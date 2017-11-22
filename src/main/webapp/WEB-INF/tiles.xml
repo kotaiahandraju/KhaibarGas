@@ -28,6 +28,9 @@
 	<definition name="cylinderHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/cylinder.jsp" />
 	</definition>
+	<definition name="truckHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/truck.jsp" />
+	</definition>
 	
 </tiles-definitions>
 
