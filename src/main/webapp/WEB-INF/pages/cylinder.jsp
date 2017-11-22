@@ -43,6 +43,7 @@
                     <div class="panel-body">
                      
                      <form:form class="form-horizontal" modelAttribute="cylinderForm"  role="form" id="cylider-form" action="addcylinder" method="post">
+                     <form:hidden path="id"/>
 						  <div class="form-group">
 						    <label for="focusedinput" class="col-sm-2 control-label">Cylinder ID</label>
 						    <div class="col-sm-3">
