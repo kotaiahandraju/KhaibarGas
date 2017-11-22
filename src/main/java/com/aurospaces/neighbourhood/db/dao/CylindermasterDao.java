@@ -14,12 +14,10 @@ import com.aurospaces.neighbourhood.db.basedao.BaseCylindermasterDao;
 @Repository(value = "cylindermasterDao")
 public class CylindermasterDao extends BaseCylindermasterDao
 {
-
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 
- 
 
 }
 

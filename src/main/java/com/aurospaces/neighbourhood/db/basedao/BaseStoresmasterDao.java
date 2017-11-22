@@ -24,7 +24,6 @@ public class BaseStoresmasterDao{
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-
  
 	public final String INSERT_SQL = "INSERT INTO storesmaster( created_time, updated_time, storeid, storename, location, status) values (?, ?, ?, ?, ?, ?)"; 
 

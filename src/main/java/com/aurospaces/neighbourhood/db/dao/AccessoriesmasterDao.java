@@ -14,12 +14,10 @@ import com.aurospaces.neighbourhood.db.basedao.BaseAccessoriesmasterDao;
 @Repository(value = "accessoriesmasterDao")
 public class AccessoriesmasterDao extends BaseAccessoriesmasterDao
 {
-
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 
- 
 
 }
 

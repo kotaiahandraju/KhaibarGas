@@ -1,40 +1,18 @@
 package com.aurospaces.neighbourhood.bean;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-
-
 import java.util.Date;
-import java.math.BigDecimal;
-
-
-
-
 
 public class FillingstationmasterBean 
 {
-
 protected int id   = 0;
-
 protected Date createdTime ;
-
 protected Date updatedTime ;
-
 protected String gasavailability ;
-
 protected String numberoffillingmachines ;
-
 protected String quantity ;
-
 protected String gascapacity ;
-
 protected String availablegas ;
-
 protected String status ;
 
 public int getId()

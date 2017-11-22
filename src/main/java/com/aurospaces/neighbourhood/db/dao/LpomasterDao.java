@@ -19,7 +19,5 @@ public class LpomasterDao extends BaseLpomasterDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 
- 
-
 }
 

@@ -20,14 +20,10 @@ import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 
 
 public class BaseCompanymasterDao{
-	
+
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-
-
-
-
  
 	public final String INSERT_SQL = "INSERT INTO companymaster( created_time, updated_time, companycode, companyname, contactpersonname, contactpersonmobile, emailid, remarks, typeofcompany, customertype, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 
@@ -39,7 +35,6 @@ public class BaseCompanymasterDao{
 	@Transactional
 	public void save(final CompanymasterBean companymaster) 
 	{
-		
 		jdbcTemplate = custom.getJdbcTemplate();
 	if(companymaster.getId() == 0)	{
 
@@ -98,7 +93,6 @@ ps.setString(11, companymaster.getStatus());
 		
 		@Transactional
 		public void delete(int id) {
-			
 			jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "DELETE FROM companymaster WHERE id=?";
 			jdbcTemplate.update(sql, new Object[]{id});

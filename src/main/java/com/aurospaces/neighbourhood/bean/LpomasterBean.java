@@ -1,46 +1,20 @@
 package com.aurospaces.neighbourhood.bean;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-
-
 import java.util.Date;
-import java.math.BigDecimal;
-
-
-
-
-
 public class LpomasterBean 
 {
-
 protected int id   = 0;
-
 protected Date createdTime ;
-
 protected Date updatedTime ;
-
 protected String lponumber ;
-
 protected String item ;
-
 protected String remarks ;
-
 protected String suppliername ;
-
 protected String supplieraddress ;
-
 protected String suppliercontactno ;
-
 protected String supplieremail ;
-
 protected String amount ;
-
 protected String status ;
 
 public int getId()

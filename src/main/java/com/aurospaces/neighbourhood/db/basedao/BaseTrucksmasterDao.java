@@ -24,7 +24,6 @@ public class BaseTrucksmasterDao{
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-
  
 	public final String INSERT_SQL = "INSERT INTO trucksmaster( created_time, updated_time, trucknumber, registrationexpirydate, civildefensecardexpirydate, servicedue, make, description, capacityoftruck, lponumber, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 

@@ -24,7 +24,6 @@ public class BaseTariffmasterDao{
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-
  
 	public final String INSERT_SQL = "INSERT INTO tariffmaster( created_time, updated_time, assetcode, assetdescription, rate, alloweddiscount, remarks, status) values (?, ?, ?, ?, ?, ?, ?, ?)"; 
 

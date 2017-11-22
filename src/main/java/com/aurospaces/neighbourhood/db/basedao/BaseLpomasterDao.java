@@ -24,7 +24,6 @@ public class BaseLpomasterDao{
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-
  
 	public final String INSERT_SQL = "INSERT INTO lpomaster( created_time, updated_time, lponumber, item, remarks, suppliername, supplieraddress, suppliercontactno, supplieremail, amount, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 

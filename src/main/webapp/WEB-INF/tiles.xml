@@ -25,79 +25,10 @@
 	<definition name="changePasswordPage" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/changePasswordPage.jsp" />
 	</definition>
-	<definition name="bodyTypeHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/bodyType.jsp" />
-	</definition>
-	<definition name="casteHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/caste.jsp" />
-	</definition>
-	<definition name="complexionHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/complexion.jsp" />
-	</definition>
-	<definition name="countriesHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/countries.jsp" />
-	</definition>
-	<definition name="educationHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/education.jsp" />
-	</definition>
-	<definition name="heightHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/height.jsp" />
-	</definition>
-	<definition name="languagesHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/languages.jsp" />
-	</definition>
-	<definition name="occupationHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/occupation.jsp" />
-	</definition>
-	<definition name="membershipHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/memberShip.jsp" />
-	</definition>
-	<definition name="raasiHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/raasi.jsp" />
-	</definition>
-	<definition name="religionHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/religion.jsp" />
-	</definition>
-	<definition name="starHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/star.jsp" />
-	</definition>
-		<definition name="branchHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/branch.jsp" />
-	</definition>
-	<definition name="createProfile" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/createProfile.jsp" />
-	</definition>
-		<definition name="allProfiles" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/allProfiles.jsp" />
-	</definition>
-		<definition name="deleteProfiles" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/deleteProfiles.jsp" />
-	</definition>
-	<definition name="inactiveProfiles" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/inactiveProfiles.jsp" />
-	</definition>
-	<definition name="adminCreateProfile" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/adminCreateProfile.jsp" />
-	</definition>
-	<definition name="freeRegisterProfile" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/freeRegisterProfile.jsp" />
-	</definition>
-	<definition name="premiumProfile" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/premiumProfile.jsp" />
-	</definition>
-	<definition name="StateHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/state.jsp" />
+	<definition name="cylinderHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/cylinder.jsp" />
 	</definition>
 	
-	<definition name="CityHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/city.jsp" />
-	</definition>
-	<definition name="DoshamHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/dosham.jsp" />
-	</definition>
-	<definition name="SalaryHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/salary.jsp" />
-	</definition>
 </tiles-definitions>
 
 

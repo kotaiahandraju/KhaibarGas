@@ -24,7 +24,6 @@ public class BaseFillingstationmasterDao{
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-
  
 	public final String INSERT_SQL = "INSERT INTO fillingstationmaster( created_time, updated_time, gasavailability, numberoffillingmachines, quantity, gascapacity, availablegas, status) values (?, ?, ?, ?, ?, ?, ?, ?)"; 
 

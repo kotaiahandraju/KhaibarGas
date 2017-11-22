@@ -24,7 +24,6 @@ public class BaseStaffmasterDao{
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-
  
 	public final String INSERT_SQL = "INSERT INTO staffmaster( created_time, updated_time, staffcode, staffno, designation, nationality, firstname, lastname, mobile, customertype, documents, active, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 

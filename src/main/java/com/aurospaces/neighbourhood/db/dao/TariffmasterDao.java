@@ -18,8 +18,6 @@ public class TariffmasterDao extends BaseTariffmasterDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 
- 
-
 
 }
 

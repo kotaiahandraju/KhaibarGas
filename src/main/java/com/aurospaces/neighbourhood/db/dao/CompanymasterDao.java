@@ -19,8 +19,5 @@ public class CompanymasterDao extends BaseCompanymasterDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 
- 
-	
-
 }
 

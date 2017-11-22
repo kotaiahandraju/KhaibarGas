@@ -1,44 +1,22 @@
 package com.aurospaces.neighbourhood.bean;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-
-
 import java.util.Date;
-import java.math.BigDecimal;
-
 
 
 public class TrucksmasterBean 
 {
-
 protected int id   = 0;
-
 protected Date createdTime ;
-
 protected Date updatedTime ;
-
 protected String trucknumber ;
-
 protected Date registrationexpirydate ;
-
 protected Date civildefensecardexpirydate ;
-
 protected String servicedue ;
-
 protected String make ;
-
 protected String description ;
-
 protected String capacityoftruck ;
-
 protected String lponumber ;
-
 protected String status ;
 
 public int getId()

@@ -20,12 +20,10 @@ import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 
 
 public class BaseAccessoriesmasterDao{
-	
 
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-
  
 	public final String INSERT_SQL = "INSERT INTO accessoriesmaster( created_time, updated_time, typeofaccessory, suppliername, madein, lponumber, accessoriesstatus, remarks, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 
@@ -37,7 +35,6 @@ public class BaseAccessoriesmasterDao{
 	@Transactional
 	public void save(final AccessoriesmasterBean accessoriesmaster) 
 	{
-		
 		jdbcTemplate = custom.getJdbcTemplate();
 	if(accessoriesmaster.getId() == 0)	{
 
@@ -102,7 +99,6 @@ ps.setString(9, accessoriesmaster.getStatus());
 
 	 public AccessoriesmasterBean getById(int id) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-		 
 			String sql = "SELECT * from accessoriesmaster where id = ? ";
 			List<AccessoriesmasterBean> retlist = jdbcTemplate.query(sql,
 			new Object[]{id},

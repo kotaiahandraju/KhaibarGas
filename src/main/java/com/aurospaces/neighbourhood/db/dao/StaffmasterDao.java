@@ -19,7 +19,5 @@ public class StaffmasterDao extends BaseStaffmasterDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 
- 
-
 }
 

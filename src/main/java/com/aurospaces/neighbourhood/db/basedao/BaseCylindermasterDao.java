@@ -7,11 +7,7 @@ import java.sql.SQLException;
 import java.util.Date;
 import java.util.List;
 
-import javax.resource.cci.ResultSet;
-import javax.swing.tree.RowMapper;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
@@ -28,7 +24,6 @@ public class BaseCylindermasterDao{
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-
  
 	public final String INSERT_SQL = "INSERT INTO cylindermaster( created_time, updated_time, cylinderid, size, capacity, cylinderstatus, customerid, location, lponumber, color, madein, expirydate, ownercompany, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 
@@ -72,7 +67,7 @@ public class BaseCylindermasterDao{
 							
 					PreparedStatement ps =
 									connection.prepareStatement(INSERT_SQL,new String[]{"id"});
-ps.setTimestamp(1, createdTime);
+	ps.setTimestamp(1, createdTime);
 ps.setTimestamp(2, updatedTime);
 ps.setString(3, cylindermaster.getCylinderid());
 ps.setString(4, cylindermaster.getSize());
@@ -124,15 +119,6 @@ ps.setString(14, cylindermaster.getStatus());
 				return retlist.get(0);
 			return null;
 		}
-	 
-	 @SuppressWarnings("unchecked")
-	public List<CylindermasterBean> getCylinders(){  
-		 jdbcTemplate = custom.getJdbcTemplate();
-		return jdbcTemplate.query("SELECT * FROM cylindermaster", new BeanPropertyRowMapper(CylindermasterBean.class));
-			
-		    
-		}  
-		
 
 	
 

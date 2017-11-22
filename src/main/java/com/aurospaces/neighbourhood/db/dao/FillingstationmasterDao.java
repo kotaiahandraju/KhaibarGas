@@ -14,12 +14,10 @@ import com.aurospaces.neighbourhood.db.basedao.BaseFillingstationmasterDao;
 @Repository(value = "fillingstationmasterDao")
 public class FillingstationmasterDao extends BaseFillingstationmasterDao
 {
-
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 
- 
 
 }
 

@@ -12,35 +12,19 @@ import javax.persistence.Id;
 import java.util.Date;
 import java.math.BigDecimal;
 
-
-
-
-
 public class CustomermasterBean 
 {
-
 protected int id   = 0;
-
 protected Date createdTime ;
-
 protected Date updatedTime ;
-
 protected String customerid ;
-
 protected String customername ;
-
 protected String customeraddress ;
-
 protected String mobile ;
-
 protected String landline ;
-
 protected String authorizedperson ;
-
 protected String contactperson ;
-
 protected String customertype ;
-
 protected String status ;
 
 public int getId()

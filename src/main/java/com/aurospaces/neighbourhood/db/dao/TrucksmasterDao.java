@@ -19,7 +19,5 @@ public class TrucksmasterDao extends BaseTrucksmasterDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 
- 
-
 }
 
