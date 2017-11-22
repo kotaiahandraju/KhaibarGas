@@ -18,8 +18,26 @@ protected String lponumber ;
 protected String color ;
 protected String madein ;
 protected Date expirydate ;
+protected String expirtdate1;
 protected String ownercompany ;
+protected String remarks ;
+
+
+public String getRemarks() {
+	return remarks;
+}
+public void setRemarks(String remarks) {
+	this.remarks = remarks;
+}
 protected String status ;
+
+
+public String getExpirtdate1() {
+	return expirtdate1;
+}
+public void setExpirtdate1(String expirtdate1) {
+	this.expirtdate1 = expirtdate1;
+}
 
 public int getId()
 {

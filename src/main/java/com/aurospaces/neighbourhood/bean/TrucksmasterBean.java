@@ -18,7 +18,21 @@ protected String description ;
 protected String capacityoftruck ;
 protected String lponumber ;
 protected String status ;
+protected String civildefensecardexpirydate1;
+protected String registrationexpirydate1;
 
+public String getCivildefensecardexpirydate1() {
+	return civildefensecardexpirydate1;
+}
+public void setCivildefensecardexpirydate1(String civildefensecardexpirydate1) {
+	this.civildefensecardexpirydate1 = civildefensecardexpirydate1;
+}
+public String getRegistrationexpirydate1() {
+	return registrationexpirydate1;
+}
+public void setRegistrationexpirydate1(String registrationexpirydate1) {
+	this.registrationexpirydate1 = registrationexpirydate1;
+}
 public int getId()
 {
   return id;

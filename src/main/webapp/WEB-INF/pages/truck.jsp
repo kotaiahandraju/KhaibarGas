@@ -1,19 +1,12 @@
-    
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
-    <!--[if lt IE 9]>
-        <script type="text/javascript" src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/respond.js/1.1.0/respond.min.js"></script>
-        <script type="text/javascript" src="assets/plugins/charts-flot/excanvas.min.js"></script>
-    <![endif]-->
-
-    <!-- The following CSS are included as plugins and can be removed if unused-->
-
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <div id="page-content">
     <div id="wrap">
         <div id="page-heading" class="row">
         <div class="col-md-6">
-              <h1>Cylinder</h1>
+              <h1>Truck</h1>
               </div>
               <div class="col-md-6">
               <div class="options">
@@ -29,7 +22,7 @@
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="index.html">Home</a></li>
-               <li>Cylinder</li>
+               <li>Truck</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container">
@@ -39,118 +32,81 @@
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Cylinder</h4>
+                        <h4>Add Truck</h4>
                         <div class="options">
                         </div>
                     </div>
                     <div class="panel-body">
-                     
-                     <form class="form-horizontal">
+                     <form:form modelAttribute="truckForm" class="form-horizontal" action="addTruck">
+                     <form:hidden path="id"/>
 						  <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Cylinder ID</label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Truck Number</label>
 						    <div class="col-sm-3">
-						      <input type="text" class="form-control"  placeholder="Cylinder ID">
+						      <form:input path="trucknumber" type="text" class="form-control"  placeholder="Ttruck Number"/>
 						    </div>
 						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Size</label>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">Registration Expiry</label>
 						    </div>
                              <div class="col-sm-3">
-						      <select name="selector1" id="selector1" class="form-control">
-						  		<option>Large</option>
-						  		<option>Medium</option>
-						  		<option>Small</option>
-						  	</select>
+						      <form:input path="registrationexpirydate1" type="text" class="form-control"  placeholder="Registration Expiry"/>
 						    </div>
 						  </div>
                           
                           <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Capacity</label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Civil defense card expiry</label>
 						    <div class="col-sm-3">
-						       <select name="selector1" id="selector1" class="form-control">
-						  		<option>44 kgs</option>
-						  		<option>22 kgs</option>
-						  		<option>11 kgs</option>
-						  	</select>
+						       <form:input path="civildefensecardexpirydate1" type="text" class="form-control"  placeholder="Civil defense card expiry"/>
 						    </div>
 						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Status</label>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">Service Due</label>
 						    </div>
                              <div class="col-sm-3">
-						    <select name="selector1" id="selector1" class="form-control">
-						  		<option>Idle</option>
-						  		<option>Filled</option>
-						  		<option>Delivered</option>
-                                <option>Empty</option>
-                                <option>Missing</option>
-						  	</select>
+						    <form:select path="servicedue"  class="form-control">
+						  		<form:option value="Maintenance">Maintenance</form:option>
+						  		<form:option value="Agency Repairs">Agency Repairs</form:option>
+						  		<form:option value="Agency Service">Agency Service</form:option>
+						  	</form:select>
 						    </div>
 						  </div>
                           
                           <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Customer ID</label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Make</label>
 						    <div class="col-sm-3">
-						       <input type="text" class="form-control"  placeholder="Customer ID">
+						       <form:input path="make" type="text" class="form-control"  placeholder="Make"/>
 						    </div>
 						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Location</label>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">Description</label>
 						    </div>
                              <div class="col-sm-3">
-						    <select name="selector1" id="selector1" class="form-control">
-						  		<option>In Store</option>
-						  		<option>With Customer</option>
-						  		<option>In the plant floor</option>
-                                <option>Loaded in the truck</option>
-						  	</select>
+                              <form:input path="description" type="text" class="form-control"  placeholder="Description"/>
+						    
 						    </div>
 						  </div>
                           
                           <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">LPO No</label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Capacity of truck</label>
 						    <div class="col-sm-3">
-						       <input type="text" class="form-control"  placeholder="LPO No">
+						       <form:input path="capacityoftruck" type="text" class="form-control"  placeholder="Capacity of truck"/>
 						    </div>
 						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Remarks</label>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">LPO number </label>
 						    </div>
                              <div class="col-sm-3">
-						    <input type="text" class="form-control"  placeholder="Remarks">
+						    <form:input path="lponumber" type="text" class="form-control"  placeholder="LPO number "/>
 						    </div>
 						  </div>
                           
-                          <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Color of Cylinder</label>
-						    <div class="col-sm-3">
-						       <input type="text" class="form-control"  placeholder="LPO No">
-						    </div>
-						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Made in</label>
-						    </div>
-                             <div class="col-sm-3">
-						    <input type="text" class="form-control"  placeholder="Made in">
-						    </div>
-						  </div>
                           
-                          <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Expiry Date</label>
-						    <div class="col-sm-3">
-						       <input type="text" class="form-control"  placeholder="Expiry Date">
-						    </div>
-						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Owner Company</label>
-						    </div>
-                             <div class="col-sm-3">
-						    <input type="text" class="form-control"  placeholder="Owner Company">
-						    </div>
-						  </div>
-						</form>
+						
                     </div>
                     
                     <div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar  pull-right">
-					      			<button class="btn-primary btn">Submit</button>
-					      			<button class="btn-default btn">Cancel</button>
+				      			<input class="btn-primary btn" type="submit" value="Sumbit">
+				      			<input class="btn-default btn" type="reset" value="Cancel">
+					      			</form:form>
 				      			</div>
 				      		</div>
 				      	</div>
@@ -172,252 +128,14 @@
                             </div>
                         </div>
                         <div class="panel-body collapse in">
-                        <div class="table-responsive">
+                        <div class="table-responsive" id="tableId">
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                     <tr>
-                                        <th>Cylinder ID</th>
-                                        <th>Size</th>
-                                        <th>Status</th>
-                                        <th>Customer ID</th>
-                                        <th>Location</th>
-                                        <th>LPO No</th>
-                                        <th>Color</th>
-                                        <th>Expiry Date</th>
-                                        <th>Action</th>
+                                        <th>Truck Number</th> <th>Registration Expiry</th> <th>Civil defense card expiry</th><th>Service due</th> <th>Make</th><th>Description</th><th>Capacity of truck</th><th>LPO number</th><th>Action</th>
                                     </tr>
                                 </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                       
-                                        <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr> <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr> <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr> <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                    
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                     <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr> <tr>
-                                        <td>1235</td>
-                                        <td>large</td>
-                                        <td>Filled</td>
-                                        <td>325664</td>
-                                        <td>Store</td>
-                                        <td>98564</td>
-                                        <td>REd</td>
-                                        <td>11/12/18</td>
-                                        <td><i class="fa fa-pencil green" aria-hidden="true"></i> &nbsp; <i class="fa fa-trash-o red" aria-hidden="true"></i></td>
-                                    </tr>
-                                </tbody>
+                                <tbody> </tbody>
                             </table>
                             </div>
                         </div>
@@ -428,3 +146,57 @@
         </div> <!-- container -->
     </div> <!-- #wrap -->
 </div> <!-- page-content -->
+<script type="text/javascript">
+var listOrders1 = ${allOrders1};
+if (listOrders1 != "") {
+	displayTable(listOrders1);
+}
+function displayTable(listOrders) {
+	$('#tableId').html('');
+	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
+			+ '<thead><tr> <th>Truck Number</th> <th>Registration Expiry</th> <th>Civil defense card expiry</th><th>Service due</th> <th>Make</th><th>Description</th><th>Capacity of truck</th><th>LPO number</th><th>Action</th></tr></thead><tbody></tbody></table>';
+	$('#tableId').html(tableHead);
+	serviceUnitArray = {};
+	$.each(listOrders,function(i, orderObj) {
+					var edit = "<a  onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+					var deleterow = "<a  onclick='deletetruckMaster("+ orderObj.id+ ")'><i class='fa fa-trash-o red'></i></a>"
+					serviceUnitArray[orderObj.id] = orderObj;
+					var tblRow = "<tr >"
+							+ "<td title='"+orderObj.trucknumber+"'>"+ orderObj.trucknumber + "</td>"
+							+ "<td title='"+orderObj.registrationexpirydate+"'>"+ orderObj.registrationexpirydate + "</td>"
+							+ "<td title='"+orderObj.civildefensecardexpirydate+"'>"+ orderObj.civildefensecardexpirydate + "</td>"
+							+ "<td title='"+orderObj.servicedue+"'>"+ orderObj.servicedue + "</td>"
+							+ "<td title='"+orderObj.make+"'>"+ orderObj.make + "</td>"
+							+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
+							+ "<td title='"+orderObj.capacityoftruck+"'>"+ orderObj.capacityoftruck + "</td>"
+							+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber + "</td>"
+							+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+							+ "</tr >";
+					$(tblRow).appendTo("#tableId table tbody");
+					});
+	
+}
+
+function editTruckMaster(id) {
+	$("#id").val(serviceUnitArray[id].id);
+	$("#name").val(serviceUnitArray[id].name);
+//	$(window).scrollTop($('#addForm').offset().top);
+	}
+function deleteStar(id){
+	var checkstr =  confirm('Are you sure you want to delete this?');
+	if(checkstr == true){
+	var formData = new FormData();
+     formData.append('id', id);
+	$.fn.makeMultipartRequest('POST', 'deleteStar', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		alert(jsonobj.message);
+		var alldata = jsonobj.allOrders1;
+		console.log(jsonobj.allOrders1);
+		displayTable(alldata);
+	});
+	}
+	
+}
+
+</script>

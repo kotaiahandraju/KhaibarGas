@@ -81,6 +81,7 @@ ps.setString(11, cylindermaster.getMadein());
 ps.setTimestamp(12, expirydate);
 ps.setString(13, cylindermaster.getOwnercompany());
 ps.setString(14, cylindermaster.getStatus());
+ps.setString(14, cylindermaster.getRemarks());
 
 							return ps;
 						}
