@@ -8,12 +8,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import javax.servlet.http.HttpSession;
-
 import org.apache.commons.lang.StringUtils;
 
 
-public class HRMSUtil {
+public class KhaibarGasUtil {
 	public static Date  dateFormate(String date){
 		SimpleDateFormat formatter = new SimpleDateFormat("dd-MMMM-yyyy");
 		Date date1 = null;
