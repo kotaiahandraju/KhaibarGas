@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
@@ -31,11 +32,21 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		}  
 	
 
-	public int  updateCylinders(int id){  
-		 jdbcTemplate = custom.getJdbcTemplate();
-		return jdbcTemplate.update(" update cylindermaster set status='0' where id="+id);
-			
-
+	@Transactional
+	public boolean deleteCylinder(int id) {
+		jdbcTemplate = custom.getJdbcTemplate();
+		boolean delete = false;
+		try{
+			String sql = "Update  cylindermaster set status='0' WHERE id=?";
+			int intDelete = jdbcTemplate.update(sql, new Object[]{id});
+			if(intDelete != 0){
+				delete = true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return delete;
 	}
+	
 }
 

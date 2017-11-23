@@ -1,16 +1,21 @@
-  <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
-
-
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
 <div id="page-content">
     <div id="wrap">
         <div id="page-heading" class="row">
         <div class="col-md-6">
-              <h1>Cylinder</h1>
+              <h1>Filling Station</h1>
               </div>
               <div class="col-md-6">
               <div class="options">
@@ -42,108 +47,37 @@
                     </div>
                     <div class="panel-body">
                      
-                     <form:form class="form-horizontal" modelAttribute="cylinderForm"  role="form" id="cylider-form" action="addcylinder" method="post">
+                     <form:form class="form-horizontal" modelAttribute="fillingStationForm"  role="form" id="fillingstation-form" action="addfillingstation" method="post">
+                     
                      <form:hidden path="id"/>
 						  <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Cylinder ID</label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Opening Balance in GasTank </label>
 						    <div class="col-sm-3">
-						      <form:input path="cylinderid" class="form-control"  placeholder="Cylinder ID"/>
+						      <form:input path="gasavailability" class="form-control"  placeholder="Available Gas"/>
+						    </div>
+						    </div>
+						    
+                          <div class="form-group">
+						    <label for="focusedinput" class="col-sm-2 control-label">Quantity</label>
+						    <div class="col-sm-3">
+						       <form:input path="quantity" type="text" class="form-control"  placeholder="quantity"/>
 						    </div>
 						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Size</label>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">Capacity</label>
 						    </div>
                              <div class="col-sm-3">
-                             <form:select path="size" class="form-control u1">
-											<form:option value="large">Large</form:option>
-											<form:option value="medium">Medium</form:option>
-											<form:option value="small">Small</form:option>
-										</form:select>
+						    <form:input path="gascapacity" class="form-control"  placeholder="capacity"/>
 						    </div>
 						  </div>
                           
                           <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Capacity</label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Closing Balance in GasTank </label>
 						    <div class="col-sm-3">
-<%-- 						    <form:input path="capacity" class="form-control" readonly="true"/> --%>
-						       <form:select path="capacity" id="selector1" class="form-control">
-						  		<form:option value="44">44 kgs</form:option>
-						  		<form:option value="22">22 kgs</form:option>
-						  		<form:option value="11">11 kgs</form:option>
-						  	</form:select> 
+						       <form:input path="availablegas" class="form-control"  placeholder="LPO No"/>
 						    </div>
-						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label"> Status</label>
 						    </div>
-                             <div class="col-sm-3">
-						    <form:select path="cylinderstatus" id="selector1" class="form-control">
-						  		<form:option value="idle">Idle</form:option>
-						  		<form:option value="filled">Filled</form:option>
-						  		<form:option value="Delivered">Delivered</form:option>
-                                <form:option value="empty">Empty</form:option>
-                                <form:option value="missing">Missing</form:option>
-						  	</form:select>
-						    </div>
-						  </div>
-                          
-                          <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Customer ID</label>
-						    <div class="col-sm-3">
-						       <form:input path="customerid" type="text" class="form-control"  placeholder="Customer ID"/>
-						    </div>
-						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Location</label>
-						    </div>
-                             <div class="col-sm-3">
-						    <form:select path="location" id="selector1" class="form-control">
-						  		<form:option value="instore">In Store</form:option>
-						  		<form:option value="withcustomer">With Customer</form:option>
-						  		<form:option value="intheplantfloor">In the plant floor</form:option>
-                                <form:option value="loadedinthetruck">Loaded in the truck</form:option>
-						  	</form:select>
-						    </div>
-						  </div>
-                          
-                          <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">LPO No</label>
-						    <div class="col-sm-3">
-						       <form:input path="lponumber" type="text" class="form-control"  placeholder="LPO No"/>
-						    </div>
-						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Remarks</label>
-						    </div>
-                             <div class="col-sm-3">
-						    <form:input path="remarks" class="form-control"  placeholder="Remarks"/>
-						    </div>
-						  </div>
-                          
-                          <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Color of Cylinder</label>
-						    <div class="col-sm-3">
-						       <form:input path="color" class="form-control"  placeholder="LPO No"/>
-						    </div>
-						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Made in</label>
-						    </div>
-                             <div class="col-sm-3">
-						    <form:input path="madein" class="form-control"  placeholder="Made in"/>
-						    </div>
-						  </div>
-                          
-                          <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Expiry Date</label>
-						    <div class="col-sm-3">
-						       <form:input path="expirtdate1" class="form-control"  placeholder="Expiry Date"/>
-						    </div>
-						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Owner Company</label>
-						    </div>
-                             <div class="col-sm-3">
-						    <form:input path="ownercompany" class="form-control"  placeholder="Owner Company"/>
-						    </div>
-						  </div>
-						
-                    </div>
-                    
+						    
+						          
                     <div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
@@ -192,7 +126,8 @@
         </div> <!-- container -->
     </div> <!-- #wrap -->
 </div> <!-- page-content -->
-
+</div>
+</body>
 
 <script type="text/javascript">
 var listOrders1 = ${allOrders1};
@@ -275,18 +210,7 @@ function deleteCylinder(id){
 	}
 	
 }
-
-
-
-
-
-
-
-$(document).ready(function() {                                       
-    $("#size").live("change", function() {
-      $("#capacity").val($(this).find("option:selected").attr("value"));
-    });
-    $('#name option[value=large]').attr('selected','selected').change();
-});   
-
 </script>
+
+
+</html>
