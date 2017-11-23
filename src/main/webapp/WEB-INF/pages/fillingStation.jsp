@@ -31,7 +31,7 @@
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="index.html">Home</a></li>
-               <li>Cylinder</li>
+               <li>Filling station</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container">
@@ -41,14 +41,16 @@
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Cylinder</h4>
+                        <h4>Add Filling Station</h4>
                         <div class="options">
                         </div>
                     </div>
                     <div class="panel-body">
                      
                      <form:form class="form-horizontal" modelAttribute="fillingStationForm"  role="form" id="fillingstation-form" action="addfillingstation" method="post">
-                     
+                     <c:if test="${not empty msg}">
+									<div class="alert alert-success fadeIn animated">${msg}</div>
+								</c:if>
                      <form:hidden path="id"/>
 						  <div class="form-group">
 						    <label for="focusedinput" class="col-sm-2 control-label">Opening Balance </label>
@@ -62,6 +64,24 @@
 						    <div class="col-sm-3">
 						       <form:input path="quantity" type="text" class="form-control"  placeholder="quantity"/>
 						    </div>
+						    
+						    
+						    <div>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">unitpoint</label>
+						    </div>
+                             <div class="col-sm-3">
+						    <form:input path="unitpoint" class="form-control"  placeholder="unitpoint"/>
+						    </div>
+						  </div>
+						  
+						    <div>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">Station Name</label>
+						    </div>
+                             <div class="col-sm-3">
+						    <form:input path="stationname" class="form-control"  placeholder="stationname"/>
+						    </div>
+						  </div>
+						  
 						    <div>
 						    	 <label for="focusedinput" class="col-sm-2 control-label">Capacity</label>
 						    </div>
@@ -108,7 +128,7 @@
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Cylinders List</h4>
+                            <h4>Filling Stations List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -119,7 +139,7 @@
                                 <thead>
                                     <tr>
                                         <th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>Closing Balance</th>
-                                        <th>status</th><th></th>
+                                        <th>Station Name</th><th>Unit Point</th><th>status</th><th></th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -144,7 +164,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>Closing Balance</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>Closing Balance</th><th>Station Name</th><th>Unitpoint</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -157,6 +177,8 @@ function displayTable(listOrders) {
 							+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
 							+ "<td title='"+orderObj.gascapacity+"'>"+ orderObj.gascapacity + "</td>"
 							+ "<td title='"+orderObj.availablegas+"'>"+ orderObj.availablegas+ "</td>"
+							+ "<td title='"+orderObj.stationname+"'>"+ orderObj.stationname + "</td>"
+							+ "<td title='"+orderObj.unitpoint+"'>"+ orderObj.unitpoint+ "</td>"
 							+ "<td title='"+orderObj.status+"'>"+ orderObj.status + "</td>"
 							+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 							+ "</tr >";
