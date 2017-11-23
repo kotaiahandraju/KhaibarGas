@@ -8,6 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
@@ -37,7 +38,8 @@ public class BaseAccessoriesmasterDao{
 	{
 		jdbcTemplate = custom.getJdbcTemplate();
 	if(accessoriesmaster.getId() == 0)	{
-
+		
+		
 	KeyHolder keyHolder = new GeneratedKeyHolder();
 	int update = jdbcTemplate.update(
 			new PreparedStatementCreator() {
@@ -82,7 +84,7 @@ ps.setString(9, accessoriesmaster.getStatus());
 		}
 		else
 		{
-
+			
 			String sql = "UPDATE accessoriesmaster  set typeofaccessory = ? ,suppliername = ? ,madein = ? ,lponumber = ? ,accessoriesstatus = ? ,remarks = ? ,status = ?  where id = ? ";
 	
 			jdbcTemplate.update(sql, new Object[]{accessoriesmaster.getTypeofaccessory(),accessoriesmaster.getSuppliername(),accessoriesmaster.getMadein(),accessoriesmaster.getLponumber(),accessoriesmaster.getAccessoriesstatus(),accessoriesmaster.getRemarks(),accessoriesmaster.getStatus(),accessoriesmaster.getId()});
@@ -90,10 +92,15 @@ ps.setString(9, accessoriesmaster.getStatus());
 	}
 		
 		@Transactional
-		public void delete(int id) {
+		public Boolean delete(int id) {
+			boolean result=false;
 			jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "DELETE FROM accessoriesmaster WHERE id=?";
-			jdbcTemplate.update(sql, new Object[]{id});
+		 int results=jdbcTemplate.update(sql, new Object[]{id});
+			if(results!=0){
+				result= true;
+			}
+			return result;
 		}
 		
 
@@ -107,6 +114,7 @@ ps.setString(9, accessoriesmaster.getStatus());
 				return retlist.get(0);
 			return null;
 		}
+	
 
 	
 
