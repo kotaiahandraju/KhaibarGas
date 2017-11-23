@@ -20,7 +20,15 @@ protected String lponumber ;
 protected String status ;
 protected String civildefensecardexpirydate1;
 protected String registrationexpirydate1;
+protected String truckStatus;
 
+
+public String getTruckStatus() {
+	return truckStatus;
+}
+public void setTruckStatus(String truckStatus) {
+	this.truckStatus = truckStatus;
+}
 public String getCivildefensecardexpirydate1() {
 	return civildefensecardexpirydate1;
 }

@@ -34,6 +34,8 @@ session.setAttribute("baseurl", baseurl);
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/form-toggle/toggles.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/datatables/dataTables.css' /> 
 
+<link href="${baseurl }/assets/css/datepicker1.css" rel="stylesheet" type="text/css" />
+
 <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
 <script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
   
@@ -49,11 +51,11 @@ session.setAttribute("baseurl", baseurl);
 <div class="masters">
         <ul class="nav navbar-nav pull-right toolbar">
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">Master Admin <i class="fa fa-caret-down"></i></span><img src="assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
+                <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">Master Admin <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
                 <ul class="dropdown-menu userinfo arrow">
                     <li class="username">
                         <a href="#">
-                            <div class="pull-left"><img src="assets/demo/avatar/dangerfield.png" alt=""/></div>
+                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
                             <div class="pull-right"><h5>Master Admin!</h5><small>Logged in as <span>Master</span></small></div> 
                         </a>
                     </li>
