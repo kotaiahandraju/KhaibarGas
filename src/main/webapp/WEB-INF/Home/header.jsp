@@ -86,7 +86,7 @@ session.setAttribute("baseurl", baseurl);
                 <li><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>TRUCKS</span></a></li>
                 <li><a href="${baseurl }/admin/accessoriesHome"><i class="fa fa-tint"></i> <span>ACCESSORIES</span></a></li>
                 <li><a href="#"><i class="fa fa-th"></i> <span>STORES</span></a></li>
-                <li><a href="#"><i class="fa fa-archive"></i> <span>FILLING STATIONS</span></a></li>
+                <li><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>FILLING STATIONS</span></a></li>
                 <li><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>CUSTOMERS</span></a></li>
                 <li><a href="#"><i class="fa fa-user"></i> <span>STAFF</span></a></li>
                 <li><a href="#"><i class="fa fa-building"></i> <span>COMPANY</span></a></li>
