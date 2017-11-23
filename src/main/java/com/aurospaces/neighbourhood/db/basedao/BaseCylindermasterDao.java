@@ -25,7 +25,7 @@ public class BaseCylindermasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO cylindermaster( created_time, updated_time, cylinderid, size, capacity, cylinderstatus, customerid, location, lponumber, color, madein, expirydate, ownercompany, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO cylindermaster( created_time, updated_time, cylinderid, size, capacity, cylinderstatus, customerid, location, lponumber, color, madein, expirydate, ownercompany, status,remarks) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"; 
 
 
 
@@ -81,6 +81,7 @@ ps.setString(11, cylindermaster.getMadein());
 ps.setTimestamp(12, expirydate);
 ps.setString(13, cylindermaster.getOwnercompany());
 ps.setString(14, cylindermaster.getStatus());
+ps.setString(15, cylindermaster.getRemarks());
 
 							return ps;
 						}

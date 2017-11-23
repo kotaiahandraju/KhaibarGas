@@ -17,8 +17,9 @@ session.setAttribute("baseurl", baseurl);
 
 </div> <!-- page-container -->
 
-
-<script type='text/javascript' src='${baseurl }/assets/js/jqueryui-1.10.3.min.js'></script>  
+ 
+<script type='text/javascript' src='${baseurl }/assets/js/jqueryui-1.10.3.min.js'></script> 
+ 
 <script type='text/javascript' src='${baseurl }/assets/js/bootstrap.min.js'></script>  
 <script type='text/javascript' src='${baseurl }/assets/js/enquire.js'></script>  
 <script type='text/javascript' src='${baseurl }/assets/js/jquery.cookie.js'></script> 

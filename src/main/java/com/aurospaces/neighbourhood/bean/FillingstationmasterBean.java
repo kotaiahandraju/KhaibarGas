@@ -8,11 +8,11 @@ public class FillingstationmasterBean
 protected int id   = 0;
 protected Date createdTime ;
 protected Date updatedTime ;
-protected String gasavailability ;
+protected String gasavailability;
 protected String numberoffillingmachines ;
 protected String quantity ;
-protected String gascapacity ;
-protected String availablegas ;
+protected String gascapacity;
+protected String availablegas;
 protected String status ;
 
 public int getId()

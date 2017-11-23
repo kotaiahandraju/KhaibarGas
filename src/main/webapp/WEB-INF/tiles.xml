@@ -34,7 +34,12 @@
 	<definition name="customerHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/customer.jsp" />
 	</definition>
-	
+	<definition name="truckHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/truck.jsp" />
+	</definition>
+	<definition name="fillingStationHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/fillingStation.jsp" />
+	</definition>
 	
 </tiles-definitions>
 

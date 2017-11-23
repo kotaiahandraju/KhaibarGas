@@ -19,26 +19,27 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
-import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
+import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
-//@RequestMapping(value = "/admin")
-public class CylinderController {
-	
+public class FillingstationController {
 	private Logger logger = Logger.getLogger(CylinderController.class);
 	@Autowired
-	CylindermasterDao cylindermasterDao;
+	FillingstationmasterDao fillingstationmasterDao;
 	
-	@RequestMapping(value = "/CylinderHome")
-	public String cylinderHome( @Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean, ModelMap model, HttpServletRequest request,
+	@RequestMapping(value = "/fillingStationHome")
+	public String fillingStationHome(@Valid @ModelAttribute("fillingStationForm") FillingstationmasterBean objFillingstationmasterBean, ModelMap model, HttpServletRequest request,
 			HttpSession session) {
+		
+	  logger.info("hi");
 		
 		ObjectMapper objectMapper = null;
 		String sJson = null;
-		List<CylindermasterBean> listOrderBeans = null;
+		List<FillingstationmasterBean> listOrderBeans = null;
 		try {
-			listOrderBeans =cylindermasterDao.getCylinders();
+			listOrderBeans =fillingstationmasterDao.getFillingStationAllData();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -55,24 +56,24 @@ public class CylinderController {
 			System.out.println(e);
 
 		}
-		return "cylinderHome";
+		return "fillingStationHome";
 	}
 	
 	
-	@RequestMapping(value = "/addcylinder", method = RequestMethod.POST)
-	public String addCylinder(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,BindingResult bindingresults,Model model)
+	/*@RequestMapping(value = "/addfillingstation", method = RequestMethod.POST)
+	public String addCylinder(@Valid @ModelAttribute("fillingStationForm") FillingstationmasterBean objFillingstationmasterBean,BindingResult bindingresults,Model model)
     {
         try
         {
         	
 		if(bindingresults.hasErrors())
 		{
-		return "cylinderHome";
+		return "fillingStationHome";
 	    }
 		
 		
-			objCylindermasterBean.setStatus("1");
-	      cylindermasterDao.save(objCylindermasterBean);
+		objFillingstationmasterBean.setStatus("1");
+		fillingstationmasterDao.save(objFillingstationmasterBean);
 	      
 		model.addAttribute("cylinder",new CylindermasterBean());
 		//List<CylindermasterBean> list =cylindermasterDao.getCylinders();
@@ -89,17 +90,18 @@ public class CylinderController {
 		return "redirect:CylinderHome";
 	}
 	
+		
 	@RequestMapping(value = "/deleteCylinder")
 	public @ResponseBody String deleteEducation( CylindermasterBean objCylindermasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		System.out.println("deleteEducation page...");
-		List<CylindermasterBean> listOrderBeans  = null;
+		List<FillingstationmasterBean> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
 		boolean delete = false;
 		try{
 			if(objCylindermasterBean.getId() != 0){
- 				delete = cylindermasterDao.deleteCylinder(objCylindermasterBean.getId());
+ 				delete = fillingstationmasterDao.deleteFillingStationData(objCylindermasterBean.getId());
  				if(delete){
  					jsonObj.put("message", "deleted");
  				}else{
@@ -107,7 +109,7 @@ public class CylinderController {
  				}
  			}
  				
-			listOrderBeans = cylindermasterDao.getCylinders();
+			listOrderBeans = fillingstationmasterDao.getFillingStationAllData();
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				
@@ -134,9 +136,6 @@ public class CylinderController {
 		return String.valueOf(jsonObj);
 	}
 	
-	
-	}
-	
-	
-	
+*/
 
+}

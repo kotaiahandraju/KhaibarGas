@@ -105,12 +105,22 @@ ps.setString(11, trucksmaster.getStatus());
 		}
 	}
 		
-		@Transactional
-		public void delete(int id) {
-			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "DELETE FROM trucksmaster WHERE id=?";
-			jdbcTemplate.update(sql, new Object[]{id});
+	@Transactional
+	public boolean delete(int id) {
+		jdbcTemplate = custom.getJdbcTemplate();
+		boolean delete = false;
+		try{
+			String sql = "update trucksmaster set status='0' where id = ?";
+			int intDelete = jdbcTemplate.update(sql, new Object[]{id});
+			if(intDelete != 0){
+				delete = true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
 		}
+		return delete;
+	}
+	
 		
 
 	 public TrucksmasterBean getById(int id) {
