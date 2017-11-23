@@ -28,6 +28,13 @@
 	<definition name="cylinderHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/cylinder.jsp" />
 	</definition>
+	<definition name="accessoriesHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/accessories.jsp" />
+	</definition>
+	<definition name="customerHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/customer.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>
 
