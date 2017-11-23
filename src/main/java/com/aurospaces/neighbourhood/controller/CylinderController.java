@@ -23,7 +23,7 @@ import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
-//@RequestMapping(value = "/admin")
+@RequestMapping(value = "/admin")
 public class CylinderController {
 	
 	private Logger logger = Logger.getLogger(CylinderController.class);

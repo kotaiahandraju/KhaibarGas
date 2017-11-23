@@ -26,11 +26,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
 @RequestMapping(value = "/admin")
-public class TrucksController {
-	private Logger logger = Logger.getLogger(TrucksController.class);
+public class StaffMasterController {
+	private Logger logger = Logger.getLogger(StaffMasterController.class);
 	@Autowired TrucksmasterDao objTrucksmasterDao;
-	@RequestMapping(value = "/truckHome")
-	public String truckHome(@ModelAttribute("truckForm") TrucksmasterBean objTrucksmasterBean, ModelMap model,
+	@RequestMapping(value = "/staffMasterHome")
+	public String staffMasterHome(@ModelAttribute("truckForm") TrucksmasterBean objTrucksmasterBean, ModelMap model,
 			HttpServletRequest request, HttpSession session) {
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -54,8 +54,8 @@ public class TrucksController {
 		}
 		return "truckHome";
 	}
-	@RequestMapping(value = "/addTruck")
-	public String addTruck(@ModelAttribute("truckForm") TrucksmasterBean objTrucksmasterBean, ModelMap model,
+	@RequestMapping(value = "/addStaffMaster")
+	public String addStaffMaster(@ModelAttribute("truckForm") TrucksmasterBean objTrucksmasterBean, ModelMap model,
 			HttpServletRequest request, HttpSession session,RedirectAttributes redirect) {
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -104,8 +104,8 @@ public class TrucksController {
 		}
 		return "redirect:truckHome";
 	}
-	@RequestMapping(value = "/deletetruckMaster")
-	public @ResponseBody String deletetruckMaster( TrucksmasterBean objTrucksmasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+	@RequestMapping(value = "/deleteStaffMaster")
+	public @ResponseBody String deleteEducation( TrucksmasterBean objTrucksmasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		System.out.println("deleteEducation page...");
 		List<TrucksmasterBean> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();

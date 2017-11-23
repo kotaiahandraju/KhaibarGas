@@ -20,6 +20,7 @@ import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
+@RequestMapping(value="admin")
 public class AccessoriesController {
 	
 	@Autowired
