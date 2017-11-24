@@ -34,11 +34,14 @@
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Accessories</h4>
+                        <h4>Add Customers</h4>
                         <div class="options">
                         </div>
                     </div>
 	                <form:form modelAttribute="customerForm" action="customerSave" class="form-horizontal" method="Post" >
+	                <c:if test="${not empty msg}">
+									<div class="alert alert-success fadeIn animated">${msg}</div>
+								</c:if>
                     <div class="panel-body">
                     	<div class="row">
                     		<div class="col-md-4">
@@ -141,7 +144,7 @@
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Accessories List</h4>
+                            <h4>Customers List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -194,7 +197,7 @@ function showTableData(response){
 	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Accessories ID</th><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Color</th><th></th></tr>'+
+    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
