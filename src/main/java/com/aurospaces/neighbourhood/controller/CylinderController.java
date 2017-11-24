@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
@@ -79,16 +80,26 @@ public class CylinderController {
 	 */
 	@RequestMapping(value = "/addcylinder", method = RequestMethod.POST)
 	public String addCylinder(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
-			BindingResult bindingresults, Model model) {
-		try {
+			BindingResult bindingresults, Model model,RedirectAttributes redirect) {
+		
+		List<CylindermasterBean> cylinderMaster=null;
 
-			if (bindingresults.hasErrors()) {
-				return "cylinderHome";
-			}
+		try
+        {
+        
+		String cyId=objCylindermasterBean.getCylinderid();
+		cylinderMaster=cylindermasterDao.getByCylinderId(cyId);
+		
+		if(cylinderMaster.size() ==0 || cylinderMaster ==null){
 
 			objCylindermasterBean.setStatus("1");
-			cylindermasterDao.save(objCylindermasterBean);
-
+	      cylindermasterDao.save(objCylindermasterBean);
+	      redirect.addFlashAttribute("msg", "Updated");
+		}
+		else{
+			System.out.println("data already exit");
+			redirect.addFlashAttribute("msg", "AlreadyExist");
+		}
 			model.addAttribute("cylinder", new CylindermasterBean());
 			// List<CylindermasterBean> list =cylindermasterDao.getCylinders();
 			// model.addAttribute("cylinders",
