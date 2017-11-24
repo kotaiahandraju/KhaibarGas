@@ -1,4 +1,5 @@
 
+
 package com.aurospaces.neighbourhood.db.basedao;
 
 import java.sql.Connection;
@@ -15,6 +16,7 @@ import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aurospaces.neighbourhood.bean.CustomermasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 
@@ -86,12 +88,19 @@ ps.setString(6, storesmaster.getStatus());
 		}
 	}
 		
-		@Transactional
-		public void delete(int id) {
-			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "DELETE FROM storesmaster WHERE id=?";
-			jdbcTemplate.update(sql, new Object[]{id});
-		}
+	@Transactional
+	public Boolean delete(int id) {
+		boolean result=false;
+		Integer results=null;
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "update storesmaster set status='0' where id = ?";
+		jdbcTemplate.update(sql, new Object[]{id});
+		  results=jdbcTemplate.update(sql, new Object[]{id});
+			if(results !=null || result){
+				result= true;
+			}
+			return result;
+	}
 		
 
 	 public StoresmasterBean getById(int id) {
@@ -104,7 +113,7 @@ ps.setString(6, storesmaster.getStatus());
 				return retlist.get(0);
 			return null;
 		}
-
+	
 	
 
 }

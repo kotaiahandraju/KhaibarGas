@@ -12,7 +12,7 @@ protected Date updatedTime ;
 protected String trucknumber ;
 protected Date registrationexpirydate ;
 protected Date civildefensecardexpirydate ;
-protected String servicedue ;
+protected Date servicedue ;
 protected String make ;
 protected String description ;
 protected String capacityoftruck ;
@@ -21,8 +21,22 @@ protected String status ;
 protected String civildefensecardexpirydate1;
 protected String registrationexpirydate1;
 protected String truckStatus;
+protected String typeOfService;
+protected String servicedue1;
 
 
+public String getServicedue1() {
+	return servicedue1;
+}
+public void setServicedue1(String servicedue1) {
+	this.servicedue1 = servicedue1;
+}
+public String getTypeOfService() {
+	return typeOfService;
+}
+public void setTypeOfService(String typeOfService) {
+	this.typeOfService = typeOfService;
+}
 public String getTruckStatus() {
 	return truckStatus;
 }
@@ -89,13 +103,12 @@ public void setCivildefensecardexpirydate(final Date civildefensecardexpirydate)
 {
   this.civildefensecardexpirydate = civildefensecardexpirydate;
 }
-public String getServicedue()
-{
-  return servicedue;
+
+public Date getServicedue() {
+	return servicedue;
 }
-public void setServicedue(final String servicedue)
-{
-  this.servicedue = servicedue;
+public void setServicedue(Date servicedue) {
+	this.servicedue = servicedue;
 }
 public String getMake()
 {

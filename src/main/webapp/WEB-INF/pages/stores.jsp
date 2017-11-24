@@ -8,7 +8,7 @@
     <div id="wrap">
         <div id="page-heading" class="row">
         <div class="col-md-6">
-              <h1>Accessories</h1>
+              <h1>Store</h1>
               </div>
               <div class="col-md-6">
               <div class="options">
@@ -24,7 +24,7 @@
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="index.html">Home</a></li>
-               <li>Accessories</li>
+               <li>Store</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container">
@@ -34,73 +34,34 @@
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Accessories</h4>
+                        <h4>Add Store</h4>
                         <div class="options">
                         </div>
                     </div>
-	                <form:form modelAttribute="accessorForm" action="accessoriesSave" class="form-horizontal" method="Post" >
+	                <form:form modelAttribute="storeForm" action="storeSave" class="form-horizontal" method="Post" >
 	                <c:if test="${not empty msg}">
 									<div class="alert alert-success fadeIn animated">${msg}</div>
 								</c:if>
+	                <!-- <div id="errorMsg" class="alert alert-success fadeIn animated" style="display: none"></div> -->
                     <div class="panel-body">
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Type of Accessory</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Store Name</label>
                     				<div class="col-md-6">
-		                            	<form:hidden path="id"/>
-								      	<form:select path="typeofaccessory" class="form-control">
-									  		<form:option value="Industrial">Industrial</form:option>
-									  		<form:option value="Commercial">Commercial</form:option>
-									  		<form:option value="Domestic">Domestic</form:option>
-								  		</form:select>
-								  	</div>
+                    				<form:input type="text" path="storename" class="form-control" placeholder="Supplier name"/>
+                    				<form:hidden path="id"/>
+                    				</div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Supplier Name</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Store Location</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="suppliername" class="form-control" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="location" class="form-control" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
-                    	</div>
-                    	<div class="row">
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Made In</label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="madein" class="form-control" placeholder="Made in"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">LPO No</label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="lponumber" class="form-control" placeholder="LPO No"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    	</div>
-                    	<div class="row">
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Remarks</label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="remarks" id="remarks" class="form-control" placeholder="Remarks"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<!-- <div class="col-md-6">
-                    			<div class="form-group">
-                    				<div class="col-md-offset-4 col-md-6">
-		                            	<input class="btn-primary btn" type="submit" value="Submit" />
-					      				<input class="btn-danger btn" type="reset" value="Reset" />
-								  	</div>
-                    			</div>
-                    		</div> -->
                     	</div>
                     </div>
                     
@@ -117,15 +78,12 @@
          			</form:form>				    
                 </div>
             </div>
-            
-             
-            
         </div>
         <div class="row">
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Accessories List</h4>
+                            <h4>Store List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -134,7 +92,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th></th></tr>
+                                	<tr><th>Store ID</th><th>Store Name</th><th>Location</th><th>Color</th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -147,8 +105,10 @@
         </div> <!-- container -->
     </div> <!-- #wrap -->
 </div> <!-- page-content -->
+<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
 
-<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript">
 var lstOrders =${allObjects};
 
@@ -171,27 +131,25 @@ var data = {};
 
 
 function showTableData(response){
-// 	$("#userData table ").remove();
-	//$("#userData table tr").remove();
-	$('#tableId').html('');
+	
+	var table=$('#tableId').html('');
+	
 	serviceUnitArray = {};
 	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th></th></tr>'+
+    	'<thead><tr><th>Store ID</th><th>Store Name</th><th>Location</th><th>Color</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
-		var edit = "<a class='edit' onclick='editAccessory("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
-		var deleterow = "<a class='delete' onclick='deleteAccessory("+ orderObj.id+ ")'><i class='fa fa-trash-o red'></i></a>"
+		var edit = "<a class='edit' onclick='editStore("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+		var deleterow = "<a class='delete' onclick='deleteStore("+ orderObj.id+ ")'><i class='fa fa-trash-o red'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 			
 		var tblRow ="<tr>"
-						+ "<td title='"+orderObj.typeofaccessory+"'>" + orderObj.typeofaccessory + "</td>"
-						+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
-						+ "<td title='"+orderObj.madein+"'>" + orderObj.madein + "</td>"
-						+ "<td title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
-						+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
+			+ "<td title='"+orderObj.id+"'>" + orderObj.storeid + "</td>"
+						+ "<td title='"+orderObj.storename+"'>" + orderObj.storename + "</td>"
+						+ "<td title='"+orderObj.location+"'>" + orderObj.location + "</td>"
 						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
 						
 						/* + "<td><a href='javascript:void(0)' id='"
@@ -205,25 +163,24 @@ function showTableData(response){
 						+ "</td>" */
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
+				//$('.datatables').dataTable({});
 			});
 	}
 }
-function editAccessory(id) {
+function editStore(id) {
 	$("#id").val(id);
-	$("#typeofaccessory").val(serviceUnitArray[id].typeofaccessory);
-	$("#suppliername").val(serviceUnitArray[id].suppliername);
-	$("#madein").val(serviceUnitArray[id].madein);
-	$("#lponumber").val(serviceUnitArray[id].lponumber);
-	$("#remarks").val(serviceUnitArray[id].remarks);
+	$("#storename").val(serviceUnitArray[id].storename);
+	$("#storeid").val(serviceUnitArray[id].storeid);
+	$("#location").val(serviceUnitArray[id].location);
 	$(window).scrollTop($('body').offset().top);
 }
 
-function deleteAccessory(id) {
+function deleteStore(id) {
 	var checkstr =  confirm('Are you sure you want to delete this?');
 	if(checkstr == true){
 		$.ajax({
 					type : "POST",
-					url : "deleteDamage.htm",
+					url : "storeDelete.htm",
 					data :"id="+id,
 					success: function (response) {
 		                 if(response != null ){
@@ -240,9 +197,10 @@ function deleteAccessory(id) {
 }
 
 function damageDataClear(){
- $('#productId').val("");
- $('#quantity').val("");
- $('#description').val("");
+	$("#id").val("");
+	$("#storeName").val("");
+	$("#storeid").val("");
+	$("#location").val("");
 }
 
 

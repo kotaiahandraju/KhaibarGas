@@ -190,9 +190,11 @@ var data = {};
 
 
 function showTableData(response){
-// 	$("#userData table ").remove();
-	//$("#userData table tr").remove();
-	$('#tableId').html('');
+	
+	var table=$('#tableId').html('');
+	table .clear().draw();
+	
+	
 	serviceUnitArray = {};
 	if(response != undefined && response.length >0){
 	var protectType = null;
@@ -254,8 +256,10 @@ function customerDelete(id) {
 					data :"id="+id,
 					success: function (response) {
 		                 if(response != null ){
-		                	//var resJson=JSON.parse(response);
-		                	showTableData(response);
+		                	var resJson=JSON.parse(response);
+		                	
+		                	showTableData(resJson);
+		                	alert("Delete Sucessfully");
 		                	}
 		                 },
 		             error: function (e) { 

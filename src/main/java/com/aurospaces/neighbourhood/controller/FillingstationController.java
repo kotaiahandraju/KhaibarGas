@@ -26,7 +26,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping(value="admin")
 public class FillingstationController {
-	private Logger logger = Logger.getLogger(CylinderController.class);
+	private Logger logger = Logger.getLogger(FillingstationController.class);
 	@Autowired
 	FillingstationmasterDao fillingstationmasterDao;
 	

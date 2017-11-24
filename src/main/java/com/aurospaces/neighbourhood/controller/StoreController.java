@@ -16,28 +16,31 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
 import com.aurospaces.neighbourhood.bean.CustomermasterBean;
-import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
+import com.aurospaces.neighbourhood.bean.StoresmasterBean;
+import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import CommonUtils.CommonUtils;
+
 @Controller
-@RequestMapping(value="admin")
-public class CustomerController {
+@RequestMapping(value="/admin")
+public class StoreController {
 	
 	@Autowired
-	CustomermasterDao customermasterDao;
+	StoresmasterDao storesmasterDao;
 	
 	
-	@RequestMapping(value = "/customerHome")
-	public String customerHome(@ModelAttribute("customerForm")CustomermasterBean customermasterBean,HttpServletRequest request,
+	@RequestMapping(value = "/storeHome")
+	public String storeHome(@ModelAttribute("storeForm")StoresmasterBean storesmasterBean,HttpServletRequest request,
 			HttpSession session) {
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		List<CustomermasterBean> customerList=null;
 		try {
 			
-			sJson=customermasterDao.getAllCustomer();
+			sJson=storesmasterDao.getAllStore();
 			if(sJson !=null){
 				
 				 request.setAttribute("allObjects", sJson);
@@ -54,36 +57,37 @@ public class CustomerController {
 			System.out.println(e);
 
 		}
-		return "customerHome";
+		return "storeHome";
 	}
 	
-	@RequestMapping(value = "/customerSave")
-	public  String customerSave(@ModelAttribute("customerForm")CustomermasterBean customermasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
+	@RequestMapping(value = "/storeSave")
+	public  String storeSave(@ModelAttribute("storeForm")StoresmasterBean storesmasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
 		boolean isInsert = false;
 		String sJson = "";
-		List<CustomermasterBean> customermaster=null;
+		List<StoresmasterBean> storeBean=null;
 		 String sProductId ="";
 		 Integer existId =null;
 		try {
 			System.out.println("--------customerSave----------");
 			
-			String sMobileNo=customermasterBean.getMobile();
-			customermaster=customermasterDao.getByMobileNo(sMobileNo);
-			System.out.println("customerSave"+customermaster);
-			if(customermaster.size() ==0 || customermaster ==null){
-				customermasterBean.setStatus("1");
-				customermasterDao.save(customermasterBean);
-				reAttributes.addFlashAttribute("msg", "Login Sucessfull");
+			String sName=storesmasterBean.getStorename();
+			storeBean=storesmasterDao.getByStoreName(sName);
+			System.out.println("customerSave"+storeBean);
+			if(storeBean.size() ==0 || storeBean ==null){
+				storesmasterBean.setStoreid(CommonUtils.getAutoGenId());
+				storesmasterBean.setStatus("1");
+				storesmasterDao.save(storesmasterBean);;
+				reAttributes.addFlashAttribute("msg", "Record Add Sucessfull");
 			}else{
-				for (CustomermasterBean customermasterBean2 : customermaster) {
+				for (StoresmasterBean iterarateList : storeBean) {
 					
-					 existId=customermasterBean2.getId();
-					 if(existId==customermasterBean.getId()){
-						 customermasterDao.save(customermasterBean);
+					 existId=iterarateList.getId();
+					 if(existId==storesmasterBean.getId()){
+						 storesmasterDao.save(storesmasterBean);
 						 reAttributes.addFlashAttribute("msg", "Record Updated Successfully");
 
 					 }else{
-						 reAttributes.addFlashAttribute("msg", "Mobile Number already exist.");
+						 reAttributes.addFlashAttribute("msg", "Store name already exist.");
 						 reAttributes.addFlashAttribute("cssMsg", "danger");
 
 						}
@@ -95,11 +99,11 @@ public class CustomerController {
 			System.out.println("Exception in Product Controller in productSave()");
 			e.printStackTrace();
 		}
-		return "redirect:customerHome";
+		return "redirect:storeHome";
 	}
 	
-	@RequestMapping(value = "/customerDelete")
-	public @ResponseBody String customerDelete( @RequestParam("id") String id, HttpSession objSession,
+	@RequestMapping(value = "/storeDelete")
+	public @ResponseBody String storeDelete( @RequestParam("id") String id, HttpSession objSession,
 			HttpServletRequest objRequest) throws JsonGenerationException, JsonMappingException, IOException {
 		boolean isDelete = false;
 		String sJson = "";
@@ -107,10 +111,10 @@ public class CustomerController {
 		List<AccessoriesmasterBean> accessories=null;
 		ObjectMapper objectMapper = null;
 		  int dId=Integer.parseInt(id);
-		  isDelete = customermasterDao.delete(dId);
+		  isDelete = storesmasterDao.delete(dId);
 		 
 		  if(isDelete){
-			  sJson=customermasterDao.getAllCustomer();
+			  sJson=storesmasterDao.getAllStore();
 			  System.out.println("deleted cusmer data--"+sJson);
 				
 			}

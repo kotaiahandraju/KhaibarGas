@@ -13,6 +13,7 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aurospaces.neighbourhood.bean.TrucksmasterBean;
@@ -25,7 +26,7 @@ public class BaseTrucksmasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO trucksmaster( created_time, updated_time, trucknumber, registrationexpirydate, civildefensecardexpirydate, servicedue, make, description, capacityoftruck, lponumber, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO trucksmaster( created_time, updated_time, trucknumber, registrationexpirydate, civildefensecardexpirydate, servicedue, make, description, capacityoftruck, lponumber, status,typeOfService) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"; 
 
 
 
@@ -71,6 +72,13 @@ public class BaseTrucksmasterDao{
 					}
 					java.sql.Timestamp civildefensecardexpirydate = 
 						new java.sql.Timestamp(trucksmaster.getCivildefensecardexpirydate().getTime()); 
+					
+					if(trucksmaster.getServicedue()== null)
+					{
+					trucksmaster.setServicedue( new Date());
+					}
+					java.sql.Timestamp servicedue = 
+						new java.sql.Timestamp(trucksmaster.getCivildefensecardexpirydate().getTime()); 
 							
 					PreparedStatement ps =
 									connection.prepareStatement(INSERT_SQL,new String[]{"id"});
@@ -79,12 +87,13 @@ ps.setTimestamp(2, updatedTime);
 ps.setString(3, trucksmaster.getTrucknumber());
 ps.setTimestamp(4, registrationexpirydate);
 ps.setTimestamp(5, civildefensecardexpirydate);
-ps.setString(6, trucksmaster.getServicedue());
+ps.setTimestamp(6, servicedue);
 ps.setString(7, trucksmaster.getMake());
 ps.setString(8, trucksmaster.getDescription());
 ps.setString(9, trucksmaster.getCapacityoftruck());
 ps.setString(10, trucksmaster.getLponumber());
 ps.setString(11, trucksmaster.getStatus());
+ps.setString(12, trucksmaster.getTypeOfService());
 
 							return ps;
 						}
@@ -99,9 +108,9 @@ ps.setString(11, trucksmaster.getStatus());
 		else
 		{
 
-			String sql = "UPDATE trucksmaster  set trucknumber = ? ,registrationexpirydate = ? ,civildefensecardexpirydate = ? ,servicedue = ? ,make = ? ,description = ? ,capacityoftruck = ? ,lponumber = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE trucksmaster  set trucknumber = ? ,registrationexpirydate = ? ,civildefensecardexpirydate = ? ,servicedue = ? ,make = ? ,description = ? ,capacityoftruck = ? ,lponumber = ? ,status = ?,typeOfService=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{trucksmaster.getTrucknumber(),trucksmaster.getRegistrationexpirydate(),trucksmaster.getCivildefensecardexpirydate(),trucksmaster.getServicedue(),trucksmaster.getMake(),trucksmaster.getDescription(),trucksmaster.getCapacityoftruck(),trucksmaster.getLponumber(),trucksmaster.getStatus(),trucksmaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{trucksmaster.getTrucknumber(),trucksmaster.getRegistrationexpirydate(),trucksmaster.getCivildefensecardexpirydate(),trucksmaster.getServicedue(),trucksmaster.getMake(),trucksmaster.getDescription(),trucksmaster.getCapacityoftruck(),trucksmaster.getLponumber(),trucksmaster.getStatus(),trucksmaster.getTypeOfService(), trucksmaster.getId()});
 		}
 	}
 		

@@ -145,8 +145,8 @@ s.parentNode.insertBefore(ga, s);
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 		$.each(listOrders,function(i, orderObj) {
-						var edit = "<a  onclick='editOccupation("	+ orderObj.id+ ")'><i style='color: green;' class='fa fa-edit'></i></a>"
-						var deleterow = "<a  onclick='deleteOccupation("+ orderObj.id+ ")'><i style='color: red;' class='fa fa-trash'></i></a>"
+						var edit = "<a onclick='editOccupation("+ orderObj.id+ ")'><i style='color: green;' class='fa fa-edit'></i></a>"
+						var deleterow = "<a onclick='deleteOccupation("+ orderObj.id+ ")'><i style='color: red;' class='fa fa-trash'></i></a>"
 						serviceUnitArray[orderObj.id] = orderObj;
 						var tblRow = "<tr >"
 								+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
