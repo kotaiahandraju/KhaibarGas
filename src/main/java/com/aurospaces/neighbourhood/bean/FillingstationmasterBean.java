@@ -15,6 +15,41 @@ protected String gascapacity;
 protected String availablegas;
 protected String status ;
 
+protected String stationname;
+protected String unitpoint;
+
+/*protected String openingbalance;
+protected String closingbalance;
+*/
+
+
+
+
+public String getStationname() {
+	return stationname;
+}
+public void setStationname(String stationname) {
+	this.stationname = stationname;
+}
+public String getUnitpoint() {
+	return unitpoint;
+}
+public void setUnitpoint(String unitpoint) {
+	this.unitpoint = unitpoint;
+}
+/*public String getOpeningbalance() {
+	return openingbalance;
+}
+public void setOpeningbalance(String openingbalance) {
+	this.openingbalance = openingbalance;
+}
+public String getClosingbalance() {
+	return closingbalance;
+}
+public void setClosingbalance(String closingbalance) {
+	this.closingbalance = closingbalance;
+}
+*/
 public int getId()
 {
   return id;

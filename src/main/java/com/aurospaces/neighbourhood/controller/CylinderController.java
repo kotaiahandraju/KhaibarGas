@@ -22,23 +22,36 @@ import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * @author KLS
+ *
+ */
 @Controller
-//@RequestMapping(value = "/admin")
+@RequestMapping(value = "/admin")
 public class CylinderController {
-	
+
 	private Logger logger = Logger.getLogger(CylinderController.class);
 	@Autowired
 	CylindermasterDao cylindermasterDao;
-	
+
+	/**
+	 * 
+	 * @param objCylindermasterBean
+	 * @param model
+	 * @param request
+	 * @param session
+	 * @return
+	 * 
+	 */
 	@RequestMapping(value = "/CylinderHome")
-	public String cylinderHome( @Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean, ModelMap model, HttpServletRequest request,
-			HttpSession session) {
-		
+	public String cylinderHome(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
+			ModelMap model, HttpServletRequest request, HttpSession session) {
+
 		ObjectMapper objectMapper = null;
 		String sJson = null;
 		List<CylindermasterBean> listOrderBeans = null;
 		try {
-			listOrderBeans =cylindermasterDao.getCylinders();
+			listOrderBeans = cylindermasterDao.getCylinders();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -57,60 +70,70 @@ public class CylinderController {
 		}
 		return "cylinderHome";
 	}
-	
-	
+
+	/**
+	 * @param objCylindermasterBean
+	 * @param bindingresults
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping(value = "/addcylinder", method = RequestMethod.POST)
-	public String addCylinder(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,BindingResult bindingresults,Model model)
-    {
-        try
-        {
-        	
-		if(bindingresults.hasErrors())
-		{
-		return "cylinderHome";
-	    }
-		
-		
+	public String addCylinder(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
+			BindingResult bindingresults, Model model) {
+		try {
+
+			if (bindingresults.hasErrors()) {
+				return "cylinderHome";
+			}
+
 			objCylindermasterBean.setStatus("1");
-	      cylindermasterDao.save(objCylindermasterBean);
-	      
-		model.addAttribute("cylinder",new CylindermasterBean());
-		//List<CylindermasterBean> list =cylindermasterDao.getCylinders();
-	//	model.addAttribute("cylinders", cylindermasterDao.getCylinders());
-		
-		
-        }catch (Exception e) {
+			cylindermasterDao.save(objCylindermasterBean);
+
+			model.addAttribute("cylinder", new CylindermasterBean());
+			// List<CylindermasterBean> list =cylindermasterDao.getCylinders();
+			// model.addAttribute("cylinders",
+			// cylindermasterDao.getCylinders());
+
+		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
 
 		}
-		
-		
+
 		return "redirect:CylinderHome";
 	}
-	
+
+	/**
+	 * @param objCylindermasterBean
+	 * @param model
+	 * @param request
+	 * @param session
+	 * @param objBindingResult
+	 * @return
+	 */
 	@RequestMapping(value = "/deleteCylinder")
-	public @ResponseBody String deleteEducation( CylindermasterBean objCylindermasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+	public @ResponseBody String deleteEducation(CylindermasterBean objCylindermasterBean, ModelMap model,
+			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
 		System.out.println("deleteEducation page...");
-		List<CylindermasterBean> listOrderBeans  = null;
+		List<CylindermasterBean> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
-		String sJson=null;
+		String sJson = null;
 		boolean delete = false;
-		try{
-			if(objCylindermasterBean.getId() != 0){
- 				delete = cylindermasterDao.deleteCylinder(objCylindermasterBean.getId());
- 				if(delete){
- 					jsonObj.put("message", "deleted");
- 				}else{
- 					jsonObj.put("message", "delete fail");
- 				}
- 			}
- 				
+		try {
+			if (objCylindermasterBean.getId() != 0) {
+				delete = cylindermasterDao.deleteCylinder(objCylindermasterBean.getId());
+				if (delete) {
+					jsonObj.put("message", "deleted");
+				} else {
+					jsonObj.put("message", "delete fail");
+				}
+			}
+
 			listOrderBeans = cylindermasterDao.getCylinders();
-			 objectMapper = new ObjectMapper();
+			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-				
+
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
@@ -122,21 +145,15 @@ public class CylinderController {
 				request.setAttribute("allOrders1", "''");
 				jsonObj.put("allOrders1", listOrderBeans);
 			}
-		}catch(Exception e){
+		} catch (Exception e) {
 			e.printStackTrace();
-	System.out.println(e);
 			logger.error(e);
 			logger.fatal("error in EducationController class deleteEducation method  ");
-			jsonObj.put("message", "excetption"+e);
+			jsonObj.put("message", "excetption" + e);
 			return String.valueOf(jsonObj);
-			
+
 		}
 		return String.valueOf(jsonObj);
 	}
-	
-	
-	}
-	
-	
-	
 
+}

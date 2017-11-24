@@ -82,12 +82,12 @@ session.setAttribute("baseurl", baseurl);
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar">
             <ul class="nav navbar-nav">
                 <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                <li><a href="cylindar.html"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>CYLINDERS</span></a></li>
-                <li><a href="#"><i class="fa fa-truck" aria-hidden="true"></i> <span>TRUCKS</span></a></li>
-                <li><a href="#"><i class="fa fa-tint"></i> <span>ACCESSORIES</span></a></li>
+                <li><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>CYLINDERS</span></a></li>
+                <li><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>TRUCKS</span></a></li>
+                <li><a href="${baseurl }/admin/accessoriesHome"><i class="fa fa-tint"></i> <span>ACCESSORIES</span></a></li>
                 <li><a href="#"><i class="fa fa-th"></i> <span>STORES</span></a></li>
-                <li><a href="#"><i class="fa fa-archive"></i> <span>FILLING STATIONS</span></a></li>
-                <li><a href="#"><i class="fa fa-group"></i> <span>CUSTOMERS</span></a></li>
+                <li><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>FILLING STATIONS</span></a></li>
+                <li><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>CUSTOMERS</span></a></li>
                 <li><a href="#"><i class="fa fa-user"></i> <span>STAFF</span></a></li>
                 <li><a href="#"><i class="fa fa-building"></i> <span>COMPANY</span></a></li>
                 <li><a href="#"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>

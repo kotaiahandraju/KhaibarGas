@@ -24,6 +24,7 @@ import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
+@RequestMapping(value="admin")
 public class FillingstationController {
 	private Logger logger = Logger.getLogger(CylinderController.class);
 	@Autowired
@@ -60,7 +61,7 @@ public class FillingstationController {
 	}
 	
 	
-	/*@RequestMapping(value = "/addfillingstation", method = RequestMethod.POST)
+	@RequestMapping(value = "/addfillingstation", method = RequestMethod.POST)
 	public String addCylinder(@Valid @ModelAttribute("fillingStationForm") FillingstationmasterBean objFillingstationmasterBean,BindingResult bindingresults,Model model)
     {
         try
@@ -87,11 +88,11 @@ public class FillingstationController {
 		}
 		
 		
-		return "redirect:CylinderHome";
+		return "redirect:fillingStationHome";
 	}
 	
 		
-	@RequestMapping(value = "/deleteCylinder")
+	@RequestMapping(value = "/deletefillingstation")
 	public @ResponseBody String deleteEducation( CylindermasterBean objCylindermasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		System.out.println("deleteEducation page...");
 		List<FillingstationmasterBean> listOrderBeans  = null;
@@ -136,6 +137,5 @@ public class FillingstationController {
 		return String.valueOf(jsonObj);
 	}
 	
-*/
 
 }

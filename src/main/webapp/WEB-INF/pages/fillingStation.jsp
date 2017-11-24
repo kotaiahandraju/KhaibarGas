@@ -31,7 +31,7 @@
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="index.html">Home</a></li>
-               <li>Cylinder</li>
+               <li>Filling station</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container">
@@ -41,17 +41,19 @@
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Cylinder</h4>
+                        <h4>Add Filling Station</h4>
                         <div class="options">
                         </div>
                     </div>
                     <div class="panel-body">
                      
                      <form:form class="form-horizontal" modelAttribute="fillingStationForm"  role="form" id="fillingstation-form" action="addfillingstation" method="post">
-                     
+                     <c:if test="${not empty msg}">
+									<div class="alert alert-success fadeIn animated">${msg}</div>
+								</c:if>
                      <form:hidden path="id"/>
 						  <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Opening Balance in GasTank </label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Opening Balance </label>
 						    <div class="col-sm-3">
 						      <form:input path="gasavailability" class="form-control"  placeholder="Available Gas"/>
 						    </div>
@@ -62,6 +64,24 @@
 						    <div class="col-sm-3">
 						       <form:input path="quantity" type="text" class="form-control"  placeholder="quantity"/>
 						    </div>
+						    
+						    
+						    <div>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">unitpoint</label>
+						    </div>
+                             <div class="col-sm-3">
+						    <form:input path="unitpoint" class="form-control"  placeholder="unitpoint"/>
+						    </div>
+						  </div>
+						  
+						    <div>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">Station Name</label>
+						    </div>
+                             <div class="col-sm-3">
+						    <form:input path="stationname" class="form-control"  placeholder="stationname"/>
+						    </div>
+						  </div>
+						  
 						    <div>
 						    	 <label for="focusedinput" class="col-sm-2 control-label">Capacity</label>
 						    </div>
@@ -69,11 +89,18 @@
 						    <form:input path="gascapacity" class="form-control"  placeholder="capacity"/>
 						    </div>
 						  </div>
+						  
+						   <div class="form-group">
+						    <label for="focusedinput" class="col-sm-2 control-label">Filling Machines </label>
+						    <div class="col-sm-3">
+						       <form:input path="numberoffillingmachines" class="form-control"  placeholder="filling machines"/>
+						    </div>
+						    </div>
                           
                           <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Closing Balance in GasTank </label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Closing Balance </label>
 						    <div class="col-sm-3">
-						       <form:input path="availablegas" class="form-control"  placeholder="LPO No"/>
+						       <form:input path="availablegas" class="form-control"  placeholder="closing Balance in gasTank"/>
 						    </div>
 						    </div>
 						    
@@ -101,7 +128,7 @@
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Cylinders List</h4>
+                            <h4>Filling Stations List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -111,8 +138,8 @@
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                     <tr>
-                                        <th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Customer ID</th><th>Location</th><th>LPO No</th>
-                                        <th>Color</th><th>Expiry Date</th><th>status</th><th></th>
+                                        <th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>Closing Balance</th>
+                                        <th>Station Name</th><th>Unit Point</th><th>status</th><th></th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -137,7 +164,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Customer ID</th><th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>Closing Balance</th><th>Station Name</th><th>Unitpoint</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -145,14 +172,13 @@ function displayTable(listOrders) {
 					var deleterow = "<a  onclick='deleteCylinder("+ orderObj.id+ ")'><i class='fa fa-trash-o red'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
-							+ "<td title='"+orderObj.cylinderid+"'>"+ orderObj.cylinderid + "</td>"
-							+ "<td title='"+orderObj.size+"'>"+ orderObj.size + "</td>"
-							+ "<td title='"+orderObj.cylinderstatus+"'>"+ orderObj.cylinderstatus + "</td>"
-							+ "<td title='"+orderObj.customerid+"'>"+ orderObj.customerid + "</td>"
-							+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
-							+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber+ "</td>"
-							+ "<td title='"+orderObj.color+"'>"+ orderObj.color + "</td>"
-							+ "<td title='"+orderObj.expirydate+"'>"+ new Date(orderObj.expirydate) + "</td>"
+							+ "<td title='"+orderObj.gasavailability+"'>"+ orderObj.gasavailability + "</td>"
+							+ "<td title='"+orderObj.numberoffillingmachines+"'>"+ orderObj.numberoffillingmachines + "</td>"
+							+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
+							+ "<td title='"+orderObj.gascapacity+"'>"+ orderObj.gascapacity + "</td>"
+							+ "<td title='"+orderObj.availablegas+"'>"+ orderObj.availablegas+ "</td>"
+							+ "<td title='"+orderObj.stationname+"'>"+ orderObj.stationname + "</td>"
+							+ "<td title='"+orderObj.unitpoint+"'>"+ orderObj.unitpoint+ "</td>"
 							+ "<td title='"+orderObj.status+"'>"+ orderObj.status + "</td>"
 							+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 							+ "</tr >";
@@ -175,18 +201,11 @@ function displayTable(listOrders) {
 
 
 function editCylinder(id) {
-	$("#id").val(serviceUnitArray[id].id);
-	$("#cylinderid").val(serviceUnitArray[id].cylinderid);
-	$("#size").val(serviceUnitArray[id].size);
-	$("#capacity").val(serviceUnitArray[id].capacity);
-	$("#status").val(serviceUnitArray[id].cylinderstatus);
-	$("#location").val(serviceUnitArray[id].location);
-	$("#lponumber").val(serviceUnitArray[id].lponumber);
-	$("#color").val(serviceUnitArray[id].color);
-	$("#madein").val(serviceUnitArray[id].madein);
-	$("#expirydate1").val(serviceUnitArray[id].expirydate1);
-	$("#ownercompany").val(serviceUnitArray[id].ownercompany);
-	$("#customerid").val(serviceUnitArray[id].customerid);
+	$("#gasavailability").val(serviceUnitArray[id].gasavailability);
+	$("#numberoffillingmachines").val(serviceUnitArray[id].numberoffillingmachines);
+	$("#quantity").val(serviceUnitArray[id].quantity);
+	$("#gascapacity").val(serviceUnitArray[id].gascapacity);
+	$("#availablegas").val(serviceUnitArray[id].availablegas);
 	
 	
 	
@@ -199,7 +218,7 @@ function deleteCylinder(id){
 	if(checkstr == true){
 	var formData = new FormData();
      formData.append('id', id);
-	$.fn.makeMultipartRequest('POST', 'deleteCylinder', false,
+	$.fn.makeMultipartRequest('POST', 'deletefillingstation', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		alert(jsonobj.message);
