@@ -69,6 +69,10 @@ public class TrucksController {
 				Date date=  KhaibarGasUtil.dateFormate(objTrucksmasterBean.getCivildefensecardexpirydate1());
 				objTrucksmasterBean.setCivildefensecardexpirydate(date);
 			}
+			if(StringUtils.isNotBlank(objTrucksmasterBean.getServicedue1())){
+				Date date=  KhaibarGasUtil.dateFormate(objTrucksmasterBean.getServicedue1());
+				objTrucksmasterBean.setServicedue(date);
+			}
 			objTrucksmasterBean.setStatus("1");
 			TrucksmasterBean trucksmasterBean = objTrucksmasterDao.getByName(objTrucksmasterBean);
 			int dummyId =0;

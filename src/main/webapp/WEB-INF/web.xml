@@ -14,7 +14,10 @@
   </servlet-mapping>
   <context-param>
     <param-name>contextConfigLocation</param-name>
-    <param-value>/WEB-INF/spring-servlet.xml</param-value>
+    <param-value>
+    /WEB-INF/spring-servlet.xml
+    
+    </param-value>
   </context-param>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -85,4 +88,6 @@
     <filter-name>f1</filter-name>
     <url-pattern>/admin/*</url-pattern>
   </filter-mapping> -->
+  	<!-- Spring Security -->
+	
 </web-app>
