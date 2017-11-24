@@ -40,6 +40,9 @@
 	<definition name="fillingStationHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/fillingStation.jsp" />
 	</definition>
+		<definition name="dashboardHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/dashboard.jsp" />
+	</definition>
 	
 </tiles-definitions>
 

@@ -46,7 +46,7 @@ session.setAttribute("baseurl", baseurl);
        
 
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="index.html">KHAIBAR GAS LLC</a>
+            <a class="navbar-brand" href="#">KHAIBAR GAS LLC</a>
         </div>
 <div class="masters">
         <ul class="nav navbar-nav pull-right toolbar">
@@ -81,9 +81,9 @@ session.setAttribute("baseurl", baseurl);
         </div>
         <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="index.html"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-                <li><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>CYLINDERS</span></a></li>
-                <li><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>TRUCKS</span></a></li>
+                <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
+                <li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>CYLINDERS</span></a></li>
+                <li class="truck"><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>TRUCKS</span></a></li>
                 <li><a href="${baseurl }/admin/accessoriesHome"><i class="fa fa-tint"></i> <span>ACCESSORIES</span></a></li>
                 <li><a href="#"><i class="fa fa-th"></i> <span>STORES</span></a></li>
                 <li><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>FILLING STATIONS</span></a></li>

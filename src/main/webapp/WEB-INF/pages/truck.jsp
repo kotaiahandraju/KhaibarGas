@@ -53,24 +53,25 @@
 						    	 <label for="focusedinput" class="col-sm-2 control-label">Registration Expiry</label>
 						    </div>
                              <div class="col-sm-3">
-						      <form:input path="registrationexpirydate1" type="text" class="form-control"  placeholder="Registration Expiry"/>
+						      <form:input path="registrationexpirydate1" type="text" readonly="true" class="form-control"  placeholder="Registration Expiry"/>
 						    </div>
 						  </div>
                           
                           <div class="form-group">
 						    <label for="focusedinput" class="col-sm-2 control-label">Civil defense card expiry</label>
 						    <div class="col-sm-3">
-						       <form:input path="civildefensecardexpirydate1" type="text" class="form-control"  placeholder="Civil defense card expiry"/>
+						       <form:input path="civildefensecardexpirydate1" type="text" readonly="true" class="form-control"  placeholder="Civil defense card expiry"/>
 						    </div>
 						    <div>
 						    	 <label for="focusedinput" class="col-sm-2 control-label">Service Due</label>
 						    </div>
                              <div class="col-sm-3">
-						    <form:select path="servicedue"  class="form-control">
+                             <form:input path="servicedue1" type="text" class="form-control" readonly="true"  placeholder="Servicedue"/>
+						    <%-- <form:select path="servicedue"  class="form-control">
 						  		<form:option value="Maintenance">Maintenance</form:option>
 						  		<form:option value="Agency Repairs">Agency Repairs</form:option>
 						  		<form:option value="Agency Service">Agency Service</form:option>
-						  	</form:select>
+						  	</form:select> --%>
 						    </div>
 						  </div>
                           
@@ -101,7 +102,17 @@
 						    </div>
 						  </div>
                           
-                          
+                           <div class="form-group">
+						    <label for="focusedinput" class="col-sm-2 control-label">Type Of Service</label>
+						    <div class="col-sm-3">
+						      <form:select path="typeOfService"  class="form-control">
+						  		<form:option value="Maintenance">Maintenance</form:option>
+						  		<form:option value="Agency Repairs">Agency Repairs</form:option>
+						  		<form:option value="Agency Service">Agency Service</form:option>
+						  	</form:select>
+						    </div>
+						   
+						  </div>
 						
                     </div>
                     
@@ -127,7 +138,7 @@
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Cylinders List</h4>
+                            <h4>Truck List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -168,7 +179,17 @@ $("#civildefensecardexpirydate1").datepicker({
 		changeMonth : true,
 		changeYear : true,
 	});
+	
+$("#servicedue1").datepicker({
+	 dateFormat: "dd-MM-yy",
+	 changeDate : true,
+		changeMonth : true,
+		changeYear : true,
+	});
+	
+
 });
+
 
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
@@ -188,7 +209,7 @@ function displayTable(listOrders) {
 							+ "<td title='"+orderObj.trucknumber+"'>"+ orderObj.trucknumber + "</td>"
 							+ "<td title='"+orderObj.registrationexpirydate1+"'>"+ orderObj.registrationexpirydate1 + "</td>"
 							+ "<td title='"+orderObj.civildefensecardexpirydate1+"'>"+ orderObj.civildefensecardexpirydate1 + "</td>"
-							+ "<td title='"+orderObj.servicedue+"'>"+ orderObj.servicedue + "</td>"
+							+ "<td title='"+orderObj.servicedue1+"'>"+ orderObj.servicedue1 + "</td>"
 							+ "<td title='"+orderObj.make+"'>"+ orderObj.make + "</td>"
 							+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
 							+ "<td title='"+orderObj.capacityoftruck+"'>"+ orderObj.capacityoftruck + "</td>"
@@ -207,7 +228,7 @@ function editTruckMaster(id) {
 	$("#trucknumber").val(serviceUnitArray[id].trucknumber);
 	$("#registrationexpirydate1").val(serviceUnitArray[id].registrationexpirydate1);
 	$("#civildefensecardexpirydate1").val(serviceUnitArray[id].civildefensecardexpirydate1);
-	$("#servicedue").val(serviceUnitArray[id].servicedue);
+	$("#servicedue1").val(serviceUnitArray[id].servicedue1);
 	$("#make").val(serviceUnitArray[id].make);
 	$("#description").val(serviceUnitArray[id].description);
 	$("#capacityoftruck").val(serviceUnitArray[id].capacityoftruck);
@@ -230,5 +251,5 @@ function deletetruckMaster(id){
 	}
 	
 }
-
+$(".truck").addClass("active"); 
 </script>

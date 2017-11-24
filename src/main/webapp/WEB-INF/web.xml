@@ -80,14 +80,13 @@
     <error-code>503</error-code>
     <location>/WEB-INF/ErrorPages/503.jsp</location>
   </error-page>
-  <!-- <filter>
+  <filter>
     <filter-name>f1</filter-name>
     <filter-class>com.aurospaces.neighbourhood.filter.MyFilter</filter-class>
-  </filter> -->
- <!--  <filter-mapping>
+  </filter>
+  <filter-mapping>
     <filter-name>f1</filter-name>
     <url-pattern>/admin/*</url-pattern>
-  </filter-mapping> -->
-  	<!-- Spring Security -->
+  </filter-mapping>
 	
 </web-app>
