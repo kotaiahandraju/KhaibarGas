@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
 import com.aurospaces.neighbourhood.bean.CustomermasterBean;
@@ -56,11 +57,12 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/customerSave")
-	public  String customerSave(@ModelAttribute("customerForm")CustomermasterBean customermasterBean, HttpSession objSession,HttpServletRequest objRequest) {
+	public  String customerSave(@ModelAttribute("customerForm")CustomermasterBean customermasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
 		boolean isInsert = false;
 		String sJson = "";
 		List<CustomermasterBean> customermaster=null;
 		 String sProductId ="";
+		 Integer existId =null;
 		try {
 			System.out.println("--------customerSave----------");
 			
@@ -68,9 +70,23 @@ public class CustomerController {
 			customermaster=customermasterDao.getByMobileNo(sMobileNo);
 			System.out.println("customerSave"+customermaster);
 			if(customermaster.size() ==0 || customermaster ==null){
+				customermasterBean.setStatus("0");
 				customermasterDao.save(customermasterBean);
+				reAttributes.addFlashAttribute("msg", "Login Sucessfull");
 			}else{
-				return "redirect:customerHome";
+				for (CustomermasterBean customermasterBean2 : customermaster) {
+					
+					 existId=customermasterBean2.getId();
+					 if(existId==customermasterBean.getId()){
+						 customermasterDao.save(customermasterBean);
+						 reAttributes.addFlashAttribute("msg", "Record Updated Successfully");
+
+					 }else{
+						 reAttributes.addFlashAttribute("msg", "Mobile Number already exist.");
+						 reAttributes.addFlashAttribute("cssMsg", "danger");
+
+						}
+				}
 			}
 			
 			
@@ -94,6 +110,7 @@ public class CustomerController {
 		 
 		  if(isDelete){
 			  sJson=customermasterDao.getAllCustomer();
+			  System.out.println("deleted cusmer data--"+sJson);
 				
 			}
 		
