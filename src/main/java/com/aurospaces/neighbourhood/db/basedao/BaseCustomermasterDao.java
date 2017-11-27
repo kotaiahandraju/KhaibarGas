@@ -37,7 +37,7 @@ public class BaseCustomermasterDao{
 	{
 		jdbcTemplate = custom.getJdbcTemplate();
 	if(customermaster.getId() == 0)	{
-		customermaster.setStatus("0");
+		
 		
 	KeyHolder keyHolder = new GeneratedKeyHolder();
 	int update = jdbcTemplate.update(
@@ -85,7 +85,6 @@ ps.setString(11, customermaster.getStatus());
 		}
 		else
 		{
-			customermaster.setStatus("1");
 
 			String sql = "UPDATE customermaster  set customerid = ? ,customername = ? ,customeraddress = ? ,mobile = ? ,landline = ? ,authorizedperson = ? ,contactperson = ? ,customertype = ? ,status = ?  where id = ? ";
 	
@@ -97,7 +96,7 @@ ps.setString(11, customermaster.getStatus());
 		public Boolean delete(int id) {
 			boolean result=false;
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "DELETE FROM customermaster WHERE id=?";
+			String sql = "update customermaster set status='0' where id = ?";
 			jdbcTemplate.update(sql, new Object[]{id});
 			 int results=jdbcTemplate.update(sql, new Object[]{id});
 				if(results!=0){

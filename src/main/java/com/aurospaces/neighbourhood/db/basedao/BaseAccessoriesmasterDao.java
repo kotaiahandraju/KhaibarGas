@@ -95,7 +95,7 @@ ps.setString(9, accessoriesmaster.getStatus());
 		public Boolean delete(int id) {
 			boolean result=false;
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "DELETE FROM accessoriesmaster WHERE id=?";
+			String sql = "update accessoriesmaster set status='0' where id = ?";
 		 int results=jdbcTemplate.update(sql, new Object[]{id});
 			if(results!=0){
 				result= true;
