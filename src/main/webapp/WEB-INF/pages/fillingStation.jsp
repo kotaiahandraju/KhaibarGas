@@ -48,31 +48,13 @@
 							<div class="panel-body">
 
 								<form:form class="form-horizontal" 	modelAttribute="fillingStationForm" role="form" id="fillingstation-form" action="addfillingstation" method="post">
-									
-									
-									<c:if test="${not empty msg}">
-										<div class="alert alert-success fadeIn animated">${msg}</div>
-									</c:if>
+								<c:if test="${not empty msg}">
+									<div class="alert alert-success fadeIn animated">${msg}</div>
+								</c:if>
 									<form:hidden path="id" />
-
-									<div class="form-group">
-										<label for="focusedinput" class="col-sm-2 control-label">Opening
-											Balance </label>
-										<div class="col-sm-3">
-											<form:input path="gasavailability" class="form-control"
-												placeholder="Available Gas" />
-										</div>
-									</div>
-
+									
 									<div>
-										<label for="focusedinput" class="col-sm-2 control-label">Quantity</label>
-										<div class="col-sm-3">
-											<form:input path="quantity" type="text" class="form-control"
-												placeholder="quantity" />
-										</div>
-									</div>
-
-									<div class="form-group">
+									
 										<label for="focusedinput" class="col-sm-2 control-label">Station
 											Number</label>
 										<div class="col-sm-3">
@@ -82,17 +64,36 @@
 									</div>
 
 
-									<div>
-										<label for="focusedinput" class="col-sm-2 control-label">Station
-											Name</label>
+									<div class="form-group">
+										<label for="focusedinput" class="col-sm-2 control-label">Station Name</label>
+											
 										<div class="col-sm-3">
 											<form:input path="stationname" class="form-control"
 												placeholder="stationname" />
 										</div>
 									</div>
+									
 
+									<div>
+										<label for="focusedinput" class="col-sm-2 control-label">Opening
+											Balance </label>
+										<div class="col-sm-3">
+											<form:input path="gasavailability" class="form-control"
+												placeholder="Available Gas" />
+										</div>
+									</div>
 
 									<div class="form-group">
+										<label for="focusedinput" class="col-sm-2 control-label">Quantity</label>
+										<div class="col-sm-3">
+											<form:input path="quantity" type="text" class="form-control"
+												placeholder="quantity" />
+										</div>
+									</div>
+
+									
+
+									<div>
 										<label for="focusedinput" class="col-sm-2 control-label">Capacity</label>
 										<div class="col-sm-3">
 											<form:input path="gascapacity" class="form-control"
@@ -100,7 +101,7 @@
 										</div>
 									</div>
 
-									<div>
+									<div class="form-group">
 										<label for="focusedinput" class="col-sm-2 control-label">Filling
 											Machines </label>
 										<div class="col-sm-3">
@@ -109,7 +110,7 @@
 										</div>
 									</div>
 
-									<div class="form-group">
+									<div>
 										<label for="focusedinput" class="col-sm-2 control-label">Closing
 											Balance </label>
 										<div class="col-sm-3">
@@ -233,6 +234,8 @@ function editCylinder(id) {
 	$("#quantity").val(serviceUnitArray[id].quantity);
 	$("#gascapacity").val(serviceUnitArray[id].gascapacity);
 	$("#availablegas").val(serviceUnitArray[id].availablegas);
+	$("#stationname").val(serviceUnitArray[id].stationname);
+	$("#unitpoint").val(serviceUnitArray[id].unitpoint);
 	
 	
 	

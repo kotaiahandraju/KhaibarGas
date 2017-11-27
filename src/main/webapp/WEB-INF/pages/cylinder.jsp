@@ -231,6 +231,7 @@
 </div> <!-- page-content -->
 
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
+<script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script> 
 
 <script type="text/javascript">
 
@@ -289,7 +290,7 @@ function editCylinder(id) {
 	$("#madein").val(serviceUnitArray[id].madein);
 	$("#expirtdate1").val(serviceUnitArray[id].expirtdate1);
 	$("#ownercompany").val(serviceUnitArray[id].ownercompany);
-	$("#submit11").val("Update");
+	$("#submit1").val("Update");
 	$(window).scrollTop($('body').offset().top);
 	
 	}
@@ -311,7 +312,7 @@ function deleteCylinder(id){
 }
 
 
-/*  $(function () {
+  $(function () {
 	$("#expirtdate1").datepicker({
 	 dateFormat: "dd-MM-yy",
 	 changeDate : true,
@@ -319,15 +320,8 @@ function deleteCylinder(id){
 		changeYear : true,
 	});
 	});
-  */
+  
  
- $(function() {
-	  $( "#expirtdate1" ).datepicker({ 
-	  dateFormat: "dd/mm/yy",
-	  
-	  });
-	});
-
  
  
  /* function displayVals() {    

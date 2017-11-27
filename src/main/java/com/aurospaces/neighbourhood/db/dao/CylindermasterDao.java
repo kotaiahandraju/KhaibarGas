@@ -26,9 +26,17 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	@SuppressWarnings("unchecked")
 	
 	public List<CylindermasterBean> getCylinders(){  
-		 jdbcTemplate = custom.getJdbcTemplate();
-		return jdbcTemplate.query("SELECT  *,date(c.expirydate) as expirydate FROM cylindermaster c", new BeanPropertyRowMapper(CylindermasterBean.class));
-			
+ jdbcTemplate = custom.getJdbcTemplate();
+		 
+		 //String sql="SELECT *, DATE_FORMAT(expirydate,'%d/%m/%Y') AS expirtdate1  FROM cylindermaster";
+		
+		 String sql =  "SELECT c. *,DATE_FORMAT(c.expirydate,'%d-%M-%Y') AS expirtdate1 ,  CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as status   FROM cylindermaster c";
+		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
+				ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+		
+		if (retlist.size() > 0)
+			return retlist;
+		return null;
 		    
 		}  
 	
@@ -49,17 +57,27 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		return delete;
 	}
 	
-	public List<CylindermasterBean> getByCylinderId(String cyid) {
-		 List<CylindermasterBean> retlist =null;
+	public CylindermasterBean getByCylinderId(CylindermasterBean cylindermasterBean) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT * from cylindermaster where cylinderid = ? ";
-			 retlist = jdbcTemplate.query(sql,
-			new Object[]{cyid},
+			String sql = "SELECT * from cylindermaster where cylinderid = ?";
+			List<CylindermasterBean> retlist = jdbcTemplate.query(sql,
+			new Object[]{cylindermasterBean.getCylinderid()},
 			ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 			if(retlist.size() > 0)
-				return retlist;
-			return retlist;
+				return retlist.get(0);
+			return null;
 		}
+	
+	
+	 @SuppressWarnings("deprecation")
+		public  int  getCylindersCount(){  
+			 jdbcTemplate = custom.getJdbcTemplate();
+			 
+			 String sql="SELECT  count(*)    FROM cylindermaster";
+			   
+			   return jdbcTemplate.queryForInt(sql);
+		}
+
 	
 	
 	

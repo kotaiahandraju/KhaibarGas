@@ -180,7 +180,8 @@ var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color:
 $('.validate').blur(function() {
 	var id = $(this).attr('id');
 	var placeholder = $(this).attr('placeholder');
-	var value = $("#" + id).val();
+	var value1 = $("#" + id).val();
+	var value=$.trim(value1);
 	if (value == null || value == "" || value == "undefined") {
 		$('style').append(styleBlock);
 		$("#" + id ).attr("placeholder", placeholder);

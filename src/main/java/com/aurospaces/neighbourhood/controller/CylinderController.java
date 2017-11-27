@@ -1,11 +1,13 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
+import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+
 
 
 @Controller
@@ -58,41 +63,64 @@ public class CylinderController {
 		}
 		return "cylinderHome";
 	}
+	
 	@RequestMapping(value = "/addcylinder", method = RequestMethod.POST)
 	public String addCylinder(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
-			BindingResult bindingresults, Model model,RedirectAttributes redirect) {
+			BindingResult bindingresults, Model model,RedirectAttributes redir) {
 		
-		List<CylindermasterBean> cylinderMaster=null;
-
+		//List<CylindermasterBean> cylinderMaster=null;
+		
+		int id = 0;
+		
 		try
-        {
-        
-		String cyId=objCylindermasterBean.getCylinderid();
-		cylinderMaster=cylindermasterDao.getByCylinderId(cyId);
-		
-		if(cylinderMaster.size() ==0 || cylinderMaster ==null){
-
+		{
+			
+			if(StringUtils.isNotBlank(objCylindermasterBean.getExpirtdate1())){
+				Date date=  KhaibarGasUtil.dateFormate(objCylindermasterBean.getExpirtdate1());
+				objCylindermasterBean.setExpirydate(date);
+			}
 			objCylindermasterBean.setStatus("1");
-	      cylindermasterDao.save(objCylindermasterBean);
-	      redirect.addFlashAttribute("msg", "Updated");
-		}
-		else{
-			System.out.println("data already exit");
-			redirect.addFlashAttribute("msg", "AlreadyExist");
-		}
-			model.addAttribute("cylinder", new CylindermasterBean());
-			// List<CylindermasterBean> list =cylindermasterDao.getCylinders();
-			// model.addAttribute("cylinders",
-			// cylindermasterDao.getCylinders());
-
+			CylindermasterBean cylindermasterBean = cylindermasterDao.getByCylinderId(objCylindermasterBean);
+			int dummyId =0;
+			if(cylindermasterBean != null){
+				dummyId = cylindermasterBean.getId();
+			}
+			if(objCylindermasterBean.getId() != 0)
+			{
+				id = objCylindermasterBean.getId();
+				if(id == dummyId || cylindermasterBean == null )
+				{
+					cylindermasterDao.save(objCylindermasterBean);
+					redir.addFlashAttribute("msg", "Record Updated Successfully");
+					redir.addFlashAttribute("cssMsg", "warning");
+				}
+				else
+				{
+					redir.addFlashAttribute("msg", "Already Record Exist");
+					redir.addFlashAttribute("cssMsg", "danger");
+				}
+			}
+			if(objCylindermasterBean.getId() == 0 && cylindermasterBean == null)
+			{
+				cylindermasterDao.save(objCylindermasterBean);
+				redir.addFlashAttribute("msg", "Record Inserted Successfully");
+				redir.addFlashAttribute("cssMsg", "success");
+			}
+			if(objCylindermasterBean.getId() == 0 && cylindermasterBean != null)
+			{
+				redir.addFlashAttribute("msg", "Already Record Exist");
+				redir.addFlashAttribute("cssMsg", "danger");
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
 
 		}
-
 		return "redirect:CylinderHome";
-	}
+	}	
+		
+
+
 	@RequestMapping(value = "/deleteCylinder")
 	public @ResponseBody String deleteEducation(CylindermasterBean objCylindermasterBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
@@ -137,6 +165,20 @@ public class CylinderController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	
+	
+	
+	@ModelAttribute
+	public void addingcommonobject(Model model)
+	{
+		
+		int cylindersCount=cylindermasterDao.getCylindersCount();
+		
+		model.addAttribute("cylindersCount",cylindersCount);
+		
+		
+	}
+	
 	@RequestMapping(value = "/cylinderMovetofillingStation")
 	public String cylinderMovetofillingStation(  CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
