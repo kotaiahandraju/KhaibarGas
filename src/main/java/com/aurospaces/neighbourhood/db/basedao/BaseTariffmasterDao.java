@@ -89,10 +89,21 @@ ps.setString(8, tariffmaster.getStatus());
 	}
 		
 		@Transactional
-		public void delete(int id) {
+		public boolean delete(int id) {
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "DELETE FROM tariffmaster WHERE id=?";
+			boolean delete = false;
+			try{
+			String sql = "update tariffmaster set status='0'  WHERE id=?";
+			int intDelete = jdbcTemplate.update(sql, new Object[]{id});
 			jdbcTemplate.update(sql, new Object[]{id});
+			if(intDelete != 0){
+				delete = true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+			
+			return delete;
 		}
 		
 

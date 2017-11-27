@@ -33,6 +33,7 @@ session.setAttribute("baseurl", baseurl);
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/codeprettifier/prettify.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/form-toggle/toggles.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/datatables/dataTables.css' /> 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 <link href="${baseurl }/assets/css/datepicker1.css" rel="stylesheet" type="text/css" />
 
@@ -85,12 +86,14 @@ session.setAttribute("baseurl", baseurl);
                 <li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>CYLINDERS</span></a></li>
                 <li class="truck"><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>TRUCKS</span></a></li>
                 <li><a href="${baseurl }/admin/accessoriesHome"><i class="fa fa-tint"></i> <span>ACCESSORIES</span></a></li>
-                <li><a href="#"><i class="fa fa-th"></i> <span>STORES</span></a></li>
+                <li><a href="${baseurl }/admin/storeHome"><i class="fa fa-th"></i> <span>STORES</span></a></li>
                 <li><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>FILLING STATIONS</span></a></li>
                 <li><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>CUSTOMERS</span></a></li>
-                <li><a href="#"><i class="fa fa-user"></i> <span>STAFF</span></a></li>
+                <li><a href="${baseurl }/admin/staffMasterHome"><i class="fa fa-user"></i> <span>STAFF</span></a></li>
                 <li><a href="#"><i class="fa fa-building"></i> <span>COMPANY</span></a></li>
                 <li><a href="#"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
+                 <li><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
+                
                 <li><a href="#"><i class="fa fa-list"></i> <span>REPORTS</span></a></li>
             </ul>
         </div>
