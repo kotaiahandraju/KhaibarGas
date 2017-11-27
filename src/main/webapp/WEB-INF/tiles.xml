@@ -21,14 +21,15 @@
 	<!-- <definition name="partnerLoginHome" extends="base.definition"> <put-attribute 
 		name="body" value="/WEB-INF/pages/partnerLogin.jsp" /> </definition> -->
 	<!-- Exception page -->
-	
+
 	<definition name="changePasswordPage" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/changePasswordPage.jsp" />
+		<put-attribute name="body"
+			value="/WEB-INF/pages/changePasswordPage.jsp" />
 	</definition>
 	<definition name="cylinderHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/cylinder.jsp" />
 	</definition>
-	
+
 	<definition name="accessoriesHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/accessories.jsp" />
 	</definition>
@@ -43,17 +44,22 @@
 	</definition>
 	<definition name="storeHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/stores.jsp" />
-		</definition>
-		
-		<definition name="dashboardHome" extends="base.definition">
+	</definition>
+
+	<definition name="dashboardHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/dashboard.jsp" />
 	</definition>
-		<definition name="tariffMasterHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/tariffMasterHome.jsp" />
+	<definition name="tariffMasterHome" extends="base.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/pages/tariffMasterHome.jsp" />
 	</definition>
-	
-	
-	
+
+	<definition name="movetoFillingStation" extends="base.definition">
+		<put-attribute name="body"
+			value="/WEB-INF/pages/cylindermovetoFillingStation.jsp" />
+	</definition>
+
+
 </tiles-definitions>
 
 

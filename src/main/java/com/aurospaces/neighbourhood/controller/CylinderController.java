@@ -23,10 +23,7 @@ import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-/**
- * @author KLS
- *
- */
+
 @Controller
 @RequestMapping(value = "/admin")
 public class CylinderController {
@@ -34,16 +31,6 @@ public class CylinderController {
 	private Logger logger = Logger.getLogger(CylinderController.class);
 	@Autowired
 	CylindermasterDao cylindermasterDao;
-
-	/**
-	 * 
-	 * @param objCylindermasterBean
-	 * @param model
-	 * @param request
-	 * @param session
-	 * @return
-	 * 
-	 */
 	@RequestMapping(value = "/CylinderHome")
 	public String cylinderHome(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
@@ -71,13 +58,6 @@ public class CylinderController {
 		}
 		return "cylinderHome";
 	}
-
-	/**
-	 * @param objCylindermasterBean
-	 * @param bindingresults
-	 * @param model
-	 * @return
-	 */
 	@RequestMapping(value = "/addcylinder", method = RequestMethod.POST)
 	public String addCylinder(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
 			BindingResult bindingresults, Model model,RedirectAttributes redirect) {
@@ -113,15 +93,6 @@ public class CylinderController {
 
 		return "redirect:CylinderHome";
 	}
-
-	/**
-	 * @param objCylindermasterBean
-	 * @param model
-	 * @param request
-	 * @param session
-	 * @param objBindingResult
-	 * @return
-	 */
 	@RequestMapping(value = "/deleteCylinder")
 	public @ResponseBody String deleteEducation(CylindermasterBean objCylindermasterBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
@@ -165,6 +136,33 @@ public class CylinderController {
 
 		}
 		return String.valueOf(jsonObj);
+	}
+	@RequestMapping(value = "/cylinderMovetofillingStation")
+	public String cylinderMovetofillingStation(  CylindermasterBean objCylindermasterBean,
+			ModelMap model, HttpServletRequest request, HttpSession session) {
+
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<CylindermasterBean> listOrderBeans = null;
+		try {
+			listOrderBeans = cylindermasterDao.getCylinders();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "movetoFillingStation";
 	}
 
 }
