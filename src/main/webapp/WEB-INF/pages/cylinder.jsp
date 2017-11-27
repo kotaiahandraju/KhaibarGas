@@ -308,96 +308,84 @@ function deleteCylinder(id){
 }
 
 $('#size').change(function(){
-    var id = $(this).val();
-    if ($(this).val() == "1")
-	      $("#capacity").val("44");
-	    if ($(this).val() == "2")
-	    	  $("#capacity").val("22");
-	    if ($(this).val() == "3")
-	    	  $("#capacity").val("11");
-});
+    var cid = $(this).val();
+    //Ajax call to get capacityValue
+    //can we set context path or do we need to multipart request as like in delte
+	$.ajax({
+			type : "GET",
+			url : "/NBD/admin/getCylinderCapacity",
+			data : {"cid":cid},
+			dataType : "text",
+			success : function(data) {
+				$("#capacity").val(data);
+			}
+		});
 
-
-
-
-
-
-
-
-
-
-
-  $(function () {
-	$("#expirtdate1").datepicker({
-	 dateFormat: "dd-MM-yy",
-	 changeDate : true,
-		changeMonth : true,
-		changeYear : true,
 	});
+
+	$(function() {
+		$("#expirtdate1").datepicker({
+			dateFormat : "dd-MM-yy",
+			changeDate : true,
+			changeMonth : true,
+			changeYear : true,
+		});
 	});
-  
- 
- 
- 
- 
- $(function () {
-	  $("#size").change(function () {
-	    if ($(this).val() == "large")
-	      $("#capacity").val("44");
-	    if ($(this).val() == "medium")
-	    	  $("#capacity").val("22");
-	    if ($(this).val() == "small")
-	    	  $("#capacity").val("11");
-	    
-	  });
+
+	/* $(function() {
+		$("#size").change(function() {
+			//ajax call
+			if ($(this).val() == "large")
+				$("#capacity").val("44");
+			if ($(this).val() == "medium")
+				$("#capacity").val("22");
+			if ($(this).val() == "small")
+				$("#capacity").val("11");
+
+		});
 	});
- 
- 
- function validate(id){
-		if($('#cylinderid').val() ==  null || $('#cylinderid').val() == ""  || $('#cylinderid').val()=="undefined" ) {
-			$('#nameError').css('color','red');
-		    $("#nameError").text("Cylinder id   cannot be blank.");
-		}else{
+ */
+	function validate(id) {
+		if ($('#cylinderid').val() == null || $('#cylinderid').val() == ""
+				|| $('#cylinderid').val() == "undefined") {
+			$('#nameError').css('color', 'red');
+			$("#nameError").text("Cylinder id   cannot be blank.");
+		} else {
 			$("#nameError").text("");
 		}
-		}
-		
- 
- $("#submit11").click(function()
-			{			
-				if($('#cylinderid').val() ==  null || $('#cylinderid').val() == ""  || $('#cylinderid').val()=="undefined")
-				{
-					if($('#cylinderid').val() ==  null || $('#cylinderid').val() == ""  || $('#cylinderid').val()=="undefined" ) 
-					{
-//	 				    
-					    $('#cylinderidError').css('color','red');
-					    $("#cylinderidError").text("Cylinderid cannot be blank.");
-				    }
+	}
+
+	$("#submit11").click(
+			function() {
+				if ($('#cylinderid').val() == null
+						|| $('#cylinderid').val() == ""
+						|| $('#cylinderid').val() == "undefined") {
+					if ($('#cylinderid').val() == null
+							|| $('#cylinderid').val() == ""
+							|| $('#cylinderid').val() == "undefined") {
+						//	 				    
+						$('#cylinderidError').css('color', 'red');
+						$("#cylinderidError").text(
+								"Cylinderid cannot be blank.");
+					}
 					return false;
-					 $("#cylinder-form").submit();
+					$("#cylinder-form").submit();
 				}
-				});
-				
- 
- function isDate(txtDate)
- {
+			});
 
-   var currVal1 = $("#"+txtDate+"").val();
-   
-   
-   var currVal=$.trim(currVal1);
-   if(currVal == '')
-     return false;
-   //Declare Regex 
-   var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
-   
-   if(!currVal.match(rxDatePattern)||currVal=="")
-	   console.log("Enter valid date");
-	   
-      
-   return true;
- }
- 
+	function isDate(txtDate) {
 
+		var currVal1 = $("#" + txtDate + "").val();
 
+		var currVal = $.trim(currVal1);
+		if (currVal == '')
+			return false;
+		//Declare Regex 
+		var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
+
+		if (!currVal.match(rxDatePattern) || currVal == "")
+			console.log("Enter valid date");
+
+		return true;
+	}
 </script>

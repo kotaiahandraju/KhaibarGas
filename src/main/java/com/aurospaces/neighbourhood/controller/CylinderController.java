@@ -1,8 +1,6 @@
 package com.aurospaces.neighbourhood.controller;
 
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -239,12 +237,13 @@ public class CylinderController {
 		return statesMap;
 	}
 	
-	@RequestMapping("cylindertypes")
-	public  @ResponseBody  String cylinderTypes(Model model)
+	@RequestMapping("/getCylinderCapacity")
+	public  @ResponseBody  String cylinderTypes(HttpServletRequest request, HttpSession session)
 	{
-		
-		System.out.print("enter into ajax call");
-		return "o";
+			if(null != request.getParameter("cid"))
+				return cylindermasterDao.getCylinderCapacityByID(Integer.parseInt(request.getParameter("cid")));
+			else
+				return "No data found";
 	}
 	
 

@@ -107,7 +107,12 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		}
 
 	
-	
+	public String getCylinderCapacityByID(int id) {
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "SELECT CAPACITY FROM CYLINDERTYPES WHERE ID=?";
+			return jdbcTemplate.queryForObject(sql, new Object[] { id }, String.class);
+
+		}
 	
 	
 }
