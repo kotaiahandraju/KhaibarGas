@@ -1,7 +1,9 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
@@ -173,12 +176,16 @@ public class CylinderController {
 	{
 		
 		int cylindersCount=cylindermasterDao.getCylindersCount();
+		//List<String> cylinderTypes= cylindermasterDao.getCylinderstypes();
 		
+		//System.out.println(cylinderTypes);
 		model.addAttribute("cylindersCount",cylindersCount);
 		
+	//	model.addAttribute("cylinderTypes",cylinderTypes);
+		model.addAttribute("cylindertype",new CylinderTypesBean());
 		
 	}
-	
+
 	@RequestMapping(value = "/cylinderMovetofillingStation")
 	public String cylinderMovetofillingStation(  CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
@@ -206,5 +213,28 @@ public class CylinderController {
 		}
 		return "movetoFillingStation";
 	}
+	
+	
+	
+	@ModelAttribute("cylinderTypes")
+	public Map<Integer, String> populateUsers() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			//String sSql = "select id,userName from cylindertypes";
+			List<CylinderTypesBean> list= cylindermasterDao.getCylinderstypes();
+			for(CylinderTypesBean bean: list){
+				statesMap.put(bean.getId(), bean.getName());
+			}
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
+	
+	
+	
+	
 
 }

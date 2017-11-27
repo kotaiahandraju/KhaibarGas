@@ -47,7 +47,7 @@
 						  <div class="form-group">
 						    <label for="focusedinput" class="col-sm-2 control-label">Truck Number</label>
 						    <div class="col-sm-3">
-						      <form:input path="trucknumber" type="text" class="form-control"  placeholder="Ttruck Number"/>
+						      <form:input path="trucknumber" type="text" class="form-control validate"  placeholder="Ttruck Number"/>
 						    </div>
 						    <div>
 						    	 <label for="focusedinput" class="col-sm-2 control-label">Registration Expiry</label>
@@ -78,13 +78,13 @@
                           <div class="form-group">
 						    <label for="focusedinput" class="col-sm-2 control-label">Make</label>
 						    <div class="col-sm-3">
-						       <form:input path="make" type="text" class="form-control"  placeholder="Make"/>
+						       <form:input path="make" type="text" class="form-control validate"  placeholder="Make"/>
 						    </div>
 						    <div>
 						    	 <label for="focusedinput" class="col-sm-2 control-label">Description</label>
 						    </div>
                              <div class="col-sm-3">
-                              <form:input path="description" type="text" class="form-control"  placeholder="Description"/>
+                              <form:input path="description" type="text" class="form-control validate"  placeholder="Description"/>
 						    
 						    </div>
 						  </div>
@@ -92,18 +92,18 @@
                           <div class="form-group">
 						    <label for="focusedinput" class="col-sm-2 control-label">Capacity of truck</label>
 						    <div class="col-sm-3">
-						       <form:input path="capacityoftruck" type="text" class="form-control"  placeholder="Capacity of truck"/>
+						       <form:input path="capacityoftruck" type="text" class="form-control validate"  placeholder="Capacity of truck"/>
 						    </div>
 						    <div>
 						    	 <label for="focusedinput" class="col-sm-2 control-label">LPO number </label>
 						    </div>
                              <div class="col-sm-3">
-						    <form:input path="lponumber" type="text" class="form-control"  placeholder="LPO number "/>
+						    <form:input path="lponumber" type="text" class="form-control validate"  placeholder="LPO number "/>
 						    </div>
 						  </div>
                           
                            <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Type Of Service</label>
+						    <label for="focusedinput" class="col-sm-2 control-label ">Type Of Service</label>
 						    <div class="col-sm-3">
 						      <form:select path="typeOfService"  class="form-control">
 						  		<form:option value="Maintenance">Maintenance</form:option>
@@ -164,6 +164,7 @@
 </div> <!-- page-content -->
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
 <!--  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script> -->
+<script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script> 
 <script type="text/javascript">
 $(function () {
 $("#registrationexpirydate1").datepicker({

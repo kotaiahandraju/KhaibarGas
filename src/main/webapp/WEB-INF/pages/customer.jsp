@@ -49,7 +49,7 @@
                     				<label for="focusedinput" class="col-md-6 control-label">Customer ID</label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
-								      	<form:input type="text" path="customerid" class="form-control" placeholder="Supplier name"/>
+								      	<form:input type="text" path="customerid" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -57,7 +57,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Customer Name</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="customername" class="form-control" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="customername" class="form-control validate" placeholder="customer name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -65,7 +65,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Customer Address</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="customeraddress" class="form-control" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="customeraddress" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -76,7 +76,7 @@
                     				<label for="focusedinput" class="col-md-6 control-label">MobileNo</label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
-								      	<form:input type="text" path="mobile" class="form-control" placeholder="Supplier name"/>
+								      	<form:input type="text" path="mobile" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -84,7 +84,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Land Line</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="landline" class="form-control" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="landline" class="form-control " placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -92,7 +92,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Authorized person</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="authorizedperson" class="form-control" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="authorizedperson" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -103,13 +103,13 @@
                     				<label for="focusedinput" class="col-md-6 control-label">Contact person</label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
-								      	<form:input type="text" path="contactperson" class="form-control" placeholder="Supplier name"/>
+								      	<form:input type="text" path="contactperson" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">customertype</label>
+                    				<label for="focusedinput" class="col-md-6 control-label validate">customertype</label>
                     				<div class="col-md-6">
 		                            	<form:select path="customertype" class="form-control">
 									  		<form:option value="Commercial">COMMERCIAL</form:option>
@@ -168,6 +168,7 @@
 </div> <!-- page-content -->
 
 <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
+<script type='text/javascript' src='${baseurl}/js/custemValidation.js'></script> 
 <script type="text/javascript">
 var lstOrders =${allObjects};
 

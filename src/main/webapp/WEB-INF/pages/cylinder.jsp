@@ -1,4 +1,4 @@
- <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
@@ -65,12 +65,9 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size</label>
 								    <div class="col-md-6">
-								    	<form:select path="size" class="form-control u1 validate">
-                                            <form:option value="">Select size</form:option>
-											<form:option value="large">Large</form:option>
-											<form:option value="medium">Medium</form:option>
-											<form:option value="small">Small</form:option>
-										</form:select>
+								    	<form:select path="size" items="${cylinderTypes}" class="form-control u1 validate"/>
+                                            
+										
 								      <span class="hasError" id="sizeError"></span>
 								    </div>
                     			</div>
@@ -161,7 +158,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Expiry Date</label>
 								    <div class="col-md-6">
-								    	<form:input path="expirtdate1" value="" class="form-control validate  " placeholder="Expiry Date" onblur="isDate(this.id)" />
+								    	<form:input path="expirtdate1" value="" class="form-control" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" />
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
@@ -232,6 +229,7 @@
 
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script> 
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script> 
 
 <script type="text/javascript">
 
@@ -310,6 +308,13 @@ function deleteCylinder(id){
 	}
 	
 }
+
+
+
+
+
+
+
 
 
   $(function () {

@@ -58,17 +58,17 @@
 										<label for="focusedinput" class="col-sm-2 control-label">Station
 											Number</label>
 										<div class="col-sm-3">
-											<form:input path="unitpoint" class="form-control"
-												placeholder="unitpoint" />
+											<form:input path="unitpoint" class="form-control validate"
+												placeholder="station number" />
 										</div>
 									</div>
 
 
 									<div class="form-group">
-										<label for="focusedinput" class="col-sm-2 control-label">Station Name</label>
+										<label for="focusedinput" class="col-sm-2 control-label " >Station Name</label>
 											
 										<div class="col-sm-3">
-											<form:input path="stationname" class="form-control"
+											<form:input path="stationname" class="form-control validate"
 												placeholder="stationname" />
 										</div>
 									</div>
@@ -78,15 +78,15 @@
 										<label for="focusedinput" class="col-sm-2 control-label">Opening
 											Balance </label>
 										<div class="col-sm-3">
-											<form:input path="gasavailability" class="form-control"
+											<form:input path="gasavailability" class="form-control  validate"
 												placeholder="Available Gas" />
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label for="focusedinput" class="col-sm-2 control-label">Quantity</label>
+										<label for="focusedinput" class="col-sm-2 control-label ">Quantity</label>
 										<div class="col-sm-3">
-											<form:input path="quantity" type="text" class="form-control"
+											<form:input path="quantity" type="text" class="form-control validate"
 												placeholder="quantity" />
 										</div>
 									</div>
@@ -94,27 +94,27 @@
 									
 
 									<div>
-										<label for="focusedinput" class="col-sm-2 control-label">Capacity</label>
+										<label for="focusedinput" class="col-sm-2 control-label ">Capacity</label>
 										<div class="col-sm-3">
-											<form:input path="gascapacity" class="form-control"
+											<form:input path="gascapacity" class="form-control  validate"
 												placeholder="capacity" />
 										</div>
 									</div>
 
 									<div class="form-group">
-										<label for="focusedinput" class="col-sm-2 control-label">Filling
+										<label for="focusedinput" class="col-sm-2 control-label ">Filling
 											Machines </label>
 										<div class="col-sm-3">
 											<form:input path="numberoffillingmachines"
-												class="form-control" placeholder="filling machines" />
+												class="form-control  validate " placeholder="filling machines" />
 										</div>
 									</div>
 
 									<div>
-										<label for="focusedinput" class="col-sm-2 control-label">Closing
+										<label for="focusedinput" class="col-sm-2 control-label ">Closing
 											Balance </label>
 										<div class="col-sm-3">
-											<form:input path="availablegas" class="form-control"
+											<form:input path="availablegas" class="form-control  validate"
 												placeholder="closing Balance in gasTank" />
 										</div>
 									</div>
@@ -183,8 +183,10 @@
 	<!-- page-content -->
 	</div>
 </body>
-
+<script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script> 
 <script type="text/javascript">
+
+
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);

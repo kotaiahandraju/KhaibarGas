@@ -39,7 +39,22 @@ session.setAttribute("baseurl", baseurl);
 
 <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
 <script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
-  
+  <script>
+		window.setTimeout(function() {
+		    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
+		        $(this).remove(); 
+		    });
+		}, 5000);
+		$(document).ready(function(){
+			$('.edit').attr('data-toggle','tooltip');
+			$('.edit').attr('data-original-title','Edit');
+			$('.delete').attr('data-toggle','tooltip');
+			$('.delete').attr('data-original-title','Delete');
+			$('.reset').attr('data-toggle','tooltip');
+			$('.reset').attr('data-original-title','Reset Password');
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 </head>
 
 <body class="horizontal-nav ">
