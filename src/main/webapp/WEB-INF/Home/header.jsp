@@ -93,9 +93,10 @@ session.setAttribute("baseurl", baseurl);
                 <li><a href="#"><i class="fa fa-building"></i> <span>COMPANY</span></a></li>
                 <li><a href="#"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
                  <li><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
-                
+                 <li><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
                 <li><a href="#"><i class="fa fa-list"></i> <span>REPORTS</span></a></li>
             </ul>
+            
         </div>
     </nav>
 
