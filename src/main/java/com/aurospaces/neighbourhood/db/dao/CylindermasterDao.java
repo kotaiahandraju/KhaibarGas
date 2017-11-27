@@ -29,7 +29,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	@SuppressWarnings("unchecked")
 	
 	public List<CylindermasterBean> getCylinders(){  
- jdbcTemplate = custom.getJdbcTemplate();
+		jdbcTemplate = custom.getJdbcTemplate();
 		 
 		 //String sql="SELECT *, DATE_FORMAT(expirydate,'%d/%m/%Y') AS expirtdate1  FROM cylindermaster";
 		
@@ -81,6 +81,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			   return jdbcTemplate.queryForInt(sql);
 		}
 	 
+	
 	 public List<CylinderTypesBean> getCylinderstypes() {
 		 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "SELECT name,id from cylindertypes";
@@ -90,6 +91,18 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			
 			List<CylinderTypesBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(CylinderTypesBean.class));
 			return retlist;
+
+		}
+
+	 
+	 /**
+	 * Retreives cylinder object by input capacity 
+	 */
+	public int getCylinderIdByCapacity(String capacity) {
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "SELECT ID FROM CYLINDERTYPES WHERE CAPACITY=?";
+			int value =jdbcTemplate.queryForObject(sql, new Object[] { capacity }, Integer.class);
+			return value;
 
 		}
 

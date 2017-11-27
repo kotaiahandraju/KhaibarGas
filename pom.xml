@@ -2,17 +2,17 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.aurospaces</groupId>
-	<artifactId>HRMS</artifactId>
+	<artifactId>KhaibarGas</artifactId>
 	<packaging>war</packaging>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>HRMS</name>
-
+	<name>KhaibarGas</name>
 	<properties>
 		<java-version>1.7</java-version>
 		<org.springframework-version>3.2.3.RELEASE</org.springframework-version>
 		<org.apache.tiles-version>2.2.2</org.apache.tiles-version>
 		<org.aspectj-version>1.6.9</org.aspectj-version>
 		<org.slf4j-version>1.5.10</org.slf4j-version>
+		<spring.security.version>3.2.3.RELEASE</spring.security.version>
 	</properties>
 
 	<dependencies>
@@ -300,6 +300,26 @@
 			<version>1.8.3</version>
 		</dependency>
 		
+		
+		<!-- Spring Security -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
+
+		<!-- Spring Security JSP Taglib -->
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-taglibs</artifactId>
+			<version>${spring.security.version}</version>
+		</dependency>
 		
 		<dependency>
 			<groupId>commons-fileupload</groupId>

@@ -66,8 +66,6 @@
                     				<label for="focusedinput" class="col-md-4 control-label">Size</label>
 								    <div class="col-md-6">
 								    	<form:select path="size" items="${cylinderTypes}" class="form-control u1 validate"/>
-                                            
-										
 								      <span class="hasError" id="sizeError"></span>
 								    </div>
                     			</div>
@@ -79,7 +77,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label ">Capacity</label>
 								    <div class="col-md-6">
-								    	<form:input path="capacity" value="" class="form-control" readonly="true" placeholder="Capacity"/>
+								    	<form:input path="capacity" value="44" class="form-control" readonly="true" placeholder="Capacity"/>
 								      	<span class="hasError" id="capacityError"></span>
 								    </div>
                     			</div>
@@ -309,6 +307,18 @@ function deleteCylinder(id){
 	
 }
 
+$('#size').change(function(){
+    var id = $(this).val();
+    if ($(this).val() == "1")
+	      $("#capacity").val("44");
+	    if ($(this).val() == "2")
+	    	  $("#capacity").val("22");
+	    if ($(this).val() == "3")
+	    	  $("#capacity").val("11");
+});
+
+
+
 
 
 
@@ -329,15 +339,6 @@ function deleteCylinder(id){
  
  
  
- /* function displayVals() {    
-	  var singleValues = $( "#size" ).val();  
-	console.log(singleValues);  
-	$(capacity).val=displayVals();
-	   
-	}    
-	$( "select" ).change( displayVals ); 
-	displayVals();  
- */
  
  $(function () {
 	  $("#size").change(function () {

@@ -1,6 +1,8 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,7 +37,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping(value = "/admin")
 public class CylinderController {
-
+	
+	
 	private Logger logger = Logger.getLogger(CylinderController.class);
 	@Autowired
 	CylindermasterDao cylindermasterDao;
@@ -105,6 +108,12 @@ public class CylinderController {
 			}
 			if(objCylindermasterBean.getId() == 0 && cylindermasterBean == null)
 			{
+				//get cylinder Capacity
+				String capacity = objCylindermasterBean.getCapacity();
+				//changing capcity to Id
+				int capacityId = cylindermasterDao.getCylinderIdByCapacity(capacity);
+				objCylindermasterBean.setCapacity(String.valueOf(capacityId));
+				
 				cylindermasterDao.save(objCylindermasterBean);
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
@@ -181,8 +190,6 @@ public class CylinderController {
 		//System.out.println(cylinderTypes);
 		model.addAttribute("cylindersCount",cylindersCount);
 		
-	//	model.addAttribute("cylinderTypes",cylinderTypes);
-		model.addAttribute("cylindertype",new CylinderTypesBean());
 		
 	}
 
@@ -220,7 +227,6 @@ public class CylinderController {
 	public Map<Integer, String> populateUsers() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
 		try {
-			//String sSql = "select id,userName from cylindertypes";
 			List<CylinderTypesBean> list= cylindermasterDao.getCylinderstypes();
 			for(CylinderTypesBean bean: list){
 				statesMap.put(bean.getId(), bean.getName());
@@ -233,8 +239,13 @@ public class CylinderController {
 		return statesMap;
 	}
 	
-	
-	
+	@RequestMapping("cylindertypes")
+	public  @ResponseBody  String cylinderTypes(Model model)
+	{
+		
+		System.out.print("enter into ajax call");
+		return "o";
+	}
 	
 
 }
