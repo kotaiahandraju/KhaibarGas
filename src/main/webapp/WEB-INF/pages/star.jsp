@@ -138,22 +138,30 @@ s.parentNode.insertBefore(ga, s);
 	if (listOrders1 != "") {
 		displayTable(listOrders1);
 	}
- function displayTable(listOrders) {
+	function displayTable(listOrders) {
 		$('#tableId').html('');
-		var tableHead = '<table  class="table table-hover table-nomargin table-bordered dataTable dataTable-column_filter" data-column_filter_types="text,null">'
-				+ '<thead><tr><th>Name</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+		var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
+				+ '<thead><tr><th>Cylinder ID</th><th>Size</th><th>Status</th><th>Customer ID</th><th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 		$('#tableId').html(tableHead);
 		serviceUnitArray = {};
 		$.each(listOrders,function(i, orderObj) {
-						var edit = "<a onclick='editStar("+ orderObj.id+ ")'><i style='color: green;' class='fa fa-edit'></i></a>"
-						var deleterow = "<a onclick='deleteStar("+ orderObj.id+ ")'><i style='color: red;' class='fa fa-trash'></i></a>"
+						var edit = "<a  onclick='editOccupation("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+						var deleterow = "<a  onclick='deleteOccupation("+ orderObj.id+ ")'><i class='fa fa-trash-o red'></i></a>"
 						serviceUnitArray[orderObj.id] = orderObj;
 						var tblRow = "<tr >"
-								+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
-								+ "<td style='text-align: center;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>" 
+								+ "<td title='"+orderObj.cylinderid+"'>"+ orderObj.cylinderid + "</td>"
+								+ "<td title='"+orderObj.size+"'>"+ orderObj.size + "</td>"
+								+ "<td title='"+orderObj.status+"'>"+ orderObj.status + "</td>"
+								+ "<td title='"+orderObj.customerid+"'>"+ orderObj.customerid + "</td>"
+								+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
+								+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber+ "</td>"
+								+ "<td title='"+orderObj.color+"'>"+ orderObj.color + "</td>"
+								+ "<td title='"+orderObj.expirydate+"'>"+ new Date(orderObj.expirydate) + "</td>"
+								+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 								+ "</tr >";
 						$(tblRow).appendTo("#tableId table tbody");
 						});
+		
 		/* $('#DataTables_Table_0').DataTable({
 			dom: 'Bfrtip',
 			buttons: [{extend:"print",className:"btn default"},{extend:"pdf",className:"btn default"},{extend:"csv",className:"btn default"}]
@@ -167,6 +175,7 @@ s.parentNode.insertBefore(ga, s);
 		        }
 		    });*/
 	}
+
  function editStar(id) {
 		$("#id").val(serviceUnitArray[id].id);
 		$("#name").val(serviceUnitArray[id].name);

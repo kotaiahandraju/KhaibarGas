@@ -43,6 +43,11 @@
 		<definition name="dashboardHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/dashboard.jsp" />
 	</definition>
+		<definition name="tariffMasterHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/tariffMasterHome.jsp" />
+	</definition>
+	
+	
 	
 </tiles-definitions>
 
