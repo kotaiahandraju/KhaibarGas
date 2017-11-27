@@ -137,5 +137,32 @@ public class CylinderController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	@RequestMapping(value = "/cylinderMovetofillingStation")
+	public String cylinderMovetofillingStation(  CylindermasterBean objCylindermasterBean,
+			ModelMap model, HttpServletRequest request, HttpSession session) {
+
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<CylindermasterBean> listOrderBeans = null;
+		try {
+			listOrderBeans = cylindermasterDao.getCylinders();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "movetoFillingStation";
+	}
 
 }
