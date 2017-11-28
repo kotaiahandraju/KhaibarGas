@@ -21,8 +21,7 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4>Add Cylinder</h4>
-                        <div class="options">
-                        </div>
+                        <div class="options"></div>
                     </div>
                     <form:form class="form-horizontal" modelAttribute="cylinderForm"  role="form" id="cylider-form" action="addcylinder" method="post">
                     <div class="panel-body">
@@ -71,8 +70,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Status</label>
 								    <div class="col-md-6">
-								    	<form:select path="cylinderstatus" id="selector1" class="form-control validate">
-									        <form:option value="">Select Status</form:option>
+								    	<form:select path="cylinderstatus" class="form-control">
 									  		<form:option value="idle">Idle</form:option>
 									  		<form:option value="filled">Filled</form:option>
 									  		<form:option value="Delivered">Delivered</form:option>
@@ -262,13 +260,14 @@ function editCylinder(id) {
 	$("#cylinderid").val(serviceUnitArray[id].cylinderid);
 	$("#size").val(serviceUnitArray[id].size);
 	$("#capacity").val(serviceUnitArray[id].capacity);
-	$("#status").val(serviceUnitArray[id].cylinderstatus);
 	$("#location").val(serviceUnitArray[id].location);
 	$("#lponumber").val(serviceUnitArray[id].lponumber);
 	$("#color").val(serviceUnitArray[id].color);
 	$("#madein").val(serviceUnitArray[id].madein);
 	$("#expirtdate1").val(serviceUnitArray[id].expirtdate1);
 	$("#ownercompany").val(serviceUnitArray[id].ownercompany);
+	$("#cylinderstatus").val(serviceUnitArray[id].cylinderstatus);
+	$("#remarks").val(serviceUnitArray[id].remarks);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('body').offset().top);
 	
@@ -292,6 +291,7 @@ function deleteCylinder(id){
 
 $('#size').change(function(){
     var cid = $(this).val();
+
     var formData = new FormData();
     formData.append('cid', cid);
     $.fn.makeMultipartRequest('POST', 'deleteCylinder', false,
@@ -300,11 +300,13 @@ $('#size').change(function(){
     });
 });
 	/* $.ajax({
+>>>>>>> c0fed2516fec227f765d486569babfd9045f3c29
 			type : "GET",
 			url : "getCylinderCapacity",
 			data : {"cid":cid},
 			dataType : "text",
 			success : function(data) {
+				console.log(data);
 				$("#capacity").val(data);
 			}
 		});
@@ -320,19 +322,7 @@ $('#size').change(function(){
 		});
 	});
 
-	/* $(function() {
-		$("#size").change(function() {
-			//ajax call
-			if ($(this).val() == "large")
-				$("#capacity").val("44");
-			if ($(this).val() == "medium")
-				$("#capacity").val("22");
-			if ($(this).val() == "small")
-				$("#capacity").val("11");
-
-		});
-	});
- */
+	
 	function validate(id) {
 		if ($('#cylinderid').val() == null || $('#cylinderid').val() == ""
 				|| $('#cylinderid').val() == "undefined") {

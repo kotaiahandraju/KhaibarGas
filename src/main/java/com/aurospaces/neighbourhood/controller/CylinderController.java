@@ -94,6 +94,13 @@ public class CylinderController {
 				id = objCylindermasterBean.getId();
 				if(id == dummyId || cylindermasterBean == null )
 				{
+					
+					
+					/*String capacity = objCylindermasterBean.getCapacity();
+					//changing capcity to Id
+					int capacityId = cylindermasterDao.getCylinderIdByCapacity(capacity);
+					objCylindermasterBean.setCapacity(String.valueOf(capacityId));*/
+					
 					cylindermasterDao.save(objCylindermasterBean);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
@@ -106,13 +113,8 @@ public class CylinderController {
 			}
 			if(objCylindermasterBean.getId() == 0 && cylindermasterBean == null)
 			{
-				//get cylinder Capacity
-				String capacity = objCylindermasterBean.getCapacity();
-				//changing capcity to Id
-				int capacityId = cylindermasterDao.getCylinderIdByCapacity(capacity);
-				objCylindermasterBean.setCapacity(String.valueOf(capacityId));
-				
 				cylindermasterDao.save(objCylindermasterBean);
+				
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
@@ -175,25 +177,6 @@ public class CylinderController {
 		}
 		return String.valueOf(jsonObj);
 	}
-	
-<<<<<<< HEAD
-=======
-	
-	
-	@ModelAttribute
-	public void addingcommonobject(Model model)
-	{
-		
-		int cylindersCount=cylindermasterDao.getCylindersCount();
-		//List<String> cylinderTypes= cylindermasterDao.getCylinderstypes();
-		
-		//System.out.println(cylinderTypes);
-		model.addAttribute("cylindersCount",cylindersCount);
-		
-		
-	}
-
->>>>>>> 5aab921032bab7a10afe3b14a53874e907282625
 	@RequestMapping(value = "/cylinderMovetofillingStation")
 	public String cylinderMovetofillingStation(  CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
