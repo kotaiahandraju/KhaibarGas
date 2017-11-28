@@ -70,7 +70,8 @@ public class LoginController {
 					
 			} else {
 				redirect.addFlashAttribute("msg", "Login Failed");
-				return "redirect:HomePage";
+				request.setAttribute("msg", "Login Failed");
+				return "loginPage1";
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -78,5 +79,36 @@ public class LoginController {
 
 		}
 		return null;
+	}
+	@RequestMapping(value = "/logoutHome")
+	public String logoutHome(ModelMap model, HttpServletRequest request, HttpSession objSession,
+			HttpServletResponse response)  {
+		System.out.println("logout page...");
+		try {
+
+			HttpSession session = request.getSession(false);
+			KhaibarUsersBean objuserBean = (KhaibarUsersBean) session.getAttribute("cacheUserBean");
+			if (objuserBean != null) {
+				session.removeAttribute("cacheUserBean");
+				session.removeAttribute("cacheGuest");
+				session.removeAttribute("rolId");
+				session.removeAttribute("userName");
+				session.invalidate();
+				response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");// HTTP
+																							// 1.1
+				response.setHeader("Pragma", "no-cache"); // HTTP 1.0
+				response.setDateHeader("Expires", -1); // prevents caching at
+														// the proxy server
+				// String baseUrl = MiscUtils.getBaseUrl(request);
+				// System.out.println(baseUrl);
+				// response.sendRedirect(baseUrl+"/LoginHome1.htm" );
+//				response.sendRedirect(request.getContextPath() + "/LoginHome");
+			}
+			return "redirect:LoginHome";
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return "redirect:LoginHome";
 	}
 }
