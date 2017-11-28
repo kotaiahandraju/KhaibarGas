@@ -265,7 +265,7 @@ function dataClear(){
 	$("#contactperson").val("");
 	$("#customertype").val("");
 }
-$("#pageName").text("Customer");
+$("#pageName").text("Customer Master");
 $(".customer").addClass("active"); 
 
 </script>

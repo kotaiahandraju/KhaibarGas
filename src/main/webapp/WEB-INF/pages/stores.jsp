@@ -184,7 +184,7 @@ function damageDataClear(){
 	$("#storeid").val("");
 	$("#location").val("");
 }
-$("#pageName").text("Stores");
+$("#pageName").text("Stores Master");
 $(".stores").addClass("active"); 
 
 </script>

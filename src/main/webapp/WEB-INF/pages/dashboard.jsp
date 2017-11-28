@@ -97,3 +97,8 @@
     </div> <!-- #wrap -->
 </div> <!-- page-content -->
 <!-- Body Ends Here -->
+<script type="text/javascript">
+
+$(".dashboard").addClass("active"); 
+</script>
+

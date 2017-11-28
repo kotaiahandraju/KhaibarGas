@@ -351,7 +351,7 @@ $('#size').change(function(){
 				}
 			});
 
- $("#pageName").text("Cylinder");
+ $("#pageName").text("Cylinder Master");
  $(".cylinder").addClass("active"); 
  
 </script>
