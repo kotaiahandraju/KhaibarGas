@@ -30,7 +30,7 @@
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Type of Accessory</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Type of Accessory<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
 								      	<form:select path="typeofaccessory" class="form-control">
@@ -43,7 +43,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Supplier Name</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Supplier Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="suppliername" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
@@ -53,7 +53,7 @@
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Made In</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Made In<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="madein" class="form-control validate" placeholder="Made in"/>
 								  	</div>
@@ -61,7 +61,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">LPO No</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">LPO No<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="lponumber" class="form-control validate" placeholder="LPO No"/>
 								  	</div>

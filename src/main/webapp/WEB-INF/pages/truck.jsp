@@ -29,12 +29,12 @@
 								</c:if>
                      <form:hidden path="id"/>
 						  <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Truck Number</label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Truck Number<span class="impColor">*</span></label>
 						    <div class="col-sm-3">
 						      <form:input path="trucknumber" type="text" class="form-control validate"  placeholder="Ttruck Number"/>
 						    </div>
 						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Registration Expiry</label>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">Registration Expiry<span class="impColor">*</span></label>
 						    </div>
                              <div class="col-sm-3">
 						      <form:input path="registrationexpirydate1" type="text" readonly="true" class="form-control"  placeholder="Registration Expiry"/>
@@ -42,12 +42,12 @@
 						  </div>
                           
                           <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Civil defense card expiry</label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Civil defense card expiry<span class="impColor">*</span></label>
 						    <div class="col-sm-3">
 						       <form:input path="civildefensecardexpirydate1" type="text" readonly="true" class="form-control"  placeholder="Civil defense card expiry"/>
 						    </div>
 						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Service Due</label>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">Service Due<span class="impColor">*</span></label>
 						    </div>
                              <div class="col-sm-3">
                              <form:input path="servicedue1" type="text" class="form-control" readonly="true"  placeholder="Servicedue"/>
@@ -60,12 +60,12 @@
 						  </div>
                           
                           <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Make</label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Make<span class="impColor">*</span></label>
 						    <div class="col-sm-3">
 						       <form:input path="make" type="text" class="form-control validate"  placeholder="Make"/>
 						    </div>
 						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">Description</label>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">Description<span class="impColor">*</span></label>
 						    </div>
                              <div class="col-sm-3">
                               <form:input path="description" type="text" class="form-control validate"  placeholder="Description"/>
@@ -74,12 +74,12 @@
 						  </div>
                           
                           <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Capacity of truck</label>
+						    <label for="focusedinput" class="col-sm-2 control-label">Capacity of truck<span class="impColor">*</span></label>
 						    <div class="col-sm-3">
 						       <form:input path="capacityoftruck" type="text" class="form-control validate"  placeholder="Capacity of truck"/>
 						    </div>
 						    <div>
-						    	 <label for="focusedinput" class="col-sm-2 control-label">LPO number </label>
+						    	 <label for="focusedinput" class="col-sm-2 control-label">LPO number <span class="impColor">*</span> </label>
 						    </div>
                              <div class="col-sm-3">
 						    <form:input path="lponumber" type="text" class="form-control validate"  placeholder="LPO number "/>
@@ -87,7 +87,7 @@
 						  </div>
                           
                            <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label ">Type Of Service</label>
+						    <label for="focusedinput" class="col-sm-2 control-label ">Type Of Service<span class="impColor">*</span></label>
 						    <div class="col-sm-3">
 						      <form:select path="typeOfService"  class="form-control">
 						  		<form:option value="Maintenance">Maintenance</form:option>

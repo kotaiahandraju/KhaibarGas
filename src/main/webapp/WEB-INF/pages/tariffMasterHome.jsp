@@ -43,7 +43,7 @@
 											<div class="form-group">
 												<form:hidden path="id" />
 												<label class="col-sm-4 control-label required">Asset
-													Code (Either Cylinder Code or Accessory Code)</label>
+													Code <span class="impColor">*</span>(Either Cylinder Code or Accessory Code)</label>
 												<div class="col-sm-6">
 													<form:input path="assetcode"
 														class="form-control numericOnly validate"
@@ -77,7 +77,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="col-sm-4 control-label required">Rate</label>
+												<label class="col-sm-4 control-label required">Rate<span class="impColor">*</span></label>
 												<div class="col-sm-6">
 													<form:input path="rate"
 														class="form-control numericOnly validate"

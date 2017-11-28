@@ -30,7 +30,7 @@
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Customer ID</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer ID<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
 								      	<form:input type="text" path="customerid" class="form-control validate" placeholder="Supplier name"/>
@@ -39,7 +39,7 @@
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Customer Name</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="customername" class="form-control validate" placeholder="customer name"/>
 								  	</div>
@@ -47,7 +47,7 @@
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Customer Address</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Address<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="customeraddress" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
@@ -57,7 +57,7 @@
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">MobileNo</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">MobileNo<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
 								      	<form:input type="text" path="mobile" class="form-control validate" placeholder="Supplier name"/>
@@ -74,7 +74,7 @@
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Authorized person</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Authorized person<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="authorizedperson" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
@@ -84,7 +84,7 @@
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Contact person</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Contact person<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
 								      	<form:input type="text" path="contactperson" class="form-control validate" placeholder="Supplier name"/>
@@ -93,7 +93,7 @@
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label validate">customertype</label>
+                    				<label for="focusedinput" class="col-md-6 control-label validate">customertype<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:select path="customertype" class="form-control">
 									  		<form:option value="Commercial">COMMERCIAL</form:option>

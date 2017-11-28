@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -47,6 +48,18 @@ public class FillingstationmasterDao extends BaseFillingstationmasterDao
 		}
 		return delete;
 	}
+	
+	
+	public FillingstationmasterBean getByFillingstationById(FillingstationmasterBean fillingstationmasterBean) {
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "SELECT * from fillingstationmaster where unitpoint = ?";
+			List<FillingstationmasterBean> retlist = jdbcTemplate.query(sql,
+			new Object[]{fillingstationmasterBean.getUnitpoint()},
+			ParameterizedBeanPropertyRowMapper.newInstance(FillingstationmasterBean.class));
+			if(retlist.size() > 0)
+				return retlist.get(0);
+			return null;
+		}
 	
 
 
