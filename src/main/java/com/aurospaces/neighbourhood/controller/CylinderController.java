@@ -166,19 +166,6 @@ public class CylinderController {
 		return String.valueOf(jsonObj);
 	}
 	
-	
-	
-	@ModelAttribute
-	public void addingcommonobject(Model model)
-	{
-		
-		int cylindersCount=cylindermasterDao.getCylindersCount();
-		
-		model.addAttribute("cylindersCount",cylindersCount);
-		
-		
-	}
-	
 	@RequestMapping(value = "/cylinderMovetofillingStation")
 	public String cylinderMovetofillingStation(  CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {

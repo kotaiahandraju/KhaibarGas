@@ -6,26 +6,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
 
-<div id="page-content">
-    <div id="wrap">
-        <div id="page-heading" class="row">
-        <div class="col-md-6">
-              <h1>Cylinder</h1>
-              </div>
-              <div class="col-md-6">
-              <div class="options">
-                <div class="btn-toolbar">
-                    <a href="#" class="btn btn-danger "><span>${cylindersCount}</span><br />Cylinders</a>
-                    <a href="#" class="btn btn-warning"><span>223456</span><br />Customers</a>
-                    <a href="#" class="btn btn-info"><span>123456</span><br />Gas in Kgs</a>
-                </div>
-            </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+ 
+<!--         body starts heare -->
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Home</a></li>
                <li>Cylinder</li>
             </ol>
             <div class="clearfix"></div>
@@ -161,7 +146,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Expiry Date</label>
 								    <div class="col-md-6">
-								    	<form:input path="expirtdate1" value="" class="form-control validate  " placeholder="Expiry Date" onblur="isDate(this.id)" />
+								    	<form:input path="expirtdate1" value="" class="form-control validate" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" />
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
@@ -231,7 +216,7 @@
 </div> <!-- page-content -->
 
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
-<script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script> 
+
 
 <script type="text/javascript">
 
@@ -391,7 +376,7 @@ function deleteCylinder(id){
       
    return true;
  }
+ $("#pageName").text("Cylinder");
+ $(".cylinder").addClass("active"); 
  
-
-
 </script>

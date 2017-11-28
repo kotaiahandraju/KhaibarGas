@@ -39,7 +39,49 @@ session.setAttribute("baseurl", baseurl);
 
 <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
 <script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
-  
+
+<style type="text/css">
+.impColor{color:red;}
+
+.edit, .delete {cursor: pointer;}
+
+span.has-error,span.hasError
+{
+  font-weight:normal;
+  border-color: #e73d4a;
+  color:red;
+  margin-top: -3px;
+  display: block !important;
+  position: absolute;
+}
+
+.error{color: red; font-weight: bold;}
+
+.alert-success, .alert-warning, .alert-danger{color: white !important;}
+.alert-success{background-color: #4CAF50 !important;}
+.alert-warning{background-color: #ff6600 !important;}
+.alert-danger{background-color: #d43f3a !important;}
+
+.your-class::-webkit-input-placeholder {color: #e73d4a !important;}
+.your-class::-moz-placeholder {color: #e73d4a !important;}
+
+.default-class::-webkit-input-placeholder {color: #e73d4a !important;}
+.default-class::-moz-placeholder {color: #e73d4a !important;}
+</style>
+	<script>
+		window.setTimeout(function() {
+		    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
+		        $(this).remove(); 
+		    });
+		}, 5000);
+		$(document).ready(function(){
+			$('.edit').attr('data-toggle','tooltip');
+			$('.edit').attr('data-original-title','Edit');
+			$('.delete').attr('data-toggle','tooltip');
+			$('.delete').attr('data-original-title','Delete');
+			$('[data-toggle="tooltip"]').tooltip();
+		});
+	</script>
 </head>
 
 <body class="horizontal-nav ">
@@ -85,15 +127,15 @@ session.setAttribute("baseurl", baseurl);
                 <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                 <li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>CYLINDERS</span></a></li>
                 <li class="truck"><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>TRUCKS</span></a></li>
-                <li><a href="${baseurl }/admin/accessoriesHome"><i class="fa fa-tint"></i> <span>ACCESSORIES</span></a></li>
-                <li><a href="${baseurl }/admin/storeHome"><i class="fa fa-th"></i> <span>STORES</span></a></li>
-                <li><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>FILLING STATIONS</span></a></li>
-                <li><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>CUSTOMERS</span></a></li>
-                <li><a href="${baseurl }/admin/staffMasterHome"><i class="fa fa-user"></i> <span>STAFF</span></a></li>
-                <li><a href="#"><i class="fa fa-building"></i> <span>COMPANY</span></a></li>
-                <li><a href="#"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
-                 <li><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
-                 <li><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
+                <li class="accessories"><a href="${baseurl }/admin/accessoriesHome"><i class="fa fa-tint"></i> <span>ACCESSORIES</span></a></li>
+                <li class="stores"><a href="${baseurl }/admin/storeHome"><i class="fa fa-th"></i> <span>STORES</span></a></li>
+                <li class="fillingStation"><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>FILLING STATIONS</span></a></li>
+                <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>CUSTOMERS</span></a></li>
+                <li class=""><a href="${baseurl }/admin/staffMasterHome"><i class="fa fa-user"></i> <span>STAFF</span></a></li>
+                <li class="company"><a href="${baseurl }/admin/companymaster"><i class="fa fa-building"></i> <span>COMPANY</span></a></li>
+                <li class=""><a href="#"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
+                 <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
+                 <li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
                 <li><a href="#"><i class="fa fa-list"></i> <span>REPORTS</span></a></li>
             </ul>
             
@@ -102,4 +144,39 @@ session.setAttribute("baseurl", baseurl);
 
 
     <div id="page-container">
+    	<div id="page-content">
+    <div id="wrap">
+        <div id="page-heading" class="row">
+        <div class="col-md-6">
+              <h1 id="pageName"></h1>
+              </div>
+              <div class="col-md-6">
+              <div class="options">
+                <div class="btn-toolbar">
+                    <a href="#" class="btn btn-danger "><span id="cylinderCount1"></span><br />Cylinders</a>
+                    <a href="#" class="btn btn-warning"><span id="customerCount1"></span><br />Customers</a>
+                    <a href="#" class="btn btn-info"><span>123456</span><br />Gas in Kgs</a>
+                </div>
+            </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
 <!-- Header ends Here -->
+<script type="text/javascript">
+$( document ).ready(function() {
+	var formData = new FormData();
+    
+	$.fn.makeMultipartRequest('POST', 'getCount', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+// 		alert(jsonobj.cylinderCount);
+		$("#cylinderCount1").text(jsonobj.cylinderCount);
+		$("#customerCount1").text(jsonobj.customerCount);
+// 		var alldata = jsonobj.allOrders1;
+// 		console.log(jsonobj.allOrders1);
+// 		displayTable(alldata);
+	});
+
+});
+	
+</script>

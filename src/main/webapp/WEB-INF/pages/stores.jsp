@@ -4,23 +4,7 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-<div id="page-content">
-    <div id="wrap">
-        <div id="page-heading" class="row">
-        <div class="col-md-6">
-              <h1>Store</h1>
-              </div>
-              <div class="col-md-6">
-              <div class="options">
-                <div class="btn-toolbar">
-                    <a href="#" class="btn btn-danger "><span>123456</span><br />Cylinders</a>
-                    <a href="#" class="btn btn-warning"><span>223456</span><br />Customers</a>
-                    <a href="#" class="btn btn-info"><span>123456</span><br />Gas in Kgs</a>
-                </div>
-            </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="index.html">Home</a></li>
@@ -105,9 +89,9 @@
         </div> <!-- container -->
     </div> <!-- #wrap -->
 </div> <!-- page-content -->
-<script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script> -->
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css"> -->
+<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
 
 <script type="text/javascript">
 var lstOrders =${allObjects};
@@ -202,6 +186,7 @@ function damageDataClear(){
 	$("#storeid").val("");
 	$("#location").val("");
 }
-
+$("#pageName").text("Stores");
+$(".stores").addClass("active"); 
 
 </script>

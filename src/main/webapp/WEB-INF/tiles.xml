@@ -58,8 +58,10 @@
 		<put-attribute name="body"
 			value="/WEB-INF/pages/cylindermovetoFillingStation.jsp" />
 	</definition>
-
-
+	
+	<definition name="companymasterHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/companymaster.jsp" />
+	</definition>
 </tiles-definitions>
 
 

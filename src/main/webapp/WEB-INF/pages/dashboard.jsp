@@ -1,22 +1,4 @@
 
-<!-- Body Starts Here -->
-<div id="page-content">
-    <div id="wrap">
-        <div id="page-heading" class="row">
-        <div class="col-md-6">
-              <h1>Dashboard</h1>
-              </div>
-              <div class="col-md-6">
-              <div class="options">
-                <div class="btn-toolbar">
-                    <a href="#" class="btn btn-danger "><span>123456</span><br />Cylinders</a>
-                    <a href="#" class="btn btn-warning"><span>223456</span><br />Customers</a>
-                    <a href="#" class="btn btn-info"><span>123456</span><br />Gas in Kgs</a>
-                </div>
-            </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="#">Dashboard</a></li>
@@ -75,7 +57,7 @@
                             <a class="info-tiles tiles-info" href="#">
                                 <div class="tiles-heading">TOTAL CYLINDERS</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center">625457</div>
+                                    <div class="text-center">${cylinderCount }</div>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>
