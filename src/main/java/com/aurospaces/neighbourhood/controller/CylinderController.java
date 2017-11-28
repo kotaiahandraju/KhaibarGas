@@ -1,7 +1,9 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
@@ -32,7 +35,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @Controller
 @RequestMapping(value = "/admin")
 public class CylinderController {
-
+	
+	
 	private Logger logger = Logger.getLogger(CylinderController.class);
 	@Autowired
 	CylindermasterDao cylindermasterDao;
@@ -102,6 +106,12 @@ public class CylinderController {
 			}
 			if(objCylindermasterBean.getId() == 0 && cylindermasterBean == null)
 			{
+				//get cylinder Capacity
+				String capacity = objCylindermasterBean.getCapacity();
+				//changing capcity to Id
+				int capacityId = cylindermasterDao.getCylinderIdByCapacity(capacity);
+				objCylindermasterBean.setCapacity(String.valueOf(capacityId));
+				
 				cylindermasterDao.save(objCylindermasterBean);
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
@@ -166,6 +176,24 @@ public class CylinderController {
 		return String.valueOf(jsonObj);
 	}
 	
+<<<<<<< HEAD
+=======
+	
+	
+	@ModelAttribute
+	public void addingcommonobject(Model model)
+	{
+		
+		int cylindersCount=cylindermasterDao.getCylindersCount();
+		//List<String> cylinderTypes= cylindermasterDao.getCylinderstypes();
+		
+		//System.out.println(cylinderTypes);
+		model.addAttribute("cylindersCount",cylindersCount);
+		
+		
+	}
+
+>>>>>>> 5aab921032bab7a10afe3b14a53874e907282625
 	@RequestMapping(value = "/cylinderMovetofillingStation")
 	public String cylinderMovetofillingStation(  CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
@@ -193,5 +221,33 @@ public class CylinderController {
 		}
 		return "movetoFillingStation";
 	}
+	
+	
+	
+	@ModelAttribute("cylinderTypes")
+	public Map<Integer, String> populateUsers() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			List<CylinderTypesBean> list= cylindermasterDao.getCylinderstypes();
+			for(CylinderTypesBean bean: list){
+				statesMap.put(bean.getId(), bean.getName());
+			}
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
+	
+	@RequestMapping("/getCylinderCapacity")
+	public  @ResponseBody  String cylinderTypes(HttpServletRequest request, HttpSession session)
+	{
+			if(null != request.getParameter("cid"))
+				return cylindermasterDao.getCylinderCapacityByID(Integer.parseInt(request.getParameter("cid")));
+			else
+				return "No data found";
+	}
+	
 
 }

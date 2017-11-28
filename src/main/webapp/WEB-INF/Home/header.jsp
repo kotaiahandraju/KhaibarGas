@@ -79,6 +79,8 @@ span.has-error,span.hasError
 			$('.edit').attr('data-original-title','Edit');
 			$('.delete').attr('data-toggle','tooltip');
 			$('.delete').attr('data-original-title','Delete');
+			$('.reset').attr('data-toggle','tooltip');
+			$('.reset').attr('data-original-title','Reset Password');
 			$('[data-toggle="tooltip"]').tooltip();
 		});
 	</script>

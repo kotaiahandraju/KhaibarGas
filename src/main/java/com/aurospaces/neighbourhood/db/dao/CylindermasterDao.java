@@ -1,7 +1,9 @@
 
 package com.aurospaces.neighbourhood.db.dao;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -10,6 +12,7 @@ import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseCylindermasterDao;
@@ -26,7 +29,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	@SuppressWarnings("unchecked")
 	
 	public List<CylindermasterBean> getCylinders(){  
- jdbcTemplate = custom.getJdbcTemplate();
+		jdbcTemplate = custom.getJdbcTemplate();
 		 
 		 //String sql="SELECT *, DATE_FORMAT(expirydate,'%d/%m/%Y') AS expirtdate1  FROM cylindermaster";
 		
@@ -77,9 +80,39 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			   
 			   return jdbcTemplate.queryForInt(sql);
 		}
+	 
+	
+	 public List<CylinderTypesBean> getCylinderstypes() {
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "SELECT name,id from cylindertypes";
+		
+			@SuppressWarnings("rawtypes")
+			List list=jdbcTemplate.queryForList(sql);
+			
+			List<CylinderTypesBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(CylinderTypesBean.class));
+			return retlist;
+
+		}
+
+	 
+	 /**
+	 * Retreives cylinder object by input capacity 
+	 */
+	public int getCylinderIdByCapacity(String capacity) {
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "SELECT ID FROM CYLINDERTYPES WHERE CAPACITY=?";
+			int value =jdbcTemplate.queryForObject(sql, new Object[] { capacity }, Integer.class);
+			return value;
+
+		}
 
 	
-	
+	public String getCylinderCapacityByID(int id) {
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "SELECT CAPACITY FROM CYLINDERTYPES WHERE ID=?";
+			return jdbcTemplate.queryForObject(sql, new Object[] { id }, String.class);
+
+		}
 	
 	
 }

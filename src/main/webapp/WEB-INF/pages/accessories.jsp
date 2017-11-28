@@ -45,7 +45,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Supplier Name</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="suppliername" class="form-control" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="suppliername" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -55,7 +55,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Made In</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="madein" class="form-control" placeholder="Made in"/>
+		                            	<form:input type="text" path="madein" class="form-control validate" placeholder="Made in"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -63,7 +63,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">LPO No</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="lponumber" class="form-control" placeholder="LPO No"/>
+		                            	<form:input type="text" path="lponumber" class="form-control validate" placeholder="LPO No"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -73,7 +73,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Remarks</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="remarks" id="remarks" class="form-control" placeholder="Remarks"/>
+		                            	<form:input type="text" path="remarks" id="remarks" class="form-control validate " placeholder="Remarks"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -132,8 +132,11 @@
     </div> <!-- #wrap -->
 </div> <!-- page-content -->
 
+<script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script> 
 <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript">
+
+
 var lstOrders =${allObjects};
 
 console.log(lstOrders);

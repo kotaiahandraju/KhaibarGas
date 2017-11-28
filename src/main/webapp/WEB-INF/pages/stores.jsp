@@ -33,16 +33,16 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Store Name</label>
                     				<div class="col-md-6">
-                    				<form:input type="text" path="storename" class="form-control" placeholder="Supplier name"/>
+                    				<form:input type="text" path="storename" class="form-control validate" placeholder="Supplier name"/>
                     				<form:hidden path="id"/>
                     				</div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Store Location</label>
+                    				<label for="focusedinput" class="col-md-4 control-label ">Store Location</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="location" class="form-control" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="location" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -89,9 +89,7 @@
         </div> <!-- container -->
     </div> <!-- #wrap -->
 </div> <!-- page-content -->
-<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script> -->
-<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css"> -->
-<!-- <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script> -->
+
 
 <script type="text/javascript">
 var lstOrders =${allObjects};

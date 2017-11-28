@@ -1,4 +1,4 @@
- <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
@@ -50,12 +50,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size</label>
 								    <div class="col-md-6">
-								    	<form:select path="size" class="form-control u1 validate">
-                                            <form:option value="">Select size</form:option>
-											<form:option value="large">Large</form:option>
-											<form:option value="medium">Medium</form:option>
-											<form:option value="small">Small</form:option>
-										</form:select>
+								    	<form:select path="size" items="${cylinderTypes}" class="form-control u1 validate"/>
 								      <span class="hasError" id="sizeError"></span>
 								    </div>
                     			</div>
@@ -67,7 +62,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label ">Capacity</label>
 								    <div class="col-md-6">
-								    	<form:input path="capacity" value="" class="form-control" readonly="true" placeholder="Capacity"/>
+								    	<form:input path="capacity" value="44" class="form-control" readonly="true" placeholder="Capacity"/>
 								      	<span class="hasError" id="capacityError"></span>
 								    </div>
                     			</div>
@@ -146,7 +141,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Expiry Date</label>
 								    <div class="col-md-6">
-								    	<form:input path="expirtdate1" value="" class="form-control validate" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" />
+								    	<form:input path="expirtdate1" value="" class="form-control" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" />
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
@@ -216,7 +211,6 @@
 </div> <!-- page-content -->
 
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
-
 
 <script type="text/javascript">
 
@@ -296,86 +290,76 @@ function deleteCylinder(id){
 	
 }
 
+$('#size').change(function(){
+    var cid = $(this).val();
+    var formData = new FormData();
+    formData.append('cid', cid);
+    $.fn.makeMultipartRequest('POST', 'deleteCylinder', false,
+			formData, false, 'text', function(data){
+    	$("#capacity").val(data);
+    });
+});
+	/* $.ajax({
+			type : "GET",
+			url : "getCylinderCapacity",
+			data : {"cid":cid},
+			dataType : "text",
+			success : function(data) {
+				$("#capacity").val(data);
+			}
+		});
 
-  $(function () {
-	$("#expirtdate1").datepicker({
-	 dateFormat: "dd-MM-yy",
-	 changeDate : true,
-		changeMonth : true,
-		changeYear : true,
+	}); */
+
+	$(function() {
+		$("#expirtdate1").datepicker({
+			dateFormat : "dd-MM-yy",
+			changeDate : true,
+			changeMonth : true,
+			changeYear : true,
+		});
 	});
+
+	/* $(function() {
+		$("#size").change(function() {
+			//ajax call
+			if ($(this).val() == "large")
+				$("#capacity").val("44");
+			if ($(this).val() == "medium")
+				$("#capacity").val("22");
+			if ($(this).val() == "small")
+				$("#capacity").val("11");
+
+		});
 	});
-  
- 
- 
- 
- /* function displayVals() {    
-	  var singleValues = $( "#size" ).val();  
-	console.log(singleValues);  
-	$(capacity).val=displayVals();
-	   
-	}    
-	$( "select" ).change( displayVals ); 
-	displayVals();  
  */
- 
- $(function () {
-	  $("#size").change(function () {
-	    if ($(this).val() == "large")
-	      $("#capacity").val("44");
-	    if ($(this).val() == "medium")
-	    	  $("#capacity").val("22");
-	    if ($(this).val() == "small")
-	    	  $("#capacity").val("11");
-	    
-	  });
-	});
- 
- 
- function validate(id){
-		if($('#cylinderid').val() ==  null || $('#cylinderid').val() == ""  || $('#cylinderid').val()=="undefined" ) {
-			$('#nameError').css('color','red');
-		    $("#nameError").text("Cylinder id   cannot be blank.");
-		}else{
+	function validate(id) {
+		if ($('#cylinderid').val() == null || $('#cylinderid').val() == ""
+				|| $('#cylinderid').val() == "undefined") {
+			$('#nameError').css('color', 'red');
+			$("#nameError").text("Cylinder id   cannot be blank.");
+		} else {
 			$("#nameError").text("");
 		}
-		}
-		
- 
- $("#submit11").click(function()
-			{			
-				if($('#cylinderid').val() ==  null || $('#cylinderid').val() == ""  || $('#cylinderid').val()=="undefined")
-				{
-					if($('#cylinderid').val() ==  null || $('#cylinderid').val() == ""  || $('#cylinderid').val()=="undefined" ) 
-					{
-//	 				    
-					    $('#cylinderidError').css('color','red');
-					    $("#cylinderidError").text("Cylinderid cannot be blank.");
-				    }
-					return false;
-					 $("#cylinder-form").submit();
-				}
-				});
-				
- 
- function isDate(txtDate)
- {
+	}
 
-   var currVal1 = $("#"+txtDate+"").val();
-   
-   
-   var currVal=$.trim(currVal1);
-   if(currVal == '')
-     return false;
-   //Declare Regex 
-   var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
-   
-   if(!currVal.match(rxDatePattern)||currVal=="")
-	   console.log("Enter valid date");
-	   
-      
-   return true;
- }
+	$("#submit11").click(function() {
+				if ($('#cylinderid').val() == null
+						|| $('#cylinderid').val() == ""
+						|| $('#cylinderid').val() == "undefined") {
+					if ($('#cylinderid').val() == null
+							|| $('#cylinderid').val() == ""
+							|| $('#cylinderid').val() == "undefined") {
+						//	 				    
+						$('#cylinderidError').css('color', 'red');
+						$("#cylinderidError").text(
+								"Cylinderid cannot be blank.");
+					}
+					return false;
+					$("#cylinder-form").submit();
+				}
+			});
+
  $("#pageName").text("Cylinder");
  $(".cylinder").addClass("active"); 
  
