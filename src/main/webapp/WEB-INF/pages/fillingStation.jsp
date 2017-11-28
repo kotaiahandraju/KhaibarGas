@@ -159,7 +159,7 @@
 	<!-- page-content -->
 	</div>
 </body>
-<script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script> 
+<%-- <script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script>  --%>
 <script type="text/javascript">
 
 
@@ -191,18 +191,6 @@ function displayTable(listOrders) {
 					$(tblRow).appendTo("#tableId table tbody");
 					});
 	
-	/* $('#DataTables_Table_0').DataTable({
-		dom: 'Bfrtip',
-		buttons: [{extend:"print",className:"btn default"},{extend:"pdf",className:"btn default"},{extend:"csv",className:"btn default"}]
-	}); */
-	
-	 /*$('#datatable-buttons').DataTable({
-	        "dom": 'C<"clear">lfrtip',
-	        "colVis": {
-	            "buttonText": "Change columns",
-	        "buttons": [{extend:"copy",className:"btn default"},{extend:"print",className:"btn default"},{extend:"pdf",className:"btn default"},{extend:"csv",className:"btn default"}]
-	        }
-	    });*/
 }
 
 
