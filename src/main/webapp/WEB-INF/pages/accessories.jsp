@@ -92,7 +92,7 @@
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
-					      			<input class="btn-primary btn" type="submit" value="Submit" />
+					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1" />
 					      			<input class="btn-danger btn" type="reset" value="Reset" />
 				      			</div>
 				      		</div>
