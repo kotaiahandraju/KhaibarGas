@@ -93,12 +93,20 @@ ps.setString(13, staffmaster.getStatus());
 		}
 	}
 		
-		@Transactional
-		public void delete(int id) {
-			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "DELETE FROM staffmaster WHERE id=?";
-			jdbcTemplate.update(sql, new Object[]{id});
-		}
+	@Transactional
+	public Boolean delete(int id) {
+		boolean result=false;
+		Integer results=null;
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "update storesmaster set staffmaster='0' where id = ?";
+		jdbcTemplate.update(sql, new Object[]{id});
+		  results=jdbcTemplate.update(sql, new Object[]{id});
+			if(results !=null || result){
+				result= true;
+			}
+			return result;
+	}
+		
 		
 
 	 public StaffmasterBean getById(int id) {
