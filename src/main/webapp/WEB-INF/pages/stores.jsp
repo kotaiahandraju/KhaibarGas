@@ -31,7 +31,7 @@
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Store Name</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Store Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
                     				<form:input type="text" path="storename" class="form-control validate" placeholder="Supplier name"/>
                     				<form:hidden path="id"/>
@@ -40,7 +40,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label ">Store Location</label>
+                    				<label for="focusedinput" class="col-md-4 control-label ">Store Location<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="location" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
@@ -185,8 +185,7 @@ function damageDataClear(){
 	$("#storeid").val("");
 	$("#location").val("");
 }
-
-$("#pageName").text("Stores");
+$("#pageName").text("Stores Master");
 $(".stores").addClass("active"); 
 
 </script>

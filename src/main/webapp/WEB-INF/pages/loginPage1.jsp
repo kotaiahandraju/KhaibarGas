@@ -1,6 +1,6 @@
-<%-- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page session="true"%>
-<html>
+<%--<html>
 <head>
 <title>Login Page</title>
 <style>
@@ -107,6 +107,11 @@
 	<div class="panel panel-primary">
 		<div class="panel-body">
 			<h4 class="text-center" style="margin-bottom: 25px;">Log in to get started</h4>
+			<c:if test="${not empty msg}">
+								<div class="msgcss controls fadeOut animated alert alert-danger" style="animation-delay: 5s;">
+									${msg}
+								</div>
+							</c:if>
 				<form name='loginForm'	action="loginAction" method='POST' class="form-horizontal" style="margin-bottom: 0px !important;">
 						<div class="form-group">
 							<div class="col-sm-12">

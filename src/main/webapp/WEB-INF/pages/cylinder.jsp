@@ -38,7 +38,7 @@
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<form:hidden path="id"/>
-                    				<label for="focusedinput" class="col-md-4 control-label">Cylinder ID</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Cylinder ID<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								      <form:input path="cylinderid" class="form-control validate" placeholder="Cylinder ID"/>
 								      <span class="hasError" id="cylinderidError"></span>
@@ -47,7 +47,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Size</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Size<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:select path="size" items="${cylinderTypes}" class="form-control"/>
 								      <span class="hasError" id="sizeError"></span>
@@ -68,7 +68,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Status</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Status<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:select path="cylinderstatus" class="form-control">
 									  		<form:option value="idle">Idle</form:option>
@@ -86,7 +86,7 @@
                      <div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Location</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Location<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="location" value="" class="form-control validate" placeholder="Location" />
 								      	<span class="hasError" id="locationError"></span>
@@ -95,7 +95,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">LPO Number</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">LPO Number<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="lponumber" value="" class="form-control validate" placeholder="LPO No" />
 								      	<span class="hasError" id="lponumberError"></span>
@@ -107,7 +107,7 @@
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Owner Company</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Owner Company<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="ownercompany" value="" class="form-control validate" placeholder="Owner Company" />
 								      	<span class="hasError" id="ownercompanyError"></span>
@@ -116,7 +116,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="color" value="" class="form-control  validate"  placeholder="Color Of Cylinder"/>
 								      	<span class="hasError" id="colorError"></span>
@@ -128,7 +128,7 @@
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Made In</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Made In<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="madein" value="" class="form-control validate" placeholder="Made In" />
 								      	<span class="hasError" id="madeinError"></span>
@@ -137,7 +137,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Expiry Date</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Expiry Date<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="expirtdate1" value="" class="form-control" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" />
 								      	<span class="hasError" id="expirydateError"></span>
@@ -351,7 +351,7 @@ $('#size').change(function(){
 				}
 			});
 
- $("#pageName").text("Cylinder");
+ $("#pageName").text("Cylinder Master");
  $(".cylinder").addClass("active"); 
  
 </script>

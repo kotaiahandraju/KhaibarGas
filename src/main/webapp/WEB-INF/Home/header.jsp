@@ -111,7 +111,7 @@ span.has-error,span.hasError
                             <li><a href="#">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>
                             <li><a href="#">Change Password <i class="pull-right fa fa-cog"></i></a></li>
                             <li class="divider"></li>
-                            <li><a href="#" class="text-right">Sign Out</a></li>
+                            <li><a href="../logoutHome" class="text-right">Sign Out</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -135,7 +135,7 @@ span.has-error,span.hasError
                 <li class="stores"><a href="${baseurl }/admin/storeHome"><i class="fa fa-th"></i> <span>STORES</span></a></li>
                 <li class="fillingStation"><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>FILLING STATIONS</span></a></li>
                 <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>CUSTOMERS</span></a></li>
-                <li class=""><a href="${baseurl }/admin/staffMasterHome"><i class="fa fa-user"></i> <span>STAFF</span></a></li>
+                <li class="staff"><a href="${baseurl }/admin/staffMaster"><i class="fa fa-user"></i> <span>STAFF</span></a></li>
                 <li class="company"><a href="${baseurl }/admin/companymaster"><i class="fa fa-building"></i> <span>COMPANY</span></a></li>
                 <li class=""><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
                  <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
