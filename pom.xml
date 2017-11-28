@@ -393,6 +393,6 @@
 				</executions>
 			</plugin>
 		</plugins>
-		<finalName>HRMS</finalName>
+		<finalName>KhaibarGas</finalName>
 	</build>
 </project>
