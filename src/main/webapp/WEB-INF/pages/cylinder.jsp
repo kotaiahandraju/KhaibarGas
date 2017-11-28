@@ -49,7 +49,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size</label>
 								    <div class="col-md-6">
-								    	<form:select path="size" items="${cylinderTypes}" class="form-control u1 validate"/>
+								    	<form:select path="size" items="${cylinderTypes}" class="form-control"/>
 								      <span class="hasError" id="sizeError"></span>
 								    </div>
                     			</div>
@@ -61,7 +61,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label ">Capacity</label>
 								    <div class="col-md-6">
-								    	<form:input path="capacity" value="44" class="form-control" readonly="true" placeholder="Capacity"/>
+								    	<form:input path="capacity" value="11" class="form-control" readonly="true" placeholder="Capacity"/>
 								      	<span class="hasError" id="capacityError"></span>
 								    </div>
                     			</div>
@@ -294,8 +294,9 @@ $('#size').change(function(){
 
     var formData = new FormData();
     formData.append('cid', cid);
-    $.fn.makeMultipartRequest('POST', 'deleteCylinder', false,
+    $.fn.makeMultipartRequest('POST', 'getCylinderCapacity', false,
 			formData, false, 'text', function(data){
+    	console.log(data);
     	$("#capacity").val(data);
     });
 });
