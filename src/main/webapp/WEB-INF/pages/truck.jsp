@@ -104,7 +104,7 @@
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar  pull-right">
-				      			<input class="btn-primary btn" type="submit" value="Sumbit">
+				      			<input class="btn-primary btn" type="submit" value="Sumbit" id="submit1">
 				      			<input class="btn-default btn" type="reset" value="Cancel">
 					      			</form:form>
 				      			</div>
