@@ -18,6 +18,7 @@ import com.aurospaces.neighbourhood.bean.TariffmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 
 @Controller
+@RequestMapping("admin")
 public class TransactionController {
 	CylindermasterDao cylindermasterDao;
 	private Logger logger = Logger.getLogger(TransactionController.class);
