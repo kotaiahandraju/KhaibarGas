@@ -118,7 +118,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th></th></tr>
+                                	<tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th>Action</th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -132,11 +132,7 @@
     </div> <!-- #wrap -->
 </div> <!-- page-content -->
 
-<script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script> 
-<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
 <script type="text/javascript">
-
-
 var lstOrders =${allObjects};
 
 console.log(lstOrders);
@@ -165,10 +161,17 @@ function showTableData(response){
 	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th></th></tr>'+
+    	'<thead><tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th>Action</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
+		
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactive' onclick='deletetruckMaster("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+		}else{  
+			var deleterow = "<a class='active' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+		}
+		
 		var edit = "<a class='edit' onclick='editAccessory("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 		var deleterow = "<a class='delete' onclick='deleteAccessory("+ orderObj.id+ ")'><i class='fa fa-trash-o red'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
@@ -179,17 +182,9 @@ function showTableData(response){
 						+ "<td title='"+orderObj.madein+"'>" + orderObj.madein + "</td>"
 						+ "<td title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
 						+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
+						+ "<td title='"+orderObj.accessoriesStatus+"'>" + orderObj.accessoriesStatus + "</td>"
 						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
 						
-						/* + "<td><a href='javascript:void(0)' id='"
-						+ orderObj.suplierId
-						+"'onclick='editProduct(this.id)'  class='delRec' href='#'>Edit</a>"
-						+ '</td>'
-						
-						+ "<td ><a href='javascript:void(0)' id='"
-						+ orderObj.suplierId
-						+"'onclick='deleteProduct(this.id)'  class='delRec' href='#'>Delete</a>"
-						+ "</td>" */
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
 			});
@@ -217,6 +212,7 @@ function deleteAccessory(id) {
 		                	var resJson=JSON.parse(response);
 		                	showTableData(resJson);
 		                	alert("Delete Sucessfully");
+		                	window.location.reload();
 		                	}
 		                 },
 		             error: function (e) { 
@@ -231,6 +227,7 @@ function damageDataClear(){
  $('#quantity').val("");
  $('#description').val("");
 }
+
 $("#pageName").text("Accessories Master");
 $(".accessories").addClass("active"); 
 

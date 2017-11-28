@@ -187,8 +187,16 @@ function displayTable(listOrders) {
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactive' onclick='deletetruckMaster("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			/* $("#truckStatus option" ).removeClass('active');
+			$("#truckStatus option#"+orderObj.truckStatus).addClass('highlight'); */	
+		}else{  
+			var deleterow = "<a class='active' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			/* $("#truckStatus option" ).removeClass('active');
+			$("#truckStatus option"+orderObj.truckStatus).addClass('highlight'); */	
+		}
 					var edit = "<a  onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
-					var deleterow = "<a  onclick='deletetruckMaster("+ orderObj.id+ ")'><i class='fa fa-trash-o red'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
 							+ "<td title='"+orderObj.trucknumber+"'>"+ orderObj.trucknumber + "</td>"
@@ -220,8 +228,15 @@ function editTruckMaster(id) {
 	$("#lponumber").val(serviceUnitArray[id].lponumber);
 	$(window).scrollTop($('#page-heading').offset().top);
 	}
-function deletetruckMaster(id){
-	var checkstr =  confirm('Are you sure you want to delete this?');
+function deletetruckMaster(id,status){
+	
+	var checkstr=null;
+	if(status == 0){
+		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+	}else{
+		 checkstr =  confirm('Are you sure you want to Activate this?');
+	}
+	
 	if(checkstr == true){
 	var formData = new FormData();
      formData.append('id', id);
@@ -229,9 +244,10 @@ function deletetruckMaster(id){
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		alert(jsonobj.message);
-		var alldata = jsonobj.allOrders1;
-		console.log(jsonobj.allOrders1);
-		displayTable(alldata);
+		window.location.reload();
+// 		var alldata = jsonobj.allOrders1;
+// 		console.log(jsonobj.allOrders1);
+// 		displayTable(alldata);
 	});
 	}
 	

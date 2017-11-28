@@ -17,6 +17,7 @@ protected String status ;
 
 protected String stationname;
 protected String unitpoint;
+protected String fillingStatus;
 
 /*protected String openingbalance;
 protected String closingbalance;
@@ -25,6 +26,12 @@ protected String closingbalance;
 
 
 
+public String getFillingStatus() {
+	return fillingStatus;
+}
+public void setFillingStatus(String fillingStatus) {
+	this.fillingStatus = fillingStatus;
+}
 public String getStationname() {
 	return stationname;
 }

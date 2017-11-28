@@ -91,6 +91,7 @@
 </div> <!-- page-content -->
 
 
+
 <script type="text/javascript">
 var lstOrders =${allObjects};
 
@@ -184,6 +185,7 @@ function damageDataClear(){
 	$("#storeid").val("");
 	$("#location").val("");
 }
+
 $("#pageName").text("Stores");
 $(".stores").addClass("active"); 
 

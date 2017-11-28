@@ -21,8 +21,15 @@ protected Date expirydate ;
 protected String expirtdate1;
 protected String ownercompany ;
 protected String remarks ;
+protected String cylenderstatus ;
 
 
+public String getCylenderstatus() {
+	return cylenderstatus;
+}
+public void setCylenderstatus(String cylenderstatus) {
+	this.cylenderstatus = cylenderstatus;
+}
 public String getRemarks() {
 	return remarks;
 }

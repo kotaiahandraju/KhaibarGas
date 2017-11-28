@@ -62,6 +62,10 @@
 	<definition name="companymasterHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/companymaster.jsp" />
 	</definition>
+	<definition name="lpoHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/lpo.jsp" />
+	</definition>
+	
 </tiles-definitions>
 
 

@@ -27,7 +27,7 @@ public class AccessoriesmasterDao extends BaseAccessoriesmasterDao
 			try {
 				jdbcTemplate = custom.getJdbcTemplate();
 				
-				String sql = "SELECT *from accessoriesmaster";
+				String sql = "SELECT a.*,CASE WHEN a.status IN ('0') THEN 'Deactive' WHEN a.status in ('1') THEN 'Active'  ELSE '-----' END as accessoriesStatus  from accessoriesmaster a";
 				System.out.println("sql:::"+sql);
 				lstDamage = jdbcTemplate.query(sql, new BeanPropertyRowMapper<AccessoriesmasterBean>(AccessoriesmasterBean.class));
 				//System.out.println("lstDamage:::"+lstDamage);
