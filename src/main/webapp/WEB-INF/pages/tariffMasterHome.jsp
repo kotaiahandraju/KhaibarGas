@@ -8,24 +8,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
 
-<div id="page-content">
-	<div id="wrap">
-		<div id="page-heading" class="row">
-			<div class="col-md-6">
-				<h1>Tariff Master</h1>
-			</div>
-			<div class="col-md-6">
-				<div class="options">
-					<div class="btn-toolbar">
-						<a href="#" class="btn btn-danger "><span>123456</span><br />Cylinders</a>
-						<a href="#" class="btn btn-warning"><span>223456</span><br />Customers</a>
-						<a href="#" class="btn btn-info"><span>123456</span><br />Gas
-							in Kgs</a>
-					</div>
-				</div>
-			</div>
-			<div class="clearfix"></div>
-		</div>
 		<div class="clearfix"></div>
 		<ol class="breadcrumb">
 			<li><a href="">Home</a></li>
@@ -64,7 +46,7 @@
 													Code (Either Cylinder Code or Accessory Code)</label>
 												<div class="col-sm-6">
 													<form:input path="assetcode"
-														class="form-control onlyCharacters validate"
+														class="form-control numericOnly validate"
 														autocomplete="off" placeholder="Asset Code"
 														required="required" />
 													<span class="hasError" id="assetcodeError"></span>
@@ -98,7 +80,7 @@
 												<label class="col-sm-4 control-label required">Rate</label>
 												<div class="col-sm-6">
 													<form:input path="rate"
-														class="form-control onlyCharacters validate"
+														class="form-control numericOnly validate"
 														autocomplete="off" placeholder="" required="required" />
 													<span class="hasError" id="rateError"></span>
 													<div>
@@ -115,7 +97,7 @@
 												<div class="col-sm-4">
 													<div class="input-group">
 												      <form:input path="alloweddiscount"
-															class="form-control onlyCharacters validate"
+															class="form-control numericOnly validate"
 															autocomplete="off" placeholder="" required="required" />
 												      <span class="input-group-addon"><i class="fa fa-percent"></i>
 </span>   
@@ -167,7 +149,7 @@
 										<div class="col-sm-12">
 											<div class="btn-toolbar  pull-right">
 												<input type="submit" value="Submit" id="submit1" class="btn-primary btn" />
-												<input type="reset" value="Reset" class="btn-danger btn" />
+												<input type="reset" value="Reset" class="btn-danger btn cancel" />
 											</div>
 										</div>
 									</div>
@@ -277,6 +259,8 @@
 				}
 
 			}
+			$("#pageName").text("Tariff Master");
+			$(".tariffMaster").addClass("active"); 
 		</script>
 <%-- <tr>
 <td>  Religion System</td>

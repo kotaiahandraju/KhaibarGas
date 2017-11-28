@@ -38,5 +38,7 @@ session.setAttribute("baseurl", baseurl);
 <script type='text/javascript' src='${baseurl }/assets/plugins/charts-morrisjs/morris.min.js'></script> 
 <script type='text/javascript' src='${baseurl }/assets/demo/demo-morrisjs.js'></script> 
 
+<script type='text/javascript' src='${baseurl }/js/customValidation.js'></script> 
+
 </body>
 </html>

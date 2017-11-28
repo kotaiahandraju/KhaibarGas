@@ -4,23 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 
 
-<div id="page-content">
-    <div id="wrap">
-        <div id="page-heading" class="row">
-        <div class="col-md-6">
-              <h1>Truck</h1>
-              </div>
-              <div class="col-md-6">
-              <div class="options">
-                <div class="btn-toolbar">
-                    <a href="#" class="btn btn-danger "><span>123456</span><br />Cylinders</a>
-                    <a href="#" class="btn btn-warning"><span>223456</span><br />Customers</a>
-                    <a href="#" class="btn btn-info"><span>123456</span><br />Gas in Kgs</a>
-                </div>
-            </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="index.html">Home</a></li>
@@ -252,5 +236,6 @@ function deletetruckMaster(id){
 	}
 	
 }
+$("#pageName").text("Truck Master");
 $(".truck").addClass("active"); 
 </script>

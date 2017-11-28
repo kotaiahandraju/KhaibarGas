@@ -5,24 +5,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-<div id="page-content">
-	<div id="wrap">
-		<div id="page-heading" class="row">
-				<div class="col-md-6">
-					<h1>Filling Station</h1>
-				</div>
-				<div class="col-md-6">
-					<div class="options">
-						<div class="btn-toolbar">
-							<a href="#" class="btn btn-danger "><span>123456</span><br />Cylinders</a>
-							<a href="#" class="btn btn-warning"><span>223456</span><br />Customers</a>
-							<a href="#" class="btn btn-info"><span>123456</span><br />Gasin Kgs</a>
-								
-						</div>
-					</div>
-				</div>
-				<div class="clearfix"></div>
-		</div>
 			<div class="clearfix"></div>
 			<ol class="breadcrumb">
 				<li><a href="index.html">Home</a></li>
@@ -249,6 +231,8 @@ function deleteCylinder(id){
 	}
 	
 }
+$("#pageName").text("Filling Station");
+$(".fillingStation").addClass("active"); 
 </script>
 
 

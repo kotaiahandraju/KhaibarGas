@@ -35,6 +35,8 @@ public class BaseCompanymasterDao{
 	@Transactional
 	public void save(final CompanymasterBean companymaster) 
 	{
+		System.out.println("----update---"+companymaster.getId());
+		
 		jdbcTemplate = custom.getJdbcTemplate();
 	if(companymaster.getId() == 0)	{
 
@@ -84,6 +86,7 @@ ps.setString(11, companymaster.getStatus());
 		}
 		else
 		{
+			System.out.println("----update---"+companymaster.getId()); 
 
 			String sql = "UPDATE companymaster  set companycode = ? ,companyname = ? ,contactpersonname = ? ,contactpersonmobile = ? ,emailid = ? ,remarks = ? ,typeofcompany = ? ,customertype = ? ,status = ?  where id = ? ";
 	
@@ -91,11 +94,26 @@ ps.setString(11, companymaster.getStatus());
 		}
 	}
 		
-		@Transactional
+		/*@Transactional
 		public void delete(int id) {
 			jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "DELETE FROM companymaster WHERE id=?";
 			jdbcTemplate.update(sql, new Object[]{id});
+		}*/
+		@Transactional
+		public boolean delete(int id) {
+			jdbcTemplate = custom.getJdbcTemplate();
+			boolean delete = false;
+			try{
+				String sql = "DELETE FROM companymaster WHERE id=?";
+				int intDelete = jdbcTemplate.update(sql, new Object[]{id});
+				if(intDelete != 0){
+					delete = true;
+				}
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return delete;
 		}
 		
 

@@ -6,26 +6,11 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
 
-<div id="page-content">
-    <div id="wrap">
-        <div id="page-heading" class="row">
-        <div class="col-md-6">
-              <h1>Cylinder</h1>
-              </div>
-              <div class="col-md-6">
-              <div class="options">
-                <div class="btn-toolbar">
-                    <a href="#" class="btn btn-danger "><span>${cylindersCount}</span><br />Cylinders</a>
-                    <a href="#" class="btn btn-warning"><span>223456</span><br />Customers</a>
-                    <a href="#" class="btn btn-info"><span>123456</span><br />Gas in Kgs</a>
-                </div>
-            </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+ 
+<!--         body starts heare -->
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Home</a></li>
                <li>Cylinder</li>
             </ol>
             <div class="clearfix"></div>
@@ -224,8 +209,6 @@
 </div> <!-- page-content -->
 
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
-<script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script> 
-<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script> 
 
 <script type="text/javascript">
 
@@ -308,10 +291,18 @@ function deleteCylinder(id){
 
 $('#size').change(function(){
     var cid = $(this).val();
-    //Ajax call to get capacityValue
-	$.ajax({
+
+    var formData = new FormData();
+    formData.append('cid', cid);
+    $.fn.makeMultipartRequest('POST', 'deleteCylinder', false,
+			formData, false, 'text', function(data){
+    	$("#capacity").val(data);
+    });
+});
+	/* $.ajax({
+>>>>>>> c0fed2516fec227f765d486569babfd9045f3c29
 			type : "GET",
-			url : "/NBD/admin/getCylinderCapacity",
+			url : "getCylinderCapacity",
 			data : {"cid":cid},
 			dataType : "text",
 			success : function(data) {
@@ -320,7 +311,7 @@ $('#size').change(function(){
 			}
 		});
 
-	});
+	}); */
 
 	$(function() {
 		$("#expirtdate1").datepicker({
@@ -342,8 +333,7 @@ $('#size').change(function(){
 		}
 	}
 
-	$("#submit11").click(
-			function() {
+	$("#submit11").click(function() {
 				if ($('#cylinderid').val() == null
 						|| $('#cylinderid').val() == ""
 						|| $('#cylinderid').val() == "undefined") {
@@ -360,19 +350,7 @@ $('#size').change(function(){
 				}
 			});
 
-	function isDate(txtDate) {
-
-		var currVal1 = $("#" + txtDate + "").val();
-
-		var currVal = $.trim(currVal1);
-		if (currVal == '')
-			return false;
-		//Declare Regex 
-		var rxDatePattern = /^(\d{1,2})(\/|-)(\d{1,2})(\/|-)(\d{4})$/;
-
-		if (!currVal.match(rxDatePattern) || currVal == "")
-			console.log("Enter valid date");
-
-		return true;
-	}
+ $("#pageName").text("Cylinder");
+ $(".cylinder").addClass("active"); 
+ 
 </script>

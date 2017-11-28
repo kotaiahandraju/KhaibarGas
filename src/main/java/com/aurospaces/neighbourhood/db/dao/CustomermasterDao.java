@@ -43,5 +43,13 @@ public class CustomermasterDao extends BaseCustomermasterDao
 		}
 		return sJson;
 	}
+	 @SuppressWarnings("deprecation")
+		public  int  getCustomerCount(){  
+			 jdbcTemplate = custom.getJdbcTemplate();
+			 
+			 String sql="SELECT  count(*)    FROM customermaster";
+			   
+			   return jdbcTemplate.queryForInt(sql);
+		}
 }
 
