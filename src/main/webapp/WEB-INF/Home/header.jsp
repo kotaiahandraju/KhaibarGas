@@ -137,7 +137,7 @@ span.has-error,span.hasError
                 <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>CUSTOMERS</span></a></li>
                 <li class="staff"><a href="${baseurl }/admin/staffMaster"><i class="fa fa-user"></i> <span>STAFF</span></a></li>
                 <li class="company"><a href="${baseurl }/admin/companymaster"><i class="fa fa-building"></i> <span>COMPANY</span></a></li>
-                <li class=""><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
+                <li class="lpo"><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
                  <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
                  <li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
                 <li><a href="#"><i class="fa fa-list"></i> <span>REPORTS</span></a></li>

@@ -94,7 +94,8 @@
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">customertype<span class="impColor">*</span></label>
+
+                    				<label for="focusedinput" class="col-md-6 control-label ">customertype<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:select path="customertype" class="form-control">
 									  		<form:option value="Commercial">COMMERCIAL</form:option>
@@ -152,8 +153,8 @@
     </div> <!-- #wrap -->
 </div> <!-- page-content -->
 
-<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>
-<script type='text/javascript' src='${baseurl}/js/custemValidation.js'></script> 
+<!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
+<%-- <script type='text/javascript' src='${baseurl}/js/custemValidation.js'></script>  --%>
 <script type="text/javascript">
 var lstOrders =${allObjects};
 
@@ -180,7 +181,7 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	
 	serviceUnitArray = {};
-	if(response != undefined && response.length >0){
+	if(response != "undefined" && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
     	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th>Action</th></tr>'+
@@ -208,16 +209,6 @@ function showTableData(response){
 						+ "<td title='"+orderObj.customertype+"'>" + orderObj.customertype + "</td>"
 						+ "<td title='"+orderObj.custStatus+"'>" + orderObj.custStatus + "</td>"
 						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
-						
-						/* + "<td><a href='javascript:void(0)' id='"
-						+ orderObj.suplierId
-						+"'onclick='editProduct(this.id)'  class='delRec' href='#'>Edit</a>"
-						+ '</td>'
-						
-						+ "<td ><a href='javascript:void(0)' id='"
-						+ orderObj.suplierId
-						+"'onclick='deleteProduct(this.id)'  class='delRec' href='#'>Delete</a>"
-						+ "</td>" */
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
 			});

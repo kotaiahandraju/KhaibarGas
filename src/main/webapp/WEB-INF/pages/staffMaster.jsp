@@ -29,7 +29,7 @@
 							</div>
 							<form:form modelAttribute="staffMaster" class="form-horizontal"
 								role="form" id="education-form" action="saveStaffDetails"
-								method="post">
+								method="post" >
 								<div class="panel-body">
 									<c:if test="${not empty msg}">
 										<div class="form-group">
