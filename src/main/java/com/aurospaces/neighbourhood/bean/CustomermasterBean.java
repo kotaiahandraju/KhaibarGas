@@ -26,7 +26,14 @@ protected String authorizedperson ;
 protected String contactperson ;
 protected String customertype ;
 protected String status ;
+protected String custStatus ;
 
+public String getCustStatus() {
+	return custStatus;
+}
+public void setCustStatus(String custStatus) {
+	this.custStatus = custStatus;
+}
 public int getId()
 {
   return id;

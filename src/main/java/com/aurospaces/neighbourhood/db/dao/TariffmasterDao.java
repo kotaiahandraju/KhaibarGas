@@ -24,7 +24,7 @@ public class TariffmasterDao extends BaseTariffmasterDao
 	
 	public List<TariffmasterBean> getAllTariffmasterDetails() {
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "SELECT * from tariffmaster";
+		String sql = "SELECT t.*,CASE WHEN t.status IN ('0') THEN 'Deactive' WHEN t.status in ('1') THEN 'Active'  ELSE '-----' END as tariffStatus  from tariffmaster t";
 		List<TariffmasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(TariffmasterBean.class));
 		if (retlist.size() > 0)

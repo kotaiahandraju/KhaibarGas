@@ -18,7 +18,20 @@ protected String remarks ;
 protected String typeofcompany ;
 protected String customertype ;
 protected String status ;
+protected String companyStatus ;
 
+/**
+ * @return the companyStatus
+ */
+public String getCompanyStatus() {
+	return companyStatus;
+}
+/**
+ * @param companyStatus the companyStatus to set
+ */
+public void setCompanyStatus(String companyStatus) {
+	this.companyStatus = companyStatus;
+}
 public int getId()
 {
   return id;

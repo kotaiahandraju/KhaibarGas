@@ -132,8 +132,8 @@ public class TariffMasterController {
 		String sJson=null;
 		boolean delete = false;
 		try{
-			if(objTariffmasterBean.getId() != 0){
- 				delete = objTariffmasterDao.delete(objTariffmasterBean.getId());
+			if(objTariffmasterBean.getId() != 0 && objTariffmasterBean.getStatus() !=""){
+ 				delete = objTariffmasterDao.delete(objTariffmasterBean.getId(),objTariffmasterBean.getStatus());
  				if(delete){
  					jsonObj.put("message", "Record Deleted Successfully");
  					redir.addFlashAttribute("msg", "Record Updated Successfully");

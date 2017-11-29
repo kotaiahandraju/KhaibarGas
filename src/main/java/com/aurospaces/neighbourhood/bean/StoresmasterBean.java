@@ -13,6 +13,13 @@ protected String storeid ;
 protected String storename ;
 protected String location ;
 protected String status ;
+public String getStoreStatus() {
+	return storeStatus;
+}
+public void setStoreStatus(String storeStatus) {
+	this.storeStatus = storeStatus;
+}
+protected String storeStatus ;
 
 public int getId()
 {

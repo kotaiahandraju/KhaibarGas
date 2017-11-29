@@ -16,31 +16,29 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
 import com.aurospaces.neighbourhood.bean.CustomermasterBean;
-import com.aurospaces.neighbourhood.bean.StoresmasterBean;
-import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
+import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
+import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import CommonUtils.CommonUtils;
-
 @Controller
-@RequestMapping(value="/admin")
-public class StoreController {
+@RequestMapping(value="admin")
+public class LpoMasterController {
 	
 	@Autowired
-	StoresmasterDao storesmasterDao;
+	LpomasterDao lpomasterDao;
 	
 	
-	@RequestMapping(value = "/storeHome")
-	public String storeHome(@ModelAttribute("storeForm")StoresmasterBean storesmasterBean,HttpServletRequest request,
+	@RequestMapping(value = "/lpoHome")
+	public String lpoHome(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean,HttpServletRequest request,
 			HttpSession session) {
-		ObjectMapper objectMapper = null;
 		String sJson = null;
-		List<CustomermasterBean> customerList=null;
+		List<LpomasterBean> lpoList=null;
 		try {
 			
-			sJson=storesmasterDao.getAllStore();
+			sJson=lpomasterDao.getAllCustomer();
 			if(sJson !=null){
 				
 				 request.setAttribute("allObjects", sJson);
@@ -57,37 +55,36 @@ public class StoreController {
 			System.out.println(e);
 
 		}
-		return "storeHome";
+		return "lpoHome";
 	}
 	
-	@RequestMapping(value = "/storeSave")
-	public  String storeSave(@ModelAttribute("storeForm")StoresmasterBean storesmasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
+	@RequestMapping(value = "/lpoSave")
+	public  String lpoSave(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
 		boolean isInsert = false;
 		String sJson = "";
-		List<StoresmasterBean> storeBean=null;
+		List<LpomasterBean> lpomaster=null;
 		 String sProductId ="";
 		 Integer existId =null;
 		try {
-			System.out.println("--------customerSave----------");
+			System.out.println("--------customerSave----------"+lpomasterBean.getAmount());
 			
-			String sName=storesmasterBean.getStorename();
-			storeBean=storesmasterDao.getByStoreName(sName);
-			System.out.println("customerSave"+storeBean);
-			if(storeBean.size() ==0 || storeBean ==null){
-				storesmasterBean.setStoreid(CommonUtils.getAutoGenId());
-				storesmasterBean.setStatus("1");
-				storesmasterDao.save(storesmasterBean);;
-				reAttributes.addFlashAttribute("msg", "Record Add Sucessfull");
+			String sLpoNo=lpomasterBean.getLponumber();
+			lpomaster=lpomasterDao.getByLpoNo(sLpoNo);
+			System.out.println("customerSave"+lpomaster);
+			if(lpomaster.size() ==0 || lpomaster ==null){
+				lpomasterBean.setStatus("1");
+				lpomasterDao.save(lpomasterBean);
+				reAttributes.addFlashAttribute("msg", "Login Sucessfull");
 			}else{
-				for (StoresmasterBean iterarateList : storeBean) {
+				for (LpomasterBean lpomasterBean2 : lpomaster) {
 					
-					 existId=iterarateList.getId();
-					 if(existId==storesmasterBean.getId()){
-						 storesmasterDao.save(storesmasterBean);
+					 existId=lpomasterBean2.getId();
+					 if(existId==lpomasterBean.getId()){
+						 lpomasterDao.save(lpomasterBean);
 						 reAttributes.addFlashAttribute("msg", "Record Updated Successfully");
 
 					 }else{
-						 reAttributes.addFlashAttribute("msg", "Store name already exist.");
+						 reAttributes.addFlashAttribute("msg", "Mobile Number already exist.");
 						 reAttributes.addFlashAttribute("cssMsg", "danger");
 
 						}
@@ -99,11 +96,11 @@ public class StoreController {
 			System.out.println("Exception in Product Controller in productSave()");
 			e.printStackTrace();
 		}
-		return "redirect:storeHome";
+		return "redirect:lpoHome";
 	}
 	
-	@RequestMapping(value = "/storeDelete")
-	public @ResponseBody String storeDelete( @RequestParam("id") String id,@RequestParam("status") String status, HttpSession objSession,
+	@RequestMapping(value = "/lpoDelete")
+	public @ResponseBody String lpoDelete( @RequestParam("id") String id, @RequestParam("status") String status, HttpSession objSession,
 			HttpServletRequest objRequest) throws JsonGenerationException, JsonMappingException, IOException {
 		boolean isDelete = false;
 		String sJson = "";
@@ -111,10 +108,10 @@ public class StoreController {
 		List<AccessoriesmasterBean> accessories=null;
 		ObjectMapper objectMapper = null;
 		  int dId=Integer.parseInt(id);
-		  isDelete = storesmasterDao.delete(dId,status);
+		  isDelete = lpomasterDao.delete(dId,status);
 		 
 		  if(isDelete){
-			  sJson=storesmasterDao.getAllStore();
+			  sJson=lpomasterDao.getAllCustomer();
 			  System.out.println("deleted cusmer data--"+sJson);
 				
 			}

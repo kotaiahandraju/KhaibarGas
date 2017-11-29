@@ -89,11 +89,11 @@ ps.setString(6, storesmaster.getStatus());
 	}
 		
 	@Transactional
-	public Boolean delete(int id) {
+	public Boolean delete(int id,String status) {
 		boolean result=false;
 		Integer results=null;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "update storesmaster set status='0' where id = ?";
+		String sql = "update storesmaster set status='"+status+"' where id = ?";
 		jdbcTemplate.update(sql, new Object[]{id});
 		  results=jdbcTemplate.update(sql, new Object[]{id});
 			if(results !=null || result){

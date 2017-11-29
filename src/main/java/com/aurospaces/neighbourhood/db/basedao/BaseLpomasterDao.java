@@ -85,18 +85,25 @@ ps.setString(11, lpomaster.getStatus());
 		else
 		{
 
-			String sql = "UPDATE lpomaster  set lponumber = ? ,item = ? ,remarks = ? ,suppliername = ? ,supplieraddress = ? ,suppliercontactno = ? ,supplieremail = ? ,amount = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE lpomaster  set lponumber = ? ,item = ? ,remarks = ? ,suppliername = ? ,supplieraddress = ? ,suppliercontactno = ? ,supplieremail = ? ,amount = ?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{lpomaster.getLponumber(),lpomaster.getItem(),lpomaster.getRemarks(),lpomaster.getSuppliername(),lpomaster.getSupplieraddress(),lpomaster.getSuppliercontactno(),lpomaster.getSupplieremail(),lpomaster.getAmount(),lpomaster.getStatus(),lpomaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{lpomaster.getLponumber(),lpomaster.getItem(),lpomaster.getRemarks(),lpomaster.getSuppliername(),lpomaster.getSupplieraddress(),lpomaster.getSuppliercontactno(),lpomaster.getSupplieremail(),lpomaster.getAmount(),lpomaster.getId()});
 		}
 	}
 		
 		@Transactional
-		public void delete(int id) {
+		public Boolean delete(int id,String status) {
+			boolean result=false;
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "DELETE FROM lpomaster WHERE id=?";
+			String sql = "update lpomaster set status='"+status+"' where id = ?";
 			jdbcTemplate.update(sql, new Object[]{id});
+			 int results=jdbcTemplate.update(sql, new Object[]{id});
+				if(results!=0){
+					result= true;
+				}
+				return result;
 		}
+		
 		
 
 	 public LpomasterBean getById(int id) {

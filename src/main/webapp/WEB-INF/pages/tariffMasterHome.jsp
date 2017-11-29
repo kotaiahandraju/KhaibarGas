@@ -214,8 +214,12 @@
 						.each(
 								listOrders,
 								function(i, orderObj) {
+									if(orderObj.status == "1"){
+										var deleterow = "<a class='deactive' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+									}else{  
+										var deleterow = "<a class='active' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+									}
 									var edit = "<a class='edit' onclick='editTariffMasterDetails(" + orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
-									var deleterow = "<a class='delete' onclick='deleteTariffMasterDetails(" + orderObj.id + ")'><i class='fa fa-trash-o red'></i></a>"
 									serviceUnitArray[orderObj.id] = orderObj;
 									var tblRow = "<tr >"
 											+ "<td title='"+orderObj.id+"'>" + orderObj.assetcode + "</td>"
@@ -223,11 +227,12 @@
 											+ "<td title='"+orderObj.id+"'>" + orderObj.rate + "</td>"
 											+ "<td title='"+orderObj.id+"'>" + orderObj.alloweddiscount + "</td>"
 											+ "<td title='"+orderObj.id+"'>" + orderObj.remarks + "</td>"
-											+ "<td title='"+orderObj.id+"'>" + orderObj.status + "</td>"
+											+ "<td title='"+orderObj.tariffStatus+"'>" + orderObj.tariffStatus + "</td>"
 											+ "<td style='text-align: center;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 											+ "</tr >";
 									$(tblRow).appendTo("#tableId table tbody");
 								});
+				$(".datatables").DataTable();
 
 			}
 			
@@ -243,11 +248,18 @@
 				$("#submit1").val("Update");
 				$(window).scrollTop($('body').offset().top);
 			}
-			function deleteTariffMasterDetails(id) {
+			function deleteTariffMasterDetails(id,status) {
+				var checkstr=null;
+				if(status == 0){
+					 checkstr =  confirm('Are you sure you want to Deactivate this?');
+				}else{
+					 checkstr =  confirm('Are you sure you want to Activate this?');
+				}
 				var checkstr = confirm('Are you sure you want to delete this?');
 				if (checkstr == true) {
 					var formData = new FormData();
 					formData.append('id', id);
+					formData.append('status', status);
 					$.fn.makeMultipartRequest('POST', 'deleteTariffMasterDetails',
 							false, formData, false, 'text', function(data) {
 								var jsonobj = $.parseJSON(data);
@@ -255,6 +267,7 @@
 								var alldata = jsonobj.allOrders1;
 								console.log(jsonobj.allOrders1);
 								displayTable(alldata);
+// 								window.location.reload();
 							});
 				}
 

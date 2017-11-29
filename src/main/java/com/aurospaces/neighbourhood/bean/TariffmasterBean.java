@@ -14,6 +14,7 @@ protected String rate ;
 protected String alloweddiscount ;
 protected String remarks ;
 protected String status ;
+protected String tariffStatus ;
 
 public int getId()
 {
@@ -30,6 +31,12 @@ public Date getCreatedTime()
 public void setCreatedTime(final Date createdTime)
 {
   this.createdTime = createdTime;
+}
+public String getTariffStatus() {
+	return tariffStatus;
+}
+public void setTariffStatus(String tariffStatus) {
+	this.tariffStatus = tariffStatus;
 }
 public Date getUpdatedTime()
 {

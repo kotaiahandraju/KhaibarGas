@@ -32,7 +32,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		 
 		 //String sql="SELECT *, DATE_FORMAT(expirydate,'%d/%m/%Y') AS expirtdate1  FROM cylindermaster";
 		
-		 String sql =  "SELECT c. *,DATE_FORMAT(c.expirydate,'%d-%M-%Y') AS expirtdate1 ,  CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as status   FROM cylindermaster c";
+		 String sql =  "SELECT c. *,DATE_FORMAT(c.expirydate,'%d-%M-%Y') AS expirtdate1 ,  CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylenderstatus   FROM cylindermaster c";
 		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 		
@@ -44,11 +44,11 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	
 
 	@Transactional
-	public boolean deleteCylinder(int id) {
+	public boolean deleteCylinder(int id,String status) {
 		jdbcTemplate = custom.getJdbcTemplate();
 		boolean delete = false;
 		try{
-			String sql = "Update  cylindermaster set status='0' WHERE id=?";
+			String sql = "Update  cylindermaster set status='"+status+"' WHERE id=?";
 			int intDelete = jdbcTemplate.update(sql, new Object[]{id});
 			if(intDelete != 0){
 				delete = true;

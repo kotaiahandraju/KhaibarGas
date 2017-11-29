@@ -79,8 +79,10 @@ span.has-error,span.hasError
 			$('.edit').attr('data-original-title','Edit');
 			$('.delete').attr('data-toggle','tooltip');
 			$('.delete').attr('data-original-title','Delete');
-			$('.reset').attr('data-toggle','tooltip');
-			$('.reset').attr('data-original-title','Reset Password');
+			$('.active').attr('data-toggle','tooltip');
+			$('.active').attr('data-original-title','Activate');
+			$('.deactive').attr('data-toggle','tooltip');
+			$('.deactive').attr('data-original-title','Deactivate');
 			$('[data-toggle="tooltip"]').tooltip();
 		});
 	</script>
@@ -135,7 +137,7 @@ span.has-error,span.hasError
                 <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>CUSTOMERS</span></a></li>
                 <li class="staff"><a href="${baseurl }/admin/staffMaster"><i class="fa fa-user"></i> <span>STAFF</span></a></li>
                 <li class="company"><a href="${baseurl }/admin/companymaster"><i class="fa fa-building"></i> <span>COMPANY</span></a></li>
-                <li class=""><a href="#"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
+                <li class="lpo"><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
                  <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
                  <li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
                 <li class="checkQuality"><a href="${baseurl }/admin/checkQuality"><i class="fa fa-bar-chart-o"></i> <span>checkQuality</span></a></li>

@@ -28,17 +28,17 @@ public class FillingstationmasterDao extends BaseFillingstationmasterDao
 	@SuppressWarnings("unchecked")
 	public List<FillingstationmasterBean> getFillingStationAllData(){  
 		 jdbcTemplate = custom.getJdbcTemplate();
-		return jdbcTemplate.query("SELECT  * FROM fillingstationmaster", new BeanPropertyRowMapper(FillingstationmasterBean.class));
+		return jdbcTemplate.query("SELECT f.*,CASE WHEN f.status IN ('0') THEN 'Deactive' WHEN f.status in ('1') THEN 'Active'  ELSE '-----' END as fillingStatus  from fillingstationmaster f", new BeanPropertyRowMapper(FillingstationmasterBean.class));
 			
 		    
 		}  
 	
 	@Transactional
-	public boolean deleteFillingStationData(int id) {
+	public boolean deleteFillingStationData(int id,String status) {
 		jdbcTemplate = custom.getJdbcTemplate();
 		boolean delete = false;
 		try{
-			String sql = "Update  fillingstationmaster set status='0' WHERE id=?";
+			String sql = "Update  fillingstationmaster set status='"+status+"' WHERE id=?";
 			int intDelete = jdbcTemplate.update(sql, new Object[]{id});
 			if(intDelete != 0){
 				delete = true;

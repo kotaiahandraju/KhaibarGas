@@ -16,7 +16,14 @@ protected String suppliercontactno ;
 protected String supplieremail ;
 protected String amount ;
 protected String status ;
+protected String lpoStatus ;
 
+public String getLpoStatus() {
+	return lpoStatus;
+}
+public void setLpoStatus(String lpoStatus) {
+	this.lpoStatus = lpoStatus;
+}
 public int getId()
 {
   return id;

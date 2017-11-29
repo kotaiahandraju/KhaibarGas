@@ -17,11 +17,13 @@ protected String lponumber ;
 protected String accessoriesstatus ;
 protected String remarks ;
 protected String status ;
+//protected String accessoriesStatus ;
 
 public int getId()
 {
   return id;
 }
+
 public void setId(final int id)
 {
   this.id = id;
