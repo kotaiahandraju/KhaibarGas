@@ -87,7 +87,7 @@ ps.setString(10, fillingstationmaster.getUnitpoint());
 
 			String sql = "UPDATE fillingstationmaster  set gasavailability = ? ,numberoffillingmachines = ? ,quantity = ? ,gascapacity = ? ,availablegas = ? ,status = ? ,stationname =?,unitpoint =? where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{fillingstationmaster.getGasavailability(),fillingstationmaster.getNumberoffillingmachines(),fillingstationmaster.getQuantity(),fillingstationmaster.getGascapacity(),fillingstationmaster.getAvailablegas(),fillingstationmaster.getStatus(),fillingstationmaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{fillingstationmaster.getGasavailability(),fillingstationmaster.getNumberoffillingmachines(),fillingstationmaster.getQuantity(),fillingstationmaster.getGascapacity(),fillingstationmaster.getAvailablegas(),fillingstationmaster.getStatus(),fillingstationmaster.getStationname(),fillingstationmaster.getUnitpoint(),fillingstationmaster.getId()});
 		}
 	}
 		

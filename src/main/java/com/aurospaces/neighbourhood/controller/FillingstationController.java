@@ -73,14 +73,10 @@ public class FillingstationController {
 	@RequestMapping(value = "/addfillingstation", method = RequestMethod.POST)
 	public String addCylinder(@Valid @ModelAttribute("fillingStationForm") FillingstationmasterBean objFillingstationmasterBean,
 			BindingResult bindingresults, Model model,RedirectAttributes redir) {
-		
-		//List<CylindermasterBean> cylinderMaster=null;
-		
 		int id = 0;
 		
 		try
 		{
-			
 			objFillingstationmasterBean.setStatus("1");
 			FillingstationmasterBean fillingstationmasterBean = fillingstationmasterDao.getByFillingstationById(objFillingstationmasterBean);
 			int dummyId =0;
