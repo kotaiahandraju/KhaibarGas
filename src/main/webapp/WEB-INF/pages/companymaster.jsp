@@ -154,7 +154,7 @@
 												of Company</label>
 											<div class="col-sm-6">
 												<form:input path="typeofcompany"
-													class="form-control validate" autocomplete="off"
+													class="form-control validate onlyCharacters" autocomplete="off"
 													placeholder="Type of Company" />
 												<span class="hasError" id="typeofcompanyError"></span>
 												<div>

@@ -77,7 +77,8 @@ public class StoreController {
 				storesmasterBean.setStoreid(CommonUtils.getAutoGenId());
 				storesmasterBean.setStatus("1");
 				storesmasterDao.save(storesmasterBean);;
-				reAttributes.addFlashAttribute("msg", "Record Add Sucessfull");
+				reAttributes.addFlashAttribute("msg", "Record Inserted Successfully");
+				reAttributes.addFlashAttribute("cssMsg", "success");
 			}else{
 				for (StoresmasterBean iterarateList : storeBean) {
 					
@@ -85,10 +86,11 @@ public class StoreController {
 					 if(existId==storesmasterBean.getId()){
 						 storesmasterDao.save(storesmasterBean);
 						 reAttributes.addFlashAttribute("msg", "Record Updated Successfully");
+							reAttributes.addFlashAttribute("cssMsg", "warning");
 
 					 }else{
-						 reAttributes.addFlashAttribute("msg", "Store name already exist.");
-						 reAttributes.addFlashAttribute("cssMsg", "danger");
+						 reAttributes.addFlashAttribute("msg", "Already Record Exist");
+							reAttributes.addFlashAttribute("cssMsg", "danger");
 
 						}
 				}

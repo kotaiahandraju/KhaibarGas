@@ -6,6 +6,8 @@ String baseurl =  request.getScheme() + "://" + request.getServerName() +      "
 session.setAttribute("baseurl", baseurl);
 %>
 <!-- Footer Starts Here -->
+		</div> <!-- #wrap -->
+	</div> <!-- page-content -->
     <footer role="contentinfo">
         <div class="clearfix">
             <ul class="list-unstyled list-inline pull-left">

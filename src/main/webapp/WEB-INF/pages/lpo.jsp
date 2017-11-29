@@ -8,12 +8,11 @@
  
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Home</a></li>
                <li>LPO </li>
             </ol>
             <div class="clearfix"></div>
         <div class="container">
-            
                     
             <div class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
@@ -25,14 +24,14 @@
 	                <form:form modelAttribute="lpoForm" id="formId" action="lpoSave" class="form-horizontal" method="post" >
                     <div class="panel-body">
 	                	<c:if test="${not empty msg}">
-	                		<div class="row">
-	                    		<div class="col-md-4 col-md-offset-4">
+	                    	<div class="row">
+	                    		<div class="col-sm-4 col-sm-offset-4">
 	                    			<div class="form-group">
-										<div class="msgcss alert alert-success fadeIn animated">${msg}</div>
-									</div>
-								</div>
-							</div>
-						</c:if>
+	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg}</div>
+	                    			</div>
+	                    		</div>
+	                    	</div>
+                    	</c:if>
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
@@ -66,7 +65,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Name</label>
                     				<div class="col-md-6">
-								      	<form:input type="text" path="suppliername" class="form-control validate" placeholder="Supplier name"/>
+								      	<form:input type="text" path="suppliername" class="form-control validate onlyCharacters" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -82,7 +81,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Contact no</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="suppliercontactno" class="form-control validate" placeholder="Supplier contact no"/>
+		                            	<form:input  path="suppliercontactno" class="form-control validate numericOnly" placeholder="Supplier contact no"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -92,7 +91,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Email</label>
                     				<div class="col-md-6">
-								      	<form:input type="text" path="supplieremail" class="form-control validate" placeholder="Supplier email"/>
+								      	<form:input type="email" path="supplieremail" class="form-control validate" placeholder="Supplier email"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -100,7 +99,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Amount</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="amount" class="form-control validate" placeholder="amount"/>
+		                            	<form:input type="text" path="amount" class="form-control validate numericOnly" placeholder="amount"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -112,7 +111,7 @@
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
 					      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
-					      			<input class="btn-danger btn" type="reset" id="clearData" onclick="dataClear();" value="Reset" />
+					      			<input class="btn-danger btn cancel" type="reset" id="clearData" onclick="dataClear();" value="Reset" />
 				      			</div>
 				      		</div>
 				    	</div>
@@ -135,7 +134,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>LPO Number</th><th>Item</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th><th>Supplier Contact no</th><th>Supplier Email</th><th>Amount</th><th>Status</th><th>Action</th></tr>
+                                	<tr><th>LPO Number</th><th>Item</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th><th>Supplier Contact no</th><th>Supplier Email</th><th>Amount</th><th>Status</th><th></th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -146,70 +145,65 @@
             </div>
 
         </div> <!-- container -->
-    </div> <!-- #wrap -->
-</div> <!-- page-content -->
 
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <script type="text/javascript">
-var lstOrders =${allObjects};
+// var lstOrders =${allObjects};
+// console.log(lstOrders);
 
-console.log(lstOrders);
-$(function() {
+var listOrders1 = ${allObjects};
+if (listOrders1 != "") {
+	displayTable(listOrders1);
+}
+
+/* $(function() {
 // 	var listOrders=JSON.parse(lstOrders);
 	showTableData(lstOrders);
 	
-});
+}); */
 
 
-</script>
+// var damageId = 0;
+// var data = {};
 
 
-<script>
+function displayTable(listOrders) {
 
-var damageId = 0;
-var serviceUnitArray ={};
-var data = {};
-
-
-function showTableData(response){
-	
-	var table=$('#tableId').html('');
-	
-	if(response != undefined && response.length >0){
-	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>LPO Number</th><th>Item</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th><th>Supplier Contact no</th><th>Supplier Email</th><th>Amount</th><th>Status</th><th>Action</th></tr>'+
-    	"</thead><tbody></tbody></table>";
+	$('#tableId').html('');
+	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'
+	    	+'<thead><tr><th>LPO Number</th><th>Item</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th><th>Supplier Contact no</th><th>Supplier Email</th><th>Amount</th><th>Status</th><th></th></tr>'
+	    	+"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
-	$.each(response,function(i, orderObj) {
+	
+	serviceUnitArray ={};
+	$.each(listOrders,function(i, orderObj) {
+		var edit = "<a class='edit' id='editId' onclick='editLpo("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactive' onclick='lpoDelete("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 		}else{  
 			var deleterow = "<a class='active' onclick='lpoDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
-		
-		var edit = "<a class='edit' id='editId' onclick='editLpo("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
-		serviceUnitArray[orderObj.id] = orderObj;
 			
+		serviceUnitArray[orderObj.id] = orderObj;
+				
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
-						+ "<td title='"+orderObj.item+"'>" + orderObj.item + "</td>"
-						+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
-						+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
-						+ "<td title='"+orderObj.suppliercontactno+"'>" + orderObj.suppliercontactno + "</td>"
-						+ "<td title='"+orderObj.supplieremail+"'>" + orderObj.supplieremail+ "</td>"
-						+ "<td title='"+orderObj.supplieraddress+"'>" + orderObj.supplieraddress + "</td>"
-						+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
-						+ "<td title='"+orderObj.lpoStatus+"'>" + orderObj.lpoStatus + "</td>"
-						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
-						
-						+"</tr>";
-				$(tblRow).appendTo("#tableId table tbody");
-			});
-	}
+			+ "<td title='"+orderObj.item+"'>" + orderObj.item + "</td>"
+			+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
+			+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
+			+ "<td title='"+orderObj.suppliercontactno+"'>" + orderObj.suppliercontactno + "</td>"
+			+ "<td title='"+orderObj.supplieremail+"'>" + orderObj.supplieremail+ "</td>"
+			+ "<td title='"+orderObj.supplieraddress+"'>" + orderObj.supplieraddress + "</td>"
+			+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
+			+ "<td title='"+orderObj.lpoStatus+"'>" + orderObj.lpoStatus + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+"</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
 }
-function editLpo(id) {
-	
+
+function editLpo(id)
+{	
 	var inputs = $('input[type="text"]');
     inputs.removeAttr('placeholder');
     inputs.css('border','');
@@ -231,37 +225,38 @@ function editLpo(id) {
 	$(window).scrollTop($('body').offset().top);
 }
 
-function lpoDelete(id,status) {
+function lpoDelete(id,status)
+{
 	var checkstr=null;
 	if(status == 0){
 		 checkstr =  confirm('Are you sure you want to Deactivate this?');
 	}else{
 		 checkstr =  confirm('Are you sure you want to Activate this?');
 	}
-	if(checkstr == true){
+	if(checkstr == true)
+	{
 		$.ajax({
-					type : "POST",
-					url : "lpoDelete.htm",
-					data :"id="+id+"&status="+status,
-					success: function (response) {
-		                 if(response != null ){
-		                	//var resJson=JSON.parse(response);
-		                	//showTableData(resJson);
-		                	alert("Delete Sucessfully");
-		                	//window.location.reload();
-		                	}
-		                 window.location.reload();
-		                 },
-		             error: function (e) { 
-							console.log(e);
-		             }
-				});
+			type : "POST",
+			url : "lpoDelete.htm",
+			data :"id="+id+"&status="+status,
+			success: function (response) {
+				if(response != null ){
+// 					var resJson=JSON.parse(response);
+// 					displayTable(resJson);
+// 					alert("Delete Sucessfully");
+// 					window.location.reload();
+				}
+				window.location.reload();
+			},
+			error: function (e) { 
+				console.log(e);
+			}
+		});
 	}
 }
 
-function dataClear(){
-	
-	
+function dataClear()
+{
 	$("#id").val('');
 	$("#lponumber").val('');
 	$("#item").val('');
@@ -275,7 +270,4 @@ function dataClear(){
 
 $("#pageName").text("LPO Master");
 $(".lpo").addClass("active");
-
-
-
 </script>

@@ -45,7 +45,7 @@
 	                    			<div class="form-group">
 										<label for="focusedinput" class="col-md-4 control-label">Station Name<span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="stationname" class="form-control validate" placeholder="station Name" />	
+											<form:input path="stationname" class="form-control validate onlyCharacters" placeholder="station Name" />	
 											<span class="hasError" id="stationnameError"></span>
 									    </div>
 	                    			</div>
@@ -56,16 +56,16 @@
 	                    			<div class="form-group">
 										<label for="focusedinput" class="col-md-4 control-label">Opening Balance<span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="gasavailability" class="form-control validate" placeholder="opening Balance" />	
+											<form:input path="gasavailability" class="form-control validate numericOnly" placeholder="opening Balance" />	
 											<span class="hasError" id="gasavailabilityError"></span>
 									    </div>
 	                    			</div>
 	                    		</div>
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label ">Quantity<span class="impColor">*</span></label>
+										<label for="focusedinput" class="col-md-4 control-label  ">Quantity<span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="quantity" type="text" class="form-control validate" placeholder="quantity" />	
+											<form:input path="quantity" type="text" class="form-control validate numericOnly" placeholder="quantity" />	
 											<span class="hasError" id="quantityError"></span>
 									    </div>
 	                    			</div>
@@ -76,7 +76,7 @@
 	                    			<div class="form-group">
 										<label for="focusedinput" class="col-md-4 control-label ">Capacity<span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="gascapacity" class="form-control  validate"	placeholder="capacity" />	
+											<form:input path="gascapacity" class="form-control  validate numericOnly"	placeholder="capacity" />	
 											<span class="hasError" id="gascapacityError"></span>
 									    </div>
 	                    			</div>
@@ -85,7 +85,7 @@
 	                    			<div class="form-group">
 										<label for="focusedinput" class="col-md-4 control-label ">Filling 	Machines<span class="impColor">*</span> </label>
 										<div class="col-md-6">
-											<form:input path="numberoffillingmachines"	class="form-control  validate " placeholder="filling machines" />	
+											<form:input path="numberoffillingmachines"	class="form-control  validate numericOnly" placeholder="filling machines" />	
 											<span class="hasError" id="numberoffillingmachinesError"></span>
 									    </div>
 	                    			</div>
@@ -96,7 +96,7 @@
 	                    			<div class="form-group">
 										<label for="focusedinput" class="col-md-4 control-label ">Closing Balance<span class="impColor">*</span> </label>
 										<div class="col-md-6">
-											<form:input path="availablegas" class="form-control  validate" 	placeholder="closing Balance in gasTank" />	
+											<form:input path="availablegas" class="form-control  validate numericOnly" 	placeholder="closing Balance in gasTank" />	
 											<span class="hasError" id="availablegasError"></span>
 									    </div>
 	                    			</div>
@@ -109,7 +109,7 @@
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar  pull-right">
 						      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
-						      			<input type="reset" value="Reset" class="btn-danger btn"/>
+						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
 					      	</div>
