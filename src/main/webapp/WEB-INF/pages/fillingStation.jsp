@@ -174,7 +174,7 @@ function displayTable(listOrders) {
 					}else{  
 						var deleterow = "<a class='active' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 					}
-					var edit = "<a  onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+					var edit = "<a class='edit' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
 							+ "<td title='"+orderObj.gasavailability+"'>"+ orderObj.gasavailability + "</td>"
@@ -194,6 +194,7 @@ function displayTable(listOrders) {
 
 
 function editCylinder(id) {
+	$("#id").val(serviceUnitArray[id].id);
 	$("#gasavailability").val(serviceUnitArray[id].gasavailability);
 	$("#numberoffillingmachines").val(serviceUnitArray[id].numberoffillingmachines);
 	$("#quantity").val(serviceUnitArray[id].quantity);
@@ -201,6 +202,8 @@ function editCylinder(id) {
 	$("#availablegas").val(serviceUnitArray[id].availablegas);
 	$("#stationname").val(serviceUnitArray[id].stationname);
 	$("#unitpoint").val(serviceUnitArray[id].unitpoint);
+	$("#submit1").val("Update");
+	$(window).scrollTop($('body').offset().top);
 	
 	
 	
