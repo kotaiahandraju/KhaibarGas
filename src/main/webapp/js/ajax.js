@@ -1,6 +1,6 @@
 $.fn.makeMultipartRequest = function(method, url, processData, formData,
 		contentType, dataType, successFunction) {
-	$("#loadAjax").show();
+	
 	$.ajax({
 		type : method,
 		url : url,
@@ -8,9 +8,16 @@ $.fn.makeMultipartRequest = function(method, url, processData, formData,
 		data : formData,
 		contentType : contentType,
 		dataType : dataType,
-		
+		 beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          }, 
+          
 		success : successFunction,
-		error :  function(e){console.log(e);}
+		complete: function () {
+            
+            $.unblockUI();
+       },
+		error :  function(e){$.unblockUI();console.log(e);}
 	});
 	$("#loadAjax").hide();
 };
