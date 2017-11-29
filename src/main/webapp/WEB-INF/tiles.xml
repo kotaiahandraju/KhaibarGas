@@ -68,7 +68,9 @@
 	<definition name="staffMasterHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/staffMaster.jsp" />
 	</definition>
-
+	<definition name="checkQualityHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/checkQuality.jsp" />
+	</definition>
 </tiles-definitions>
 
 

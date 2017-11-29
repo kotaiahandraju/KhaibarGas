@@ -140,6 +140,7 @@ span.has-error,span.hasError
                 <li class="lpo"><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
                  <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
                  <li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
+                <li class="checkQuality"><a href="${baseurl }/admin/checkQuality"><i class="fa fa-bar-chart-o"></i> <span>checkQuality</span></a></li>
                 <li><a href="#"><i class="fa fa-list"></i> <span>REPORTS</span></a></li>
             </ul>
             

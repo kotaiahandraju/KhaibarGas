@@ -169,7 +169,7 @@
 												Type</label>
 											<div class="col-sm-6">
 												<form:select path="customertype"
-													class="form-control validate">
+													class="form-control validate" onfocus="removeBorder(this.id)">
 													<form:option value="">-- Select Customer Type --</form:option>
 													<form:option value="Owner">Owner</form:option>
 													<form:option value="Competitor">Competitor</form:option>
