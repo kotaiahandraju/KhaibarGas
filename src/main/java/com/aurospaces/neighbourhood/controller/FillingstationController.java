@@ -1,13 +1,12 @@
 package com.aurospaces.neighbourhood.controller;
 
-import java.util.Date;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +23,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
-import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -37,6 +35,11 @@ public class FillingstationController {
 	@RequestMapping(value = "/fillingStationHome")
 	public String fillingStationHome(@Valid @ModelAttribute("fillingStationForm") FillingstationmasterBean objFillingstationmasterBean, ModelMap model, HttpServletRequest request,
 			HttpSession session) {
+		
+		 Random ran = new Random();
+		 String id = String.format("%04d", ran.nextInt(10000));
+		 
+		 objFillingstationmasterBean.setUnitpoint(id);
 		
 	  logger.info("hi");
 		

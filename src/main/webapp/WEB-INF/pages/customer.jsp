@@ -177,7 +177,7 @@ var data = {};
 function showTableData(response){
 	
 	var table=$('#tableId').html('');
-	table .clear().draw();
+	table.clear().draw();
 	
 	
 	serviceUnitArray = {};
