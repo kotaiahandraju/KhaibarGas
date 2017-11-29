@@ -115,11 +115,11 @@ ps.setString(12, trucksmaster.getTypeOfService());
 	}
 		
 	@Transactional
-	public boolean delete(int id) {
+	public boolean delete(int id,String status) {
 		jdbcTemplate = custom.getJdbcTemplate();
 		boolean delete = false;
 		try{
-			String sql = "update trucksmaster set status='0' where id = ?";
+			String sql = "update trucksmaster set status='"+status+"' where id = ?";
 			int intDelete = jdbcTemplate.update(sql, new Object[]{id});
 			if(intDelete != 0){
 				delete = true;

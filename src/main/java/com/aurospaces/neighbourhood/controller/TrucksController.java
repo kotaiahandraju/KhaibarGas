@@ -95,7 +95,7 @@ public class TrucksController {
 			if(objTrucksmasterBean.getId() == 0 && trucksmasterBean == null)
 			{
 				objTrucksmasterDao.save(objTrucksmasterBean);
-				redirect.addFlashAttribute("msg", "inserted");
+				redirect.addFlashAttribute("msg", "Record add successfully.");
 			}
 			if(objTrucksmasterBean.getId() == 0 && trucksmasterBean != null)
 			{
@@ -117,8 +117,8 @@ public class TrucksController {
 		String sJson=null;
 		boolean delete = false;
 		try{
-			if(objTrucksmasterBean.getId() != 0){
- 				delete = objTrucksmasterDao.delete(objTrucksmasterBean.getId());
+			if(objTrucksmasterBean.getId() != 0 && objTrucksmasterBean.getStatus() != ""){
+ 				delete = objTrucksmasterDao.delete(objTrucksmasterBean.getId(),objTrucksmasterBean.getStatus());
  				if(delete){
  					jsonObj.put("message", "deleted");
  				}else{

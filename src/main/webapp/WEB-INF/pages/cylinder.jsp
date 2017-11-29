@@ -239,7 +239,7 @@ function displayTable(listOrders) {
 							+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber+ "</td>"
 							+ "<td title='"+orderObj.color+"'>"+ orderObj.color + "</td>"
 							+ "<td title='"+orderObj.expirtdate1+"'>"+orderObj.expirtdate1+ "</td>"
-							+ "<td title='"+orderObj.cylinderStatus+"'>"+ orderObj.cylinderStatus + "</td>"
+							+ "<td title='"+orderObj.cylendersstatus+"'>"+ orderObj.cylendersstatus + "</td>"
 							+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 							+ "</tr >";
 					$(tblRow).appendTo("#tableId table tbody");
@@ -292,9 +292,10 @@ function deleteCylinder(id,status){
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		alert(jsonobj.message);
-		var alldata = jsonobj.allOrders1;
-		console.log(jsonobj.allOrders1);
-		displayTable(alldata);
+		window.location.reload();
+// 		var alldata = jsonobj.allOrders1;
+// 		console.log(jsonobj.allOrders1);
+// 		displayTable(alldata);
 	});
 	}
 	
