@@ -310,6 +310,7 @@ function deleteStaffMasterDetails(id,status)
 		 checkstr =  confirm('Are you sure you want to Deactivate this?');
 	}else{
 		 checkstr =  confirm('Are you sure you want to Activate this?');
+		 
 	}
 	if (checkstr == true)
 	{

@@ -98,7 +98,7 @@ ps.setString(13, staffmaster.getStatus());
 		boolean result=false;
 		Integer results=null;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "update storesmaster set status='"+status+"' where id = ?";
+		String sql = "update staffmaster set status='"+status+"' where id = ?";
 		jdbcTemplate.update(sql, new Object[]{id});
 		  results=jdbcTemplate.update(sql, new Object[]{id});
 			if(results !=null || result){
