@@ -143,8 +143,8 @@ public class CylinderController {
 		String sJson = null;
 		boolean delete = false;
 		try {
-			if (objCylindermasterBean.getId() != 0) {
-				delete = cylindermasterDao.deleteCylinder(objCylindermasterBean.getId());
+			if (objCylindermasterBean.getId() != 0 && objCylindermasterBean.getStatus() !="") {
+				delete = cylindermasterDao.deleteCylinder(objCylindermasterBean.getId(),objCylindermasterBean.getStatus());
 				if (delete) {
 					jsonObj.put("message", "deleted");
 				} else {

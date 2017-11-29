@@ -103,7 +103,7 @@ public class StoreController {
 	}
 	
 	@RequestMapping(value = "/storeDelete")
-	public @ResponseBody String storeDelete( @RequestParam("id") String id, HttpSession objSession,
+	public @ResponseBody String storeDelete( @RequestParam("id") String id,@RequestParam("status") String status, HttpSession objSession,
 			HttpServletRequest objRequest) throws JsonGenerationException, JsonMappingException, IOException {
 		boolean isDelete = false;
 		String sJson = "";
@@ -111,7 +111,7 @@ public class StoreController {
 		List<AccessoriesmasterBean> accessories=null;
 		ObjectMapper objectMapper = null;
 		  int dId=Integer.parseInt(id);
-		  isDelete = storesmasterDao.delete(dId);
+		  isDelete = storesmasterDao.delete(dId,status);
 		 
 		  if(isDelete){
 			  sJson=storesmasterDao.getAllStore();

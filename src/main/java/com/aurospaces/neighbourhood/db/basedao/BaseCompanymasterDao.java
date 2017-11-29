@@ -101,11 +101,11 @@ ps.setString(11, companymaster.getStatus());
 			jdbcTemplate.update(sql, new Object[]{id});
 		}*/
 		@Transactional
-		public boolean delete(int id) {
+		public boolean delete(int id,String status) {
 			jdbcTemplate = custom.getJdbcTemplate();
 			boolean delete = false;
 			try{
-				String sql = "DELETE FROM companymaster WHERE id=?";
+				String sql = "update tariffmaster set status='"+status+"'  WHERE id=?";
 				int intDelete = jdbcTemplate.update(sql, new Object[]{id});
 				if(intDelete != 0){
 					delete = true;

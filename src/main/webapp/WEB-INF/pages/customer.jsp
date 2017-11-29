@@ -23,16 +23,17 @@
                         </div>
                     </div>
 	                <form:form modelAttribute="customerForm" action="customerSave" class="form-horizontal" method="Post" >
+	                <div class="panel-body">
 	                <c:if test="${not empty msg}">
 									<div class="alert alert-success fadeIn animated">${msg}</div>
 								</c:if>
-                    <div class="panel-body">
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Customer ID<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
+		                            	<form:hidden path="status"/>
 								      	<form:input type="text" path="customerid" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
@@ -60,7 +61,7 @@
                     				<label for="focusedinput" class="col-md-6 control-label">MobileNo<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
-								      	<form:input type="text" path="mobile" class="form-control validate" placeholder="Supplier name"/>
+								      	<form:input type="text" path="mobile" class="form-control validate numericOnly" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -68,7 +69,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Land Line</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="landline" class="form-control " placeholder="Supplier name"/>
+		                            	<form:input type="text" path="landline" class="form-control validate numericOnly" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -93,7 +94,7 @@
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label validate">customertype<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">customertype<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:select path="customertype" class="form-control">
 									  		<form:option value="Commercial">COMMERCIAL</form:option>
@@ -137,7 +138,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Action</th></tr>
+                                	<tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th>Action</th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -182,15 +183,15 @@ function showTableData(response){
 	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Action</th></tr>'+
+    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th>Action</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactive' onclick='deletetruckMaster("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactive' onclick='customerDelete("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 		}else{  
-			var deleterow = "<a class='active' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='active' onclick='customerDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 		
 		var edit = "<a class='edit' onclick='editCustomer("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
@@ -232,26 +233,33 @@ function editCustomer(id) {
 	$("#authorizedperson").val(serviceUnitArray[id].authorizedperson);
 	$("#contactperson").val(serviceUnitArray[id].contactperson);
 	$("#customertype").val(serviceUnitArray[id].customertype);
-	
+	$("#status").val(serviceUnitArray[id].status);
+	$("#submit1").val("Update");
 	
 	$(window).scrollTop($('body').offset().top);
 }
 
-function customerDelete(id) {
-	var checkstr =  confirm('Are you sure you want to delete this?');
+function customerDelete(id,status) {
+	var checkstr=null;
+	if(status == 0){
+		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+	}else{
+		 checkstr =  confirm('Are you sure you want to Activate this?');
+	}
+	
 	if(checkstr == true){
 		$.ajax({
 					type : "POST",
 					url : "customerDelete.htm",
-					data :"id="+id,
+					data :"id="+id+"&status="+status,
 					success: function (response) {
 		                 if(response != null ){
-		                	var resJson=JSON.parse(response);
-		                	
-		                	showTableData(resJson);
+		                	//var resJson=JSON.parse(response);
+		                	//showTableData(resJson);
 		                	alert("Delete Sucessfully");
-		                	window.location.reload();
+		                	//window.location.reload();
 		                	}
+		                 window.location.reload();
 		                 },
 		             error: function (e) { 
 							console.log(e);

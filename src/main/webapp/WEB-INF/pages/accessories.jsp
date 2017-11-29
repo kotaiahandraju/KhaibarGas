@@ -23,16 +23,17 @@
                         </div>
                     </div>
 	                <form:form modelAttribute="accessorForm" action="accessoriesSave" class="form-horizontal" method="Post" >
+	                <div class="panel-body">
 	                <c:if test="${not empty msg}">
 									<div class="alert alert-success fadeIn animated">${msg}</div>
 								</c:if>
-                    <div class="panel-body">
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Type of Accessory<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
+		                            	<form:hidden path="status"/>
 								      	<form:select path="typeofaccessory" class="form-control">
 									  		<form:option value="Industrial">Industrial</form:option>
 									  		<form:option value="Commercial">Commercial</form:option>
@@ -118,7 +119,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th>Action</th></tr>
+                                	<tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th>Status</th>th<th>Action</th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -161,19 +162,18 @@ function showTableData(response){
 	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th>Action</th></tr>'+
+    	'<thead><tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th>Status</th><th>Action</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactive' onclick='deletetruckMaster("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactive' onclick='deleteAccessory("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 		}else{  
-			var deleterow = "<a class='active' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='active' onclick='deleteAccessory("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 		
 		var edit = "<a class='edit' onclick='editAccessory("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
-		var deleterow = "<a class='delete' onclick='deleteAccessory("+ orderObj.id+ ")'><i class='fa fa-trash-o red'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 			
 		var tblRow ="<tr>"
@@ -182,7 +182,7 @@ function showTableData(response){
 						+ "<td title='"+orderObj.madein+"'>" + orderObj.madein + "</td>"
 						+ "<td title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
 						+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
-						+ "<td title='"+orderObj.accessoriesStatus+"'>" + orderObj.accessoriesStatus + "</td>"
+						+ "<td title='"+orderObj.accessoriesstatus+"'>" + orderObj.accessoriesstatus + "</td>"
 						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
 						
 						+"</tr>";
@@ -197,23 +197,32 @@ function editAccessory(id) {
 	$("#madein").val(serviceUnitArray[id].madein);
 	$("#lponumber").val(serviceUnitArray[id].lponumber);
 	$("#remarks").val(serviceUnitArray[id].remarks);
+	$("#status").val(serviceUnitArray[id].status);
+	$("#submit1").val("Update");
 	$(window).scrollTop($('body').offset().top);
 }
 
-function deleteAccessory(id) {
-	var checkstr =  confirm('Are you sure you want to delete this?');
+function deleteAccessory(id,status) {
+	
+	var checkstr=null;
+	if(status == 0){
+		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+	}else{
+		 checkstr =  confirm('Are you sure you want to Activate this?');
+	}
+	
 	if(checkstr == true){
 		$.ajax({
 					type : "POST",
 					url : "deleteDamage.htm",
-					data :"id="+id,
+					data :"id="+id+"&status="+status,
 					success: function (response) {
 		                 if(response != null ){
-		                	var resJson=JSON.parse(response);
-		                	showTableData(resJson);
+		                	//var resJson=JSON.parse(response);
+		                	//showTableData(resJson);
 		                	alert("Delete Sucessfully");
-		                	window.location.reload();
 		                	}
+		                 window.location.reload();
 		                 },
 		             error: function (e) { 
 							console.log(e);

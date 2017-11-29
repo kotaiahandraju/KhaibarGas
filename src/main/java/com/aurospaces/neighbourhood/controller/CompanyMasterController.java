@@ -162,8 +162,8 @@ public class CompanyMasterController {
 		String sJson=null;
 		boolean delete = false;
 		try{
-			if(objCompanymasterBean.getId() != 0){
- 				delete = cd.delete(objCompanymasterBean.getId());
+			if(objCompanymasterBean.getId() != 0 && objCompanymasterBean.getStatus() !=""){
+ 				delete = cd.delete(objCompanymasterBean.getId(),objCompanymasterBean.getStatus());
  				if(delete){
  					jsonObj.put("message", "Record Deleted Successfully");
  					redir.addFlashAttribute("msg", "Record Updated Successfully");

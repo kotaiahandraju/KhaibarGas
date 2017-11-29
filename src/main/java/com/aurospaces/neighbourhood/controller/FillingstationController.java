@@ -129,7 +129,7 @@ public class FillingstationController {
 		boolean delete = false;
 		try{
 			if(objCylindermasterBean.getId() != 0){
- 				delete = fillingstationmasterDao.deleteFillingStationData(objCylindermasterBean.getId());
+ 				delete = fillingstationmasterDao.deleteFillingStationData(objCylindermasterBean.getId(),objCylindermasterBean.getStatus());
  				if(delete){
  					jsonObj.put("message", "deleted");
  				}else{

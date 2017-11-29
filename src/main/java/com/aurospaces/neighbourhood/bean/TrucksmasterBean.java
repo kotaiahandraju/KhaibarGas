@@ -20,8 +20,8 @@ protected String lponumber ;
 protected String status ;
 protected String civildefensecardexpirydate1;
 protected String registrationexpirydate1;
-protected String truckStatus;
 protected String typeOfService;
+protected String truckStatus;
 protected String servicedue1;
 
 

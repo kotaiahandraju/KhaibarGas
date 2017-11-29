@@ -73,7 +73,7 @@ public class CustomerController {
 			if(customermaster.size() ==0 || customermaster ==null){
 				customermasterBean.setStatus("1");
 				customermasterDao.save(customermasterBean);
-				reAttributes.addFlashAttribute("msg", "Login Sucessfull");
+				reAttributes.addFlashAttribute("msg", "Add record Sucessfull");
 			}else{
 				for (CustomermasterBean customermasterBean2 : customermaster) {
 					
@@ -99,7 +99,7 @@ public class CustomerController {
 	}
 	
 	@RequestMapping(value = "/customerDelete")
-	public @ResponseBody String customerDelete( @RequestParam("id") String id, HttpSession objSession,
+	public @ResponseBody String customerDelete( @RequestParam("id") String id,@RequestParam("status") String status, HttpSession objSession,
 			HttpServletRequest objRequest) throws JsonGenerationException, JsonMappingException, IOException {
 		boolean isDelete = false;
 		String sJson = "";
@@ -107,7 +107,7 @@ public class CustomerController {
 		List<AccessoriesmasterBean> accessories=null;
 		ObjectMapper objectMapper = null;
 		  int dId=Integer.parseInt(id);
-		  isDelete = customermasterDao.delete(dId);
+		  isDelete = customermasterDao.delete(dId,status);
 		 
 		  if(isDelete){
 			  sJson=customermasterDao.getAllCustomer();

@@ -45,11 +45,11 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	
 
 	@Transactional
-	public boolean deleteCylinder(int id) {
+	public boolean deleteCylinder(int id,String status) {
 		jdbcTemplate = custom.getJdbcTemplate();
 		boolean delete = false;
 		try{
-			String sql = "Update  cylindermaster set status='0' WHERE id=?";
+			String sql = "Update  cylindermaster set status='"+status+"' WHERE id=?";
 			int intDelete = jdbcTemplate.update(sql, new Object[]{id});
 			if(intDelete != 0){
 				delete = true;

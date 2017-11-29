@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
@@ -26,7 +27,7 @@ public class BaseAccessoriesmasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO accessoriesmaster( created_time, updated_time, typeofaccessory, suppliername, madein, lponumber, accessoriesstatus, remarks, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO accessoriesmaster( created_time, updated_time, typeofaccessory,suppliername, madein, lponumber,remarks,status) values (?, ?, ?, ?, ?, ?, ?,?)"; 
 
 
 
@@ -68,9 +69,8 @@ ps.setString(3, accessoriesmaster.getTypeofaccessory());
 ps.setString(4, accessoriesmaster.getSuppliername());
 ps.setString(5, accessoriesmaster.getMadein());
 ps.setString(6, accessoriesmaster.getLponumber());
-ps.setString(7, accessoriesmaster.getAccessoriesstatus());
-ps.setString(8, accessoriesmaster.getRemarks());
-ps.setString(9, accessoriesmaster.getStatus());
+ps.setString(7, accessoriesmaster.getRemarks());
+ps.setString(8, accessoriesmaster.getStatus());
 
 							return ps;
 						}
@@ -80,22 +80,21 @@ ps.setString(9, accessoriesmaster.getStatus());
 				Number unId = keyHolder.getKey();
 				accessoriesmaster.setId(unId.intValue());
 				
-
 		}
 		else
 		{
 			
-			String sql = "UPDATE accessoriesmaster  set typeofaccessory = ? ,suppliername = ? ,madein = ? ,lponumber = ? ,accessoriesstatus = ? ,remarks = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE accessoriesmaster  set typeofaccessory = ? ,suppliername = ? ,madein = ? ,lponumber = ? ,remarks = ? ,status = ?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{accessoriesmaster.getTypeofaccessory(),accessoriesmaster.getSuppliername(),accessoriesmaster.getMadein(),accessoriesmaster.getLponumber(),accessoriesmaster.getAccessoriesstatus(),accessoriesmaster.getRemarks(),accessoriesmaster.getStatus(),accessoriesmaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{accessoriesmaster.getTypeofaccessory(),accessoriesmaster.getSuppliername(),accessoriesmaster.getMadein(),accessoriesmaster.getLponumber(),accessoriesmaster.getRemarks(),accessoriesmaster.getStatus(),accessoriesmaster.getId()});
 		}
 	}
 		
 		@Transactional
-		public Boolean delete(int id) {
+		public Boolean delete(int id,String status) {
 			boolean result=false;
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "update accessoriesmaster set status='0' where id = ?";
+			String sql = "update accessoriesmaster set status='"+status+"' where id = ?";
 		 int results=jdbcTemplate.update(sql, new Object[]{id});
 			if(results!=0){
 				result= true;
