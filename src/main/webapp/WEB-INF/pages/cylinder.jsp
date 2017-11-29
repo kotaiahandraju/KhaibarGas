@@ -292,9 +292,10 @@ function deleteCylinder(id,status){
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		alert(jsonobj.message);
-		var alldata = jsonobj.allOrders1;
-		console.log(jsonobj.allOrders1);
-		displayTable(alldata);
+		window.location.reload();
+// 		var alldata = jsonobj.allOrders1;
+// 		console.log(jsonobj.allOrders1);
+// 		displayTable(alldata);
 	});
 	}
 	

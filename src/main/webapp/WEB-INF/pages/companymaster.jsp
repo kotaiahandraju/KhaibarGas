@@ -363,7 +363,7 @@
 				formData.append('status', status);
 				$.fn.makeMultipartRequest('POST', 'deleteCompanyMasterDetails',
 						false, formData, false, 'text', function(data) {
-// 							var jsonobj = $.parseJSON(data);
+							var jsonobj = $.parseJSON(data);
 							alert(jsonobj.message);
 // 							var alldata = jsonobj.allOrders1;
 // 							console.log(jsonobj.allOrders1);
