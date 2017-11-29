@@ -310,13 +310,15 @@ function deleteStaffMasterDetails(id,status)
 		 checkstr =  confirm('Are you sure you want to Deactivate this?');
 	}else{
 		 checkstr =  confirm('Are you sure you want to Activate this?');
+		 
 	}
+	console.log(status);
 	if (checkstr == true)
 	{
 		var formData = new FormData();
 		formData.append('id', id);
 		formData.append('status', status);
-		$.fn.makeMultipartRequest('POST', 'deleteTariffMasterDetails',
+		$.fn.makeMultipartRequest('POST', 'deleteStaffMasterDetails',
 			false, formData, false, 'text', function(data) {
 				var jsonobj = $.parseJSON(data);
 				alert(jsonobj.message);

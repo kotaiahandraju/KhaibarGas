@@ -25,7 +25,7 @@ public class BaseCylindertransactionDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO cylindertransaction( created_time, updated_time, cylindetId, cylinderStatus, createdBy) values (?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO cylindertransaction( created_time, updated_time, cylindetId, cylinderStatus, createdBy,fillingStation ,customerId) values (?, ?, ?, ?, ?,?,?)"; 
 
 
 
@@ -65,6 +65,8 @@ ps.setTimestamp(2, updatedTime);
 ps.setString(3, cylindertransaction.getCylindetId());
 ps.setString(4, cylindertransaction.getCylinderStatus());
 ps.setString(5, cylindertransaction.getCreatedBy());
+ps.setString(6, cylindertransaction.getFillingStation());
+ps.setString(7, cylindertransaction.getCustomerId());
 
 							return ps;
 						}
