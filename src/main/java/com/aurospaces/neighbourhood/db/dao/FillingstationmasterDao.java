@@ -61,7 +61,11 @@ public class FillingstationmasterDao extends BaseFillingstationmasterDao
 			return null;
 		}
 	
-
+	public List<FillingstationmasterBean> populate(String sql ){
+		 jdbcTemplate = custom.getJdbcTemplate();
+				List<FillingstationmasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(FillingstationmasterBean.class));
+					return retlist;
+		 }
 
 }
 
