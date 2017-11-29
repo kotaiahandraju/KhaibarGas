@@ -64,7 +64,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">LPO No<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="lponumber" class="form-control validate" placeholder="LPO No"/>
+		                            	<form:input type="text" path="lponumber" class="form-control validate numericOnly" placeholder="LPO No"/>
 								  	</div>
                     			</div>
                     		</div>
