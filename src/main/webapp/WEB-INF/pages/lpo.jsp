@@ -206,7 +206,6 @@ function showTableData(response){
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
 			});
-		$(".datatables").DataTable();
 	}
 }
 function editLpo(id) {

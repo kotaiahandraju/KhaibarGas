@@ -350,7 +350,7 @@
 			$("#submit1").val("Update");
 			$(window).scrollTop($('body').offset().top);
 		}
-		function deleteCompanyMasterDetails(id) {
+		function deleteCompanyMasterDetails(id,status) {
 			var checkstr=null;
 			if(status == 0){
 				 checkstr =  confirm('Are you sure you want to Deactivate this?');

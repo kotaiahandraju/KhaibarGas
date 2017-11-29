@@ -27,7 +27,7 @@ public class StaffmasterDao extends BaseStaffmasterDao
 	public List<StaffmasterBean> getAllStaffmasterDetails() {
 		
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "SELECT * from staffmaster";
+		String sql = "SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as staffStatus  from staffmaster s";
 		List<StaffmasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(StaffmasterBean.class));
 		if (retlist.size() > 0)
