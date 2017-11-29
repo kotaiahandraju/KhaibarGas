@@ -100,7 +100,7 @@ public class LpoMasterController {
 	}
 	
 	@RequestMapping(value = "/lpoDelete")
-	public @ResponseBody String lpoDelete( @RequestParam("id") String id, HttpSession objSession,
+	public @ResponseBody String lpoDelete( @RequestParam("id") String id, @RequestParam("status") String status, HttpSession objSession,
 			HttpServletRequest objRequest) throws JsonGenerationException, JsonMappingException, IOException {
 		boolean isDelete = false;
 		String sJson = "";
@@ -108,7 +108,7 @@ public class LpoMasterController {
 		List<AccessoriesmasterBean> accessories=null;
 		ObjectMapper objectMapper = null;
 		  int dId=Integer.parseInt(id);
-		  isDelete = lpomasterDao.delete(dId);
+		  isDelete = lpomasterDao.delete(dId,status);
 		 
 		  if(isDelete){
 			  sJson=lpomasterDao.getAllCustomer();

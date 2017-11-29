@@ -132,8 +132,8 @@ System.out.println("hello staff");
 		String sJson=null;
 		boolean delete = false;
 		try{
-			if(objStaffmasterBean.getId() != 0){
- 				delete = objStaffmasterDao.delete(objStaffmasterBean.getId());
+			if(objStaffmasterBean.getId() != 0 && objStaffmasterBean.getStatus() !=""){
+ 				delete = objStaffmasterDao.delete(objStaffmasterBean.getId(),objStaffmasterBean.getStatus());
  				if(delete){
  					jsonObj.put("message", "Record Deleted Successfully");
  					redir.addFlashAttribute("msg", "Record Updated Successfully");

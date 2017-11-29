@@ -168,8 +168,13 @@ function displayTable(listOrders) {
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
-					var edit = "<a  onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
-					var deleterow = "<a  onclick='deleteCylinder("+ orderObj.id+ ")'><i class='fa fa-trash-o red'></i></a>"
+		
+					if(orderObj.status == "1"){
+						var deleterow = "<a class='deactive' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+					}else{  
+						var deleterow = "<a class='active' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+					}
+					var edit = "<a class='edit' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
 							+ "<td title='"+orderObj.gasavailability+"'>"+ orderObj.gasavailability + "</td>"
@@ -179,7 +184,7 @@ function displayTable(listOrders) {
 							+ "<td title='"+orderObj.availablegas+"'>"+ orderObj.availablegas+ "</td>"
 							+ "<td title='"+orderObj.stationname+"'>"+ orderObj.stationname + "</td>"
 							+ "<td title='"+orderObj.unitpoint+"'>"+ orderObj.unitpoint+ "</td>"
-							+ "<td title='"+orderObj.status+"'>"+ orderObj.status + "</td>"
+							+ "<td title='"+orderObj.fillingStatus+"'>"+ orderObj.fillingStatus + "</td>"
 							+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 							+ "</tr >";
 					$(tblRow).appendTo("#tableId table tbody");
@@ -189,6 +194,7 @@ function displayTable(listOrders) {
 
 
 function editCylinder(id) {
+	$("#id").val(serviceUnitArray[id].id);
 	$("#gasavailability").val(serviceUnitArray[id].gasavailability);
 	$("#numberoffillingmachines").val(serviceUnitArray[id].numberoffillingmachines);
 	$("#quantity").val(serviceUnitArray[id].quantity);
@@ -196,6 +202,8 @@ function editCylinder(id) {
 	$("#availablegas").val(serviceUnitArray[id].availablegas);
 	$("#stationname").val(serviceUnitArray[id].stationname);
 	$("#unitpoint").val(serviceUnitArray[id].unitpoint);
+	$("#submit1").val("Update");
+	$(window).scrollTop($('body').offset().top);
 	
 	
 	
@@ -203,18 +211,25 @@ function editCylinder(id) {
 	
 //	$(window).scrollTop($('#addForm').offset().top);
 	}
-function deleteCylinder(id){
-	var checkstr =  confirm('Are you sure you want to delete this?');
+function deleteCylinder(id,status){
+	var checkstr=null;
+	if(status == 0){
+		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+	}else{
+		 checkstr =  confirm('Are you sure you want to Activate this?');
+	}
 	if(checkstr == true){
 	var formData = new FormData();
      formData.append('id', id);
+     formData.append('status', status);
 	$.fn.makeMultipartRequest('POST', 'deletefillingstation', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		alert(jsonobj.message);
-		var alldata = jsonobj.allOrders1;
-		console.log(jsonobj.allOrders1);
-		displayTable(alldata);
+		window.location.reload();
+// 		var alldata = jsonobj.allOrders1;
+// 		console.log(jsonobj.allOrders1);
+// 		displayTable(alldata);
 	});
 	}
 	

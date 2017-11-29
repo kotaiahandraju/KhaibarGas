@@ -39,6 +39,7 @@
                     				<label for="focusedinput" class="col-md-6 control-label">LPO Number</label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
+		                            	<form:hidden path="status"/>
 								      	<form:input type="text" path="lponumber" class="form-control validate numericOnly" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
@@ -182,9 +183,9 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactive' onclick='deletetruckMaster("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactive' onclick='lpoDelete("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 		}else{  
-			var deleterow = "<a class='active' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='active' onclick='lpoDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 		
 		var edit = "<a class='edit' id='editId' onclick='editLpo("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
@@ -225,25 +226,31 @@ function editLpo(id) {
 	$("#suppliername").val(serviceUnitArray[id].suppliername);
 	$("#amount").val(serviceUnitArray[id].amount);
 	$("#supplieremail").val(serviceUnitArray[id].supplieremail);
-	
+	$("#status").val(serviceUnitArray[id].status);
+	$("#submit1").val("Update");
 	$(window).scrollTop($('body').offset().top);
 }
 
-function lpoDelete(id) {
-	var checkstr =  confirm('Are you sure you want to delete this?');
+function lpoDelete(id,status) {
+	var checkstr=null;
+	if(status == 0){
+		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+	}else{
+		 checkstr =  confirm('Are you sure you want to Activate this?');
+	}
 	if(checkstr == true){
 		$.ajax({
 					type : "POST",
 					url : "lpoDelete.htm",
-					data :"id="+id,
+					data :"id="+id+"&status="+status,
 					success: function (response) {
 		                 if(response != null ){
-		                	var resJson=JSON.parse(response);
-		                	
-		                	showTableData(resJson);
+		                	//var resJson=JSON.parse(response);
+		                	//showTableData(resJson);
 		                	alert("Delete Sucessfully");
-		                	window.location.reload();
+		                	//window.location.reload();
 		                	}
+		                 window.location.reload();
 		                 },
 		             error: function (e) { 
 							console.log(e);

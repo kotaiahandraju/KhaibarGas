@@ -169,7 +169,7 @@
 												Type</label>
 											<div class="col-sm-6">
 												<form:select path="customertype"
-													class="form-control validate">
+													class="form-control validate" onfocus="removeBorder(this.id)">
 													<form:option value="">-- Select Customer Type --</form:option>
 													<form:option value="Owner">Owner</form:option>
 													<form:option value="Competitor">Competitor</form:option>
@@ -273,12 +273,16 @@
 					.each(
 							listOrders,
 							function(i, orderObj) {
+								
+								if(orderObj.status == "1"){
+									var deleterow = "<a class='deactive' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+								}else{  
+									var deleterow = "<a class='active' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+								}
 								var edit = "<a class='edit' onclick='editCompanyMasterDetails("
 										+ orderObj.id
 										+ ")'><i class='fa fa-pencil green'></i></a>"
-								var deleterow = "<a class='delete' onclick='deleteCompanyMasterDetails("
-										+ orderObj.id
-										+ ")'><i class='fa fa-trash-o red'></i></a>"
+								
 								serviceUnitArray[orderObj.id] = orderObj;
 								var tblRow = "<tr >"
 										+ "<td title='"+orderObj.companycode+"'>"
@@ -305,8 +309,8 @@
 										+ "<td title='"+orderObj.customertype+"'>"
 										+ orderObj.customertype
 										+ "</td>"
-										+ "<td title='"+orderObj.status+"'>"
-										+ orderObj.status
+										+ "<td title='"+orderObj.companyStatus+"'>"
+										+ orderObj.companyStatus
 										+ "</td>"
 										+ "<td style='text-align: center;white-space: nowrap;'>"
 										+ edit
@@ -346,18 +350,25 @@
 			$("#submit1").val("Update");
 			$(window).scrollTop($('body').offset().top);
 		}
-		function deleteCompanyMasterDetails(id) {
-			var checkstr = confirm('Are you sure you want to delete this?');
+		function deleteCompanyMasterDetails(id,status) {
+			var checkstr=null;
+			if(status == 0){
+				 checkstr =  confirm('Are you sure you want to Deactivate this?');
+			}else{
+				 checkstr =  confirm('Are you sure you want to Activate this?');
+			}
 			if (checkstr == true) {
 				var formData = new FormData();
 				formData.append('id', id);
+				formData.append('status', status);
 				$.fn.makeMultipartRequest('POST', 'deleteCompanyMasterDetails',
 						false, formData, false, 'text', function(data) {
 							var jsonobj = $.parseJSON(data);
 							alert(jsonobj.message);
-							var alldata = jsonobj.allOrders1;
-							console.log(jsonobj.allOrders1);
-							displayTable(alldata);
+// 							var alldata = jsonobj.allOrders1;
+// 							console.log(jsonobj.allOrders1);
+// 							displayTable(alldata);
+							window.location.reload();
 						});
 			}
 

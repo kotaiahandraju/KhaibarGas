@@ -240,6 +240,7 @@ function deletetruckMaster(id,status){
 	if(checkstr == true){
 	var formData = new FormData();
      formData.append('id', id);
+     formData.append('status', status);
 	$.fn.makeMultipartRequest('POST', 'deletetruckMaster', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);

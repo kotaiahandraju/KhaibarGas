@@ -19,7 +19,14 @@ protected String customertype ;
 protected String documents ;
 protected String active ;
 protected String status ;
+protected String staffStatus ;
 
+public String getStaffStatus() {
+	return staffStatus;
+}
+public void setStaffStatus(String staffStatus) {
+	this.staffStatus = staffStatus;
+}
 public int getId()
 {
   return id;

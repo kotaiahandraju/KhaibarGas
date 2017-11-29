@@ -231,7 +231,8 @@
 													<th>Nationality</th>
 													<th>Mobile</th>
 													<th>Documents</th>
-													<th></th>
+													<th>Status</th>
+													<th>Action</th>
 												</tr>
 											</thead>
 											<tbody></tbody>
@@ -259,12 +260,17 @@ function displayTable(listOrders)
 {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ '<thead><tr><th>First Name</th><th>Last Name</th><th>Staff Code</th><th>Staff Number</th><th>Designation</th><th>Nationality</th><th>Mobile</th><th>Documents</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+		+ '<thead><tr><th>First Name</th><th>Last Name</th><th>Staff Code</th><th>Staff Number</th><th>Designation</th><th>Nationality</th><th>Mobile</th><th>Documents</th><th>Status</th><th style="text-align: center;">Action</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj){
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactive' onclick='deleteStaffMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+		}else{  
+			var deleterow = "<a class='active' onclick='deleteStaffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+		}
+		
 		var edit = "<a class='edit' onclick='editStaffMasterDetails(" + orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
-		var deleterow = "<a class='delete' onclick='deleteStaffMasterDetails(" + orderObj.id + ")'><i class='fa fa-trash-o red'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr >"
 			+ "<td title='"+orderObj.firstname+"'>" + orderObj.firstname + "</td>"
@@ -275,7 +281,7 @@ function displayTable(listOrders)
 			+ "<td title='"+orderObj.nationality+"'>" + orderObj.nationality + "</td>"
 			+ "<td title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
 			+ "<td title='"+orderObj.documents+"'>" + orderObj.documents + "</td>"
-// 			+ "<td title='"+orderObj.id+"'>" + orderObj.status + "</td>"
+			+ "<td title='"+orderObj.staffStatus+"'>" + orderObj.staffStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -297,20 +303,29 @@ function editStaffMasterDetails(id)
 	$(window).scrollTop($('body').offset().top);
 }
 
-function deleteStaffMasterDetails(id)
+function deleteStaffMasterDetails(id,status)
 {
-	var checkstr = confirm('Are you sure you want to delete this?');
+	var checkstr=null;
+	if(status == 0){
+		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+	}else{
+		 checkstr =  confirm('Are you sure you want to Activate this?');
+		 
+	}
+	console.log(status);
 	if (checkstr == true)
 	{
 		var formData = new FormData();
 		formData.append('id', id);
-		$.fn.makeMultipartRequest('POST', 'deleteTariffMasterDetails',
+		formData.append('status', status);
+		$.fn.makeMultipartRequest('POST', 'deleteStaffMasterDetails',
 			false, formData, false, 'text', function(data) {
 				var jsonobj = $.parseJSON(data);
 				alert(jsonobj.message);
-				var alldata = jsonobj.allOrders1;
-				console.log(jsonobj.allOrders1);
-				displayTable(alldata);
+				window.location.reload();
+// 				var alldata = jsonobj.allOrders1;
+// 				console.log(jsonobj.allOrders1);
+// 				displayTable(alldata);
 		});
 	}
 }
