@@ -6,7 +6,9 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
 
- 
+
+
+
 <!-- Body starts heare -->
         <div class="clearfix"></div>
              <ol class="breadcrumb">
@@ -97,7 +99,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">LPO Number<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="lponumber" value="" class="form-control validate"  >
+								    	<form:select path="lponumber" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id)" >
 								    	<form:option value="">-- Select LPO Number --</form:option>
 								    	<form:options items="${LPONumbers }"></form:options>
 								    	</form:select>
@@ -274,6 +276,7 @@ function editCylinder(id) {
 	$("#capacity").val(serviceUnitArray[id].capacity);
 	$("#location").val(serviceUnitArray[id].location);
 	$("#lponumber").val(serviceUnitArray[id].lponumber);
+	$("#lponumber").trigger("chosen:updated");
 	$("#color").val(serviceUnitArray[id].color);
 	$("#madein").val(serviceUnitArray[id].madein);
 	$("#expirtdate1").val(serviceUnitArray[id].expirtdate1);

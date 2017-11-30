@@ -107,7 +107,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Type Of Service <span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path="typeOfService" class="form-control validate" onfocus="removeBorder(this.id)">
+										<form:select path="typeOfService" class="form-control  chzn-select validate" onchange="removeBorder(this.id)">
 									      	<form:option value="">-- Select Type Of Service --</form:option>
 									  		<form:option value="Maintenance">Maintenance</form:option>
 									  		<form:option value="Agency Repairs">Agency Repairs</form:option>
@@ -239,6 +239,7 @@ function editTruckMaster(id) {
 	$("#capacityoftruck").val(serviceUnitArray[id].capacityoftruck);
 	$("#lponumber").val(serviceUnitArray[id].lponumber);
 	$("#typeOfService").val(serviceUnitArray[id].typeOfService);
+	$("#typeOfService").trigger("chosen:updated")
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#page-heading').offset().top);
 	}

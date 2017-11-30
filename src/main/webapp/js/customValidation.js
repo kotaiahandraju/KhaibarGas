@@ -188,6 +188,11 @@ $('.validate').blur(function() {
 		$("#" + id ).css('border-color','#e73d4a');
 		$("#" + id ).css('color','#e73d4a');
 		$("#" + id ).addClass('placeholder-style your-class');
+		
+		if ($("#" + id+"_chosen").length)
+		{
+			$("#" + id+"_chosen").children('a').css('border-color','#e73d4a');
+		}
 //		$("#" + id + "Error").text("Please " + placeholder);
 	} else {
 		$("#" + id + "Error").text("");
@@ -212,6 +217,11 @@ $('#submit1').click(function(event) {
 			$("#" + idArray[i] ).css('border-color','#e73d4a');
 			$("#" + idArray[i] ).css('color','#e73d4a');
 			$("#" + idArray[i] ).addClass('placeholder-style your-class');
+			 var id11 = $("#" + idArray[i]+"_chosen").length;
+			if ($("#" + idArray[i]+"_chosen").length)
+			{
+				$("#" + idArray[i]+"_chosen").children('a').css('border-color','#e73d4a');
+			}
 //			$("#" + idArray[i] + "Error").text("Please " + placeholder);
 			validation = false;
 		} 
@@ -234,11 +244,20 @@ $(".cancel").click(function()
 	$.each(idArray, function(i, val)
 	{
 		var value = $("#" + idArray[i]).val();
+		if ($("#" +idArray[i]+"_chosen").length)
+		{
+			$("#" +idArray[i]).val("");
+			$("#" +idArray[i]).trigger("chosen:updated");
+		}
 //		$("form")[0].reset();
 		$("#"+idArray[i]).val('');
 		$("#"+idArray[i]).css('border-color','');
 		$("#"+idArray[i]).css('color','black');
 		$("#"+idArray[i]).removeClass('placeholder-style your-class default-class');
+		if ($("#" + idArray[i]+"_chosen").length)
+		{
+			$("#" + idArray[i]+"_chosen").children('a').css('border-color','black');
+		}
 	});
 });
 
@@ -252,4 +271,8 @@ function removeBorder(el){
 	  $("#"+el).css("border", "");
 	  $("#"+el).css('color','black');
 	  $('#'+el).addClass('default-class');
+	  if ($("#" + el+"_chosen").length)
+		{
+			$("#" +el+"_chosen").children('a').css('border-color','black');
+		}
 }

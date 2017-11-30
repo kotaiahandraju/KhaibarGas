@@ -39,7 +39,8 @@ session.setAttribute("baseurl", baseurl);
 
 <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
 <script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
 <style type="text/css">
 .impColor{color:red;}
 
@@ -86,6 +87,11 @@ span.has-error,span.hasError
 			$('[data-toggle="tooltip"]').tooltip();
 		});
 	</script>
+	  <script type="text/javascript">
+$(function() {
+    $(".chzn-select").chosen();
+});
+</script>
 </head>
 
 <body class="horizontal-nav ">
