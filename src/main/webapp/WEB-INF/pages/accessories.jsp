@@ -23,14 +23,8 @@
 	                <form:form modelAttribute="accessorForm" action="accessoriesSave" class="form-horizontal" method="Post" >
 	                <div class="panel-body">
 	                <c:if test="${not empty msg}">
-	                    	<div class="row">
-	                    		<div class="col-sm-4 col-sm-offset-4">
-	                    			<div class="form-group">
-	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg}</div>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-                    	</c:if>
+									<div class="alert alert-success fadeIn animated">${msg}</div>
+								</c:if>
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
@@ -38,8 +32,7 @@
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
 		                            	<form:hidden path="status"/>
-								      	<form:select path="typeofaccessory" class="form-control validate" onfocus="removeBorder(this.id)">
-									  		<form:option value="">-- Select Type Of Accessory --</form:option>
+								      	<form:select path="typeofaccessory" class="form-control">
 									  		<form:option value="Industrial">Industrial</form:option>
 									  		<form:option value="Commercial">Commercial</form:option>
 									  		<form:option value="Domestic">Domestic</form:option>
@@ -51,7 +44,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Supplier Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="suppliername" class="form-control validate onlyCharacters" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="suppliername" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -61,7 +54,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Made In<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="madein" class="form-control validate onlyCharacters" placeholder="Made in"/>
+		                            	<form:input type="text" path="madein" class="form-control validate" placeholder="Made in"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -99,7 +92,7 @@
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
 					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1" />
-					      			<input class="btn-danger btn cancel" type="reset" value="Reset" />
+					      			<input class="btn-danger btn" type="reset" value="Reset" />
 				      			</div>
 				      		</div>
 				      	</div>
@@ -121,7 +114,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>Type of Accessory</th><th>Supplier Name</th><th>Made In</th><th>LPO No</th><th>Remarks</th><th>Status</th><th></th></tr>
+                                	<tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th>Status</th>th<th>Action</th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -132,27 +125,39 @@
             </div>
 
         </div> <!-- container -->
+    </div> <!-- #wrap -->
+</div> <!-- page-content -->
 
 <script type="text/javascript">
-/* var lstOrders =${allObjects};
+var lstOrders =${allObjects};
+
 console.log(lstOrders);
 $(function() {
 // 	var listOrders=JSON.parse(lstOrders);
 	showTableData(lstOrders);
-}); */
+	
+});
 
-var listOrders1 = ${allObjects};
-if (listOrders1 != "") {
-	displayTable(listOrders1);
-}
 
-function displayTable(response)
-{
+</script>
+
+
+<script>
+
+var damageId = 0;
+var serviceUnitArray ={};
+var data = {};
+
+
+function showTableData(response){
+// 	$("#userData table ").remove();
+	//$("#userData table tr").remove();
 	$('#tableId').html('');
 	serviceUnitArray = {};
+	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Type of Accessory</th><th>Supplier Name</th><th>Made In</th><th>LPO No</th><th>Remarks</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th>Status</th><th>Action</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -167,20 +172,20 @@ function displayTable(response)
 		serviceUnitArray[orderObj.id] = orderObj;
 			
 		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.typeofaccessory+"'>" + orderObj.typeofaccessory + "</td>"
-			+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
-			+ "<td title='"+orderObj.madein+"'>" + orderObj.madein + "</td>"
-			+ "<td title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
-			+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
-			+ "<td title='"+orderObj.accessoriesstatus+"'>" + orderObj.accessoriesstatus + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
-			+"</tr>";
-		$(tblRow).appendTo("#tableId table tbody");
-	});
+						+ "<td title='"+orderObj.typeofaccessory+"'>" + orderObj.typeofaccessory + "</td>"
+						+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
+						+ "<td title='"+orderObj.madein+"'>" + orderObj.madein + "</td>"
+						+ "<td title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
+						+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
+						+ "<td title='"+orderObj.accessoriesstatus+"'>" + orderObj.accessoriesstatus + "</td>"
+						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
+						
+						+"</tr>";
+				$(tblRow).appendTo("#tableId table tbody");
+			});
+	}
 }
-
-function editAccessory(id)
-{
+function editAccessory(id) {
 	$("#id").val(id);
 	$("#typeofaccessory").val(serviceUnitArray[id].typeofaccessory);
 	$("#suppliername").val(serviceUnitArray[id].suppliername);
@@ -192,8 +197,8 @@ function editAccessory(id)
 	$(window).scrollTop($('body').offset().top);
 }
 
-function deleteAccessory(id,status)
-{
+function deleteAccessory(id,status) {
+	
 	var checkstr=null;
 	if(status == 0){
 		 checkstr =  confirm('Are you sure you want to Deactivate this?');
@@ -203,33 +208,36 @@ function deleteAccessory(id,status)
 	
 	if(checkstr == true){
 		$.ajax({
-			type : "POST",
-			url : "deleteDamage.htm",
-			data :"id="+id+"&status="+status,
-			success: function (response) {
-				if(response != null ){
-// 					var resJson=JSON.parse(response);
-// 					displayTable(resJson);
-// 					alert("Delete Sucessfully");
-// 					window.location.reload();
-				}
-				window.location.reload();
-			},
-			error: function (e) { 
-				console.log(e);
-			}
-		});
+					type : "POST",
+					url : "deleteDamage.htm",
+					data :"id="+id+"&status="+status,
+					beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          },
+					success: function (response) {
+		                 if(response != null ){
+		                	 $.unblockUI();
+		                	//var resJson=JSON.parse(response);
+		                	//showTableData(resJson);
+		                	//alert("Delete Sucessfully");
+		                	}
+		                 window.location.reload();
+		                 },
+		             error: function (e) { 
+		            	 $.unblockUI();
+							console.log(e);
+		             }
+				});
 	}
 }
 
-function damageDataClear()
-{
-	$('#productId').val("");
-	$('#quantity').val("");
-	$('#description').val("");
+function damageDataClear(){
+ $('#productId').val("");
+ $('#quantity').val("");
+ $('#description').val("");
 }
 
 $("#pageName").text("Accessories Master");
-$(".accessories").addClass("active");
+$(".accessories").addClass("active"); 
 
 </script>
