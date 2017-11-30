@@ -230,6 +230,7 @@ $('#submit1').click(function(event) {
 //reset-form
 $(".cancel").click(function()
 {
+	$("#id").val(0);
 	$.each(idArray, function(i, val)
 	{
 		var value = $("#" + idArray[i]).val();

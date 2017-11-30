@@ -251,7 +251,7 @@ function customerDelete(id,status) {
 		                 if(response != null ){
 		                	//var resJson=JSON.parse(response);
 		                	//showTableData(resJson);
-		                	alert("Delete Sucessfully");
+		                	//alert("Delete Sucessfully");
 		                	//window.location.reload();
 		                	}
 		                 window.location.reload();

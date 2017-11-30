@@ -74,7 +74,8 @@ public class LpoMasterController {
 			if(lpomaster.size() ==0 || lpomaster ==null){
 				lpomasterBean.setStatus("1");
 				lpomasterDao.save(lpomasterBean);
-				reAttributes.addFlashAttribute("msg", "Login Sucessfull");
+				reAttributes.addFlashAttribute("msg", "Record Inserted Successfully");
+				reAttributes.addFlashAttribute("cssMsg", "success");
 			}else{
 				for (LpomasterBean lpomasterBean2 : lpomaster) {
 					
@@ -82,6 +83,7 @@ public class LpoMasterController {
 					 if(existId==lpomasterBean.getId()){
 						 lpomasterDao.save(lpomasterBean);
 						 reAttributes.addFlashAttribute("msg", "Record Updated Successfully");
+						 reAttributes.addFlashAttribute("cssMsg", "warning");
 
 					 }else{
 						 reAttributes.addFlashAttribute("msg", "Mobile Number already exist.");

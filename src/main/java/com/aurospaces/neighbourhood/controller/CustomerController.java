@@ -74,6 +74,7 @@ public class CustomerController {
 				customermasterBean.setStatus("1");
 				customermasterDao.save(customermasterBean);
 				reAttributes.addFlashAttribute("msg", "Add record Sucessfull");
+				 reAttributes.addFlashAttribute("cssMsg", "success");
 			}else{
 				for (CustomermasterBean customermasterBean2 : customermaster) {
 					
@@ -81,6 +82,7 @@ public class CustomerController {
 					 if(existId==customermasterBean.getId()){
 						 customermasterDao.save(customermasterBean);
 						 reAttributes.addFlashAttribute("msg", "Record Updated Successfully");
+						 reAttributes.addFlashAttribute("cssMsg", "warning");
 
 					 }else{
 						 reAttributes.addFlashAttribute("msg", "Mobile Number already exist.");

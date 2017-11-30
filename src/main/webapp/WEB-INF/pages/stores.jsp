@@ -177,7 +177,7 @@ function deleteStore(id,status) {
 		                	 $.unblockUI();
 		                	//var resJson=JSON.parse(response);
 		                	//showTableData(resJson);
-		                	alert("Delete Sucessfully");
+		                	//alert("Delete Sucessfully");
 		                	//window.location.reload();
 		                	}
 		                 window.location.reload();

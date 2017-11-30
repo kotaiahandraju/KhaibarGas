@@ -23,7 +23,8 @@ protected Date createdTime ;
 protected Date updatedTime ;
 protected String cylindetId ;
 protected String cylinderStatus ;
-protected String createdBy ;
+protected String createdBy,fillingStation , customerId ;
+
 public int getId()
 {
   return id;
@@ -71,6 +72,18 @@ public String getCreatedBy()
 public void setCreatedBy(final String createdBy)
 {
   this.createdBy = createdBy;
+}
+public String getFillingStation() {
+	return fillingStation;
+}
+public void setFillingStation(String fillingStation) {
+	this.fillingStation = fillingStation;
+}
+public String getCustomerId() {
+	return customerId;
+}
+public void setCustomerId(String customerId) {
+	this.customerId = customerId;
 }
 
 }

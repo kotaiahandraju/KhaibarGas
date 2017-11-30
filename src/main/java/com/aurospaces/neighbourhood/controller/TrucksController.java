@@ -85,21 +85,26 @@ public class TrucksController {
 				if(id == dummyId || trucksmasterBean == null )
 				{
 					objTrucksmasterDao.save(objTrucksmasterBean);
-					redirect.addFlashAttribute("msg", "Updated");
+					redirect.addFlashAttribute("msg", "Record Updated Successfully");
+					redirect.addFlashAttribute("cssMsg", "warning");
 				}
 				else
 				{
-					redirect.addFlashAttribute("msg", "AlreadyExist");
+					redirect.addFlashAttribute("msg", "Already Record Exist");
+					redirect.addFlashAttribute("cssMsg", "danger");
 				}
 			}
 			if(objTrucksmasterBean.getId() == 0 && trucksmasterBean == null)
 			{
 				objTrucksmasterDao.save(objTrucksmasterBean);
-				redirect.addFlashAttribute("msg", "Record add successfully.");
+				
+				redirect.addFlashAttribute("msg", "Record Inserted Successfully");
+				redirect.addFlashAttribute("cssMsg", "success");
 			}
 			if(objTrucksmasterBean.getId() == 0 && trucksmasterBean != null)
 			{
-				redirect.addFlashAttribute("msg", "AlreadyExist");
+				redirect.addFlashAttribute("msg", "Already Record Exist");
+				redirect.addFlashAttribute("cssMsg", "danger");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -126,22 +126,7 @@
 												</div>
 											</div>
 										</div>
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-sm-4 control-label required">Status
-													<span class="impColor">*</span>
-												</label>
-												<div class="col-sm-6">
-													<form:input path="status"
-														class="form-control onlyCharacters validate"
-														autocomplete="off" placeholder="" required="required" />
-													<span class="hasError" id="statusError"></span>
-													<div>
-														<form:errors path="status" cssClass="error" />
-													</div>
-												</div>
-											</div>
-										</div>
+										
 									</div>
 								</div>
 								<div class="panel-footer">

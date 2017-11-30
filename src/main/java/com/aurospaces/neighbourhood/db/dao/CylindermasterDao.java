@@ -113,17 +113,29 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	
 	public List<CylindermasterBean> getEmptyCylinders(){  
 		jdbcTemplate = custom.getJdbcTemplate();
-		 
-		
-		 String sql =  "SELECT  *  FROM cylindermaster where cylinderstatus='1'";
-		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
+		 String sql =  "SELECT  *  FROM cylindermaster where cylinderstatus='1' ";
+		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] { },
 				ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 		
 		if (retlist.size() > 0)
 			return retlist;
 		return null;
 		    
-		}  
+		} 
+	public boolean updateCylinderStatus(String cylinderId,String cylinderStatus) {
+		jdbcTemplate = custom.getJdbcTemplate();
+		boolean update = false;
+		try{
+			String sql = "Update  cylindermaster set cylinderstatus= ? WHERE cylinderid=?";
+			int intDelete = jdbcTemplate.update(sql, new Object[]{cylinderStatus,cylinderId});
+			if(intDelete != 0){
+				update = true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return update;
+	}
 		
 	
 }

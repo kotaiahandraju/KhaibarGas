@@ -22,11 +22,17 @@
                         <div class="options">
                         </div>
                     </div>
-                    <div class="panel-body">
                      <form:form modelAttribute="truckForm" class="form-horizontal" action="addTruck">
-                     <c:if test="${not empty msg}">
-									<div class="alert alert-success fadeIn animated">${msg}</div>
-								</c:if>
+                    <div class="panel-body">
+                    <c:if test="${not empty msg}">
+	                    	<div class="row">
+	                    		<div class="col-sm-4 col-sm-offset-4">
+	                    			<div class="form-group">
+	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg}</div>
+	                    			</div>
+	                    		</div>
+	                    	</div>
+                    	</c:if>
                      <form:hidden path="id"/>
 						  <div class="form-group">
 						    <label for="focusedinput" class="col-sm-2 control-label">Truck Number<span class="impColor">*</span></label>
@@ -60,7 +66,7 @@
 						  </div>
                           
                           <div class="form-group">
-						    <label for="focusedinput" class="col-sm-2 control-label">Make<span class="impColor">*</span></label>
+						    <label for="focusedinput" class="col-sm-2 control-label onlyCharacters">Make<span class="impColor">*</span></label>
 						    <div class="col-sm-3">
 						       <form:input path="make" type="text" class="form-control validate"  placeholder="Make"/>
 						    </div>
@@ -76,7 +82,7 @@
                           <div class="form-group">
 						    <label for="focusedinput" class="col-sm-2 control-label">Capacity of truck<span class="impColor">*</span></label>
 						    <div class="col-sm-3">
-						       <form:input path="capacityoftruck" type="text" class="form-control validate"  placeholder="Capacity of truck"/>
+						       <form:input path="capacityoftruck" type="text" class="form-control validate numericOnly"  placeholder="Capacity of truck"/>
 						    </div>
 						    <div>
 						    	 <label for="focusedinput" class="col-sm-2 control-label">LPO number <span class="impColor">*</span> </label>
@@ -89,14 +95,15 @@
                            <div class="form-group">
 						    <label for="focusedinput" class="col-sm-2 control-label ">Type Of Service<span class="impColor">*</span></label>
 						    <div class="col-sm-3">
-						      <form:select path="typeOfService"  class="form-control">
+						      <form:select path="typeOfService" class="form-control validate" onfocus="removeBorder(this.id)">
+						      	<form:option value="">-- Select Type Of Service --</form:option>
 						  		<form:option value="Maintenance">Maintenance</form:option>
 						  		<form:option value="Agency Repairs">Agency Repairs</form:option>
 						  		<form:option value="Agency Service">Agency Service</form:option>
 						  	</form:select>
 						    </div>
 						   
-						  </div>
+						  </div>		
 						
                     </div>
                     
@@ -105,7 +112,7 @@
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar  pull-right">
 				      			<input class="btn-primary btn" type="submit" value="Sumbit" id="submit1">
-				      			<input class="btn-default btn" type="reset" value="Cancel">
+				      			<input class="btn-default btn cancel" type="reset" value="Cancel">
 					      			</form:form>
 				      			</div>
 				      		</div>
@@ -196,7 +203,7 @@ function displayTable(listOrders) {
 			/* $("#truckStatus option" ).removeClass('active');
 			$("#truckStatus option"+orderObj.truckStatus).addClass('highlight'); */	
 		}
-					var edit = "<a  onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+					var edit = "<a class='edit' onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
 							+ "<td title='"+orderObj.trucknumber+"'>"+ orderObj.trucknumber + "</td>"
@@ -226,6 +233,8 @@ function editTruckMaster(id) {
 	$("#description").val(serviceUnitArray[id].description);
 	$("#capacityoftruck").val(serviceUnitArray[id].capacityoftruck);
 	$("#lponumber").val(serviceUnitArray[id].lponumber);
+	$("#typeOfService").val(serviceUnitArray[id].typeOfService);
+	$("#submit1").val("Update");
 	$(window).scrollTop($('#page-heading').offset().top);
 	}
 function deletetruckMaster(id,status){

@@ -43,7 +43,7 @@ session.setAttribute("baseurl", baseurl);
 <style type="text/css">
 .impColor{color:red;}
 
-.edit, .delete {cursor: pointer;}
+.edit, .delete, .active, .deactive {cursor: pointer;}
 
 span.has-error,span.hasError
 {
@@ -90,33 +90,31 @@ span.has-error,span.hasError
 
 <body class="horizontal-nav ">
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
-       
-
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="#">KHAIBAR GAS LLC</a>
         </div>
-<div class="masters">
-        <ul class="nav navbar-nav pull-right toolbar">
-            <li class="dropdown">
-                <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">Master Admin <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
-                <ul class="dropdown-menu userinfo arrow">
-                    <li class="username">
-                        <a href="#">
-                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
-                            <div class="pull-right"><h5>Master Admin!</h5><small>Logged in as <span>Master</span></small></div> 
-                        </a>
-                    </li>
-                    <li class="userlinks">
-                        <ul class="dropdown-menu">
-                            <li><a href="#">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>
-                            <li><a href="#">Change Password <i class="pull-right fa fa-cog"></i></a></li>
-                            <li class="divider"></li>
-                            <li><a href="../logoutHome" class="text-right">Sign Out</a></li>
-                        </ul>
-                    </li>
-                </ul>
-            </li>
-        </ul>
+		<div class="masters">
+	        <ul class="nav navbar-nav pull-right toolbar">
+	            <li class="dropdown">
+	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">Master Admin <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
+	                <ul class="dropdown-menu userinfo arrow">
+	                    <li class="username">
+	                        <a href="#">
+	                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
+	                            <div class="pull-right"><h5>Master Admin!</h5><small>Logged in as <span>Master</span></small></div> 
+	                        </a>
+	                    </li>
+	                    <li class="userlinks">
+	                        <ul class="dropdown-menu">
+	                            <li><a href="#">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>
+	                            <li><a href="#">Change Password <i class="pull-right fa fa-cog"></i></a></li>
+	                            <li class="divider"></li>
+	                            <li><a href="../logoutHome" class="text-right">Sign Out</a></li>
+	                        </ul>
+	                    </li>
+	                </ul>
+	            </li>
+	        </ul>
         </div>
     </header>
 

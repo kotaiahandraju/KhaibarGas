@@ -88,7 +88,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Location<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="location" value="" class="form-control validate" placeholder="Location" />
+								    	<form:input path="location" value="" class="form-control validate onlyCharacters" placeholder="Location" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -109,7 +109,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Owner Company<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="ownercompany" value="" class="form-control validate" placeholder="Owner Company" />
+								    	<form:input path="ownercompany" value="" class="form-control validate onlyCharacters" placeholder="Owner Company" />
 								      	<span class="hasError" id="ownercompanyError"></span>
 								    </div>
                     			</div>
@@ -118,7 +118,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="color" value="" class="form-control  validate"  placeholder="Color Of Cylinder"/>
+								    	<form:input path="color" value="" class="form-control  validate onlyCharacters"  placeholder="Color Of Cylinder"/>
 								      	<span class="hasError" id="colorError"></span>
 								    </div>
                     			</div>
@@ -130,7 +130,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Made In<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="madein" value="" class="form-control validate" placeholder="Made In" />
+								    	<form:input path="madein" value="" class="form-control validate onlyCharacters" placeholder="Made In" />
 								      	<span class="hasError" id="madeinError"></span>
 								    </div>
                     			</div>
@@ -162,7 +162,7 @@
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar  pull-right">
 					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
-					      			<input type="reset" value="Reset" class="btn-danger btn"/>
+					      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 				      			</div>
 				      		</div>
 				      	</div>

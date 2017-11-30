@@ -59,7 +59,7 @@ public class AccessoriesController {
 	}
 	
 	@RequestMapping(value = "/accessoriesSave")
-	public  String accessoriesSave(@ModelAttribute("accessorForm")AccessoriesmasterBean accessoriesmasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes redirectAttributes) {
+	public  String accessoriesSave(@ModelAttribute("accessorForm")AccessoriesmasterBean accessoriesmasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes redir) {
 		boolean isInsert = false;
 		String sJson = "";
 		AccessoriesmasterBean bean=null;
@@ -71,9 +71,11 @@ public class AccessoriesController {
 			
 			if(accessoriesmasterBean.getId() == 0){
 				accessoriesmasterBean.setStatus("1");
-				redirectAttributes.addFlashAttribute("msg", "Record added successfully");
+				redir.addFlashAttribute("msg", "Record Inserted Successfully");
+				redir.addFlashAttribute("cssMsg", "success");
 			}else{
-				redirectAttributes.addFlashAttribute("msg", "Record updated successfully");
+				redir.addFlashAttribute("msg", "Record Updated Successfully");
+				redir.addFlashAttribute("cssMsg", "warning");
 			}
 			accessoriesmasterDao.save(accessoriesmasterBean);
 			
