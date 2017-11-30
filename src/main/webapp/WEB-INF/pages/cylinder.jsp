@@ -291,7 +291,6 @@ function deleteCylinder(id,status){
 	$.fn.makeMultipartRequest('POST', 'deleteCylinder', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
-		alert(jsonobj.message);
 		window.location.reload();
 // 		var alldata = jsonobj.allOrders1;
 // 		console.log(jsonobj.allOrders1);
@@ -335,33 +334,6 @@ $('#size').change(function(){
 		});
 	});
 
-	
-	function validate(id) {
-		if ($('#cylinderid').val() == null || $('#cylinderid').val() == ""
-				|| $('#cylinderid').val() == "undefined") {
-			$('#nameError').css('color', 'red');
-			$("#nameError").text("Cylinder id   cannot be blank.");
-		} else {
-			$("#nameError").text("");
-		}
-	}
-
-	$("#submit11").click(function() {
-				if ($('#cylinderid').val() == null
-						|| $('#cylinderid').val() == ""
-						|| $('#cylinderid').val() == "undefined") {
-					if ($('#cylinderid').val() == null
-							|| $('#cylinderid').val() == ""
-							|| $('#cylinderid').val() == "undefined") {
-						//	 				    
-						$('#cylinderidError').css('color', 'red');
-						$("#cylinderidError").text(
-								"Cylinderid cannot be blank.");
-					}
-					return false;
-					$("#cylinder-form").submit();
-				}
-			});
 
  $("#pageName").text("Cylinder Master");
  $(".cylinder").addClass("active"); 
