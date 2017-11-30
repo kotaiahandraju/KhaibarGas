@@ -204,6 +204,18 @@ public class CylinderController {
 		}
 		return statesMap;
 	}
+
+	
+	@RequestMapping("/getCylinderMadein")
+	public  @ResponseBody  String cylinderMadein(HttpServletRequest request, HttpSession session)
+	{
+			if(null != request.getParameter("lpoid"))
+				return cylindermasterDao.getCylinderrMadeinByLPO(Integer.parseInt(request.getParameter("lpoid")));
+			else
+				return "Enter valid lpoNumber";
+	}
+	
+
 	@ModelAttribute("LPONumbers")
 	public Map<String, String> populateCity() {
 		Map<String, String> statesMap = new LinkedHashMap<String, String>();
