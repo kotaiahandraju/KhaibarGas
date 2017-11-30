@@ -7,7 +7,7 @@
 
 
  
-<!--         body starts heare -->
+<!-- Body starts heare -->
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="#">Home</a></li>
@@ -173,10 +173,6 @@
                     
                 </div>
             </div>
-            
-            
-            
-        </div>
         
         <div class="row">
               <div class="col-md-12">
@@ -205,8 +201,6 @@
             </div>
 
         </div> <!-- container -->
-    </div> <!-- #wrap -->
-</div> <!-- page-content -->
 
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
 

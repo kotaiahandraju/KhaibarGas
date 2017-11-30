@@ -7,13 +7,11 @@
 
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Home</a></li>
                <li>Accessories</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container">
-            
-                    
             <div class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
@@ -109,9 +107,6 @@
          			</form:form>				    
                 </div>
             </div>
-            
-             
-            
         </div>
         <div class="row">
               <div class="col-md-12">
@@ -126,7 +121,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>Type of Accessory</th><th>Supplier name</th><th>Made in</th><th>LPO No</th><th>Remarks</th><th>Status</th>th<th></th></tr>
+                                	<tr><th>Type of Accessory</th><th>Supplier Name</th><th>Made In</th><th>LPO No</th><th>Remarks</th><th>Status</th><th></th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>

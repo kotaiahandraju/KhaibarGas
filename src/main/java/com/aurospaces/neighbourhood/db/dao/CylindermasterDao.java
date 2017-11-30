@@ -1,9 +1,7 @@
 
 package com.aurospaces.neighbourhood.db.dao;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -106,7 +104,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	
 	public String getCylinderCapacityByID(int id) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT CAPACITY FROM CYLINDERTYPES WHERE ID=?";
+			String sql = "select capacity from cylindertypes where id=?";
 			return jdbcTemplate.queryForObject(sql, new Object[] { id }, String.class);
 
 		}

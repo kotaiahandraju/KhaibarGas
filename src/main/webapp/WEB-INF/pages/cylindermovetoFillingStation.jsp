@@ -5,20 +5,30 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
-            <div class="clearfix"></div>
-        </div>
-        <div class="clearfix"></div>
-             <ol class="breadcrumb">
-              <li><a href="index.html">Home</a></li>
-               <li>Cylinder</li>
-            </ol>
-            <div class="clearfix"></div>
-        <div class="container">
+	<div class="clearfix"></div>
+	<div class="clearfix"></div>
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li>Cylinder Move to Filling Station</li>
+	</ol>
+	<div class="clearfix"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-10 col-md-offset-1 col-sm-12">
+			</div>
+		</div>
             
-                    
-        
         <div class="row">
 			<div class="col-md-6">
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class="col-md-6">
+				        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div class="panel panel-primary">
 					<div class="panel-heading">
                     	<h4>Cylinders List</h4>
@@ -39,28 +49,52 @@
 				</div>
 			</div>
 			<div class="col-md-6">
+				<form:form commandName="fillingStationForm">
 				<div class="row">
-					<div class="col-md-4">
-						<div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label>
+							<div class="col-md-6">
+				        		<div id="displayCylinders"></div>
+							</div>
 						</div>
-		        		<form:form commandName="fillingStationForm">
-		        			<form:select path="stationname" class="form-control">
-		        				<form:option value="">-- Select Filling Station --</form:option>
-		        				<form:options items="${fillingstation }"></form:options>
-		        			</form:select>
-		        		</form:form>
 					</div>
 				</div>
-        		<input type="button" class="btn btn-danger" value="Move To FillingStation" onclick="movetofillingStation()">
-         		<p><input type="checkbox" id="parent" /> Check/Uncheck All</p>
-         		Cylinders ::<div id="displayCylinders"></div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-3 control-label">Select Filling Station <span class="impColor">*</span></label>
+							<div class="col-md-6">
+				        		<form:select path="stationname" class="form-control validate" onfocus="removeBorder(this.id)">
+				        			<form:option value="">-- Select Filling Station --</form:option>
+				        			<form:options items="${fillingstation}"></form:options>
+				        		</form:select>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- <div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class="col-md-offset-3 col-md-6">
+				        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>
+							</div>
+						</div>
+					</div>
+				</div> -->
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class="col-md-offset-3 col-md-6" style="padding-top: 6px;">
+				        		<input type="button" class="btn btn-primary" value="Move To Filling Station" onclick="movetofillingStation()">
+							</div>
+						</div>
+					</div>
+				</div>
+				</form:form>
          	</div>
 		</div>
-
-        </div> <!-- container -->
-    </div> <!-- #wrap -->
-</div> <!-- page-content -->
-
+	</div> <!-- container -->
 
 <script type="text/javascript">
 $(document).ready(function() {
@@ -128,12 +162,12 @@ function movetofillingStation(){
     	 cylenderId[i] = $(this).val();
      }); 
      if(cylenderId.length == 0){
-    	 alert("Please select cylinder");
+    	 alert("Please Select Cylinder");
     	 return false;
      }
      var stationname = $("#stationname").val();
      if(stationname == null || stationname == "undefined" || stationname ==""){
-    	 alert("Please selsect filling station");
+    	 alert("Please Select Filling Station");
     	 return false;
      }
      alert(cylenderId);
@@ -143,7 +177,7 @@ function movetofillingStation(){
      formData.append("cylinderStatus",2);
      $.fn.makeMultipartRequest('POST', 'updateCylinderStatus', false,
  			formData, false, 'text', function(data){
- 		var jsonobj = $.parseJSON(data);
+//  		var jsonobj = $.parseJSON(data);
  		window.location.reload();
  		/* alert(jsonobj.message);
  		var alldata = jsonobj.allOrders1;
