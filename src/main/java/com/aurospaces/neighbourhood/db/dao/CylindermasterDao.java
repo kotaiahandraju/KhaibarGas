@@ -136,6 +136,15 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		}
 		return update;
 	}
+
+
+	public String getCylinderrMadeinByLPO(int lponumber) {
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "select madein from lpomaster where lponumber=?";
+			return jdbcTemplate.queryForObject(sql, new Object[] { lponumber }, String.class);
+		
+		
+	}
 		
 	
 }

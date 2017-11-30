@@ -39,7 +39,7 @@
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
 		                            	<form:hidden path="status"/>
-								      	<form:input type="text" path="lponumber" class="form-control validate numericOnly" placeholder="Supplier name"/>
+								      	<form:input type="text" path="lponumber" class="form-control validate" placeholder="LPO Number"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -103,6 +103,16 @@
 								  	</div>
                     			</div>
                     		</div>
+                    		
+                    		<%-- <div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Made In</label>
+                    				<div class="col-md-6">
+		                            	<form:input  path="madein" class="form-control validate onlyCharacters" placeholder="Made in"/>
+								  	</div>
+                    			</div>
+                    		</div> --%>
+                    	</div>
                     	</div>
                     </div>
                     

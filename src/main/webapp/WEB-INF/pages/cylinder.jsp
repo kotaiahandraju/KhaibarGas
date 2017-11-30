@@ -118,7 +118,17 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="color" value="" class="form-control  validate onlyCharacters"  placeholder="Color Of Cylinder"/>
+								    	<form:select path="color" class="form-control" value="Red">
+									  		<form:option value="red">Red</form:option>
+									  		<form:option value="green">Green</form:option>
+									  		<form:option value="yellow">Yellow</form:option>
+			                                <form:option value="blue">Blue</form:option>
+			                                <form:option value="pink">Pink</form:option>
+			                                <form:option value="indigo">Indigo</form:option>
+			                                <form:option value="violet">Violet</form:option>
+			                                <form:option value="orange">Orange</form:option>
+			                               </form:select>
+			                                
 								      	<span class="hasError" id="colorError"></span>
 								    </div>
                     			</div>
@@ -130,7 +140,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Made In<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="madein" value="" class="form-control validate onlyCharacters" placeholder="Made In" />
+								    	<form:input path="madein" value="" class="form-control validate onlyCharacters" placeholder="Made In" readonly="true" />
 								      	<span class="hasError" id="madeinError"></span>
 								    </div>
                     			</div>
@@ -311,6 +321,22 @@ $('#size').change(function(){
     	$("#capacity").val(data);
     });
 });
+
+
+$('#lponumber').blur(function(){
+    var lpoid = $(this).val();
+
+    var formData = new FormData();
+    formData.append('lpoid', lpoid);
+    $.fn.makeMultipartRequest('POST', 'getCylinderMadein', false,
+			formData, false, 'text', function(data){
+    	console.log(data);
+    	$("#madein").val(data);
+    });
+});
+
+
+
 	/* $.ajax({
 >>>>>>> c0fed2516fec227f765d486569babfd9045f3c29
 			type : "GET",

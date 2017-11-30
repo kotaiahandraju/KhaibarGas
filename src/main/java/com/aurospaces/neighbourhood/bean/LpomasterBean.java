@@ -18,6 +18,7 @@ protected String amount ;
 protected String status ;
 protected String lpoStatus ;
 
+
 public String getLpoStatus() {
 	return lpoStatus;
 }
