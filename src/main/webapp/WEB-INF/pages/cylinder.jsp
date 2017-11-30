@@ -310,7 +310,7 @@ $('#size').change(function(){
     	$("#capacity").val(data);
     });
 });
-cylinderSize
+
 	/* $.ajax({
 >>>>>>> c0fed2516fec227f765d486569babfd9045f3c29
 			type : "GET",
