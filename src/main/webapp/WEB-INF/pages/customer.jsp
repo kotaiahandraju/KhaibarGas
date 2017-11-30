@@ -150,8 +150,7 @@
             </div>
 
         </div> <!-- container -->
-    </div> <!-- #wrap -->
-</div> <!-- page-content -->
+   
 
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <%-- <script type='text/javascript' src='${baseurl}/js/custemValidation.js'></script>  --%>

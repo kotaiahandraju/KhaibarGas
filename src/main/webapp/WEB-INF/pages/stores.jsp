@@ -88,8 +88,7 @@
             </div>
 
         </div> <!-- container -->
-    </div> <!-- #wrap -->
-</div> <!-- page-content -->
+
 
 
 

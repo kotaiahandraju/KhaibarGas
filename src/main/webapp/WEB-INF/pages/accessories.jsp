@@ -125,8 +125,7 @@
             </div>
 
         </div> <!-- container -->
-    </div> <!-- #wrap -->
-</div> <!-- page-content -->
+    
 
 <script type="text/javascript">
 var lstOrders =${allObjects};
