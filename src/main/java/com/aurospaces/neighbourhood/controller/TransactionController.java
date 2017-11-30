@@ -76,7 +76,7 @@ public class TransactionController {
 			cylindertransactionBean.setFillingStation(fillingStation);
 			cylindertransactionBean.setCylindetId(cylenderId1[i]);
 			cylindertransactionDao.save(cylindertransactionBean);
-			cylindermasterDao.updateCylinderStatus(cylenderId, cylinderStatus);
+			cylindermasterDao.updateCylinderStatus(cylenderId1[i], cylinderStatus);
 			objJson.put("msg", "Updated");
 			}
 			

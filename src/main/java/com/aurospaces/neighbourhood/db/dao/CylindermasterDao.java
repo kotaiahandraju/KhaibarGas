@@ -11,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
+import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseCylindermasterDao;
 
@@ -134,7 +136,12 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		}
 		return update;
 	}
-		
+	public List<LpomasterBean> populate(String sql ){
+		 jdbcTemplate = custom.getJdbcTemplate();
+				List<LpomasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(LpomasterBean.class));
+					return retlist;
+		 }
+
 	
 }
 

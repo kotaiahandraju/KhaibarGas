@@ -49,7 +49,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="size" items="${cylinderTypes}" class="form-control"/>
+								    	<form:select path="size" items="${cylinderTypes}" class="form-control cylinderSize"/>
 								      <span class="hasError" id="sizeError"></span>
 								    </div>
                     			</div>
@@ -97,7 +97,10 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">LPO Number<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="lponumber" value="" class="form-control validate" placeholder="LPO No" />
+								    	<form:select path="lponumber" value="" class="form-control validate"  >
+								    	<form:option value="">-- Select LPO Number --</form:option>
+								    	<form:options items="${LPONumbers }"></form:options>
+								    	</form:select>
 								      	<span class="hasError" id="lponumberError"></span>
 								    </div>
                     			</div>
@@ -295,6 +298,8 @@ function deleteCylinder(id,status){
 }
 
 $('#size').change(function(){
+	
+	
     var cid = $(this).val();
 
     var formData = new FormData();
@@ -305,6 +310,7 @@ $('#size').change(function(){
     	$("#capacity").val(data);
     });
 });
+cylinderSize
 	/* $.ajax({
 >>>>>>> c0fed2516fec227f765d486569babfd9045f3c29
 			type : "GET",
