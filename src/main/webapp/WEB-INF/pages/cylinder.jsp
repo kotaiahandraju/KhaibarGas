@@ -121,7 +121,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="color" class="form-control" value="Red">
+								    	<form:select path="color" class="form-control validate " value="Red">
 									  		<form:option value="red">Red</form:option>
 									  		<form:option value="green">Green</form:option>
 									  		<form:option value="yellow">Yellow</form:option>
