@@ -322,7 +322,7 @@ $('#size').change(function(){
 });
 
 
-$('#lponumber').blur(function(){
+/* $('#lponumber').blur(function(){
     var lpoid = $(this).val();
 
     var formData = new FormData();
@@ -332,7 +332,7 @@ $('#lponumber').blur(function(){
     	console.log(data);
     	$("#madein").val(data);
     });
-});
+}); */
 
 
 
