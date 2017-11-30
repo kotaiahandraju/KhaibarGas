@@ -25,14 +25,8 @@
 	                <form:form modelAttribute="customerForm" action="customerSave" class="form-horizontal" method="Post" >
 	                <div class="panel-body">
 	                <c:if test="${not empty msg}">
-	                    	<div class="row">
-	                    		<div class="col-sm-4 col-sm-offset-4">
-	                    			<div class="form-group">
-	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg}</div>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-                    	</c:if>
+									<div class="alert alert-success fadeIn animated">${msg}</div>
+								</c:if>
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
@@ -48,7 +42,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Customer Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="customername" class="form-control validate onlyCharacters" placeholder="customer name"/>
+		                            	<form:input type="text" path="customername" class="form-control validate" placeholder="customer name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -83,7 +77,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Authorized person<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="authorizedperson" class="form-control validate onlyCharacters" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="authorizedperson" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -94,17 +88,16 @@
                     				<label for="focusedinput" class="col-md-6 control-label">Contact person<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
-								      	<form:input type="text" path="contactperson" class="form-control validate onlyCharacters" placeholder="Supplier name"/>
+								      	<form:input type="text" path="contactperson" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
 
-                    				<label for="focusedinput" class="col-md-6 control-label ">Customer Type<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label ">customertype<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:select path="customertype" class="form-control validate" onfocus="removeBorder(this.id)">
-		                            	    <form:option value="">-- Select CustomerType --</form:option>
+		                            	<form:select path="customertype" class="form-control">
 									  		<form:option value="Commercial">COMMERCIAL</form:option>
 									  		<form:option value="Domestic">Domestic</form:option>
 									  		<form:option value="industrial">industrial</form:option>
@@ -121,7 +114,7 @@
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
 					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
-					      			<input class="btn-danger btn cancel" type="reset"  value="Reset" />
+					      			<input class="btn-danger btn" type="reset"  value="Reset" />
 				      			</div>
 				      		</div>
 				      	</div>
@@ -157,19 +150,38 @@
             </div>
 
         </div> <!-- container -->
+   
 
+<!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
+<%-- <script type='text/javascript' src='${baseurl}/js/custemValidation.js'></script>  --%>
 <script type="text/javascript">
+var lstOrders =${allObjects};
 
-var listOrders1 = ${allObjects};
-if (listOrders1 != "") {
-	showTableData(listOrders1);
-}
+console.log(lstOrders);
+$(function() {
+// 	var listOrders=JSON.parse(lstOrders);
+	showTableData(lstOrders);
+	
+});
+
+
+</script>
+
+
+<script>
+
+var damageId = 0;
+var serviceUnitArray ={};
+var data = {};
+
 
 function showTableData(response){
 	
 	var table=$('#tableId').html('');
 	
 	serviceUnitArray = {};
+	if(response != "undefined" && response.length >0){
+	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
     	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th>Action</th></tr>'+
     	"</thead><tbody></tbody></table>";
@@ -195,10 +207,11 @@ function showTableData(response){
 						+ "<td title='"+orderObj.contactperson+"'>" + orderObj.contactperson + "</td>"
 						+ "<td title='"+orderObj.customertype+"'>" + orderObj.customertype + "</td>"
 						+ "<td title='"+orderObj.custStatus+"'>" + orderObj.custStatus + "</td>"
-						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
 			});
+	}
 }
 function editCustomer(id) {
 	$("#id").val(id);
@@ -229,13 +242,26 @@ function customerDelete(id,status) {
 					type : "POST",
 					url : "customerDelete.htm",
 					data :"id="+id+"&status="+status,
+					beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          }, 
 					success: function (response) {
+						 $.unblockUI();
+		                 if(response != null ){
+		                	//var resJson=JSON.parse(response);
+		                	//showTableData(resJson);
+		                	//alert("Delete Sucessfully");
+		                	//window.location.reload();
+		                	}
 		                 window.location.reload();
 		                 },
+		                 
 		             error: function (e) { 
+		            	 	$.unblockUI();
 							console.log(e);
 		             }
 				});
+		$("#loadAjax").hide();
 	}
 }
 

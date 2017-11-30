@@ -1,10 +1,9 @@
-	
-	  <%
-     
-     
-String baseurl =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
-session.setAttribute("baseurl", baseurl);
+
+<%
+	String baseurl =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
+	session.setAttribute("baseurl", baseurl);
 %>
+
 <!-- Footer Starts Here -->
 		</div> <!-- #wrap -->
 	</div> <!-- page-content -->

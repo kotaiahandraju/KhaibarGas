@@ -25,6 +25,8 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
+import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -178,6 +180,14 @@ public class CylinderController {
 		return String.valueOf(jsonObj);
 	}
 	
+	@RequestMapping("/getCylinderCapacity")
+	public  @ResponseBody  String cylinderTypes(HttpServletRequest request, HttpSession session)
+	{
+			if(null != request.getParameter("cid"))
+				return cylindermasterDao.getCylinderCapacityByID(Integer.parseInt(request.getParameter("cid")));
+			else
+				return "No data found";
+	}
 	
 	@ModelAttribute("cylinderTypes")
 	public Map<Integer, String> populateUsers() {
@@ -194,15 +204,7 @@ public class CylinderController {
 		}
 		return statesMap;
 	}
-	
-	@RequestMapping("/getCylinderCapacity")
-	public  @ResponseBody  String cylinderTypes(HttpServletRequest request, HttpSession session)
-	{
-			if(null != request.getParameter("cid"))
-				return cylindermasterDao.getCylinderCapacityByID(Integer.parseInt(request.getParameter("cid")));
-			else
-				return "No data found";
-	}
+
 	
 	@RequestMapping("/getCylinderMadein")
 	public  @ResponseBody  String cylinderMadein(HttpServletRequest request, HttpSession session)
@@ -214,4 +216,20 @@ public class CylinderController {
 	}
 	
 
+	@ModelAttribute("LPONumbers")
+	public Map<String, String> populateCity() {
+		Map<String, String> statesMap = new LinkedHashMap<String, String>();
+		try {
+			String sSql = "select lponumber,lponumber from lpomaster";
+			List<LpomasterBean> list = cylindermasterDao.populate(sSql);
+			for (LpomasterBean bean : list) {
+				statesMap.put(bean.getLponumber(), bean.getLponumber());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
 }

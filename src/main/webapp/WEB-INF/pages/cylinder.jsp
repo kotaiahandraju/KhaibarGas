@@ -7,7 +7,7 @@
 
 
  
-<!--         body starts heare -->
+<!-- Body starts heare -->
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="#">Home</a></li>
@@ -49,7 +49,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="size" items="${cylinderTypes}" class="form-control"/>
+								    	<form:select path="size" items="${cylinderTypes}" class="form-control cylinderSize"/>
 								      <span class="hasError" id="sizeError"></span>
 								    </div>
                     			</div>
@@ -97,7 +97,10 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">LPO Number<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="lponumber" value="" class="form-control validate" placeholder="LPO No" />
+								    	<form:select path="lponumber" value="" class="form-control validate"  >
+								    	<form:option value="">-- Select LPO Number --</form:option>
+								    	<form:options items="${LPONumbers }"></form:options>
+								    	</form:select>
 								      	<span class="hasError" id="lponumberError"></span>
 								    </div>
                     			</div>
@@ -183,10 +186,6 @@
                     
                 </div>
             </div>
-            
-            
-            
-        </div>
         
         <div class="row">
               <div class="col-md-12">
@@ -215,8 +214,6 @@
             </div>
 
         </div> <!-- container -->
-    </div> <!-- #wrap -->
-</div> <!-- page-content -->
 
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
 
@@ -311,6 +308,8 @@ function deleteCylinder(id,status){
 }
 
 $('#size').change(function(){
+	
+	
     var cid = $(this).val();
 
     var formData = new FormData();
@@ -334,6 +333,7 @@ $('#lponumber').blur(function(){
     	$("#madein").val(data);
     });
 });
+
 
 
 

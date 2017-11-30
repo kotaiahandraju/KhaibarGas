@@ -145,12 +145,8 @@
 				</div>
 			</div>
 		</div>
-	</div>
 			<!-- container -->
-</div>
-		<!-- #wrap -->
-	
-	<!-- page-content -->
+
 
 </body>
 <%-- <script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script>  --%>

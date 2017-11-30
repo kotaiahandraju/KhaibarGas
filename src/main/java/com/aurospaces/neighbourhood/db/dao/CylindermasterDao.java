@@ -1,9 +1,7 @@
 
 package com.aurospaces.neighbourhood.db.dao;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -13,6 +11,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
+import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseCylindermasterDao;
 
@@ -106,7 +106,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	
 	public String getCylinderCapacityByID(int id) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT CAPACITY FROM CYLINDERTYPES WHERE ID=?";
+			String sql = "select capacity from cylindertypes where id=?";
 			return jdbcTemplate.queryForObject(sql, new Object[] { id }, String.class);
 
 		}
@@ -138,6 +138,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	}
 
 
+
 	public String getCylinderrMadeinByLPO(int lponumber) {
 		 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "select madein from lpomaster where lponumber=?";
@@ -146,6 +147,13 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		
 	}
 		
+	public List<LpomasterBean> populate(String sql ){
+		 jdbcTemplate = custom.getJdbcTemplate();
+				List<LpomasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(LpomasterBean.class));
+					return retlist;
+		 }
+
+
 	
 }
 

@@ -25,19 +25,13 @@
 	                <form:form modelAttribute="storeForm" action="storeSave" class="form-horizontal" method="Post" >
 	                <div class="panel-body">
 	                <c:if test="${not empty msg}">
-	                    	<div class="row">
-	                    		<div class="col-sm-4 col-sm-offset-4">
-	                    			<div class="form-group">
-	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg}</div>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-                    	</c:if>
+									<div class="alert alert-success fadeIn animated">${msg}</div>
+								</c:if>
 	                <!-- <div id="errorMsg" class="alert alert-success fadeIn animated" style="display: none"></div> -->
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label onlyCharacters">Store Name<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Store Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
                     				<form:input type="text" path="storename" class="form-control validate" placeholder="Supplier name"/>
                     				<form:hidden path="id"/>
@@ -47,7 +41,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label onlyCharacters ">Store Location<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label ">Store Location<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="location" class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
@@ -61,7 +55,7 @@
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
 					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
-					      			<input class="btn-danger btn cancel" type="reset" value="Reset" />
+					      			<input class="btn-danger btn" type="reset" value="Reset" />
 				      			</div>
 				      		</div>
 				      	</div>
@@ -95,19 +89,37 @@
 
         </div> <!-- container -->
 
+
+
+
 <script type="text/javascript">
+var lstOrders =${allObjects};
 
-var listOrders1 = ${allObjects};
-if (listOrders1 != "") {
-	displayTable(listOrders1);
-}
+console.log(lstOrders);
+$(function() {
+// 	var listOrders=JSON.parse(lstOrders);
+	showTableData(lstOrders);
+	
+});
 
 
-function displayTable(response){
+</script>
+
+
+<script>
+
+var damageId = 0;
+var serviceUnitArray ={};
+var data = {};
+
+
+function showTableData(response){
 	
 	var table=$('#tableId').html('');
 	
 	serviceUnitArray = {};
+	if(response != undefined && response.length >0){
+	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
     	'<thead><tr><th>Store ID</th><th>Store Name</th><th>Location</th><th>Status</th><th>Action</th></tr>'+
     	"</thead><tbody></tbody></table>";
@@ -127,13 +139,13 @@ function displayTable(response){
 						+ "<td title='"+orderObj.storename+"'>" + orderObj.storename + "</td>"
 						+ "<td title='"+orderObj.location+"'>" + orderObj.location + "</td>"
 						+ "<td title='"+orderObj.storeStatus+"'>" + orderObj.storeStatus + "</td>"
-						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
 				//$('.datatables').dataTable({});
-	});
+			});
+	}
 }
-
 function editStore(id) {
 	$("#id").val(id);
 	$("#storename").val(serviceUnitArray[id].storename);
@@ -151,19 +163,29 @@ function deleteStore(id,status) {
 	}else{
 		 checkstr =  confirm('Are you sure you want to Activate this?');
 	}
-	if(checkstr == true)
-	{
+	if(checkstr == true){
 		$.ajax({
-			type : "POST",
-			url : "storeDelete.htm",
-			data :"id="+id+"&status="+status,
-			success: function (response) {
-				window.location.reload();
-			},
-			error: function (e) { 
-				console.log(e);
-			}
-		});
+					type : "POST",
+					url : "storeDelete.htm",
+					data :"id="+id+"&status="+status,
+					beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          },
+					success: function (response) {
+		                 if(response != null ){
+		                	 $.unblockUI();
+		                	//var resJson=JSON.parse(response);
+		                	//showTableData(resJson);
+		                	//alert("Delete Sucessfully");
+		                	//window.location.reload();
+		                	}
+		                 window.location.reload();
+		                 },
+		             error: function (e) { 
+		            	 $.unblockUI();
+							console.log(e);
+		             }
+				});
 	}
 }
 
