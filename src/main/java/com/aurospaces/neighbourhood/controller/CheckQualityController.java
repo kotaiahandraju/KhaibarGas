@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,11 +19,12 @@ import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 @RequestMapping(value = "/admin")
 public class CheckQualityController {
 	
+	@Autowired
 	CylindermasterDao cylindermasterDao;
 	private Logger logger = Logger.getLogger(TransactionController.class);
 	
 	@RequestMapping(value = "/checkQuality")
-	public String checkQualityHome(  CylindermasterBean objCylindermasterBean,
+	public String checkQualityHome(CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
 	ObjectMapper objectMapper = null;
 	String sJson = null;
@@ -33,7 +35,6 @@ public class CheckQualityController {
 			objectMapper = new ObjectMapper();
 			sJson = objectMapper.writeValueAsString(listOrderBeans);
 			request.setAttribute("allOrders1", sJson);
-			// System.out.println(sJson);
 		} else {
 			objectMapper = new ObjectMapper();
 			sJson = objectMapper.writeValueAsString(listOrderBeans);

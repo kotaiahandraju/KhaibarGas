@@ -225,7 +225,6 @@ function deleteCylinder(id,status){
 	$.fn.makeMultipartRequest('POST', 'deletefillingstation', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
-		alert(jsonobj.message);
 		window.location.reload();
 // 		var alldata = jsonobj.allOrders1;
 // 		console.log(jsonobj.allOrders1);
