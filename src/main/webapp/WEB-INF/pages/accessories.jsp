@@ -216,8 +216,12 @@ function deleteAccessory(id,status) {
 					type : "POST",
 					url : "deleteDamage.htm",
 					data :"id="+id+"&status="+status,
+					beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          },
 					success: function (response) {
 		                 if(response != null ){
+		                	 $.unblockUI();
 		                	//var resJson=JSON.parse(response);
 		                	//showTableData(resJson);
 		                	alert("Delete Sucessfully");
@@ -225,6 +229,7 @@ function deleteAccessory(id,status) {
 		                 window.location.reload();
 		                 },
 		             error: function (e) { 
+		            	 $.unblockUI();
 							console.log(e);
 		             }
 				});

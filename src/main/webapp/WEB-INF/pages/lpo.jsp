@@ -243,9 +243,13 @@ function lpoDelete(id,status) {
 					type : "POST",
 					url : "lpoDelete.htm",
 					data :"id="+id+"&status="+status,
+					 beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          },
 					success: function (response) {
 		                 if(response != null ){
-		                	//var resJson=JSON.parse(response);
+		                	 $.unblockUI();
+		                	 //var resJson=JSON.parse(response);
 		                	//showTableData(resJson);
 		                	alert("Delete Sucessfully");
 		                	//window.location.reload();
@@ -253,6 +257,7 @@ function lpoDelete(id,status) {
 		                 window.location.reload();
 		                 },
 		             error: function (e) { 
+		            	 $.unblockUI();
 							console.log(e);
 		             }
 				});

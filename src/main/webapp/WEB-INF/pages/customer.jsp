@@ -243,7 +243,11 @@ function customerDelete(id,status) {
 					type : "POST",
 					url : "customerDelete.htm",
 					data :"id="+id+"&status="+status,
+					beforeSend : function() {
+			             $.blockUI({ message: 'Please wait' });
+			          }, 
 					success: function (response) {
+						 $.unblockUI();
 		                 if(response != null ){
 		                	//var resJson=JSON.parse(response);
 		                	//showTableData(resJson);
@@ -252,10 +256,13 @@ function customerDelete(id,status) {
 		                	}
 		                 window.location.reload();
 		                 },
+		                 
 		             error: function (e) { 
+		            	 	$.unblockUI();
 							console.log(e);
 		             }
 				});
+		$("#loadAjax").hide();
 	}
 }
 
