@@ -362,6 +362,7 @@ function deleteCylinder(id,status){
 			changeYear : true,
 		});
 	});
+	
 function getLPOdetails(value){
 	var formData = new FormData();
     formData.append('lponumber', value);

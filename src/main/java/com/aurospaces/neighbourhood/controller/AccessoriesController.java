@@ -1,7 +1,9 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -15,7 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.db.dao.AccessoriesmasterDao;
+import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -26,6 +30,8 @@ public class AccessoriesController {
 	
 	@Autowired
 	AccessoriesmasterDao accessoriesmasterDao;
+	@Autowired
+	LpomasterDao lpomasterDao;
 	
 	
 	@RequestMapping(value = "/accessoriesHome")
@@ -181,6 +187,25 @@ public class AccessoriesController {
 		}
 		return sJson;
 	}*/
+	
+	
+	@ModelAttribute("items")
+	public Map<Integer, String> populateCity() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			String sSql = " select id,name from items ";
+			List<CylinderTypesBean> list = lpomasterDao.populate(sSql);
+			for (CylinderTypesBean bean : list) {
+				statesMap.put(bean.getId(), bean.getName());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
+
 	
 	
 }
