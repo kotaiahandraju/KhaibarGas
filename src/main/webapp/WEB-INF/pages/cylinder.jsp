@@ -187,7 +187,7 @@
                     				<form:hidden path="id"/>
                     				<label for="focusedinput" class="col-md-4 control-label">Cylinder ID<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								      <form:input path="cylinderid" class="form-control validate" placeholder="Cylinder ID"/>
+								      <form:input path="cylinderid" class="form-control " placeholder="Cylinder ID"/>
 								      <span class="hasError" id="cylinderidError"></span>
 								    </div>
                     			</div>
