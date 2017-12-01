@@ -25,15 +25,25 @@
 	                <form:form modelAttribute="storeForm" action="storeSave" class="form-horizontal" method="Post" >
 	                <div class="panel-body">
 	                <c:if test="${not empty msg}">
-									<div class="alert alert-success fadeIn animated">${msg}</div>
-								</c:if>
-	                <!-- <div id="errorMsg" class="alert alert-success fadeIn animated" style="display: none"></div> -->
+	                    	<div class="row">
+	                    		<div class="col-sm-4 col-sm-offset-4">
+	                    			<div class="form-group">
+	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg} <span style="color: red;">${msgId}</span></div>
+	                    			</div>
+	                    		</div>
+	                    	</div>
+                    	</c:if>
                     	<div class="row">
-                    		<div class="col-md-6">
+                    	   
+                    			<div class="form-group">
+                    			<form:hidden path="id"/>
+                   				<%-- <form:hidden  path="storeid" length="3" class="form-control validate" placeholder="Store id"/> --%>
+                    			
+                    		 <div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Store Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    				<form:input type="text" path="storename" class="form-control validate" placeholder="Supplier name"/>
+                    				<form:input  path="storename" class="form-control validate" placeholder="Store Name"/>
                     				<form:hidden path="id"/>
                     				<form:hidden path="status"/>
                     				</div>
@@ -43,7 +53,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label ">Store Location<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="location" class="form-control validate" placeholder="Supplier name"/>
+		                            	<form:input  path="location" class="form-control validate" placeholder="Store Location"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -121,7 +131,7 @@ function showTableData(response){
 	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Store ID</th><th>Store Name</th><th>Location</th><th>Status</th><th>Action</th></tr>'+
+    	'<thead><tr><th>Store ID</th><th>Store Name</th><th>Store Location</th><th>Status</th><th>Action</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
