@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseLpomasterDao;
@@ -32,7 +33,7 @@ public class LpomasterDao extends BaseLpomasterDao
 		try {
 			
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT l.*,CASE WHEN l.status IN ('0') THEN 'Deactive' WHEN l.status in ('1') THEN 'Active'  ELSE '-----' END as lpoStatus  from lpomaster l";
+			String sql = "SELECT l.*, DATE_FORMAT(l.expiryDate, '%d-%M-%Y') as expiryDate1,CASE WHEN l.status IN ('0') THEN 'Deactive' WHEN l.status in ('1') THEN 'Active'  ELSE '-----' END as lpoStatus  from lpomaster l";
 			System.out.println("sql:::"+sql);
 			listLpomasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<LpomasterBean>(LpomasterBean.class));
 			if(listLpomasterBean !=null){
@@ -56,6 +57,11 @@ public class LpomasterDao extends BaseLpomasterDao
 				return retlist;
 			return retlist;
 		}
+	 public List<CylinderTypesBean> populate(String sql ){
+		 jdbcTemplate = custom.getJdbcTemplate();
+				List<CylinderTypesBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(CylinderTypesBean.class));
+					return retlist;
+		 }
 	
 }
 

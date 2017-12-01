@@ -25,10 +25,10 @@ public class BaseLpomasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO lpomaster( created_time, updated_time, lponumber, item, remarks, suppliername, supplieraddress, suppliercontactno, supplieremail, amount, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO lpomaster( created_time, updated_time, lponumber, item, remarks, suppliername, supplieraddress, suppliercontactno, supplieremail, amount, status,expiryDate) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"; 
 
 
-
+	java.sql.Timestamp expiryDate=null;
 
 
 	/* this should be conditional based on whether the id is present or not */
@@ -36,6 +36,12 @@ public class BaseLpomasterDao{
 	public void save(final LpomasterBean lpomaster) 
 	{
 		jdbcTemplate = custom.getJdbcTemplate();
+		if(lpomaster.getExpiryDate() == null)
+		{
+		lpomaster.setExpiryDate( new Date());
+		}
+		 expiryDate = 
+			new java.sql.Timestamp(lpomaster.getExpiryDate().getTime()); 
 	if(lpomaster.getId() == 0)	{
 
 	KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -57,6 +63,7 @@ public class BaseLpomasterDao{
 					}
 					java.sql.Timestamp updatedTime = 
 						new java.sql.Timestamp(lpomaster.getUpdatedTime().getTime()); 
+					
 							
 					PreparedStatement ps =
 									connection.prepareStatement(INSERT_SQL,new String[]{"id"});
@@ -71,6 +78,7 @@ ps.setString(8, lpomaster.getSuppliercontactno());
 ps.setString(9, lpomaster.getSupplieremail());
 ps.setString(10, lpomaster.getAmount());
 ps.setString(11, lpomaster.getStatus());
+ps.setTimestamp(12, expiryDate);
 
 							return ps;
 						}

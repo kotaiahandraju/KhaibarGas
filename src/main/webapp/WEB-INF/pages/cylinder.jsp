@@ -59,7 +59,7 @@
                     	</div>
                     	
                     	<div class="row">
-                    		<div class="col-md-6">
+                    		<%-- <div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label ">Capacity</label>
 								    <div class="col-md-6">
@@ -67,8 +67,8 @@
 								      	<span class="hasError" id="capacityError"></span>
 								    </div>
                     			</div>
-                    		</div>
-                    		<div class="col-md-6">
+                    		</div> --%>
+                    		<%-- <div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Status<span class="impColor">*</span></label>
 								    <div class="col-md-6">
@@ -82,7 +82,7 @@
 								      <span class="hasError" id="cylinderstatusError"></span>
 								    </div>
                     			</div>
-                    		</div>
+                    		</div> --%>
                     	</div>
                      
                      <div class="row">
@@ -99,7 +99,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">LPO Number<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="lponumber" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id)" >
+								    	<form:select path="lponumber" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id),getLPOdetails(this.value)" >
 								    	<form:option value="">-- Select LPO Number --</form:option>
 								    	<form:options items="${LPONumbers }"></form:options>
 								    	</form:select>
@@ -143,9 +143,9 @@
                     	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Made In<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Made By<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="madein" value="" class="form-control validate onlyCharacters" placeholder="Made In" readonly="true" />
+								    	<form:input path="madein" value="" class="form-control validate onlyCharacters" placeholder="Made By" readonly="true" />
 								      	<span class="hasError" id="madeinError"></span>
 								    </div>
                     			</div>
@@ -310,7 +310,7 @@ function deleteCylinder(id,status){
 	
 }
 
-$('#size').change(function(){
+/* $('#size').change(function(){
 	
 	
     var cid = $(this).val();
@@ -322,7 +322,7 @@ $('#size').change(function(){
     	console.log(data);
     	$("#capacity").val(data);
     });
-});
+}); */
 
 
 /* $('#lponumber').blur(function(){
@@ -362,7 +362,17 @@ $('#size').change(function(){
 			changeYear : true,
 		});
 	});
-
+function getLPOdetails(value){
+	var formData = new FormData();
+    formData.append('lponumber', value);
+	$.fn.makeMultipartRequest('POST', 'getLPOdetails', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+// 		var alldata = jsonobj.allOrders1;
+// 		console.log(jsonobj.allOrders1);
+// 		displayTable(alldata);
+	});
+}
 
  $("#pageName").text("Cylinder Master");
  $(".cylinder").addClass("active"); 
