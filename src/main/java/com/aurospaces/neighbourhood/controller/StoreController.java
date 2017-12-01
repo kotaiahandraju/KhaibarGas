@@ -2,6 +2,7 @@ package com.aurospaces.neighbourhood.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -67,6 +68,7 @@ public class StoreController {
 		List<StoresmasterBean> storeBean=null;
 		 String sProductId ="";
 		 Integer existId =null;
+		 Random ran = new Random();
 		try {
 			System.out.println("--------customerSave----------");
 			
@@ -76,18 +78,19 @@ public class StoreController {
 			if(storeBean.size() ==0 || storeBean ==null){
 				//storesmasterBean.setStoreid(CommonUtils.getAutoGenId());
 				storesmasterBean.setStatus("1");
-				String str=storesmasterBean.getStorename().substring(0,3);
+				String str=storesmasterBean.getStorename().substring(0,3) +String.format("%03d", ran.nextInt(1000));
+				
 				storesmasterBean.setStoreid(str);
 				
-				System.out.println(storesmasterBean.getStoreid());
-				System.out.println(storesmasterBean.getStorename());
+				
 				
 				
 				storesmasterDao.save(storesmasterBean);
 				
 				
 				
-				reAttributes.addFlashAttribute("msg", "Record Inserted Successfully with id  "+str);
+				reAttributes.addFlashAttribute("msg", "Record Inserted Successfully with Id:");
+				reAttributes.addFlashAttribute("msgId", str);
 				reAttributes.addFlashAttribute("cssMsg", "success");
 			}else{
 				for (StoresmasterBean iterarateList : storeBean) {

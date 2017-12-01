@@ -28,7 +28,7 @@
 	                    	<div class="row">
 	                    		<div class="col-sm-4 col-sm-offset-4">
 	                    			<div class="form-group">
-	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg}</div>
+	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg} <span style="color: red;">${msgId}</span></div>
 	                    			</div>
 	                    		</div>
 	                    	</div>
