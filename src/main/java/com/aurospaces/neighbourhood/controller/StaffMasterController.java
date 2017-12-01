@@ -1,10 +1,16 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
@@ -14,11 +20,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.StaffmasterBean;
 import com.aurospaces.neighbourhood.db.dao.StaffmasterDao;
+import com.aurospaces.neighbourhood.util.MiscUtils;
 @Controller
 @RequestMapping("admin")
 public class StaffMasterController {
@@ -62,17 +71,56 @@ System.out.println("hello staff");
 	}
 
 	@RequestMapping(value="/saveStaffDetails")
-	public String saveStaffDetails(@ModelAttribute("staffMaster")StaffmasterBean objStaffmasterBean, ModelMap model,BindingResult result, HttpServletRequest request,
+	public String saveStaffDetails( @RequestParam("file") MultipartFile file, @ModelAttribute("staffMaster")StaffmasterBean objStaffmasterBean, ModelMap model,BindingResult result, HttpServletRequest request,
 			HttpSession session,RedirectAttributes redir)
 	{
+		
 
 		System.out.println("saving staffDetails page...");
+		String name=null;
+		String sTomcatRootPath = null;
+		String sDirPath = null;
+		String filepath = null;
+		try{
+			if (!file.isEmpty()) {
+				byte[] bytes = file.getBytes();
+				name =file.getOriginalFilename();
+				int n=name.lastIndexOf(".");
+				String ext1 = FilenameUtils.getExtension(name);
+				filepath= MiscUtils.generateRandomString(5)+"."+ext1;
+				//filepath= name+file.getContentType();
+				String rootPath = request.getSession().getServletContext().getRealPath("/");
+				File dir = new File(rootPath + File.separator + "documents");
+				if (!dir.exists()) {
+					dir.mkdirs();
+				}
+
+				File serverFile = new File(dir.getAbsolutePath() + File.separator + filepath);
+				try {
+					try (InputStream is = file.getInputStream(); BufferedOutputStream stream = new BufferedOutputStream(new FileOutputStream(serverFile))) {
+						int i;
+						while ((i = is.read()) != -1) {
+							stream.write(i);
+						}
+						stream.flush();
+					}
+				} catch (IOException e) {
+					System.out.println("error : " + e);
+				}
+				filepath= "documents/"+filepath;
+				objStaffmasterBean.setDocuments(filepath);
+				sTomcatRootPath = System.getProperty("catalina.base");
+				sDirPath = sTomcatRootPath + File.separator + "webapps"+ File.separator + "documents" ;
+				System.out.println(sDirPath);
+				File file1 = new File(sDirPath);
+				file.transferTo(file1);
+			}
+		
 		int id = 0; 
 		//int name = null;
 		StaffmasterBean existModel=null;
 		boolean isUpdate=false;
 
-		try {
 			/*if (result.hasErrors()) {
 //				model.addAttribute("newUser", userObj);
 				return "staffMasterHome";

@@ -90,8 +90,13 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Location<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="location" value="" class="form-control validate onlyCharacters" placeholder="Location" />
-								      	<span class="hasError" id="locationError"></span>
+								   	   <form:select path="store" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id)" >
+								    	<form:option value="">-- Select Store --</form:option>
+								    	<form:options items="${stores }"></form:options>
+								    	</form:select>
+								      	<span class="hasError" id="lponumberError"></span>
+								    	<%-- <form:input path="location" value="" class="form-control validate onlyCharacters" placeholder="Location" />
+								      	<span class="hasError" id="locationError"></span> --%>
 								    </div>
                     			</div>
                     		</div>
@@ -369,9 +374,13 @@ function getLPOdetails(value){
 	$.fn.makeMultipartRequest('POST', 'getLPOdetails', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
-// 		var alldata = jsonobj.allOrders1;
-// 		console.log(jsonobj.allOrders1);
-// 		displayTable(alldata);
+		var alldata = jsonobj.allOrders1;
+		console.log(jsonobj.allOrders1);
+		$.each(alldata,function(i, orderObj) {
+			$("#madein").val(orderObj.suppliername);
+			$("#expirtdate1").val(orderObj.expiryDate1);
+		});
+// 		suppliername ,expiryDate
 	});
 }
 

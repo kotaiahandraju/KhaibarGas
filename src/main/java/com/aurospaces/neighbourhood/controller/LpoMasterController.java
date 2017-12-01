@@ -139,23 +139,18 @@ public class LpoMasterController {
 	@RequestMapping(value = "/getLPOdetails")
 	public @ResponseBody String deletetruckMaster( LpomasterBean lpomasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		System.out.println("deleteEducation page...");
-		List<TrucksmasterBean> listOrderBeans  = null;
+		List<LpomasterBean> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
 		boolean delete = false;
 		try{
-			
-			/*if(objTrucksmasterBean.getId() != 0 && objTrucksmasterBean.getStatus() != ""){
- 				delete = objTrucksmasterDao.delete(objTrucksmasterBean.getId(),objTrucksmasterBean.getStatus());
- 				if(delete){
- 					jsonObj.put("message", "deleted");
- 				}else{
- 					jsonObj.put("message", "delete fail");
- 				}
- 			}
+			if(StringUtils.isNotBlank(lpomasterBean.getLponumber())){
+				
+			}
+		
  				
-			listOrderBeans = objTrucksmasterDao.getAllTrucks();
+			listOrderBeans = lpomasterDao.getLPOdetails(lpomasterBean);
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				
@@ -169,10 +164,10 @@ public class LpoMasterController {
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", "''");
 				jsonObj.put("allOrders1", listOrderBeans);
-			}*/
+			}
 		}catch(Exception e){
 			e.printStackTrace();
-	System.out.println(e);
+			System.out.println(e);
 			logger.error(e);
 			logger.fatal("error in EducationController class deleteEducation method  ");
 			jsonObj.put("message", "excetption"+e);

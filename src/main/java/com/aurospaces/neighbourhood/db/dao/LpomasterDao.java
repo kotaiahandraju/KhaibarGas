@@ -57,6 +57,17 @@ public class LpomasterDao extends BaseLpomasterDao
 				return retlist;
 			return retlist;
 		}
+	 public List<LpomasterBean> getLPOdetails(LpomasterBean lpomasterBean) {
+		 List<LpomasterBean> retlist =null;
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "SELECT l.*,DATE_FORMAT(l.expiryDate, '%d-%M-%Y') as expiryDate1 from lpomaster l where lponumber = ? ";
+			 retlist = jdbcTemplate.query(sql,
+			new Object[]{lpomasterBean.getLponumber()},
+			ParameterizedBeanPropertyRowMapper.newInstance(LpomasterBean.class));
+			if(retlist.size() > 0)
+				return retlist;
+			return retlist;
+		}
 	 public List<CylinderTypesBean> populate(String sql ){
 		 jdbcTemplate = custom.getJdbcTemplate();
 				List<CylinderTypesBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(CylinderTypesBean.class));

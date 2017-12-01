@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseStoresmasterDao;
@@ -56,6 +57,11 @@ public class StoresmasterDao extends BaseStoresmasterDao
 				return retlist;
 			return retlist;
 		}
+	 public List<StoresmasterBean> populate(String sql ){
+		 jdbcTemplate = custom.getJdbcTemplate();
+				List<StoresmasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(StoresmasterBean.class));
+					return retlist;
+		 }
 }
 
 

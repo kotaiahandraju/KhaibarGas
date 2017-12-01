@@ -29,7 +29,7 @@
 							</div>
 							<form:form modelAttribute="staffMaster" class="form-horizontal"
 								role="form" id="education-form" action="saveStaffDetails"
-								method="post" >
+								method="post"  enctype="multipart/form-data">
 								<div class="panel-body">
 									<c:if test="${not empty msg}">
 										<div class="form-group">
@@ -165,7 +165,7 @@
 													<!-- <span class="impColor">*</span> -->
 												</label>
 												<div class="col-sm-6">
-													<input type="file" name="documents" id="documents" />
+													<input type="file" name="file" id="documents" />
 <%-- 													<form:input path="documents"	class="form-control validate" autocomplete="off" placeholder="" required="required" /> --%>
 													<span class="hasError" id="documentsError"></span>
 													<div>
