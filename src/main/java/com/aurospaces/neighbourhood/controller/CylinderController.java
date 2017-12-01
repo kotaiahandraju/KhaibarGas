@@ -220,7 +220,7 @@ public class CylinderController {
 	public Map<String, String> populateCity() {
 		Map<String, String> statesMap = new LinkedHashMap<String, String>();
 		try {
-			String sSql = "select lponumber,lponumber from lpomaster";
+			String sSql = "select lponumber,lponumber from lpomaster where item='1' and status='1'";
 			List<LpomasterBean> list = cylindermasterDao.populate(sSql);
 			for (LpomasterBean bean : list) {
 				statesMap.put(bean.getLponumber(), bean.getLponumber());

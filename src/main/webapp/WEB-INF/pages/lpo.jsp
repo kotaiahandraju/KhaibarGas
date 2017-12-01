@@ -48,7 +48,11 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Item</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="item" class="form-control validate" placeholder="Item"/>
+<%-- 		                            	<form:input type="text" path="item" class="form-control validate" placeholder="Item"/> --%>
+											<form:select path="item" class="form-control validate" onfocus="removeBorder(this.id)" onchange="showexpiryDate(this.value)">
+												<form:option value="">-- Select Item --</form:option>
+									    		<form:options items="${items }"></form:options>
+											</form:select>
 								  	</div>
                     			</div>
                     		</div>
@@ -101,6 +105,14 @@
                     				<label for="focusedinput" class="col-md-6 control-label">Amount</label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="amount" class="form-control validate" placeholder="amount"/>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-4" style="display: none" id="exporydatediv">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Expiry Date</label>
+                    				<div class="col-md-6">
+		                            	<form:input type="text"  readonly="true" path="expiryDate1" class="form-control"  placeholder="Expiry Date"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -237,6 +249,10 @@ function editLpo(id) {
 	$("#supplieremail").val(serviceUnitArray[id].supplieremail);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
+	if(serviceUnitArray[id].item =="1"){
+		$("#exporydatediv").show();
+		$("#expiryDate1").val(serviceUnitArray[id].expiryDate1);
+	}
 	$(window).scrollTop($('body').offset().top);
 }
 
@@ -256,8 +272,8 @@ function lpoDelete(id,status) {
 			             $.blockUI({ message: 'Please wait' });
 			          },
 					success: function (response) {
-		                 if(response != null ){
 		                	 $.unblockUI();
+		                 if(response != null ){
 		                	 //var resJson=JSON.parse(response);
 		                	//showTableData(resJson);
 		                	//alert("Delete Sucessfully");
@@ -285,6 +301,21 @@ function dataClear(){
 	$("#suplieraddress").val("");
 	$("#supliercontactno").val("");
 	$("#amount").val("");
+}
+$(function() {
+	$("#expiryDate1").datepicker({
+		dateFormat : "dd-MM-yy",
+		changeDate : true,
+		changeMonth : true,
+		changeYear : true,
+	});
+});
+function showexpiryDate(value){
+	if(value=="1"){
+		 $('#exporydatediv').show();
+	}else{
+		$('#exporydatediv').hide();
+	}
 }
 
 $("#pageName").text("LPO Master");

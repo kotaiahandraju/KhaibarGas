@@ -17,6 +17,9 @@ protected String supplieremail ;
 protected String amount ;
 protected String status ;
 protected String lpoStatus ;
+protected Date expiryDate ;
+protected String expiryDate1 ;
+
 
 
 public String getLpoStatus() {
@@ -120,6 +123,18 @@ public String getStatus()
 public void setStatus(final String status)
 {
   this.status = status;
+}
+public Date getExpiryDate() {
+	return expiryDate;
+}
+public void setExpiryDate(Date expiryDate) {
+	this.expiryDate = expiryDate;
+}
+public String getExpiryDate1() {
+	return expiryDate1;
+}
+public void setExpiryDate1(String expiryDate1) {
+	this.expiryDate1 = expiryDate1;
 }
 
 }
