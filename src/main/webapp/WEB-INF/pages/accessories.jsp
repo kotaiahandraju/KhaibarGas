@@ -22,29 +22,34 @@
                     </div>
 	                <form:form modelAttribute="accessorForm" action="accessoriesSave" class="form-horizontal" method="Post" >
 	                <div class="panel-body">
-	                <c:if test="${not empty msg}">
+	                	<c:if test="${not empty msg}">
 									<div class="alert alert-success fadeIn animated">${msg}</div>
 								</c:if>
                     	<div class="row">
+                    	<form:hidden path="id"/>
+		                <%-- <form:hidden path="status"/> --%>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Type of Accessory<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Accessory Name<span class=impcolor>*</span></label>
                     				<div class="col-md-6">
-		                            	<form:hidden path="id"/>
-		                            	<form:hidden path="status"/>
-								      	<form:select path="typeofaccessory" class="form-control">
-									  		<form:option value="Industrial">Industrial</form:option>
-									  		<form:option value="Commercial">Commercial</form:option>
-									  		<form:option value="Domestic">Domestic</form:option>
-								  		</form:select>
-								  	</div>
+<%-- 		                            	<form:input type="text" path="item" class="form-control validate" placeholder="Item"/> --%>
+											<form:select path="suppliername" class="form-control validate" onfocus="removeBorder(this.id)" onchange="showexpiryDate(this.value)">
+												<form:option value="">--Select An Accessory--</form:option>
+									    		<form:options items="${items }"></form:options>
+											</form:select>
+                    				</div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Supplier Name<span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="suppliername" class="form-control validate" placeholder="Supplier name"/>
+                    				<label for="focusedinput" class="col-md-4 control-label">Type of Accessory<span class="impColor">*</span></label>
+		                            	<div class="col-md-6">
+								      	<form:select path="typeofaccessory" class="form-control validate">
+								      	   <form:option value="">-- Select Accessory Type --</form:option>
+									  		<form:option value="Industrial">Industrial</form:option>
+									  		<form:option value="Commercial">Commercial</form:option>
+									  		<form:option value="Domestic">Domestic</form:option>
+								  		</form:select>
 								  	</div>
                     			</div>
                     		</div>
@@ -86,19 +91,18 @@
                     		</div> -->
                     	</div>
                     </div>
-                    
                     <div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
 					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1" />
-					      			<input class="btn-danger btn" type="reset" value="Reset" />
+					      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 				      			</div>
 				      		</div>
 				      	</div>
-				      </div>
+                	</div>
          			</form:form>				    
-                </div>
+				</div>
             </div>
         </div>
         <div class="row">
