@@ -77,5 +77,12 @@ public void setStatus(final String status)
 {
   this.status = status;
 }
+@Override
+public String toString() {
+	return "StoresmasterBean [id=" + id + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", storeid="
+			+ storeid + ", storename=" + storename + ", location=" + location + ", status=" + status + ", storeStatus="
+			+ storeStatus + "]";
+}
+
 
 }
