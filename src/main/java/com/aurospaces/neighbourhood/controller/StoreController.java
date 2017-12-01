@@ -7,8 +7,13 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
 import com.aurospaces.neighbourhood.bean.CustomermasterBean;
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -29,9 +35,8 @@ import CommonUtils.CommonUtils;
 @RequestMapping(value="/admin")
 public class StoreController {
 	
-	@Autowired
-	StoresmasterDao storesmasterDao;
-	
+	@Autowired	StoresmasterDao storesmasterDao;
+	private Logger logger = Logger.getLogger(StoreController.class);
 	
 	@RequestMapping(value = "/storeHome")
 	public String storeHome(@ModelAttribute("storeForm")StoresmasterBean storesmasterBean,HttpServletRequest request,
@@ -79,16 +84,8 @@ public class StoreController {
 				//storesmasterBean.setStoreid(CommonUtils.getAutoGenId());
 				storesmasterBean.setStatus("1");
 				String str=storesmasterBean.getStorename().substring(0,3) +String.format("%03d", ran.nextInt(1000));
-				
 				storesmasterBean.setStoreid(str);
-				
-				
-				
-				
 				storesmasterDao.save(storesmasterBean);
-				
-				
-				
 				reAttributes.addFlashAttribute("msg", "Record Inserted Successfully with Id:");
 				reAttributes.addFlashAttribute("msgId", str);
 				reAttributes.addFlashAttribute("cssMsg", "success");
@@ -138,6 +135,42 @@ public class StoreController {
 		return sJson;
 	}
 	
-
+	@RequestMapping(value = "/getStoreDetails")
+	public @ResponseBody String deletetruckMaster( StoresmasterBean storesmasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		System.out.println("deleteEducation page...");
+		List<StoresmasterBean> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
+		try{
+			if(storesmasterBean.getId() != 0){
+			listOrderBeans = storesmasterDao.getStoreDetails(storesmasterBean);
+			 objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println(e);
+			logger.error(e);
+			logger.fatal("error in EducationController class deleteEducation method  ");
+			jsonObj.put("message", "excetption"+e);
+			return String.valueOf(jsonObj);
+			
+		}
+		return String.valueOf(jsonObj);
+	}
 	
 }

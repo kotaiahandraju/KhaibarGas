@@ -23,10 +23,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.CompanymasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
+import com.aurospaces.neighbourhood.db.dao.CompanymasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
@@ -44,6 +46,7 @@ public class CylinderController {
 	@Autowired
 	CylindermasterDao cylindermasterDao;
 	@Autowired StoresmasterDao storesmasterDao;
+	@Autowired CompanymasterDao companymasterDao;
 	@RequestMapping(value = "/CylinderHome")
 	public String cylinderHome(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
@@ -79,9 +82,22 @@ public class CylinderController {
 		//List<CylindermasterBean> cylinderMaster=null;
 		
 		int id = 0;
+		String size=null; 
 		
 		try
 		{
+			if(objCylindermasterBean.getSize().equals("1")){
+				objCylindermasterBean.setCapacity("11");
+				size="S";
+			}
+			if(objCylindermasterBean.getSize().equals("2")){
+				objCylindermasterBean.setCapacity("22");
+				size="M";
+			}
+			if(objCylindermasterBean.getSize().equals("3")){
+				objCylindermasterBean.setCapacity("44");
+				size="L";
+			}
 			objCylindermasterBean.setCylinderstatus("1");
 			if(StringUtils.isNotBlank(objCylindermasterBean.getExpirtdate1())){
 				Date date=  KhaibarGasUtil.dateFormate(objCylindermasterBean.getExpirtdate1());
@@ -140,7 +156,7 @@ public class CylinderController {
 	@RequestMapping(value = "/deleteCylinder")
 	public @ResponseBody String deleteEducation(CylindermasterBean objCylindermasterBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
-		System.out.println("deleteEducation page...");
+		System.out.println("deleteCylinder page...");
 		List<CylindermasterBean> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
@@ -219,13 +235,13 @@ public class CylinderController {
 	
 
 	@ModelAttribute("LPONumbers")
-	public Map<String, String> populateLPONumbers() {
-		Map<String, String> statesMap = new LinkedHashMap<String, String>();
+	public Map<Integer, String> populateLPONumbers() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
 		try {
-			String sSql = "select lponumber,lponumber from lpomaster where item='1' and status='1'";
+			String sSql = "select id,lponumber from lpomaster where item='1' and status='1'";
 			List<LpomasterBean> list = cylindermasterDao.populate(sSql);
 			for (LpomasterBean bean : list) {
-				statesMap.put(bean.getLponumber(), bean.getLponumber());
+				statesMap.put(bean.getId(), bean.getLponumber());
 			}
 
 		} catch (Exception e) {
@@ -235,13 +251,29 @@ public class CylinderController {
 		return statesMap;
 	}
 	@ModelAttribute("stores")
-	public Map<String, String> populatestores() {
-		Map<String, String> statesMap = new LinkedHashMap<String, String>();
+	public Map<Integer, String> populatestores() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
 		try {
-			String sSql = "select storeid ,storename from storesmaster where status='1'";
+			String sSql = "select id ,storename from storesmaster where status='1'";
 			List<StoresmasterBean> list = storesmasterDao.populate(sSql);
 			for (StoresmasterBean bean : list) {
-				statesMap.put(bean.getStoreid(), bean.getStorename());
+				statesMap.put(bean.getId(), bean.getStorename());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
+	@ModelAttribute("companys")
+	public Map<Integer, String> populatecompanys() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			String sSql = "select id ,companyname from companymaster where status='1'";
+			List<CompanymasterBean> list = companymasterDao.populate(sSql);
+			for (CompanymasterBean bean : list) {
+				statesMap.put(bean.getId(), bean.getCompanyname());
 			}
 
 		} catch (Exception e) {

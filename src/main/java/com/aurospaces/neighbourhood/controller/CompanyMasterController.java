@@ -67,7 +67,7 @@ public class CompanyMasterController {
 			return "companymasterHome";
 	}*/
 	
-	@RequestMapping(value = "/save")
+	@RequestMapping(value = "/saveCompanyMaster")
 	public  String addCompanyMasterDetails(@ModelAttribute("companymaster")CompanymasterBean objCompanymasterBean, BindingResult result,
 			ModelMap model, HttpServletRequest request, HttpSession session, HttpServletResponse responses,RedirectAttributes redir){
 		System.out.println("addCompanyMasterDetails page...");
@@ -76,6 +76,7 @@ public class CompanyMasterController {
 //		model.put("userForm", user);
 		CompanymasterBean existModel=null;
 		boolean isUpdate=false;
+		objCompanymasterBean.setStatus("1");
 		
 		try {
 			if (result.hasErrors()) {

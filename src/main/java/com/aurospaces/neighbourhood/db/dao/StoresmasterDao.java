@@ -57,6 +57,17 @@ public class StoresmasterDao extends BaseStoresmasterDao
 				return retlist;
 			return retlist;
 		}
+	 public List<StoresmasterBean> getStoreDetails(StoresmasterBean storesmasterBean) {
+		 List<StoresmasterBean> retlist =null;
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "select * from storesmaster where status='1' and id=? ";
+			 retlist = jdbcTemplate.query(sql,
+			new Object[]{storesmasterBean.getId()},
+			ParameterizedBeanPropertyRowMapper.newInstance(StoresmasterBean.class));
+			if(retlist.size() > 0)
+				return retlist;
+			return retlist;
+		}
 	 public List<StoresmasterBean> populate(String sql ){
 		 jdbcTemplate = custom.getJdbcTemplate();
 				List<StoresmasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(StoresmasterBean.class));

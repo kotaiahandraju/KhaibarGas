@@ -37,16 +37,7 @@
 	                    	</div>
                     	</c:if>
                     	<div class="row">
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<form:hidden path="id"/>
-                    				<label for="focusedinput" class="col-md-4 control-label">Cylinder ID<span class="impColor">*</span></label>
-								    <div class="col-md-6">
-								      <form:input path="cylinderid" class="form-control validate" placeholder="Cylinder ID"/>
-								      <span class="hasError" id="cylinderidError"></span>
-								    </div>
-                    			</div>
-                    		</div>
+                    		
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size<span class="impColor">*</span></label>
@@ -88,13 +79,13 @@
                      <div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Location<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Store<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								   	   <form:select path="store" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id)" >
+								   	   <form:select path="store" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id),getStoreDetails(this.value)" >
 								    	<form:option value="">-- Select Store --</form:option>
 								    	<form:options items="${stores }"></form:options>
 								    	</form:select>
-								      	<span class="hasError" id="lponumberError"></span>
+								      	<span class="hasError" id="storeError"></span>
 								    	<%-- <form:input path="location" value="" class="form-control validate onlyCharacters" placeholder="Location" />
 								      	<span class="hasError" id="locationError"></span> --%>
 								    </div>
@@ -119,7 +110,11 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Owner Company<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="ownercompany" value="" class="form-control validate onlyCharacters" placeholder="Owner Company" />
+								    <form:select path="ownercompany" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id)" >
+								    	<form:option value="">-- Select Company --</form:option>
+								    	<form:options items="${companys }"></form:options>
+								    	</form:select>
+<%-- 								    	<form:input path="ownercompany" value="" class="form-control validate onlyCharacters" placeholder="Owner Company" /> --%>
 								      	<span class="hasError" id="ownercompanyError"></span>
 								    </div>
                     			</div>
@@ -166,6 +161,15 @@
                     		</div>
                     	</div>
                     	<div class="row">
+                    	<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-4 control-label">Location</label>
+								    <div class="col-md-6">
+								    	<form:input path="location" value="" readonly="true" class="form-control validate onlyCharacters" placeholder="Location" />
+								      	<span class="hasError" id="locationError"></span>
+								    </div>
+                    			</div>
+                    		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Remarks</label>
@@ -176,6 +180,19 @@
                     			</div>
                     		</div>
                     	</div>
+                    	
+                    	<div class="row">
+                    		<div class="col-md-6" id="cylinderId1" style="display: none;">
+                    			<div class="form-group">
+                    				<form:hidden path="id"/>
+                    				<label for="focusedinput" class="col-md-4 control-label">Cylinder ID<span class="impColor">*</span></label>
+								    <div class="col-md-6">
+								      <form:input path="cylinderid" class="form-control validate" placeholder="Cylinder ID"/>
+								      <span class="hasError" id="cylinderidError"></span>
+								    </div>
+                    			</div>
+                    		</div>
+                    	</div>	 
 				</div>
                     <div class="panel-footer">
 				      	<div class="row">
@@ -275,6 +292,7 @@ function displayTable(listOrders) {
 
 
 function editCylinder(id) {
+	$("#cylinderId1").show();
 	$("#id").val(serviceUnitArray[id].id);
 	$("#cylinderid").val(serviceUnitArray[id].cylinderid);
 	$("#size").val(serviceUnitArray[id].size);
@@ -369,7 +387,7 @@ function deleteCylinder(id,status){
 	});
 function getLPOdetails(value){
 	var formData = new FormData();
-    formData.append('lponumber', value);
+    formData.append('id', value);
 	$.fn.makeMultipartRequest('POST', 'getLPOdetails', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
@@ -379,10 +397,21 @@ function getLPOdetails(value){
 			$("#madein").val(orderObj.suppliername);
 			$("#expirtdate1").val(orderObj.expiryDate1);
 		});
-// 		suppliername ,expiryDate
 	});
 }
-
+function getStoreDetails(value){
+	var formData = new FormData();
+    formData.append('id', value);
+	$.fn.makeMultipartRequest('POST', 'getStoreDetails', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.allOrders1;
+		console.log(jsonobj.allOrders1);
+		$.each(alldata,function(i, orderObj) {
+			$("#location").val(orderObj.location);
+		});
+	});
+}
  $("#pageName").text("Cylinder Master");
  $(".cylinder").addClass("active"); 
  

@@ -23,7 +23,7 @@
 							<div class="options"></div>
 						</div>
 						<form:form class="form-horizontal" modelAttribute="companymaster"
-							role="form" id="cylider-form" action="save" method="post">
+							role="form" id="cylider-form" action="saveCompanyMaster" method="post">
 							<div class="panel-body">
 								<c:if test="${not empty msg}">
 									<div class="form-group">
@@ -185,21 +185,7 @@
 									</div>
 								</div>
 
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="col-sm-4 control-label required">Status</label>
-											<div class="col-sm-6">
-												<form:input path="status" class="form-control validate"
-													autocomplete="off" placeholder="Status" />
-												<span class="hasError" id="statusError"></span>
-												<div>
-													<form:errors path="status" cssClass="error" />
-												</div>
-											</div>
-										</div>
-								</div>
-							</div>
+								
 							</div>
 							<div class="panel-footer">
 								<div class="row">

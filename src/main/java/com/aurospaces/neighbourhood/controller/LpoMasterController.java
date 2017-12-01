@@ -23,11 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
-import com.aurospaces.neighbourhood.bean.CustomermasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
-import com.aurospaces.neighbourhood.bean.TrucksmasterBean;
-import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -145,11 +142,9 @@ public class LpoMasterController {
 		String sJson=null;
 		boolean delete = false;
 		try{
-			if(StringUtils.isNotBlank(lpomasterBean.getLponumber())){
+			if(lpomasterBean.getId() !=0){
 				
-			}
-		
- 				
+			
 			listOrderBeans = lpomasterDao.getLPOdetails(lpomasterBean);
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
@@ -164,6 +159,7 @@ public class LpoMasterController {
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", "''");
 				jsonObj.put("allOrders1", listOrderBeans);
+			}
 			}
 		}catch(Exception e){
 			e.printStackTrace();
