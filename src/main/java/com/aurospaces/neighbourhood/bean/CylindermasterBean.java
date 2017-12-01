@@ -22,8 +22,15 @@ protected String expirtdate1;
 protected String ownercompany ;
 protected String remarks ;
 protected String cylendersstatus ;
+protected String store;
 
 
+public String getStore() {
+	return store;
+}
+public void setStore(String store) {
+	this.store = store;
+}
 public String getCylendersstatus() {
 	return cylendersstatus;
 }

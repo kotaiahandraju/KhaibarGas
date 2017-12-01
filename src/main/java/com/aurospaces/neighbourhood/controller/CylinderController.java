@@ -25,9 +25,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
-import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
+import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
+import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -42,6 +43,7 @@ public class CylinderController {
 	private Logger logger = Logger.getLogger(CylinderController.class);
 	@Autowired
 	CylindermasterDao cylindermasterDao;
+	@Autowired StoresmasterDao storesmasterDao;
 	@RequestMapping(value = "/CylinderHome")
 	public String cylinderHome(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
@@ -217,13 +219,29 @@ public class CylinderController {
 	
 
 	@ModelAttribute("LPONumbers")
-	public Map<String, String> populateCity() {
+	public Map<String, String> populateLPONumbers() {
 		Map<String, String> statesMap = new LinkedHashMap<String, String>();
 		try {
 			String sSql = "select lponumber,lponumber from lpomaster where item='1' and status='1'";
 			List<LpomasterBean> list = cylindermasterDao.populate(sSql);
 			for (LpomasterBean bean : list) {
 				statesMap.put(bean.getLponumber(), bean.getLponumber());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
+	@ModelAttribute("stores")
+	public Map<String, String> populatestores() {
+		Map<String, String> statesMap = new LinkedHashMap<String, String>();
+		try {
+			String sSql = "select storeid ,storename from storesmaster where status='1'";
+			List<StoresmasterBean> list = storesmasterDao.populate(sSql);
+			for (StoresmasterBean bean : list) {
+				statesMap.put(bean.getStoreid(), bean.getStorename());
 			}
 
 		} catch (Exception e) {
