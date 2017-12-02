@@ -5,7 +5,22 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
  
- 
+ <style>
+table #dependent_table{
+/* 	width: 100%; */
+	counter-reset: rowNumber;
+}
+
+table tbody tr.rowInc{
+	counter-increment: rowNumber;
+}
+
+table#dependent_table tbody tr td:first-child::before {
+	content: counter(rowNumber);
+/* 	min-width: 1em; */
+/* 	margin-right: 0.5em; */
+}
+</style>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="index.html">Home</a></li>
@@ -49,10 +64,10 @@
                     				<label for="focusedinput" class="col-md-6 control-label">Item</label>
                     				<div class="col-md-6">
 <%-- 		                            	<form:input type="text" path="item" class="form-control validate" placeholder="Item"/> --%>
-											<form:select path="item" class="form-control validate" onfocus="removeBorder(this.id)" onchange="showexpiryDate(this.value)">
+											<%-- <form:select path="item" class="form-control validate" onfocus="removeBorder(this.id)" onchange="showexpiryDate(this.value)">
 												<form:option value="">-- Select Item --</form:option>
 									    		<form:options items="${items }"></form:options>
-											</form:select>
+											</form:select> --%>
 								  	</div>
                     			</div>
                     		</div>
@@ -139,6 +154,97 @@
 				      		</div>
 				    	</div>
 				    </div>
+				    
+<table class="notPrintMe">
+ <tr>
+ <td style="height: 20px;"> 
+  <span onclick="addMoreRowsForDependent(this.form);" style="cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;">
+	Add Row
+</span>
+</td>
+</tr>
+</table>
+				    
+				    <table class="inventory" id="dependent_table">
+    <thead>
+      <tr>
+        <th rowspan="2" ><span>Sl. No</span></th>
+        <th rowspan="2" style="width:200px"><span >Items</span></th>
+        <th rowspan="2"><span>Quantity</span></th>
+        <th rowspan="2"><span>Price</span></th>
+        <th rowspan="2"><span>Total Price</span></th>
+        <th rowspan="2"><span>Disc</span></th>
+        <th rowspan="2"><span>Total value</span></th>
+      </tr>
+    </thead>
+<form:select path="item" id="item1" style="display:none;font-size: small;">
+	<form:option value="" selected="selected" disabled="disabled">-- Select Client --</form:option>
+	<form:options items="${items}"></form:options>
+</form:select>
+<%-- <form:select path="cgst" id="cgst" style="display:none;font-size: small;">
+	<form:option value="0.00" selected="selected" disabled="disabled">0.00</form:option>
+	<form:options items="${cgst}"></form:options>
+</form:select>
+<form:select path="prdescription" id="prdescription" style="display:none;font-size: small;">
+	<form:option value="" selected="selected" disabled="disabled">-- Select Product --</form:option>
+	<form:options items="${prdescription}"></form:options>
+</form:select>
+<form:select path="prate" id="prate" style="display:none;font-size: small;">
+	<form:option value="0.00" selected="selected" disabled="disabled">0.00</form:option>
+	<form:options items="${prate}"></form:options>
+</form:select> --%>
+    <tbody>
+		<tr id="1" class="rowInc">
+			<td></td>
+<!-- 			<td><input name="item" id="1item" type="text" onkeydown="removeBorder(this.id);" class="form-control " /></td> -->
+			<td>
+				<select name="item" id="1item" style="width: 100%;font-size: small;" title="Select Product" onchange="removeBorder(this.id),productRateFilter(this.id)" class="form-control">
+					<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
+				</select>
+			</td>
+			<td><input name="unit" value="0" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/></td>
+			<td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly"/></td>
+			<td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
+			<td><input name="discount" value="0.00" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control" /></td>
+			<td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
+		</tr>
+	</tbody>
+	<tfoot>
+		<tr>
+	        <th colspan="4"><h3 align="right"></h3></th>
+	        <th><span class="totalInvoiceValue"></span></th>
+			<th><span class="totalDiscounts"></span></th>
+			<th><span class="totalTaxableValue"></span></th>
+		</tr>
+	</tfoot>
+    
+  </table>
+  
+  
+  <!-- <table class="balance">
+    <tr>
+      <th><span>Total Invoice value</span></th>
+      <td><span class="totalInvoiceValue"></span></td>
+    </tr>
+    <tr>
+      <th><span>Total Discounts</span></th>
+      <td><span class="totalDiscounts"></span></td>
+    </tr>
+    <tr>
+      <th><span>Total Taxable value</span></th>
+      <td><span class="totalTaxableValue"></span></td>
+    </tr>
+    <tr>
+      <th><span>Grand Total</span></th>
+      <td><span class="grandTotal"></span></td>
+    </tr>
+    <tr>
+      <th><span>Round Off</span></th>
+      <td><span class="roundOff"></span></td>
+    </tr>
+  </table> -->
+				    
+				    
          			</form:form>				    
                 </div>
             </div>
@@ -178,6 +284,10 @@ console.log(lstOrders);
 $(function() {
 // 	var listOrders=JSON.parse(lstOrders);
 	showTableData(lstOrders);
+	
+	var dummyItems = $("#item1").html();
+	$("#1item").empty();
+	$(dummyItems).appendTo("#1item");
 	
 });
 
@@ -317,6 +427,168 @@ function showexpiryDate(value){
 		$('#exporydatediv').hide();
 	}
 }
+
+
+
+
+
+var dependentRowCount = 1;
+var validates = true;
+var rowvalidate = false;
+
+function addMoreRowsForDependent() {
+	rowvalidate =false;
+	var rowid =$('#dependent_table tbody tr:last').attr('id');
+	console.log(rowid);
+	    var number = parseInt(rowid.match(/[0-9]+/)[0], 10);
+	    var item = $('#' + number + 'item').val();
+		var qty = $('#'+number+'unit').val();
+		var rate =  $('#' + number + 'rate').val();
+	    
+		/* if(item == "" || item == null || item == "undefined" || qty == "" || qty == null || qty == "undefined" || rate == "" || rate == null || rate == "undefined")
+		{
+			if(item == "" || item == null || item == "undefined")
+			{
+				$('#'+number+'item').css('color','red');
+				$('#'+number+'item').css("border-color","#e73d4a");
+				$('#'+number+'item').attr("placeholder","Enter Product Description");
+				$('#'+number+'item').addClass('your-class');
+				$('#'+number+'item').focus();
+				return false;
+			}
+			if(qty == "" || qty == null || qty == "undefined")
+			{
+				$('#'+number+'qty').css('color','red');
+				$('#'+number+'qty').css("border-color","#e73d4a");
+				$('#'+number+'qty').attr("placeholder","Enter Quantity");
+				$('#'+number+'qty').addClass('your-class');
+				$('#'+number+'qty').focus();
+				return false;
+			}
+			if(rate == "" || rate == null || rate == "undefined")
+			{
+				$('#'+number+'rate').css('color','red');
+				$('#'+number+'rate').css("border-color","#e73d4a");
+				$('#'+number+'rate').attr("placeholder","Enter Rate");
+				$('#'+number+'rate').addClass('your-class');
+				$('#'+number+'rate').focus();
+				return false;
+			}
+			rowvalidate = true;
+			return false;
+		} */
+	dependentRowCount++;
+	var dependentRow1 = '<tr class="rowInc" role="row" id="'+dependentRowCount+'">'
+			+ '<td class="labelCss"></td>'
+			+ '<td class="inputCss"><select title="Select Item" name="item" style="width: 100%;font-size: small;" id="'
+			+ dependentRowCount
+			+ 'item" class="form-control" onchange="removeBorder(this.id),productRateFilter(this.id)"><option>Select</option></select></td>'
+			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
+			+ dependentRowCount
+			+ 'unit" type="text" value="0" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
+			+ '<td class="inputCss"><input name="rate" id="'
+			+ dependentRowCount
+			+ 'rate" type="text" value="0.0" class="form-control numericOnly" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)"/></td>'
+// 			+ '<td class="inputCss"><select title="Select Rate" name="rate" style="width: 100%;font-size: small;" id="'
+// 			+ dependentRowCount
+// 			+ 'rate" class="form-control" onchange="removeBorder(this.id);"></select></td>'
+			+ '<td class="labelCss"><input title="Total Value" name="totalvalue" id="'
+			+ dependentRowCount
+			+ 'totalvalue" value="0.00" type="text"  class="form-control" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
+			+ '<td class="inputCss"><input title="Discount" name="discount" id="'
+			+ dependentRowCount
+			+ 'discount" value="0.00" type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)"/></td>'
+			+ '<td class="labelCss"><input title="Taxable Value" name="taxable" id="'
+			+ dependentRowCount
+			+ 'taxable" value="0.00" type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
+			+ "<th class='labelCss notPrintMe' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("
+			+ dependentRowCount + ");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>" +
+			 + "</tr>";
+	$(dependentRow1).appendTo("#dependent_table");
+	var dummyItem1 = $('#item1').html();
+	$('#'+dependentRowCount+'item').empty();
+	$(dummyItem1).appendTo('#'+dependentRowCount+'item');
+	
+}
+
+function removeDependentRow(dependentRowCount) {
+	jQuery('#' + dependentRowCount).remove();
+	priceCalculator();
+	
+	
+}
+function allcalculate(id){
+	     var unit=0.00;
+	     var rate=0.00;
+	     var total1 =0.00;
+	     var discount=0.00;
+
+	
+	var number = parseInt(id.match(/[0-9]+/)[0], 10);
+	unit = $('#' + number + 'unit').val();
+	rate = $('#' + number + 'rate').val();
+	total1 =  unit * rate;
+
+	taxable = $('#' + number + 'taxable').val();
+	
+	$('#' + number + 'totalvalue').val(total1.toFixed(2));
+	
+	total = $('#' + number + 'totalvalue').val();
+	discount = $('#' + number + 'discount').val();
+	var result = total - discount;
+	$('#' + number + 'taxable').val(result.toFixed(2));
+	
+	
+	
+	priceCalculator();
+}
+function priceCalculator(){
+	 var globelTotalValue = 0.00;
+		var globalDiscount = 0.00;
+		var globalTaxable = 0.00;
+		var grandTotal = 0.00;
+	var array = $.makeArray($('tbody tr[id]').map(function() {
+		  return this.id;
+		}));
+		console.log(array);
+	 for(var i=0;i<array.length;i++){
+		 var discount = 0.00;
+			var total = 0.00;
+			var taxable = 0.00;
+			
+			
+			
+		total = $('#' + array[i] + 'totalvalue').val();
+		globelTotalValue = globelTotalValue + parseFloat(total);
+		
+		 discount = $('#' + array[i] + 'discount').val();
+		 if(discount == ""){
+			 discount = 0.00;
+		 }
+		globalDiscount = globalDiscount + parseFloat(discount);
+		
+		taxable = $('#' + array[i] + 'taxable').val();
+		globalTaxable = globalTaxable+parseFloat(taxable);
+		
+		
+		
+		$(".totalInvoiceValue").text(globelTotalValue.toFixed(2));
+		$(".totalDiscounts").text(globalDiscount.toFixed(2));
+		$(".totalTaxableValue").text(globalTaxable.toFixed(2));
+		
+		
+	 }
+	 grandTotal = globalTaxable;
+	 $("#amount").val(grandTotal);
+// 	 alert(grandTotal);
+	 $(".grandTotal").text(grandTotal.toFixed(2));
+// 	 $(".roundOff").text(Math.round(grandTotal).toFixed(2));
+}
+
+
+
+
+
 
 $("#pageName").text("LPO Master");
 $(".lpo").addClass("active");
