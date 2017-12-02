@@ -30,8 +30,8 @@
 		<put-attribute name="body" value="/WEB-INF/pages/cylinder.jsp" />
 	</definition>
 
-	<definition name="accessoriesHome" extends="base.definition">
-		<put-attribute name="body" value="/WEB-INF/pages/accessories.jsp" />
+	<definition name="itemsHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/items.jsp" />
 	</definition>
 	<definition name="customerHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/customer.jsp" />

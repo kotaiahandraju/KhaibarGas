@@ -135,7 +135,7 @@ $(function() {
                 <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
                 <li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Cylinders</span></a></li>
                 <li class="truck"><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>Trucks</span></a></li>
-                <li class="accessories"><a href="${baseurl }/admin/accessoriesHome"><i class="fa fa-tint"></i> <span>Accessories</span></a></li>
+                <li class="items"><a href="${baseurl }/admin/itemsHome"><i class="fa fa-tint"></i> <span>Items</span></a></li>
                 <li class="stores"><a href="${baseurl }/admin/storeHome"><i class="fa fa-th"></i> <span>Stores</span></a></li>
                 <li class="fillingStation"><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>Filling Stations</span></a></li>
                 <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>Customers</span></a></li>

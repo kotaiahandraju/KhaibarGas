@@ -139,12 +139,19 @@ public class CylindermasterDao extends BaseCylindermasterDao
 
 
 
-	public String getCylinderrMadeinByLPO(int lponumber) {
-		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select madein from lpomaster where lponumber=?";
-			return jdbcTemplate.queryForObject(sql, new Object[] { lponumber }, String.class);
-		
-		
+	public boolean updateCylinderIds() {
+		jdbcTemplate = custom.getJdbcTemplate();
+		boolean delete = false;
+		try{
+			String sql = "update cylindermaster c set  c.cylinderid= concat((select SUBSTR(cy.name,1,1) from cylindertypes cy where cy.id=c.size),LPAD( c.id, 9, '0')) ";
+			int intDelete = jdbcTemplate.update(sql, new Object[]{});
+			if(intDelete != 0){
+				delete = true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return delete;
 	}
 		
 	public List<LpomasterBean> populate(String sql ){

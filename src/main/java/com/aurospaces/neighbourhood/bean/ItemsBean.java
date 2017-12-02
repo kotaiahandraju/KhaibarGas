@@ -23,32 +23,28 @@ import java.math.BigDecimal;
 public class ItemsBean 
 {
 
-@Id
-@GeneratedValue(strategy=GenerationType.AUTO)
-		 /** Field mapping. **/
-@Column(name= "id")
 protected int id   = 0;
 
-/** Field mapping. **/
-@Column(name= "created_time")
 protected Date createdTime ;
 
-/** Field mapping. **/
-@Column(name= "updated_time")
 protected Date updatedTime ;
 
-/** Field mapping. **/
-@Column(name= "name")
 protected String name ;
 
-/** Field mapping. **/
-@Column(name= "description")
 protected String description ;
 
-/** Field mapping. **/
-@Column(name= "status")
-protected String status ;
+protected String price ;
+protected String discount ;
 
+protected String status ;
+protected String itemstatus ;
+
+public String getItemstatus() {
+	return itemstatus;
+}
+public void setItemstatus(String itemstatus) {
+	this.itemstatus = itemstatus;
+}
 public int getId()
 {
   return id;
@@ -97,5 +93,24 @@ public void setStatus(final String status)
 {
   this.status = status;
 }
+public String getPrice() {
+	return price;
+}
+public void setPrice(String price) {
+	this.price = price;
+}
+public String getDiscount() {
+	return discount;
+}
+public void setDiscount(String discount) {
+	this.discount = discount;
+}
+@Override
+public String toString() {
+	return "ItemsBean [id=" + id + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", name=" + name
+			+ ", description=" + description + ", price=" + price + ", discount=" + discount + ", status=" + status
+			+ "]";
+}
+
 
 }

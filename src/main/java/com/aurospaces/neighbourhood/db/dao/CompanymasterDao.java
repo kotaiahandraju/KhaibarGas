@@ -44,6 +44,7 @@ public class CompanymasterDao extends BaseCompanymasterDao
 			return retlist;
 		return retlist;
 	}
+	
 	public List<CompanymasterBean> populate(String sql ){
 		 jdbcTemplate = custom.getJdbcTemplate();
 				List<CompanymasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(CompanymasterBean.class));

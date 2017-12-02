@@ -88,15 +88,12 @@ public class CylinderController {
 		{
 			if(objCylindermasterBean.getSize().equals("1")){
 				objCylindermasterBean.setCapacity("11");
-				size="S";
 			}
 			if(objCylindermasterBean.getSize().equals("2")){
 				objCylindermasterBean.setCapacity("22");
-				size="M";
 			}
 			if(objCylindermasterBean.getSize().equals("3")){
 				objCylindermasterBean.setCapacity("44");
-				size="L";
 			}
 			objCylindermasterBean.setCylinderstatus("1");
 			if(StringUtils.isNotBlank(objCylindermasterBean.getExpirtdate1())){
@@ -143,6 +140,7 @@ public class CylinderController {
 				redir.addFlashAttribute("msg", "Already Record Exist");
 				redir.addFlashAttribute("cssMsg", "danger");
 			}
+			cylindermasterDao.updateCylinderIds();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
@@ -224,14 +222,7 @@ public class CylinderController {
 	}
 
 	
-	@RequestMapping("/getCylinderMadein")
-	public  @ResponseBody  String cylinderMadein(HttpServletRequest request, HttpSession session)
-	{
-			if(null != request.getParameter("lpoid"))
-				return cylindermasterDao.getCylinderrMadeinByLPO(Integer.parseInt(request.getParameter("lpoid")));
-			else
-				return "Enter valid lpoNumber";
-	}
+
 	
 
 	@ModelAttribute("LPONumbers")

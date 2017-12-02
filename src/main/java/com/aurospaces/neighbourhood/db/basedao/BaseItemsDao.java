@@ -25,7 +25,7 @@ public class BaseItemsDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO items( created_time, updated_time, name, description, status) values (?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO items( createdtime, updatedtime, name, description, price,discount,status) values (?, ?, ?, ?,?,? ,?)"; 
 
 
 
@@ -64,7 +64,9 @@ public class BaseItemsDao{
 ps.setTimestamp(2, updatedTime);
 ps.setString(3, items.getName());
 ps.setString(4, items.getDescription());
-ps.setString(5, items.getStatus());
+ps.setString(7, items.getStatus());
+ps.setString(5, items.getPrice());
+ps.setString(6, items.getDiscount());
 
 							return ps;
 						}
@@ -79,17 +81,17 @@ ps.setString(5, items.getStatus());
 		else
 		{
 
-			String sql = "UPDATE items  set name = ? ,description = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE items  set name = ? ,description = ?,price = ?,discount = ?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{items.getName(),items.getDescription(),items.getStatus(),items.getId()});
+			jdbcTemplate.update(sql, new Object[]{items.getName(),items.getDescription(),items.getPrice(),items.getDiscount(),items.getId()});
 		}
 	}
 		
 		@Transactional
-		public void delete(int id) {
+		public void delete(int id,String status) {
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "DELETE FROM items WHERE id=?";
-			jdbcTemplate.update(sql, new Object[]{id});
+			String sql = "update  items set status=? WHERE id=?";
+			jdbcTemplate.update(sql, new Object[]{status,id});
 		}
 		
 
