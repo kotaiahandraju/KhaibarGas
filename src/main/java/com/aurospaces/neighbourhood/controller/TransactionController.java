@@ -46,7 +46,8 @@ public class TransactionController {
 		String sJson = null;
 		List<CylindermasterBean> listOrderBeans = null;
 		try {
-			listOrderBeans = cylindermasterDao.getEmptyCylinders();
+			String cylinderstatus="2";
+			listOrderBeans = cylindermasterDao.getEmptyCylinders(cylinderstatus);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -81,7 +82,7 @@ public class TransactionController {
 			cylindertransactionBean.setFillingStation(fillingStation);
 			cylindertransactionBean.setCylindetId(cylenderId1[i]);
 			cylindertransactionDao.save(cylindertransactionBean);
-			cylindermasterDao.updateCylinderStatus(cylenderId1[i], cylinderStatus);
+			cylindermasterDao.updateCylinderStatus(cylenderId1[i], cylinderStatus,fillingStation);
 			objJson.put("msg", "Updated");
 			}
 			
@@ -165,5 +166,57 @@ public class TransactionController {
 		}
 		return sJson;
 		
+	}
+	@RequestMapping("searchFillingStationInQualitycheck")
+	public @ResponseBody String searchFillingStationInQualitycheck(@RequestParam("stationname") String stationname,@RequestParam("name") String name){
+		ObjectMapper objectMapper=null;
+		String sJson=null;
+		List<CylindermasterBean> retlist=null;
+		try{
+			if(stationname !="" && name !=""){
+				
+				System.out.println("----data------"+stationname+"---name--------"+name+"---quantity---");
+				retlist=cylindermasterDao.searchFillingStationInQualitycheck(stationname, name);
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(retlist);
+			}
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return sJson;
+		
+	}
+	
+	@RequestMapping(value = "/FillingStationInQualitycheck")
+	public String FillingStationInQualitycheckHome( @ModelAttribute("fillingStationForm") FillingstationmasterBean fillingstationmasterBean,
+			ModelMap model, HttpServletRequest request, HttpSession session) {
+
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<CylindermasterBean> listOrderBeans = null;
+		try {
+			System.out.println("-----------filling Station----------");
+			String cylinderstatus="2";
+			
+			listOrderBeans = cylindermasterDao.getEmptyCylinders(cylinderstatus);
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "FillingStationInQualitycheck";
 	}
 }

@@ -27,6 +27,7 @@ protected String name;
 protected String storename;
 
 
+
 public String getName() {
 	return name;
 }

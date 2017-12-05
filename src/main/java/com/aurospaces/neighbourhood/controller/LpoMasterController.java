@@ -67,7 +67,10 @@ public class LpoMasterController {
 	}
 	
 	@RequestMapping(value = "/lpoSave")
-	public  String lpoSave(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
+	public  String lpoSave(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean,
+			@RequestParam("unit") String[] unit,@RequestParam("rate") String[] rate,
+			@RequestParam("totalvalue") String[] totalvalue,@RequestParam("discount") String[] discount,
+			@RequestParam("taxable") String[] taxable,HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
 		boolean isInsert = false;
 		String sJson = "";
 		List<LpomasterBean> lpomaster=null;
