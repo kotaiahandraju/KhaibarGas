@@ -28,6 +28,7 @@
 							</div>
 						</div>
 					</div>
+					
 				</div>
 				<div class="panel panel-primary">
 					<div class="panel-heading">
@@ -41,6 +42,8 @@
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 								<thead>
 									<tr><th>Cylinder ID</th></tr>
+									<th>Store</th>
+									<th>Size</th>
 								</thead>
 								<tbody></tbody>
 							</table>
@@ -72,6 +75,25 @@
 							</div>
 						</div>
 					</div>
+					<%-- <div class="col-md-12">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-3 control-label">Store <span class="impColor">*</span></label>
+							<div class="col-md-6">
+				        		<form:select path="storename" class="form-control validate" onfocus="removeBorder(this.id)">
+				        			<form:option value="">-- Select Store --</form:option>
+				        			<form:options items="${stores}"></form:options>
+				        		</form:select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-12">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-3 control-label">Quantity <span class="impColor">*</span></label>
+							<div class="col-md-6">
+				        		<form:input type="text" path="quantity" class="form-control validate" placeholder="quantity"/>
+							</div>
+						</div>
+					</div> --%>
 				</div>
 				<!-- <div class="row">
 					<div class="col-md-12">
@@ -91,7 +113,50 @@
 						</div>
 					</div>
 				</div>
+				
+				<div class="row">
+				  	<div class="col-md-4">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-4 control-label">Store <span class="impColor">*</span></label>
+							<div class="col-md-6">
+				        		<form:select path="store" class="form-control validate" onfocus="removeBorder(this.id)">
+				        			<form:option value="">-- Select Store --</form:option>
+				        			<form:options items="${stores}"></form:options>
+				        		</form:select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-4 control-label">Quantity <span class="impColor">*</span></label>
+							<div class="col-md-6">
+				        		<form:input type="text" path="quantity" class="form-control validate" placeholder="quantity"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-4">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-4 control-label">Cylender Type <span class="impColor">*</span></label>
+							<div class="col-md-6">
+				        		<form:select path="name" class="form-control validate" onfocus="removeBorder(this.id)">
+				        			<form:option value="">-- Select Store --</form:option>
+				        			<form:options items="${cylinderTypes}"></form:options>
+				        		</form:select>
+							</div>
+						</div>
+					</div>
+				</div>
 				</form:form>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="form-group">
+							<div class="col-md-offset-3 col-md-6" style="padding-top: 6px;">
+				        		<input type="button" class="btn btn-primary" value="search" onclick="searchData();">
+<!-- 									<button class="btn btn-primary" >search</button> -->
+							</div>
+						</div>
+					</div>
+				</div>
          	</div>
 		</div>
 	</div> <!-- container -->
@@ -121,20 +186,22 @@ $(document).ready(function() {
 	      });
 	  });
 });
-var listOrders1 = ${allOrders1};
+/* var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);
-}
+} */
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Cylinder ID</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Cylinder ID</th><th>Store</th><th>Size</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
 							+ "<td title='"+orderObj.cylinderid+"'><input class='child' name='chkbox' type='checkbox' style='width: 21px;' value='"+orderObj.cylinderid+"' >"+ orderObj.cylinderid + "</td>"
+							+ "<td title='"+orderObj.strorername+"'><input class='child' name='chkbox' type='checkbox' style='width: 21px;' value='"+orderObj.strorename+"' >"+ orderObj.storename + "</td>"
+							+ "<td title='"+orderObj.name+"'><input class='child' name='chkbox' type='checkbox' style='width: 21px;' value='"+orderObj.name+"' >"+ orderObj.name + "</td>"
 							+ "</tr >";
 					$(tblRow).appendTo("#tableId table tbody");
 					
@@ -204,7 +271,43 @@ function deleteCylinder(id){
 	
 }
 
-
+function searchData(){
+	alert();
+	var store=$("#store").val();
+	var quantity=$("#quantity").val();
+	var name=$("#name").val();
+	 var formData = new FormData();
+    
+	
+	$.ajax({
+		type : "POST",
+		url : "searchCylinderMoveToFilling.htm",
+		data :"store="+store+"&quantity="+quantity+"&name="+name,
+		 beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          },
+		success: function (response) {
+            	 $.unblockUI();
+             if(response != null ){
+            	 var resJson=JSON.parse(response);
+            	 displayTable(resJson);
+            	 $("#store").val("");
+            	 $("#quantity").val("");
+            	 $("#name").val("");
+            	//alert("Delete Sucessfully");
+            	//window.location.reload();
+            	}
+             //window.location.reload();
+             },
+         error: function (e) { 
+        	 $.unblockUI();
+				console.log(e);
+         }
+	});
+	
+    
+     
+}
 
 
 

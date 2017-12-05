@@ -18,14 +18,27 @@ protected String status ;
 protected String stationname;
 protected String unitpoint;
 protected String fillingStatus;
+protected String name;
+protected String store;
 
+
+public String getStore() {
+	return store;
+}
+public void setStore(String store) {
+	this.store = store;
+}
 /*protected String openingbalance;
 protected String closingbalance;
 */
 
 
-
-
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
 public String getFillingStatus() {
 	return fillingStatus;
 }

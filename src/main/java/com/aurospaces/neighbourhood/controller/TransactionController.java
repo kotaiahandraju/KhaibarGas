@@ -15,15 +15,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.CylindertransactionBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.bean.TariffmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindertransactionDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
+import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 
 @Controller
 @RequestMapping("admin")
@@ -31,6 +35,7 @@ public class TransactionController {
 	@Autowired CylindermasterDao cylindermasterDao;
 	@Autowired FillingstationmasterDao fillingstationmasterDao;
 	@Autowired CylindertransactionDao cylindertransactionDao;
+	@Autowired StoresmasterDao storesmasterDao;
 	private Logger logger = Logger.getLogger(TransactionController.class);
 	
 	@RequestMapping(value = "/cylinderMovetofillingStation")
@@ -107,5 +112,58 @@ public class TransactionController {
 		} finally {
 		}
 		return statesMap;
+	}
+	@ModelAttribute("stores")
+	public Map<Integer, String> populatestores() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			String sSql = "select id ,storename from storesmaster where status='1'";
+			List<StoresmasterBean> list = storesmasterDao.populate(sSql);
+			for (StoresmasterBean bean : list) {
+				statesMap.put(bean.getId(), bean.getStorename());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
+	@ModelAttribute("cylinderTypes")
+	public Map<Integer, String> populateUsers() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			List<CylinderTypesBean> list= cylindermasterDao.getCylinderstypes();
+			for(CylinderTypesBean bean: list){
+				statesMap.put(bean.getId(), bean.getName());
+			}
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
+	@RequestMapping("searchCylinderMoveToFilling")
+	public @ResponseBody String searchCylinderMoveToFilling(@RequestParam("store") String sStore,@RequestParam("name") String name,@RequestParam("quantity") String limit){
+		ObjectMapper objectMapper=null;
+		String sJson=null;
+		List<CylindermasterBean> retlist=null;
+		try{
+			if(sStore !="" && name !="" && limit !=""){
+				
+				int iLimit=Integer.parseInt(limit);
+				System.out.println("----data------"+sStore+"---name"+name+"---quantity---"+limit);
+				retlist=cylindermasterDao.searchCylinderMoveToFilling(sStore, name, iLimit);
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(retlist);
+			}
+			
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return sJson;
+		
 	}
 }

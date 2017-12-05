@@ -25,7 +25,7 @@ public class BaseCylindermasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO cylindermaster( created_time, updated_time, cylinderid, size, capacity, cylinderstatus, customerid, location, lponumber, color, madein, expirydate, ownercompany, status,remarks) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO cylindermaster( created_time, updated_time, cylinderid,store, size, capacity, cylinderstatus, customerid, location, lponumber, color, madein, expirydate, ownercompany, status,remarks) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)"; 
 
 
 
@@ -70,18 +70,19 @@ public class BaseCylindermasterDao{
 	ps.setTimestamp(1, createdTime);
 ps.setTimestamp(2, updatedTime);
 ps.setString(3, cylindermaster.getCylinderid());
-ps.setString(4, cylindermaster.getSize());
-ps.setString(5, cylindermaster.getCapacity());
-ps.setString(6, cylindermaster.getCylinderstatus());
-ps.setString(7, cylindermaster.getCustomerid());
-ps.setString(8, cylindermaster.getLocation());
-ps.setString(9, cylindermaster.getLponumber());
-ps.setString(10, cylindermaster.getColor());
-ps.setString(11, cylindermaster.getMadein());
-ps.setTimestamp(12, expirydate);
-ps.setString(13, cylindermaster.getOwnercompany());
-ps.setString(14, cylindermaster.getStatus());
-ps.setString(15, cylindermaster.getRemarks());
+ps.setString(4, cylindermaster.getStore());
+ps.setString(5, cylindermaster.getSize());
+ps.setString(6, cylindermaster.getCapacity());
+ps.setString(7, cylindermaster.getCylinderstatus());
+ps.setString(8, cylindermaster.getCustomerid());
+ps.setString(9, cylindermaster.getLocation());
+ps.setString(10, cylindermaster.getLponumber());
+ps.setString(11, cylindermaster.getColor());
+ps.setString(12, cylindermaster.getMadein());
+ps.setTimestamp(13, expirydate);
+ps.setString(14, cylindermaster.getOwnercompany());
+ps.setString(15, cylindermaster.getStatus());
+ps.setString(16, cylindermaster.getRemarks());
 
 							return ps;
 						}
@@ -96,9 +97,9 @@ ps.setString(15, cylindermaster.getRemarks());
 		else
 		{
 
-			String sql = "UPDATE cylindermaster  set cylinderid = ? ,size = ? ,capacity = ? ,cylinderstatus = ? ,customerid = ? ,location = ? ,lponumber = ? ,color = ? ,madein = ? ,expirydate = ? ,ownercompany = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE cylindermaster  set cylinderid = ?,store =?,size = ? ,capacity = ? ,cylinderstatus = ? ,customerid = ? ,location = ? ,lponumber = ? ,color = ? ,madein = ? ,expirydate = ? ,ownercompany = ? ,status = ?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{cylindermaster.getCylinderid(),cylindermaster.getSize(),cylindermaster.getCapacity(),cylindermaster.getCylinderstatus(),cylindermaster.getCustomerid(),cylindermaster.getLocation(),cylindermaster.getLponumber(),cylindermaster.getColor(),cylindermaster.getMadein(),cylindermaster.getExpirydate(),cylindermaster.getOwnercompany(),cylindermaster.getStatus(),cylindermaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{cylindermaster.getCylinderid(),cylindermaster.getStore(),cylindermaster.getSize(),cylindermaster.getCapacity(),cylindermaster.getCylinderstatus(),cylindermaster.getCustomerid(),cylindermaster.getLocation(),cylindermaster.getLponumber(),cylindermaster.getColor(),cylindermaster.getMadein(),cylindermaster.getExpirydate(),cylindermaster.getOwnercompany(),cylindermaster.getStatus(),cylindermaster.getId()});
 		}
 	}
 		

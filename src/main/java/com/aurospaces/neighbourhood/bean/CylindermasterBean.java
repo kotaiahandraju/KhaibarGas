@@ -23,8 +23,22 @@ protected String ownercompany ;
 protected String remarks ;
 protected String cylendersstatus ;
 protected String store;
+protected String name;
+protected String storename;
 
 
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
+public String getStorename() {
+	return storename;
+}
+public void setStorename(String storename) {
+	this.storename = storename;
+}
 public String getStore() {
 	return store;
 }

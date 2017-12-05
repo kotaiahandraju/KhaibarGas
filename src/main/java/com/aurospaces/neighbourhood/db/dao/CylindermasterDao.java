@@ -159,6 +159,21 @@ public class CylindermasterDao extends BaseCylindermasterDao
 				List<LpomasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(LpomasterBean.class));
 					return retlist;
 		 }
+	
+	public List<CylindermasterBean> searchCylinderMoveToFilling(String sStore,String name,int limit) {
+		jdbcTemplate = custom.getJdbcTemplate();
+		boolean delete = false;
+		List<CylindermasterBean> retlis=null;
+		try{
+			String sql =  "select c.cylinderid,ct.name,c.size,st.storename from cylindermaster c,cylindertypes ct,storesmaster st where c.store=? and ct.id=?  limit ?";
+				retlis = jdbcTemplate.query(sql, new Object[] {sStore,name,limit },
+					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			System.out.println("-----------list----------"+retlis);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return retlis;
+	}
 
 
 	
