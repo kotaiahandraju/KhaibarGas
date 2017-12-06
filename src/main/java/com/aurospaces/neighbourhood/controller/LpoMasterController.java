@@ -17,6 +17,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,7 +25,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
+import com.aurospaces.neighbourhood.bean.ItemsBean;
+import com.aurospaces.neighbourhood.bean.LpoitemsBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
+import com.aurospaces.neighbourhood.db.dao.LpoitemsDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -35,9 +39,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping(value="admin")
 public class LpoMasterController {
 	
-	@Autowired
-	LpomasterDao lpomasterDao;
-	
+	@Autowired	LpomasterDao lpomasterDao;
+	@Autowired LpoitemsDao lpoitemsDao;
 	private Logger logger = Logger.getLogger(LpoMasterController.class);
 	@RequestMapping(value = "/lpoHome")
 	public String lpoHome(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean,HttpServletRequest request,
@@ -67,14 +70,18 @@ public class LpoMasterController {
 	}
 	
 	@RequestMapping(value = "/lpoSave")
-	public  String lpoSave(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
+	public  String lpoSave(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean, 	@RequestParam("unit") String[] unit,@RequestParam("rate") String[] rate,
+			@RequestParam("totalvalue") String[] totalvalue,@RequestParam("discount") String[] discount,@RequestParam("item1") String[] item,
+			@RequestParam("taxable") String[] taxable,HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
 		boolean isInsert = false;
 		String sJson = "";
 		List<LpomasterBean> lpomaster=null;
 		 String sProductId ="";
 		 Integer existId =null;
+		 LpoitemsBean objLpoitemsBean = null;
+		 System.out.println("lpoSave");
 		try {
-			System.out.println("--------customerSave----------"+lpomasterBean.getAmount());
+			System.out.println("--------lpoSave----------"+lpomasterBean.getAmount());
 			
 			if(StringUtils.isNotBlank(lpomasterBean.getExpiryDate1())){
 			Date date=	KhaibarGasUtil.dateFormate(lpomasterBean.getExpiryDate1());
@@ -98,11 +105,36 @@ public class LpoMasterController {
 						 reAttributes.addFlashAttribute("cssMsg", "warning");
 
 					 }else{
-						 reAttributes.addFlashAttribute("msg", "Mobile Number already exist.");
+						 reAttributes.addFlashAttribute("msg", "LPO Number already exist.");
 						 reAttributes.addFlashAttribute("cssMsg", "danger");
 
 						}
 				}
+			}
+			
+			for(int i=0; i<unit.length; i++)
+			{
+				objLpoitemsBean= new LpoitemsBean();
+				if(unit != null && unit.length != 0){
+					objLpoitemsBean.setQuantity(unit[i]);
+				}
+				if(rate != null && rate.length != 0){
+					objLpoitemsBean.setPrice(rate[i]);
+				}
+				if(totalvalue != null && totalvalue.length != 0){
+					objLpoitemsBean.setTotalprice(totalvalue[i]);
+				}
+				if(discount != null && discount.length != 0){
+					objLpoitemsBean.setDiscount(discount[i]);
+				}
+				if(taxable != null && taxable.length != 0){
+					objLpoitemsBean.setGrandtotal(taxable[i]);
+				}
+				if(item != null && item.length != 0){
+					objLpoitemsBean.setItemid(item[i]);
+				}
+				objLpoitemsBean.setLponumber(lpomasterBean.getLponumber());
+				lpoitemsDao.save(objLpoitemsBean);
 			}
 			
 			
@@ -146,6 +178,45 @@ public class LpoMasterController {
 				
 			
 			listOrderBeans = lpomasterDao.getLPOdetails(lpomasterBean);
+			 objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println(e);
+			logger.error(e);
+			logger.fatal("error in EducationController class deleteEducation method  ");
+			jsonObj.put("message", "excetption"+e);
+			return String.valueOf(jsonObj);
+			
+		}
+		return String.valueOf(jsonObj);
+	}
+	@RequestMapping(value = "/viewLPOdetails")
+	public @ResponseBody String viewLPOdetails( LpomasterBean lpomasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		System.out.println("viewLPOdetails  page...");
+		List<LpoitemsBean> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
+		try{
+			if(StringUtils.isNotBlank(lpomasterBean.getLponumber() )){
+				
+			
+			listOrderBeans = lpomasterDao.viewLPOdetails(lpomasterBean);
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				

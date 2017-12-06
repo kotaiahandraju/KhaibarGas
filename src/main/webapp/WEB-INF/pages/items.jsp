@@ -67,7 +67,7 @@
                     				</div>
                     			</div>
                     		</div>
-                    		<<%-- div class="col-md-6">
+                    		<%--< div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label ">Discount<span class="impColor">*</span></label>
                     				<div class="col-md-6">

@@ -5,6 +5,7 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
  
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
  <style>
 table #dependent_table{
 /* 	width: 100%; */
@@ -38,6 +39,7 @@ table#dependent_table tbody tr td:first-child::before {
                         <div class="options"></div>
                     </div>
 	                <form:form modelAttribute="lpoForm" id="formId" action="lpoSave" class="form-horizontal" method="post" >
+<table><tr><td>                    
                     <div class="panel-body">
 	                	<c:if test="${not empty msg}">
 	                		<div class="row">
@@ -48,52 +50,32 @@ table#dependent_table tbody tr td:first-child::before {
 								</div>
 							</div>
 						</c:if>
-                    	<div class="row">
+<!--                     	<div class="row"> -->
                     		<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">LPO Number</label>
                     				<div class="col-md-6">
-		                            	<form:hidden path="id"/>
-		                            	<form:hidden path="status"/>
-								      	<form:input type="text" path="lponumber" class="form-control validate" placeholder="LPO Number"/>
+		                            	<form:input type="hidden" path="id"/>
+								      	<form:input type="text" path="lponumber"  class="form-control validate" placeholder="LPO Number"/>
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Item</label>
-                    				<div class="col-md-6">
-<%-- 		                            	<form:input type="text" path="item" class="form-control validate" placeholder="Item"/> --%>
-											<%-- <form:select path="item" class="form-control validate" onfocus="removeBorder(this.id)" onchange="showexpiryDate(this.value)">
-												<form:option value="">-- Select Item --</form:option>
-									    		<form:options items="${items }"></form:options>
-											</form:select> --%>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Remarks</label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="remarks" class="form-control validate" placeholder="Remarks"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    	</div>
-                    	<div class="row">
+                    		
+                    	<!-- </div>
+                    	<div class="row"> -->
                     		<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Name</label>
                     				<div class="col-md-6">
-								      	<form:input type="text" path="suppliername" class="form-control validate" placeholder="Supplier name"/>
+								      	<form:input type="text" path="suppliername"  class="form-control validate" placeholder="Supplier name"/>
 								  	</div>
                     			</div>
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Address</label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="supplieraddress" class="form-control validate" placeholder="Supplier address"/>
+                    				<div class="col-md-6"> 
+		                            	<form:input type="text" path="supplieraddress"   class="form-control validate" placeholder="Supplier address"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -101,12 +83,12 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Contact no</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="suppliercontactno" class="form-control validate" placeholder="Supplier contact no"/>
+		                            	<form:input type="text" path="suppliercontactno"   class="form-control validate" placeholder="Supplier contact no"/>
 								  	</div>
                     			</div>
                     		</div>
-                    	</div>
-                    	<div class="row">
+                    	<!-- </div>
+                    	<div class="row"> -->
                     		<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Email</label>
@@ -119,7 +101,15 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Amount</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="amount" class="form-control validate" placeholder="amount"/>
+		                            	<form:input type="text" path="amount"  class="form-control validate" placeholder="amount"/>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Remarks</label>
+                    				<div class="col-md-6">
+		                            	<form:input type="text" path="remarks"  class="form-control validate" placeholder="Remarks"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -127,10 +117,10 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Expiry Date</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text"  readonly="true" path="expiryDate1" class="form-control"  placeholder="Expiry Date"/>
+		                            	<form:input type="text" path="expiryDate1" class="form-control" readonly="true"  placeholder="Expiry Date"/>
 								  	</div>
                     			</div>
-                    		</div>
+                    		</div> 
                     		
                     		<%-- <div class="col-md-4">
                     			<div class="form-group">
@@ -141,19 +131,10 @@ table#dependent_table tbody tr td:first-child::before {
                     			</div>
                     		</div> --%>
                     	</div>
-                    	</div>
-                    </div>
+                    	<!-- </div>
+                    </div> -->
                     
-                    <div class="panel-footer">
-				      	<div class="row">
-				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar pull-right">
-					      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
-					      			<input class="btn-danger btn" type="reset" id="clearData" onclick="dataClear();" value="Reset" />
-				      			</div>
-				      		</div>
-				    	</div>
-				    </div>
+                   
 				    
 <table class="notPrintMe">
  <tr>
@@ -175,9 +156,10 @@ table#dependent_table tbody tr td:first-child::before {
         <th rowspan="2"><span>Total Price</span></th>
         <th rowspan="2"><span>Disc</span></th>
         <th rowspan="2"><span>Total value</span></th>
+         <th rowspan="2"><span>Expiry Date</span></th>
       </tr>
     </thead>
-<form:select path="item" id="item1" style="display:none;font-size: small;">
+ <form:select path="item" id="item1" style="display:none;font-size: small;">
 	<form:option value="" selected="selected" disabled="disabled">-- Select Client --</form:option>
 	<form:options items="${items}"></form:options>
 </form:select>
@@ -198,7 +180,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<td></td>
 <!-- 			<td><input name="item" id="1item" type="text" onkeydown="removeBorder(this.id);" class="form-control " /></td> -->
 			<td>
-				<select name="item" id="1item" style="width: 100%;font-size: small;" title="Select Product" onchange="removeBorder(this.id),productRateFilter(this.id)" class="form-control">
+				<select name="item1" id="1item" style="width: 100%;font-size: small;" title="Select Product" onchange="removeBorder(this.id),productRateFilter(this.id)" class="form-control">
 					<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
 				</select>
 			</td>
@@ -243,8 +225,19 @@ table#dependent_table tbody tr td:first-child::before {
       <td><span class="roundOff"></span></td>
     </tr>
   </table> -->
-				    
-				    
+				     <div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-12">
+				      			<div class="btn-toolbar pull-right">
+					      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
+					      			<input class="btn-danger btn" type="reset" id="clearData" onclick="dataClear();" value="Reset" />
+				      			</div>
+				      		</div>
+				    	</div>
+				    </div>
+</td>
+</tr>
+</table>				    
          			</form:form>				    
                 </div>
             </div>
@@ -263,7 +256,7 @@ table#dependent_table tbody tr td:first-child::before {
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>LPO Number</th><th>Item</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th><th>Supplier Contact no</th><th>Supplier Email</th><th>Amount</th><th>Status</th><th>Action</th></tr>
+                                	<tr><th>LPO Number</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th><th>Supplier Contact no</th><th>Supplier Email</th><th>Amount</th><th>Status</th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -275,7 +268,7 @@ table#dependent_table tbody tr td:first-child::before {
 
         </div> <!-- container -->
  
-
+<div id="dial1"></div>
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <script type="text/javascript">
 var lstOrders =${allObjects};
@@ -309,7 +302,7 @@ function showTableData(response){
 	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>LPO Number</th><th>Item</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th><th>Supplier Contact no</th><th>Supplier Email</th><th>Amount</th><th>Status</th><th>Action</th></tr>'+
+    	'<thead><tr><th>LPO Number</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th><th>Supplier Contact no</th><th>Supplier Email</th><th>Amount</th><th>Status</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -323,8 +316,7 @@ function showTableData(response){
 		serviceUnitArray[orderObj.id] = orderObj;
 			
 		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
-						+ "<td title='"+orderObj.item+"'>" + orderObj.item + "</td>"
+			+ "<td id='"+orderObj.lponumber+"' style='text-align: center;cursor: pointer;color: red; text-decoration: underline;' onclick=viewDetails(this.id) title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
 						+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
 						+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
 						+ "<td title='"+orderObj.suppliercontactno+"'>" + orderObj.suppliercontactno + "</td>"
@@ -332,7 +324,7 @@ function showTableData(response){
 						+ "<td title='"+orderObj.supplieraddress+"'>" + orderObj.supplieraddress + "</td>"
 						+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
 						+ "<td title='"+orderObj.lpoStatus+"'>" + orderObj.lpoStatus + "</td>"
-						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
+// 						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
 						
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
@@ -445,7 +437,7 @@ function addMoreRowsForDependent() {
 		var qty = $('#'+number+'unit').val();
 		var rate =  $('#' + number + 'rate').val();
 	    
-		/* if(item == "" || item == null || item == "undefined" || qty == "" || qty == null || qty == "undefined" || rate == "" || rate == null || rate == "undefined")
+		 if(item == "" || item == null || item == "undefined" )
 		{
 			if(item == "" || item == null || item == "undefined")
 			{
@@ -456,31 +448,12 @@ function addMoreRowsForDependent() {
 				$('#'+number+'item').focus();
 				return false;
 			}
-			if(qty == "" || qty == null || qty == "undefined")
-			{
-				$('#'+number+'qty').css('color','red');
-				$('#'+number+'qty').css("border-color","#e73d4a");
-				$('#'+number+'qty').attr("placeholder","Enter Quantity");
-				$('#'+number+'qty').addClass('your-class');
-				$('#'+number+'qty').focus();
-				return false;
-			}
-			if(rate == "" || rate == null || rate == "undefined")
-			{
-				$('#'+number+'rate').css('color','red');
-				$('#'+number+'rate').css("border-color","#e73d4a");
-				$('#'+number+'rate').attr("placeholder","Enter Rate");
-				$('#'+number+'rate').addClass('your-class');
-				$('#'+number+'rate').focus();
-				return false;
-			}
-			rowvalidate = true;
-			return false;
-		} */
+			
+		} 
 	dependentRowCount++;
 	var dependentRow1 = '<tr class="rowInc" role="row" id="'+dependentRowCount+'">'
 			+ '<td class="labelCss"></td>'
-			+ '<td class="inputCss"><select title="Select Item" name="item" style="width: 100%;font-size: small;" id="'
+			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
 			+ 'item" class="form-control" onchange="removeBorder(this.id),productRateFilter(this.id)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
@@ -501,6 +474,9 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"><input title="Taxable Value" name="taxable" id="'
 			+ dependentRowCount
 			+ 'taxable" value="0.00" type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
+			+ '<td class="labelCss" ><input title="Taxable Value" name="taxable" id="'
+			+ dependentRowCount
+			+ 'expiryDate1"  type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
 			+ "<th class='labelCss notPrintMe' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("
 			+ dependentRowCount + ");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>" +
 			 + "</tr>";
@@ -585,7 +561,54 @@ function priceCalculator(){
 // 	 $(".roundOff").text(Math.round(grandTotal).toFixed(2));
 }
 
-
+function viewDetails(id){
+	$('#dial1').html('');
+	var formData = new FormData();
+    formData.append('lponumber', id);
+	$.fn.makeMultipartRequest('POST', 'viewLPOdetails', false,
+			formData, false, 'text', function(data){
+		var lponumbertitle=null;
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.allOrders1;
+		console.log(jsonobj.allOrders1);
+		var tblRow ="<table id='viewtable' class='meta table-bordered' style='width: 100%;'><thead>"
+			+	"<th><span >Lponumber </span></th>"
+			+	"<th><span >Item Name</span></th>"
+			+	"<th><span >Quantity </span></th>"
+			+	"<th><span >Price</span></th>"
+			+	"<th><span >Totalprice</span></th>"
+			+	"<th><span >Discount</span></th>"
+			+	"<th><span >Grandtotal</span></th></thead>"
+			+"<tbody></tbody>"
+			+"</table>";
+			$(tblRow).appendTo("#dial1");
+		$.each(alldata,	function(i, orderObj) {
+			var lponumber =orderObj.lponumber;
+			lponumbertitle = lponumber;
+			var quantity =orderObj.quantity;
+			var price =orderObj.price;
+			var totalprice =orderObj.totalprice;
+			var discount =orderObj.discount;
+			var grandtotal =orderObj.grandtotal;
+			var itemid =orderObj.itemid;
+			
+				
+			var tblRow1	=	"<tr >"
+				+	"<td style=''><span>"+lponumber+"</span></td>"
+				+	"<td style=''><span>"+itemid+"</span></td>"
+				+	"<td style=''><span>"+quantity+"</span></td>"
+				+	"<td style=''><span>"+price+"</span></td>"
+				+	"<td style=''><span>"+totalprice+"</span></td>"
+				+	"<td style=''><span>"+discount+"</span></td>"
+				+	"<td style=''><span>"+grandtotal+"</span></td>"
+				+	"</tr>";
+				
+			
+			  	$(tblRow1).appendTo("#viewtable tbody ");
+		});
+		$('#dial1').dialog({ title:lponumbertitle,width:1199,height:600,modal: true}).dialog('open');
+	});
+}
 
 
 

@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
+import com.aurospaces.neighbourhood.bean.LpoitemsBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseLpomasterDao;
@@ -64,6 +65,15 @@ public class LpomasterDao extends BaseLpomasterDao
 			 retlist = jdbcTemplate.query(sql,
 			new Object[]{lpomasterBean.getId()},
 			ParameterizedBeanPropertyRowMapper.newInstance(LpomasterBean.class));
+			if(retlist.size() > 0)
+				return retlist;
+			return retlist;
+		}
+	 public List<LpoitemsBean> viewLPOdetails(LpomasterBean lpomasterBean) {
+		 List<LpoitemsBean> retlist =null;
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "select li.lponumber,li.quantity,li.price,li.totalprice,li.discount,li.grandtotal,i.name as itemid from lpoitems li ,items i where i.id=li.itemid and li.lponumber=? ";
+			 retlist = jdbcTemplate.query(sql,	new Object[]{lpomasterBean.getLponumber()},ParameterizedBeanPropertyRowMapper.newInstance(LpoitemsBean.class));
 			if(retlist.size() > 0)
 				return retlist;
 			return retlist;
