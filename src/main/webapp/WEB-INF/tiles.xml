@@ -71,6 +71,10 @@
 	<definition name="checkQualityHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/checkQuality.jsp" />
 	</definition>
+	<definition name="FillingStationInQualitycheck" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/FillingStationInQualitycheck.jsp" />
+	</definition>
+	
 </tiles-definitions>
 
 

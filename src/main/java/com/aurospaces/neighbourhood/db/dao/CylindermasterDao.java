@@ -111,10 +111,10 @@ public class CylindermasterDao extends BaseCylindermasterDao
 
 		}
 	
-	public List<CylindermasterBean> getEmptyCylinders(){  
+	public List<CylindermasterBean> getEmptyCylinders( String cylinderstatus){  
 		jdbcTemplate = custom.getJdbcTemplate();
-		 String sql =  "SELECT  *  FROM cylindermaster where cylinderstatus='1' ";
-		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] { },
+		 String sql =  "SELECT  c.*,ct.name,s.storename FROM cylindermaster c,cylindertypes ct,storesmaster s  where ct.id=size and s.id=store and c.cylinderstatus=?";
+		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] {cylinderstatus },
 				ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 		
 		if (retlist.size() > 0)
@@ -122,12 +122,12 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		return null;
 		    
 		} 
-	public boolean updateCylinderStatus(String cylinderId,String cylinderStatus) {
+	public boolean updateCylinderStatus(String cylinderId,String cylinderStatus,String fillingStation) {
 		jdbcTemplate = custom.getJdbcTemplate();
 		boolean update = false;
 		try{
-			String sql = "Update  cylindermaster set cylinderstatus= ? WHERE cylinderid=?";
-			int intDelete = jdbcTemplate.update(sql, new Object[]{cylinderStatus,cylinderId});
+			String sql = "Update  cylindermaster set cylinderstatus= ?,fillingstationId=?  WHERE cylinderid=?";
+			int intDelete = jdbcTemplate.update(sql, new Object[]{cylinderStatus,fillingStation,cylinderId});
 			if(intDelete != 0){
 				update = true;
 			}
@@ -159,7 +159,35 @@ public class CylindermasterDao extends BaseCylindermasterDao
 				List<LpomasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(LpomasterBean.class));
 					return retlist;
 		 }
-
+	
+	public List<CylindermasterBean> searchCylinderMoveToFilling(String sStore,String name,int limit) {
+		jdbcTemplate = custom.getJdbcTemplate();
+		boolean delete = false;
+		List<CylindermasterBean> retlis=null;
+		try{
+			String sql =  "select c.cylinderid,ct.name,c.size,st.storename from cylindermaster c,cylindertypes ct,storesmaster st where c.store=? and ct.id=?  limit ?";
+				retlis = jdbcTemplate.query(sql, new Object[] {sStore,name,limit },
+					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			System.out.println("-----------list----------"+retlis);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return retlis;
+	}
+	public List<CylindermasterBean> searchFillingStationInQualitycheck(String stationname,String name) {
+		jdbcTemplate = custom.getJdbcTemplate();
+		boolean delete = false;
+		List<CylindermasterBean> retlis=null;
+		try{
+			String sql =  "select c.*,ct.name,s.storename from cylindermaster c,storesmaster s,cylindertypes ct where c.fillingstationId=? and ct.id=? and s.id=store";
+				retlis = jdbcTemplate.query(sql, new Object[] {stationname,name },
+					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			System.out.println("-----------list----------"+retlis.size());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return retlis;
+	}
 
 	
 }
