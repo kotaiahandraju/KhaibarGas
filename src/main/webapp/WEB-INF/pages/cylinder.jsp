@@ -27,6 +27,7 @@
                     </div>
                     <form:form class="form-horizontal" modelAttribute="cylinderForm"  role="form" id="cylider-form" action="addcylinder" method="post">
                     <div class="panel-body">
+                    <form:hidden path="id"/>
                     	<c:if test="${not empty msg}">
 	                    	<div class="row">
 	                    		<div class="col-sm-4 col-sm-offset-4">
@@ -36,8 +37,6 @@
 	                    		</div>
 	                    	</div>
                     	</c:if>
-                    	<div class="row">
-                    		
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size<span class="impColor">*</span></label>
@@ -50,36 +49,6 @@
 								    </div>
                     			</div>
                     		</div>
-                    	</div>
-                    	
-                    	<div class="row">
-                    		<%-- <div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label ">Capacity</label>
-								    <div class="col-md-6">
-								    	<form:input path="capacity" value="11" class="form-control" readonly="true" placeholder="Capacity"/>
-								      	<span class="hasError" id="capacityError"></span>
-								    </div>
-                    			</div>
-                    		</div> --%>
-                    		<%-- <div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Status<span class="impColor">*</span></label>
-								    <div class="col-md-6">
-								    	<form:select path="cylinderstatus" class="form-control">
-									  		<form:option value="idle">Idle</form:option>
-									  		<form:option value="filled">Filled</form:option>
-									  		<form:option value="Delivered">Delivered</form:option>
-			                                <form:option value="empty">Empty</form:option>
-			                                <form:option value="missing">Missing</form:option>
-									  	</form:select>
-								      <span class="hasError" id="cylinderstatusError"></span>
-								    </div>
-                    			</div>
-                    		</div> --%>
-                    	</div>
-                     
-                     <div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Store<span class="impColor">*</span></label>
@@ -98,7 +67,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">LPO Number<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="lponumber" value="" class="form-control  validate"  onchange="removeBorder(this.id),getLPOdetails(this.value)" >
+								    	<form:select path="lponumber" value="" class="form-control validate" onchange="removeBorder(this.id),getLPOdetails(this.value)" >
 								    	<form:option value="">-- Select LPO Number --</form:option>
 								    	<<%-- form:options items="${LPONumbers }"></form:options> --%>
 								    	</form:select>
@@ -106,9 +75,6 @@
 								    </div>
                     			</div>
                     		</div>
-                    	</div>
-                    	
-                    	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Owner Company<span class="impColor">*</span></label>
@@ -141,9 +107,6 @@
 								    </div>
                     			</div>
                     		</div>
-                    	</div>
-                    	
-                    	<div class="row">
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Made By<span class="impColor">*</span></label>
@@ -162,9 +125,7 @@
 								    </div>
                     			</div>
                     		</div>
-                    	</div>
-                    	<div class="row">
-                    	<div class="col-md-6">
+                    		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Location</label>
 								    <div class="col-md-6">
@@ -182,33 +143,30 @@
 								    </div>
                     			</div>
                     		</div>
-                    	</div>
-                    	
-                    	<div class="row">
-                    		<div class="col-md-6" id="cylinderId1" style="display: none;">
+                    		<%-- <div class="col-md-6" id="cylinderId1" style="display: none;">
                     			<div class="form-group">
-                    				<form:hidden path="id"/>
+                    				
                     				<label for="focusedinput" class="col-md-4 control-label">Cylinder ID<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								      <form:input path="cylinderid" class="form-control " placeholder="Cylinder ID"/>
 								      <span class="hasError" id="cylinderidError"></span>
 								    </div>
                     			</div>
-                    		</div>
+                    		</div> --%>
                     	</div>	 
-				</div>
-                    <div class="panel-footer">
-				      	<div class="row">
-				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar  pull-right">
-					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
-					      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
-				      			</div>
-				      		</div>
-				      	</div>
-				      </div>
+	                    <div class="panel-footer">
+					      	<div class="row">
+					      		<div class="col-sm-12">
+					      			<div class="btn-toolbar  pull-right">
+						      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
+					      			</div>
+					      		</div>
+					      	</div>
+					      </div>
+					</form:form>
+					</div>
 				      
-				      </form:form>
 			</div>
                     
                 </div>
@@ -295,9 +253,9 @@ function displayTable(listOrders) {
 
 
 function editCylinder(id) {
-	$("#cylinderId1").show();
+// 	$("#cylinderId1").show();
 	$("#id").val(serviceUnitArray[id].id);
-	$("#cylinderid").val(serviceUnitArray[id].cylinderid);
+// 	$("#cylinderid").val(serviceUnitArray[id].cylinderid);
 	$("#size").val(serviceUnitArray[id].size);
 	$("#capacity").val(serviceUnitArray[id].capacity);
 	$("#location").val(serviceUnitArray[id].location);
