@@ -1,7 +1,9 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,6 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.ItemsBean;
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
+import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
@@ -27,7 +31,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class IteamsController {
 	
 	
-		
+		@Autowired CylindermasterDao cylindermasterDao;
 		@Autowired	ItemsDao iteamsmasterDao;
 		private Logger logger = Logger.getLogger(StoreController.class);
 		
@@ -122,7 +126,8 @@ public class IteamsController {
 			return sJson;
 		}
 		
-		
+	
+			
 		
 	}
 

@@ -26,6 +26,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.aurospaces.neighbourhood.bean.CompanymasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
+import com.aurospaces.neighbourhood.bean.LpoitemsBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CompanymasterDao;
@@ -198,11 +199,28 @@ public class CylinderController {
 	
 	@RequestMapping("/getCylinderCapacity")
 	public  @ResponseBody  String cylinderTypes(HttpServletRequest request, HttpSession session)
-	{
-			if(null != request.getParameter("cid"))
-				return cylindermasterDao.getCylinderCapacityByID(Integer.parseInt(request.getParameter("cid")));
-			else
-				return "No data found";
+	{  
+		List<LpoitemsBean> retlist=null;
+		//String retlist=null;
+		JSONObject obj = new JSONObject();
+		try {
+			System.out.println("-----id-------"+request.getParameter("cid"));
+			if(null != request.getParameter("cid")){
+				retlist=cylindermasterDao.getCylinderCapacityByID(request.getParameter("cid"));
+				if(retlist != null){
+//					obj = new JSONObject(retlist);
+				System.out.println("-result------"+retlist);
+				obj.put("list",retlist);
+				}else{
+					obj.put("list", "");
+				}
+			}
+				 
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		return String.valueOf(obj);
 	}
 	
 	@ModelAttribute("cylinderTypes")
@@ -272,5 +290,32 @@ public class CylinderController {
 		} finally {
 		}
 		return statesMap;
+	}
+	
+	@RequestMapping("/getMadeByAndExparidate")
+	public  @ResponseBody  String getMadeByAndExparidate(@ModelAttribute LpoitemsBean lpoitemsBean, HttpServletRequest request, HttpSession session)
+	{  
+		List<LpoitemsBean> retlist=null;
+		//String retlist=null;
+		JSONObject obj = new JSONObject();
+		try {
+			System.out.println("-----lponumber-------"+lpoitemsBean.getLponumber()+"-------item------"+lpoitemsBean.getItemid());
+			if(null != request.getParameter("cid")){
+				retlist=cylindermasterDao.getMadeByAndExparidate(lpoitemsBean.getItemid(),lpoitemsBean.getLponumber());
+				if(retlist != null){
+//					obj = new JSONObject(retlist);
+				System.out.println("-result------"+retlist.size());
+				obj.put("list",retlist);
+				}else{
+					obj.put("list", "");
+				}
+			}
+				 
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return String.valueOf(obj);
 	}
 }

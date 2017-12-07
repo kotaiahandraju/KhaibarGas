@@ -1,7 +1,9 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -18,7 +20,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.TrucksmasterBean;
+import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.TrucksmasterDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 @RequestMapping(value = "/admin")
 public class TrucksController {
 	private Logger logger = Logger.getLogger(TrucksController.class);
+	@Autowired CylindermasterDao cylindermasterDao;
 	@Autowired TrucksmasterDao objTrucksmasterDao;
 	@RequestMapping(value = "/truckHome")
 	public String truckHome(@ModelAttribute("truckForm") TrucksmasterBean objTrucksmasterBean, ModelMap model,
@@ -156,5 +161,21 @@ public class TrucksController {
 			
 		}
 		return String.valueOf(jsonObj);
+	}
+	@ModelAttribute("LPONumbers")
+	public Map<String, String> populateLPONumbers() {
+		Map<String, String> statesMap = new LinkedHashMap<String, String>();
+		try {
+			String sSql = "select lponumber,lponumber from lpoitems where itemid in ('4')";
+			List<LpomasterBean> list = cylindermasterDao.populate(sSql);
+			for (LpomasterBean bean : list) {
+				statesMap.put(bean.getLponumber(), bean.getLponumber());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
 	}
 }

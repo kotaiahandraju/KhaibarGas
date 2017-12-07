@@ -70,81 +70,81 @@ public class LpoMasterController {
 	}
 	
 	@RequestMapping(value = "/lpoSave")
-	public  String lpoSave(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean, 	@RequestParam("unit") String[] unit,@RequestParam("rate") String[] rate,
-			@RequestParam("totalvalue") String[] totalvalue,@RequestParam("discount") String[] discount,@RequestParam("item1") String[] item,
+		public  String lpoSave(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean, 	@RequestParam("unit") String[] unit,@RequestParam("rate") String[] rate,
+				@RequestParam("totalvalue") String[] totalvalue,@RequestParam("discount") String[] discount,@RequestParam("item1") String[] item,
 
-			@RequestParam("taxable") String[] taxable,HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
-		boolean isInsert = false;
-		String sJson = "";
-		List<LpomasterBean> lpomaster=null;
-		 String sProductId ="";
-		 Integer existId =null;
-		 LpoitemsBean objLpoitemsBean = null;
-		 System.out.println("lpoSave");
-		try {
-			System.out.println("--------lpoSave----------"+lpomasterBean.getAmount());
-			
-			if(StringUtils.isNotBlank(lpomasterBean.getExpiryDate1())){
-			Date date=	KhaibarGasUtil.dateFormate(lpomasterBean.getExpiryDate1());
-			lpomasterBean.setExpiryDate(date);
-			}
-			String sLpoNo=lpomasterBean.getLponumber();
-			lpomaster=lpomasterDao.getByLpoNo(sLpoNo);
-			System.out.println("customerSave"+lpomaster);
-			if(lpomaster.size() ==0 || lpomaster ==null){
-				lpomasterBean.setStatus("1");
-				lpomasterDao.save(lpomasterBean);
-				reAttributes.addFlashAttribute("msg", "Record Inserted Successfully");
-				reAttributes.addFlashAttribute("cssMsg", "success");
-			}else{
-				for (LpomasterBean lpomasterBean2 : lpomaster) {
-					
-					 existId=lpomasterBean2.getId();
-					 if(existId==lpomasterBean.getId()){
-						 lpomasterDao.save(lpomasterBean);
-						 reAttributes.addFlashAttribute("msg", "Record Updated Successfully");
-						 reAttributes.addFlashAttribute("cssMsg", "warning");
+				@RequestParam("taxable") String[] taxable,HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
+			boolean isInsert = false;
+			String sJson = "";
+			List<LpomasterBean> lpomaster=null;
+			 String sProductId ="";
+			 Integer existId =null;
+			 LpoitemsBean objLpoitemsBean = null;
+			 System.out.println("lpoSave");
+			try {
+				System.out.println("--------lpoSave----------"+lpomasterBean.getAmount());
+				
+				if(StringUtils.isNotBlank(lpomasterBean.getExpiryDate1())){
+				Date date=	KhaibarGasUtil.dateFormate(lpomasterBean.getExpiryDate1());
+				lpomasterBean.setExpiryDate(date);
+				}
+				String sLpoNo=lpomasterBean.getLponumber();
+				lpomaster=lpomasterDao.getByLpoNo(sLpoNo);
+				System.out.println("customerSave"+lpomaster);
+				if(lpomaster.size() ==0 || lpomaster ==null){
+					lpomasterBean.setStatus("1");
+					lpomasterDao.save(lpomasterBean);
+					reAttributes.addFlashAttribute("msg", "Record Inserted Successfully");
+					reAttributes.addFlashAttribute("cssMsg", "success");
+				}else{
+					for (LpomasterBean lpomasterBean2 : lpomaster) {
+						
+						 existId=lpomasterBean2.getId();
+						 if(existId==lpomasterBean.getId()){
+							 lpomasterDao.save(lpomasterBean);
+							 reAttributes.addFlashAttribute("msg", "Record Updated Successfully");
+							 reAttributes.addFlashAttribute("cssMsg", "warning");
 
-					 }else{
-						 reAttributes.addFlashAttribute("msg", "LPO Number already exist.");
-						 reAttributes.addFlashAttribute("cssMsg", "danger");
+						 }else{
+							 reAttributes.addFlashAttribute("msg", "LPO Number already exist.");
+							 reAttributes.addFlashAttribute("cssMsg", "danger");
 
-						}
+							}
+					}
 				}
+				
+				for(int i=0; i<unit.length; i++)
+				{
+					objLpoitemsBean= new LpoitemsBean();
+					if(unit != null && unit.length != 0){
+						objLpoitemsBean.setQuantity(unit[i]);
+					}
+					if(rate != null && rate.length != 0){
+						objLpoitemsBean.setPrice(rate[i]);
+					}
+					if(totalvalue != null && totalvalue.length != 0){
+						objLpoitemsBean.setTotalprice(totalvalue[i]);
+					}
+					if(discount != null && discount.length != 0){
+						objLpoitemsBean.setDiscount(discount[i]);
+					}
+					if(taxable != null && taxable.length != 0){
+						objLpoitemsBean.setGrandtotal(taxable[i]);
+					}
+					if(item != null && item.length != 0){
+						objLpoitemsBean.setItemid(item[i]);
+					}
+					objLpoitemsBean.setLponumber(lpomasterBean.getLponumber());
+					lpoitemsDao.save(objLpoitemsBean);
+				}
+				
+				
+			} catch (Exception e) {
+				System.out.println("Exception in Product Controller in productSave()");
+				e.printStackTrace();
 			}
-			
-			for(int i=0; i<unit.length; i++)
-			{
-				objLpoitemsBean= new LpoitemsBean();
-				if(unit != null && unit.length != 0){
-					objLpoitemsBean.setQuantity(unit[i]);
-				}
-				if(rate != null && rate.length != 0){
-					objLpoitemsBean.setPrice(rate[i]);
-				}
-				if(totalvalue != null && totalvalue.length != 0){
-					objLpoitemsBean.setTotalprice(totalvalue[i]);
-				}
-				if(discount != null && discount.length != 0){
-					objLpoitemsBean.setDiscount(discount[i]);
-				}
-				if(taxable != null && taxable.length != 0){
-					objLpoitemsBean.setGrandtotal(taxable[i]);
-				}
-				if(item != null && item.length != 0){
-					objLpoitemsBean.setItemid(item[i]);
-				}
-				objLpoitemsBean.setLponumber(lpomasterBean.getLponumber());
-				lpoitemsDao.save(objLpoitemsBean);
-			}
-			
-			
-		} catch (Exception e) {
-			System.out.println("Exception in Product Controller in productSave()");
-			e.printStackTrace();
+			return "redirect:lpoHome";
 		}
-		return "redirect:lpoHome";
-	}
 	
 	@RequestMapping(value = "/lpoDelete")
 	public @ResponseBody String lpoDelete( @RequestParam("id") String id, @RequestParam("status") String status, HttpSession objSession,
@@ -175,7 +175,7 @@ public class LpoMasterController {
 		String sJson=null;
 		boolean delete = false;
 		try{
-			if(lpomasterBean.getId() !=0){
+			if(StringUtils.isNotBlank(lpomasterBean.getItem())){
 				
 			
 			listOrderBeans = lpomasterDao.getLPOdetails(lpomasterBean);

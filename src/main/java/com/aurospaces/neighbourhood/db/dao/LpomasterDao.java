@@ -61,9 +61,9 @@ public class LpomasterDao extends BaseLpomasterDao
 	 public List<LpomasterBean> getLPOdetails(LpomasterBean lpomasterBean) {
 		 List<LpomasterBean> retlist =null;
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT l.*,DATE_FORMAT(l.expiryDate, '%d-%M-%Y') as expiryDate1 from lpomaster l where id = ? ";
+			String sql = "select l.suppliername,li.expiryDate from lpomaster l ,lpoitems li where l.lponumber =li.lponumber and li.itemid=? and li.lponumber =?";
 			 retlist = jdbcTemplate.query(sql,
-			new Object[]{lpomasterBean.getId()},
+			new Object[]{lpomasterBean.getItem(),lpomasterBean.getLponumber()},
 			ParameterizedBeanPropertyRowMapper.newInstance(LpomasterBean.class));
 			if(retlist.size() > 0)
 				return retlist;

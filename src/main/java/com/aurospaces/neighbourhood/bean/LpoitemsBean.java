@@ -38,7 +38,14 @@ protected String totalprice ;
 protected String discount ;
 
 protected String grandtotal ;
+protected String suppliername ;
 
+public String getSuppliername() {
+	return suppliername;
+}
+public void setSuppliername(String suppliername) {
+	this.suppliername = suppliername;
+}
 public int getId()
 {
   return id;

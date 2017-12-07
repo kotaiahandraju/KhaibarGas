@@ -97,7 +97,11 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">LPO Number <span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="lponumber" type="text" class="form-control validate" placeholder="LPO Number "/>
+<%-- 										<form:input path="lponumber" type="text" class="form-control validate" placeholder="LPO Number "/> --%>
+										<form:select path="lponumber" value="" class="form-control  validate"  onchange="removeBorder(this.id),getLPOdetails(this.value)" >
+								    	<form:option value="">-- Select LPO Number --</form:option>
+								    	<form:options items="${LPONumbers }"></form:options> 
+								    	</form:select>
 									</div>
 								</div>
 							</div>

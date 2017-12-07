@@ -42,7 +42,10 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="size" items="${cylinderTypes}" class="form-control cylinderSize"/>
+								    	<form:select path="size"   class="form-control cylinderSize">
+								    	<form:option value="">-- Select Size --</form:option>
+								    	<form:options items="${cylinderTypes }"></form:options>
+								    	</form:select>
 								      <span class="hasError" id="sizeError"></span>
 								    </div>
                     			</div>
@@ -95,9 +98,9 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">LPO Number<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="lponumber" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id),getLPOdetails(this.value)" >
+								    	<form:select path="lponumber" value="" class="form-control  validate"  onchange="removeBorder(this.id),getLPOdetails(this.value)" >
 								    	<form:option value="">-- Select LPO Number --</form:option>
-								    	<form:options items="${LPONumbers }"></form:options>
+								    	<<%-- form:options items="${LPONumbers }"></form:options> --%>
 								    	</form:select>
 								      	<span class="hasError" id="lponumberError"></span>
 								    </div>
@@ -333,7 +336,7 @@ function deleteCylinder(id,status){
 	
 }
 
-/* $('#size').change(function(){
+$('#size').change(function(){
 	
 	
     var cid = $(this).val();
@@ -342,23 +345,34 @@ function deleteCylinder(id,status){
     formData.append('cid', cid);
     $.fn.makeMultipartRequest('POST', 'getCylinderCapacity', false,
 			formData, false, 'text', function(data){
+    	//alert(data);
     	console.log(data);
     	$("#capacity").val(data);
+    	var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.list;
+		var html = "<option value=''>-- Select --</option>";
+		$.each(alldata,function(i, catObj) {
+			 html = html + '<option value="'
+				+ catObj.lponumber + '">'
+				+ catObj.lponumber + '</option>';
+		});
+		$('#lponumber').empty().append(html);
+    	
     });
-}); */
+}); 
 
 
-/* $('#lponumber').blur(function(){
-    var lpoid = $(this).val();
-
+ /* $('#lponumber').change(function(){
+    var lponumber = $(this).val();
+	var itemid=$("#size").val();
     var formData = new FormData();
-    formData.append('lpoid', lpoid);
-    $.fn.makeMultipartRequest('POST', 'getCylinderMadein', false,
+    formData.append('lponumber', lponumber);
+    $.fn.makeMultipartRequest('POST', 'getMadeByAndExparidate', false,
 			formData, false, 'text', function(data){
     	console.log(data);
     	$("#madein").val(data);
     });
-}); */
+});  */
 
 
 
@@ -387,8 +401,10 @@ function deleteCylinder(id,status){
 	});
 	
 function getLPOdetails(value){
+	var item=$("#size").val();
 	var formData = new FormData();
-    formData.append('id', value);
+    formData.append('lponumber', value);
+    formData.append('item', item);
 	$.fn.makeMultipartRequest('POST', 'getLPOdetails', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
@@ -396,7 +412,7 @@ function getLPOdetails(value){
 		console.log(jsonobj.allOrders1);
 		$.each(alldata,function(i, orderObj) {
 			$("#madein").val(orderObj.suppliername);
-			$("#expirtdate1").val(orderObj.expiryDate1);
+			$("#expirtdate1").val(orderObj.expiryDate);
 		});
 	});
 }

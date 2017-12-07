@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.bean.LpoitemsBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseCylindermasterDao;
@@ -83,7 +84,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	
 	public List<CylinderTypesBean> getCylinderstypes() {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select name,id from cylindertypes";
+			String sql = "select name,id from items where id in (1,2,3)";
 			@SuppressWarnings("rawtypes")
 			List list=jdbcTemplate.queryForList(sql);
 			List<CylinderTypesBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(CylinderTypesBean.class));
@@ -104,11 +105,14 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		}
 
 	
-	public String getCylinderCapacityByID(int id) {
+	public List<LpoitemsBean> getCylinderCapacityByID(String itemid) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select capacity from cylindertypes where id=?";
-			return jdbcTemplate.queryForObject(sql, new Object[] { id }, String.class);
-
+		 //String retlist=null;
+		 List<LpoitemsBean> retlist=null;
+			String sql = "select lponumber,itemid from lpoitems where itemid=? group by lponumber,itemid";
+			retlist= jdbcTemplate.query(sql, new Object[] { itemid },ParameterizedBeanPropertyRowMapper.newInstance(LpoitemsBean.class));
+			 
+			 return retlist;
 		}
 	
 	public List<CylindermasterBean> getEmptyCylinders( String cylinderstatus){  
@@ -188,6 +192,16 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		}
 		return retlis;
 	}
+	
+	public List<LpoitemsBean> getMadeByAndExparidate(String itemid,String lponumber) {
+		 jdbcTemplate = custom.getJdbcTemplate();
+		 //String retlist=null;
+		 List<LpoitemsBean> retlist=null;
+			String sql = "select l.suppliername,li.expiryDate from lpomaster l ,lpoitems li where l.lponumber =li.lponumber and li.itemid=? and li.lponumber =? ";
+			retlist= jdbcTemplate.query(sql, new Object[] { itemid,lponumber },ParameterizedBeanPropertyRowMapper.newInstance(LpoitemsBean.class));
+			 System.out.println("---------retList"+retlist.size());
+			 return retlist;
+		}
 
 	
 }
