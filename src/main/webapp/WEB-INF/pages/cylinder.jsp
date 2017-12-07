@@ -225,7 +225,7 @@ function displayTable(listOrders) {
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
 							+ "<td title='"+orderObj.cylinderid+"'>"+ orderObj.cylinderid + "</td>"
-							+ "<td title='"+orderObj.size+"'>"+ orderObj.size + "</td>"
+							+ "<td title='"+orderObj.sizeName+"'>"+ orderObj.sizeName + "</td>"
 							+ "<td title='"+orderObj.cylinderstatus+"'>"+ orderObj.cylinderstatus + "</td>"
 							+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
 							+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber+ "</td>"

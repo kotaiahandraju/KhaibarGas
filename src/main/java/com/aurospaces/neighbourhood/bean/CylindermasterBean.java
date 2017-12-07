@@ -25,9 +25,16 @@ protected String cylendersstatus ;
 protected String store;
 protected String name;
 protected String storename;
+protected String sizeName;
 
 
 
+public String getSizeName() {
+	return sizeName;
+}
+public void setSizeName(String sizeName) {
+	this.sizeName = sizeName;
+}
 public String getName() {
 	return name;
 }

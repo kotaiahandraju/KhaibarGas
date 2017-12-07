@@ -33,7 +33,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		 
 		 //String sql="SELECT *, DATE_FORMAT(expirydate,'%d/%m/%Y') AS expirtdate1  FROM cylindermaster";
 		
-		 String sql =  "SELECT c. *,DATE_FORMAT(c.expirydate,'%d-%M-%Y') AS expirtdate1 ,  CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylendersstatus   FROM cylindermaster c";
+		 String sql =  "SELECT c. *,i.name As sizeName,DATE_FORMAT(c.expirydate,'%d-%M-%Y') AS expirtdate1 ,  CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylendersstatus   FROM cylindermaster c,items i where c.size=i.id";
 		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 		
