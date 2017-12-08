@@ -117,7 +117,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	
 	public List<CylindermasterBean> getEmptyCylinders( String cylinderstatus){  
 		jdbcTemplate = custom.getJdbcTemplate();
-		 String sql =  "SELECT  c.*,ct.name,s.storename FROM cylindermaster c,cylindertypes ct,storesmaster s  where ct.id=size and s.id=store and c.cylinderstatus=?";
+		 String sql =  "SELECT  c.*,it.name,s.storename FROM cylindermaster c,items it,storesmaster s  where c.size=it.id and s.id=c.store  and c.cylinderstatus=?";
 		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] {cylinderstatus },
 				ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 		
@@ -169,7 +169,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		boolean delete = false;
 		List<CylindermasterBean> retlis=null;
 		try{
-			String sql =  "select c.cylinderid,ct.name,c.size,st.storename from cylindermaster c,cylindertypes ct,storesmaster st where c.store=? and ct.id=?  limit ?";
+			String sql =  "select c.cylinderid,it.name,c.size,st.storename from cylindermaster c,items it,storesmaster st where c.store=? and c.size=? and it.id=c.size and c.store=st.id limit ?";
 				retlis = jdbcTemplate.query(sql, new Object[] {sStore,name,limit },
 					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 			System.out.println("-----------list----------"+retlis);
