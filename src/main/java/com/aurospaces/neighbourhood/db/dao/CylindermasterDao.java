@@ -116,7 +116,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	
 	public List<CylindermasterBean> getEmptyCylinders( String cylinderstatus){  
 		jdbcTemplate = custom.getJdbcTemplate();
-		 String sql =  "SELECT  c.*,ct.name,s.storename FROM cylindermaster c,cylindertypes ct,storesmaster s  where ct.id=size and s.id=store and c.cylinderstatus=?";
+		 String sql =  "SELECT  c.*,it.name,s.storename FROM cylindermaster c,items it,storesmaster s  where c.size=it.id and s.id=c.store  and c.cylinderstatus=?";
 		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] {cylinderstatus },
 				ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 		
