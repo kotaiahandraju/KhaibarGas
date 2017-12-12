@@ -1,4 +1,11 @@
-
+<script>
+window.onload = function() {
+    if(!window.location.hash) {
+        window.location = window.location + '#loaded';
+        window.location.reload();
+    }
+}
+</script>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="#">Dashboard</a></li>
@@ -30,7 +37,7 @@
                             <a class="info-tiles tiles-orange" href="#">
                                 <div class="tiles-heading">EMPTY CYLINDERS</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center">32509</div>
+                                    <div class="text-center">${Empty }</div>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>
@@ -39,7 +46,7 @@
                             <a class="info-tiles tiles-alizarin" href="#">
                                 <div class="tiles-heading">FILLED CYLINDERS</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center">325457</div>
+                                    <div class="text-center">${FillingStation }</div>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>
@@ -57,7 +64,7 @@
                             <a class="info-tiles tiles-info" href="#">
                                 <div class="tiles-heading">TOTAL CYLINDERS</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center">${cylinderCount }</div>
+                                    <div class="text-center">${totalCylinderCount }</div>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>

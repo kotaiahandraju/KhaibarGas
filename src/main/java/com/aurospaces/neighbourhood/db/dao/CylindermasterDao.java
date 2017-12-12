@@ -2,6 +2,7 @@
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -33,7 +34,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		 
 		 //String sql="SELECT *, DATE_FORMAT(expirydate,'%d/%m/%Y') AS expirtdate1  FROM cylindermaster";
 		
-		 String sql =  "SELECT c. *,i.name As sizeName,DATE_FORMAT(c.expirydate,'%d-%M-%Y') AS expirtdate1 ,  CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylendersstatus   FROM cylindermaster c,items i where c.size=i.id";
+		 String sql =  "SELECT c. *,cs.name as cylinderstatus,i.name As sizeName,DATE_FORMAT(c.expirydate,'%d-%M-%Y') AS expirtdate1 ,  CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylendersstatus   FROM cylindermaster c,items i,cylinderstatus cs where c.size=i.id and cs.id=c.cylinderstatus";
 		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 		
@@ -72,21 +73,19 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		}
 	
 	
-	 @SuppressWarnings("deprecation")
-		public  int  getCylindersCount(){  
+		public   List<Map<String, Object>>  getCylindersCount(){  
 			 jdbcTemplate = custom.getJdbcTemplate();
 			 
-			 String sql="SELECT  count(*)    FROM cylindermaster";
+			 String sql="select count(c.cylinderstatus) as count,cs.name as  cylinderstatus from cylindermaster c,cylinderstatus cs where cs.id= c.cylinderstatus group by c.cylinderstatus ";
 			   
-			   return jdbcTemplate.queryForInt(sql);
+			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
+				return retlist;
 		}
 	 
 	
 	public List<CylinderTypesBean> getCylinderstypes() {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select name,id from items where id in (1,2,3)";
-			@SuppressWarnings("rawtypes")
-			List list=jdbcTemplate.queryForList(sql);
+			String sql = "select * from items where itemType='Cylinder' and status='1' ";
 			List<CylinderTypesBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(CylinderTypesBean.class));
 			return retlist;
 
@@ -109,7 +108,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		 jdbcTemplate = custom.getJdbcTemplate();
 		 //String retlist=null;
 		 List<LpoitemsBean> retlist=null;
-			String sql = "select lponumber,itemid from lpoitems where itemid=? group by lponumber,itemid";
+			String sql = " select * from lpoitems lpn,items i where lpn.itemid=i.id and i.itemType='Cylinder' and  i.id=?";
 			retlist= jdbcTemplate.query(sql, new Object[] { itemid },ParameterizedBeanPropertyRowMapper.newInstance(LpoitemsBean.class));
 			 
 			 return retlist;
@@ -141,7 +140,20 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		return update;
 	}
 
-
+	public boolean updateCylinderStatus1(String cylinderId,String cylinderStatus,String truckId) {
+		jdbcTemplate = custom.getJdbcTemplate();
+		boolean update = false;
+		try{
+			String sql = "Update  cylindermaster set cylinderstatus= ?,truckId=?  WHERE cylinderid=?";
+			int intDelete = jdbcTemplate.update(sql, new Object[]{cylinderStatus,truckId,cylinderId});
+			if(intDelete != 0){
+				update = true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return update;
+	}
 
 	public boolean updateCylinderIds() {
 		jdbcTemplate = custom.getJdbcTemplate();
@@ -164,13 +176,12 @@ public class CylindermasterDao extends BaseCylindermasterDao
 					return retlist;
 		 }
 	
-	public List<CylindermasterBean> searchCylinderMoveToFilling(String sStore,String name,int limit) {
+	public List<CylindermasterBean> searchCylinderMoveToFilling(String sStore,String cylinderType,int limit,String cylinderstatus) {
 		jdbcTemplate = custom.getJdbcTemplate();
-		boolean delete = false;
 		List<CylindermasterBean> retlis=null;
 		try{
-			String sql =  "select c.cylinderid,ct.name,c.size,st.storename from cylindermaster c,cylindertypes ct,storesmaster st where c.store=? and ct.id=?  limit ?";
-				retlis = jdbcTemplate.query(sql, new Object[] {sStore,name,limit },
+			String sql =  "select cm.cylinderid,s.storename ,i.name  from cylindermaster cm,items i,storesmaster s where cm.store=s.id and i.id=cm.size and cm.store=? and cm.size=? and cm.cylinderstatus=?  limit ?";
+				retlis = jdbcTemplate.query(sql, new Object[] {sStore,cylinderType,cylinderstatus,limit },
 					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 			System.out.println("-----------list----------"+retlis);
 		}catch(Exception e){
@@ -180,7 +191,6 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	}
 	public List<CylindermasterBean> searchFillingStationInQualitycheck(String stationname,String name) {
 		jdbcTemplate = custom.getJdbcTemplate();
-		boolean delete = false;
 		List<CylindermasterBean> retlis=null;
 		try{
 			String sql =  "select c.*,ct.name,s.storename from cylindermaster c,storesmaster s,cylindertypes ct where c.fillingstationId=? and ct.id=? and s.id=store";
@@ -202,7 +212,26 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			 System.out.println("---------retList"+retlist.size());
 			 return retlist;
 		}
-
-	
+	public List<CylindermasterBean> searchQualityCheck(String fillingStationId,String cylinderType,int limit,String cylinderstatus) {
+		jdbcTemplate = custom.getJdbcTemplate();
+		List<CylindermasterBean> retlis=null;
+		try{
+			String sql =  "select cm.cylinderid,f.stationname ,i.name  from cylindermaster cm,items i,fillingstationmaster f where cm.size=i.id and f.id=cm.fillingstationId and cm.size=? and cm.fillingstationId= ? and cm.cylinderstatus= ?   limit ?";
+				retlis = jdbcTemplate.query(sql, new Object[] {cylinderType,fillingStationId,cylinderstatus,limit },
+					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			System.out.println("-----------list----------"+retlis);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return retlis;
+	}
+	 @SuppressWarnings("deprecation")
+		public  int  getTotalcylindersCount(){  
+			 jdbcTemplate = custom.getJdbcTemplate();
+			 
+			 String sql="SELECT  count(*)    FROM cylindermaster";
+			   
+			   return jdbcTemplate.queryForInt(sql);
+		}
 }
 

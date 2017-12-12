@@ -14,15 +14,21 @@ protected String suppliername ;
 protected String supplieraddress ;
 protected String suppliercontactno ;
 protected String supplieremail ;
-protected String amount ;
-protected String status ;
-protected String lpoStatus ;
-protected Date expiryDate ;
-protected String expiryDate1 ;
+protected String amount;
+protected String status;
+protected String lpoStatus;
+protected String paidamount;
+protected String dueamount;
+protected String expirydate;
 
 
 
-
+public String getExpirydate() {
+	return expirydate;
+}
+public void setExpirydate(String expirydate) {
+	this.expirydate = expirydate;
+}
 public String getLpoStatus() {
 	return lpoStatus;
 }
@@ -125,17 +131,18 @@ public void setStatus(final String status)
 {
   this.status = status;
 }
-public Date getExpiryDate() {
-	return expiryDate;
+public String getPaidamount() {
+	return paidamount;
 }
-public void setExpiryDate(Date expiryDate) {
-	this.expiryDate = expiryDate;
+public void setPaidamount(String paidamount) {
+	this.paidamount = paidamount;
 }
-public String getExpiryDate1() {
-	return expiryDate1;
+public String getDueamount() {
+	return dueamount;
 }
-public void setExpiryDate1(String expiryDate1) {
-	this.expiryDate1 = expiryDate1;
+public void setDueamount(String dueamount) {
+	this.dueamount = dueamount;
 }
+
 
 }

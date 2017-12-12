@@ -25,7 +25,7 @@ public class BaseItemsDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO items( createdtime, updatedtime, name, description, price,discount,status) values (?, ?, ?, ?,?,? ,?)"; 
+	public final String INSERT_SQL = "INSERT INTO items( createdtime, updatedtime, name, description, price,discount,status,itemType) values (?, ?, ?, ?,?,? ,?,?)"; 
 
 
 
@@ -64,9 +64,10 @@ public class BaseItemsDao{
 ps.setTimestamp(2, updatedTime);
 ps.setString(3, items.getName());
 ps.setString(4, items.getDescription());
-ps.setString(7, items.getStatus());
 ps.setString(5, items.getPrice());
 ps.setString(6, items.getDiscount());
+ps.setString(7, items.getStatus());
+ps.setString(8, items.getItemType());
 
 							return ps;
 						}
@@ -81,9 +82,9 @@ ps.setString(6, items.getDiscount());
 		else
 		{
 
-			String sql = "UPDATE items  set name = ? ,description = ?,price = ?,discount = ?  where id = ? ";
+			String sql = "UPDATE items  set name = ? ,description = ?,price = ?,discount = ?,itemType=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{items.getName(),items.getDescription(),items.getPrice(),items.getDiscount(),items.getId()});
+			jdbcTemplate.update(sql, new Object[]{items.getName(),items.getDescription(),items.getPrice(),items.getDiscount(),items.getItemType(), items.getId()});
 		}
 	}
 		

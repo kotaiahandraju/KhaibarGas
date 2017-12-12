@@ -23,8 +23,15 @@ protected Date createdTime ;
 protected Date updatedTime ;
 protected String cylindetId ;
 protected String cylinderStatus ;
-protected String createdBy,fillingStation , customerId ;
+protected String createdBy,fillingStation , customerId,truckId ;
 
+
+public String getTruckId() {
+	return truckId;
+}
+public void setTruckId(String truckId) {
+	this.truckId = truckId;
+}
 public int getId()
 {
   return id;

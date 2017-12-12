@@ -60,21 +60,27 @@
                     			<form:hidden path="id"/>
                     		 <div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Price<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Item Type<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    				<form:input  path="price" class="form-control validate" placeholder="item Price"/>
+                    				<form:select  path="itemType" class="form-control validate" >
+                    				<form:option value="Cylinder">Cylinder</form:option>
+                    				<form:option value="Truck">Truck</form:option>
+                    				<form:option value="Accessories">Accessories</form:option>
+                    				<form:option value="GAS">GAS</form:option>
+                    				<form:option value="Equipment">Equipment</form:option>
+                    				</form:select>
                     				
                     				</div>
                     			</div>
                     		</div>
-                    		<%--< div class="col-md-6">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label ">Discount<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label ">Price <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input  path="discount" class="form-control validate" placeholder="Discount"/>
+		                            	<form:input  path="price" class="form-control numericOnly validate" placeholder="Price"/>
 								  	</div>
                     			</div>
-                    		</div> --%>
+                    		</div> 
                     	</div>
                     </div>
                     </div>
@@ -106,7 +112,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>Iteam Name</th><th>Description</th><th>Price</th><th>Status</th><th>Action</th></tr>
+                                	<tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price</th><th>Status</th><th>Action</th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -150,7 +156,7 @@ function showTableData(response){
 	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Item Name</th><th>Description</th><th>Price</th><th>Status</th><th>Action</th></tr>'+
+    	'<thead><tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price</th><th>Status</th><th>Action</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -166,6 +172,7 @@ function showTableData(response){
 		var tblRow ="<tr>"
 			           
 						+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
+						+ "<td title='"+orderObj.itemType+"'>" + orderObj.itemType + "</td>"
 						+ "<td title='"+orderObj.description+"'>" + orderObj.description + "</td>"
 						 + "<td title='"+orderObj.price+"'>" + orderObj.price + "</td>"
 						+ "<td title='"+orderObj.Status+"'>" + orderObj.itemstatus + "</td>"
@@ -180,6 +187,7 @@ function editItem(id) {
 	$("#id").val(id);
 	$("#name").val(serviceUnitArray[id].name);
 	$("#description").val(serviceUnitArray[id].description);
+	$("#itemType").val(serviceUnitArray[id].itemType);
 	$("#price").val(serviceUnitArray[id].price);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
@@ -225,7 +233,7 @@ function dataClear(){
 	$("#s").val("");
 	$("#location").val("");
 }
-$("#pageName").text("Items Master");
+$("#pageName").text("Item Master");
 $(".items").addClass("active"); 
 
 </script>

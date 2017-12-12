@@ -25,7 +25,7 @@ public class BaseLpomasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO lpomaster( created_time, updated_time, lponumber, item, remarks, suppliername, supplieraddress, suppliercontactno, supplieremail, amount, status,expiryDate) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO lpomaster( created_time, updated_time, lponumber, item, remarks, suppliername, supplieraddress, suppliercontactno, supplieremail, amount, status,dueamount,paidamount) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)"; 
 
 
 	java.sql.Timestamp expiryDate=null;
@@ -36,12 +36,6 @@ public class BaseLpomasterDao{
 	public void save(final LpomasterBean lpomaster) 
 	{
 		jdbcTemplate = custom.getJdbcTemplate();
-		if(lpomaster.getExpiryDate() == null)
-		{
-		lpomaster.setExpiryDate( new Date());
-		}
-		 expiryDate = 
-			new java.sql.Timestamp(lpomaster.getExpiryDate().getTime()); 
 	if(lpomaster.getId() == 0)	{
 
 	KeyHolder keyHolder = new GeneratedKeyHolder();
@@ -78,7 +72,8 @@ ps.setString(8, lpomaster.getSuppliercontactno());
 ps.setString(9, lpomaster.getSupplieremail());
 ps.setString(10, lpomaster.getAmount());
 ps.setString(11, lpomaster.getStatus());
-ps.setTimestamp(12, expiryDate);
+ps.setString(12, lpomaster.getDueamount());
+ps.setString(13, lpomaster.getPaidamount());
 
 							return ps;
 						}

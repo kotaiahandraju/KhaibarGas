@@ -25,7 +25,7 @@ public class BaseCylindertransactionDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO cylindertransaction( created_time, updated_time, cylindetId, cylinderStatus, createdBy,fillingStation ,customerId) values (?, ?, ?, ?, ?,?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO cylindertransaction( created_time, updated_time, cylindetId, cylinderStatus, createdBy,fillingStation ,customerId,truckId) values (?, ?, ?, ?, ?,?,?,?)"; 
 
 
 
@@ -67,6 +67,7 @@ ps.setString(4, cylindertransaction.getCylinderStatus());
 ps.setString(5, cylindertransaction.getCreatedBy());
 ps.setString(6, cylindertransaction.getFillingStation());
 ps.setString(7, cylindertransaction.getCustomerId());
+ps.setString(8, cylindertransaction.getTruckId());
 
 							return ps;
 						}
@@ -81,9 +82,9 @@ ps.setString(7, cylindertransaction.getCustomerId());
 		else
 		{
 
-			String sql = "UPDATE cylindertransaction  set cylindetId = ? ,cylinderStatus = ? ,createdBy = ?  where id = ? ";
+			String sql = "UPDATE cylindertransaction  set cylindetId = ? ,cylinderStatus = ? ,createdBy = ?,TruckId=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{cylindertransaction.getCylindetId(),cylindertransaction.getCylinderStatus(),cylindertransaction.getCreatedBy(),cylindertransaction.getId()});
+			jdbcTemplate.update(sql, new Object[]{cylindertransaction.getCylindetId(),cylindertransaction.getCylinderStatus(),cylindertransaction.getCreatedBy(),cylindertransaction.getTruckId(),cylindertransaction.getId()});
 		}
 	}
 		

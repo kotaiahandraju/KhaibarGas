@@ -20,8 +20,22 @@ protected String unitpoint;
 protected String fillingStatus;
 protected String name;
 protected String store;
+protected String cylinderType;
+protected String truckId;
 
 
+public String getTruckId() {
+	return truckId;
+}
+public void setTruckId(String truckId) {
+	this.truckId = truckId;
+}
+public String getCylinderType() {
+	return cylinderType;
+}
+public void setCylinderType(String cylinderType) {
+	this.cylinderType = cylinderType;
+}
 public String getStore() {
 	return store;
 }

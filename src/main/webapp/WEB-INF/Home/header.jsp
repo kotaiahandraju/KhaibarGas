@@ -80,11 +80,24 @@ span.has-error,span.hasError
 			$('.edit').attr('data-original-title','Edit');
 			$('.delete').attr('data-toggle','tooltip');
 			$('.delete').attr('data-original-title','Delete');
-			$('.active').attr('data-toggle','tooltip');
-			$('.active').attr('data-original-title','Activate');
-			$('.deactive').attr('data-toggle','tooltip');
-			$('.deactive').attr('data-original-title','Deactivate');
+			$('.activate').attr('data-toggle','tooltip');
+			$('.activate').attr('data-original-title','Activate');
+			$('.deactivate').attr('data-toggle','tooltip');
+			$('.deactivate').attr('data-original-title','Deactivate');
 			$('[data-toggle="tooltip"]').tooltip();
+			
+			var formData = new FormData();
+		    
+			$.fn.makeMultipartRequest('POST', 'getCount', false,
+					formData, false, 'text', function(data){
+				var jsonobj = $.parseJSON(data);
+//		 		alert(jsonobj.cylinderCount);
+				$("#cylinderCount1").text(jsonobj.totalCylinderCount);
+				$("#customerCount1").text(jsonobj.customerCount);
+//		 		var alldata = jsonobj.allOrders1;
+//		 		console.log(jsonobj.allOrders1);
+//		 		displayTable(alldata);
+			});
 		});
 	</script>
 	  <script type="text/javascript">
@@ -143,17 +156,21 @@ $(function() {
                 <li class="company"><a href="${baseurl }/admin/companymaster"><i class="fa fa-building"></i> <span>Company</span></a></li>
                 <li class="lpo"><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
                 <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
-                <li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
-                <li class="checkQuality"><a href="${baseurl }/admin/checkQuality"><i class="fa fa-bar-chart-o"></i> <span>Quality Check</span></a></li>
+                <%-- <li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
+                <li class="cylinderQualityCheck"><a href="${baseurl }/admin/cylinderQualityCheck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Quality Check</span></a></li>
+                <li class="cylinderQualityCheck"><a href="${baseurl }/admin/cylinderMovetoTruck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to Truck</span></a></li> --%>
+                
+                
 <!--                 <li><a href="#"><i class="fa fa-list"></i> <span>REPORTS</span></a></li> -->
 				<li class="transactions">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Transactions</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li><a href="#">Page 1-1</a></li>
-						<li><a href="#">Page 1-2</a></li>
-						<li><a href="#">Page 1-3</a></li>
+						<li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
+                		<li class="cylinderQualityCheck"><a href="${baseurl }/admin/cylinderQualityCheck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Quality Check</span></a></li>
+						<li class="cylinderMovetoTruck"><a href="${baseurl }/admin/cylinderMovetoTruck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to Truck</span></a></li>
 					</ul>
 				</li>
+				<li class="expenseTracker"><a href="${baseurl }/admin/expenseTrackerHome"><i class="fa fa-bar-chart-o"></i> <span>Expense Tracker</span></a></li>
 			</ul>
 		</div>
     </nav>
@@ -179,18 +196,7 @@ $(function() {
 <!-- Header ends Here -->
 <script type="text/javascript">
 $( document ).ready(function() {
-	var formData = new FormData();
-    
-	$.fn.makeMultipartRequest('POST', 'getCount', false,
-			formData, false, 'text', function(data){
-		var jsonobj = $.parseJSON(data);
-// 		alert(jsonobj.cylinderCount);
-		$("#cylinderCount1").text(jsonobj.cylinderCount);
-		$("#customerCount1").text(jsonobj.customerCount);
-// 		var alldata = jsonobj.allOrders1;
-// 		console.log(jsonobj.allOrders1);
-// 		displayTable(alldata);
-	});
+	
 
 });
 	

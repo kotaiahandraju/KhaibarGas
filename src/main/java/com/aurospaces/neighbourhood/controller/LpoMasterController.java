@@ -72,8 +72,7 @@ public class LpoMasterController {
 	@RequestMapping(value = "/lpoSave")
 		public  String lpoSave(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean, 	@RequestParam("unit") String[] unit,@RequestParam("rate") String[] rate,
 				@RequestParam("totalvalue") String[] totalvalue,@RequestParam("discount") String[] discount,@RequestParam("item1") String[] item,
-
-				@RequestParam("taxable") String[] taxable,HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
+				@RequestParam("taxable") String[] taxable,@RequestParam("manufacturingdate") String[] manufacturingdate,@RequestParam("expirydate") String[] expirydate,HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
 			boolean isInsert = false;
 			String sJson = "";
 			List<LpomasterBean> lpomaster=null;
@@ -84,10 +83,6 @@ public class LpoMasterController {
 			try {
 				System.out.println("--------lpoSave----------"+lpomasterBean.getAmount());
 				
-				if(StringUtils.isNotBlank(lpomasterBean.getExpiryDate1())){
-				Date date=	KhaibarGasUtil.dateFormate(lpomasterBean.getExpiryDate1());
-				lpomasterBean.setExpiryDate(date);
-				}
 				String sLpoNo=lpomasterBean.getLponumber();
 				lpomaster=lpomasterDao.getByLpoNo(sLpoNo);
 				System.out.println("customerSave"+lpomaster);
@@ -108,6 +103,7 @@ public class LpoMasterController {
 						 }else{
 							 reAttributes.addFlashAttribute("msg", "LPO Number already exist.");
 							 reAttributes.addFlashAttribute("cssMsg", "danger");
+							 return "redirect:lpoHome";
 
 							}
 					}
@@ -116,6 +112,7 @@ public class LpoMasterController {
 				for(int i=0; i<unit.length; i++)
 				{
 					objLpoitemsBean= new LpoitemsBean();
+					objLpoitemsBean.setLponumber(lpomasterBean.getLponumber());
 					if(unit != null && unit.length != 0){
 						objLpoitemsBean.setQuantity(unit[i]);
 					}
@@ -134,7 +131,13 @@ public class LpoMasterController {
 					if(item != null && item.length != 0){
 						objLpoitemsBean.setItemid(item[i]);
 					}
-					objLpoitemsBean.setLponumber(lpomasterBean.getLponumber());
+					if(expirydate != null && expirydate.length != 0){
+						objLpoitemsBean.setExpirydate(expirydate[i]);
+					}
+					if(manufacturingdate != null && manufacturingdate.length != 0){
+						objLpoitemsBean.setManufacturingdate(manufacturingdate[i]);
+					}
+					
 					lpoitemsDao.save(objLpoitemsBean);
 				}
 				
@@ -249,7 +252,7 @@ public class LpoMasterController {
 	public Map<Integer, String> populateCity() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
 		try {
-			String sSql = " select id,name from items ";
+			String sSql = " select id,name from items where status='1' ";
 			List<CylinderTypesBean> list = lpomasterDao.populate(sSql);
 			for (CylinderTypesBean bean : list) {
 				statesMap.put(bean.getId(), bean.getName());

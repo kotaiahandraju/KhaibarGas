@@ -25,10 +25,22 @@ protected String cylendersstatus ;
 protected String store;
 protected String name;
 protected String storename;
-protected String sizeName;
+protected String sizeName,stationname,count;
 
 
 
+public String getCount() {
+	return count;
+}
+public void setCount(String count) {
+	this.count = count;
+}
+public String getStationname() {
+	return stationname;
+}
+public void setStationname(String stationname) {
+	this.stationname = stationname;
+}
 public String getSizeName() {
 	return sizeName;
 }

@@ -39,7 +39,22 @@ protected String discount ;
 
 protected String grandtotal ;
 protected String suppliername ;
+protected String expirydate;
+protected String manufacturingdate;
 
+
+public String getExpirydate() {
+	return expirydate;
+}
+public void setExpirydate(String expirydate) {
+	this.expirydate = expirydate;
+}
+public String getManufacturingdate() {
+	return manufacturingdate;
+}
+public void setManufacturingdate(String manufacturingdate) {
+	this.manufacturingdate = manufacturingdate;
+}
 public String getSuppliername() {
 	return suppliername;
 }

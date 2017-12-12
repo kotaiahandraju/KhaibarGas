@@ -34,7 +34,7 @@
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
 		                            	<form:hidden path="status"/>
-								      	<form:input type="text" path="customerid" class="form-control validate" placeholder="Supplier name"/>
+								      	<form:input type="text" path="customerid" class="form-control validate" placeholder="Customer ID"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -42,7 +42,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Customer Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="customername" class="form-control validate" placeholder="customer name"/>
+		                            	<form:input type="text" path="customername" class="form-control validate" placeholder="Customer Name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -50,7 +50,8 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Customer Address<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="customeraddress" class="form-control validate" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address"/>
+<%-- 		                            	<form:textarea type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address"></form:textarea> --%>
 								  	</div>
                     			</div>
                     		</div>
@@ -58,10 +59,10 @@
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">MobileNo<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Mobile<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
-								      	<form:input type="text" path="mobile" class="form-control validate numericOnly" placeholder="Supplier name"/>
+								      	<form:input type="text" path="mobile" class="form-control validate numericOnly" placeholder="Mobile"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -69,15 +70,15 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Land Line</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="landline" class="form-control validate numericOnly" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="landline" class="form-control  numericOnly" placeholder="Land Line"/>
 								  	</div>
                     			</div>
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Authorized person<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Authorized Person<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="authorizedperson" class="form-control validate" placeholder="Supplier name"/>
+		                            	<form:input type="text" path="authorizedperson" class="form-control validate" placeholder="Authorized Person"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -85,19 +86,20 @@
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Contact person<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Contact Person<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:hidden path="id"/>
-								      	<form:input type="text" path="contactperson" class="form-control validate" placeholder="Supplier name"/>
+								      	<form:input type="text" path="contactperson" class="form-control validate" placeholder="Contact Person"/>
 								  	</div>
                     			</div>
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
 
-                    				<label for="focusedinput" class="col-md-6 control-label ">customertype<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label ">Customer Type</label>
                     				<div class="col-md-6">
 		                            	<form:select path="customertype" class="form-control">
+		                            		<form:option value="">-- Customer Type --</form:option>
 									  		<form:option value="Commercial">COMMERCIAL</form:option>
 									  		<form:option value="Domestic">Domestic</form:option>
 									  		<form:option value="industrial">industrial</form:option>
@@ -180,18 +182,18 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	
 	serviceUnitArray = {};
-	if(response != "undefined" && response.length >0){
+// 	if(response != "undefined" && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th>Action</th></tr>'+
+    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Customer Address</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th>Action</th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactive' onclick='customerDelete("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='customerDelete("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 		}else{  
-			var deleterow = "<a class='active' onclick='customerDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='customerDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 		
 		var edit = "<a class='edit' onclick='editCustomer("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
@@ -211,7 +213,7 @@ function showTableData(response){
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
 			});
-	}
+// 	}
 }
 function editCustomer(id) {
 	$("#id").val(id);

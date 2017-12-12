@@ -99,9 +99,25 @@ table#dependent_table tbody tr td:first-child::before {
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Amount</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">LPO Amount</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="amount"  class="form-control validate" placeholder="amount"/>
+		                            	<form:input type="text" path="amount"  class="form-control validate" placeholder=" Lpo Amount"/>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Paid Amount</label>
+                    				<div class="col-md-6">
+		                            	<form:input type="text" path="paidamount" onkeyup="PaidCalculation(this.value)"  class="form-control validate" placeholder="Paid Amount"/>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Due Amount</label>
+                    				<div class="col-md-6">
+		                            	<form:input type="text" path="dueamount"  class="form-control validate" placeholder="Due Amount"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -113,14 +129,6 @@ table#dependent_table tbody tr td:first-child::before {
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-4" style="display: none" id="exporydatediv">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Expiry Date</label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="expiryDate1" class="form-control" readonly="true"  placeholder="Expiry Date"/>
-								  	</div>
-                    			</div>
-                    		</div> 
                     		
                     		<%-- <div class="col-md-4">
                     			<div class="form-group">
@@ -140,7 +148,7 @@ table#dependent_table tbody tr td:first-child::before {
  <tr>
  <td style="height: 20px;"> 
   <span onclick="addMoreRowsForDependent(this.form);" style="cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;">
-	Add Row
+	Add Item
 </span>
 </td>
 </tr>
@@ -156,6 +164,7 @@ table#dependent_table tbody tr td:first-child::before {
         <th rowspan="2"><span>Total Price</span></th>
         <th rowspan="2"><span>Disc</span></th>
         <th rowspan="2"><span>Total value</span></th>
+         <th rowspan="2"><span>Manufacturing Date</span></th>
          <th rowspan="2"><span>Expiry Date</span></th>
       </tr>
     </thead>
@@ -189,7 +198,10 @@ table#dependent_table tbody tr td:first-child::before {
 			<td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
 			<td><input name="discount" value="0.00" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control" /></td>
 			<td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
+			<td><input name="manufacturingdate"  title="Taxable Value" id="1manufacturingdate" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
+			<td><input name="expirydate"   id="1expirydate" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
 		</tr>
+		
 	</tbody>
 	<tfoot>
 		<tr>
@@ -289,7 +301,20 @@ $(function() {
 
 
 <script>
-
+$(function() {
+	$("#1expirydate").datepicker({
+		dateFormat : "dd-MM-yy",
+		changeDate : true,
+		changeMonth : true,
+		changeYear : true,
+	});
+	$("#1manufacturingdate").datepicker({
+		dateFormat : "dd-MM-yy",
+		changeDate : true,
+		changeMonth : true,
+		changeYear : true,
+	});
+});
 var damageId = 0;
 var serviceUnitArray ={};
 var data = {};
@@ -474,13 +499,28 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"><input title="Taxable Value" name="taxable" id="'
 			+ dependentRowCount
 			+ 'taxable" value="0.00" type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
-			+ '<td class="labelCss" ><input title="Taxable Value" name="taxable" id="'
+			+ '<td class="labelCss" ><input title="Taxable Value" name="manufacturingdate" id="'
 			+ dependentRowCount
-			+ 'expiryDate1"  type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
+			+ 'manufacturingdate"  type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
+			+ '<td class="labelCss" ><input title="Taxable Value" name="expirydate" id="'
+			+ dependentRowCount
+			+ 'expirydate"  type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
 			+ "<th class='labelCss notPrintMe' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("
 			+ dependentRowCount + ");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>" +
 			 + "</tr>";
 	$(dependentRow1).appendTo("#dependent_table");
+	$("#"+dependentRowCount+"manufacturingdate").datepicker({
+		dateFormat : "dd-MM-yy",
+		changeDate : true,
+		changeMonth : true,
+		changeYear : true,
+	});
+	$("#"+dependentRowCount+"expirydate").datepicker({
+		dateFormat : "dd-MM-yy",
+		changeDate : true,
+		changeMonth : true,
+		changeYear : true,
+	});
 	var dummyItem1 = $('#item1').html();
 	$('#'+dependentRowCount+'item').empty();
 	$(dummyItem1).appendTo('#'+dependentRowCount+'item');
@@ -610,6 +650,12 @@ function viewDetails(id){
 	});
 }
 
+function PaidCalculation(value){
+	var amount = $("#amount").val();
+	if(amount !="" && value !=""){
+		$("#dueamount").val(parseInt(amount)-parseInt(value));
+	}
+}
 
 
 

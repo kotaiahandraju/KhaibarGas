@@ -9,30 +9,22 @@
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="#">Home</a></li>
-		<li>Cylinder Move to Filling Station</li>
+		<li>Cylinder Move to Truck</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-            <form:form commandName="fillingStationForm">
+			<form:form commandName="fillingStationForm">
 				<div class="row">
 				  	<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Store <span class="impColor">*</span></label>
+							<label for="focusedinput" class="col-md-6 control-label">Filling Station <span class="impColor">*</span></label>
 							<div class="col-md-6">
-				        		<form:select path="store" class="form-control validate" onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store --</form:option>
-				        			<form:options items="${stores}"></form:options>
+				        		<form:select path="stationname" class="form-control " onfocus="removeBorder(this.id)">
+				        			<form:option value="">-- Select Filling Station --</form:option>
+				        			<form:options items="${fillingstation}"></form:options>
 				        		</form:select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-6 control-label numericOnly">Quantity <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:input type="text" path="quantity" class="form-control " placeholder="Quantity"/>
 							</div>
 						</div>
 					</div>
@@ -49,12 +41,21 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
+							<label for="focusedinput" class="col-md-6 control-label">Quantity <span class="impColor">*</span></label>
+							<div class="col-md-6">
+				        		<form:input type="text" path="quantity" class="form-control " placeholder="Quantity"/>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
 							<div class="col-md-6" style="padding-top: 6px;">
 				        		<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
 							</div>
 						</div>
 					</div>
 				</div>
+            
         <div class="row">
 			<div class="col-md-6">
 				<div class="row">
@@ -76,11 +77,9 @@
 					</div>
 					<div class="panel-body collapse in">
 						<div class="table-responsive" id="tableId">
-							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+							<table class="table table-striped table-bordered datatables" id="example">
 								<thead>
-									<tr><th>Cylinder ID</th>
-									<th>Store</th>
-									<th>Size</th></tr>
+									<tr><th>Cylinder ID</th><th>Store</th><th>Size</th></tr>
 								</thead>
 								<tbody></tbody>
 							</table>
@@ -103,58 +102,27 @@
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-3 control-label">Select Filling Station <span class="impColor">*</span></label>
+							<label for="focusedinput" class="col-md-3 control-label">Select Truck <span class="impColor">*</span></label>
 							<div class="col-md-6">
-				        		<form:select path="stationname" class="form-control validate" onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Filling Station --</form:option>
-				        			<form:options items="${fillingstation}"></form:options>
+				        		<form:select path="truckId" class="form-control validate" onfocus="removeBorder(this.id)">
+				        			<form:option value="">-- Select Truck --</form:option>
+				        			<form:options items="${trucks}"></form:options>
 				        		</form:select>
 							</div>
 						</div>
 					</div>
+				</div>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
 							<div class="col-md-offset-3 col-md-6" style="padding-top: 6px;">
-				        		<input type="button" class="btn btn-primary" value="Move To Filling Station" onclick="movetofillingStation()">
+				        		<input type="button" class="btn btn-primary" value="Move Truck" onclick="movetoTruck()">
 							</div>
 						</div>
 					</div>
 				</div>
 				
-				<%-- <div class="row">
-				  	<div class="col-md-4">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Store <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:select path="store" class="form-control validate" onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store --</form:option>
-				        			<form:options items="${stores}"></form:options>
-				        		</form:select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Quantity <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:input type="text" path="quantity" class="form-control validate" placeholder="quantity"/>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Cylender Type <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:select path="cylinderType" class="form-control validate" onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store --</form:option>
-				        			<form:options items="${cylinderTypes}"></form:options>
-				        		</form:select>
-							</div>
-						</div>
-					</div>
-				</div> --%>
-				</form:form>
+			</form:form>
          	</div>
 		</div>
 	</div> <!-- container -->
@@ -191,14 +159,14 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Cylinder ID</th><th>Store</th><th>Size</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Cylinder ID</th><th>stationname</th><th>Size</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
 							+ "<td title='"+orderObj.cylinderid+"'><input class='child' name='chkbox' type='checkbox' style='width: 21px;' value='"+orderObj.cylinderid+"' >"+ orderObj.cylinderid + "</td>"
-							+ "<td title='"+orderObj.strorername+"'>"+ orderObj.storename + "</td>"
+							+ "<td title='"+orderObj.stationname+"'>"+ orderObj.stationname + "</td>"
 							+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
 							+ "</tr >";
 					$(tblRow).appendTo("#tableId table tbody");
@@ -217,11 +185,10 @@ function displayTable(listOrders) {
 				        }
 				      });
 					});
-	
-	
+// 	$("#example").DataTable();
 }
 
-function movetofillingStation(){
+function movetoTruck(){
 	 var cylenderId = [];
      $('#tableId :checkbox:checked').each(function(i){
     	 cylenderId[i] = $(this).val();
@@ -230,17 +197,17 @@ function movetofillingStation(){
     	 alert("Please Select Cylinder");
     	 return false;
      }
-     var stationname = $("#stationname").val();
-     if(stationname == null || stationname == "undefined" || stationname ==""){
-    	 alert("Please Select Filling Station");
+     var truckId = $("#truckId").val();
+     if(truckId == null || truckId == "undefined" || truckId ==""){
+    	 alert("Please Select truckId");
     	 return false;
      }
      alert(cylenderId);
      var formData = new FormData();
-     formData.append("fillingStation",stationname);
-     formData.append("cylindetId",cylenderId);
-     formData.append("cylinderStatus",2);
-     $.fn.makeMultipartRequest('POST', 'updateCylinderStatus', false,
+     formData.append("truckId",truckId);
+     formData.append("CylindetId",cylenderId);
+     formData.append("cylinderStatus",4);
+     $.fn.makeMultipartRequest('POST', 'updateCylinderStatus3', false,
  			formData, false, 'text', function(data){
 //  		var jsonobj = $.parseJSON(data);
  		window.location.reload();
@@ -270,40 +237,23 @@ function deleteCylinder(id){
 }
 
 function searchData(){
-	var store=$("#store").val();
+	var stationname=$("#stationname").val();
 	var quantity=$("#quantity").val();
 	var cylinderType=$("#cylinderType").val();
 	 var formData = new FormData();
-    
-	
-	$.ajax({
-		type : "POST",
-		url : "searchCylinderMoveToFilling.htm",
-		data :"store="+store+"&quantity="+quantity+"&cylinderType="+cylinderType,
-		 beforeSend : function() {
-             $.blockUI({ message: 'Please wait' });
-          },
-		success: function (response) {
-            	 $.unblockUI();
-             if(response != null ){
-            	 var resJson=JSON.parse(response);
-            	 displayTable(resJson);
-            	/*  $("#store").val("");
-            	 $("#quantity").val("");
-            	 $("#name").val(""); */
-            	//alert("Delete Sucessfully");
-            	//window.location.reload();
-            	}
-             //window.location.reload();
-             },
-         error: function (e) { 
-        	 $.unblockUI();
-				console.log(e);
-         }
+     formData.append('stationname', stationname);
+     formData.append('quantity', quantity);
+     formData.append('cylinderType', cylinderType);
+	$.fn.makeMultipartRequest('POST', 'searchTruckStatus', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.allOrders1;
+		console.log(jsonobj.allOrders1);
+		displayTable(alldata);
 	});
-	
 }
-$("#pageName").text("Cylinder Move to Filling Station");
+
+$("#pageName").text("Cylinder Move to Truck");
 // $(".transactions").addClass("open");
-$(".cylinderMovetofillingStation").addClass("active");
+$(".cylinderMovetoTruck").addClass("active");
 </script>

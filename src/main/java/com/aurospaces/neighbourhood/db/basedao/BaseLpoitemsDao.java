@@ -4,11 +4,8 @@ package com.aurospaces.neighbourhood.db.basedao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 import java.util.Date;
-import java.util.UUID;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -16,7 +13,6 @@ import org.springframework.jdbc.core.PreparedStatementCreator;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.aurospaces.neighbourhood.bean.LpoitemsBean;
@@ -29,7 +25,7 @@ public class BaseLpoitemsDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO lpoitems( createdtime, updated_time, itemid, lponumber, quantity, price, totalprice, discount, grandtotal) values (?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO lpoitems( createdtime, updated_time, itemid, lponumber, quantity, price, totalprice, discount, grandtotal,manufacturingdate,expirydate) values (?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)"; 
 
 
 
@@ -73,6 +69,8 @@ ps.setString(6, lpoitems.getPrice());
 ps.setString(7, lpoitems.getTotalprice());
 ps.setString(8, lpoitems.getDiscount());
 ps.setString(9, lpoitems.getGrandtotal());
+ps.setString(10, lpoitems.getManufacturingdate());
+ps.setString(11, lpoitems.getExpirydate());
 
 							return ps;
 						}
@@ -87,9 +85,9 @@ ps.setString(9, lpoitems.getGrandtotal());
 		else
 		{
 
-			String sql = "UPDATE lpoitems  set createdtime = ? ,itemid = ? ,lponumber = ? ,quantity = ? ,price = ? ,totalprice = ? ,discount = ? ,grandtotal = ?  where id = ? ";
+			String sql = "UPDATE lpoitems  set createdtime = ? ,itemid = ? ,lponumber = ? ,quantity = ? ,price = ? ,totalprice = ? ,discount = ? ,grandtotal = ?,manufacturingdate=?,expirydate=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{lpoitems.getCreatedtime(),lpoitems.getItemid(),lpoitems.getLponumber(),lpoitems.getQuantity(),lpoitems.getPrice(),lpoitems.getTotalprice(),lpoitems.getDiscount(),lpoitems.getGrandtotal(),lpoitems.getId()});
+			jdbcTemplate.update(sql, new Object[]{lpoitems.getCreatedtime(),lpoitems.getItemid(),lpoitems.getLponumber(),lpoitems.getQuantity(),lpoitems.getPrice(),lpoitems.getTotalprice(),lpoitems.getDiscount(),lpoitems.getGrandtotal(),lpoitems.getManufacturingdate(),lpoitems.getExpirydate(),lpoitems.getId()});
 		}
 	}
 		

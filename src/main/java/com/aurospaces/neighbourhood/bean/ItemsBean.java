@@ -34,8 +34,15 @@ protected String name ;
 protected String description ;
 
 protected String price ;
-protected String discount ;
+protected String discount,itemType ;
 
+
+public String getItemType() {
+	return itemType;
+}
+public void setItemType(String itemType) {
+	this.itemType = itemType;
+}
 protected String status ;
 protected String itemstatus ;
 

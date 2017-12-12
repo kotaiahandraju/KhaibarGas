@@ -10,6 +10,7 @@ public class CylinderTypesBean {
 	protected String capacity;
 	protected String name;
 	protected String amount;
+	
 	public int getId() {
 		return id;
 	}

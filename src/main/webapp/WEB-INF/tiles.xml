@@ -74,6 +74,16 @@
 	<definition name="FillingStationInQualitycheck" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/FillingStationInQualitycheck.jsp" />
 	</definition>
+	<definition name="cylinderQualityCheck" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/cylinderQualityCheck.jsp" />
+	</definition>
+	<definition name="cylinderMovetoTruck" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/cylinderMovetoTruck.jsp" />
+	</definition>
+	<definition name="expenseTrackerHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/expenseTracker.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>
 

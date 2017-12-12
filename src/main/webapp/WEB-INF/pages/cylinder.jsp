@@ -41,7 +41,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="size"   class="form-control cylinderSize">
+								    	<form:select path="size" class="form-control cylinderSize validate" onfocus="removeBorder(this.id)" onchange="getLpoNumber();">
 								    	<form:option value="">-- Select Size --</form:option>
 								    	<form:options items="${cylinderTypes }"></form:options>
 								    	</form:select>
@@ -53,7 +53,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Store<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								   	   <form:select path="store" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id),getStoreDetails(this.value)" >
+								   	   <form:select path="store" value="" class="form-control chzn-select validate" onchange="removeBorder(this.id),getStoreDetails(this.value)" >
 								    	<form:option value="">-- Select Store --</form:option>
 								    	<form:options items="${stores }"></form:options>
 								    	</form:select>
@@ -63,6 +63,7 @@
 								    </div>
                     			</div>
                     		</div>
+                    		<div class="clearfix"></div>
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">LPO Number<span class="impColor">*</span></label>
@@ -88,11 +89,13 @@
 								    </div>
                     			</div>
                     		</div>
+                    		<div class="clearfix"></div>
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="color" class="form-control validate " value="Red">
+								    	<form:select path="color" class="form-control validate" onfocus="removeBorder(this.id)">
+									  		<form:option value="">-- Select Cylinder Color --</form:option>
 									  		<form:option value="red">Red</form:option>
 									  		<form:option value="green">Green</form:option>
 									  		<form:option value="yellow">Yellow</form:option>
@@ -120,7 +123,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Expiry Date<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="expirtdate1" value="" class="form-control" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" />
+								    	<form:input path="expirtdate1" value="" class="form-control validate" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" />
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
@@ -129,7 +132,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Location</label>
 								    <div class="col-md-6">
-								    	<form:input path="location" value="" readonly="true" class="form-control validate onlyCharacters" placeholder="Location" />
+								    	<form:input path="location" value="" readonly="true" class="form-control onlyCharacters" placeholder="Location" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -138,7 +141,8 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Remarks</label>
 								    <div class="col-md-6">
-								    	<form:input path="remarks" value="" class="form-control"  placeholder="Remarks"/>
+<%-- 								    	<form:input path="remarks" value="" class="form-control"  placeholder="Remarks"/> --%>
+								    	<form:textarea path="remarks" class="form-control" placeholder="Remarks"></form:textarea>
 								      	<span class="hasError" id="remarksError"></span>
 								    </div>
                     			</div>
@@ -217,9 +221,9 @@ function displayTable(listOrders) {
 	$.each(listOrders,function(i, orderObj) {
 		
 					if(orderObj.status == "1"){
-						var deleterow = "<a class='deactive' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+						var deleterow = "<a class='deactivate' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 					}else{  
-						var deleterow = "<a class='active' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+						var deleterow = "<a class='activate' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 					}
 					var edit = "<a class='edit' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;
@@ -251,7 +255,7 @@ function displayTable(listOrders) {
 	    });*/
 }
 
-
+var lpo = "";
 function editCylinder(id) {
 // 	$("#cylinderId1").show();
 	$("#id").val(serviceUnitArray[id].id);
@@ -259,17 +263,21 @@ function editCylinder(id) {
 	$("#size").val(serviceUnitArray[id].size);
 	$("#capacity").val(serviceUnitArray[id].capacity);
 	$("#location").val(serviceUnitArray[id].location);
-	$("#lponumber").val(serviceUnitArray[id].lponumber);
-	$("#lponumber").trigger("chosen:updated");
+	 lpo =  serviceUnitArray[id].lponumber
 	$("#color").val(serviceUnitArray[id].color);
 	$("#madein").val(serviceUnitArray[id].madein);
 	$("#expirtdate1").val(serviceUnitArray[id].expirtdate1);
 	$("#ownercompany").val(serviceUnitArray[id].ownercompany);
+	$("#ownercompany").trigger("chosen:updated");
+	$("#store").val(serviceUnitArray[id].store);
+	$("#store").trigger("chosen:updated")
 	$("#cylinderstatus").val(serviceUnitArray[id].cylinderstatus);
 	$("#remarks").val(serviceUnitArray[id].remarks);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('body').offset().top);
-	
+	getLpoNumber();
+	$("#lponumber").val(lpo);
+	$("#lponumber").trigger("chosen:updated");
 	}
 function deleteCylinder(id,status){
 	var checkstr=null;
@@ -294,10 +302,9 @@ function deleteCylinder(id,status){
 	
 }
 
-$('#size').change(function(){
+function getLpoNumber(){
 	
-	
-    var cid = $(this).val();
+    var cid = $("#size").val();
 
     var formData = new FormData();
     formData.append('cid', cid);
@@ -308,16 +315,19 @@ $('#size').change(function(){
     	$("#capacity").val(data);
     	var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.list;
-		var html = "<option value=''>-- Select --</option>";
+		var html = "<option value=''>-- Select LPO Number --</option>";
 		$.each(alldata,function(i, catObj) {
 			 html = html + '<option value="'
 				+ catObj.lponumber + '">'
 				+ catObj.lponumber + '</option>';
 		});
 		$('#lponumber').empty().append(html);
-    	
+    	if(lpo !=""){
+    		$("#lponumber").val(lpo);
+    		$("#lponumber").trigger("chosen:updated");
+    	}
     });
-}); 
+}
 
 
  /* $('#lponumber').change(function(){
@@ -370,7 +380,7 @@ function getLPOdetails(value){
 		console.log(jsonobj.allOrders1);
 		$.each(alldata,function(i, orderObj) {
 			$("#madein").val(orderObj.suppliername);
-			$("#expirtdate1").val(orderObj.expiryDate);
+			$("#expirtdate1").val(orderObj.expirydate);
 		});
 	});
 }

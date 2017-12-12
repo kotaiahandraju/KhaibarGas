@@ -50,7 +50,7 @@
 												<div class="col-sm-6">
 												<form:hidden path="id"/>
 													<form:input path="staffcode"
-														class="form-control numericOnly validate"
+														class="form-control  validate"
 														autocomplete="off" placeholder="Staff Code"
 														required="required" />
 													<span class="hasError" id="staffcodeError"></span>
@@ -68,7 +68,7 @@
 												</label>
 												<div class="col-sm-6">
 													<form:input path="staffno"
-														class="form-control numericOnly validate"
+														class="form-control  validate"
 														autocomplete="off" placeholder="3 digit number" required="required" maxlength="3" />
 													<span class="hasError" id="staffnoError"></span>
 													<div>

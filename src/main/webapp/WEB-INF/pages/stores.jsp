@@ -13,69 +13,7 @@
             <div class="clearfix"></div>
         <div class="container">
             
-                    
             <div class="row">
-            <div class="col-md-10 col-md-offset-1 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4>Add Store</h4>
-                        <div class="options">
-                        </div>
-                    </div>
-	                <form:form modelAttribute="storeForm" action="storeSave" class="form-horizontal" method="Post" >
-	                <div class="panel-body">
-	                <c:if test="${not empty msg}">
-	                    	<div class="row">
-	                    		<div class="col-sm-4 col-sm-offset-4">
-	                    			<div class="form-group">
-	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg} <span style="color: red;">${msgId}</span></div>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-                    	</c:if>
-                    	<div class="row">
-                    	   
-                    			<div class="form-group">
-                    			<form:hidden path="id"/>
-                   				<%-- <form:hidden  path="storeid" length="3" class="form-control validate" placeholder="Store id"/> --%>
-                    			
-                    		 <div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Store Name<span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-                    				<form:input  path="storename" class="form-control validate" placeholder="Store Name"/>
-                    				<form:hidden path="id"/>
-                    				<form:hidden path="status"/>
-                    				</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label ">Store Location<span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-		                            	<form:input  path="location" class="form-control validate" placeholder="Store Location"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    	</div>
-                    </div>
-                    </div>
-                    
-                    <div class="panel-footer">
-				      	<div class="row">
-				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar pull-right">
-					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
-					      			<input class="btn-danger btn" type="reset" value="Reset" />
-				      			</div>
-				      		</div>
-				      	</div>
-				      </div>
-         			</form:form>				    
-                </div>
-            </div>
-        </div>
-        <div class="row">
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -96,11 +34,71 @@
                         </div>
                     </div>
                 </div>
-            </div>
+        	</div>
+                    
+            <div class="row">
+	            <div class="col-md-10 col-md-offset-1 col-sm-12">
+	                <div class="panel panel-primary">
+	                    <div class="panel-heading">
+	                        <h4>Add Store</h4>
+	                        <div class="options">
+	                        </div>
+	                    </div>
+		                <form:form modelAttribute="storeForm" action="storeSave" class="form-horizontal" method="Post" >
+		                <div class="panel-body">
+		                <c:if test="${not empty msg}">
+		                    	<div class="row">
+		                    		<div class="col-sm-4 col-sm-offset-4">
+		                    			<div class="form-group">
+		                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg} <span style="color: red;">${msgId}</span></div>
+		                    			</div>
+		                    		</div>
+		                    	</div>
+	                    	</c:if>
+	                    	<div class="row">
+	                    	   
+	                    			<div class="form-group">
+	                    			<form:hidden path="id"/>
+	                   				<%-- <form:hidden  path="storeid" length="3" class="form-control validate" placeholder="Store id"/> --%>
+	                    			
+	                    		 <div class="col-md-6">
+	                    			<div class="form-group">
+	                    				<label for="focusedinput" class="col-md-4 control-label">Store Name<span class="impColor">*</span></label>
+	                    				<div class="col-md-6">
+	                    				<form:input  path="storename" class="form-control validate" placeholder="Store Name"/>
+	                    				<form:hidden path="id"/>
+	                    				<form:hidden path="status"/>
+	                    				</div>
+	                    			</div>
+	                    		</div>
+	                    		<div class="col-md-6">
+	                    			<div class="form-group">
+	                    				<label for="focusedinput" class="col-md-4 control-label ">Store Location<span class="impColor">*</span></label>
+	                    				<div class="col-md-6">
+			                            	<form:input  path="location" class="form-control validate" placeholder="Store Location"/>
+									  	</div>
+	                    			</div>
+	                    		</div>
+	                    	</div>
+	                    </div>
+	                    </div>
+	                    
+	                    <div class="panel-footer">
+					      	<div class="row">
+					      		<div class="col-sm-12">
+					      			<div class="btn-toolbar pull-right">
+						      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
+						      			<input class="btn-danger btn cancel" type="reset" value="Reset" />
+					      			</div>
+					      		</div>
+					      	</div>
+					      </div>
+	         			</form:form>				    
+	                </div>
+	            </div>
+			</div>
 
         </div> <!-- container -->
-
-
 
 
 <script type="text/javascript">
@@ -164,7 +162,7 @@ function editStore(id) {
 	$("#location").val(serviceUnitArray[id].location);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
-	$(window).scrollTop($('body').offset().top);
+	$(window).scrollTop($('#submit1').offset().top);
 }
 
 function deleteStore(id,status) {
@@ -206,7 +204,7 @@ function dataClear(){
 	$("#storeid").val("");
 	$("#location").val("");
 }
-$("#pageName").text("Stores Master");
+$("#pageName").text("Store Master");
 $(".stores").addClass("active"); 
 
 </script>

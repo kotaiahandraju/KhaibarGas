@@ -9,8 +9,8 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
-import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseItemsDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -58,7 +58,15 @@ public class ItemsDao extends BaseItemsDao
 			return retlist;
 		}
 
+	 public List<ItemsBean> getItems() {
+		 jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "select id,name from items where itemType='Truck' and status='1' ";
+			@SuppressWarnings("rawtypes")
+			List list=jdbcTemplate.queryForList(sql);
+			List<ItemsBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(ItemsBean.class));
+			return retlist;
 
+		}
 
 }
 
