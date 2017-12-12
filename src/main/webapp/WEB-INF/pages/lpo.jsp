@@ -101,7 +101,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">LPO Amount</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="amount"  class="form-control validate" placeholder=" Lpo Amount"/>
+		                            	<form:input type="text" path="amount"  class="form-control validate numericOnly" placeholder=" Lpo Amount"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -109,7 +109,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Paid Amount</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="paidamount" onkeyup="PaidCalculation(this.value)"  class="form-control validate" placeholder="Paid Amount"/>
+		                            	<form:input type="text" path="paidamount" onkeyup="PaidCalculation(this.value)"  class="form-control validate numericOnly" placeholder="Paid Amount"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -117,7 +117,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Due Amount</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="dueamount"  class="form-control validate" placeholder="Due Amount"/>
+		                            	<form:input type="text" path="dueamount"  class="form-control  numericOnly" placeholder="Due Amount"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -596,6 +596,12 @@ function priceCalculator(){
 	 }
 	 grandTotal = globalTaxable;
 	 $("#amount").val(grandTotal);
+	 var paidamount =$("#paidamount").val();
+	 if(paidamount.trim().length == 0){
+		 $("#dueamount").val(grandTotal);
+	 }else{
+		 $("#dueamount").val(parseInt(grandTotal)-parseInt(paidamount));
+	 }
 // 	 alert(grandTotal);
 	 $(".grandTotal").text(grandTotal.toFixed(2));
 // 	 $(".roundOff").text(Math.round(grandTotal).toFixed(2));
