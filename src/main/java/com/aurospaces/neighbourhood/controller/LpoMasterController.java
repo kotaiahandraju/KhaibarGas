@@ -1,7 +1,6 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.IOException;
-import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -25,12 +23,10 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
-import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LpoitemsBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.db.dao.LpoitemsDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
-import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -72,43 +68,52 @@ public class LpoMasterController {
 	@RequestMapping(value = "/lpoSave")
 		public  String lpoSave(@ModelAttribute("lpoForm")LpomasterBean lpomasterBean, 	@RequestParam("unit") String[] unit,@RequestParam("rate") String[] rate,
 				@RequestParam("totalvalue") String[] totalvalue,@RequestParam("discount") String[] discount,@RequestParam("item1") String[] item,
-				@RequestParam("taxable") String[] taxable,@RequestParam("manufacturingdate") String[] manufacturingdate,@RequestParam("expirydate") String[] expirydate,HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
-			boolean isInsert = false;
-			String sJson = "";
-			List<LpomasterBean> lpomaster=null;
-			 String sProductId ="";
-			 Integer existId =null;
+				@RequestParam("taxable") String[] taxable,@RequestParam("manufacturingdate") String[] manufacturingdate,@RequestParam("expirydate") String[] expirydate,HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes redirect) {
 			 LpoitemsBean objLpoitemsBean = null;
 			 System.out.println("lpoSave");
+			 int id = 0;
 			try {
 				System.out.println("--------lpoSave----------"+lpomasterBean.getAmount());
 				
 				String sLpoNo=lpomasterBean.getLponumber();
-				lpomaster=lpomasterDao.getByLpoNo(sLpoNo);
-				System.out.println("customerSave"+lpomaster);
-				if(lpomaster.size() ==0 || lpomaster ==null){
-					lpomasterBean.setStatus("1");
-					lpomasterDao.save(lpomasterBean);
-					reAttributes.addFlashAttribute("msg", "Record Inserted Successfully");
-					reAttributes.addFlashAttribute("cssMsg", "success");
-				}else{
-					for (LpomasterBean lpomasterBean2 : lpomaster) {
-						
-						 existId=lpomasterBean2.getId();
-						 if(existId==lpomasterBean.getId()){
-							 lpomasterDao.save(lpomasterBean);
-							 reAttributes.addFlashAttribute("msg", "Record Updated Successfully");
-							 reAttributes.addFlashAttribute("cssMsg", "warning");
-
-						 }else{
-							 reAttributes.addFlashAttribute("msg", "LPO Number already exist.");
-							 reAttributes.addFlashAttribute("cssMsg", "danger");
-							 return "redirect:lpoHome";
-
-							}
+				LpomasterBean	lpomaster=lpomasterDao.getByLpoNo(sLpoNo);
+				
+				int dummyId =0;
+				if(lpomaster != null){
+					dummyId = lpomaster.getId();
+				}
+				if(lpomasterBean.getId() != 0)
+				{
+					id = lpomasterBean.getId();
+					if(id == dummyId || lpomaster == null )
+					{
+						lpomasterDao.save(lpomasterBean);
+						redirect.addFlashAttribute("msg", "Record Updated Successfully");
+						redirect.addFlashAttribute("cssMsg", "warning");
+					}
+					else
+					{
+						objRequest.setAttribute("msg", "Already Record Exist");
+						objRequest.setAttribute("cssMsg", "danger");
+						redirect.addFlashAttribute("msg", "Already Record Exist");
+						redirect.addFlashAttribute("cssMsg", "danger");
+						return "lpoHome"; 
 					}
 				}
-				
+				if(lpomasterBean.getId() == 0 && lpomaster == null)
+				{
+					lpomasterDao.save(lpomasterBean);
+					redirect.addFlashAttribute("msg", "Record Inserted Successfully");
+					redirect.addFlashAttribute("cssMsg", "success");
+				}
+				if(lpomasterBean.getId() == 0 && lpomaster != null)
+				{
+					objRequest.setAttribute("msg", "Already Record Exist");
+					objRequest.setAttribute("cssMsg", "danger");
+					redirect.addFlashAttribute("msg", "Already Record Exist");
+					redirect.addFlashAttribute("cssMsg", "danger");
+					return "lpoHome"; 
+				}
 				for(int i=0; i<unit.length; i++)
 				{
 					objLpoitemsBean= new LpoitemsBean();

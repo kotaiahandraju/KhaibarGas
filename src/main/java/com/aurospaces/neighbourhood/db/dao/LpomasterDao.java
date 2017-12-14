@@ -47,7 +47,7 @@ public class LpomasterDao extends BaseLpomasterDao
 		}
 		return sJson;
 	}
-	 public List<LpomasterBean> getByLpoNo(String sMobileNo) {
+	 public LpomasterBean getByLpoNo(String sMobileNo) {
 		 List<LpomasterBean> retlist =null;
 		 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "SELECT * from lpomaster where lponumber = ? ";
@@ -55,8 +55,8 @@ public class LpomasterDao extends BaseLpomasterDao
 			new Object[]{sMobileNo},
 			ParameterizedBeanPropertyRowMapper.newInstance(LpomasterBean.class));
 			if(retlist.size() > 0)
-				return retlist;
-			return retlist;
+				return retlist.get(0);
+			return null;
 		}
 	 public List<LpomasterBean> getLPOdetails(LpomasterBean lpomasterBean) {
 		 List<LpomasterBean> retlist =null;
@@ -72,7 +72,8 @@ public class LpomasterDao extends BaseLpomasterDao
 	 public List<LpoitemsBean> viewLPOdetails(LpomasterBean lpomasterBean) {
 		 List<LpoitemsBean> retlist =null;
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select li.lponumber,li.quantity,li.price,li.totalprice,li.discount,li.grandtotal,i.name as itemid from lpoitems li ,items i where i.id=li.itemid and li.lponumber=? ";
+//			String sql = "select li.lponumber,li.quantity,li.price,li.totalprice,li.discount,li.grandtotal,i.name as itemid from lpoitems li ,items i where i.id=li.itemid and li.lponumber=? ";
+		 String sql = "select * from lpoitems where lponumber = ?";
 			 retlist = jdbcTemplate.query(sql,	new Object[]{lpomasterBean.getLponumber()},ParameterizedBeanPropertyRowMapper.newInstance(LpoitemsBean.class));
 			if(retlist.size() > 0)
 				return retlist;

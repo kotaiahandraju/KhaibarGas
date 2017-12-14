@@ -316,6 +316,7 @@ $(function() {
 });
 var damageId = 0;
 var serviceUnitArray ={};
+var serviceUnitArray1 ={};
 var data = {};
 
 
@@ -338,7 +339,7 @@ function showTableData(response){
 		
 		var edit = "<a class='edit' id='editId' onclick='editLpo("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
-			
+		serviceUnitArray1[orderObj.lponumber] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td id='"+orderObj.lponumber+"' style='text-align: center;cursor: pointer;color: red; text-decoration: underline;' onclick=viewDetails(this.id) title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
 						+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
@@ -374,11 +375,11 @@ function editLpo(id) {
 	$("#amount").val(serviceUnitArray[id].amount);
 	$("#supplieremail").val(serviceUnitArray[id].supplieremail);
 	$("#status").val(serviceUnitArray[id].status);
+	$("#paidamount").val(serviceUnitArray[id].paidamount);
+	$("#dueamount").val(serviceUnitArray[id].dueamount);
+	
 	$("#submit1").val("Update");
-	if(serviceUnitArray[id].item =="1"){
-		$("#exporydatediv").show();
-		$("#expiryDate1").val(serviceUnitArray[id].expiryDate1);
-	}
+
 	$(window).scrollTop($('body').offset().top);
 }
 
@@ -607,6 +608,8 @@ function priceCalculator(){
 }
 
 function viewDetails(id){
+	var LpoId = serviceUnitArray1[id].id;
+	editLpo(LpoId);
 	$('#dial1').html('');
 	var formData = new FormData();
     formData.append('lponumber', id);
@@ -615,7 +618,7 @@ function viewDetails(id){
 		var lponumbertitle=null;
 		var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.allOrders1;
-		console.log(jsonobj.allOrders1);
+		/* console.log(jsonobj.allOrders1);
 		var tblRow ="<table id='viewtable' class='meta table-bordered' style='width: 100%;'><thead>"
 			+	"<th><span >Lponumber </span></th>"
 			+	"<th><span >Item Name</span></th>"
@@ -626,9 +629,24 @@ function viewDetails(id){
 			+	"<th><span >Grandtotal</span></th></thead>"
 			+"<tbody></tbody>"
 			+"</table>";
-			$(tblRow).appendTo("#dial1");
+			$(tblRow).appendTo("#dial1"); */
+			var j=1;
 		$.each(alldata,	function(i, orderObj) {
-			var lponumber =orderObj.lponumber;
+			if(j == 1){
+				
+				$("#1item").val(orderObj.itemid);
+				$("#1unit").val(orderObj.quantity);
+				$("#1rate").val(orderObj.price);
+				$("#1totalvalue").val(orderObj.totalprice); 
+				$("#1discount").val(orderObj.discount);
+				$("#1taxable").val(orderObj.grandtotal);
+				$("#1manufacturingdate").val(orderObj.manufacturingdate);
+				$("#1expirydate").val(orderObj.expirydate);
+			}else{
+				addMoreRowsForDependent();
+			}
+			j++;
+			/* var lponumber =orderObj.lponumber;
 			lponumbertitle = lponumber;
 			var quantity =orderObj.quantity;
 			var price =orderObj.price;
@@ -649,9 +667,9 @@ function viewDetails(id){
 				+	"</tr>";
 				
 			
-			  	$(tblRow1).appendTo("#viewtable tbody ");
+			  	$(tblRow1).appendTo("#viewtable tbody "); */
 		});
-		$('#dial1').dialog({ title:lponumbertitle,width:1199,height:600,modal: true}).dialog('open');
+// 		$('#dial1').dialog({ title:lponumbertitle,width:1199,height:600,modal: true}).dialog('open');
 	});
 }
 

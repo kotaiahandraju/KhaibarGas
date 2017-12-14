@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseFillingstationmasterDao;

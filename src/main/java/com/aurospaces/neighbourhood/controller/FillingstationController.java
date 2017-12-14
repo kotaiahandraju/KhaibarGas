@@ -36,10 +36,10 @@ public class FillingstationController {
 	public String fillingStationHome(@Valid @ModelAttribute("fillingStationForm") FillingstationmasterBean objFillingstationmasterBean, ModelMap model, HttpServletRequest request,
 			HttpSession session) {
 		
-		 Random ran = new Random();
-		 String id = String.format("%04d", ran.nextInt(10000));
+//		 Random ran = new Random();
+//		 String id = String.format("%04d", ran.nextInt(10000));
 		 
-		 objFillingstationmasterBean.setUnitpoint(id);
+//		 objFillingstationmasterBean.setUnitpoint(id);
 		
 	  logger.info("hi");
 		
