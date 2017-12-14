@@ -195,7 +195,7 @@ function showTableData(response){
 						+ "<td title='"+orderObj.contactperson+"'>" + orderObj.contactperson + "</td>"
 						+ "<td title='"+orderObj.customertype+"'>" + orderObj.customertype + "</td>"
 						+ "<td title='"+orderObj.custStatus+"'>" + orderObj.custStatus + "</td>"
-						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
+						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
 			});

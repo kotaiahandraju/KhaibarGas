@@ -193,12 +193,7 @@ function editCylinder(id) {
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 	
-	
-	
-	
-	
-//	$(window).scrollTop($('#addForm').offset().top);
-	}
+}
 function deleteCylinder(id,status){
 	var checkstr=null;
 	if(status == 0){

@@ -22,7 +22,7 @@
 					</div>
 					<div class="panel-body collapse in">
 						<div class="table-responsive" id="tableId">
-							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+							<table class="table table-striped table-bordered datatables" id="example">
 								<thead>
 									<tr>
 										<th>Truck Number</th><th>Registration Expiry</th><th>Civil Defense Card Expiry</th><th>Service Due</th><th>Make</th>
@@ -42,7 +42,6 @@
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h4>Add Truck</h4>
-						<div class="options"></div>
                     </div>
 					<form:form modelAttribute="truckForm" class="form-horizontal" action="addTruck">
 					<div class="panel-body">
@@ -64,8 +63,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Civil Defense Card Expiry <span class="impColor">*</span></label>
@@ -82,8 +79,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Make <span class="impColor">*</span></label>
@@ -92,16 +87,6 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6">
-								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Description <span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<form:input path="description" type="text" class="form-control validate" placeholder="Description"/>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Capacity of Truck <span class="impColor">*</span></label>
@@ -121,8 +106,6 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
 							<div class="col-md-6">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Type Of Service <span class="impColor">*</span></label>
@@ -133,6 +116,15 @@
 									  		<form:option value="Agency Repairs">Agency Repairs</form:option>
 									  		<form:option value="Agency Service">Agency Service</form:option>
 									  	</form:select>
+									</div>
+								</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label">Description</label>
+									<div class="col-md-6">
+										<form:textarea path="description" class="form-control" placeholder="Description"></form:textarea>
 									</div>
 								</div>
 							</div>
@@ -196,23 +188,21 @@ function displayTable(listOrders) {
 		}else{  
 			var deleterow = "<a class='activate' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
-					var edit = "<a class='edit' onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
-					serviceUnitArray[orderObj.id] = orderObj;
-					var tblRow = "<tr >"
-							+ "<td title='"+orderObj.trucknumber+"'>"+ orderObj.trucknumber + "</td>"
-							+ "<td title='"+orderObj.registrationexpirydate1+"'>"+ orderObj.registrationexpirydate1 + "</td>"
-							+ "<td title='"+orderObj.civildefensecardexpirydate1+"'>"+ orderObj.civildefensecardexpirydate1 + "</td>"
-							+ "<td title='"+orderObj.servicedue1+"'>"+ orderObj.servicedue1 + "</td>"
-							+ "<td title='"+orderObj.make+"'>"+ orderObj.make + "</td>"
-							+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
-							+ "<td title='"+orderObj.capacityoftruck+"'>"+ orderObj.capacityoftruck + "</td>"
-							+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber + "</td>"
-							+ "<td title='"+orderObj.truckStatus+"'>"+ orderObj.truckStatus + "</td>"
-							
-							+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
-							+ "</tr >";
-					$(tblRow).appendTo("#tableId table tbody");
-				
+		var edit = "<a class='edit' onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+		serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr >"
+			+ "<td title='"+orderObj.trucknumber+"'>"+ orderObj.trucknumber + "</td>"
+			+ "<td title='"+orderObj.registrationexpirydate1+"'>"+ orderObj.registrationexpirydate1 + "</td>"
+			+ "<td title='"+orderObj.civildefensecardexpirydate1+"'>"+ orderObj.civildefensecardexpirydate1 + "</td>"
+			+ "<td title='"+orderObj.servicedue1+"'>"+ orderObj.servicedue1 + "</td>"
+			+ "<td title='"+orderObj.make+"'>"+ orderObj.make + "</td>"
+			+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
+			+ "<td title='"+orderObj.capacityoftruck+"'>"+ orderObj.capacityoftruck + "</td>"
+			+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber + "</td>"
+			+ "<td title='"+orderObj.truckStatus+"'>"+ orderObj.truckStatus + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			+ "</tr >";
+		$(tblRow).appendTo("#tableId table tbody");		
 	});
 }
 
@@ -243,8 +233,7 @@ function deletetruckMaster(id,status){
 		var formData = new FormData();
 	    formData.append('id', id);
 	    formData.append('status', status);
-		$.fn.makeMultipartRequest('POST', 'deletetruckMaster', false,
-				formData, false, 'text', function(data){
+		$.fn.makeMultipartRequest('POST', 'deletetruckMaster', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
 			window.location.reload();
 	// 		var alldata = jsonobj.allOrders1;

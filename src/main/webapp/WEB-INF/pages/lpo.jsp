@@ -52,7 +52,7 @@ table#dependent_table tbody tr td:first-child::before {
                 </div>
             </div>
                     
-            <div class="row">
+            <div class="row" id="moveTo">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -62,15 +62,6 @@ table#dependent_table tbody tr td:first-child::before {
 	                <form:form modelAttribute="lpoForm" id="formId" action="lpoSave" class="form-horizontal" method="post" >
 <table><tr><td>                    
                     <div class="panel-body">
-	                	<c:if test="${not empty msg}">
-	                		<div class="row">
-	                    		<div class="col-md-4 col-md-offset-4">
-	                    			<div class="form-group">
-										<div class="msgcss alert alert-success fadeIn animated">${msg}</div>
-									</div>
-								</div>
-							</div>
-						</c:if>
 <!--                     	<div class="row"> -->
                     		<div class="col-md-4">
                     			<div class="form-group">
@@ -379,8 +370,7 @@ function editLpo(id) {
 	$("#dueamount").val(serviceUnitArray[id].dueamount);
 	
 	$("#submit1").val("Update");
-
-	$(window).scrollTop($('body').offset().top);
+	$(window).scrollTop($('#moveTo').offset().top);
 }
 
 function lpoDelete(id,status) {
@@ -658,11 +648,6 @@ function PaidCalculation(value){
 	}
 }
 
-
-
 $("#pageName").text("LPO Master");
 $(".lpo").addClass("active");
-
-
-
 </script>
