@@ -180,28 +180,28 @@ function editExpensiveTracker(id) {
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
-		function deleteExpensiveTracker(id,status) {
-			var checkstr=null;
-			if(status == 0){
-				 checkstr =  confirm('Are you sure you want to Deactivate?');
-			}else{
-				 checkstr =  confirm('Are you sure you want to Activate?');
-			}
-			if (checkstr == true) {
-				var formData = new FormData();
-				formData.append('id', id);
-				formData.append('status', status);
-				$.fn.makeMultipartRequest('POST', 'deleteExpensiveTracker',
-						false, formData, false, 'text', function(data) {
-							var jsonobj = $.parseJSON(data);
-// 							var alldata = jsonobj.allOrders1;
-// 							console.log(jsonobj.allOrders1);
-// 							displayTable(alldata);
-							window.location.reload();
-						});
-			}
 
-		}
-		$("#pageName").text("Expense Tracker");
-		$(".expenseTracker").addClass("active"); 
-	</script>
+function deleteExpensiveTracker(id,status) {
+	var checkstr=null;
+	if(status == 0){
+		checkstr =  confirm('Are you sure you want to Deactivate?');
+	}else{
+		checkstr =  confirm('Are you sure you want to Activate?');
+	}
+	if (checkstr == true) {
+		var formData = new FormData();
+		formData.append('id', id);
+		formData.append('status', status);
+		$.fn.makeMultipartRequest('POST', 'deleteExpensiveTracker', false, formData, false, 'text', function(data) {
+			var jsonobj = $.parseJSON(data);
+// 			var alldata = jsonobj.allOrders1;
+// 			console.log(jsonobj.allOrders1);
+// 			displayTable(alldata);
+			window.location.reload();
+		});
+	}
+
+}
+$("#pageName").text("Expense Tracker");
+$(".expenseTracker").addClass("active"); 
+</script>
