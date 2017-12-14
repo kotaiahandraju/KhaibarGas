@@ -88,6 +88,8 @@ public class LpoMasterController {
 					if(id == dummyId || lpomaster == null )
 					{
 						lpomasterDao.save(lpomasterBean);
+						LpomasterBean deleteLpoItems = lpomasterDao.getById(lpomasterBean.getId());
+						lpoitemsDao.deleteLPONumber(deleteLpoItems.getLponumber());
 						redirect.addFlashAttribute("msg", "Record Updated Successfully");
 						redirect.addFlashAttribute("cssMsg", "warning");
 					}

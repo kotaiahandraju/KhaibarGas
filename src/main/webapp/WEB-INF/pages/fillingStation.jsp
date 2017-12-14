@@ -39,7 +39,7 @@
 				</div>
 			</div>
 				
-				<div class="row">
+				<div class="row" id="moveTo">
 					<div class="col-md-10 col-md-offset-1 col-sm-12">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
@@ -52,18 +52,18 @@
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
 	                    				<form:hidden path="id"/>
-										<label for="focusedinput" class="col-md-4 control-label">Station Number<span class="impColor">*</span></label>
+										<label for="focusedinput" class="col-md-4 control-label">Station Number <span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="unitpoint" class="form-control validate" placeholder="station number" />	
+											<form:input path="unitpoint" class="form-control validate" placeholder="Station Number" />	
 											<span class="hasError" id="unitpointError"></span>
 									    </div>
 	                    			</div>
 	                    		</div>
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Station Name<span class="impColor">*</span></label>
+										<label for="focusedinput" class="col-md-4 control-label">Station Name <span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="stationname" class="form-control validate onlyCharacters" placeholder="station Name" />	
+											<form:input path="stationname" class="form-control validate onlyCharacters" placeholder="Station Name" />	
 											<span class="hasError" id="stationnameError"></span>
 									    </div>
 	                    			</div>
@@ -72,18 +72,18 @@
                     		<div class="row">
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Opening Balance<span class="impColor">*</span></label>
+										<label for="focusedinput" class="col-md-4 control-label">Opening Balance <span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="gasavailability" class="form-control validate numericOnly" placeholder="opening Balance" />	
+											<form:input path="gasavailability" class="form-control validate numericOnly" placeholder="Opening Balance" />	
 											<span class="hasError" id="gasavailabilityError"></span>
 									    </div>
 	                    			</div>
 	                    		</div>
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label  ">Quantity<span class="impColor">*</span></label>
+										<label for="focusedinput" class="col-md-4 control-label">Quantity <span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="quantity" type="text" class="form-control validate numericOnly" placeholder="quantity" />	
+											<form:input path="quantity" type="text" class="form-control validate numericOnly" placeholder="Quantity" />	
 											<span class="hasError" id="quantityError"></span>
 									    </div>
 	                    			</div>
@@ -92,18 +92,18 @@
                     		<div class="row">
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label ">Capacity<span class="impColor">*</span></label>
+										<label for="focusedinput" class="col-md-4 control-label">Capacity <span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="gascapacity" class="form-control  validate numericOnly"	placeholder="capacity" />	
+											<form:input path="gascapacity" class="form-control validate numericOnly" placeholder="Capacity" />	
 											<span class="hasError" id="gascapacityError"></span>
 									    </div>
 	                    			</div>
 	                    		</div>
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label ">Filling 	Machines<span class="impColor">*</span> </label>
+										<label for="focusedinput" class="col-md-4 control-label">Filling Machines <span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="numberoffillingmachines"	class="form-control  validate numericOnly" placeholder="filling machines" />	
+											<form:input path="numberoffillingmachines"	class="form-control validate numericOnly" placeholder="Filling Machines" />	
 											<span class="hasError" id="numberoffillingmachinesError"></span>
 									    </div>
 	                    			</div>
@@ -112,9 +112,9 @@
                     		<div class="row">
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label ">Closing Balance<span class="impColor">*</span> </label>
+										<label for="focusedinput" class="col-md-4 control-label">Closing Balance <span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="availablegas" class="form-control  validate numericOnly" 	placeholder="closing Balance in gasTank" />	
+											<form:input path="availablegas" class="form-control validate numericOnly" placeholder="Closing Balance in gasTank" />	
 											<span class="hasError" id="availablegasError"></span>
 									    </div>
 	                    			</div>
@@ -159,9 +159,9 @@ function displayTable(listOrders) {
 	$.each(listOrders,function(i, orderObj) {
 		
 					if(orderObj.status == "1"){
-						var deleterow = "<a class='deactive' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+						var deleterow = "<a class='deactivate' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 					}else{  
-						var deleterow = "<a class='active' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+						var deleterow = "<a class='activate' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 					}
 					var edit = "<a class='edit' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;
@@ -176,9 +176,8 @@ function displayTable(listOrders) {
 							+ "<td title='"+orderObj.fillingStatus+"'>"+ orderObj.fillingStatus + "</td>"
 							+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 							+ "</tr >";
-					$(tblRow).appendTo("#tableId table tbody");
-					});
-	
+		$(tblRow).appendTo("#tableId table tbody");
+	});
 }
 
 
@@ -192,7 +191,7 @@ function editCylinder(id) {
 	$("#stationname").val(serviceUnitArray[id].stationname);
 	$("#unitpoint").val(serviceUnitArray[id].unitpoint);
 	$("#submit1").val("Update");
-	$(window).scrollTop($('body').offset().top);
+	$(window).scrollTop($('#moveTo').offset().top);
 	
 	
 	
@@ -203,16 +202,15 @@ function editCylinder(id) {
 function deleteCylinder(id,status){
 	var checkstr=null;
 	if(status == 0){
-		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+		 checkstr = confirm('Are you sure you want to Deactivate this?');
 	}else{
-		 checkstr =  confirm('Are you sure you want to Activate this?');
+		 checkstr = confirm('Are you sure you want to Activate this?');
 	}
 	if(checkstr == true){
 	var formData = new FormData();
-     formData.append('id', id);
-     formData.append('status', status);
-	$.fn.makeMultipartRequest('POST', 'deletefillingstation', false,
-			formData, false, 'text', function(data){
+    formData.append('id', id);
+    formData.append('status', status);
+	$.fn.makeMultipartRequest('POST', 'deletefillingstation', false, formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		window.location.reload();
 // 		var alldata = jsonobj.allOrders1;

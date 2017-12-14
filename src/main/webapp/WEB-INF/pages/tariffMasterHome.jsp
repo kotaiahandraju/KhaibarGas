@@ -180,24 +180,23 @@
 
 
 <script>
-			var listOrders1 = ${allOrders1};
-			if (listOrders1 != "") {
-				displayTable(listOrders1);
-			}
+var listOrders1 = ${allOrders1};
+if (listOrders1 != "") {
+	displayTable(listOrders1);
+}
 			function displayTable(listOrders) {
 				$('#tableId').html('');
 				var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
 					+ '<thead><tr><th>Asset Code</th><th>Asset Description</th><th>Rate</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 			$('#tableId').html(tableHead);
 				serviceUnitArray = {};
-				$
-						.each(
+				$.each(
 								listOrders,
 								function(i, orderObj) {
 									if(orderObj.status == "1"){
-										var deleterow = "<a class='deactive' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+										var deleterow = "<a class='deactivate' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 									}else{  
-										var deleterow = "<a class='active' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+										var deleterow = "<a class='activate' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 									}
 									var edit = "<a class='edit' onclick='editTariffMasterDetails(" + orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
 									serviceUnitArray[orderObj.id] = orderObj;
@@ -212,7 +211,7 @@
 											+ "</tr >";
 									$(tblRow).appendTo("#tableId table tbody");
 								});
-				$(".datatables").DataTable();
+// 				$(".datatables").DataTable();
 
 			}
 			
@@ -243,21 +242,14 @@
 					$.fn.makeMultipartRequest('POST', 'deleteTariffMasterDetails',
 							false, formData, false, 'text', function(data) {
 								var jsonobj = $.parseJSON(data);
-								var alldata = jsonobj.allOrders1;
-								console.log(jsonobj.allOrders1);
-								displayTable(alldata);
-// 								window.location.reload();
+// 								var alldata = jsonobj.allOrders1;
+// 								console.log(jsonobj.allOrders1);
+// 								displayTable(alldata);
+								window.location.reload();
 							});
 				}
 
-			}
-			$("#pageName").text("Tariff Master");
-			$(".tariffMaster").addClass("active"); 
-		</script>
-<%-- <tr>
-<td>  Religion System</td>
- <td> <form:select path ="religionSystem" items="${religionsSystemList}"/> </td>
-</tr>
- --%>
-
-</html>
+}
+$("#pageName").text("Tariff Master");
+$(".tariffMaster").addClass("active"); 
+</script>

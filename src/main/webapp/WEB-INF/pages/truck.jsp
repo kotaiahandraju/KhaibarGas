@@ -25,7 +25,8 @@
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 								<thead>
 									<tr>
-										<th>Truck Number</th><th>Registration Expiry</th><th>Civil Defense Card Expiry</th><th>Service Due</th><th>Make</th><th>Description</th><th>Capacity of Truck</th><th>LPO Number</th><th>Truck Status</th><th></th>
+										<th>Truck Number</th><th>Registration Expiry</th><th>Civil Defense Card Expiry</th><th>Service Due</th><th>Make</th>
+										<th>Description</th><th>Capacity of Truck</th><th>LPO Number</th><th>Truck Status</th><th></th>
 									</tr>
 								</thead>
 								<tbody> </tbody>
@@ -113,10 +114,9 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">LPO Number <span class="impColor">*</span></label>
 									<div class="col-md-6">
-<%-- 										<form:input path="lponumber" type="text" class="form-control validate" placeholder="LPO Number "/> --%>
-										<form:select path="lponumber" value="" class="form-control  validate"  onchange="removeBorder(this.id),getLPOdetails(this.value)" >
-								    	<form:option value="">-- Select LPO Number --</form:option>
-								    	<form:options items="${LPONumbers }"></form:options> 
+										<form:select path="lponumber" value="" class="form-control validate" onfocus="removeBorder(this.id),getLPOdetails(this.value)" >
+									    	<form:option value="">-- Select LPO Number --</form:option>
+									    	<form:options items="${LPONumbers }"></form:options> 
 								    	</form:select>
 									</div>
 								</div>
@@ -127,7 +127,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Type Of Service <span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path="typeOfService" class="form-control  chzn-select validate" onchange="removeBorder(this.id)">
+										<form:select path="typeOfService" class="form-control chzn-select validate" onfocus="removeBorder(this.id)">
 									      	<form:option value="">-- Select Type Of Service --</form:option>
 									  		<form:option value="Maintenance">Maintenance</form:option>
 									  		<form:option value="Agency Repairs">Agency Repairs</form:option>
@@ -143,7 +143,7 @@
 							<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
 									<input class="btn-primary btn" type="submit" value="Sumbit" id="submit1">
-					      			<input class="btn-default btn cancel" type="reset" value="Cancel">
+					      			<input class="btn-danger btn cancel" type="reset" value="Reset">
 				      			</div>
 				      		</div>
 						</div>
@@ -155,8 +155,6 @@
 	</div> <!-- container -->
 
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
-<!--  <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script> -->
-<%-- <script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script>  --%>
 <script type="text/javascript">
 $(function () {
 	$("#registrationexpirydate1").datepicker({
@@ -194,13 +192,9 @@ function displayTable(listOrders) {
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactive' onclick='deletetruckMaster("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
-			/* $("#truckStatus option" ).removeClass('active');
-			$("#truckStatus option#"+orderObj.truckStatus).addClass('highlight'); */	
+			var deleterow = "<a class='deactivate' onclick='deletetruckMaster("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 		}else{  
-			var deleterow = "<a class='active' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
-			/* $("#truckStatus option" ).removeClass('active');
-			$("#truckStatus option"+orderObj.truckStatus).addClass('highlight'); */	
+			var deleterow = "<a class='activate' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 					var edit = "<a class='edit' onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;

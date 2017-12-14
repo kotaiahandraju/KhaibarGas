@@ -71,6 +71,20 @@ span.has-error,span.hasError
 
 .default-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .default-class::-moz-placeholder {color: #e73d4a !important;}
+
+.msgcss
+{
+/* 	width: 50% !important; */
+/* 	font-weight: bold; */
+	margin: auto;
+	text-align: center;
+	top: 1.5% !important;
+	left:0;
+	right:0;
+	position: fixed;
+	font-size: 14px;
+	z-index:99999;
+}
 </style>
 	<script>
 		window.setTimeout(function() {
@@ -111,15 +125,15 @@ $(function() {
 </head>
 
 <body class="horizontal-nav ">
-						<c:if test="${not empty msg}">
-	                    	<div class="row">
-	                    		<div class="col-sm-4 col-sm-offset-4">
-	                    			<div class="form-group">
-	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg}</div>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-                    	</c:if>
+	<c:if test="${not empty msg}">
+		<div class="msgcss row">
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="form-group">
+					<div class="alert alert-${cssMsg} fadeIn animated">${msg}</div>
+				</div>
+			</div>
+		</div>
+	</c:if>
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
