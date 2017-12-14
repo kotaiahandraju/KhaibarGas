@@ -30,7 +30,7 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 		try {
 			jdbcTemplate = custom.getJdbcTemplate();
 			
-			String sql = "SELECT  *from expensetracker ";
+			String sql = "SELECT e.*,CASE WHEN e.status IN ('0') THEN 'Deactive' WHEN e.status in ('1') THEN 'Active'  ELSE '-----' END as trackrstatus  from expensetracker e ";
 			System.out.println("sql:::"+sql);
 			expensetracker = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Expensetracker>(Expensetracker.class));
 			if(expensetracker !=null){

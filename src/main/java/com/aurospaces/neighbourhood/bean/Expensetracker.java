@@ -22,7 +22,21 @@ protected String paymentRemarks ;
 protected Date createdTime ;
 
 protected Date updatedTime ;
+protected String status ;
+protected String trackrstatus ;
 
+public String getTrackrstatus() {
+	return trackrstatus;
+}
+public void setTrackrstatus(String trackrstatus) {
+	this.trackrstatus = trackrstatus;
+}
+public String getStatus() {
+	return status;
+}
+public void setStatus(String status) {
+	this.status = status;
+}
 public int getId()
 {
   return id;

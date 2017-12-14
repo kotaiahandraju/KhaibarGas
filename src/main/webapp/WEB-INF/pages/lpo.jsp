@@ -644,6 +644,14 @@ function viewDetails(id){
 				$("#1expirydate").val(orderObj.expirydate);
 			}else{
 				addMoreRowsForDependent();
+				$("#"+j+"item").val(orderObj.itemid);
+				$("#"+j+"unit").val(orderObj.quantity);
+				$("#"+j+"1rate").val(orderObj.price);
+				$("#"+j+"1totalvalue").val(orderObj.totalprice); 
+				$("#"+j+"discount").val(orderObj.discount);
+				$("#"+j+"taxable").val(orderObj.grandtotal);
+				$("#"+j+"manufacturingdate").val(orderObj.manufacturingdate);
+				$("#"+j+"expirydate").val(orderObj.expirydate);
 			}
 			j++;
 			/* var lponumber =orderObj.lponumber;
