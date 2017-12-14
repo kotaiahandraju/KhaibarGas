@@ -5,128 +5,106 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-		<div class="clearfix"></div>
-		<ol class="breadcrumb">
-			<li><a href="#">Home</a></li>
-			<li>Expense Tracker</li>
-		</ol>
-		<div class="clearfix"></div>
-		<div class="container">
-			<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<h4>Expense Tracker Details</h4>
-								<div class="options">
-									<a href="javascript:;" class="panel-collapse"><i
-										class="fa fa-chevron-down"></i></a>
-								</div>
-							</div>
-							<div class="panel-body collapse in">
-								<div class="table-responsive" id="tableId">
-									<table cellpadding="0" cellspacing="0" border="0"
-										class="table table-striped table-bordered datatables"
-										id="example">
-										<thead>
-											<tr>
-												<th>Account Head</th>
-												<th>Date of Expense</th>
-												<th>Item description</th>
-												<th>Payment Type</th>
-												<th>Remarks</th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody></tbody>
-									</table>
-								</div>
-							</div>
+	<div class="clearfix"></div>
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li>Expense Tracker</li>
+	</ol>
+	<div class="clearfix"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Expense Tracker Details</h4>
+						<div class="options">
+							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+						</div>
+					</div>
+					<div class="panel-body collapse in">
+						<div class="table-responsive" id="tableId">
+							<table class="table table-striped table-bordered datatables" id="example">
+								<thead>
+									<tr>
+										<th>Account Head</th><th>Date of Expense</th><th>Item description</th>
+										<th>Payment Type</th><th>Remarks</th><th></th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
 						</div>
 					</div>
 				</div>
-
-			<div class="row" id="moveTo">
-				<div class="col-md-10 col-md-offset-1 col-sm-12">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h4>Expense Tracker </h4>
-							<div class="options"></div>
-						</div>
-						<form:form class="form-horizontal" modelAttribute="expensiveTrackerForm"
-							role="form" id="expensiveTrackerForm-form" action="expenseTrackerSave" method="post">
-							<div class="panel-body">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<form:hidden path="id" />
-											<label class="col-sm-4 control-label required">Account Head <span class="impColor">*</span></label>
-											<div class="col-sm-6">
-												<form:input path="accountHead" class="form-control validate" autocomplete="off" placeholder="Account Head" required="required" />
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="col-sm-4 control-label required">Date of Expense <span class="impColor">*</span></label>
-											<div class="col-sm-6">
-												<form:input path="dateOfExpense" class="form-control validate" autocomplete="off" placeholder="Date of Expense" required="required" readonly="true"/>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="col-sm-4 control-label required">Item Description <span class="impColor">*</span></label>
-											<div class="col-sm-6">
-												<form:input path="itemDescription" class="form-control onlyCharacters validate" autocomplete="off" placeholder="Item Description" required="required" />
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="col-sm-4 control-label required">Payment Type <span class="impColor">*</span>
-											</label>
-											<div class="col-sm-6">
-												<form:input path="paymentType" class="form-control validate" autocomplete="off" placeholder="Payment Type" required="required" />
-											</div>
-										</div>
-									</div>
-								</div>
-
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="col-sm-4 control-label required">Remarks</label>
-											<div class="col-sm-6">
-<%-- 												<form:input path="paymentRemarks" class="form-control onlyCharacters validate" placeholder="Remarks" /> --%>
-												<form:textarea path="paymentRemarks" class="form-control onlyCharacters" placeholder="Remarks"></form:textarea>
-											</div>
-										</div>
-									</div>
-								</div>
-
-								
-							</div>
-							<div class="panel-footer">
-								<div class="row">
-									<div class="col-sm-12">
-										<div class="btn-toolbar  pull-right">
-											<input type="submit" value="Submit" id="submit1" class="btn-primary btn" />
-											<input type="reset" value="Reset" class="btn-danger btn cancel"  />
-										</div>
-									</div>
-								</div>
-							</div>
-							
-						</form:form>
-					</div>
-
-				</div>
-
 			</div>
 		</div>
+
+		<div class="row" id="moveTo">
+			<div class="col-md-10 col-md-offset-1 col-sm-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Expense Tracker </h4>
+					</div>
+					<form:form class="form-horizontal" modelAttribute="expensiveTrackerForm" role="form" id="expensiveTrackerForm-form" action="expenseTrackerSave" method="post">
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+									<form:hidden path="id" />
+									<label class="col-sm-4 control-label required">Account Head <span class="impColor">*</span></label>
+									<div class="col-sm-6">
+										<form:input path="accountHead" class="form-control validate" autocomplete="off" placeholder="Account Head" required="required" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-sm-4 control-label required">Date of Expense <span class="impColor">*</span></label>
+									<div class="col-sm-6">
+										<form:input path="dateOfExpense" class="form-control validate" autocomplete="off" placeholder="Date of Expense" required="required" readonly="true"/>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-sm-4 control-label required">Item Description <span class="impColor">*</span></label>
+									<div class="col-sm-6">
+										<form:input path="itemDescription" class="form-control onlyCharacters validate" autocomplete="off" placeholder="Item Description" required="required" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-sm-4 control-label required">Payment Type <span class="impColor">*</span></label>
+									<div class="col-sm-6">
+										<form:input path="paymentType" class="form-control validate" autocomplete="off" placeholder="Payment Type" required="required" />
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-sm-4 control-label required">Remarks</label>
+									<div class="col-sm-6">
+										<form:textarea path="paymentRemarks" class="form-control onlyCharacters" placeholder="Remarks"></form:textarea>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="panel-footer">
+						<div class="row">
+							<div class="col-sm-12">
+								<div class="btn-toolbar  pull-right">
+									<input type="submit" value="Submit" id="submit1" class="btn-primary btn" />
+									<input type="reset" value="Reset" class="btn-danger btn cancel"  />
+								</div>
+							</div>
+						</div>
+					</div>
+					</form:form>
+				</div>
+			</div>
+		</div>
+	</div>
 		
 <script type="text/javascript">
 $(function() {
@@ -184,9 +162,9 @@ function editExpensiveTracker(id) {
 function deleteExpensiveTracker(id,status) {
 	var checkstr=null;
 	if(status == 0){
-		checkstr =  confirm('Are you sure you want to Deactivate?');
+		checkstr = confirm('Are you sure you want to Deactivate?');
 	}else{
-		checkstr =  confirm('Are you sure you want to Activate?');
+		checkstr = confirm('Are you sure you want to Activate?');
 	}
 	if (checkstr == true) {
 		var formData = new FormData();
