@@ -1,5 +1,6 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,10 +10,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.Expensetracker;
 import com.aurospaces.neighbourhood.db.dao.ExpensetrackerDao;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Controller
@@ -63,6 +68,7 @@ public class ExpenseTrackerController {
 			
 			
 			if( expensetracker.getId() == 0){
+				expensetracker.setStatus("1");
 				expensetrackerDao.save(expensetracker);
 				reAttributes.addFlashAttribute("msg", "Add record Sucessfull");
 				 reAttributes.addFlashAttribute("cssMsg", "success");
@@ -105,26 +111,23 @@ public class ExpenseTrackerController {
 		return "redirect:expenseTrackerHome";
 	}
 	
-	/*@RequestMapping(value = "/customerDelete")
-	public @ResponseBody String customerDelete( @RequestParam("id") String id,@RequestParam("status") String status, HttpSession objSession,
+	@RequestMapping(value = "/trckerDelete")
+	public @ResponseBody String trckerDelete( @RequestParam("id") String id,@RequestParam("status") String status, HttpSession objSession,
 			HttpServletRequest objRequest) throws JsonGenerationException, JsonMappingException, IOException {
 		boolean isDelete = false;
 		String sJson = "";
-		Boolean accessoriesmasterBean=null;
-		List<AccessoriesmasterBean> accessories=null;
-		ObjectMapper objectMapper = null;
 		  int dId=Integer.parseInt(id);
-		  isDelete = customermasterDao.delete(dId,status);
+		  isDelete = expensetrackerDao.delete(dId,status);
 		 
 		  if(isDelete){
-			  sJson=customermasterDao.getAllCustomer();
+			  sJson=expensetrackerDao.getAllExpenseTracker();
 			  System.out.println("deleted cusmer data--"+sJson);
 				
 			}
 		
 		
 		return sJson;
-	}*/
+	}
 	
 
 	

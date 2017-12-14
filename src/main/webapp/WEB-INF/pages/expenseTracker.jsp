@@ -124,14 +124,14 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Account Head</th><th>Date of Expense</th><th>Item description</th><th>Payment Type</th><th>Remarks</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Account Head</th><th>Date of Expense</th><th>Item description</th><th>Payment Type</th><th>Remarks</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj){
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteExpensiveTracker("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='trckerDelete("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteExpensiveTracker("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='trckerDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 		var edit = "<a class='edit' onclick='editExpensiveTracker("+ orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
@@ -141,6 +141,7 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.itemDescription+"'>" + orderObj.itemDescription + "</td>"
 			+ "<td title='"+orderObj.paymentType+"'>" + orderObj.paymentType + "</td>"
 			+ "<td title='"+orderObj.paymentRemarks+"'>" + orderObj.paymentRemarks + "</td>"
+			+ "<td title='"+orderObj.trackrstatus+"'>" + orderObj.trackrstatus + "</td>"
 			+ "<td style='text-align: center;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+ "</tr >";
 		$(tblRow).appendTo("#tableId table tbody");
@@ -159,7 +160,7 @@ function editExpensiveTracker(id) {
 	$(window).scrollTop($('#moveTo').offset().top);
 }
 
-function deleteExpensiveTracker(id,status) {
+function trckerDelete(id,status) {
 	var checkstr=null;
 	if(status == 0){
 		checkstr = confirm('Are you sure you want to Deactivate?');
@@ -170,7 +171,7 @@ function deleteExpensiveTracker(id,status) {
 		var formData = new FormData();
 		formData.append('id', id);
 		formData.append('status', status);
-		$.fn.makeMultipartRequest('POST', 'deleteExpensiveTracker', false, formData, false, 'text', function(data) {
+		$.fn.makeMultipartRequest('POST', 'trckerDelete', false, formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);
 // 			var alldata = jsonobj.allOrders1;
 // 			console.log(jsonobj.allOrders1);

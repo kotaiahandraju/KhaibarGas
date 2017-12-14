@@ -27,7 +27,7 @@ public class BaseExpensetrackerDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO expensetracker( accountHead, dateOfExpense, itemDescription, paymentType, paymentRemarks, created_time, updated_time) values (?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO expensetracker( accountHead, dateOfExpense, itemDescription, paymentType, paymentRemarks, created_time, updated_time,status) values (?, ?, ?, ?, ?, ?, ?,?)"; 
 
 
 
@@ -68,7 +68,7 @@ ps.setString(4, expensetracker.getPaymentType());
 ps.setString(5, expensetracker.getPaymentRemarks());
 ps.setTimestamp(6, createdTime);
 ps.setTimestamp(7, updatedTime);
-
+ps.setString(8,expensetracker.getStatus());
 							return ps;
 						}
 				},
@@ -88,11 +88,18 @@ ps.setTimestamp(7, updatedTime);
 		}
 	}
 		
-		@Transactional
-		public void delete(int id) {
-			String sql = "DELETE FROM expensetracker WHERE id=?";
-			jdbcTemplate.update(sql, new Object[]{id});
-		}
+	@Transactional
+	public Boolean delete(int id,String status) {
+		boolean result=false;
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "update expensetracker set status='"+status+"' where id = ?";
+		jdbcTemplate.update(sql, new Object[]{id});
+		 int results=jdbcTemplate.update(sql, new Object[]{id});
+			if(results!=0){
+				result= true;
+			}
+			return result;
+	}
 		
 
 	 public Expensetracker getById(int id) {

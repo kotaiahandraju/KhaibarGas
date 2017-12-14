@@ -627,6 +627,7 @@ dependentRowCount = 1;
 				addMoreRowsForDependent();
 				$("#"+j+"item").val(orderObj.itemid);
 				$("#"+j+"unit").val(orderObj.quantity);
+
 				$("#"+j+"rate").val(orderObj.price);
 				$("#"+j+"totalvalue").val(orderObj.totalprice); 
 				$("#"+j+"discount").val(orderObj.discount);
