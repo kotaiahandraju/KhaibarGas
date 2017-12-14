@@ -508,7 +508,7 @@ function addMoreRowsForDependent() {
 			+ "<th class='labelCss notPrintMe' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("
 			+ dependentRowCount + ");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>" +
 			 + "</tr>";
-	$(dependentRow1).appendTo("#dependent_table");
+	$(dependentRow1).appendTo("#dependent_table tbody");
 	$("#"+dependentRowCount+"manufacturingdate").datepicker({
 		dateFormat : "dd-MM-yy",
 		changeDate : true,
@@ -608,6 +608,8 @@ function priceCalculator(){
 }
 
 function viewDetails(id){
+$("#dependent_table tbody").find("tr:gt(0)").remove();
+dependentRowCount = 1;
 	var LpoId = serviceUnitArray1[id].id;
 	editLpo(LpoId);
 	$('#dial1').html('');
@@ -618,18 +620,7 @@ function viewDetails(id){
 		var lponumbertitle=null;
 		var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.allOrders1;
-		/* console.log(jsonobj.allOrders1);
-		var tblRow ="<table id='viewtable' class='meta table-bordered' style='width: 100%;'><thead>"
-			+	"<th><span >Lponumber </span></th>"
-			+	"<th><span >Item Name</span></th>"
-			+	"<th><span >Quantity </span></th>"
-			+	"<th><span >Price</span></th>"
-			+	"<th><span >Totalprice</span></th>"
-			+	"<th><span >Discount</span></th>"
-			+	"<th><span >Grandtotal</span></th></thead>"
-			+"<tbody></tbody>"
-			+"</table>";
-			$(tblRow).appendTo("#dial1"); */
+		
 			var j=1;
 		$.each(alldata,	function(i, orderObj) {
 			if(j == 1){
@@ -644,32 +635,19 @@ function viewDetails(id){
 				$("#1expirydate").val(orderObj.expirydate);
 			}else{
 				addMoreRowsForDependent();
+				$("#"+j+"item").val(orderObj.itemid);
+				$("#"+j+"unit").val(orderObj.quantity);
+				$("#"+j+"rate").val(orderObj.price);
+				$("#"+j+"totalvalue").val(orderObj.totalprice); 
+				$("#"+j+"discount").val(orderObj.discount);
+				$("#"+j+"taxable").val(orderObj.grandtotal);
+				$("#"+j+"manufacturingdate").val(orderObj.manufacturingdate);
+				$("#"+j+"expirydate").val(orderObj.expirydate);
 			}
 			j++;
-			/* var lponumber =orderObj.lponumber;
-			lponumbertitle = lponumber;
-			var quantity =orderObj.quantity;
-			var price =orderObj.price;
-			var totalprice =orderObj.totalprice;
-			var discount =orderObj.discount;
-			var grandtotal =orderObj.grandtotal;
-			var itemid =orderObj.itemid;
 			
-				
-			var tblRow1	=	"<tr >"
-				+	"<td style=''><span>"+lponumber+"</span></td>"
-				+	"<td style=''><span>"+itemid+"</span></td>"
-				+	"<td style=''><span>"+quantity+"</span></td>"
-				+	"<td style=''><span>"+price+"</span></td>"
-				+	"<td style=''><span>"+totalprice+"</span></td>"
-				+	"<td style=''><span>"+discount+"</span></td>"
-				+	"<td style=''><span>"+grandtotal+"</span></td>"
-				+	"</tr>";
-				
-			
-			  	$(tblRow1).appendTo("#viewtable tbody "); */
 		});
-// 		$('#dial1').dialog({ title:lponumbertitle,width:1199,height:600,modal: true}).dialog('open');
+		priceCalculator();
 	});
 }
 
