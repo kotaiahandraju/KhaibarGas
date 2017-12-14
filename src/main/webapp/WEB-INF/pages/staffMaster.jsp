@@ -39,7 +39,7 @@
 													<th>Mobile</th>
 													<th>Documents</th>
 													<th>Status</th>
-													<th>Action</th>
+													<th></th>
 												</tr>
 											</thead>
 											<tbody></tbody>
@@ -51,7 +51,7 @@
 					</div>
 
 
-				<div class="row">
+				<div class="row" id="moveTo">
 					<div class="col-md-10 col-md-offset-1 col-sm-12">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
@@ -170,11 +170,11 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="col-sm-4 control-label required">Mobile Number</label>
+												<label class="col-sm-4 control-label required">Mobile <span class="impColor">*</span></label>
 												<div class="col-sm-6">
 													<form:input path="mobile"
 														class="form-control numericOnly validate"
-														autocomplete="off" placeholder="Mobile Number" required="required" maxlength="13" />
+														autocomplete="off" placeholder="Mobile" required="required" maxlength="13" />
 													<span class="hasError" id="mobileError"></span>
 													<div>
 														<form:errors path="mobile" cssClass="error" />
@@ -198,24 +198,6 @@
 											</div>
 										</div>
 									</div>
-									
-									<%-- <div class="row">
-										<div class="col-md-6">
-											<div class="form-group">
-												<label class="col-sm-4 control-label required">Status</label>
-												<div class="col-sm-6">
-													<form:input path="status"
-														class="form-control  validate"
-														autocomplete="off" placeholder=""  />
-													<span class="hasError" id="statusError"></span>
-													<div>
-														<form:errors path="status" cssClass="error" />
-													</div>
-												</div>
-											</div>
-										</div>
-									
-									</div> --%>
 								</div>
 								<div class="panel-footer">
 									<div class="row">
@@ -251,9 +233,9 @@ function displayTable(listOrders)
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj){
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactive' onclick='deleteStaffMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='deleteStaffMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 		}else{  
-			var deleterow = "<a class='active' onclick='deleteStaffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='deleteStaffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 		
 		var edit = "<a class='edit' onclick='editStaffMasterDetails(" + orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
@@ -286,17 +268,16 @@ function editStaffMasterDetails(id)
 	$("#mobile").val(serviceUnitArray[id].mobile);
 // 	$("#documents").val(serviceUnitArray[id].documents);
 	$("#submit1").val("Update");
-	$(window).scrollTop($('body').offset().top);
+	$(window).scrollTop($('#moveTo').offset().top);
 }
 
 function deleteStaffMasterDetails(id,status)
 {
 	var checkstr=null;
 	if(status == 0){
-		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+		 checkstr = confirm('Are you sure you want to Deactivate?');
 	}else{
-		 checkstr =  confirm('Are you sure you want to Activate this?');
-		 
+		 checkstr = confirm('Are you sure you want to Activate?');
 	}
 	console.log(status);
 	if (checkstr == true)
@@ -304,8 +285,7 @@ function deleteStaffMasterDetails(id,status)
 		var formData = new FormData();
 		formData.append('id', id);
 		formData.append('status', status);
-		$.fn.makeMultipartRequest('POST', 'deleteStaffMasterDetails',
-			false, formData, false, 'text', function(data) {
+		$.fn.makeMultipartRequest('POST', 'deleteStaffMasterDetails', false, formData, false, 'text', function(data) {
 				var jsonobj = $.parseJSON(data);
 				window.location.reload();
 // 				var alldata = jsonobj.allOrders1;
@@ -316,11 +296,4 @@ function deleteStaffMasterDetails(id,status)
 }
 $("#pageName").text("Staff Master");
 $(".staff").addClass("active");
-		</script>
-<%-- <tr>
-<td>  Religion System</td>
- <td> <form:select path ="religionSystem" items="${religionsSystemList}"/> </td>
-</tr>
- --%>
-
-</html>
+</script>

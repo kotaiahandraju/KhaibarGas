@@ -49,7 +49,7 @@
 					</div>
 				</div>
 
-			<div class="row">
+			<div class="row" id="moveTo">
 				<div class="col-md-10 col-md-offset-1 col-sm-12">
 					<div class="panel panel-primary">
 						<div class="panel-heading">
@@ -143,9 +143,7 @@
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label class="col-sm-4 control-label required">Email
-												Id <span class="impColor">*</span>
-											</label>
+											<label class="col-sm-4 control-label required">Email Id <span class="impColor">*</span></label>
 											<div class="col-sm-6">
 												<form:input path="emailid" class="form-control validate"
 													autocomplete="off" placeholder="Email Id"
@@ -161,26 +159,17 @@
 										<div class="form-group">
 											<label class="col-sm-4 control-label required">Remarks</label>
 											<div class="col-sm-6">
-												<form:input path="remarks"
-													class="form-control onlyCharacters validate"
-													autocomplete="off" placeholder="Remarks" />
-												<span class="hasError" id="remarksError"></span>
-												<div>
-													<form:errors path="remarks" cssClass="error" />
-												</div>
+												<form:textarea path="remarks" class="form-control" placeholder="Remarks"></form:textarea>
 											</div>
 										</div>
 									</div>
-								</div>
-
-								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="col-sm-4 control-label required">Type
 												of Company</label>
 											<div class="col-sm-6">
 												<form:input path="typeofcompany"
-													class="form-control validate onlyCharacters" autocomplete="off"
+													class="form-control onlyCharacters" autocomplete="off"
 													placeholder="Type of Company" />
 												<span class="hasError" id="typeofcompanyError"></span>
 												<div>
@@ -195,7 +184,7 @@
 												Type</label>
 											<div class="col-sm-6">
 												<form:select path="customertype"
-													class="form-control validate" onfocus="removeBorder(this.id)">
+													class="form-control" onfocus="removeBorder(this.id)">
 													<form:option value="">-- Select Customer Type --</form:option>
 													<form:option value="Owner">Owner</form:option>
 													<form:option value="Competitor">Competitor</form:option>
@@ -251,9 +240,9 @@
 							function(i, orderObj) {
 								
 								if(orderObj.status == "1"){
-									var deleterow = "<a class='deactive' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+									var deleterow = "<a class='deactivate' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 								}else{  
-									var deleterow = "<a class='active' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+									var deleterow = "<a class='activate' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 								}
 								var edit = "<a class='edit' onclick='editCompanyMasterDetails("
 										+ orderObj.id
@@ -324,14 +313,14 @@
 			$("#status").val(serviceUnitArray[id].status);
 			//$("#customerid").val(serviceUnitArray[id].customerid);
 			$("#submit1").val("Update");
-			$(window).scrollTop($('body').offset().top);
+			$(window).scrollTop($('#moveTo').offset().top);
 		}
 		function deleteCompanyMasterDetails(id,status) {
 			var checkstr=null;
 			if(status == 0){
-				 checkstr =  confirm('Are you sure you want to Deactivate this?');
+				 checkstr =  confirm('Are you sure you want to Deactivate?');
 			}else{
-				 checkstr =  confirm('Are you sure you want to Activate this?');
+				 checkstr =  confirm('Are you sure you want to Activate?');
 			}
 			if (checkstr == true) {
 				var formData = new FormData();

@@ -35,7 +35,7 @@
                 </div>
             </div>
                     
-            <div class="row">
+            <div class="row" id="moveTo">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -134,7 +134,7 @@
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
 					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
-					      			<input class="btn-danger btn" type="reset"  value="Reset" />
+					      			<input class="btn-danger btn cancel" type="reset"  value="Reset" />
 				      			</div>
 				      		</div>
 				      	</div>
@@ -150,23 +150,13 @@
         </div> <!-- container -->
    
 
-<!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
-<%-- <script type='text/javascript' src='${baseurl}/js/custemValidation.js'></script>  --%>
 <script type="text/javascript">
-var lstOrders =${allObjects};
+var listOrders1 =${allObjects};
 
-console.log(lstOrders);
-$(function() {
-// 	var listOrders=JSON.parse(lstOrders);
-	showTableData(lstOrders);
-	
-});
-
-
-</script>
-
-
-<script>
+console.log(listOrders1);
+if (listOrders1 != "") {
+	showTableData(listOrders1);
+}
 
 var damageId = 0;
 var serviceUnitArray ={};
@@ -224,15 +214,15 @@ function editCustomer(id) {
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
 	
-	$(window).scrollTop($('body').offset().top);
+	$(window).scrollTop($('#moveTo').offset().top);
 }
 
 function customerDelete(id,status) {
 	var checkstr=null;
 	if(status == 0){
-		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+		 checkstr = confirm('Are you sure you want to Deactivate?');
 	}else{
-		 checkstr =  confirm('Are you sure you want to Activate this?');
+		 checkstr = confirm('Are you sure you want to Activate?');
 	}
 	
 	if(checkstr == true){

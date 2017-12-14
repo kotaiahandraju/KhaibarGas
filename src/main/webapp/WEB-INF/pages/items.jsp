@@ -26,7 +26,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price</th><th>Status</th><th>Action</th></tr>
+                                	<tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price</th><th>Status</th><th></th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -36,7 +36,7 @@
                 </div>
             </div>
                     
-            <div class="row">
+            <div class="row" id="moveTo">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -51,16 +51,16 @@
                     			<form:hidden path="id"/>
                     		 <div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Iteam Name<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Item Name <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    				<form:input  path="name" class="form-control validate" placeholder="item Name"/>
+                    				<form:input  path="name" class="form-control validate" placeholder="Item Name"/>
                     				
                     				</div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label ">Description<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Description <span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input  path="description" class="form-control validate" placeholder="Description"/>
 								  	</div>
@@ -73,14 +73,15 @@
                     			<form:hidden path="id"/>
                     		 <div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Item Type<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Item Type <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    				<form:select  path="itemType" class="form-control validate" >
-                    				<form:option value="Cylinder">Cylinder</form:option>
-                    				<form:option value="Truck">Truck</form:option>
-                    				<form:option value="Accessories">Accessories</form:option>
-                    				<form:option value="GAS">GAS</form:option>
-                    				<form:option value="Equipment">Equipment</form:option>
+                    				<form:select path="itemType" class="form-control validate" onfocus="removeBorder(this.id)">
+	                    				<form:option value="">-- Select Item Type --</form:option>
+	                    				<form:option value="Cylinder">Cylinder</form:option>
+	                    				<form:option value="Truck">Truck</form:option>
+	                    				<form:option value="Accessories">Accessories</form:option>
+	                    				<form:option value="GAS">GAS</form:option>
+	                    				<form:option value="Equipment">Equipment</form:option>
                     				</form:select>
                     				
                     				</div>
@@ -88,7 +89,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label ">Price <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Price <span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input  path="price" class="form-control numericOnly validate" placeholder="Price"/>
 								  	</div>
@@ -119,20 +120,12 @@
 
 
 <script type="text/javascript">
-var lstOrders =${allObjects};
+var listOrders1 =${allObjects};
 
-console.log(lstOrders);
-$(function() {
-// 	var listOrders=JSON.parse(lstOrders);
-	showTableData(lstOrders);
-	
-});
-
-
-</script>
-
-
-<script>
+console.log(listOrders1);
+if (listOrders1 != "") {
+	showTableData(listOrders1);
+}
 
 var damageId = 0;
 var serviceUnitArray ={};
@@ -144,17 +137,17 @@ function showTableData(response){
 	var table=$('#tableId').html('');
 	
 	serviceUnitArray = {};
-	if(response != undefined && response.length >0){
+// 	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price</th><th>Status</th><th>Action</th></tr>'+
+    	'<thead><tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactive' onclick='deleteItem("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='deleteItem("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 		}else{  
-			var deleterow = "<a class='active' onclick='deleteItem("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='deleteItem("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 		
 		var edit = "<a class='edit' onclick='editItem("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
@@ -165,14 +158,14 @@ function showTableData(response){
 						+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
 						+ "<td title='"+orderObj.itemType+"'>" + orderObj.itemType + "</td>"
 						+ "<td title='"+orderObj.description+"'>" + orderObj.description + "</td>"
-						 + "<td title='"+orderObj.price+"'>" + orderObj.price + "</td>"
+						+ "<td title='"+orderObj.price+"'>" + orderObj.price + "</td>"
 						+ "<td title='"+orderObj.Status+"'>" + orderObj.itemstatus + "</td>"
 						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;|&nbsp;" + deleterow + "</td>"
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
 				//$('.datatables').dataTable({});
 			});
-	}
+// 	}
 }
 function editItem(id) {
 	$("#id").val(id);
@@ -182,15 +175,15 @@ function editItem(id) {
 	$("#price").val(serviceUnitArray[id].price);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
-	$(window).scrollTop($('body').offset().top);
+	$(window).scrollTop($('#moveTo').offset().top);
 }
 
 function deleteItem(id,status) {
 	var checkstr=null;
 	if(status == 0){
-		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+		 checkstr = confirm('Are you sure you want to Deactivate?');
 	}else{
-		 checkstr =  confirm('Are you sure you want to Activate this?');
+		 checkstr = confirm('Are you sure you want to Activate?');
 	}
 	if(checkstr == true){
 		$.ajax({
@@ -226,5 +219,4 @@ function dataClear(){
 }
 $("#pageName").text("Item Master");
 $(".items").addClass("active"); 
-
 </script>
