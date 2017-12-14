@@ -239,7 +239,7 @@ function QualityCheck(){
      var formData = new FormData();
      formData.append("fillingStation",stationname);
      formData.append("cylindetId",cylenderId);
-     formData.append("cylinderStatus",3);
+     formData.append("cylinderStatus",4);
      $.fn.makeMultipartRequest('POST', 'updateCylinderStatus1', false,
  			formData, false, 'text', function(data){
 //  		var jsonobj = $.parseJSON(data);

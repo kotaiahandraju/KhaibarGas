@@ -95,7 +95,6 @@
                     				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:select path="color" class="form-control validate" onfocus="removeBorder(this.id)">
-									  		<form:option value="">-- Select Cylinder Color --</form:option>
 									  		<form:option value="red">Red</form:option>
 									  		<form:option value="green">Green</form:option>
 									  		<form:option value="yellow">Yellow</form:option>

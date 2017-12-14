@@ -24,7 +24,7 @@ public class LoginController {
 	@RequestMapping(value = "/LoginHome")
 	public String LoginHome(Map<String, Object> model1, ModelMap model, HttpServletRequest request,
 			HttpSession session)  {
-		System.out.println("LoginHome page...");
+//		System.out.println("LoginHome page...");
 		KhaibarUsersBean loginBean = new KhaibarUsersBean();
 		model.put("loginForm", loginBean);
 		try {
@@ -49,7 +49,7 @@ public class LoginController {
 	@RequestMapping(value = "/loginAction")
 	public  String loginAction( @ModelAttribute("loginForm") KhaibarUsersBean userObj, BindingResult result,
 			ModelMap model, HttpServletRequest request, HttpSession session, HttpServletResponse responses,RedirectAttributes redirect)	 {
-		System.out.println("loginAction page...");
+//		System.out.println("loginAction page...");
 		KhaibarUsersBean objUserBean = null;
 		JSONObject obj = new JSONObject();
 		String object1 = null;
@@ -83,7 +83,7 @@ public class LoginController {
 	@RequestMapping(value = "/logoutHome")
 	public String logoutHome(ModelMap model, HttpServletRequest request, HttpSession objSession,
 			HttpServletResponse response)  {
-		System.out.println("logout page...");
+//		System.out.println("logout page...");
 		try {
 
 			HttpSession session = request.getSession(false);

@@ -4,6 +4,7 @@ package com.aurospaces.neighbourhood.db.dao;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
@@ -76,7 +77,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		public   List<Map<String, Object>>  getCylindersCount(){  
 			 jdbcTemplate = custom.getJdbcTemplate();
 			 
-			 String sql="select count(c.cylinderstatus) as count,cs.name as  cylinderstatus from cylindermaster c,cylinderstatus cs where cs.id= c.cylinderstatus group by c.cylinderstatus ";
+			 String sql="select IFNULL(count(c.cylinderstatus), 0) as count,cs.name as  cylinderstatus from cylindermaster c,cylinderstatus cs where cs.id= c.cylinderstatus   group by c.cylinderstatus ";
 			   
 			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
 				return retlist;
@@ -108,7 +109,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		 jdbcTemplate = custom.getJdbcTemplate();
 		 //String retlist=null;
 		 List<LpoitemsBean> retlist=null;
-			String sql = " select * from lpoitems lpn,items i where lpn.itemid=i.id and i.itemType='Cylinder' and  i.id=?";
+			String sql = " select * from lpoitems lpn,items i where lpn.itemid=i.id and i.itemType='Cylinder' and  i.id=? group by lponumber";
 			retlist= jdbcTemplate.query(sql, new Object[] { itemid },ParameterizedBeanPropertyRowMapper.newInstance(LpoitemsBean.class));
 			 
 			 return retlist;
@@ -129,8 +130,20 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		jdbcTemplate = custom.getJdbcTemplate();
 		boolean update = false;
 		try{
-			String sql = "Update  cylindermaster set cylinderstatus= ?,fillingstationId=?  WHERE cylinderid=?";
-			int intDelete = jdbcTemplate.update(sql, new Object[]{cylinderStatus,fillingStation,cylinderId});
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("Update  cylindermaster set ");
+			if(StringUtils.isNotBlank(cylinderStatus)){
+				buffer.append(" cylinderstatus= '"+cylinderStatus+"'");
+			}
+			if(StringUtils.isNotBlank(fillingStation)){
+				buffer.append(" ,fillingstationId= '"+fillingStation+"'");
+			}
+			if(StringUtils.isNotBlank(cylinderId)){
+				buffer.append(" WHERE cylinderid= '"+cylinderId+"'"); 
+			}
+//			String sql = "Update  cylindermaster set cylinderstatus= ?,fillingstationId=?  WHERE cylinderid=?";
+			String sql = buffer.toString();
+			int intDelete = jdbcTemplate.update(sql, new Object[]{});
 			if(intDelete != 0){
 				update = true;
 			}
@@ -216,8 +229,23 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		jdbcTemplate = custom.getJdbcTemplate();
 		List<CylindermasterBean> retlis=null;
 		try{
-			String sql =  "select cm.cylinderid,f.stationname ,i.name  from cylindermaster cm,items i,fillingstationmaster f where cm.size=i.id and f.id=cm.fillingstationId and cm.size=? and cm.fillingstationId= ? and cm.cylinderstatus= ?   limit ?";
-				retlis = jdbcTemplate.query(sql, new Object[] {cylinderType,fillingStationId,cylinderstatus,limit },
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("select cm.cylinderid,f.stationname ,i.name  from cylindermaster cm,items i,fillingstationmaster f where cm.size=i.id and f.id=cm.fillingstationId ");
+			if(StringUtils.isNotBlank(fillingStationId)){
+				buffer.append(" and cm.fillingstationId="+fillingStationId );
+			}
+			if(StringUtils.isNotBlank(cylinderType)){
+				buffer.append(" and cm.size="+cylinderType );			
+			}
+			if(StringUtils.isNotBlank(cylinderstatus)){
+				buffer.append(" and cm.cylinderstatus= "+cylinderstatus);
+			}
+			if(StringUtils.isNotBlank(fillingStationId)){
+				buffer.append(" limit "+limit);
+			}
+//			String sql =  "select cm.cylinderid,f.stationname ,i.name  from cylindermaster cm,items i,fillingstationmaster f where cm.size=i.id and f.id=cm.fillingstationId and cm.size=? and cm.fillingstationId= ? and cm.cylinderstatus= ?   limit ?";
+			String sql = buffer.toString();
+				retlis = jdbcTemplate.query(sql, new Object[] { },
 					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 			System.out.println("-----------list----------"+retlis);
 		}catch(Exception e){

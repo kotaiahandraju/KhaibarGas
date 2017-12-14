@@ -46,7 +46,7 @@ window.onload = function() {
                             <a class="info-tiles tiles-alizarin" href="#">
                                 <div class="tiles-heading">FILLED CYLINDERS</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center">${FillingStation }</div>
+                                    <div class="text-center">${Filled }</div>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>

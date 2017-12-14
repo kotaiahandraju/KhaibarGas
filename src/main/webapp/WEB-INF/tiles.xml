@@ -83,6 +83,10 @@
 	<definition name="expenseTrackerHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/expenseTracker.jsp" />
 	</definition>
+	<definition name="cylinderFiledStatus" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/cylinderFilledStatus.jsp" />
+	</definition>
+	
 	
 	
 </tiles-definitions>

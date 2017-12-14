@@ -97,53 +97,75 @@
 <link rel='stylesheet' type='text/css' href='assets/plugins/charts-morrisjs/morris.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/codeprettifier/prettify.css' /> 
 <link rel='stylesheet' type='text/css' href='assets/plugins/form-toggle/toggles.css' /> 
-<link rel='stylesheet' type='text/css' href='assets/plugins/datatables/dataTables.css' /> 
+<link rel='stylesheet' type='text/css' href='assets/plugins/datatables/dataTables.css' />
+
+<style type="text/css">
+.alert-success, .alert-warning, .alert-danger{color: white !important;}
+.alert-success{background-color: #4CAF50 !important;}
+.alert-warning{background-color: #ff6600 !important;}
+.alert-danger{background-color: #d43f3a !important;}
+
+.your-class::-webkit-input-placeholder {color: #e73d4a !important;}
+.your-class::-moz-placeholder {color: #e73d4a !important;}
+
+.default-class::-webkit-input-placeholder {color: #e73d4a !important;}
+.default-class::-moz-placeholder {color: #e73d4a !important;}
+</style>
+
+<script type='text/javascript' src='assets/js/jquery-1.10.2.min.js'></script>
+<script type="text/javascript">
+window.setTimeout(function() {
+    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
+        $(this).remove(); 
+    });
+}, 5000);
+</script>
 
 </head>
 
 <body class="focusedform">
 <div class="verticalcenter">
-	<a href="#"><h1 align="center">KHAIBAR GAS</h1></a>
+	<h1 align="center">KHAIBAR GAS</h1>
 	<div class="panel panel-primary">
+		<form name='loginForm' action="loginAction" method='POST' class="form-horizontal" style="margin-bottom: 0px !important;">
 		<div class="panel-body">
-			<h4 class="text-center" style="margin-bottom: 25px;">Log in to get started</h4>
+			<h4 class="text-center" style="margin-bottom: 25px;">Login to get started</h4>
 			<c:if test="${not empty msg}">
-								<div class="msgcss controls fadeOut animated alert alert-danger" style="animation-delay: 5s;">
-									${msg}
-								</div>
-							</c:if>
-				<form name='loginForm'	action="loginAction" method='POST' class="form-horizontal" style="margin-bottom: 0px !important;">
-						<div class="form-group">
-							<div class="col-sm-12">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-user"></i></span>
-									<input type="text" class="form-control" name="userName" id="userName" placeholder="Username">
-								</div>
-							</div>
-						</div>
-						<div class="form-group">
-							<div class="col-sm-12">
-								<div class="input-group">
-									<span class="input-group-addon"><i class="fa fa-lock"></i></span>
-									<input type="password" class="form-control" name="password" id="password" placeholder="Password">
-								</div>
-							</div>
-						</div>
-						<!-- <div class="clearfix">
-							<div class="pull-right"><label><input type="checkbox" style="margin-bottom: 20px" checked=""> Remember Me</label></div>
-						</div> -->
-					
-					
+				<div class="col-sm-12" style="margin-bottom: -1.3em;">
+					<div class="form-group">
+						<div class="msgcss fadeIn animated alert alert-danger" style="text-align: center;">${msg}</div>
+					</div>
+				</div>
+			</c:if>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+						<input type="text" class="form-control validate" name="userName" id="userName" placeholder="Username">
+					</div>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-12">
+					<div class="input-group">
+						<span class="input-group-addon"><i class="fa fa-lock"></i></span>
+						<input type="password" class="form-control validate" name="password" id="password" placeholder="Password">
+					</div>
+				</div>
+			</div>
+			<!-- <div class="clearfix">
+				<div class="pull-right"><label><input type="checkbox" style="margin-bottom: -5px;"> Remember Me</label></div>
+			</div> -->
 		</div>
 		<div class="panel-footer">
 			<div class="pull-right">
-				<input type="reset" value="Reset" class="btn btn-default"/>
-				<input type="submit" value="Log In"  class="btn btn-primary">
+				<input type="reset" value="Reset" class="btn btn-default cancel"/>
+				<input type="submit" value="Login" id="submit1" class="btn btn-primary">
 			</div>
 		</div>
 		</form>
 	</div>
- </div>
-      
+</div>
+<script type='text/javascript' src='js/customValidation.js'></script> 
 </body>
 </html>

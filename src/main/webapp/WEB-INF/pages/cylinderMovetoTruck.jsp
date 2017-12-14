@@ -206,7 +206,7 @@ function movetoTruck(){
      var formData = new FormData();
      formData.append("truckId",truckId);
      formData.append("CylindetId",cylenderId);
-     formData.append("cylinderStatus",4);
+     formData.append("cylinderStatus",5);
      $.fn.makeMultipartRequest('POST', 'updateCylinderStatus3', false,
  			formData, false, 'text', function(data){
 //  		var jsonobj = $.parseJSON(data);

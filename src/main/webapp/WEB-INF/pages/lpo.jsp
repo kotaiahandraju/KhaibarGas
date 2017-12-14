@@ -142,7 +142,7 @@ table#dependent_table tbody tr td:first-child::before {
                     	<!-- </div>
                     </div> -->
                     
-                   
+                  <br><br> 
 				    
 <table class="notPrintMe">
  <tr>
