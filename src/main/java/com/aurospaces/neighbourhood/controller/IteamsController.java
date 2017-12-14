@@ -62,39 +62,50 @@ public class IteamsController {
 		}
 		
 		@RequestMapping(value = "/itemsSave")
-		public  String storeSave(@ModelAttribute("itemsForm")ItemsBean itemmasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes reAttributes) {
+		public  String storeSave(@ModelAttribute("itemsForm")ItemsBean itemmasterBean, HttpSession objSession,HttpServletRequest objRequest,RedirectAttributes redirect) {
 			boolean isInsert = false;
 			String sJson = "";
-			List<ItemsBean> storeBean=null;
+			ItemsBean item=null;
 			 String sProductId ="";
 			 Integer existId =null;
 			 Random ran = new Random();
+			 int id = 0;
 			try {
 				System.out.println("--------customerSave----------");
 				
 				String sName=itemmasterBean.getName();
-				storeBean=iteamsmasterDao.getByItemName(sName);
-				System.out.println("itemSave"+storeBean);
-				if(storeBean.size() ==0 || storeBean ==null){
+				item=iteamsmasterDao.getByItemName(sName);
+				int dummyId =0;
+				if(item != null){
+					dummyId = item.getId();
+				}
+				if(itemmasterBean.getId() != 0)
+				{
+					id = itemmasterBean.getId();
+					if(id == dummyId || item == null )
+					{
+						iteamsmasterDao.save(itemmasterBean);
+						redirect.addFlashAttribute("msg", "Record Updated Successfully");
+						redirect.addFlashAttribute("cssMsg", "warning");
+					}
+					else
+					{
+						redirect.addFlashAttribute("msg", "Already Record Exist");
+						redirect.addFlashAttribute("cssMsg", "danger");
+					}
+				}
+				if(itemmasterBean.getId() == 0 && item == null)
+				{
 					itemmasterBean.setStatus("1");
 					iteamsmasterDao.save(itemmasterBean);
-					reAttributes.addFlashAttribute("msg", "Record Inserted Successfully with Id:");
-					reAttributes.addFlashAttribute("cssMsg", "success");
-				}else{
-					for (ItemsBean iterarateList : storeBean) {
-						
-						 existId=iterarateList.getId();
-						 if(existId==itemmasterBean.getId()){
-							 iteamsmasterDao.save(itemmasterBean);
-							 reAttributes.addFlashAttribute("msg", "Record Updated Successfully");
-								reAttributes.addFlashAttribute("cssMsg", "warning");
-
-						 }else{
-							 reAttributes.addFlashAttribute("msg", "Already Record Exist");
-								reAttributes.addFlashAttribute("cssMsg", "danger");
-
-							}
-					}
+					
+					redirect.addFlashAttribute("msg", "Record Inserted Successfully");
+					redirect.addFlashAttribute("cssMsg", "success");
+				}
+				if(itemmasterBean.getId() == 0 && item != null)
+				{
+					redirect.addFlashAttribute("msg", "Already Record Exist");
+					redirect.addFlashAttribute("cssMsg", "danger");
 				}
 				
 				

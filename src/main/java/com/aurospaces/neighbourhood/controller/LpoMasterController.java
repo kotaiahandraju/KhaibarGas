@@ -104,6 +104,7 @@ public class LpoMasterController {
 				}
 				if(lpomasterBean.getId() == 0 && lpomaster == null)
 				{
+					lpomasterBean.setStatus("1");
 					lpomasterDao.save(lpomasterBean);
 					redirect.addFlashAttribute("msg", "Record Inserted Successfully");
 					redirect.addFlashAttribute("cssMsg", "success");

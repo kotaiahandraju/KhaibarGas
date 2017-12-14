@@ -58,7 +58,6 @@
                     				<label for="focusedinput" class="col-md-4 control-label">Item Type <span class="impColor">*</span></label>
                     				<div class="col-md-6">
 	                    				<form:select path="itemType" class="form-control validate" onfocus="removeBorder(this.id)">
-		                    				<form:option value="">-- Select Item Type --</form:option>
 		                    				<form:option value="Cylinder">Cylinder</form:option>
 		                    				<form:option value="Truck">Truck</form:option>
 		                    				<form:option value="Accessories">Accessories</form:option>

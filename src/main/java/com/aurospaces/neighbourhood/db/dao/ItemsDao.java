@@ -46,7 +46,7 @@ public class ItemsDao extends BaseItemsDao
 		return sJson;
 	}
 	
-	 public List<ItemsBean> getByItemName(String sName) {
+	 public ItemsBean getByItemName(String sName) {
 		 List<ItemsBean> retlist =null;
 		 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = "SELECT * from items where name = ? ";
@@ -54,8 +54,8 @@ public class ItemsDao extends BaseItemsDao
 			new Object[]{sName},
 			ParameterizedBeanPropertyRowMapper.newInstance(ItemsBean.class));
 			if(retlist.size() > 0)
-				return retlist;
-			return retlist;
+				return retlist.get(0);
+			return null;
 		}
 
 	 public List<ItemsBean> getItems() {

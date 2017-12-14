@@ -35,8 +35,8 @@ public class BaseItemsDao{
 	@Transactional
 	public void save(final ItemsBean items) 
 	{
-	if(items.getId() == 0)	{
 		jdbcTemplate = custom.getJdbcTemplate();
+	if(items.getId() == 0)	{
 
 	KeyHolder keyHolder = new GeneratedKeyHolder();
 	int update = jdbcTemplate.update(

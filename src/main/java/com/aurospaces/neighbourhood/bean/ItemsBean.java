@@ -35,70 +35,37 @@ protected String description ;
 
 protected String price ;
 protected String discount,itemType ;
-
-
-public String getItemType() {
-	return itemType;
-}
-public void setItemType(String itemType) {
-	this.itemType = itemType;
-}
 protected String status ;
 protected String itemstatus ;
-
-public String getItemstatus() {
-	return itemstatus;
+public int getId() {
+	return id;
 }
-public void setItemstatus(String itemstatus) {
-	this.itemstatus = itemstatus;
+public void setId(int id) {
+	this.id = id;
 }
-public int getId()
-{
-  return id;
+public Date getCreatedTime() {
+	return createdTime;
 }
-public void setId(final int id)
-{
-  this.id = id;
+public void setCreatedTime(Date createdTime) {
+	this.createdTime = createdTime;
 }
-public Date getCreatedTime()
-{
-  return createdTime;
+public Date getUpdatedTime() {
+	return updatedTime;
 }
-public void setCreatedTime(final Date createdTime)
-{
-  this.createdTime = createdTime;
+public void setUpdatedTime(Date updatedTime) {
+	this.updatedTime = updatedTime;
 }
-public Date getUpdatedTime()
-{
-  return updatedTime;
+public String getName() {
+	return name;
 }
-public void setUpdatedTime(final Date updatedTime)
-{
-  this.updatedTime = updatedTime;
+public void setName(String name) {
+	this.name = name;
 }
-public String getName()
-{
-  return name;
+public String getDescription() {
+	return description;
 }
-public void setName(final String name)
-{
-  this.name = name;
-}
-public String getDescription()
-{
-  return description;
-}
-public void setDescription(final String description)
-{
-  this.description = description;
-}
-public String getStatus()
-{
-  return status;
-}
-public void setStatus(final String status)
-{
-  this.status = status;
+public void setDescription(String description) {
+	this.description = description;
 }
 public String getPrice() {
 	return price;
@@ -112,11 +79,23 @@ public String getDiscount() {
 public void setDiscount(String discount) {
 	this.discount = discount;
 }
-@Override
-public String toString() {
-	return "ItemsBean [id=" + id + ", createdTime=" + createdTime + ", updatedTime=" + updatedTime + ", name=" + name
-			+ ", description=" + description + ", price=" + price + ", discount=" + discount + ", status=" + status
-			+ "]";
+public String getItemType() {
+	return itemType;
+}
+public void setItemType(String itemType) {
+	this.itemType = itemType;
+}
+public String getStatus() {
+	return status;
+}
+public void setStatus(String status) {
+	this.status = status;
+}
+public String getItemstatus() {
+	return itemstatus;
+}
+public void setItemstatus(String itemstatus) {
+	this.itemstatus = itemstatus;
 }
 
 
