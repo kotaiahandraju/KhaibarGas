@@ -7,12 +7,34 @@
 
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Home</a></li>
                <li>Items</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container">
             
+            <div class="row">
+              <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4>Items List</h4>
+                            <div class="options">   
+                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body collapse in">
+                        <div class="table-responsive" id="tableId" >
+                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+                                <thead>
+                                	<tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price</th><th>Status</th><th>Action</th></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                     
             <div class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
@@ -24,15 +46,6 @@
                     </div>
 	                <form:form modelAttribute="itemsForm" action="itemsSave" class="form-horizontal" method="Post" >
 	                <div class="panel-body">
-	                <c:if test="${not empty msg}">
-	                    	<div class="row">
-	                    		<div class="col-sm-4 col-sm-offset-4">
-	                    			<div class="form-group">
-	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg} <span style="color: red;">${msgId}</span></div>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-                    	</c:if>
                     	<div class="row">
                     			<div class="form-group">
                     			<form:hidden path="id"/>
@@ -99,28 +112,6 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-              <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Items List</h4>
-                            <div class="options">   
-                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
-                            </div>
-                        </div>
-                        <div class="panel-body collapse in">
-                        <div class="table-responsive" id="tableId" >
-                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-                                <thead>
-                                	<tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price</th><th>Status</th><th>Action</th></tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                         </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div> <!-- container -->
 

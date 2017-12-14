@@ -8,12 +8,46 @@
 
 		<div class="clearfix"></div>
 		<ol class="breadcrumb">
-			<li><a href="">Home</a></li>
+			<li><a href="#">Home</a></li>
 			<li>Company Master</li>
 		</ol>
 		<div class="clearfix"></div>
 		<div class="container">
-
+			<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h4>Company Master Details</h4>
+								<div class="options">
+									<a href="javascript:;" class="panel-collapse"><i
+										class="fa fa-chevron-down"></i></a>
+								</div>
+							</div>
+							<div class="panel-body collapse in">
+								<div class="table-responsive" id="tableId">
+									<table cellpadding="0" cellspacing="0" border="0"
+										class="table table-striped table-bordered datatables"
+										id="example">
+										<thead>
+											<tr>
+												<th>Company Code</th>
+												<th>Company Name</th>
+												<th>Contact Person Name</th>
+												<th>Contact Person Mobile</th>
+												<th>Email Id</th>
+												<th>Remarks</th>
+												<th>Type of Comapany</th>
+												<th>Status</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1 col-sm-12">
@@ -25,14 +59,6 @@
 						<form:form class="form-horizontal" modelAttribute="companymaster"
 							role="form" id="cylider-form" action="saveCompanyMaster" method="post">
 							<div class="panel-body">
-								<c:if test="${not empty msg}">
-									<div class="form-group">
-										<div class="col-sm-4 col-sm-offset-4">
-											<div class="msgcss alert alert-${cssMsg} fadeIn animated"
-												style="text-align: center;">${msg}</div>
-										</div>
-									</div>
-								</c:if>
 								<%-- <div class="row">
 								<div class="col-sm-4 col-sm-offset-4">
 									<div class="msgcss alert alert-success fadeIn animated" style="text-align: center;">${msg} User Created Successfully</div>
@@ -202,42 +228,7 @@
 					</div>
 
 				</div>
-
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<h4>Company Master Details</h4>
-								<div class="options">
-									<a href="javascript:;" class="panel-collapse"><i
-										class="fa fa-chevron-down"></i></a>
-								</div>
-							</div>
-							<div class="panel-body collapse in">
-								<div class="table-responsive" id="tableId">
-									<table cellpadding="0" cellspacing="0" border="0"
-										class="table table-striped table-bordered datatables"
-										id="example">
-										<thead>
-											<tr>
-												<th>Company Code</th>
-												<th>Company Name</th>
-												<th>Contact Person Name</th>
-												<th>Contact Person Mobile</th>
-												<th>Email Id</th>
-												<th>Remarks</th>
-												<th>Type of Comapany</th>
-												<th>Status</th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody></tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				
 			</div>
 		</div>
 	

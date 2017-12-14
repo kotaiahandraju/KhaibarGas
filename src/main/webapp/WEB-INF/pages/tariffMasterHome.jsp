@@ -10,13 +10,45 @@
 
 		<div class="clearfix"></div>
 		<ol class="breadcrumb">
-			<li><a href="">Home</a></li>
+			<li><a href="#">Home</a></li>
 			<li>Tariff Master</li>
 		</ol>
 		<div class="clearfix"></div>
 		<div class="container">
 
-			<div class="container">
+			<div class="row">
+						<div class="col-md-12">
+							<div class="panel panel-primary">
+								<div class="panel-heading">
+									<h4>Tariff Master Details</h4>
+									<div class="options">
+										<a href="javascript:;" class="panel-collapse"><i
+											class="fa fa-chevron-down"></i></a>
+									</div>
+								</div>
+								<div class="panel-body collapse in">
+									<div class="table-responsive" id="tableId">
+										<table cellpadding="0" cellspacing="0" border="0"
+											class="table table-striped table-bordered datatables"
+											id="example">
+											<thead>
+												<tr>
+													<th>Asset Code</th>
+													<th>Asset Description</th>
+													<th>Rate</th>
+													<th>Allowed Discount</th>
+													<th>Remarks</th>
+													<th>Status</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody></tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
 
 
 				<div class="row">
@@ -143,41 +175,6 @@
 						</div>
 					</div>
 
-					<div class="row">
-						<div class="col-md-12">
-							<div class="panel panel-primary">
-								<div class="panel-heading">
-									<h4>Tariff Master Details</h4>
-									<div class="options">
-										<a href="javascript:;" class="panel-collapse"><i
-											class="fa fa-chevron-down"></i></a>
-									</div>
-								</div>
-								<div class="panel-body collapse in">
-									<div class="table-responsive" id="tableId">
-										<table cellpadding="0" cellspacing="0" border="0"
-											class="table table-striped table-bordered datatables"
-											id="example">
-											<thead>
-												<tr>
-													<th>Asset Code</th>
-													<th>Asset Description</th>
-													<th>Rate</th>
-													<th>Allowed Discount</th>
-													<th>Remarks</th>
-													<th>Status</th>
-													<th></th>
-												</tr>
-											</thead>
-											<tbody></tbody>
-										</table>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-
-				</div>
 			</div>
 		</div>
 

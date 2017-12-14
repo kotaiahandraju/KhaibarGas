@@ -7,11 +7,38 @@
 
 			<div class="clearfix"></div>
 			<ol class="breadcrumb">
-				<li><a href="index.html">Home</a></li>
+				<li><a href="#">Home</a></li>
 				<li>Filling station</li>
 			</ol>
 			<div class="clearfix"></div>
 			<div class="container">
+				
+				<div class="row">
+				<div class="col-md-12">
+					<div class="panel panel-primary">
+						<div class="panel-heading">
+							<h4>Filling Stations List</h4>
+							<div class="options">
+								<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+							</div>
+						</div>
+						<div class="panel-body collapse in">
+							<div class="table-responsive" id="tableId">
+								<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+									<thead>
+										<tr>
+											<th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th>
+											<th>Closing Balance</th><th>Station Name</th><th>Unit Point</th><th>status</th><th></th>
+										</tr>
+									</thead>
+									<tbody></tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+				
 				<div class="row">
 					<div class="col-md-10 col-md-offset-1 col-sm-12">
 						<div class="panel panel-primary">
@@ -21,15 +48,6 @@
 							</div>
 						<form:form class="form-horizontal" 	modelAttribute="fillingStationForm" role="form" id="fillingstation-form" action="addfillingstation" method="post">
 						<div class="panel-body">
-							<c:if test="${not empty msg}">
-		                    	<div class="row">
-		                    		<div class="col-sm-4 col-sm-offset-4">
-		                    			<div class="form-group">
-		                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg}</div>
-		                    			</div>
-		                    		</div>
-		                    	</div>
-                    		</c:if>
 							<div class="row">
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
@@ -119,31 +137,6 @@
 				</div>
 			</div>
 
-			<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h4>Filling Stations List</h4>
-							<div class="options">
-								<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
-							</div>
-						</div>
-						<div class="panel-body collapse in">
-							<div class="table-responsive" id="tableId">
-								<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-									<thead>
-										<tr>
-											<th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th>
-											<th>Closing Balance</th><th>Station Name</th><th>Unit Point</th><th>status</th><th></th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
 		</div>
 			<!-- container -->
 

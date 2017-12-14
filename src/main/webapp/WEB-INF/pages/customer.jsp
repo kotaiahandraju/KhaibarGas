@@ -7,12 +7,33 @@
 
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="index.html">Home</a></li>
-               <li>CUSTOMER </li>
+              <li><a href="#">Home</a></li>
+               <li>Customer Master</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container">
-            
+            <div class="row">
+              <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4>Customers List</h4>
+                            <div class="options">   
+                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body collapse in">
+                        <div class="table-responsive" id="tableId" >
+                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+                                <thead>
+                                	<tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th>Action</th></tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                         </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
                     
             <div class="row">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
@@ -24,9 +45,6 @@
                     </div>
 	                <form:form modelAttribute="customerForm" action="customerSave" class="form-horizontal" method="Post" >
 	                <div class="panel-body">
-	                <c:if test="${not empty msg}">
-									<div class="alert alert-success fadeIn animated">${msg}</div>
-								</c:if>
                     	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
@@ -128,28 +146,6 @@
              
             
         </div>
-        <div class="row">
-              <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Customers List</h4>
-                            <div class="options">   
-                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
-                            </div>
-                        </div>
-                        <div class="panel-body collapse in">
-                        <div class="table-responsive" id="tableId" >
-                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-                                <thead>
-                                	<tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th>Action</th></tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                         </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
         </div> <!-- container -->
    

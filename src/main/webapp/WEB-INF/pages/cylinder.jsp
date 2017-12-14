@@ -6,9 +6,6 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
 
-
-
-
 <!-- Body starts heare -->
         <div class="clearfix"></div>
              <ol class="breadcrumb">
@@ -19,6 +16,32 @@
         <div class="container">
             
             <div class="row">
+              <div class="col-md-12">
+                    <div class="panel panel-primary">
+                        <div class="panel-heading">
+                            <h4>Cylinders List</h4>
+                            <div class="options">   
+                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+                            </div>
+                        </div>
+                        <div class="panel-body collapse in">
+                        <div class="table-responsive" id="tableId">
+                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+                                <thead>
+                                    <tr>
+                                        <th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Customer ID</th><th>Location</th><th>LPO No</th>
+                                        <th>Color</th><th>Expiry Date</th><th>status</th><th></th>
+                                    </tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row" id="moveTo">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -28,15 +51,6 @@
                     <form:form class="form-horizontal" modelAttribute="cylinderForm"  role="form" id="cylider-form" action="addcylinder" method="post">
                     <div class="panel-body">
                     <form:hidden path="id"/>
-                    	<c:if test="${not empty msg}">
-	                    	<div class="row">
-	                    		<div class="col-sm-4 col-sm-offset-4">
-	                    			<div class="form-group">
-	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg}</div>
-	                    			</div>
-	                    		</div>
-	                    	</div>
-                    	</c:if>
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size<span class="impColor">*</span></label>
@@ -122,7 +136,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Expiry Date<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="expirtdate1" value="" class="form-control validate" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" />
+								    	<form:input path="expirtdate1" value="" class="form-control validate" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" onchange="removeBorder(this.id)"/>
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
@@ -173,34 +187,7 @@
 			</div>
                     
                 </div>
-            </div>
         
-        <div class="row">
-              <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Cylinders List</h4>
-                            <div class="options">   
-                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
-                            </div>
-                        </div>
-                        <div class="panel-body collapse in">
-                        <div class="table-responsive" id="tableId">
-                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-                                <thead>
-                                    <tr>
-                                        <th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Customer ID</th><th>Location</th><th>LPO No</th>
-                                        <th>Color</th><th>Expiry Date</th><th>status</th><th></th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </div> <!-- container -->
 
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
@@ -273,11 +260,12 @@ function editCylinder(id) {
 	$("#cylinderstatus").val(serviceUnitArray[id].cylinderstatus);
 	$("#remarks").val(serviceUnitArray[id].remarks);
 	$("#submit1").val("Update");
-	$(window).scrollTop($('body').offset().top);
 	getLpoNumber();
 	$("#lponumber").val(lpo);
 	$("#lponumber").trigger("chosen:updated");
-	}
+	$(window).scrollTop($('#moveTo').offset().top);
+}
+
 function deleteCylinder(id,status){
 	var checkstr=null;
 	if(status == 0){
@@ -328,44 +316,14 @@ function getLpoNumber(){
     });
 }
 
-
- /* $('#lponumber').change(function(){
-    var lponumber = $(this).val();
-	var itemid=$("#size").val();
-    var formData = new FormData();
-    formData.append('lponumber', lponumber);
-    $.fn.makeMultipartRequest('POST', 'getMadeByAndExparidate', false,
-			formData, false, 'text', function(data){
-    	console.log(data);
-    	$("#madein").val(data);
-    });
-});  */
-
-
-
-
-	/* $.ajax({
->>>>>>> c0fed2516fec227f765d486569babfd9045f3c29
-			type : "GET",
-			url : "getCylinderCapacity",
-			data : {"cid":cid},
-			dataType : "text",
-			success : function(data) {
-				console.log(data);
-				$("#capacity").val(data);
-			}
-		});
-
-	}); */
-
-	$(function() {
-		$("#expirtdate1").datepicker({
-			dateFormat : "dd-MM-yy",
-			changeDate : true,
-			changeMonth : true,
-			changeYear : true,
-		});
+$(function() {
+	$("#expirtdate1").datepicker({
+		dateFormat : "dd-MM-yy",
+		changeDate : true,
+		changeMonth : true,
+		changeYear : true,
 	});
+});
 	
 function getLPOdetails(value){
 	var item=$("#size").val();

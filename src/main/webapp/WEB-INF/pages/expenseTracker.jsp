@@ -1,4 +1,3 @@
-
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
@@ -8,12 +7,43 @@
 
 		<div class="clearfix"></div>
 		<ol class="breadcrumb">
-			<li><a href="">Home</a></li>
+			<li><a href="#">Home</a></li>
 			<li>Expense Tracker</li>
 		</ol>
 		<div class="clearfix"></div>
 		<div class="container">
-
+			<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h4>Expense Tracker Details</h4>
+								<div class="options">
+									<a href="javascript:;" class="panel-collapse"><i
+										class="fa fa-chevron-down"></i></a>
+								</div>
+							</div>
+							<div class="panel-body collapse in">
+								<div class="table-responsive" id="tableId">
+									<table cellpadding="0" cellspacing="0" border="0"
+										class="table table-striped table-bordered datatables"
+										id="example">
+										<thead>
+											<tr>
+												<th>Account Head</th>
+												<th>Date of Expense</th>
+												<th>Item description</th>
+												<th>Payment Type</th>
+												<th>Remarks</th>
+												<th></th>
+											</tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 
 			<div class="row">
 				<div class="col-md-10 col-md-offset-1 col-sm-12">
@@ -144,39 +174,6 @@
 
 				</div>
 
-
-				<div class="row">
-					<div class="col-md-12">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<h4>Expense Tracker Details</h4>
-								<div class="options">
-									<a href="javascript:;" class="panel-collapse"><i
-										class="fa fa-chevron-down"></i></a>
-								</div>
-							</div>
-							<div class="panel-body collapse in">
-								<div class="table-responsive" id="tableId">
-									<table cellpadding="0" cellspacing="0" border="0"
-										class="table table-striped table-bordered datatables"
-										id="example">
-										<thead>
-											<tr>
-												<th>Account Head</th>
-												<th>Date of Expense</th>
-												<th>Item description</th>
-												<th>Payment Type</th>
-												<th>Remarks</th>
-												<th></th>
-											</tr>
-										</thead>
-										<tbody></tbody>
-									</table>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 		</div>
 		

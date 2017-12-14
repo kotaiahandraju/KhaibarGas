@@ -1,16 +1,19 @@
-
-	
-	  <%
-     
-     
-String baseurl =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
-session.setAttribute("baseurl", baseurl);
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
+<%
+	String baseurl =  request.getScheme() + "://" + request.getServerName() +      ":" +   request.getServerPort() +  request.getContextPath();
+	session.setAttribute("baseurl", baseurl);
 %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8">
     <title>Khaibar Gas LLC</title>
+    <link rel="shortcut icon" href="${baseurl }/img/logo.jpeg"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -108,6 +111,16 @@ $(function() {
 </head>
 
 <body class="horizontal-nav ">
+						<c:if test="${not empty msg}">
+	                    	<div class="row">
+	                    		<div class="col-sm-4 col-sm-offset-4">
+	                    			<div class="form-group">
+	                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg}</div>
+	                    			</div>
+	                    		</div>
+	                    	</div>
+                    	</c:if>
+
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
             <a class="navbar-brand" href="#">KHAIBAR GAS LLC</a>

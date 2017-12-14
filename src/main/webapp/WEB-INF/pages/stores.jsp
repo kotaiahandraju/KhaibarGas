@@ -7,7 +7,7 @@
 
         <div class="clearfix"></div>
              <ol class="breadcrumb">
-              <li><a href="index.html">Home</a></li>
+              <li><a href="#">Home</a></li>
                <li>Store</li>
             </ol>
             <div class="clearfix"></div>
@@ -46,15 +46,6 @@
 	                    </div>
 		                <form:form modelAttribute="storeForm" action="storeSave" class="form-horizontal" method="Post" >
 		                <div class="panel-body">
-		                <c:if test="${not empty msg}">
-		                    	<div class="row">
-		                    		<div class="col-sm-4 col-sm-offset-4">
-		                    			<div class="form-group">
-		                    				<div class="msgcss alert alert-${cssMsg} fadeIn animated" style="text-align: center;">${msg} <span style="color: red;">${msgId}</span></div>
-		                    			</div>
-		                    		</div>
-		                    	</div>
-	                    	</c:if>
 	                    	<div class="row">
 	                    	   
 	                    			<div class="form-group">
