@@ -151,9 +151,9 @@ function displayTable(listOrders) {
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj){
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactive' onclick='deleteExpensiveTracker("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='deleteExpensiveTracker("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 		}else{  
-			var deleterow = "<a class='active' onclick='deleteExpensiveTracker("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='deleteExpensiveTracker("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 		var edit = "<a class='edit' onclick='editExpensiveTracker("+ orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
