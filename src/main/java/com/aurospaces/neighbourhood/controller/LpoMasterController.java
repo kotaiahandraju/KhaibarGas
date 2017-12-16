@@ -72,6 +72,7 @@ public class LpoMasterController {
 			 LpoitemsBean objLpoitemsBean = null;
 			 System.out.println("lpoSave");
 			 int id = 0;
+			 LpomasterBean lpo = null;
 			try {
 				System.out.println("--------lpoSave----------"+lpomasterBean.getAmount());
 				
@@ -106,6 +107,8 @@ public class LpoMasterController {
 				{
 					lpomasterBean.setStatus("1");
 					lpomasterDao.save(lpomasterBean);
+					lpomasterDao.updateLPONumber();
+					 lpo = lpomasterDao.getById(lpomasterBean.getId());
 					redirect.addFlashAttribute("msg", "Record Inserted Successfully");
 					redirect.addFlashAttribute("cssMsg", "success");
 				}
@@ -120,7 +123,7 @@ public class LpoMasterController {
 				for(int i=0; i<unit.length; i++)
 				{
 					objLpoitemsBean= new LpoitemsBean();
-					objLpoitemsBean.setLponumber(lpomasterBean.getLponumber());
+					objLpoitemsBean.setLponumber(lpo.getLponumber());
 					if(unit != null && unit.length != 0){
 						objLpoitemsBean.setQuantity(unit[i]);
 					}
@@ -148,7 +151,7 @@ public class LpoMasterController {
 					
 					lpoitemsDao.save(objLpoitemsBean);
 				}
-				
+//				lpomasterDao.updateLPONumber();
 				
 			} catch (Exception e) {
 				System.out.println("Exception in Product Controller in productSave()");

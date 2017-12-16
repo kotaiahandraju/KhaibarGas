@@ -82,9 +82,9 @@ ps.setString(8, tariffmaster.getStatus());
 		else
 		{
 
-			String sql = "UPDATE tariffmaster  set assetcode = ? ,assetdescription = ? ,rate = ? ,alloweddiscount = ? ,remarks = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE tariffmaster  set assetcode = ? ,assetdescription = ? ,rate = ? ,alloweddiscount = ? ,remarks = ?   where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{tariffmaster.getAssetcode(),tariffmaster.getAssetdescription(),tariffmaster.getRate(),tariffmaster.getAlloweddiscount(),tariffmaster.getRemarks(),tariffmaster.getStatus(),tariffmaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{tariffmaster.getAssetcode(),tariffmaster.getAssetdescription(),tariffmaster.getRate(),tariffmaster.getAlloweddiscount(),tariffmaster.getRemarks(),tariffmaster.getId()});
 		}
 	}
 		

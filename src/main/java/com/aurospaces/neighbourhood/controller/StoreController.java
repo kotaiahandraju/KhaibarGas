@@ -7,7 +7,6 @@ import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,14 +21,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
 import com.aurospaces.neighbourhood.bean.CustomermasterBean;
-import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import CommonUtils.CommonUtils;
 
 @Controller
 @RequestMapping(value="/admin")
@@ -75,7 +71,7 @@ public class StoreController {
 		 Integer existId =null;
 		 Random ran = new Random();
 		try {
-			System.out.println("--------customerSave----------");
+			System.out.println("--------storeSave----------");
 			
 			String sName=storesmasterBean.getStorename();
 			storeBean=storesmasterDao.getByStoreName(sName);
@@ -83,11 +79,10 @@ public class StoreController {
 			if(storeBean.size() ==0 || storeBean ==null){
 				//storesmasterBean.setStoreid(CommonUtils.getAutoGenId());
 				storesmasterBean.setStatus("1");
-				String str=storesmasterBean.getStorename().substring(0,3) +String.format("%03d", ran.nextInt(1000));
-				storesmasterBean.setStoreid(str);
+//				String str=storesmasterBean.getStorename().substring(0,3) +String.format("%03d", ran.nextInt(1000));
+//				storesmasterBean.setStoreid(str);
 				storesmasterDao.save(storesmasterBean);
-				reAttributes.addFlashAttribute("msg", "Record Inserted Successfully with Id:");
-				reAttributes.addFlashAttribute("msgId", str);
+				reAttributes.addFlashAttribute("msg", "Record Inserted Successfully");
 				reAttributes.addFlashAttribute("cssMsg", "success");
 			}else{
 				for (StoresmasterBean iterarateList : storeBean) {
@@ -106,7 +101,7 @@ public class StoreController {
 				}
 			}
 			
-			
+			storesmasterDao.updateStoreIds();
 		} catch (Exception e) {
 			System.out.println("Exception in Product Controller in productSave()");
 			e.printStackTrace();

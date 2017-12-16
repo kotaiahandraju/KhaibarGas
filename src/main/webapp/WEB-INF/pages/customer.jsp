@@ -46,7 +46,7 @@
 	                <form:form modelAttribute="customerForm" action="customerSave" class="form-horizontal" method="Post" >
 	                <div class="panel-body">
                     	<div class="row">
-                    		<div class="col-md-4">
+                    		<%-- <div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Customer ID<span class="impColor">*</span></label>
                     				<div class="col-md-6">
@@ -55,7 +55,7 @@
 								      	<form:input type="text" path="customerid" class="form-control validate" placeholder="Customer ID"/>
 								  	</div>
                     			</div>
-                    		</div>
+                    		</div> --%>
                     		<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Customer Name<span class="impColor">*</span></label>
@@ -64,17 +64,6 @@
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Customer Address<span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address"/>
-<%-- 		                            	<form:textarea type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address"></form:textarea> --%>
-								  	</div>
-                    			</div>
-                    		</div>
-                    	</div>
-                    	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Mobile<span class="impColor">*</span></label>
@@ -100,8 +89,6 @@
 								  	</div>
                     			</div>
                     		</div>
-                    	</div>
-                    	<div class="row">
                     		<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Contact Person<span class="impColor">*</span></label>
@@ -113,15 +100,23 @@
                     		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
-
-                    				<label for="focusedinput" class="col-md-6 control-label ">Customer Type</label>
+                    				<label for="focusedinput" class="col-md-6 control-label ">Customer Type <span class="impColor">*</span> </label>
                     				<div class="col-md-6">
-		                            	<form:select path="customertype" class="form-control">
+		                            	<form:select path="customertype" class="form-control validate">
 		                            		<form:option value="">-- Customer Type --</form:option>
-									  		<form:option value="Commercial">COMMERCIAL</form:option>
-									  		<form:option value="Domestic">Domestic</form:option>
-									  		<form:option value="industrial">industrial</form:option>
+									  		<form:option value="COMMERCIAL">COMMERCIAL</form:option>
+									  		<form:option value="DOMESTIC">DOMESTIC</form:option>
+									  		<form:option value="INDUSTIAL">INDUSTIAL</form:option>
 								  		</form:select>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-4">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Address<span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+<%-- 		                            	<form:input type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address"/> --%>
+		                            	<form:textarea type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address"></form:textarea>
 								  	</div>
                     			</div>
                     		</div>
@@ -159,7 +154,7 @@ if (listOrders1 != "") {
 }
 
 var damageId = 0;
-var serviceUnitArray ={};
+// var serviceUnitArray ={};
 var data = {};
 
 
@@ -182,7 +177,7 @@ function showTableData(response){
 			var deleterow = "<a class='activate' onclick='customerDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 		
-		var edit = "<a class='edit' onclick='editCustomer("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editCustomer("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 			
 		var tblRow ="<tr>"

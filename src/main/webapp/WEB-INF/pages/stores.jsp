@@ -101,7 +101,7 @@ if (listOrders1 != "") {
 }
 
 var damageId = 0;
-var serviceUnitArray ={};
+// var serviceUnitArray ={};
 var data = {};
 
 
@@ -123,7 +123,7 @@ function showTableData(response){
 			var deleterow = "<a class='activate' onclick='deleteStore("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
 		
-		var edit = "<a class='edit' onclick='editStore("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editStore("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 			
 		var tblRow ="<tr>"

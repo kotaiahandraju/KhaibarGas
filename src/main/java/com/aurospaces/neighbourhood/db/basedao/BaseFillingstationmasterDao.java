@@ -25,7 +25,7 @@ public class BaseFillingstationmasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO fillingstationmaster( created_time, updated_time, gasavailability, numberoffillingmachines, quantity, gascapacity, availablegas, status,stationname,unitpoint) values (?, ?, ?, ?, ?, ?,?,? ,?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO fillingstationmaster( created_time, updated_time, gasavailability, numberoffillingmachines, quantity, gascapacity,  status,stationname,unitpoint) values (?, ?, ?, ?, ?, ?,?,? ,?)"; 
 
 
 
@@ -66,10 +66,9 @@ ps.setString(3, fillingstationmaster.getGasavailability());
 ps.setString(4, fillingstationmaster.getNumberoffillingmachines());
 ps.setString(5, fillingstationmaster.getQuantity());
 ps.setString(6, fillingstationmaster.getGascapacity());
-ps.setString(7, fillingstationmaster.getAvailablegas());
-ps.setString(8, fillingstationmaster.getStatus());
-ps.setString(9, fillingstationmaster.getStationname());
-ps.setString(10, fillingstationmaster.getUnitpoint());
+ps.setString(7, fillingstationmaster.getStatus());
+ps.setString(8, fillingstationmaster.getStationname());
+ps.setString(9, fillingstationmaster.getUnitpoint());
 
 
 							return ps;
@@ -85,9 +84,9 @@ ps.setString(10, fillingstationmaster.getUnitpoint());
 		else
 		{
 
-			String sql = "UPDATE fillingstationmaster  set gasavailability = ? ,numberoffillingmachines = ? ,quantity = ? ,gascapacity = ? ,availablegas = ? ,status = ? ,stationname =?,unitpoint =? where id = ? ";
+			String sql = "UPDATE fillingstationmaster  set gasavailability = ? ,numberoffillingmachines = ? ,quantity = ? ,gascapacity = ? ,status = ? ,stationname =?,unitpoint =? where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{fillingstationmaster.getGasavailability(),fillingstationmaster.getNumberoffillingmachines(),fillingstationmaster.getQuantity(),fillingstationmaster.getGascapacity(),fillingstationmaster.getAvailablegas(),fillingstationmaster.getStatus(),fillingstationmaster.getStationname(),fillingstationmaster.getUnitpoint(),fillingstationmaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{fillingstationmaster.getGasavailability(),fillingstationmaster.getNumberoffillingmachines(),fillingstationmaster.getQuantity(),fillingstationmaster.getGascapacity(),fillingstationmaster.getStatus(),fillingstationmaster.getStationname(),fillingstationmaster.getUnitpoint(),fillingstationmaster.getId()});
 		}
 	}
 		

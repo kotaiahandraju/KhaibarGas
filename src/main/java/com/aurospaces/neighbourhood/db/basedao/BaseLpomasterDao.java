@@ -88,9 +88,9 @@ ps.setString(13, lpomaster.getPaidamount());
 		else
 		{
 
-			String sql = "UPDATE lpomaster  set lponumber = ? ,item = ? ,remarks = ? ,suppliername = ? ,supplieraddress = ? ,suppliercontactno = ? ,supplieremail = ? ,amount = ?  where id = ? ";
+			String sql = "UPDATE lpomaster  set lponumber = ? ,item = ? ,remarks = ? ,suppliername = ? ,supplieraddress = ? ,suppliercontactno = ? ,supplieremail = ? ,amount = ?,dueamount=?,paidamount=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{lpomaster.getLponumber(),lpomaster.getItem(),lpomaster.getRemarks(),lpomaster.getSuppliername(),lpomaster.getSupplieraddress(),lpomaster.getSuppliercontactno(),lpomaster.getSupplieremail(),lpomaster.getAmount(),lpomaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{lpomaster.getLponumber(),lpomaster.getItem(),lpomaster.getRemarks(),lpomaster.getSuppliername(),lpomaster.getSupplieraddress(),lpomaster.getSuppliercontactno(),lpomaster.getSupplieremail(),lpomaster.getAmount(),lpomaster.getDueamount(),lpomaster.getPaidamount(),lpomaster.getId()});
 		}
 	}
 		

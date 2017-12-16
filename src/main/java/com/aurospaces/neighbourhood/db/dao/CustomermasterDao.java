@@ -51,5 +51,14 @@ public class CustomermasterDao extends BaseCustomermasterDao
 			   
 			   return jdbcTemplate.queryForInt(sql);
 		}
+	 public boolean updateCustomerIds() {
+			boolean result=false;
+			jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "update customermaster  set  customerid= concat(SUBSTR(customertype,1,3),'1' ,LPAD( id, 4, '0'))";
+			int i = jdbcTemplate.update(sql, new Object[]{});
+			 if(i>0)
+				 result = true;
+				return result;
+		}
 }
 

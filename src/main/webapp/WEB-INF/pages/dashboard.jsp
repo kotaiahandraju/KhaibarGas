@@ -1,3 +1,9 @@
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
+<%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 <script>
 window.onload = function() {
     if(!window.location.hash) {
@@ -18,17 +24,22 @@ window.onload = function() {
                                 <div class="tiles-heading">IDLE CYLINDERS</div>
                                 <div class="tiles-body-alt">
                                     <!--i class="fa fa-bar-chart-o"></i-->
-                                    <div class="text-center">21854</div>
+                                    <div class="text-center" id="idleCylinders" >21854</div>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>
                         </div>
                         <div class="col-md-2 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-success" href="#">
-                                <div class="tiles-heading">DELIVERED</div>
+                                <div class="tiles-heading" id="delivered">DELIVERED</div>
                                 <div class="tiles-body-alt">
                                     <!--i class="fa fa-money"></i-->
+                                     <c:if test="${not empty Delivered}">
                                     <div class="text-center">32545</div>
+                                    </c:if>
+                                     <c:if test="${empty Delivered}">
+                                    <div class="text-center">0</div>
+                                    </c:if>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>
@@ -37,7 +48,12 @@ window.onload = function() {
                             <a class="info-tiles tiles-orange" href="#">
                                 <div class="tiles-heading">EMPTY CYLINDERS</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center">${Empty }</div>
+                                <c:if test="${not empty Empty}">
+                                    <div class="text-center" id="emptycylinders">${Empty }</div>
+                                </c:if>
+                                <c:if test="${ empty Empty}">
+                                    <div class="text-center" id="emptycylinders">0</div>
+                                </c:if>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>
@@ -46,7 +62,12 @@ window.onload = function() {
                             <a class="info-tiles tiles-alizarin" href="#">
                                 <div class="tiles-heading">FILLED CYLINDERS</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center">${Filled }</div>
+                                 <c:if test="${not empty Filled}">
+                                    <div class="text-center" id="filledcylinders">${Filled }</div>
+                                  </c:if>
+                                   <c:if test="${empty Filled}">
+                                    <div class="text-center" id="filledcylinders">0</div>
+                                  </c:if>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>
@@ -55,7 +76,7 @@ window.onload = function() {
                             <a class="info-tiles tiles-warning" href="#">
                                 <div class="tiles-heading">MISSID CYLINDERS</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center">457</div>
+                                    <div class="text-center" id="missidcylinders">457</div>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>
@@ -105,6 +126,7 @@ window.onload = function() {
 </div> <!-- page-content -->
 <!-- Body Ends Here -->
 <script type="text/javascript">
+
 
 $(".dashboard").addClass("active"); 
 </script>

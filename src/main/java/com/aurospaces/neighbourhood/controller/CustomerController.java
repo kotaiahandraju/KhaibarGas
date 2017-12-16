@@ -91,8 +91,7 @@ public class CustomerController {
 						}
 				}
 			}
-			
-			
+			customermasterDao.updateCustomerIds();
 		} catch (Exception e) {
 			System.out.println("Exception in Product Controller in productSave()");
 			e.printStackTrace();

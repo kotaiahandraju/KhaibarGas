@@ -59,99 +59,73 @@
 						<form:form class="form-horizontal" modelAttribute="companymaster"
 							role="form" id="cylider-form" action="saveCompanyMaster" method="post">
 							<div class="panel-body">
-								<%-- <div class="row">
-								<div class="col-sm-4 col-sm-offset-4">
-									<div class="msgcss alert alert-success fadeIn animated" style="text-align: center;">${msg} User Created Successfully</div>
-								</div>
-						  	</div>
-							 --%>
 								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<form:hidden path="id" />
-											<label class="col-sm-4 control-label required">Company
-												Code <span class="impColor">*</span>
-											</label>
+											<label class="col-sm-4 control-label required">Company Code <span class="impColor">*</span></label>
 											<div class="col-sm-6">
-												<form:input path="companycode"
-													class="form-control validate"
-													autocomplete="off" placeholder="Company Code"
-													required="required" />
+												<form:input path="companycode" class="form-control validate" autocomplete="off" placeholder="Company Code" required="required" />
 												<span class="hasError" id="companycodeError"></span>
-												<div>
-													<form:errors path="companycode" cssClass="error" />
-												</div>
 											</div>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label class="col-sm-4 control-label required">Company
-												Name <span class="impColor">*</span>
-											</label>
+											<label class="col-sm-4 control-label required">Company Name <span class="impColor">*</span></label>
 											<div class="col-sm-6">
-												<form:input path="companyname"
-													class="form-control onlyCharacters validate"
-													autocomplete="off" placeholder="Company Name"
-													required="required" />
+												<form:input path="companyname" class="form-control onlyCharacters validate" autocomplete="off" placeholder="Company Name" required="required" />
 												<span class="hasError" id="companynameError"></span>
-												<div>
-													<form:errors path="companyname" cssClass="error" />
-												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-
-								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
-											<label class="col-sm-4 control-label required">Contact
-												Person Name <span class="impColor">*</span>
-											</label>
+											<label class="col-sm-4 control-label required">Contact Person Name <span class="impColor">*</span></label>
 											<div class="col-sm-6">
-												<form:input path="contactpersonname"
-													class="form-control onlyCharacters validate"
-													autocomplete="off" placeholder="Contact Person Name"
-													required="required" />
+												<form:input path="contactpersonname" class="form-control onlyCharacters validate" autocomplete="off" placeholder="Contact Person Name" required="required" />
 												<span class="hasError" id="contactpersonnameError"></span>
-												<div>
-													<form:errors path="contactpersonname" cssClass="error" />
-												</div>
 											</div>
 										</div>
 									</div>
 									<div class="col-md-6">
 										<div class="form-group">
-											<label class="col-sm-4 control-label required">Contact
-												Person Mobile <span class="impColor">*</span>
-											</label>
+											<label class="col-sm-4 control-label required">Contact Person Mobile <span class="impColor">*</span></label>
 											<div class="col-sm-6">
-												<form:input path="contactpersonmobile"
-													class="form-control numericOnly validate"
-													autocomplete="off" placeholder="Contact Person Mobile"
-													required="required" />
+												<form:input path="contactpersonmobile" class="form-control numericOnly validate" autocomplete="off" placeholder="Contact Person Mobile" required="required" />
 												<span class="hasError" id="contactpersonmobileError"></span>
-												<div>
-													<form:errors path="contactpersonmobile" cssClass="error" />
-												</div>
 											</div>
 										</div>
 									</div>
-								</div>
-
-								<div class="row">
 									<div class="col-md-6">
 										<div class="form-group">
 											<label class="col-sm-4 control-label required">Email Id <span class="impColor">*</span></label>
 											<div class="col-sm-6">
-												<form:input path="emailid" class="form-control validate"
-													autocomplete="off" placeholder="Email Id"
-													required="required" />
+												<form:input path="emailid" class="form-control validate" autocomplete="off" placeholder="Email Id" required="required" />
 												<span class="hasError" id="emailidError"></span>
-												<div>
-													<form:errors path="emailid" cssClass="error" />
-												</div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="col-sm-4 control-label required">Type of Company</label>
+											<div class="col-sm-6">
+												<form:input path="typeofcompany" class="form-control onlyCharacters" autocomplete="off" placeholder="Type of Company" />
+												<span class="hasError" id="typeofcompanyError"></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="col-sm-4 control-label required">Customer Type</label>
+											<div class="col-sm-6">
+												<form:select path="customertype" class="form-control" onfocus="removeBorder(this.id)">
+													<form:option value="">-- Select Customer Type --</form:option>
+													<form:option value="Owner">Owner</form:option>
+													<form:option value="Competitor">Competitor</form:option>
+													<form:option value="Distributor">Distributor</form:option>
+												</form:select>
+												<span class="hasError" id="customertypeError"></span>
 											</div>
 										</div>
 									</div>
@@ -163,44 +137,7 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="col-sm-4 control-label required">Type
-												of Company</label>
-											<div class="col-sm-6">
-												<form:input path="typeofcompany"
-													class="form-control onlyCharacters" autocomplete="off"
-													placeholder="Type of Company" />
-												<span class="hasError" id="typeofcompanyError"></span>
-												<div>
-													<form:errors path="typeofcompany" cssClass="error" />
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="col-sm-4 control-label required">Customer
-												Type</label>
-											<div class="col-sm-6">
-												<form:select path="customertype"
-													class="form-control" onfocus="removeBorder(this.id)">
-													<form:option value="">-- Select Customer Type --</form:option>
-													<form:option value="Owner">Owner</form:option>
-													<form:option value="Competitor">Competitor</form:option>
-													<form:option value="Distributor">Distributor</form:option>
-												</form:select>
-												<%-- <form:select path="customertype" class="form-control onlyCharacters validate" autocomplete="off" placeholder="Customer Type" /> --%>
-												<span class="hasError" id="customertypeError"></span>
-												<div>
-													<form:errors path="customertype" cssClass="error" />
-												</div>
-											</div>
-										</div>
-									</div>
 								</div>
-
-								
 							</div>
 							<div class="panel-footer">
 								<div class="row">
@@ -224,29 +161,25 @@
 
 
 <script type="text/javascript">
-		var listOrders1 = ${allOrders1};
-		if (listOrders1 != "") {
-			displayTable(listOrders1);
-		}
-		function displayTable(listOrders) {
-			$('#tableId').html('');
-			var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
+var listOrders1 = ${allOrders1};
+if (listOrders1 != "") {
+	displayTable(listOrders1);
+}
+
+function displayTable(listOrders) {
+	$('#tableId').html('');
+	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
 					+ '<thead><tr><th>Company Code</th><th>Company Name</th><th>Contact Person Name</th><th>Contact Person Mobile</th><th>Email Id</th><th>Remarks</th><th>Type of Comapany</th><th>Customer Type</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 			$('#tableId').html(tableHead);
 			serviceUnitArray = {};
-			$
-					.each(
-							listOrders,
-							function(i, orderObj) {
+			$.each(listOrders, function(i, orderObj) {
 								
 								if(orderObj.status == "1"){
 									var deleterow = "<a class='deactivate' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
 								}else{  
 									var deleterow = "<a class='activate' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 								}
-								var edit = "<a class='edit' onclick='editCompanyMasterDetails("
-										+ orderObj.id
-										+ ")'><i class='fa fa-pencil green'></i></a>"
+								var edit = "<a class='edit editIt' onclick='editCompanyMasterDetails("+ orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
 								
 								serviceUnitArray[orderObj.id] = orderObj;
 								var tblRow = "<tr >"
@@ -285,18 +218,6 @@
 								$(tblRow).appendTo("#tableId table tbody");
 							});
 
-			/* $('#DataTables_Table_0').DataTable({
-				dom: 'Bfrtip',
-				buttons: [{extend:"print",className:"btn default"},{extend:"pdf",className:"btn default"},{extend:"csv",className:"btn default"}]
-			}); */
-
-			/*$('#datatable-buttons').DataTable({
-			       "dom": 'C<"clear">lfrtip',
-			       "colVis": {
-			           "buttonText": "Change columns",
-			       "buttons": [{extend:"copy",className:"btn default"},{extend:"print",className:"btn default"},{extend:"pdf",className:"btn default"},{extend:"csv",className:"btn default"}]
-			       }
-			   });*/
 		}
 
 		function editCompanyMasterDetails(id) {
@@ -304,8 +225,7 @@
 			$("#companycode").val(serviceUnitArray[id].companycode);
 			$("#companyname").val(serviceUnitArray[id].companyname);
 			$("#contactpersonname").val(serviceUnitArray[id].contactpersonname);
-			$("#contactpersonmobile").val(
-					serviceUnitArray[id].contactpersonmobile);
+			$("#contactpersonmobile").val(serviceUnitArray[id].contactpersonmobile);
 			$("#emailid").val(serviceUnitArray[id].emailid);
 			$("#remarks").val(serviceUnitArray[id].remarks);
 			$("#customertype").val(serviceUnitArray[id].customertype);
@@ -318,9 +238,9 @@
 		function deleteCompanyMasterDetails(id,status) {
 			var checkstr=null;
 			if(status == 0){
-				 checkstr =  confirm('Are you sure you want to Deactivate?');
+				 checkstr = confirm('Are you sure you want to Deactivate?');
 			}else{
-				 checkstr =  confirm('Are you sure you want to Activate?');
+				 checkstr = confirm('Are you sure you want to Activate?');
 			}
 			if (checkstr == true) {
 				var formData = new FormData();

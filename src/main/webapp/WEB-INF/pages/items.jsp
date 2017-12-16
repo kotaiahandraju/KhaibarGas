@@ -69,9 +69,9 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Price <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Price(AED) <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input  path="price" class="form-control numericOnly validate" placeholder="Price"/>
+		                            	<form:input  path="price" class="form-control numericOnly validate" placeholder="Price(AED)"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -128,7 +128,7 @@ function showTableData(response){
 		}else{  
 			var deleterow = "<a class='activate' onclick='deleteItem("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
-		var edit = "<a class='edit' onclick='editItem("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editItem("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"

@@ -22,8 +22,22 @@ protected String name;
 protected String store;
 protected String cylinderType;
 protected String truckId;
+protected String closingBalanceGas;
+protected String usedGas;
 
 
+public String getClosingBalanceGas() {
+	return closingBalanceGas;
+}
+public void setClosingBalanceGas(String closingBalanceGas) {
+	this.closingBalanceGas = closingBalanceGas;
+}
+public String getUsedGas() {
+	return usedGas;
+}
+public void setUsedGas(String usedGas) {
+	this.usedGas = usedGas;
+}
 public String getTruckId() {
 	return truckId;
 }

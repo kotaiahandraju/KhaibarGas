@@ -84,7 +84,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 control-label required">Remarks</label>
 									<div class="col-sm-6">
-										<form:textarea path="paymentRemarks" class="form-control onlyCharacters" placeholder="Remarks"></form:textarea>
+										<form:textarea path="paymentRemarks" class="form-control " placeholder="Remarks"></form:textarea>
 									</div>
 								</div>
 							</div>
@@ -133,7 +133,7 @@ function displayTable(listOrders) {
 		}else{  
 			var deleterow = "<a class='activate' onclick='trckerDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
-		var edit = "<a class='edit' onclick='editExpensiveTracker("+ orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editExpensiveTracker("+ orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr >"
 			+ "<td title='"+orderObj.accountHead+"'>" + orderObj.accountHead + "</td>"

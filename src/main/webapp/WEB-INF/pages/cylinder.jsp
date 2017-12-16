@@ -29,8 +29,8 @@
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
                                     <tr>
-                                        <th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Customer ID</th><th>Location</th><th>LPO No</th>
-                                        <th>Color</th><th>Expiry Date</th><th>status</th><th></th>
+                                        <th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Customer ID</th><th>Owner Company</th>
+                                        <th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Status</th><th></th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -53,7 +53,7 @@
                     <form:hidden path="id"/>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Size<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Size <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:select path="size" class="form-control cylinderSize validate" onfocus="removeBorder(this.id)" onchange="getLpoNumber();">
 								    	<form:option value="">-- Select Size --</form:option>
@@ -65,7 +65,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Store<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Store <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								   	   <form:select path="store" value="" class="form-control chzn-select validate" onchange="removeBorder(this.id),getStoreDetails(this.value)" >
 								    	<form:option value="">-- Select Store --</form:option>
@@ -80,7 +80,7 @@
                     		<div class="clearfix"></div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">LPO Number<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">LPO Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:select path="lponumber" value="" class="form-control validate" onchange="removeBorder(this.id),getLPOdetails(this.value)" >
 								    	<form:option value="">-- Select LPO Number --</form:option>
@@ -92,7 +92,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Owner Company<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Owner Company <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    <form:select path="ownercompany" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id)" >
 								    	<form:option value="">-- Select Company --</form:option>
@@ -106,7 +106,7 @@
                     		<div class="clearfix"></div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:select path="color" class="form-control validate" onfocus="removeBorder(this.id)">
 									  		<form:option value="red">Red</form:option>
@@ -125,7 +125,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Made By<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Made By <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="madein" value="" class="form-control validate onlyCharacters" placeholder="Made By" readonly="true" />
 								      	<span class="hasError" id="madeinError"></span>
@@ -134,7 +134,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Expiry Date<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Expiry Date <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="expirtdate1" value="" class="form-control validate" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" onchange="removeBorder(this.id)"/>
 								      	<span class="hasError" id="expirydateError"></span>
@@ -143,7 +143,7 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Location</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Store Location</label>
 								    <div class="col-md-6">
 								    	<form:input path="location" value="" readonly="true" class="form-control onlyCharacters" placeholder="Location" />
 								      	<span class="hasError" id="locationError"></span>
@@ -201,7 +201,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Owner Company</th><th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -211,12 +211,13 @@ function displayTable(listOrders) {
 					}else{  
 						var deleterow = "<a class='activate' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 					}
-					var edit = "<a class='edit' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+					var edit = "<a class='edit editIt' onclick='editCylinder("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
 							+ "<td title='"+orderObj.cylinderid+"'>"+ orderObj.cylinderid + "</td>"
 							+ "<td title='"+orderObj.sizeName+"'>"+ orderObj.sizeName + "</td>"
 							+ "<td title='"+orderObj.cylinderstatus+"'>"+ orderObj.cylinderstatus + "</td>"
+							+ "<td title='"+orderObj.companyname+"'>"+ orderObj.companyname+ "</td>"
 							+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
 							+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber+ "</td>"
 							+ "<td title='"+orderObj.color+"'>"+ orderObj.color + "</td>"

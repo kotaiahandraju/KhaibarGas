@@ -81,7 +81,7 @@ public class TariffMasterController {
 
 
 			if(TariffmasterBean.size() == 0 || TariffmasterBean == null){
-
+				objTariffmasterBean.setStatus("1");
 				objTariffmasterDao.save(objTariffmasterBean);
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");}

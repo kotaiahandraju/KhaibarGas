@@ -27,7 +27,7 @@
 								<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 									<thead>
 										<tr>
-											<th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th>
+											<th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>UsedGas</th>
 											<th>Closing Balance</th><th>Station Name</th><th>Unit Point</th><th>status</th><th></th>
 										</tr>
 									</thead>
@@ -72,9 +72,9 @@
                     		<div class="row">
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Opening Balance <span class="impColor">*</span></label>
+										<label for="focusedinput" class="col-md-4 control-label">Opening Balance (Gas in KG's) <span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="gasavailability" class="form-control validate numericOnly" placeholder="Opening Balance" />	
+											<form:input path="gasavailability" class="form-control validate numericOnly" placeholder="Opening Balance (Gas in KG's)" />	
 											<span class="hasError" id="gasavailabilityError"></span>
 									    </div>
 	                    			</div>
@@ -109,17 +109,7 @@
 	                    			</div>
 	                    		</div>
                     		</div>
-                    		<div class="row">
-	                    		<div class="col-md-6">
-	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Closing Balance <span class="impColor">*</span></label>
-										<div class="col-md-6">
-											<form:input path="availablegas" class="form-control validate numericOnly" placeholder="Closing Balance in gasTank" />	
-											<span class="hasError" id="availablegasError"></span>
-									    </div>
-	                    			</div>
-	                    		</div>
-                    		</div>
+                    	
                     	</div>
 
 						<div class="panel-footer">
@@ -153,7 +143,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>Closing Balance</th><th>Station Name</th><th>Station Number</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>UsedGas</th><th>Closing Balance</th><th>Station Name</th><th>Station Number</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -163,14 +153,15 @@ function displayTable(listOrders) {
 					}else{  
 						var deleterow = "<a class='activate' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 					}
-					var edit = "<a class='edit' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+					var edit = "<a class='edit editIt' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
 							+ "<td title='"+orderObj.gasavailability+"'>"+ orderObj.gasavailability + "</td>"
 							+ "<td title='"+orderObj.numberoffillingmachines+"'>"+ orderObj.numberoffillingmachines + "</td>"
 							+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
-							+ "<td title='"+orderObj.gascapacity+"'>"+ orderObj.gascapacity + "</td>"
-							+ "<td title='"+orderObj.availablegas+"'>"+ orderObj.availablegas+ "</td>"
+							+ "<td title='"+orderObj.gascapacity+"'>"+ orderObj.gascapacity + "</td>" 
+							+ "<td title='"+orderObj.usedGas+"'>"+ orderObj.usedGas + "</td>" 
+							+ "<td title='"+orderObj.availablegas+"'>"+ orderObj.closingBalanceGas+ "</td>"
 							+ "<td title='"+orderObj.stationname+"'>"+ orderObj.stationname + "</td>"
 							+ "<td title='"+orderObj.unitpoint+"'>"+ orderObj.unitpoint+ "</td>"
 							+ "<td title='"+orderObj.fillingStatus+"'>"+ orderObj.fillingStatus + "</td>"

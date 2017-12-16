@@ -65,6 +65,20 @@ public class FillingstationmasterDao extends BaseFillingstationmasterDao
 				List<FillingstationmasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(FillingstationmasterBean.class));
 					return retlist;
 		 }
+	public boolean updateClosingGas() {
+		jdbcTemplate = custom.getJdbcTemplate();
+		boolean delete = false;
+		try{
+			String sql = "update  fillingstationmaster set  closingBalanceGas=gasavailability-usedGas ";
+			int intDelete = jdbcTemplate.update(sql, new Object[]{});
+			if(intDelete != 0){
+				delete = true;
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return delete;
+	}
 
 }
 

@@ -84,6 +84,10 @@ public class LpomasterDao extends BaseLpomasterDao
 				List<CylinderTypesBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(CylinderTypesBean.class));
 					return retlist;
 		 }
-	
+	 public void updateLPONumber() {
+			jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "update lpomaster  set  lponumber= concat('LPO','1' ,LPAD( id, 6, '0'))";
+			jdbcTemplate.update(sql, new Object[]{});
+		}
 }
 

@@ -110,6 +110,7 @@ public class FillingstationController {
 				redir.addFlashAttribute("msg", "Already Record Exist");
 				redir.addFlashAttribute("cssMsg", "danger");
 			}
+			fillingstationmasterDao.updateClosingGas();
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);

@@ -73,6 +73,17 @@ public class StoresmasterDao extends BaseStoresmasterDao
 				List<StoresmasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(StoresmasterBean.class));
 					return retlist;
 		 }
+	 
+	 public boolean updateStoreIds() {
+			boolean result=false;
+			jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "update storesmaster set storeid =concat('Store', LPAD(id ,6,0))";
+			int i = jdbcTemplate.update(sql, new Object[]{});
+			 if(i>0)
+				 result = true;
+				return result;
+		}
+		
 }
 
 

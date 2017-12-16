@@ -25,7 +25,7 @@ protected String cylendersstatus ;
 protected String store;
 protected String name;
 protected String storename;
-protected String sizeName,stationname,count;
+protected String sizeName,stationname,count,companyname;
 
 
 
@@ -206,6 +206,12 @@ public String getStatus()
 public void setStatus(final String status)
 {
   this.status = status;
+}
+public String getCompanyname() {
+	return companyname;
+}
+public void setCompanyname(String companyname) {
+	this.companyname = companyname;
 }
 
 }

@@ -188,7 +188,7 @@ function displayTable(listOrders) {
 		}else{  
 			var deleterow = "<a class='activate' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
 		}
-		var edit = "<a class='edit' onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr >"
 			+ "<td title='"+orderObj.trucknumber+"'>"+ orderObj.trucknumber + "</td>"
