@@ -38,6 +38,7 @@
 					</div>
 				</div>
 			</div>
+				<a class="btn btn-info btn-lg"  onclick="PopupFillingStation();">Add Gas</a> 
 				
 				<div class="row" id="moveTo">
 					<div class="col-md-10 col-md-offset-1 col-sm-12">
@@ -109,6 +110,48 @@
 	                    			</div>
 	                    		</div>
                     		</div>
+                    		
+                    		
+ 
+  <!-- Modal -->
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Add Gas</h4>
+        </div>
+        <div class="modal-body">
+        <div class="row">
+          <label for="focusedinput" class="col-md-3 control-label">Station Number <span class="impColor">*</span></label>
+			<div class="col-md-4">
+			<form:select path="stationnames" class="form-control " onfocus="removeBorder(this.id)">
+				        			<form:option value="">-- Select Store --</form:option>
+				        			<form:options items="${stationnames}"></form:options>
+				        		</form:select>
+			</div>
+			<div class="col-md-4">
+			<label for="focusedinput" class="col-md-3 control-label">Add Gas <span class="impColor">*</span></label>
+			</div>
+			<div class="col-md-4">
+			<input name="gasavail" id="gasavail"	class="form-control validate numericOnly" placeholder="Adding Gas" />	
+			</div>
+			<div class="">
+        	<input type="button" id="" value="ADD" class="btn-primary btn" onclick="addGas();"/ >
+        </div>
+        </div>
+         
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  
+</div>
                     	
                     	</div>
 
@@ -218,6 +261,40 @@ function deleteCylinder(id,status){
 	}
 	
 }
+function PopupFillingStation() {
+	$("#myModal").modal();
+	
+}
+
+function addGas() {
+	
+	var stationId =$("#stationnames").val();
+	var newGasavail=$("#gasavail").val();
+	$.ajax({
+		type : "POST",
+		url : "updateGas.htm",
+		data :"stationId="+stationId+"&newGasavail="+newGasavail,
+		beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          }, 
+		success: function (response) {
+			 $.unblockUI();
+             if(response != null ){
+            	//var resJson=JSON.parse(response);
+            	//showTableData(resJson);
+            	//alert("Delete Sucessfully");
+            	//window.location.reload();
+            	}
+             window.location.reload();
+             },
+             
+         error: function (e) { 
+        	 	$.unblockUI();
+				console.log(e);
+         }
+	});
+}
+
 $("#pageName").text("Filling Station Master");
 $(".fillingStation").addClass("active"); 
 </script>

@@ -24,8 +24,14 @@ protected String cylinderType;
 protected String truckId;
 protected String closingBalanceGas;
 protected String usedGas;
+protected String stationnames;
 
-
+public String getStationnames() {
+	return stationnames;
+}
+public void setStationnames(String stationnames) {
+	this.stationnames = stationnames;
+}
 public String getClosingBalanceGas() {
 	return closingBalanceGas;
 }
