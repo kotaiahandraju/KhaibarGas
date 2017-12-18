@@ -26,13 +26,11 @@ import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.KhaibarUsersBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
-import com.aurospaces.neighbourhood.bean.TrucksmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindertransactionDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
-import com.aurospaces.neighbourhood.db.dao.TrucksmasterDao;
 
 @Controller
 @RequestMapping("admin")
@@ -204,6 +202,7 @@ public class TransactionController {
 			cylindertransactionBean.setCylindetId(cylenderId1[i]);
 			cylindertransactionDao.save(cylindertransactionBean);
 			cylindermasterDao.updateCylinderStatus(cylenderId1[i], cylindertransactionBean1.getCylinderStatus(),null);
+			
 			}
 			
 		} catch (Exception e) {

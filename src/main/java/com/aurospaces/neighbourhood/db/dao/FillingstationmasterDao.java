@@ -79,6 +79,18 @@ public class FillingstationmasterDao extends BaseFillingstationmasterDao
 		}
 		return delete;
 	}
+	public int totalGas() {
+		jdbcTemplate = custom.getJdbcTemplate();
+		int intDelete = 0;
+		try{
+			String sql = "select sum(gasavailability) from fillingstationmaster where status=1";
+			 intDelete = jdbcTemplate.queryForInt(sql);
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return intDelete;
+	}
 
 }
 

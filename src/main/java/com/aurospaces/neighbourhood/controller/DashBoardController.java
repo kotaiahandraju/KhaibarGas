@@ -23,6 +23,7 @@ import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
+import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SuppressWarnings("unused")
@@ -31,6 +32,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 public class DashBoardController {
 	@Autowired CylindermasterDao cylindermasterDao;
 	@Autowired CustomermasterDao objCustomerDao;
+	@Autowired FillingstationmasterDao fillingstationmasterDao;
 	private Logger logger = Logger.getLogger(DashBoardController.class);
 	@RequestMapping(value = "/dashboard")
 	public String fillingStationHome( ModelMap model, HttpServletRequest request,
@@ -52,7 +54,7 @@ public class DashBoardController {
 		JSONObject objJson =new JSONObject();
 		List<Map<String, Object>> cylindersCount =null;
 		int totalCylinderCount = 0;
-		
+		int totalGas = 0;
 		int customerCount = 0;
 		try {
 			
@@ -68,37 +70,14 @@ public class DashBoardController {
 		                System.out.println("Key = " + entrySet.getKey() + " , Value = " + entrySet.getValue());
 		            }*/
 		        }
-			/* if(cylindersCount != null){
-				 for(CylindermasterBean list:cylindersCount){
-					if( list.getCylinderstatus().equals("Empty")){
-						session.setAttribute("EmptyCount", list.getCount());
-					}
-					
-					if( list.getCylinderstatus().equals("FillingStation")){
-						session.setAttribute("FillingStation", list.getCount());
-					}
-					if( list.getCylinderstatus().equals("QualityCheck")){
-						session.setAttribute("QualityCheck", list.getCount());
-					}
-					if( list.getCylinderstatus().equals("Truck")){
-						session.setAttribute("Truck", list.getCount());
-					}
-					if( list.getCylinderstatus().equals("DeliveryBoy")){
-						session.setAttribute("DeliveryBoy", list.getCount());
-					}
-					if( list.getCylendersstatus() =="Empty"){
-						session.setAttribute("EmptyCount", list.getCount());
-					}else{
-						session.setAttribute("EmptyCount", "---");
-					}
-					 
-				 }
-			 }*/
+			 totalGas =  fillingstationmasterDao.totalGas();
 			 totalCylinderCount = cylindermasterDao.getTotalcylindersCount();
 			 customerCount = objCustomerDao.getCustomerCount();
 			session.setAttribute("totalCylinderCount", totalCylinderCount);
+			session.setAttribute("totalGas", totalGas);
 			objJson.put("totalCylinderCount", totalCylinderCount);
 			objJson.put("customerCount", customerCount);
+			objJson.put("totalGas", totalGas);
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);

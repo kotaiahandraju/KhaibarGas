@@ -21,7 +21,7 @@ public class TrucksmasterDao extends BaseTrucksmasterDao
 	JdbcTemplate jdbcTemplate;
 	public List<TrucksmasterBean> getAllTrucks() {
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "SELECT t.*, DATE_FORMAT(t.registrationexpirydate, '%d-%M-%Y') as registrationexpirydate1,  DATE_FORMAT(t.civildefensecardexpirydate, '%d-%M-%Y') as civildefensecardexpirydate1,DATE_FORMAT(t.servicedue, '%d-%M-%Y') as servicedue1 ,CASE WHEN t.status IN ('0') THEN 'Deactive' WHEN t.status in ('1') THEN 'Active'  ELSE '-----' END as truckStatus  from trucksmaster t";
+		String sql = "SELECT t.*, DATE_FORMAT(t.registrationexpirydate, '%d-%M-%Y') as registrationexpirydate1,  DATE_FORMAT(t.civildefensecardexpirydate, '%d-%M-%Y') as civildefensecardexpirydate1,DATE_FORMAT(t.servicedue, '%d-%M-%Y') as servicedue1 ,CASE WHEN t.status IN ('0') THEN 'Deactive' WHEN t.status in ('1') THEN 'Active'  ELSE '-----' END as truckStatus  from trucksmaster t order by t.id desc";
 		List<TrucksmasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(TrucksmasterBean.class));
 		if (retlist.size() > 0)
