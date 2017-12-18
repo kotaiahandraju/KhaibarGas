@@ -34,7 +34,7 @@ public class LpomasterDao extends BaseLpomasterDao
 		try {
 			
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT l.*, DATE_FORMAT(l.expiryDate, '%d-%M-%Y') as expiryDate1,CASE WHEN l.status IN ('0') THEN 'Deactive' WHEN l.status in ('1') THEN 'Active'  ELSE '-----' END as lpoStatus  from lpomaster l";
+			String sql = "SELECT l.*, DATE_FORMAT(l.expiryDate, '%d-%M-%Y') as expiryDate1,CASE WHEN l.status IN ('0') THEN 'Deactive' WHEN l.status in ('1') THEN 'Active'  ELSE '-----' END as lpoStatus  from lpomaster l order by id desc";
 			System.out.println("sql:::"+sql);
 			listLpomasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<LpomasterBean>(LpomasterBean.class));
 			if(listLpomasterBean !=null){

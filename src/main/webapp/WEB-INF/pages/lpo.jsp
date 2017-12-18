@@ -79,7 +79,6 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">LPO Number <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="hidden" path="id"/>
 								      	<form:input type="text" path="lponumber" class="form-control validate" placeholder="LPO Number"/>
 								  	</div>
                     			</div>
@@ -88,6 +87,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Name <span class="impColor">*</span></label>
                     				<div class="col-md-6">
+		                            	<form:input type="hidden" path="id"/>
 								      	<form:input type="text" path="suppliername" class="form-control validate" placeholder="Supplier Name"/>
 								  	</div>
                     			</div>
@@ -309,6 +309,7 @@ function showTableData(response){
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
 			});
+	if(isClick=='Yes') $('.datatables').dataTable();
 }
 function editLpo(id) {
 	
@@ -354,12 +355,12 @@ function lpoDelete(id,status) {
 					success: function (response) {
 		                	 $.unblockUI();
 		                 if(response != null ){
-		                	 //var resJson=JSON.parse(response);
-		                	//showTableData(resJson);
+		                	 var resJson=JSON.parse(response);
+		                	showTableData(resJson);
 		                	//alert("Delete Sucessfully");
 		                	//window.location.reload();
 		                	}
-		                 window.location.reload();
+		                 //window.location.reload();
 		                 },
 		             error: function (e) { 
 		            	 $.unblockUI();

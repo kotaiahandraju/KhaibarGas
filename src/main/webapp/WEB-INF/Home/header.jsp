@@ -41,6 +41,7 @@
 <link href="${baseurl }/assets/css/datepicker1.css" rel="stylesheet" type="text/css" />
 
 <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
+<!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 <script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
@@ -87,6 +88,7 @@ span.has-error,span.hasError
 }
 </style>
 	<script>
+	var isClick = 'No';
 		window.setTimeout(function() {
 		    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
 		        $(this).remove(); 

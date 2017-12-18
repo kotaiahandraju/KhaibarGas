@@ -133,7 +133,18 @@
 
 </body>
 <%-- <script type='text/javascript' src='${baseurl }/js/custemValidation.js'></script>  --%>
+<script>
+</script>
 <script type="text/javascript">
+
+/* $(document).ready(function() {
+	 var table = $('#example').DataTable();
+	  
+	 $('#example tbody').on('click', 'tr', function () {
+	     var data = table.row( this ).data();
+	     alert( 'You clicked on '+data[0]+'\'s row' );
+	 } );
+}); */
 
 
 var listOrders1 = ${allOrders1};
@@ -169,6 +180,7 @@ function displayTable(listOrders) {
 							+ "</tr >";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
+
 }
 
 

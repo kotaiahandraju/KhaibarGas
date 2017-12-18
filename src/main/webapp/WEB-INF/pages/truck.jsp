@@ -202,8 +202,9 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.truckStatus+"'>"+ orderObj.truckStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr >";
-		$(tblRow).appendTo("#tableId table tbody");		
+		$(tblRow).appendTo("#tableId table tbody");
 	});
+		if(isClick=='Yes') $('.datatables').dataTable();
 }
 
 function editTruckMaster(id) {
@@ -235,14 +236,14 @@ function deletetruckMaster(id,status){
 	    formData.append('status', status);
 		$.fn.makeMultipartRequest('POST', 'deletetruckMaster', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
-			window.location.reload();
-	// 		var alldata = jsonobj.allOrders1;
-	// 		console.log(jsonobj.allOrders1);
-	// 		displayTable(alldata);
+			//window.location.reload();
+	 		var alldata = jsonobj.allOrders1;
+	 		console.log(jsonobj.allOrders1);
+	 		displayTable(alldata);
 		});
 	}	
 }
 
 $("#pageName").text("Truck Master");
-$(".truck").addClass("active"); 
+$(".truck").addClass("active");
 </script>

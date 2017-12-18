@@ -89,6 +89,7 @@ public class LpoMasterController {
 					if(id == dummyId || lpomaster == null )
 					{
 						lpomasterDao.save(lpomasterBean);
+						lpo = lpomasterDao.getById(lpomasterBean.getId());
 						LpomasterBean deleteLpoItems = lpomasterDao.getById(lpomasterBean.getId());
 						lpoitemsDao.deleteLPONumber(deleteLpoItems.getLponumber());
 						redirect.addFlashAttribute("msg", "Record Updated Successfully");
@@ -151,7 +152,7 @@ public class LpoMasterController {
 					
 					lpoitemsDao.save(objLpoitemsBean);
 				}
-//				lpomasterDao.updateLPONumber();
+				lpomasterDao.updateLPONumber();
 				
 			} catch (Exception e) {
 				System.out.println("Exception in Product Controller in productSave()");
