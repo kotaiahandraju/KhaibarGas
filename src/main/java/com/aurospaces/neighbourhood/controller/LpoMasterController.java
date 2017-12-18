@@ -77,7 +77,7 @@ public class LpoMasterController {
 				System.out.println("--------lpoSave----------"+lpomasterBean.getAmount());
 				
 				String sLpoNo=lpomasterBean.getLponumber();
-				LpomasterBean	lpomaster=lpomasterDao.getByLpoNo(sLpoNo);
+				LpomasterBean	lpomaster=lpomasterDao.getById(lpomasterBean.getId());
 				
 				int dummyId =0;
 				if(lpomaster != null){
@@ -89,6 +89,7 @@ public class LpoMasterController {
 					if(id == dummyId || lpomaster == null )
 					{
 						lpomasterDao.save(lpomasterBean);
+						lpomasterDao.updateLPONumber();
 						lpo = lpomasterDao.getById(lpomasterBean.getId());
 						LpomasterBean deleteLpoItems = lpomasterDao.getById(lpomasterBean.getId());
 						lpoitemsDao.deleteLPONumber(deleteLpoItems.getLponumber());

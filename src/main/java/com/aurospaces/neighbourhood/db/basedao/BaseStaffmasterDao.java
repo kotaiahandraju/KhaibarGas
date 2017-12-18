@@ -87,9 +87,9 @@ ps.setString(13, staffmaster.getStatus());
 		else
 		{
 
-			String sql = "UPDATE staffmaster  set staffcode = ? ,staffno = ? ,designation = ? ,nationality = ? ,firstname = ? ,lastname = ? ,mobile = ? ,customertype = ? ,documents = ? ,active = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE staffmaster  set staffcode = ? ,staffno = ? ,designation = ? ,nationality = ? ,firstname = ? ,lastname = ? ,mobile = ? ,customertype = ? ,documents = ? ,active = ?   where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{staffmaster.getStaffcode(),staffmaster.getStaffno(),staffmaster.getDesignation(),staffmaster.getNationality(),staffmaster.getFirstname(),staffmaster.getLastname(),staffmaster.getMobile(),staffmaster.getCustomertype(),staffmaster.getDocuments(),staffmaster.getActive(),staffmaster.getStatus(),staffmaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{staffmaster.getStaffcode(),staffmaster.getStaffno(),staffmaster.getDesignation(),staffmaster.getNationality(),staffmaster.getFirstname(),staffmaster.getLastname(),staffmaster.getMobile(),staffmaster.getCustomertype(),staffmaster.getDocuments(),staffmaster.getActive(),staffmaster.getId()});
 		}
 	}
 		

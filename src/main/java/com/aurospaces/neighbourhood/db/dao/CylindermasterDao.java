@@ -34,7 +34,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		 
 		 //String sql="SELECT *, DATE_FORMAT(expirydate,'%d/%m/%Y') AS expirtdate1  FROM cylindermaster";
 		
-		 String sql =  "SELECT co.companyname , c. *,cs.name as cylinderstatus,i.name As sizeName,DATE_FORMAT(c.expirydate,'%d-%M-%Y') AS expirtdate1 ,  CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylendersstatus   FROM companymaster co,cylindermaster c,items i,cylinderstatus cs where c.size=i.id and cs.id=c.cylinderstatus and co.id=c.ownercompany ";
+		 String sql =  "SELECT co.companyname , c. *,cs.name as cylinderstatus,i.name As sizeName,DATE_FORMAT(c.expirydate,'%d-%M-%Y') AS expirtdate1 ,  CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylendersstatus   FROM companymaster co,cylindermaster c,items i,cylinderstatus cs where c.size=i.id and cs.id=c.cylinderstatus and co.id=c.ownercompany order by co.id desc";
 		List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 		
@@ -108,7 +108,8 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		 jdbcTemplate = custom.getJdbcTemplate();
 		 //String retlist=null;
 		 List<LpoitemsBean> retlist=null;
-			String sql = " select * from lpoitems lpn,items i where lpn.itemid=i.id and i.itemType='Cylinder' and  i.id=? group by lponumber";
+		 
+			String sql = "  select * from lpoitems lpn,items i ,lpomaster lpm where lpn.itemid=i.id and lpm.lponumber=lpn.lponumber and  i.itemType='Cylinder' and  lpn.itemid=? and lpm.status='1' group by lpn.lponumber";
 			retlist= jdbcTemplate.query(sql, new Object[] { itemid },ParameterizedBeanPropertyRowMapper.newInstance(LpoitemsBean.class));
 			 
 			 return retlist;

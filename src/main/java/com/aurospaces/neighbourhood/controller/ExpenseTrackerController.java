@@ -119,11 +119,9 @@ public class ExpenseTrackerController {
 		  int dId=Integer.parseInt(id);
 		  isDelete = expensetrackerDao.delete(dId,status);
 		 
-		  if(isDelete){
 			  sJson=expensetrackerDao.getAllExpenseTracker();
 			  System.out.println("deleted cusmer data--"+sJson);
 				
-			}
 		
 		
 		return sJson;

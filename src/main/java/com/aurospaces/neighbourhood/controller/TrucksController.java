@@ -166,7 +166,7 @@ public class TrucksController {
 	public Map<String, String> populateLPONumbers() {
 		Map<String, String> statesMap = new LinkedHashMap<String, String>();
 		try {
-			String sSql = " select lpn.lponumber as lponumber,lpn.lponumber as lponumber from lpoitems lpn,items i where lpn.itemid=i.id and i.itemType='truck' ";
+			String sSql = " select lpn.lponumber as lponumber,lpn.lponumber as lponumber from lpoitems lpn,lpomaster lm,items i where lpn.itemid=i.id and lm.lponumber=lpn.lponumber and i.itemType='truck' and  lm.status='1' ";
 			List<LpomasterBean> list = cylindermasterDao.populate(sSql);
 			for (LpomasterBean bean : list) {
 				statesMap.put(bean.getLponumber(), bean.getLponumber());

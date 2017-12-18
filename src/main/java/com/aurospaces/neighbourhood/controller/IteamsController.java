@@ -1,9 +1,7 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.io.IOException;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +17,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.ItemsBean;
-import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
@@ -127,11 +124,9 @@ public class IteamsController {
 			  int dId=Integer.parseInt(id);
 			  	iteamsmasterDao.delete(dId,status);
 			 
-			  if(isDelete){
 				  sJson=iteamsmasterDao.getAllItems();
 				  System.out.println("deleted cusmer data--"+sJson);
 					
-				}
 			
 			
 			return sJson;

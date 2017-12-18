@@ -81,9 +81,9 @@ ps.setString(6, khaibarUsers.getStatus());
 		else
 		{
 
-			String sql = "UPDATE khaibar_users  set userName = ? ,password = ? ,roleId = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE khaibar_users  set userName = ? ,password = ? ,roleId = ?   where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{khaibarUsers.getUserName(),khaibarUsers.getPassword(),khaibarUsers.getRoleId(),khaibarUsers.getStatus(),khaibarUsers.getId()});
+			jdbcTemplate.update(sql, new Object[]{khaibarUsers.getUserName(),khaibarUsers.getPassword(),khaibarUsers.getRoleId(),khaibarUsers.getId()});
 		}
 	}
 		

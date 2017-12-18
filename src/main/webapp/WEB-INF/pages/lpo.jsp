@@ -589,6 +589,7 @@ dependentRowCount = 1;
 				$("#1manufacturingdate").val(orderObj.manufacturingdate);
 				$("#1expirydate").val(orderObj.expirydate);
 				if(value=="0"){
+					$("#id").val(0);
 					$(".hideme").hide();
 				}else{
 					$(".hideme").show();

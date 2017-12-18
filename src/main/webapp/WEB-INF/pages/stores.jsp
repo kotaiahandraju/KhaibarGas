@@ -66,7 +66,7 @@
 	                    			<div class="form-group">
 	                    				<label for="focusedinput" class="col-md-4 control-label">Store Location <span class="impColor">*</span></label>
 	                    				<div class="col-md-6">
-			                            	<form:input  path="location" class="form-control validate onlyCharacters" placeholder="Store Location"/>
+			                            	<form:input  path="location" class="form-control validate " placeholder="Store Location"/>
 									  	</div>
 	                    			</div>
 	                    		</div>
@@ -136,6 +136,7 @@ function showTableData(response){
 				$(tblRow).appendTo("#tableId table tbody");
 				//$('.datatables').dataTable({});
 			});
+	if(isClick=='Yes') $('.datatables').dataTable();
 // 	}
 }
 function editStore(id) {
@@ -166,12 +167,12 @@ function deleteStore(id,status) {
 					success: function (response) {
 		                 if(response != null ){
 		                	 $.unblockUI();
-		                	//var resJson=JSON.parse(response);
-		                	//showTableData(resJson);
-		                	//alert("Delete Sucessfully");
+		                	var resJson=JSON.parse(response);
+		                	showTableData(resJson);
+// 		                	alert("Delete Sucessfully");
 		                	//window.location.reload();
 		                	}
-		                 window.location.reload();
+// 		                 window.location.reload();
 		                 },
 		             error: function (e) { 
 		            	 $.unblockUI();

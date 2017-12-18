@@ -141,6 +141,7 @@ function showTableData(response){
 		$(tblRow).appendTo("#tableId table tbody");
 // 		$('.datatables').dataTable({});
 	});
+	if(isClick=='Yes') $('.datatables').dataTable();
 }
 
 function editItem(id){
@@ -172,12 +173,12 @@ function deleteItem(id,status){
 			success: function (response) {
 				if(response != null ){
 					$.unblockUI();
-		        	//var resJson=JSON.parse(response);
-		            //showTableData(resJson);
-		            //alert("Delete Sucessfully");
+		        	var resJson=JSON.parse(response);
+		            showTableData(resJson);
+// 		            alert("Delete Sucessfully");
 		            //window.location.reload();
 				}
-		        window.location.reload();
+// 		        window.location.reload();
 			},
 			error: function (e) { 
 		    	$.unblockUI();

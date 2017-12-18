@@ -32,7 +32,7 @@ public class ItemsDao extends BaseItemsDao
 		try {
 			jdbcTemplate = custom.getJdbcTemplate();
 			
-			String sql = "SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as itemstatus  from items s";
+			String sql = "SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as itemstatus  from items s order by s.id desc";
 			System.out.println("sql:::"+sql);
 			listItemsmasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<ItemsBean>(ItemsBean.class));
 			if(listItemsmasterBean !=null){
