@@ -1,6 +1,8 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -17,11 +19,15 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.bean.LpoitemsBean;
+import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -31,6 +37,8 @@ public class FillingstationController {
 	private Logger logger = Logger.getLogger(FillingstationController.class);
 	@Autowired
 	FillingstationmasterDao fillingstationmasterDao;
+	@Autowired
+	CylindermasterDao cylindermasterDao;
 	
 	@RequestMapping(value = "/fillingStationHome")
 	public String fillingStationHome(@Valid @ModelAttribute("fillingStationForm") FillingstationmasterBean objFillingstationmasterBean, ModelMap model, HttpServletRequest request,
@@ -162,6 +170,42 @@ public class FillingstationController {
 			
 		}
 		return String.valueOf(jsonObj);
+	}
+	
+	@ModelAttribute("stationnames")
+	public Map<Integer, String> fillingstationmaster() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			List<FillingstationmasterBean> list= fillingstationmasterDao.getFillingStationName();
+			for(FillingstationmasterBean bean: list){
+				statesMap.put(bean.getId(), bean.getStationname());
+				System.out.println("---list---"+bean.getId()+"--------------"+ bean.getStationname());
+			}
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
+	
+	@RequestMapping("/updateGas")
+	public  @ResponseBody  String updateGas(@RequestParam("stationId") String stationId,@RequestParam("newGasavail") String newGasavail, HttpServletRequest request, HttpSession session)
+	{  
+		boolean retlist=false;
+		//String retlist=null;
+		JSONObject obj = new JSONObject();
+		 
+		try {
+			System.out.println("-----gasavail-------"+newGasavail+"-------stationId------"+stationId);
+				retlist=fillingstationmasterDao.updateGas(Integer.parseInt(stationId), newGasavail);
+				
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			e.printStackTrace();
+		}
+		return String.valueOf(obj);
 	}
 	
 

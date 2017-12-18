@@ -10,6 +10,7 @@ import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseFillingstationmasterDao;
@@ -91,6 +92,29 @@ public class FillingstationmasterDao extends BaseFillingstationmasterDao
 		}
 		return intDelete;
 	}
+public List<FillingstationmasterBean> getFillingStationName() {
+	 jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "select * from fillingstationmaster where status='1' ";
+		List<FillingstationmasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(FillingstationmasterBean.class));
+		return retlist;
 
+	}
+public boolean updateGas(int id,String gasavailability) {
+	jdbcTemplate = custom.getJdbcTemplate();
+	Integer result = null;
+	boolean updateTo=false;
+	
+	try{
+		String sql = "update fillingstationmaster set gasavailability=(gasavailability+?) where id=?";
+		result = jdbcTemplate.update(sql, new Object[]{gasavailability,id});
+		if(result>0){
+			updateTo=true;
+		}
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	
+	return updateTo;
+}
 }
 
