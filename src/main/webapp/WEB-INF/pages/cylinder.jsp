@@ -30,7 +30,7 @@
                                 <thead>
                                     <tr>
                                         <th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Customer ID</th><th>Owner Company</th>
-                                        <th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Status</th><th></th>
+                                        <th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Remarks</th><th>Status</th><th></th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -82,7 +82,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">LPO Number <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:select path="lponumber" value="" class="form-control validate" onchange="removeBorder(this.id),getLPOdetails(this.value)" >
+								    	<form:select path="lponumber" value="" class="form-control validate" onfocus="removeBorder(this.id)"  onchange="removeBorder(this.id),getLPOdetails(this.value)" >
 								    	<form:option value="">-- Select LPO Number --</form:option>
 								    	<<%-- form:options items="${LPONumbers }"></form:options> --%>
 								    	</form:select>
@@ -201,7 +201,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Owner Company</th><th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Owner Company</th><th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -222,11 +222,13 @@ function displayTable(listOrders) {
 							+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber+ "</td>"
 							+ "<td title='"+orderObj.color+"'>"+ orderObj.color + "</td>"
 							+ "<td title='"+orderObj.expirtdate1+"'>"+orderObj.expirtdate1+ "</td>"
+							+ "<td title='"+orderObj.remarks+"'>"+orderObj.remarks+ "</td>"
 							+ "<td title='"+orderObj.cylendersstatus+"'>"+ orderObj.cylendersstatus + "</td>"
 							+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 							+ "</tr >";
 					$(tblRow).appendTo("#tableId table tbody");
 					});
+	if(isClick=='Yes') $('.datatables').dataTable();
 	
 	/* $('#DataTables_Table_0').DataTable({
 		dom: 'Bfrtip',
@@ -281,10 +283,10 @@ function deleteCylinder(id,status){
 	$.fn.makeMultipartRequest('POST', 'deleteCylinder', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
-		window.location.reload();
-// 		var alldata = jsonobj.allOrders1;
-// 		console.log(jsonobj.allOrders1);
-// 		displayTable(alldata);
+// 		window.location.reload();
+		var alldata = jsonobj.allOrders1;
+		console.log(jsonobj.allOrders1);
+		displayTable(alldata);
 	});
 	}
 	

@@ -26,7 +26,7 @@ public class CompanymasterDao extends BaseCompanymasterDao
 
 	public List<CompanymasterBean> getAllCompanyMasterDetails() {
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "SELECT c.*,CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as companyStatus  from companymaster c";
+		String sql = "SELECT c.*,CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as companyStatus  from companymaster c order by c.id desc";
 		List<CompanymasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(CompanymasterBean.class));
 		if (retlist.size() > 0)

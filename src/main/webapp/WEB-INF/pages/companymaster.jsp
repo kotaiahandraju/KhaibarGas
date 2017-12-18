@@ -92,7 +92,7 @@
 										<div class="form-group">
 											<label class="col-sm-4 control-label required">Contact Person Mobile <span class="impColor">*</span></label>
 											<div class="col-sm-6">
-												<form:input path="contactpersonmobile" class="form-control numericOnly validate" autocomplete="off" placeholder="Contact Person Mobile" required="required" />
+												<form:input path="contactpersonmobile" class="form-control numericOnly validate" maxlength="13" autocomplete="off" placeholder="Contact Person Mobile" required="required" />
 												<span class="hasError" id="contactpersonmobileError"></span>
 											</div>
 										</div>
@@ -217,6 +217,7 @@ function displayTable(listOrders) {
 										+ "</tr >";
 								$(tblRow).appendTo("#tableId table tbody");
 							});
+			if(isClick=='Yes') $('.datatables').dataTable();
 
 		}
 
@@ -249,10 +250,10 @@ function displayTable(listOrders) {
 				$.fn.makeMultipartRequest('POST', 'deleteCompanyMasterDetails',
 						false, formData, false, 'text', function(data) {
 							var jsonobj = $.parseJSON(data);
-// 							var alldata = jsonobj.allOrders1;
-// 							console.log(jsonobj.allOrders1);
-// 							displayTable(alldata);
-							window.location.reload();
+							var alldata = jsonobj.allOrders1;
+							console.log(jsonobj.allOrders1);
+							displayTable(alldata);
+// 							window.location.reload();
 						});
 			}
 

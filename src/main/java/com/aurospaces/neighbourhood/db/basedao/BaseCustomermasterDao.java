@@ -86,9 +86,9 @@ ps.setString(11, customermaster.getStatus());
 		else
 		{
 
-			String sql = "UPDATE customermaster  set customerid = ? ,customername = ? ,customeraddress = ? ,mobile = ? ,landline = ? ,authorizedperson = ? ,contactperson = ? ,customertype = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE customermaster  set customerid = ? ,customername = ? ,customeraddress = ? ,mobile = ? ,landline = ? ,authorizedperson = ? ,contactperson = ? ,customertype = ?   where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{customermaster.getCustomerid(),customermaster.getCustomername(),customermaster.getCustomeraddress(),customermaster.getMobile(),customermaster.getLandline(),customermaster.getAuthorizedperson(),customermaster.getContactperson(),customermaster.getCustomertype(),customermaster.getStatus(),customermaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{customermaster.getCustomerid(),customermaster.getCustomername(),customermaster.getCustomeraddress(),customermaster.getMobile(),customermaster.getLandline(),customermaster.getAuthorizedperson(),customermaster.getContactperson(),customermaster.getCustomertype(),customermaster.getId()});
 		}
 	}
 		

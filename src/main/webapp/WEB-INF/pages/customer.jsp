@@ -194,6 +194,7 @@ function showTableData(response){
 						+"</tr>";
 				$(tblRow).appendTo("#tableId table tbody");
 			});
+	if(isClick=='Yes') $('.datatables').dataTable();
 // 	}
 }
 function editCustomer(id) {
@@ -230,13 +231,11 @@ function customerDelete(id,status) {
 			          }, 
 					success: function (response) {
 						 $.unblockUI();
-		                 if(response != null ){
-		                	//var resJson=JSON.parse(response);
-		                	//showTableData(resJson);
+		                	var resJson=JSON.parse(response);
+		                	showTableData(resJson);
 		                	//alert("Delete Sucessfully");
 		                	//window.location.reload();
-		                	}
-		                 window.location.reload();
+// 		                 window.location.reload();
 		                 },
 		                 
 		             error: function (e) { 

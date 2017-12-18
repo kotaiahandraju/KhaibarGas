@@ -88,9 +88,9 @@ ps.setString(11, companymaster.getStatus());
 		{
 			System.out.println("----update---"+companymaster.getId()); 
 
-			String sql = "UPDATE companymaster  set companycode = ? ,companyname = ? ,contactpersonname = ? ,contactpersonmobile = ? ,emailid = ? ,remarks = ? ,typeofcompany = ? ,customertype = ? ,status = ?  where id = ? ";
+			String sql = "UPDATE companymaster  set companycode = ? ,companyname = ? ,contactpersonname = ? ,contactpersonmobile = ? ,emailid = ? ,remarks = ? ,typeofcompany = ? ,customertype = ?   where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{companymaster.getCompanycode(),companymaster.getCompanyname(),companymaster.getContactpersonname(),companymaster.getContactpersonmobile(),companymaster.getEmailid(),companymaster.getRemarks(),companymaster.getTypeofcompany(),companymaster.getCustomertype(),companymaster.getStatus(),companymaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{companymaster.getCompanycode(),companymaster.getCompanyname(),companymaster.getContactpersonname(),companymaster.getContactpersonmobile(),companymaster.getEmailid(),companymaster.getRemarks(),companymaster.getTypeofcompany(),companymaster.getCustomertype(),companymaster.getId()});
 		}
 	}
 		
@@ -105,7 +105,7 @@ ps.setString(11, companymaster.getStatus());
 			jdbcTemplate = custom.getJdbcTemplate();
 			boolean delete = false;
 			try{
-				String sql = "update tariffmaster set status='"+status+"'  WHERE id=?";
+				String sql = "update companymaster set status='"+status+"'  WHERE id=?";
 				int intDelete = jdbcTemplate.update(sql, new Object[]{id});
 				if(intDelete != 0){
 					delete = true;

@@ -254,6 +254,7 @@ function displayTable(listOrders)
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
+	if(isClick=='Yes') $('.datatables').dataTable();
 }
 			
 function editStaffMasterDetails(id)
@@ -287,10 +288,10 @@ function deleteStaffMasterDetails(id,status)
 		formData.append('status', status);
 		$.fn.makeMultipartRequest('POST', 'deleteStaffMasterDetails', false, formData, false, 'text', function(data) {
 				var jsonobj = $.parseJSON(data);
-				window.location.reload();
-// 				var alldata = jsonobj.allOrders1;
-// 				console.log(jsonobj.allOrders1);
-// 				displayTable(alldata);
+// 				window.location.reload();
+				var alldata = jsonobj.allOrders1;
+				console.log(jsonobj.allOrders1);
+				displayTable(alldata);
 		});
 	}
 }

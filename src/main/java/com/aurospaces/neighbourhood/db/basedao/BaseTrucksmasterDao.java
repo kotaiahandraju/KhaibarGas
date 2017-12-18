@@ -108,9 +108,9 @@ ps.setString(12, trucksmaster.getTypeOfService());
 		else
 		{
 
-			String sql = "UPDATE trucksmaster  set trucknumber = ? ,registrationexpirydate = ? ,civildefensecardexpirydate = ? ,servicedue = ? ,make = ? ,description = ? ,capacityoftruck = ? ,lponumber = ? ,status = ?,typeOfService=?  where id = ? ";
+			String sql = "UPDATE trucksmaster  set trucknumber = ? ,registrationexpirydate = ? ,civildefensecardexpirydate = ? ,servicedue = ? ,make = ? ,description = ? ,capacityoftruck = ? ,lponumber = ? ,typeOfService=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{trucksmaster.getTrucknumber(),trucksmaster.getRegistrationexpirydate(),trucksmaster.getCivildefensecardexpirydate(),trucksmaster.getServicedue(),trucksmaster.getMake(),trucksmaster.getDescription(),trucksmaster.getCapacityoftruck(),trucksmaster.getLponumber(),trucksmaster.getStatus(),trucksmaster.getTypeOfService(), trucksmaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{trucksmaster.getTrucknumber(),trucksmaster.getRegistrationexpirydate(),trucksmaster.getCivildefensecardexpirydate(),trucksmaster.getServicedue(),trucksmaster.getMake(),trucksmaster.getDescription(),trucksmaster.getCapacityoftruck(),trucksmaster.getLponumber(),trucksmaster.getTypeOfService(), trucksmaster.getId()});
 		}
 	}
 		

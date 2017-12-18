@@ -30,7 +30,7 @@ public class CustomermasterDao extends BaseCustomermasterDao
 		try {
 			jdbcTemplate = custom.getJdbcTemplate();
 			
-			String sql = "SELECT c.*,CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as custStatus  from customermaster c";
+			String sql = "SELECT c.*,CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as custStatus  from customermaster c order by c.id desc";
 			System.out.println("sql:::"+sql);
 			listCustomermasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<CustomermasterBean>(CustomermasterBean.class));
 			if(listCustomermasterBean !=null){

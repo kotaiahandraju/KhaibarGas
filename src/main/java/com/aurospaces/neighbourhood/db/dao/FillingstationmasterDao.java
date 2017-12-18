@@ -27,7 +27,7 @@ public class FillingstationmasterDao extends BaseFillingstationmasterDao
 	@SuppressWarnings("unchecked")
 	public List<FillingstationmasterBean> getFillingStationAllData(){  
 		 jdbcTemplate = custom.getJdbcTemplate();
-		return jdbcTemplate.query("SELECT f.*,CASE WHEN f.status IN ('0') THEN 'Deactive' WHEN f.status in ('1') THEN 'Active'  ELSE '-----' END as fillingStatus  from fillingstationmaster f", new BeanPropertyRowMapper(FillingstationmasterBean.class));
+		return jdbcTemplate.query("SELECT f.*,CASE WHEN f.status IN ('0') THEN 'Deactive' WHEN f.status in ('1') THEN 'Active'  ELSE '-----' END as fillingStatus  from fillingstationmaster f order by f.id desc", new BeanPropertyRowMapper(FillingstationmasterBean.class));
 			
 		    
 		}  
