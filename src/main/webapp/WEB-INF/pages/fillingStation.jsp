@@ -137,7 +137,7 @@
                     </div>
 					<div class="col-md-12">
                     	<div class="form-group">
-                    		<label for="focusedinput" class="col-md-4 control-label">Adding Gas <span class="impColor">*</span></label>
+                    		<label for="focusedinput" class="col-md-4 control-label">Adding Gas(in KG's) <span class="impColor">*</span></label>
                     		<div class="col-md-6">
 								<input name="gasavail" id="gasavail" class="form-control numericOnly" placeholder="Adding Gas" onblur="removeBorder(this.id)"/>
 							</div>
@@ -205,7 +205,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>UsedGas</th><th>Closing Balance</th><th>Station Name</th><th>Station Number</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance</th><th>UsedGas</th><th>Closing Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -218,16 +218,16 @@ function displayTable(listOrders) {
 					var edit = "<a class='edit editIt' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
-							+ "<td title='"+orderObj.gasavailability+"'>"+ orderObj.gasavailability + "</td>"
-							+ "<td title='"+orderObj.numberoffillingmachines+"'>"+ orderObj.numberoffillingmachines + "</td>"
-							+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
-							+ "<td title='"+orderObj.gascapacity+"'>"+ orderObj.gascapacity + "</td>" 
-							+ "<td title='"+orderObj.usedGas+"'>"+ orderObj.usedGas + "</td>" 
-							+ "<td title='"+orderObj.availablegas+"'>"+ orderObj.closingBalanceGas+ "</td>"
-							+ "<td title='"+orderObj.stationname+"'>"+ orderObj.stationname + "</td>"
-							+ "<td title='"+orderObj.unitpoint+"'>"+ orderObj.unitpoint+ "</td>"
-							+ "<td title='"+orderObj.fillingStatus+"'>"+ orderObj.fillingStatus + "</td>"
-							+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+						+ "<td title='"+orderObj.unitpoint+"'>"+ orderObj.unitpoint+ "</td>"
+						+ "<td title='"+orderObj.stationname+"'>"+ orderObj.stationname + "</td>"
+						+ "<td title='"+orderObj.gasavailability+"'>"+ orderObj.gasavailability + "</td>"
+						+ "<td title='"+orderObj.usedGas+"'>"+ orderObj.usedGas + "</td>" 
+						+ "<td title='"+orderObj.availablegas+"'>"+ orderObj.closingBalanceGas+ "</td>"
+						+ "<td title='"+orderObj.numberoffillingmachines+"'>"+ orderObj.numberoffillingmachines + "</td>"
+						+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
+						+ "<td title='"+orderObj.gascapacity+"'>"+ orderObj.gascapacity + "</td>" 
+						+ "<td title='"+orderObj.fillingStatus+"'>"+ orderObj.fillingStatus + "</td>"
+						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 							+ "</tr >";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

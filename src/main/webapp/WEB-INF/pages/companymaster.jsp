@@ -110,22 +110,23 @@
 										<div class="form-group">
 											<label class="col-sm-4 control-label required">Type of Company</label>
 											<div class="col-sm-6">
-												<form:input path="typeofcompany" class="form-control onlyCharacters" autocomplete="off" placeholder="Type of Company" />
-												<span class="hasError" id="typeofcompanyError"></span>
-											</div>
-										</div>
-									</div>
-									<div class="col-md-6">
-										<div class="form-group">
-											<label class="col-sm-4 control-label required">Customer Type</label>
-											<div class="col-sm-6">
-												<form:select path="customertype" class="form-control" onfocus="removeBorder(this.id)">
+												<%-- <form:input path="typeofcompany" class="form-control onlyCharacters" autocomplete="off" placeholder="Type of Company" /> --%>
+												<form:select path="typeofcompany" class="form-control" onfocus="removeBorder(this.id)">
 													<form:option value="">-- Select Customer Type --</form:option>
 													<form:option value="Owner">Owner</form:option>
 													<form:option value="Competitor">Competitor</form:option>
 													<form:option value="Distributor">Distributor</form:option>
 												</form:select>
 												<span class="hasError" id="customertypeError"></span>
+												<span class="hasError" id="typeofcompanyError"></span>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="col-sm-4 control-label required">Address</label>
+											<div class="col-sm-6">
+												<form:textarea path="companyAddress" class="form-control" autocomplete="off" placeholder="Company Address"></form:textarea>
 											</div>
 										</div>
 									</div>
@@ -169,7 +170,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-					+ '<thead><tr><th>Company Code</th><th>Company Name</th><th>Contact Person Name</th><th>Contact Person Mobile</th><th>Email Id</th><th>Remarks</th><th>Type of Comapany</th><th>Customer Type</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+					+ '<thead><tr><th>Company Code</th><th>Company Name</th><th>Contact Person Name</th><th>Contact Person Mobile</th><th>Email Id</th><th>Type of Comapany</th><th>Company Address</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 			$('#tableId').html(tableHead);
 			serviceUnitArray = {};
 			$.each(listOrders, function(i, orderObj) {
@@ -198,14 +199,14 @@ function displayTable(listOrders) {
 										+ "<td title='"+orderObj.emailid+"'>"
 										+ orderObj.emailid
 										+ "</td>"
-										+ "<td title='"+orderObj.remarks+"'>"
-										+ orderObj.remarks
-										+ "</td>"
 										+ "<td title='"+orderObj.typeofcompany+"'>"
 										+ orderObj.typeofcompany
 										+ "</td>"
-										+ "<td title='"+orderObj.customertype+"'>"
-										+ orderObj.customertype
+										+ "<td title='"+orderObj.companyAddress+"'>"
+										+ orderObj.companyAddress
+										+ "</td>"
+										+ "<td title='"+orderObj.remarks+"'>"
+										+ orderObj.remarks
 										+ "</td>"
 										+ "<td title='"+orderObj.companyStatus+"'>"
 										+ orderObj.companyStatus
@@ -229,7 +230,7 @@ function displayTable(listOrders) {
 			$("#contactpersonmobile").val(serviceUnitArray[id].contactpersonmobile);
 			$("#emailid").val(serviceUnitArray[id].emailid);
 			$("#remarks").val(serviceUnitArray[id].remarks);
-			$("#customertype").val(serviceUnitArray[id].customertype);
+			$("#companyAddress").val(serviceUnitArray[id].companyAddress);
 			$("#typeofcompany").val(serviceUnitArray[id].typeofcompany);
 			$("#status").val(serviceUnitArray[id].status);
 			//$("#customerid").val(serviceUnitArray[id].customerid);

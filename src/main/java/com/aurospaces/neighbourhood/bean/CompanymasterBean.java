@@ -16,10 +16,21 @@ protected String contactpersonmobile ;
 protected String emailid ;
 protected String remarks ;
 protected String typeofcompany ;
-protected String customertype ;
+protected String companyAddress ;
 protected String status ;
 protected String companyStatus ;
 
+
+
+
+
+
+public String getCompanyAddress() {
+	return companyAddress;
+}
+public void setCompanyAddress(String companyAddress) {
+	this.companyAddress = companyAddress;
+}
 /**
  * @return the companyStatus
  */
@@ -111,14 +122,6 @@ public String getTypeofcompany()
 public void setTypeofcompany(final String typeofcompany)
 {
   this.typeofcompany = typeofcompany;
-}
-public String getCustomertype()
-{
-  return customertype;
-}
-public void setCustomertype(final String customertype)
-{
-  this.customertype = customertype;
 }
 public String getStatus()
 {

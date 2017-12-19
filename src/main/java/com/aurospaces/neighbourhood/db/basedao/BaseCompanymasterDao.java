@@ -25,7 +25,7 @@ public class BaseCompanymasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO companymaster( created_time, updated_time, companycode, companyname, contactpersonname, contactpersonmobile, emailid, remarks, typeofcompany, customertype, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO companymaster( created_time, updated_time, companycode, companyname, contactpersonname, contactpersonmobile, emailid, remarks, typeofcompany, companyAddress, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
 
 
 
@@ -71,7 +71,7 @@ ps.setString(6, companymaster.getContactpersonmobile());
 ps.setString(7, companymaster.getEmailid());
 ps.setString(8, companymaster.getRemarks());
 ps.setString(9, companymaster.getTypeofcompany());
-ps.setString(10, companymaster.getCustomertype());
+ps.setString(10, companymaster.getCompanyAddress());
 ps.setString(11, companymaster.getStatus());
 
 							return ps;
@@ -88,9 +88,9 @@ ps.setString(11, companymaster.getStatus());
 		{
 			System.out.println("----update---"+companymaster.getId()); 
 
-			String sql = "UPDATE companymaster  set companycode = ? ,companyname = ? ,contactpersonname = ? ,contactpersonmobile = ? ,emailid = ? ,remarks = ? ,typeofcompany = ? ,customertype = ?   where id = ? ";
+			String sql = "UPDATE companymaster  set companycode = ? ,companyname = ? ,contactpersonname = ? ,contactpersonmobile = ? ,emailid = ? ,remarks = ? ,typeofcompany = ? ,companyAddress = ?   where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{companymaster.getCompanycode(),companymaster.getCompanyname(),companymaster.getContactpersonname(),companymaster.getContactpersonmobile(),companymaster.getEmailid(),companymaster.getRemarks(),companymaster.getTypeofcompany(),companymaster.getCustomertype(),companymaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{companymaster.getCompanycode(),companymaster.getCompanyname(),companymaster.getContactpersonname(),companymaster.getContactpersonmobile(),companymaster.getEmailid(),companymaster.getRemarks(),companymaster.getTypeofcompany(),companymaster.getCompanyAddress(),companymaster.getId()});
 		}
 	}
 		
