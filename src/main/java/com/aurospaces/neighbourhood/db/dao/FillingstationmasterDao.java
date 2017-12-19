@@ -84,7 +84,7 @@ public class FillingstationmasterDao extends BaseFillingstationmasterDao
 		jdbcTemplate = custom.getJdbcTemplate();
 		int intDelete = 0;
 		try{
-			String sql = "select sum(gasavailability) from fillingstationmaster where status=1";
+			String sql = "select sum(closingBalanceGas) from fillingstationmaster where status=1";
 			 intDelete = jdbcTemplate.queryForInt(sql);
 			
 		}catch(Exception e){
@@ -107,6 +107,23 @@ public boolean updateGas(int id,String gasavailability) {
 	try{
 		String sql = "update fillingstationmaster set gasavailability=(gasavailability+?) where id=?";
 		result = jdbcTemplate.update(sql, new Object[]{gasavailability,id});
+		if(result>0){
+			updateTo=true;
+		}
+	}catch(Exception e){
+		e.printStackTrace();
+	}
+	
+	return updateTo;
+}
+public boolean updateUsedGas(int id,int usedgas) {
+	jdbcTemplate = custom.getJdbcTemplate();
+	Integer result = null;
+	boolean updateTo=false;
+	
+	try{
+		String sql = "update fillingstationmaster set usedGas=(usedGas+?) where id=?";
+		result = jdbcTemplate.update(sql, new Object[]{usedgas,id});
 		if(result>0){
 			updateTo=true;
 		}

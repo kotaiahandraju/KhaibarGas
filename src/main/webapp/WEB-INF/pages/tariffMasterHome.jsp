@@ -29,7 +29,7 @@
 							id="example">
 							<thead>
 								<tr>
-									<th>Asset Code</th> <th>Asset Description</th><th>Rate</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th></th>
+									<th>Asset Code</th><th>Item</th> <th>Asset Description</th><th>Rate</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th></th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -58,11 +58,28 @@
 									<form:hidden path="id" />
 									<label data-toggle="tooltip" title="Either Cylinder or Accessory Code" class="col-sm-4 control-label required">Asset Code <span class="impColor">*</span></label>
 									<div class="col-sm-6">
-										<form:input path="assetcode" class="form-control numericOnly validate" autocomplete="off" placeholder="Asset Code" required="required" />
+										<form:input path="assetcode" class="form-control  validate" autocomplete="off" placeholder="Asset Code" required="required" />
 										<span class="hasError" id="assetcodeError"></span>
 									</div>
 								</div>
 							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-sm-4 control-label required">Item's <span class="impColor">*</span></label>
+									<div class="col-sm-6">
+										<form:select path="itemId" class="form-control  validate" onfocus="removeBorder(this.id)">
+											<form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
+											<form:options items="${items}"></form:options>
+										</form:select>
+									</div>
+								</div>
+							</div>
+							
+							<%-- <form:select path="item" id="item1" style="display:none;font-size: small;">
+		<form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
+		<form:options items="${items}"></form:options>
+	</form:select> --%>
+	
 							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-sm-4 control-label required">Asset Description <span class="impColor">*</span></label>
@@ -137,7 +154,7 @@ if (listOrders1 != "") {
 			function displayTable(listOrders) {
 				$('#tableId').html('');
 				var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-					+ '<thead><tr><th>Asset Code</th><th>Asset Description</th><th>Rate</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+					+ '<thead><tr><th>Asset Code</th><th>Item</th><th>Asset Description</th><th>Rate</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 			$('#tableId').html(tableHead);
 				serviceUnitArray = {};
 				$.each(listOrders, function(i, orderObj) {
@@ -150,6 +167,7 @@ if (listOrders1 != "") {
 									serviceUnitArray[orderObj.id] = orderObj;
 									var tblRow = "<tr >"
 											+ "<td title='"+orderObj.id+"'>" + orderObj.assetcode + "</td>"
+											+ "<td title='"+orderObj.itemName+"'>" + orderObj.itemName + "</td>"
 											+ "<td title='"+orderObj.id+"'>" + orderObj.assetdescription + "</td>"
 											+ "<td title='"+orderObj.id+"'>" + orderObj.rate + "</td>"
 											+ "<td title='"+orderObj.id+"'>" + orderObj.alloweddiscount + "</td>"
@@ -166,6 +184,7 @@ if (listOrders1 != "") {
 			
 			function editTariffMasterDetails(id) {
 				$("#id").val(serviceUnitArray[id].id);
+				$("#itemId").val(serviceUnitArray[id].itemId);
 				$("#assetcode").val(serviceUnitArray[id].assetcode);
 				$("#assetdescription").val(serviceUnitArray[id].assetdescription);
 				$("#rate").val(serviceUnitArray[id].rate);

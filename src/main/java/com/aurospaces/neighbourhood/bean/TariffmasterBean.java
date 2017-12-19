@@ -15,7 +15,22 @@ protected String alloweddiscount ;
 protected String remarks ;
 protected String status ;
 protected String tariffStatus ;
+protected String itemId ;
+protected String itemName ;
 
+
+public String getItemName() {
+	return itemName;
+}
+public void setItemName(String itemName) {
+	this.itemName = itemName;
+}
+public String getItemId() {
+	return itemId;
+}
+public void setItemId(String itemId) {
+	this.itemId = itemId;
+}
 public int getId()
 {
   return id;
