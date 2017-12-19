@@ -95,7 +95,7 @@
 	                    			<div class="form-group">
 										<label for="focusedinput" class="col-md-4 control-label">Filling Station Total Capacity (Gas in KG's) <span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="gascapacity" class="form-control validate numericOnly" placeholder="Capacity" />	
+											<form:input path="gascapacity" class="form-control validate numericOnly" placeholder="Total Capacity (Gas in KG's) " />	
 											<span class="hasError" id="gascapacityError"></span>
 									    </div>
 	                    			</div>
@@ -114,7 +114,7 @@
                     		
  
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
 		<div class="modal-content">
@@ -139,7 +139,7 @@
                     	<div class="form-group">
                     		<label for="focusedinput" class="col-md-4 control-label">Adding Gas(in KG's) <span class="impColor">*</span></label>
                     		<div class="col-md-6">
-								<input name="gasavail" id="gasavail" class="form-control numericOnly" placeholder="Adding Gas" onblur="removeBorder(this.id)"/>
+								<input name="gasavail" id="gasavail" class="form-control numericOnly" placeholder="Adding Gas(in KG's)" onblur="removeBorder(this.id)"/>
 							</div>
                     	</div>
                     </div>

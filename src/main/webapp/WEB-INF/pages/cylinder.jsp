@@ -155,7 +155,7 @@
                     				<label for="focusedinput" class="col-md-4 control-label">Remarks</label>
 								    <div class="col-md-6">
 <%-- 								    	<form:input path="remarks" value="" class="form-control"  placeholder="Remarks"/> --%>
-								    	<form:textarea path="remarks" class="form-control" placeholder="Remarks"></form:textarea>
+								    	<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="5" cols="70"></form:textarea>
 								      	<span class="hasError" id="remarksError"></span>
 								    </div>
                     			</div>

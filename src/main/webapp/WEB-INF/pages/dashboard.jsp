@@ -24,7 +24,7 @@ window.onload = function() {
                                 <div class="tiles-heading">IDLE CYLINDERS</div>
                                 <div class="tiles-body-alt">
                                     <!--i class="fa fa-bar-chart-o"></i-->
-                                    <div class="text-center" id="idleCylinders" >21854</div>
+                                    <div class="text-center" id="idleCylinders" >0</div>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>
@@ -35,7 +35,7 @@ window.onload = function() {
                                 <div class="tiles-body-alt">
                                     <!--i class="fa fa-money"></i-->
                                      <c:if test="${not empty Delivered}">
-                                    <div class="text-center">32545</div>
+                                    <div class="text-center">${Delivered }</div>
                                     </c:if>
                                      <c:if test="${empty Delivered}">
                                     <div class="text-center">0</div>
@@ -76,16 +76,16 @@ window.onload = function() {
                             <a class="info-tiles tiles-warning" href="#">
                                 <div class="tiles-heading">MISSID CYLINDERS</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center" id="missidcylinders">457</div>
+                                    <div class="text-center" id="missidcylinders">0</div>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>
                         </div>
                         <div class="col-md-2 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-info" href="#">
-                                <div class="tiles-heading">TOTAL CYLINDERS</div>
+                                <div class="tiles-heading">IN TRUCK</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center">${totalCylinderCount }</div>
+                                    <div class="text-center">${Truck }</div>
                                 </div>
                                 <div class="tiles-footer">more info</div>
                             </a>

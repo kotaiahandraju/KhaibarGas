@@ -76,7 +76,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		public   List<Map<String, Object>>  getCylindersCount(){  
 			 jdbcTemplate = custom.getJdbcTemplate();
 			 
-			 String sql="select IFNULL(count(c.cylinderstatus), 0) as count,cs.name as  cylinderstatus from cylindermaster c,cylinderstatus cs where cs.id= c.cylinderstatus   group by c.cylinderstatus ";
+			 String sql="SELECT a.name as cylinderstatus, IFNULL(b.statuscount,0) as count	FROM cylinderstatus a	left outer join (SELECT cylinderstatus, IFNULL(count(cylinderstatus), 0) as statuscount FROM cylindermaster group by cylinderstatus) b	on a.id = b.cylinderstatus; ";
 			   
 			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
 				return retlist;
