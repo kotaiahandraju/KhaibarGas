@@ -193,8 +193,21 @@ public class TransactionController {
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean)session.getAttribute("cacheUserBean");
 			String cylenderId =cylindertransactionBean1.getCylindetId();
+			
 			String[] cylenderId1 =cylenderId.split(",");
 			for(int i=0;i<cylenderId1.length;i++){
+				
+				CylindermasterBean cylindermasterBean = cylindermasterDao.getByCylinderName(cylenderId1[i]);
+				int cylinderCapacity = 0;
+				if(cylindermasterBean != null){
+					if(StringUtils.isNotBlank(cylindermasterBean.getName())){
+						String numberOnly= cylindermasterBean.getName().replaceAll("[^0-9]", "");
+						cylinderCapacity= Integer.parseInt(numberOnly);
+						fillingstationmasterDao.updateUsedGas(Integer.parseInt(cylindertransactionBean1.getFillingStation()), cylinderCapacity);
+						fillingstationmasterDao.updateClosingGas();
+					}
+				}
+				
 			cylindertransactionBean = new CylindertransactionBean();
 			cylindertransactionBean.setCreatedBy(String.valueOf(users.getId()));
 			cylindertransactionBean.setCylinderStatus(cylindertransactionBean1.getCylinderStatus());

@@ -25,7 +25,7 @@ public class BaseTariffmasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO tariffmaster( created_time, updated_time, assetcode, assetdescription, rate, alloweddiscount, remarks, status) values (?, ?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO tariffmaster( created_time, updated_time, assetcode, assetdescription, rate, alloweddiscount, remarks, status,itemId) values (?, ?, ?, ?, ?, ?, ?, ?,?)"; 
 
 
 
@@ -68,6 +68,9 @@ ps.setString(5, tariffmaster.getRate());
 ps.setString(6, tariffmaster.getAlloweddiscount());
 ps.setString(7, tariffmaster.getRemarks());
 ps.setString(8, tariffmaster.getStatus());
+ps.setString(9, tariffmaster.getItemId());
+
+
 
 							return ps;
 						}
@@ -82,9 +85,9 @@ ps.setString(8, tariffmaster.getStatus());
 		else
 		{
 
-			String sql = "UPDATE tariffmaster  set assetcode = ? ,assetdescription = ? ,rate = ? ,alloweddiscount = ? ,remarks = ?   where id = ? ";
+			String sql = "UPDATE tariffmaster  set assetcode = ? ,assetdescription = ? ,rate = ? ,alloweddiscount = ? ,remarks = ? ,itemId=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{tariffmaster.getAssetcode(),tariffmaster.getAssetdescription(),tariffmaster.getRate(),tariffmaster.getAlloweddiscount(),tariffmaster.getRemarks(),tariffmaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{tariffmaster.getAssetcode(),tariffmaster.getAssetdescription(),tariffmaster.getRate(),tariffmaster.getAlloweddiscount(),tariffmaster.getRemarks(),tariffmaster.getItemId(),tariffmaster.getId()});
 		}
 	}
 		

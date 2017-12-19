@@ -1,6 +1,8 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -17,7 +19,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.TariffmasterBean;
+import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.aurospaces.neighbourhood.db.dao.TariffmasterDao;
 
 @Controller
@@ -25,8 +29,8 @@ import com.aurospaces.neighbourhood.db.dao.TariffmasterDao;
 public class TariffMasterController {
 	private Logger logger = Logger.getLogger(TariffMasterController.class);
 
-	@Autowired
-	TariffmasterDao objTariffmasterDao;
+	@Autowired	TariffmasterDao objTariffmasterDao;
+	@Autowired LpomasterDao lpomasterDao;
 
 	@RequestMapping(value="/tariffMaster")
 	public String tariffMasterHome(@ModelAttribute("tariffMaster")TariffmasterBean objTariffmasterBean, ModelMap model, HttpServletRequest request,
@@ -166,6 +170,22 @@ public class TariffMasterController {
 			return String.valueOf(jsonObj);
 		}
 		return String.valueOf(jsonObj);
+	}
+	@ModelAttribute("items")
+	public Map<Integer, String> populateCity() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			String sSql = " select id,name from items where status='1' ";
+			List<CylinderTypesBean> list = lpomasterDao.populate(sSql);
+			for (CylinderTypesBean bean : list) {
+				statesMap.put(bean.getId(), bean.getName());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
 	}
 
 }
