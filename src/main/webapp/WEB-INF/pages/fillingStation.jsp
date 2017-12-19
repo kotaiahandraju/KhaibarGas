@@ -93,7 +93,7 @@
                     		<div class="row">
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Capacity <span class="impColor">*</span></label>
+										<label for="focusedinput" class="col-md-4 control-label">Filling Station Total Capacity (Gas in KG's) <span class="impColor">*</span></label>
 										<div class="col-md-6">
 											<form:input path="gascapacity" class="form-control validate numericOnly" placeholder="Capacity" />	
 											<span class="hasError" id="gascapacityError"></span>
