@@ -184,7 +184,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="col-sm-4 control-label required">Documents
+												<label class="col-sm-4 control-label required">Image
 													<!-- <span class="impColor">*</span> -->
 												</label>
 												<div class="col-sm-6">
@@ -228,7 +228,7 @@ function displayTable(listOrders)
 {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ '<thead><tr><th>First Name</th><th>Last Name</th><th>Staff Code</th><th>Staff Number</th><th>Designation</th><th>Nationality</th><th>Mobile</th><th>Documents</th><th>Status</th><th style="text-align: center;">Action</th></tr></thead><tbody></tbody></table>';
+		+ '<thead><tr><th>First Name</th><th>Last Name</th><th>Staff Code</th><th>Staff Number</th><th>Designation</th><th>Nationality</th><th>Mobile</th><th>Image</th><th>Status</th><th style="text-align: center;">Action</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj){
@@ -248,7 +248,7 @@ function displayTable(listOrders)
 			+ "<td title='"+orderObj.designation+"'>" + orderObj.designation + "</td>"
 			+ "<td title='"+orderObj.nationality+"'>" + orderObj.nationality + "</td>"
 			+ "<td title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
-			+ "<td title='"+orderObj.documents+"'>" + orderObj.documents + "</td>"
+			+ "<td title='"+orderObj.documents+"'><img style='height: 4%;' src=${baseurl }/"+orderObj.documents +"></td>"
 			+ "<td title='"+orderObj.staffStatus+"'>" + orderObj.staffStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
