@@ -113,44 +113,52 @@
                     		
                     		
  
-  <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
-    
-      <!-- Modal content-->
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Add Gas</h4>
-        </div>
-        <div class="modal-body">
-        <div class="row">
-          <label for="focusedinput" class="col-md-3 control-label">Station Number <span class="impColor">*</span></label>
-			<div class="col-md-4">
-			<form:select path="stationnames" class="form-control " onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store --</form:option>
-				        			<form:options items="${stationnames}"></form:options>
-				        		</form:select>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+	<div class="modal-dialog">
+		<!-- Modal content-->
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+				<h4 class="modal-title">Add Gas</h4>
+        	</div>
+        	<div class="modal-body">
+				<div class="row">
+					<div class="col-md-12">
+                    	<div class="form-group">
+                    		<label for="focusedinput" class="col-md-4 control-label">Filling Station Name <span class="impColor">*</span></label>
+                    		<div class="col-md-6">
+								<form:select path="stationnames" class="form-control" onfocus="removeBorder(this.id)" >
+									<form:option value="">-- Filling Station Name --</form:option>
+									<form:options items="${stationnames}"></form:options>
+								</form:select>
+							</div>
+                    	</div>
+                    </div>
+					<div class="col-md-12">
+                    	<div class="form-group">
+                    		<label for="focusedinput" class="col-md-4 control-label">Adding Gas <span class="impColor">*</span></label>
+                    		<div class="col-md-6">
+								<input name="gasavail" id="gasavail" class="form-control numericOnly" placeholder="Adding Gas" onblur="removeBorder(this.id)"/>
+							</div>
+                    	</div>
+                    </div>
+				</div>
+				<div class="row">
+					<div class="col-sm-12">
+						<div class="form-group">
+							<div class="col-md-offset-4 col-md-6">
+						      	<input type="button" id="" value="ADD"  class="btn-primary btn" onclick="addGas();" />
+							</div>
+				      	</div>
+					</div>
+				</div>
 			</div>
-			<div class="col-md-4">
-			<label for="focusedinput" class="col-md-3 control-label">Add Gas <span class="impColor">*</span></label>
-			</div>
-			<div class="col-md-4">
-			<input name="gasavail" id="gasavail"	class="form-control  numericOnly" placeholder="Adding Gas" />	
-			</div>
-			<div class="">
-        	<input type="button" id="" value="ADD" class="btn-primary btn" onclick="addGas();"/ >
-        </div>
-        </div>
-         
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
-      
+        	<div class="modal-footer">
+          		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        	</div>
+      	</div>
     </div>
-  
 </div>
                     	
                     	</div>
@@ -271,34 +279,67 @@ function addGas() {
 	
 	var stationId =$("#stationnames").val();
 	var newGasavail=$("#gasavail").val();
-	$.ajax({
-		type : "POST",
-		url : "updateGas.htm",
-		data :"stationId="+stationId+"&newGasavail="+newGasavail,
-		beforeSend : function() {
-             $.blockUI({ message: 'Please wait' });
-          }, 
-		success: function (response) {
-			 $.unblockUI();
-             if(response != null ){
+	if((stationId == null || stationId == "" || stationId == "undefined" || newGasavail == null || newGasavail == "" || newGasavail == "undefined"))
+	{
+	 	if(stationId == null || stationId == "" || stationId == "undefined"){
+		 	$('#stationnames').css('border-color','#cc0000');
+			$('#stationnames').css('color','#cc0000');
+			$('#stationnames').addClass('placeholder-style your-class');
+			return false;
+	 	}else  if(newGasavail == null || newGasavail == ""){
+	 		$('#gasavail').css('border-color','#cc0000');
+	 		$('#gasavail').css('color','#cc0000');
+	 		$('#gasavail').attr('placeholder','Please Enter Gas');
+	 		$('#gasavail').addClass('placeholder-style your-class');
+	 		return false;
+	 	}
+	}
+	else{
+		$.ajax({
+			type : "POST",
+			url : "updateGas.htm",
+			data :"stationId="+stationId+"&newGasavail="+newGasavail,
+			beforeSend : function() {
+            	$.blockUI({ message: 'Please wait' });
+          	}, 
+			success: function (response) {
+				$.unblockUI();
+             	if(response != null ){
             	//var resJson=JSON.parse(response);
             	//showTableData(resJson);
             	//alert("Delete Sucessfully");
             	//window.location.reload();
             	}
-             window.location.reload();
-             },
-             
-         error: function (e) { 
+             	window.location.reload();
+			},
+         	error: function (e) { 
         	 	$.unblockUI();
 				console.log(e);
-         }
-	});
+         	}
+		});
+	}
+}
+
+function validate(id, errorMessage)
+{
+	var styleBlock = '.placeholder-style.placeholder-style::-moz-placeholder {color: #cc0000;} .placeholder-style::-webkit-input-placeholder {color: #cc0000;}';
+	if($('#'+id).val() ==  null || $('#'+id).val() == ""  || $('#'+id).val()=="undefined" ) {
+		$('style').append(styleBlock);
+		$('#'+id).css('border-color','#cc0000');
+		$('#'+id).css('color','#cc0000');
+		$('#'+id).attr('placeholder',errorMessage);
+		$('#'+id).addClass('placeholder-style your-class');
+//			$('#'+id).css('color','#cc0000');
+//			$('#'+id+'Error').text(errorMessage);
+	}else{
+		$('#'+id).css('border-color','');
+		$('#'+id).removeClass('placeholder-style your-class');
+//			$('#'+id).css('color','');
+//			$('#'+id+'Error').text("");
+	}
+	
 }
 
 $("#pageName").text("Filling Station Master");
 $(".fillingStation").addClass("active"); 
 </script>
-
-
-</html>
