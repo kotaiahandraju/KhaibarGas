@@ -124,7 +124,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Description</label>
 									<div class="col-md-6">
-										<form:textarea path="description" class="form-control" placeholder="Description"></form:textarea>
+										<form:textarea path="description" class="form-control" placeholder="Description"  rows="5"></form:textarea>
 									</div>
 								</div>
 							</div>
