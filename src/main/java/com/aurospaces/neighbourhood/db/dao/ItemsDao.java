@@ -60,9 +60,7 @@ public class ItemsDao extends BaseItemsDao
 
 	 public List<ItemsBean> getItems() {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select id,name from items where itemType='Truck' and status='1' ";
-			@SuppressWarnings("rawtypes")
-			List list=jdbcTemplate.queryForList(sql);
+			String sql = "select id,trucknumber as name from trucksmaster where status='1' ";
 			List<ItemsBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(ItemsBean.class));
 			return retlist;
 

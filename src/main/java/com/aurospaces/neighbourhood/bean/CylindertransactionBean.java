@@ -23,9 +23,16 @@ protected Date createdTime ;
 protected Date updatedTime ;
 protected String cylindetId ;
 protected String cylinderStatus ;
-protected String createdBy,fillingStation , customerId,truckId ;
+protected String createdBy,fillingStation , customerId,truckId,item,customertype ;
 
 
+
+public String getItem() {
+	return item;
+}
+public void setItem(String item) {
+	this.item = item;
+}
 public String getTruckId() {
 	return truckId;
 }
@@ -35,6 +42,12 @@ public void setTruckId(String truckId) {
 public int getId()
 {
   return id;
+}
+public String getCustomertype() {
+	return customertype;
+}
+public void setCustomertype(String customertype) {
+	this.customertype = customertype;
 }
 public void setId(final int id)
 {

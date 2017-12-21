@@ -2,6 +2,7 @@
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -59,6 +60,14 @@ public class CustomermasterDao extends BaseCustomermasterDao
 			 if(i>0)
 				 result = true;
 				return result;
+		}
+	 public List<Map<String, Object>> getCustomers(CustomermasterBean customermasterBean) {
+			jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "select cm.*,cym1.cylinderid from customermaster cm left join cylindermaster cym on cm.customerid = cym.id left join cylindermaster cym1 on cym1.id=cm.cylinderId where cm.customertype=?";
+			List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql, new Object[] { customermasterBean.getCustomertype() });
+			if (retlist.size() > 0)
+				return retlist;
+			return null;
 		}
 }
 

@@ -126,7 +126,7 @@
 										<div class="form-group">
 											<label class="col-sm-4 control-label required">Address</label>
 											<div class="col-sm-6">
-												<form:textarea path="companyAddress" class="form-control" autocomplete="off" placeholder="Company Address"></form:textarea>
+												<form:textarea path="companyAddress" class="form-control" autocomplete="off" rows="5" placeholder="Company Address"></form:textarea>
 											</div>
 										</div>
 									</div>
@@ -134,7 +134,7 @@
 										<div class="form-group">
 											<label class="col-sm-4 control-label required">Remarks</label>
 											<div class="col-sm-6">
-												<form:textarea path="remarks" class="form-control" placeholder="Remarks"></form:textarea>
+												<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="5"></form:textarea>
 											</div>
 										</div>
 									</div>

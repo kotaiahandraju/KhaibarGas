@@ -25,12 +25,7 @@
 						<div class="panel-body collapse in">
 							<div class="table-responsive" id="tableId">
 								<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-									<thead>
-										<tr>
-											<th>Opening Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>UsedGas</th>
-											<th>Closing Balance</th><th>Station Name</th><th>Unit Point</th><th>status</th><th></th>
-										</tr>
-									</thead>
+									<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance</th><th>UsedGas</th><th>Closing Balance</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG's)</th><th>Status</th><th></th></tr></thead>
 									<tbody></tbody>
 								</table>
 							</div>
@@ -82,9 +77,9 @@
 	                    		</div>
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Quantity <span class="impColor">*</span></label>
+										<label for="focusedinput" class="col-md-4 control-label">Number of cylinders filled at a time<span class="impColor">*</span></label>
 										<div class="col-md-6">
-											<form:input path="quantity" type="text" class="form-control validate numericOnly" placeholder="Quantity" />	
+											<form:input path="quantity" type="text" class="form-control validate numericOnly" placeholder="Number of cylinders filled at a time" />	
 											<span class="hasError" id="quantityError"></span>
 									    </div>
 	                    			</div>
@@ -129,7 +124,7 @@
                     		<label for="focusedinput" class="col-md-4 control-label">Filling Station Name <span class="impColor">*</span></label>
                     		<div class="col-md-6">
 								<form:select path="stationnames" class="form-control" onfocus="removeBorder(this.id)" >
-									<form:option value="">-- Filling Station Name --</form:option>
+									<form:option value="">-- Select Filling Station  --</form:option>
 									<form:options items="${stationnames}"></form:options>
 								</form:select>
 							</div>
@@ -205,7 +200,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance</th><th>UsedGas</th><th>Closing Balance</th><th>Filling Machines</th><th>Quantity</th><th>Capacity</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance</th><th>UsedGas</th><th>Closing Balance</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG\'s)</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {

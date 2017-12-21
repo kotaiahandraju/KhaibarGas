@@ -126,20 +126,23 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		return null;
 		    
 		} 
-	public boolean updateCylinderStatus(String cylinderId,String cylinderStatus,String fillingStation) {
+	public boolean updateCylinderStatus(CylindermasterBean cylindermasterBean) {
 		jdbcTemplate = custom.getJdbcTemplate();
 		boolean update = false;
 		try{
 			StringBuffer buffer = new StringBuffer();
 			buffer.append("Update  cylindermaster set ");
-			if(StringUtils.isNotBlank(cylinderStatus)){
-				buffer.append(" cylinderstatus= '"+cylinderStatus+"'");
+			if(StringUtils.isNotBlank(cylindermasterBean.getCylinderstatus())){
+				buffer.append(" cylinderstatus= '"+cylindermasterBean.getCylinderstatus()+"'");
 			}
-			if(StringUtils.isNotBlank(fillingStation)){
-				buffer.append(" ,fillingstationId= '"+fillingStation+"'");
+			if(StringUtils.isNotBlank(cylindermasterBean.getFillingstationId())){
+				buffer.append(" ,fillingstationId= '"+cylindermasterBean.getFillingstationId()+"'");
 			}
-			if(StringUtils.isNotBlank(cylinderId)){
-				buffer.append(" WHERE cylinderid= '"+cylinderId+"'"); 
+			if(StringUtils.isNotBlank(cylindermasterBean.getTruckId())){
+				buffer.append(" ,truckId= '"+cylindermasterBean.getTruckId()+"'");
+			}
+			if(cylindermasterBean.getId() !=0){
+				buffer.append(" WHERE id= '"+cylindermasterBean.getId()+"'"); 
 			}
 //			String sql = "Update  cylindermaster set cylinderstatus= ?,fillingstationId=?  WHERE cylinderid=?";
 			String sql = buffer.toString();
@@ -193,7 +196,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		jdbcTemplate = custom.getJdbcTemplate();
 		List<CylindermasterBean> retlis=null;
 		try{
-			String sql =  "select cm.cylinderid,s.storename ,i.name  from cylindermaster cm,items i,storesmaster s where cm.store=s.id and i.id=cm.size and cm.store=? and cm.size=? and cm.cylinderstatus=?  limit ?";
+			String sql =  "select  cm.id, cm.cylinderid,s.storename ,i.name  from cylindermaster cm,items i,storesmaster s where cm.store=s.id and i.id=cm.size and cm.store=? and cm.size=? and cm.cylinderstatus=?  limit ?";
 				retlis = jdbcTemplate.query(sql, new Object[] {sStore,cylinderType,cylinderstatus,limit },
 					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 			System.out.println("-----------list----------"+retlis);
@@ -230,7 +233,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		List<CylindermasterBean> retlis=null;
 		try{
 			StringBuffer buffer = new StringBuffer();
-			buffer.append("select cm.cylinderid,f.stationname ,i.name  from cylindermaster cm,items i,fillingstationmaster f where cm.size=i.id and f.id=cm.fillingstationId ");
+			buffer.append("select cm.id, cm.cylinderid,f.stationname ,i.name  from cylindermaster cm,items i,fillingstationmaster f where cm.size=i.id and f.id=cm.fillingstationId ");
 			if(StringUtils.isNotBlank(fillingStationId)){
 				buffer.append(" and cm.fillingstationId="+fillingStationId );
 			}
@@ -271,5 +274,14 @@ public class CylindermasterDao extends BaseCylindermasterDao
 				return retlist.get(0);
 			return null;
 		}
+	 public List<Map<String, Object>> getInTruckCylinders(String truckId){
+		 jdbcTemplate = custom.getJdbcTemplate();
+		 String sql = "select * from cylindermaster where truckId=?";
+		 List<Map<String, Object>> result = jdbcTemplate.queryForList(sql,new Object[]{truckId});
+		 if(result.size()>0)
+			 return result;
+		return null;
+		 
+	 }
 }
 

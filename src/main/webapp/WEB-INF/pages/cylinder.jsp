@@ -256,12 +256,12 @@ function editCylinder(id) {
 	$("#color").val(serviceUnitArray[id].color);
 	$("#madein").val(serviceUnitArray[id].madein);
 	$("#expirtdate1").val(serviceUnitArray[id].expirtdate1);
-	$("#ownercompany").val(serviceUnitArray[id].ownercompany);
-	$("#ownercompany").trigger("chosen:updated");
-	$("#store").val(serviceUnitArray[id].store);
-	$("#store").trigger("chosen:updated")
+	$("#ownercompany").val(serviceUnitArray[id].ownercompany).trigger("change");
+// 	$("#ownercompany").trigger("chosen:updated");
+	$("#store").val(serviceUnitArray[id].store).trigger("change");
+// 	$("#store").trigger("chosen:updated")
 	$("#cylinderstatus").val(serviceUnitArray[id].cylinderstatus);
-	$("#remarks").val(serviceUnitArray[id].remarks);
+	$("#remarks").val(serviceUnitArray[id].remarks).trigger("change");
 	$("#submit1").val("Update");
 	getLpoNumber();
 	$("#lponumber").val(lpo);
@@ -313,8 +313,8 @@ function getLpoNumber(){
 		});
 		$('#lponumber').empty().append(html);
     	if(lpo !=""){
-    		$("#lponumber").val(lpo);
-    		$("#lponumber").trigger("chosen:updated");
+    		$("#lponumber").val(lpo).trigger("change");
+//     		$("#lponumber").trigger("chosen:updated");
     	}
     });
 }

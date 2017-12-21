@@ -217,8 +217,8 @@ function editTruckMaster(id) {
 	$("#description").val(serviceUnitArray[id].description);
 	$("#capacityoftruck").val(serviceUnitArray[id].capacityoftruck);
 	$("#lponumber").val(serviceUnitArray[id].lponumber);
-	$("#typeOfService").val(serviceUnitArray[id].typeOfService);
-	$("#typeOfService").trigger("chosen:updated")
+	$("#typeOfService").val(serviceUnitArray[id].typeOfService).trigger("change");
+// 	$("#typeOfService").trigger("chosen:updated")
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }

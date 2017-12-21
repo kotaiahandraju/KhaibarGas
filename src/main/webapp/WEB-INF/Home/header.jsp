@@ -45,6 +45,8 @@
 <script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
+<link rel="stylesheet" href="${baseurl }/assets/css/select2.css">
+
 <style type="text/css">
 .impColor{color:red;}
 
@@ -86,6 +88,11 @@ span.has-error,span.hasError
 	font-size: 14px;
 	z-index:99999;
 }
+.select2
+{
+/* 	max-width: 100% !important; */
+/* 	width: 100% !important; */
+}
 </style>
 	<script>
 	var isClick = 'No';
@@ -124,6 +131,7 @@ span.has-error,span.hasError
 	  <script type="text/javascript">
 $(function() {
     $(".chzn-select").chosen();
+	$(".select2").select2();
 });
 </script>
 </head>

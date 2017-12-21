@@ -30,13 +30,186 @@ table#dependent_table tbody tr td:first-child::before {
 /* 	width: auto !important; */
 }
 </style>
-        <div class="clearfix"></div>
-             <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-               <li>LPO </li>
-            </ol>
-            <div class="clearfix"></div>
-        <div class="container">
+	<div class="clearfix"></div>
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li>Cylinder Delivered</li>
+	</ol>
+	<div class="clearfix"></div>
+	<div class="container">
+		<form:form modelAttribute="lpoForm" id="cylinderDeliverForm" action="" class="form-horizontal" method="post">
+<table><tr><td>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Customer Details</h4>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+		                    				<form:select path="truckId" class="form-control select2" onfocus="removeBorder(this.id);" onchange="getTruckCylinders(this.value)">
+		                    				<form:option value="">--Select Truck--</form:option>
+		                    				<form:options items="${trucks}"></form:options>
+		                    				</form:select>
+								  	</div>
+                    			</div>
+							</div>
+							<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">customertype <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<form:select path="customertype" class="form-control select2 validate "  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
+		                            		<form:option value="">-- Customer Type --</form:option>
+									  		<form:option value="COMMERCIAL">COMMERCIAL</form:option>
+									  		<form:option value="DOMESTIC">DOMESTIC</form:option>
+									  		<form:option value="INDUSTIAL">INDUSTIAL</form:option>
+								  		</form:select>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">customerId <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<form:select path="customerId" class="form-control select2 validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
+		                            		<form:option value="">-- Select Customer Id --</form:option>
+								  		</form:select>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Cylinder Id <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<form:select path="cylindetId" class="form-control select2 validate" multiple="multiple" onfocus="removeBorder(this.id);" >
+		                            		<form:option value="">-- Select Cylinder Id --</form:option>
+								  		</form:select>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">customerId <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					Customer Name:<span id="customername"></span><br>
+                    					Customer Address:<span id="customeraddress"></span><br>
+                    					Mobile:<span id="mobile"></span><br><br>
+                    					Land Line:<span id="landline"></span><br>
+                    					cylinders :<span id="cylinders"></span>
+								  	</div>
+                    			</div>
+                    		</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Recent List</h4>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Cylinder Size <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<input name="unit" value="0"  type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/>
+								  	</div>
+                    			</div>
+							</div>
+							<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Cylinder Id <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<input name="unit" value="0" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/>
+								  	</div>
+                    			</div>
+                    		</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- </div>
+		<div class="row"> -->
+			<div class="col-md-12">
+				<div class="form-group">
+					<table class="notPrintMe">
+						<tr>
+							<td style="height: 20px;" class="hideme"> 
+								<span class="addItemButton" onclick="addMoreRowsForDependent(this.form);">Add Item</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<form:select path="item" id="item1" style="display:none;font-size: small;">
+		<form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
+		<form:options items="${items}"></form:options>
+	</form:select>
+		<!-- </div>
+		<div class="row"> -->
+			<div class="col-md-12">
+				<div class="form-group">
+					<table class="inventory" id="dependent_table">
+						<thead>
+							<tr>
+								<th style="width: 40px;"><span>Sno</span></th>
+						        <th style="width: 200px"><span>Items</span></th>
+						        <th style="width: 70px;"><span>Quantity</span></th>
+						        <th><span>Price</span></th>
+						        <th><span>Total Price</span></th>
+						        <th><span>Discount</span></th>
+						        <th><span>Total value</span></th>
+<!-- 								<th style="width: 200px"><span>VAT (5%)</span></th> -->
+<!-- 								<th style="width: 200px"><span>Net Amount</span></th> -->
+					      </tr>
+						</thead>
+					    <tbody>
+							<tr id="1" class="rowInc">
+								<td></td>
+								<td>
+									<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" class="form-control">
+										<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
+									</select>
+								</td>
+								<td><input name="unit" value="0" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/></td>
+								<td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly"/></td>
+								<td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
+								<td><input name="discount" value="0.00" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control" /></td>
+								<td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
+<!-- 								<td><input name="vat" placeholder="Vat" id="1vat" value="5" type="text" onkeydown="removeBorder(this.id);" class="form-control" /></td> -->
+<!-- 								<td><input name="netAmount" placeholder="Net Amount"  id="1netAmount" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td> -->
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="4"><h3 align="right"></h3></th>
+								<th><span class="totalInvoiceValue"></span></th>
+								<th><span class="totalDiscounts"></span></th>
+								<th><span class="totalTaxableValue"></span></th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+			<div class="panel-footer hideme">
+				<div class="row">
+		      		<div class="col-sm-12">
+		      			<div class="btn-toolbar pull-right">
+			      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
+			      			<input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
+		      			</div>
+		      		</div>
+		    	</div>
+		    </div>
+		</div>
+</td></tr></table>
+		</form:form>
             <div class="row">
               <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -64,7 +237,7 @@ table#dependent_table tbody tr td:first-child::before {
                 </div>
             </div>
                     
-            <div class="row" id="moveTo">
+            <%-- <div class="row" id="moveTo">
             <div class="col-md-10 col-md-offset-1 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
@@ -75,14 +248,14 @@ table#dependent_table tbody tr td:first-child::before {
 <table><tr><td>                    
                     <div class="panel-body">
                     	<div class="row">
-                    		<%-- <div class="col-md-4">
+                    		<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">LPO Number <span class="impColor">*</span></label>
                     				<div class="col-md-6">
 								      	<form:input type="text" path="lponumber" class="form-control validate" placeholder="LPO Number"/>
 								  	</div>
                     			</div>
-                    		</div> --%>
+                    		</div>
                     		<div class="col-md-4">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Name <span class="impColor">*</span></label>
@@ -223,11 +396,11 @@ table#dependent_table tbody tr td:first-child::before {
 </td>
 </tr>
 </table>				    
-         			</form:form>				    
+         			</form:form>	    
                 </div>
             </div>
             
-        </div>
+        </div> --%>
 
         </div> <!-- container -->
  
@@ -238,13 +411,13 @@ table#dependent_table tbody tr td:first-child::before {
 /* $(document).ready(function() {
     $("body").tooltip({ selector: '[data-toggle=tooltip]' });
 }); */
-var lstOrders =${allObjects};
+/* var lstOrders =${allObjects};
 
 console.log(lstOrders);
 
 if(lstOrders != ""){
 	showTableData(lstOrders);
-}
+} */
 
 $(function() {
 // 	var listOrders=JSON.parse(lstOrders);
@@ -434,7 +607,7 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
-			+ 'item" class="form-control validate" onchange="removeBorder(this.id),productRateFilter(this.id)"><option>Select</option></select></td>'
+			+ 'item" class="form-control validate" onchange="removeBorder(this.id)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
 			+ dependentRowCount
 			+ 'unit" type="text" value="0" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
@@ -453,12 +626,12 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"><input title="Taxable Value" name="taxable" id="'
 			+ dependentRowCount
 			+ 'taxable" value="0.00" type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
-			+ '<td class="labelCss" ><input placeholder="Manufacturing Date" name="manufacturingdate" id="'
-			+ dependentRowCount
-			+ 'manufacturingdate"  type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
-			+ '<td class="labelCss" ><input placeholder="Expiry Date" name="expirydate" id="'
-			+ dependentRowCount
-			+ 'expirydate"  type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
+// 			+ '<td class="labelCss" ><input placeholder="Manufacturing Date" name="manufacturingdate" id="'
+// 			+ dependentRowCount
+// 			+ 'manufacturingdate"  type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
+// 			+ '<td class="labelCss" ><input placeholder="Expiry Date" name="expirydate" id="'
+// 			+ dependentRowCount
+// 			+ 'expirydate"  type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
 			+ "<th class='labelCss notPrintMe hideme' style='width: 10px;'><span><a href='javascript:void(0);' style='color: red;' onclick='removeDependentRow("
 			+ dependentRowCount + ");'><i class='fa fa-trash' style='color: red;text-decoration: none;cursor: pointer;'></i></a></span></th>" +
 			 + "</tr>";
@@ -495,7 +668,7 @@ function allcalculate(id){
 
 	
 	var number = parseInt(id.match(/[0-9]+/)[0], 10);
-	unit = $('#' + number + 'unit').val();
+	unit = $('#'+ number+'unit').val();
 	rate = $('#' + number + 'rate').val();
 	total1 =  unit * rate;
 
@@ -550,12 +723,12 @@ function priceCalculator(){
 	 }
 	 grandTotal = globalTaxable;
 	 $("#amount").val(grandTotal);
-	 var paidamount =$("#paidamount").val();
-	 if(paidamount.trim().length == 0){
-		 $("#dueamount").val(grandTotal);
-	 }else{
-		 $("#dueamount").val(parseInt(grandTotal)-parseInt(paidamount));
-	 }
+// 	 var paidamount =$("#paidamount").val();
+// 	 if(paidamount.trim().length == 0){
+// 		 $("#dueamount").val(grandTotal);
+// 	 }else{
+// 		 $("#dueamount").val(parseInt(grandTotal)-parseInt(paidamount));
+// 	 }
 // 	 alert(grandTotal);
 	 $(".grandTotal").text(grandTotal.toFixed(2));
 // 	 $(".roundOff").text(Math.round(grandTotal).toFixed(2));
@@ -624,7 +797,51 @@ function PaidCalculation(value){
 		$("#dueamount").val(parseInt(amount)-parseInt(value));
 	}
 }
+function getCustomerIds(value){
+	var formData = new FormData();
+    formData.append('customertype', value);
+	$.fn.makeMultipartRequest('POST', 'getCustomerIds', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.allOrders1;
+		serviceUnitArray2 ={};
+		var html = "<option value=''>-- Select Customer Id --</option>";
+		$.each(alldata,function(i, catObj) {
+			serviceUnitArray2[catObj.id] = catObj;
+			 html = html + '<option value="'
+				+ catObj.id + '">'
+				+ catObj.customerid + '</option>';
+		});
+		$('#customerId').empty().append(html);
+	});
+}
+function getCustomerDetails(value){
+	$("#customername").text(serviceUnitArray2[value].customername);
+	$("#mobile").text(serviceUnitArray2[value].mobile);
+	$("#customeraddress").text(serviceUnitArray2[value].customeraddress);
+	$("#landline").text(serviceUnitArray2[value].landline);
+	$("#cylinders").text("");
+	$("#cylinders").text(serviceUnitArray2[value].cylinderid);
+}
+function getTruckCylinders(id){
+	var formData = new FormData();
+    formData.append('truckId', id);
+	$.fn.makeMultipartRequest('POST', 'getTruckCylinders', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.allOrders1;
+		serviceUnitArray2 ={};
+		var html = "<option value=''>-- Select Customer Id --</option>";
+		$.each(alldata,function(i, catObj) {
+			serviceUnitArray2[catObj.id] = catObj;
+			 html = html + '<option value="'
+				+ catObj.id + '">'
+				+ catObj.cylinderid + '</option>';
+		});
+		$('#cylindetId').empty().append(html);
+	});
+}
 
-$("#pageName").text("LPO Master");
-$(".lpo").addClass("active");
+$("#pageName").text("Cylinder Deliver Status");
+// $(".lpo").addClass("active");
 </script>

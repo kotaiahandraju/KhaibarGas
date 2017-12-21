@@ -86,6 +86,9 @@
 	<definition name="cylinderFiledStatus" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/cylinderFilledStatus.jsp" />
 	</definition>
+	<definition name="cylinderDeliver" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/cylinderDeliver.jsp" />
+	</definition>
 	
 	
 	

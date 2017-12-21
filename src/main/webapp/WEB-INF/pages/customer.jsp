@@ -116,7 +116,7 @@
                     				<label for="focusedinput" class="col-md-6 control-label">Customer Address<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 <%-- 		                            	<form:input type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address"/> --%>
-		                            	<form:textarea type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address"></form:textarea>
+		                            	<form:textarea type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address" rows="5"></form:textarea>
 								  	</div>
                     			</div>
                     		</div>

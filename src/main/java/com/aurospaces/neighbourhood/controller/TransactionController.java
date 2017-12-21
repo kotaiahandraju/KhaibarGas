@@ -14,22 +14,26 @@ import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aurospaces.neighbourhood.bean.CustomermasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.CylindertransactionBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.KhaibarUsersBean;
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindertransactionDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
+import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 
 @Controller
@@ -40,6 +44,7 @@ public class TransactionController {
 	@Autowired CylindertransactionDao cylindertransactionDao;
 	@Autowired StoresmasterDao storesmasterDao;
 	@Autowired ItemsDao itemsDao;
+	@Autowired LpomasterDao lpomasterDao;
 	private Logger logger = Logger.getLogger(TransactionController.class);
 	
 	@RequestMapping(value = "/cylinderMovetofillingStation")
@@ -75,6 +80,7 @@ public class TransactionController {
 	public @ResponseBody String tariffMasterHome(CylindertransactionBean fillingstationmasterBean, ModelMap model, HttpServletRequest request,HttpSession session){
     JSONObject objJson = new JSONObject();
     CylindertransactionBean cylindertransactionBean =null;
+    CylindermasterBean cylindermasterBean = null;
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean)session.getAttribute("cacheUserBean");
 			String fillingStation =fillingstationmasterBean.getFillingStation();
@@ -83,12 +89,16 @@ public class TransactionController {
 			String[] cylenderId1 =cylenderId.split(",");
 			for(int i=0;i<cylenderId1.length;i++){
 			cylindertransactionBean = new CylindertransactionBean();
+			cylindermasterBean = new CylindermasterBean();
 			cylindertransactionBean.setCreatedBy(String.valueOf(users.getId()));
 			cylindertransactionBean.setCylinderStatus(cylinderStatus);
 			cylindertransactionBean.setFillingStation(fillingStation);
 			cylindertransactionBean.setCylindetId(cylenderId1[i]);
+			cylindermasterBean.setId(Integer.parseInt(cylenderId1[i]));
+			cylindermasterBean.setCylinderstatus(cylinderStatus);
+			cylindermasterBean.setFillingstationId(fillingStation);
 			cylindertransactionDao.save(cylindertransactionBean);
-			cylindermasterDao.updateCylinderStatus(cylenderId1[i], cylinderStatus,fillingStation);
+			cylindermasterDao.updateCylinderStatus(cylindermasterBean);
 			}
 			
 		} catch (Exception e) {
@@ -190,6 +200,7 @@ public class TransactionController {
 	public @ResponseBody String updateCylinderStatus2(CylindertransactionBean cylindertransactionBean1, ModelMap model, HttpServletRequest request,HttpSession session){
     JSONObject objJson = new JSONObject();
     CylindertransactionBean cylindertransactionBean =null;
+    CylindermasterBean cylindermasterBean1 = null;
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean)session.getAttribute("cacheUserBean");
 			String cylenderId =cylindertransactionBean1.getCylindetId();
@@ -207,14 +218,16 @@ public class TransactionController {
 						fillingstationmasterDao.updateClosingGas();
 					}
 				}
-				
+				cylindermasterBean1 = new CylindermasterBean();
 			cylindertransactionBean = new CylindertransactionBean();
 			cylindertransactionBean.setCreatedBy(String.valueOf(users.getId()));
 			cylindertransactionBean.setCylinderStatus(cylindertransactionBean1.getCylinderStatus());
 			cylindertransactionBean.setFillingStation(cylindertransactionBean1.getFillingStation());
 			cylindertransactionBean.setCylindetId(cylenderId1[i]);
+			cylindermasterBean1.setId(Integer.parseInt(cylenderId1[i]));
+			cylindermasterBean1.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
 			cylindertransactionDao.save(cylindertransactionBean);
-			cylindermasterDao.updateCylinderStatus(cylenderId1[i], cylindertransactionBean1.getCylinderStatus(),null);
+			cylindermasterDao.updateCylinderStatus(cylindermasterBean1);
 			
 			}
 			
@@ -293,18 +306,22 @@ public class TransactionController {
 	public @ResponseBody String updateCylinderStatus1(CylindertransactionBean cylindertransactionBean1, ModelMap model, HttpServletRequest request,HttpSession session){
     JSONObject objJson = new JSONObject();
     CylindertransactionBean cylindertransactionBean =null;
+    CylindermasterBean cylindermasterBean =null;
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean)session.getAttribute("cacheUserBean");
 			String cylenderId =cylindertransactionBean1.getCylindetId();
 			String[] cylenderId1 =cylenderId.split(",");
 			for(int i=0;i<cylenderId1.length;i++){
 			cylindertransactionBean = new CylindertransactionBean();
+			cylindermasterBean= new CylindermasterBean();
 			cylindertransactionBean.setCreatedBy(String.valueOf(users.getId()));
 			cylindertransactionBean.setCylinderStatus(cylindertransactionBean1.getCylinderStatus());
 			cylindertransactionBean.setFillingStation(cylindertransactionBean1.getFillingStation());
 			cylindertransactionBean.setCylindetId(cylenderId1[i]);
+			cylindermasterBean.setId(Integer.parseInt(cylenderId1[i]));
+			cylindermasterBean.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
 			cylindertransactionDao.save(cylindertransactionBean);
-			cylindermasterDao.updateCylinderStatus(cylenderId1[i], cylindertransactionBean1.getCylinderStatus(),null);
+			cylindermasterDao.updateCylinderStatus(cylindermasterBean);
 			}
 			
 		} catch (Exception e) {
@@ -352,18 +369,23 @@ public class TransactionController {
 	public @ResponseBody String updateCylinderStatus3(CylindertransactionBean cylindertransactionBean1, ModelMap model, HttpServletRequest request,HttpSession session){
     JSONObject objJson = new JSONObject();
     CylindertransactionBean cylindertransactionBean =null;
+    CylindermasterBean cylindermasterBean = null;
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean)session.getAttribute("cacheUserBean");
 			String cylenderId =cylindertransactionBean1.getCylindetId();
 			String[] cylenderId1 =cylenderId.split(",");
 			for(int i=0;i<cylenderId1.length;i++){
 			cylindertransactionBean = new CylindertransactionBean();
+			cylindermasterBean= new CylindermasterBean();
 			cylindertransactionBean.setCreatedBy(String.valueOf(users.getId()));
 			cylindertransactionBean.setCylinderStatus(cylindertransactionBean1.getCylinderStatus());
 			cylindertransactionBean.setTruckId(cylindertransactionBean1.getTruckId());
 			cylindertransactionBean.setCylindetId(cylenderId1[i]);
+			cylindermasterBean.setId(Integer.parseInt(cylenderId1[i]));
+			cylindermasterBean.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
+			cylindermasterBean.setTruckId(cylindertransactionBean1.getTruckId());
 			cylindertransactionDao.save(cylindertransactionBean);
-			cylindermasterDao.updateCylinderStatus(cylenderId1[i], cylindertransactionBean1.getCylinderStatus(),cylindertransactionBean1.getFillingStation());
+			cylindermasterDao.updateCylinderStatus(cylindermasterBean);
 			}
 			
 		} catch (Exception e) {
@@ -408,6 +430,69 @@ public class TransactionController {
 		return String.valueOf(objJson);
 		
 	}
+	@RequestMapping(value = "/cylinderDeliver")
+	public String lpoHome(@ModelAttribute("lpoForm")CylindertransactionBean cylindertransactionBean,HttpServletRequest request,
+			HttpSession session) {
+		String sJson = null;
+		List<LpomasterBean> lpoList=null;
+		try {
+			
+			/*sJson=lpomasterDao.getAllCustomer();
+			if(sJson !=null){
+				
+				 request.setAttribute("allObjects", sJson);
+			}else{
+				
+				request.setAttribute("allObjects", "''");
+			}*/
+			
+			
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "cylinderDeliver";
+	}
+	@RequestMapping(value = "/getTruckCylinders")
+	public @ResponseBody String deletetruckMaster( CylindertransactionBean objCylindertransactionBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		List<Map<String, Object>> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		try{
+			if(StringUtils.isNotBlank(objCylindertransactionBean.getTruckId()))
+			{
+			listOrderBeans = cylindermasterDao.getInTruckCylinders(objCylindertransactionBean.getTruckId());
+			}
+			 objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			logger.error(e);
+			logger.fatal("error in EducationController class deleteEducation method  ");
+			jsonObj.put("message", "excetption"+e);
+			return String.valueOf(jsonObj);
+			
+		}
+		return String.valueOf(jsonObj);
+	}
+	
 	@ModelAttribute("fillingstation")
 	public Map<Integer, String> populateCity() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
@@ -471,5 +556,20 @@ public class TransactionController {
 		return statesMap;
 	}
 	
-	
+	@ModelAttribute("items")
+	public Map<Integer, String> populateitems() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			String sSql = " select id,name from items where status='1' and itemType in('Accessories','Cylinder') ";
+			List<CylinderTypesBean> list = lpomasterDao.populate(sSql);
+			for (CylinderTypesBean bean : list) {
+				statesMap.put(bean.getId(), bean.getName());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
 }

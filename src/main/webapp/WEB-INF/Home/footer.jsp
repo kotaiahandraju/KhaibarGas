@@ -41,6 +41,9 @@
 
 <script type='text/javascript' src='${baseurl }/js/customValidation.js'></script> 
 <script type='text/javascript' src="https://cdnjs.cloudflare.com/ajax/libs/jquery.blockUI/2.70/jquery.blockUI.min.js" ></script>
+<script type='text/javascript' src="${baseurl }/js/select2.min.js" ></script>
+
+
 <script type="text/javascript">
 var isClick = 'Yes';
 </script>

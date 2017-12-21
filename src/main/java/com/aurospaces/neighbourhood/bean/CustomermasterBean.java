@@ -1,16 +1,7 @@
 package com.aurospaces.neighbourhood.bean;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-
-
 import java.util.Date;
-import java.math.BigDecimal;
 
 public class CustomermasterBean 
 {
@@ -26,8 +17,15 @@ protected String authorizedperson ;
 protected String contactperson ;
 protected String customertype ;
 protected String status ;
-protected String custStatus ;
+protected String custStatus,cylinderId ;
 
+
+public String getCylinderId() {
+	return cylinderId;
+}
+public void setCylinderId(String cylinderId) {
+	this.cylinderId = cylinderId;
+}
 public String getCustStatus() {
 	return custStatus;
 }

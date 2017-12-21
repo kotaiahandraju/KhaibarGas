@@ -198,8 +198,8 @@ function displayTable(listOrders) {
 	$.each(listOrders,function(i, orderObj) {
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
-							+ "<td title='"+orderObj.cylinderid+"'><input class='child' name='chkbox' type='checkbox' style='width: 21px;' value='"+orderObj.cylinderid+"' >"+ orderObj.cylinderid + "</td>"
-							+ "<td title='"+orderObj.strorername+"'>"+ orderObj.storename + "</td>"
+							+ "<td title='"+orderObj.cylinderid+"'><input class='child' name='chkbox' type='checkbox' style='width: 21px;' value='"+orderObj.id+"' >"+ orderObj.cylinderid + "</td>"
+							+ "<td title='"+orderObj.storename+"'>"+ orderObj.storename + "</td>"
 							+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
 							+ "</tr >";
 					$(tblRow).appendTo("#tableId table tbody");
