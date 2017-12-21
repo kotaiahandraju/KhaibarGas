@@ -76,7 +76,7 @@ System.out.println("hello staff");
 	{
 		
 
-		System.out.println("saving staffDetails page...");
+		System.out.println("saving staffDetails page..."+file.getOriginalFilename()+"----------requestImage------"+objStaffmasterBean.getImagePath());
 		String name=null;
 		String sTomcatRootPath = null;
 		String sDirPath = null;
@@ -153,6 +153,11 @@ System.out.println("hello staff");
 					}
 				}
 				if(isUpdate){
+					//System.out.println("---------filePath------"+objStaffmasterBean.getDocuments());
+					if(objStaffmasterBean.getDocuments() == "" || objStaffmasterBean.getDocuments() == null){
+						objStaffmasterBean.setDocuments(objStaffmasterBean.getImagePath());
+						//System.out.println("---------setImagepath------");
+					}
 					objStaffmasterDao.save(objStaffmasterBean);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");

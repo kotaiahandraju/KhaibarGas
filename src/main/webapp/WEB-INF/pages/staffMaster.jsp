@@ -188,8 +188,10 @@
 													<!-- <span class="impColor">*</span> -->
 												</label>
 												<div class="col-sm-6">
-													<input type="file" name="file" id="documents" />
 <%-- 													<form:input path="documents"	class="form-control validate" autocomplete="off" placeholder="" required="required" /> --%>
+													<img id="imageId" style="display: none;    width: 50%;" src="" ><span id="imageLable" style="display: none;"></span>
+													<form:hidden path="imagePath"/>
+													<input type="file" name="file" style="margin-top: 3%;" id="documents" onchange="" />
 													<span class="hasError" id="documentsError"></span>
 													<div>
 														<form:errors path="documents" cssClass="error" />
@@ -267,7 +269,17 @@ function editStaffMasterDetails(id)
 	$("#designation").val(serviceUnitArray[id].designation);
 	$("#nationality").val(serviceUnitArray[id].nationality);
 	$("#mobile").val(serviceUnitArray[id].mobile);
-// 	$("#documents").val(serviceUnitArray[id].documents);
+	$("#documents").css('color', 'transparent');
+	$("#imageId").show();
+	$("#imageLable").show();
+	$("#dynamicImage").remove();
+	
+	var editImage=serviceUnitArray[id].documents;
+	var replaceImage=editImage.replace("documents/","");
+	$("#imageId").attr("src","${baseurl }/"+editImage);
+	$("#imageLable").text(replaceImage);
+	$("#imagePath").val(editImage);
+	//alert($("#imageLable").val(replaceImage));
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
@@ -295,6 +307,52 @@ function deleteStaffMasterDetails(id,status)
 		});
 	}
 }
+
+$("#documents").change(function(e) {
+	
+	$("#dynamicImage").remove();
+	  $("#imageId").hide();
+	  $("#imageLable").hide();
+
+    for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+        
+        var file = e.originalEvent.srcElement.files[i];
+        
+        var img = document.createElement("img");
+        img.id='dynamicImage';
+        img.setAttribute('width', '50%');
+        var reader = new FileReader();
+        reader.onloadend = function() {
+             img.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+        $("#documents").before(img);
+//         $("#imageId").css('width', '20%');
+    }
+});
+
+function kkmodifyImagePath(){
+	
+for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
+        
+        var file = e.originalEvent.srcElement.files[i];
+        //$("#imageId").attr();
+        var img = document.createElement("img");
+        var reader = new FileReader();
+        reader.onloadend = function() {
+             img.src = reader.result;
+        }
+        reader.readAsDataURL(file);
+        $("input").before(img);
+        $("#input").css('color', 'width: 20%');
+    }
+	
+	
+	/* var iLable=$("#documents").val();
+	$("#imageId").attr("src","${baseurl }/"+editImage);
+	$("#imageLable").text(replaceImage); */
+}
+
 $("#pageName").text("Staff Master");
 $(".staff").addClass("active");
 </script>

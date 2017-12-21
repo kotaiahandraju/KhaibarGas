@@ -20,7 +20,14 @@ protected String documents ;
 protected String active ;
 protected String status ;
 protected String staffStatus ;
+protected String imagePath ;
 
+public String getImagePath() {
+	return imagePath;
+}
+public void setImagePath(String imagePath) {
+	this.imagePath = imagePath;
+}
 public String getStaffStatus() {
 	return staffStatus;
 }
