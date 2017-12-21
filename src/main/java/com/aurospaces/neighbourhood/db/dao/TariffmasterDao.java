@@ -36,9 +36,9 @@ public class TariffmasterDao extends BaseTariffmasterDao
 	
 	public List<TariffmasterBean> getByName(TariffmasterBean objTariffmasterBean){
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "SELECT * from tariffmaster where assetcode = ?";
+		String sql = "SELECT * from tariffmaster where itemId = ?";
 		List<TariffmasterBean> retlist = jdbcTemplate.query(sql,
-				new Object[]{objTariffmasterBean.getAssetcode()},
+				new Object[]{objTariffmasterBean.getItemId()},
 		ParameterizedBeanPropertyRowMapper.newInstance(TariffmasterBean.class));
 		if(retlist.size() > 0)
 			return retlist;
