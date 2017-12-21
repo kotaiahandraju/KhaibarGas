@@ -208,7 +208,7 @@ public class TransactionController {
 			String[] cylenderId1 =cylenderId.split(",");
 			for(int i=0;i<cylenderId1.length;i++){
 				
-				CylindermasterBean cylindermasterBean = cylindermasterDao.getByCylinderName(cylenderId1[i]);
+				CylindermasterBean cylindermasterBean = cylindermasterDao.getByCylinderName(Integer.parseInt(cylenderId1[i]));
 				int cylinderCapacity = 0;
 				if(cylindermasterBean != null){
 					if(StringUtils.isNotBlank(cylindermasterBean.getName())){

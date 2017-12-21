@@ -91,9 +91,9 @@ table#dependent_table tbody tr td:first-child::before {
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-6">
+                    		<div class="col-md-12">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">customerId <span class="impColor">*</span></label>
+<!--                     				<label for="focusedinput" class="col-md-6 control-label">customerId <span class="impColor">*</span></label> -->
                     				<div class="col-md-6">
                     					Customer Name:<span id="customername"></span><br>
                     					Customer Address:<span id="customeraddress"></span><br>
@@ -210,32 +210,32 @@ table#dependent_table tbody tr td:first-child::before {
 		</div>
 </td></tr></table>
 		</form:form>
-            <div class="row">
-              <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>LPO List</h4>
-                            <div class="options">   
-                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
-                            </div>
-                        </div>
-                        <div class="panel-body collapse in">
-                        <div class="table-responsive" id="tableId" >
-                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-                                <thead>
-                                	<tr>
-                                		<th>LPO Number</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th>
-                                		<th>Supplier Contact no</th><th>Supplier Email</th><th>Total Amount</th>
-                                		<th>Paid Amount</th><th>Due Amount</th><th>Status</th>
-                                	</tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                         </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<!--             <div class="row"> -->
+<!--               <div class="col-md-12"> -->
+<!--                     <div class="panel panel-primary"> -->
+<!--                         <div class="panel-heading"> -->
+<!--                             <h4>LPO List</h4> -->
+<!--                             <div class="options">    -->
+<!--                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a> -->
+<!--                             </div> -->
+<!--                         </div> -->
+<!--                         <div class="panel-body collapse in"> -->
+<!--                         <div class="table-responsive" id="tableId" > -->
+<!--                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example"> -->
+<!--                                 <thead> -->
+<!--                                 	<tr> -->
+<!--                                 		<th>LPO Number</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th> -->
+<!--                                 		<th>Supplier Contact no</th><th>Supplier Email</th><th>Total Amount</th> -->
+<!--                                 		<th>Paid Amount</th><th>Due Amount</th><th>Status</th> -->
+<!--                                 	</tr> -->
+<!--                                 </thead> -->
+<!--                                 <tbody></tbody> -->
+<!--                             </table> -->
+<!--                          </div> -->
+<!--                         </div> -->
+<!--                     </div> -->
+<!--                 </div> -->
+<!--             </div> -->
                     
             <%-- <div class="row" id="moveTo">
             <div class="col-md-10 col-md-offset-1 col-sm-12">

@@ -264,9 +264,9 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			   
 			   return jdbcTemplate.queryForInt(sql);
 		}
-	 public CylindermasterBean getByCylinderName(String  cylinderId) {
+	 public CylindermasterBean getByCylinderName(int  cylinderId) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT i.name  from cylindermaster c,items i where i.id=c.size and c.cylinderid = ?";
+			String sql = "SELECT i.name  from cylindermaster c,items i where i.id=c.size and c.id = ?";
 			List<CylindermasterBean> retlist = jdbcTemplate.query(sql,
 			new Object[]{cylinderId},
 			ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));

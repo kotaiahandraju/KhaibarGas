@@ -115,7 +115,7 @@
 									<label class="col-sm-4 control-label required">Remarks</label>
 									<div class="col-sm-6">
 <%-- 										<form:input path="remarks" class="form-control validate" autocomplete="off" placeholder="Remarks" required="required" /> --%>
-										<form:textarea path="remarks" class="form-control" placeholder="Remarks"></form:textarea>
+										<form:textarea path="remarks" class="form-control" placeholder="Remarks" row="5"></form:textarea>
 										<span class="hasError" id="remarksError"></span>
 									</div>
 								</div>

@@ -217,7 +217,7 @@ function displayTable(listOrders) {
 						+ "<td title='"+orderObj.stationname+"'>"+ orderObj.stationname + "</td>"
 						+ "<td title='"+orderObj.gasavailability+"'>"+ orderObj.gasavailability + "</td>"
 						+ "<td title='"+orderObj.usedGas+"'>"+ orderObj.usedGas + "</td>" 
-						+ "<td title='"+orderObj.availablegas+"'>"+ orderObj.closingBalanceGas+ "</td>"
+						+ "<td title='"+orderObj.closingBalanceGas+"'>"+ orderObj.closingBalanceGas+ "</td>"
 						+ "<td title='"+orderObj.numberoffillingmachines+"'>"+ orderObj.numberoffillingmachines + "</td>"
 						+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
 						+ "<td title='"+orderObj.gascapacity+"'>"+ orderObj.gascapacity + "</td>" 
