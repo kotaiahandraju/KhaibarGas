@@ -3,7 +3,6 @@ package com.aurospaces.neighbourhood.controller;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,10 +22,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
-import com.aurospaces.neighbourhood.bean.LpoitemsBean;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -199,8 +196,7 @@ public class FillingstationController {
 		try {
 			System.out.println("-----gasavail-------"+newGasavail+"-------stationId------"+stationId);
 				retlist=fillingstationmasterDao.updateGas(Integer.parseInt(stationId), newGasavail);
-				
-			
+				fillingstationmasterDao.updateClosingGas();
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

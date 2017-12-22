@@ -171,6 +171,56 @@ public class TariffMasterController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	@RequestMapping(value = "/getTariffPrice")
+	public @ResponseBody String getTarrifPrice( TariffmasterBean objTariffmasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult,RedirectAttributes redir) {
+		System.out.println("deleteTariffMasterDetails page...");
+		List<TariffmasterBean> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
+		String itemId = null;
+		int rate=0;
+		try{
+			 itemId = objTariffmasterBean.getItemId();
+			 rate= objTariffmasterDao.getgetTariffPrice(itemId);
+			 jsonObj.put("rate", rate);
+			/*if(objTariffmasterBean.getId() != 0 && objTariffmasterBean.getStatus() !=""){
+ 				delete = objTariffmasterDao.delete(objTariffmasterBean.getId(),objTariffmasterBean.getStatus());
+ 				if(delete){
+ 					jsonObj.put("message", "Record Deleted Successfully");
+ 					redir.addFlashAttribute("msg", "Record Updated Successfully");
+					redir.addFlashAttribute("cssMsg", "danger");
+ 				}else{
+ 					jsonObj.put("message", "Failed to Delete..!");
+ 				}
+ 			}
+ 			listOrderBeans = objTariffmasterDao.getAllTariffmasterDetails();
+			objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) 
+			{
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}*/
+		}catch(Exception e){
+			e.printStackTrace();
+			//System.out.println(e);
+			logger.error(e);
+			logger.fatal("error in CompanyMasterController class deleteCompanyMasterDetails method");
+			jsonObj.put("message", "excetption"+e);
+			return String.valueOf(jsonObj);
+		}
+		return String.valueOf(jsonObj);
+	}
+	
 	@ModelAttribute("items")
 	public Map<Integer, String> populateCity() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();

@@ -81,16 +81,6 @@ table#dependent_table tbody tr td:first-child::before {
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Cylinder Id <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-                    					<form:select path="cylindetId" class="form-control select2 validate" multiple="multiple" onfocus="removeBorder(this.id);" >
-		                            		<form:option value="">-- Select Cylinder Id --</form:option>
-								  		</form:select>
-								  	</div>
-                    			</div>
-                    		</div>
                     		<div class="col-md-12">
                     			<div class="form-group">
 <!--                     				<label for="focusedinput" class="col-md-6 control-label">customerId <span class="impColor">*</span></label> -->
@@ -173,7 +163,7 @@ table#dependent_table tbody tr td:first-child::before {
 							<tr id="1" class="rowInc">
 								<td></td>
 								<td>
-									<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" class="form-control">
+									<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value)" class="form-control">
 										<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
 									</select>
 								</td>
@@ -823,7 +813,7 @@ function getCustomerDetails(value){
 	$("#cylinders").text("");
 	$("#cylinders").text(serviceUnitArray2[value].cylinderid);
 }
-function getTruckCylinders(id){
+/* function getTruckCylinders(id){
 	var formData = new FormData();
     formData.append('truckId', id);
 	$.fn.makeMultipartRequest('POST', 'getTruckCylinders', false,
@@ -840,8 +830,26 @@ function getTruckCylinders(id){
 		});
 		$('#cylindetId').empty().append(html);
 	});
+} */
+function getTarrifPrice(value){
+	var formData = new FormData();
+    formData.append('itemId', value);
+	$.fn.makeMultipartRequest('POST', 'getTariffPrice', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.rate;
+		alert(alldata);
+		/* serviceUnitArray2 ={};
+		var html = "<option value=''>-- Select Customer Id --</option>";
+		$.each(alldata,function(i, catObj) {
+			serviceUnitArray2[catObj.id] = catObj;
+			 html = html + '<option value="'
+				+ catObj.id + '">'
+				+ catObj.cylinderid + '</option>';
+		});
+		$('#cylindetId').empty().append(html); */
+	});
 }
-
 $("#pageName").text("Cylinder Deliver Status");
 $(".cylinderDeliver").addClass("active");
 </script>

@@ -43,7 +43,14 @@ public class TariffmasterDao extends BaseTariffmasterDao
 		if(retlist.size() > 0)
 			return retlist;
 		return retlist;
-	}	
+	}
+	public int getgetTariffPrice(String itemId){
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "select rate from tariffmaster where itemId=?";
+		int retlist = jdbcTemplate.queryForInt(sql,new Object[]{itemId});
+		
+		return retlist;
+	}
 
 
 
