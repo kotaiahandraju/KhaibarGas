@@ -1,9 +1,14 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStream;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -20,7 +25,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.aurospaces.neighbourhood.bean.CustomermasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.CylindertransactionBean;
@@ -38,6 +42,7 @@ import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 
 @Controller
 @RequestMapping("admin")
+
 public class TransactionController {
 	@Autowired CylindermasterDao cylindermasterDao;
 	@Autowired FillingstationmasterDao fillingstationmasterDao;
@@ -45,6 +50,7 @@ public class TransactionController {
 	@Autowired StoresmasterDao storesmasterDao;
 	@Autowired ItemsDao itemsDao;
 	@Autowired LpomasterDao lpomasterDao;
+	@Autowired	ServletContext objContext;
 	private Logger logger = Logger.getLogger(TransactionController.class);
 	
 	@RequestMapping(value = "/cylinderMovetofillingStation")
@@ -436,7 +442,15 @@ public class TransactionController {
 		String sJson = null;
 		List<LpomasterBean> lpoList=null;
 		try {
-			
+			String sPropFilePath = objContext.getRealPath("Resources"+ File.separator + "DataBase.properties");
+			if (StringUtils.isNotBlank(sPropFilePath)) {
+				Properties objProperties = new Properties();
+				InputStream objStream = new FileInputStream(sPropFilePath);
+				objProperties.load(objStream);
+				String vat = objProperties.getProperty("vat");
+				System.out.println(vat);
+				request.setAttribute("vat", vat);
+			}
 			/*sJson=lpomasterDao.getAllCustomer();
 			if(sJson !=null){
 				
