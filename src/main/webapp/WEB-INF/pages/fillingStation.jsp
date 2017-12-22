@@ -1,114 +1,108 @@
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-			<div class="clearfix"></div>
-			<ol class="breadcrumb">
-				<li><a href="#">Home</a></li>
-				<li>Filling station</li>
-			</ol>
-			<div class="clearfix"></div>
-			<div class="container">
-				
-				<div class="row">
-				<div class="col-md-12">
-					<div class="panel panel-primary">
-						<div class="panel-heading">
-							<h4>Filling Stations List</h4>
-							<div class="options">
-								<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
-							</div>
+	<div class="clearfix"></div>
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li>Filling station</li>
+	</ol>
+	<div class="clearfix"></div>
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Filling Stations List</h4>
+						<div class="options">
+							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
-						<div class="panel-body collapse in">
-							<div class="table-responsive" id="tableId">
-								<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-									<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance</th><th>UsedGas</th><th>Closing Balance</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG's)</th><th>Status</th><th></th></tr></thead>
-									<tbody></tbody>
-								</table>
-							</div>
+					</div>
+					<div class="panel-body collapse in">
+						<div class="table-responsive" id="tableId">
+							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+								<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance</th><th>UsedGas</th><th>Closing Balance</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG's)</th><th>Status</th><th></th></tr></thead>
+								<tbody></tbody>
+							</table>
 						</div>
 					</div>
 				</div>
 			</div>
-				<a class="btn btn-info btn-lg"  onclick="PopupFillingStation();">Add Gas</a> 
-				
-				<div class="row" id="moveTo">
-					<div class="col-md-10 col-md-offset-1 col-sm-12">
-						<div class="panel panel-primary">
-							<div class="panel-heading">
-								<h4>Add Filling Station</h4>
-								<div class="options"></div>
-							</div>
-						<form:form class="form-horizontal" 	modelAttribute="fillingStationForm" role="form" id="fillingstation-form" action="addfillingstation" method="post">
-						<div class="panel-body">
-							<div class="row">
-	                    		<div class="col-md-6">
-	                    			<div class="form-group">
-	                    				<form:hidden path="id"/>
-										<label for="focusedinput" class="col-md-4 control-label">Station Number <span class="impColor">*</span></label>
-										<div class="col-md-6">
-											<form:input path="unitpoint" class="form-control " placeholder="Station Number" />	
-											<span class="hasError" id="unitpointError"></span>
-									    </div>
-	                    			</div>
-	                    		</div>
-	                    		<div class="col-md-6">
-	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Station Name <span class="impColor">*</span></label>
-										<div class="col-md-6">
-											<form:input path="stationname" class="form-control validate onlyCharacters" placeholder="Station Name" />	
-											<span class="hasError" id="stationnameError"></span>
-									    </div>
-	                    			</div>
-	                    		</div>
+		</div>
+<!-- 		<a class="btn btn-info btn-lg"  onclick="PopupFillingStation();">Add Gas</a><br><br> -->
+		<div class="row" id="moveTo">
+			<div class="col-md-12 col-sm-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Add Filling Station</h4>
+						<div class="pull-right">
+							<a class="btn btn-warning" onclick="PopupFillingStation();">Add Gas</a>
+						</div>
+					</div>
+					<form:form class="form-horizontal" 	modelAttribute="fillingStationForm" role="form" id="fillingstation-form" action="addfillingstation" method="post">
+					<div class="panel-body">
+						<div class="row">
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<form:hidden path="id"/>
+									<label for="focusedinput" class="col-md-4 control-label">Station Number <span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="unitpoint" class="form-control " placeholder="Station Number" />	
+										<span class="hasError" id="unitpointError"></span>
+								    </div>
+                    			</div>
                     		</div>
-                    		<div class="row">
-	                    		<div class="col-md-6">
-	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Opening Balance (Gas in KG's) <span class="impColor">*</span></label>
-										<div class="col-md-6">
-											<form:input path="gasavailability" class="form-control validate numericOnly" placeholder="Opening Balance (Gas in KG's)" />	
-											<span class="hasError" id="gasavailabilityError"></span>
-									    </div>
-	                    			</div>
-	                    		</div>
-	                    		<div class="col-md-6">
-	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Number of cylinders filled at a time<span class="impColor">*</span></label>
-										<div class="col-md-6">
-											<form:input path="quantity" type="text" class="form-control validate numericOnly" placeholder="Number of cylinders filled at a time" />	
-											<span class="hasError" id="quantityError"></span>
-									    </div>
-	                    			</div>
-	                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label">Station Name <span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="stationname" class="form-control validate onlyCharacters" placeholder="Station Name" />	
+										<span class="hasError" id="stationnameError"></span>
+								    </div>
+                    			</div>
                     		</div>
-                    		<div class="row">
-	                    		<div class="col-md-6">
-	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Filling Station Total Capacity (Gas in KG's) <span class="impColor">*</span></label>
-										<div class="col-md-6">
-											<form:input path="gascapacity" class="form-control validate numericOnly" placeholder="Total Capacity (Gas in KG's) " />	
-											<span class="hasError" id="gascapacityError"></span>
-									    </div>
-	                    			</div>
-	                    		</div>
-	                    		<div class="col-md-6">
-	                    			<div class="form-group">
-										<label for="focusedinput" class="col-md-4 control-label">Filling Machines <span class="impColor">*</span></label>
-										<div class="col-md-6">
-											<form:input path="numberoffillingmachines"	class="form-control validate numericOnly" placeholder="Filling Machines" />	
-											<span class="hasError" id="numberoffillingmachinesError"></span>
-									    </div>
-	                    			</div>
-	                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label">Opening Balance (Gas in KG's) <span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="gasavailability" class="form-control validate numericOnly" placeholder="Opening Balance (Gas in KG's)" />	
+										<span class="hasError" id="gasavailabilityError"></span>
+								    </div>
+                    			</div>
                     		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label">Number of cylinders filled at a time<span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="quantity" type="text" class="form-control validate numericOnly" placeholder="Number of cylinders filled at a time" />	
+										<span class="hasError" id="quantityError"></span>
+								    </div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label">Filling Station Total Capacity (Gas in KG's) <span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="gascapacity" class="form-control validate numericOnly" placeholder="Total Capacity (Gas in KG's) " />	
+										<span class="hasError" id="gascapacityError"></span>
+								    </div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label">Filling Machines <span class="impColor">*</span></label>
+									<div class="col-md-6">
+										<form:input path="numberoffillingmachines"	class="form-control validate numericOnly" placeholder="Filling Machines" />	
+										<span class="hasError" id="numberoffillingmachinesError"></span>
+								    </div>
+                    			</div>
+                    		</div>
+                    	</div>
                     		
-                    		
- 
-<!-- Modal -->
+<!-- Modal Starts here-->
 <div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" role="dialog">
 	<div class="modal-dialog">
 		<!-- Modal content-->
@@ -155,25 +149,24 @@
       	</div>
     </div>
 </div>
-                    	
-                    	</div>
+<!-- Modal Ends here-->
 
-						<div class="panel-footer">
-					      	<div class="row">
-					      		<div class="col-sm-12">
-					      			<div class="btn-toolbar  pull-right">
-						      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
-						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
-					      			</div>
-					      		</div>
-					      	</div>
-				      	</div>
-						</form:form>
 					</div>
+					<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-12">
+				      			<div class="btn-toolbar  pull-right">
+					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+					      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
+				      			</div>
+				      		</div>
+				      	</div>
+			      	</div>
+					</form:form>
 				</div>
 			</div>
-
 		</div>
+	</div>
 			<!-- container -->
 
 

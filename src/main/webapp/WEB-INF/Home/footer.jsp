@@ -15,9 +15,7 @@
             <button class="pull-right btn btn-inverse-alt btn-xs hidden-print" id="back-to-top"><i class="fa fa-arrow-up"></i></button>
         </div>
     </footer>
-
 </div> <!-- page-container -->
-
  
 <script type='text/javascript' src='${baseurl }/assets/js/jqueryui-1.10.3.min.js'></script> 
  

@@ -2948,7 +2948,7 @@ button.close {
 .nav > li > a {
   position: relative;
   display: block;
-  padding: 10px 10px;
+  padding: 10px 15px;
 }
 .nav > li > a:hover,
 .nav > li > a:focus {
@@ -3464,7 +3464,6 @@ button.close {
   z-index: 1050;
   -webkit-overflow-scrolling: touch;
   outline: 0;
-   background:rgba(0,0,0,0.7);
 }
 .modal.fade .modal-dialog {
   -webkit-transform: translate(0, -25%);
@@ -3510,7 +3509,7 @@ button.close {
   background-color: #000000;
 }
 .modal-backdrop.fade {
-  opacity: 1;
+  opacity: 0;
   filter: alpha(opacity=0);
 }
 .modal-backdrop.in {
@@ -8685,6 +8684,7 @@ body.static-header {
   overflow: hidden;
 }
 #page-content {
+  min-height: 650px;
   background: #f7f8fa;
   box-shadow: -1px 0 0 0 rgba(0, 0, 0, 0.1);
 }
@@ -8704,7 +8704,7 @@ body.static-header {
   text-shadow: none !important;
   background-color: transparent !important;
   border: 0 !important;
-  height: 60px;
+  height: 40px;
   width:auto;
 }
 @media (max-width: 480px) {
@@ -8848,7 +8848,7 @@ footer #back-to-top {
 }
 /* Page Heading */
 #page-heading {
-  background: white !important;
+  background: #f5f5f5;
 }
 #page-heading:before,
 #page-heading:after {
@@ -8904,7 +8904,7 @@ footer #back-to-top {
   }
 }
 .focusedform {
-  background: #e6e7e8 url(../img/bbg.jpg);
+  background: #e6e7e8;
   padding: 0;
 }
 .focusedform .panel {
@@ -8970,7 +8970,7 @@ footer #back-to-top {
   color: #3f444c;
 }
 #horizontal-navbar .navbar-nav li a i {
-  color: #0070A0;
+  color: #3f444c;
 }
 #horizontal-navbar .navbar-nav li.active a,
 #horizontal-navbar .navbar-nav li.active a i,
@@ -10213,6 +10213,7 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
   display: none;
 }
 .navbar {
+  position: relative;
   z-index: 1200;
   min-height: 40px;
   margin-bottom: 20px;
@@ -10357,9 +10358,9 @@ body.collapse-leftbar #search.keep-open form button[type="submit"] {
 }
 .navbar-brand {
   float: left;
-  padding: 5px 15px;
+  padding: 10px 15px;
   font-size: 18px;
-  line-height:auto;
+  line-height: 20px;
 }
 .navbar-brand:hover,
 .navbar-brand:focus {
@@ -11502,7 +11503,7 @@ a.shortcut-tiles {
   right: -1px;
   width: 0px;
   height: 0px;
-  margin-right: 10px;
+  margin-right: 11px;
   margin-bottom: 20px;
   border-top: 5px solid rgba(0, 0, 0, 0.35);
   border-right: 5px solid #f7f8fa;
@@ -15245,4 +15246,3 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 .btn span { font-size:20px;}
 .red { color: #F00;}
 .green { color:#090;}
-.top20 { margin-top:20px;}

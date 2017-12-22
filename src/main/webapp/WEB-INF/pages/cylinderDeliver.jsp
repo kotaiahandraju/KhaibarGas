@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
@@ -60,7 +60,7 @@ table#dependent_table tbody tr td:first-child::before {
 							</div>
 							<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">customertype <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Type <span class="impColor">*</span></label>
                     				<div class="col-md-6">
                     					<form:select path="customertype" class="form-control select2 validate "  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
 		                            		<form:option value="">-- Customer Type --</form:option>
@@ -73,7 +73,7 @@ table#dependent_table tbody tr td:first-child::before {
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">customerId <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Id <span class="impColor">*</span></label>
                     				<div class="col-md-6">
                     					<form:select path="customerId" class="form-control select2 validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
 		                            		<form:option value="">-- Select Customer Id --</form:option>
@@ -95,11 +95,11 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
 <!--                     				<label for="focusedinput" class="col-md-6 control-label">customerId <span class="impColor">*</span></label> -->
                     				<div class="col-md-6">
-                    					Customer Name:<span id="customername"></span><br>
-                    					Customer Address:<span id="customeraddress"></span><br>
-                    					Mobile:<span id="mobile"></span><br><br>
-                    					Land Line:<span id="landline"></span><br>
-                    					cylinders :<span id="cylinders"></span>
+                    					Customer Name: <span id="customername"></span><br>
+                    					Customer Address: <span id="customeraddress"></span><br>
+                    					Mobile: <span id="mobile"></span><br><br>
+                    					Land Line: <span id="landline"></span><br>
+                    					cylinders : <span id="cylinders"></span>
 								  	</div>
                     			</div>
                     		</div>
@@ -843,5 +843,5 @@ function getTruckCylinders(id){
 }
 
 $("#pageName").text("Cylinder Deliver Status");
-// $(".lpo").addClass("active");
+$(".cylinderDeliver").addClass("active");
 </script>

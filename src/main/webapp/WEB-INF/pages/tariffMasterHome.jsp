@@ -1,20 +1,19 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-	pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 
-	<div class="clearfix"></div>
-	<ol class="breadcrumb">
-		<li><a href="#">Home</a></li>
-		<li>Tariff Master</li>
-	</ol>
-	<div class="clearfix"></div>
-	<div class="container">
-		<div class="row">
+<div class="clearfix"></div>
+<ol class="breadcrumb">
+	<li><a href="#">Home</a></li>
+	<li>Tariff Master</li>
+</ol>
+<div class="clearfix"></div>
+<div class="container">
+	<div class="row">
 		<div class="col-md-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
@@ -40,9 +39,8 @@
 		</div>
 	</div>
 
-
 	<div class="row" id="moveTo">
-		<div class="col-md-10 col-md-offset-1 col-sm-12">
+		<div class="col-md-12 col-sm-12">
 			<div class="panel panel-primary">
 				<div class="panel-heading">
 					<h4>Tariff Master Details</h4>
@@ -114,9 +112,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 control-label required">Remarks</label>
 									<div class="col-sm-6">
-<%-- 										<form:input path="remarks" class="form-control validate" autocomplete="off" placeholder="Remarks" required="required" /> --%>
-										<form:textarea path="remarks" class="form-control" placeholder="Remarks" row="5"></form:textarea>
-										<span class="hasError" id="remarksError"></span>
+										<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="5"></form:textarea>
 									</div>
 								</div>
 							</div>
@@ -136,7 +132,6 @@
 				</form:form>
 			</div>
 		</div>
-
 	</div>
 </div>
 

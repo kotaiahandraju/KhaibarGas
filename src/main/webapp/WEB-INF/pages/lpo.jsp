@@ -1,6 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
@@ -36,7 +36,7 @@ table#dependent_table tbody tr td:first-child::before {
                <li>LPO </li>
             </ol>
             <div class="clearfix"></div>
-        <div class="container">
+        <div class="container-fluid">
             <div class="row">
               <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -63,9 +63,10 @@ table#dependent_table tbody tr td:first-child::before {
                     </div>
                 </div>
             </div>
-                    
+		</div>
+		<div class="container">
             <div class="row" id="moveTo">
-            <div class="col-md-10 col-md-offset-1 col-sm-12">
+            <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
                         <h4>Add LPOs</h4>

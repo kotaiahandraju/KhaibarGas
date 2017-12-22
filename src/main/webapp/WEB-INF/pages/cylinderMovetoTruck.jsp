@@ -1,6 +1,6 @@
-  <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
@@ -49,80 +49,78 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<div class="col-md-6" style="padding-top: 6px;">
+							<div class="col-md-6">
 				        		<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
 							</div>
 						</div>
 					</div>
 				</div>
-            
-        <div class="row">
-			<div class="col-md-6">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<div class="col-md-6">
-				        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>
+        		<div class="row">
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<div class="col-md-6">
+						        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+		                    	<h4>Cylinders List</h4>
+								<div class="options">   
+									<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+								</div>
+							</div>
+							<div class="panel-body collapse in">
+								<div class="table-responsive" id="tableId">
+									<table class="table table-striped table-bordered datatables" id="example">
+										<thead>
+											<tr><th>Cylinder ID</th><th>Store</th><th>Size</th></tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
-					
-				</div>
-				<div class="panel panel-primary">
-					<div class="panel-heading">
-                    	<h4>Cylinders List</h4>
-						<div class="options">   
-							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+					<div class="col-md-6">
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label>
+									<div class="col-md-6">
+						        		<div id="displayCylinders"></div>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-					<div class="panel-body collapse in">
-						<div class="table-responsive" id="tableId">
-							<table class="table table-striped table-bordered datatables" id="example">
-								<thead>
-									<tr><th>Cylinder ID</th><th>Store</th><th>Size</th></tr>
-								</thead>
-								<tbody></tbody>
-							</table>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-3 control-label">Select Truck <span class="impColor">*</span></label>
+									<div class="col-md-6">
+						        		<form:select path="truckId" class="form-control validate" onfocus="removeBorder(this.id)">
+						        			<form:option value="">-- Select Truck --</form:option>
+						        			<form:options items="${trucks}"></form:options>
+						        		</form:select>
+									</div>
+								</div>
+							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-<%-- 				<form:form commandName="fillingStationForm"> --%>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<div id="displayCylinders"></div>
+						<div class="row">
+							<div class="col-md-12">
+								<div class="form-group">
+									<div class="col-md-offset-3 col-md-6" style="padding-top: 6px;">
+						        		<input type="button" class="btn btn-primary" value="Move Truck" onclick="movetoTruck()">
+									</div>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-3 control-label">Select Truck <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:select path="truckId" class="form-control validate" onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Truck --</form:option>
-				        			<form:options items="${trucks}"></form:options>
-				        		</form:select>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<div class="col-md-offset-3 col-md-6" style="padding-top: 6px;">
-				        		<input type="button" class="btn btn-primary" value="Move Truck" onclick="movetoTruck()">
-							</div>
-						</div>
-					</div>
-				</div>
-				
-			</form:form>
+				</form:form>
          	</div>
 		</div>
 	</div> <!-- container -->
@@ -185,7 +183,7 @@ function displayTable(listOrders) {
 				        }
 				      });
 					});
-// 	$("#example").DataTable();
+	if(isClick=='Yes') $('.datatables').dataTable();
 }
 
 function movetoTruck(){

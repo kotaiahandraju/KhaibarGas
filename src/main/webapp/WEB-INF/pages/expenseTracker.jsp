@@ -1,6 +1,6 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
@@ -39,7 +39,7 @@
 		</div>
 
 		<div class="row" id="moveTo">
-			<div class="col-md-10 col-md-offset-1 col-sm-12">
+			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
 						<h4>Expense Tracker </h4>
@@ -84,7 +84,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 control-label required">Remarks</label>
 									<div class="col-sm-6">
-										<form:textarea path="paymentRemarks" class="form-control " placeholder="Remarks"></form:textarea>
+										<form:textarea path="paymentRemarks" rows="5" class="form-control" placeholder="Remarks"></form:textarea>
 									</div>
 								</div>
 							</div>

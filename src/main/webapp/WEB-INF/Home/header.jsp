@@ -48,6 +48,11 @@
 <link rel="stylesheet" href="${baseurl }/assets/css/select2.css">
 
 <style type="text/css">
+.control-label {
+	text-align: right;
+	margin-bottom: 0;
+    padding-top: 8px;
+}
 .impColor{color:red;}
 
 .edit, .delete, .active, .deactive {cursor: pointer;}
@@ -149,7 +154,8 @@ $(function() {
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="#">KHAIBAR GAS LLC</a>
+            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/khaibar_logo.png" class="img-responsive"></a>
+            <div class="clearfix"></div>
         </div>
 		<div class="masters">
 	        <ul class="nav navbar-nav pull-right toolbar">
@@ -176,7 +182,7 @@ $(function() {
         </div>
     </header>
 
-    <nav class="navbar navbar-default yamm" role="navigation">
+    <nav class="navbar navbar-default yamm top20" role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <i class="fa fa-bars"></i>
@@ -195,12 +201,6 @@ $(function() {
                 <li class="company"><a href="${baseurl }/admin/companymaster"><i class="fa fa-building"></i> <span>Company</span></a></li>
                 <li class="lpo"><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
                 <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
-                <%-- <li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
-                <li class="cylinderQualityCheck"><a href="${baseurl }/admin/cylinderQualityCheck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Quality Check</span></a></li>
-                <li class="cylinderQualityCheck"><a href="${baseurl }/admin/cylinderMovetoTruck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to Truck</span></a></li> --%>
-                
-                
-<!--                 <li><a href="#"><i class="fa fa-list"></i> <span>REPORTS</span></a></li> -->
 				<li class="transactions">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Transactions</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -208,6 +208,7 @@ $(function() {
 						<li class="cylinderFilledStatus"><a href="${baseurl }/admin/cylinderFilledStatus"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Filled Status</span></a></li>
                 		<li class="cylinderQualityCheck"><a href="${baseurl }/admin/cylinderQualityCheck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Quality Check</span></a></li>
 						<li class="cylinderMovetoTruck"><a href="${baseurl }/admin/cylinderMovetoTruck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to Truck</span></a></li>
+						<li class="cylinderDeliver"><a href="${baseurl }/admin/cylinderDeliver"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Delivered to Customer</span></a></li>
 					</ul>
 				</li>
 				<li class="expenseTracker"><a href="${baseurl }/admin/expenseTrackerHome"><i class="fa fa-bar-chart-o"></i> <span>Expense Tracker</span></a></li>
@@ -217,22 +218,22 @@ $(function() {
 
     <div id="page-container">
     	<div id="page-content">
-    <div id="wrap">
-        <div id="page-heading" class="row">
-        <div class="col-md-6">
-              <h1 id="pageName"></h1>
-              </div>
-              <div class="col-md-6">
-              <div class="options">
-                <div class="btn-toolbar">
-                    <a href="#" class="btn btn-danger "><span id="cylinderCount1"></span><br />Cylinders</a>
-                    <a href="#" class="btn btn-warning"><span id="customerCount1"></span><br />Customers</a>
-                    <a href="#" class="btn btn-info"><span id="totalGas1"></span><br />Gas in Kgs</a>
-                </div>
-            </div>
-            </div>
-            <div class="clearfix"></div>
-        </div>
+    		<div id="wrap">
+	        <div id="page-heading" class="row">
+	        	<div class="col-md-6">
+					<h1 id="pageName"></h1>
+				</div>
+				<div class="col-md-6">
+					<div class="options">
+		                <div class="btn-toolbar">
+		                    <a href="#" class="btn btn-danger "><span id="cylinderCount1"></span><br />Cylinders</a>
+		                    <a href="#" class="btn btn-warning"><span id="customerCount1"></span><br />Customers</a>
+		                    <a href="#" class="btn btn-info"><span id="totalGas1"></span><br />Gas in Kgs</a>
+		                </div>
+	            	</div>
+	            </div>
+	            <div class="clearfix"></div>
+	        </div>
 <!-- Header ends Here -->
 <script type="text/javascript">
 $( document ).ready(function() {

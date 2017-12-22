@@ -1,6 +1,6 @@
-  <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
@@ -13,153 +13,135 @@
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
+		<form:form commandName="fillingStationForm">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-            <form:form commandName="fillingStationForm">
-				<div class="row">
-				  	<div class="col-md-3">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Store <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:select path="store" class="form-control validate" onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store --</form:option>
-				        			<form:options items="${stores}"></form:options>
-				        		</form:select>
-							</div>
-						</div>
-					</div>
-					
-					<div class="col-md-3">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-6 control-label">Cylinder Type <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:select path="cylinderType" class="form-control " onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store --</form:option>
-				        			<form:options items="${cylinderTypes}"></form:options>
-				        		</form:select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-6 control-label numericOnly">Quantity <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:input type="text" path="quantity" class="form-control " placeholder="Quantity"/>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-3">
-						<div class="form-group">
-							<div class="col-md-6" style="padding-top: 6px;">
-				        		<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
-							</div>
-						</div>
-					</div>
-				</div>
-        <div class="row">
-			<div class="col-md-6">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<div class="col-md-6">
-				        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>
-							</div>
-						</div>
-					</div>
-					
-				</div>
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-                    	<h4>Cylinders List</h4>
-						<div class="options">   
-							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+						<h4>Search Form</h4>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+						  	<div class="col-md-4">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label">Store <span class="impColor">*</span></label>
+									<div class="col-md-8">
+						        		<form:select path="store" class="form-control validate" onfocus="removeBorder(this.id)">
+						        			<form:option value="">-- Select Store --</form:option>
+						        			<form:options items="${stores}"></form:options>
+						        		</form:select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label">Cylinder Type <span class="impColor">*</span></label>
+									<div class="col-md-8">
+						        		<form:select path="cylinderType" class="form-control " onfocus="removeBorder(this.id)">
+						        			<form:option value="">-- Select Store --</form:option>
+						        			<form:options items="${cylinderTypes}"></form:options>
+						        		</form:select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="form-group">
+									<label for="focusedinput" class="col-md-4 control-label numericOnly">Quantity <span class="impColor">*</span></label>
+									<div class="col-md-8">
+						        		<form:input type="text" path="quantity" class="form-control " placeholder="Quantity"/>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
-					<div class="panel-body collapse in">
-						<div class="table-responsive" id="tableId">
-							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-								<thead>
-									<tr><th>Cylinder ID</th>
-									<th>Store</th>
-									<th>Size</th></tr>
-								</thead>
-								<tbody></tbody>
-							</table>
-						</div>
+					<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-12">
+				      			<div class="btn-toolbar pull-right">
+					      			<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
+					      			<button type="button" onclick="window.location.reload()" class="btn btn-danger">Reset</button>
+				      			</div>
+				      		</div>
+				    	</div>
 					</div>
 				</div>
-			</div>
-			<div class="col-md-6">
-<%-- 				<form:form commandName="fillingStationForm"> --%>
 				<div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label>
 							<div class="col-md-6">
-				        		<div id="displayCylinders"></div>
+				        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;font-weight: bolder;">Check/Uncheck All</label></p>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-3 control-label">Select Filling Station <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:select path="stationname" class="form-control validate" onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Filling Station --</form:option>
-				        			<form:options items="${fillingstation}"></form:options>
-				        		</form:select>
+					<div class="col-md-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+		                    	<h4>Cylinders List</h4>
+								<div class="options">   
+									<a href="javascript:void(0);" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+								</div>
+							</div>
+							<div class="panel-body collapse in">
+								<div class="table-responsive" id="tableId">
+									<table class="table table-striped table-bordered datatables" id="example">
+										<thead>
+											<tr><th>Cylinder ID</th>
+											<th>Store</th>
+											<th>Size</th></tr>
+										</thead>
+										<tbody></tbody>
+									</table>
+								</div>
 							</div>
 						</div>
 					</div>
-				<div class="row">
-					<div class="col-md-12">
-						<div class="form-group">
-							<div class="col-md-offset-3 col-md-6" style="padding-top: 6px;">
-				        		<input type="button" class="btn btn-primary" value="Move To Filling Station" onclick="movetofillingStation()">
+					<div class="col-md-6">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h4>&nbsp;</h4>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label>
+											<div class="col-md-6">
+								        		<div id="displayCylinders"></div>
+											</div>
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="focusedinput" class="col-md-3 control-label">Select Filling Station <span class="impColor">*</span></label>
+											<div class="col-md-6">
+								        		<form:select path="stationname" class="form-control validate" onfocus="removeBorder(this.id)">
+								        			<form:option value="">-- Select Filling Station --</form:option>
+								        			<form:options items="${fillingstation}"></form:options>
+								        		</form:select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="panel-footer">
+						      	<div class="row">
+						      		<div class="col-md-12">
+						      			<div class="btn-toolbar pull-right">
+							      			<input type="button" class="btn btn-primary" value="Move To Filling Station" onclick="movetofillingStation()">
+							      			<button type="button" onclick="window.location.reload()" class="btn btn-danger">Reset</button>
+						      			</div>
+						      		</div>
+						    	</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				
-				<%-- <div class="row">
-				  	<div class="col-md-4">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Store <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:select path="store" class="form-control validate" onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store --</form:option>
-				        			<form:options items="${stores}"></form:options>
-				        		</form:select>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Quantity <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:input type="text" path="quantity" class="form-control validate" placeholder="quantity"/>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Cylender Type <span class="impColor">*</span></label>
-							<div class="col-md-6">
-				        		<form:select path="cylinderType" class="form-control validate" onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store --</form:option>
-				        			<form:options items="${cylinderTypes}"></form:options>
-				        		</form:select>
-							</div>
-						</div>
-					</div>
-				</div> --%>
-				</form:form>
          	</div>
 		</div>
+		</form:form>
 	</div> <!-- container -->
-
 <script type="text/javascript">
 $(document).ready(function() {
 	  $("#parent").click(function() {
@@ -196,30 +178,29 @@ function displayTable(listOrders) {
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
-					serviceUnitArray[orderObj.id] = orderObj;
-					var tblRow = "<tr >"
-							+ "<td title='"+orderObj.cylinderid+"'><input class='child' name='chkbox' type='checkbox' style='width: 21px;' value='"+orderObj.id+"' >"+ orderObj.cylinderid + "</td>"
-							+ "<td title='"+orderObj.storename+"'>"+ orderObj.storename + "</td>"
-							+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
-							+ "</tr >";
-					$(tblRow).appendTo("#tableId table tbody");
+		serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr >"
+				+ "<td title='"+orderObj.cylinderid+"'><input class='child' name='chkbox' type='checkbox' style='width: 21px;' value='"+orderObj.id+"' >"+ orderObj.cylinderid + "</td>"
+				+ "<td title='"+orderObj.storename+"'>"+ orderObj.storename + "</td>"
+				+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
+				+ "</tr >";
+		$(tblRow).appendTo("#tableId table tbody");
 					
-					 $('.child').click(function() {
-				    	 var cylenderId = [];
-				         $('#tableId :checkbox:checked').each(function(i){
-				        	 cylenderId[i] = $(this).val();
-				         }); 
-				         $("#displayCylinders").text(cylenderId);
-//			 	         alert(cylenderId);
-				        if ($('.child:checked').length == $('.child').length) {
-				          $('#parent').prop('checked', true);
-				        } else {
-				          $('#parent').prop('checked', false);
-				        }
-				      });
-					});
-	
-	
+		 $('.child').click(function() {
+			var cylenderId = [];
+			$('#tableId :checkbox:checked').each(function(i){
+				cylenderId[i] = $(this).val();
+			}); 
+			$("#displayCylinders").text(cylenderId);
+//			alert(cylenderId);
+			if ($('.child:checked').length == $('.child').length) {
+				$('#parent').prop('checked', true);
+			} else {
+				$('#parent').prop('checked', false);
+			}
+		});
+	});
+	if(isClick=='Yes') $('.datatables').dataTable();
 }
 
 function movetofillingStation(){
@@ -307,4 +288,12 @@ function searchData(){
 $("#pageName").text("Cylinder Move to Filling Station");
 // $(".transactions").addClass("open");
 $(".cylinderMovetofillingStation").addClass("active");
+
+
+
+
+// + '<c:if test="${(cacheGuest.roleId == 6)}">'
+// + insert_str
+// + '</c:if>	
+
 </script>

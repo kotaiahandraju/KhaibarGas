@@ -37,7 +37,7 @@
         	</div>
                     
             <div class="row" id="moveTo">
-	            <div class="col-md-10 col-md-offset-1 col-sm-12">
+	            <div class="col-md-12 col-sm-12">
 	                <div class="panel panel-primary">
 	                    <div class="panel-heading">
 	                        <h4>Add Store</h4>
