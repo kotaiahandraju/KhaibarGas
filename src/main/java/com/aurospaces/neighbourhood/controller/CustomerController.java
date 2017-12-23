@@ -22,7 +22,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
 import com.aurospaces.neighbourhood.bean.CustomermasterBean;
-import com.aurospaces.neighbourhood.bean.TrucksmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
 import com.fasterxml.jackson.core.JsonGenerationException;
 import com.fasterxml.jackson.databind.JsonMappingException;

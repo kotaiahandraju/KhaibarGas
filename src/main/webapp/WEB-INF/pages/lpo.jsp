@@ -163,7 +163,7 @@ table#dependent_table tbody tr td:first-child::before {
                     	</div>
                     	<div class="col-md-12">
                     		<div class="form-group">
-<table class="inventory" id="dependent_table">
+<table class="table table-bordered" id="dependent_table">
 	<thead>
 		<tr>
 			<th style="width: 40px;"><span>Sno</span></th>
@@ -200,7 +200,7 @@ table#dependent_table tbody tr td:first-child::before {
 	</tbody>
 	<tfoot>
 		<tr>
-			<th colspan="4"><h3 align="right"></h3></th>
+			<th colspan="6"><h3 align="right"></h3></th>
 			<th><span class="totalInvoiceValue"></span></th>
 			<th><span class="totalDiscounts"></span></th>
 			<th><span class="totalTaxableValue"></span></th>

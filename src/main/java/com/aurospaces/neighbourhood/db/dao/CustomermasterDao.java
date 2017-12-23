@@ -63,7 +63,7 @@ public class CustomermasterDao extends BaseCustomermasterDao
 		}
 	 public List<Map<String, Object>> getCustomers(CustomermasterBean customermasterBean) {
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select cm.*,cym1.cylinderid from customermaster cm left join cylindermaster cym on cm.customerid = cym.id left join cylindermaster cym1 on cym1.id=cm.cylinderId where cm.customertype=?";
+			String sql = "select cm.*,GROUP_CONCAT(cc.cylinderId) as cylinderId1,GROUP_CONCAT(i.name) as name from customermaster cm  ,customercylinders cc ,  cylindermaster cym ,  items i   where cc.customerId = cm.id and cym.id=cc.cylinderId and cym.size=i.id  and cm.customertype=?  group by cm.id";
 			List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql, new Object[] { customermasterBean.getCustomertype() });
 			if (retlist.size() > 0)
 				return retlist;

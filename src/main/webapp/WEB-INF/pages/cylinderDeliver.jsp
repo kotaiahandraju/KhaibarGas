@@ -51,7 +51,7 @@ table#dependent_table tbody tr td:first-child::before {
 								<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                    				<form:select path="truckId" class="form-control select2" onfocus="removeBorder(this.id);" onchange="getTruckCylinders(this.value)">
+		                    				<form:select path="truckId" class="form-control select2" onfocus="removeBorder(this.id);" >
 		                    				<form:option value="">--Select Truck--</form:option>
 		                    				<form:options items="${trucks}"></form:options>
 		                    				</form:select>
@@ -77,16 +77,6 @@ table#dependent_table tbody tr td:first-child::before {
                     				<div class="col-md-6">
                     					<form:select path="customerId" class="form-control select2 validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
 		                            		<form:option value="">-- Select Customer Id --</form:option>
-								  		</form:select>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Cylinder Id <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-                    					<form:select path="cylindetId" class="form-control select2 validate" multiple="multiple" onfocus="removeBorder(this.id);" >
-		                            		<form:option value="">-- Select Cylinder Id --</form:option>
 								  		</form:select>
 								  	</div>
                     			</div>
@@ -151,11 +141,12 @@ table#dependent_table tbody tr td:first-child::before {
 		<form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
 		<form:options items="${items}"></form:options>
 	</form:select>
+	vat:<c:out value="${vat}"></c:out>%
 		<!-- </div>
 		<div class="row"> -->
 			<div class="col-md-12">
 				<div class="form-group">
-					<table class="inventory" id="dependent_table">
+					<table class="table table-bordered" id="dependent_table">
 						<thead>
 							<tr>
 								<th style="width: 40px;"><span>Sno</span></th>
@@ -173,11 +164,11 @@ table#dependent_table tbody tr td:first-child::before {
 							<tr id="1" class="rowInc">
 								<td></td>
 								<td>
-									<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" class="form-control">
+									<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id)" class="form-control">
 										<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
 									</select>
 								</td>
-								<td><input name="unit" value="0" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/></td>
+								<td><input name="unit" value="1" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/></td>
 								<td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly"/></td>
 								<td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
 								<td><input name="discount" value="0.00" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control" /></td>
@@ -607,10 +598,10 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
-			+ 'item" class="form-control validate" onchange="removeBorder(this.id)"><option>Select</option></select></td>'
+			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
 			+ dependentRowCount
-			+ 'unit" type="text" value="0" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
+			+ 'unit" type="text" value="1" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
 			+ '<td class="inputCss"><input name="rate" id="'
 			+ dependentRowCount
 			+ 'rate" type="text" value="0.0" class="form-control numericOnly" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)"/></td>'
@@ -820,10 +811,10 @@ function getCustomerDetails(value){
 	$("#mobile").text(serviceUnitArray2[value].mobile);
 	$("#customeraddress").text(serviceUnitArray2[value].customeraddress);
 	$("#landline").text(serviceUnitArray2[value].landline);
-	$("#cylinders").text("");
-	$("#cylinders").text(serviceUnitArray2[value].cylinderid);
+	$("#cylinders").text(serviceUnitArray2[value].cylinderId1);
+	$("#cylinders").text(serviceUnitArray2[value].name);
 }
-function getTruckCylinders(id){
+/* function getTruckCylinders(id){
 	var formData = new FormData();
     formData.append('truckId', id);
 	$.fn.makeMultipartRequest('POST', 'getTruckCylinders', false,
@@ -840,8 +831,20 @@ function getTruckCylinders(id){
 		});
 		$('#cylindetId').empty().append(html);
 	});
+} */
+function getTarrifPrice(value,id){
+	var number = parseInt(id.match(/[0-9]+/)[0], 10);
+	
+	var formData = new FormData();
+    formData.append('itemId', value);
+	$.fn.makeMultipartRequest('POST', 'getTariffPrice', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.rate;
+		$("#"+number+"rate").val(jsonobj.rate);
+		allcalculate(number+"rate");
+	});
 }
-
 $("#pageName").text("Cylinder Deliver Status");
 $(".cylinderDeliver").addClass("active");
 </script>
