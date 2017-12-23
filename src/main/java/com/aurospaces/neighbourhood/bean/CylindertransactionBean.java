@@ -23,10 +23,16 @@ protected Date createdTime ;
 protected Date updatedTime ;
 protected String cylindetId ;
 protected String cylinderStatus ;
-protected String createdBy,fillingStation , customerId,truckId,item,customertype ;
+protected String createdBy,fillingStation , customerId,truckId,item,customertype,storename ;
 
 
 
+public String getStorename() {
+	return storename;
+}
+public void setStorename(String storename) {
+	this.storename = storename;
+}
 public String getItem() {
 	return item;
 }

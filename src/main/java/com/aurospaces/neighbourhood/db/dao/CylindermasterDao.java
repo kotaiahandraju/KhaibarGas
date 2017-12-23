@@ -146,6 +146,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			}
 //			String sql = "Update  cylindermaster set cylinderstatus= ?,fillingstationId=?  WHERE cylinderid=?";
 			String sql = buffer.toString();
+			System.out.println("sql------------"+sql);
 			int intDelete = jdbcTemplate.update(sql, new Object[]{});
 			if(intDelete != 0){
 				update = true;

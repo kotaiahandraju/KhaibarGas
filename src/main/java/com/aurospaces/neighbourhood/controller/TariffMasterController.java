@@ -75,44 +75,52 @@ public class TariffMasterController {
 		String name = null;
 		TariffmasterBean existModel=null;
 		boolean isUpdate=false;
+		String exId=null;
 
 		try {
 			if (result.hasErrors()) {
-				//				model.addAttribute("newUser", userObj);
+				// model.addAttribute("newUser", userObj);
 				return "tariffMasterHome";
 			}
 			List<TariffmasterBean> TariffmasterBean = objTariffmasterDao.getByName(objTariffmasterBean);
 
-
-			if(TariffmasterBean.size() == 0 || TariffmasterBean == null){
-				objTariffmasterBean.setStatus("1");
-				objTariffmasterDao.save(objTariffmasterBean);
-				redir.addFlashAttribute("msg", "Record Inserted Successfully");
-				redir.addFlashAttribute("cssMsg", "success");}
-
-				else
-				{
-					for(int i=0;i<TariffmasterBean.size();i++)
-					{
-						existModel = TariffmasterBean.get(i);
-						name = existModel.getAssetcode();
-						String exId = existModel.getAssetcode();
-						if(exId.equals( objTariffmasterBean.getAssetcode()))
-						{
-							isUpdate=true;
-						}
-						else
-						{
+				System.out.println("list--"+TariffmasterBean.size());
+				for (int i = 0; i < TariffmasterBean.size(); i++) {
+					existModel = TariffmasterBean.get(i);
+					exId = existModel.getItemId();
+				}
+				if(TariffmasterBean.size() !=0){
+					
+					if (objTariffmasterBean.getId() == 0) {
+						
+						if (exId.equals(objTariffmasterBean.getItemId())) {
 							redir.addFlashAttribute("msg", "Already Record Exist");
 							redir.addFlashAttribute("cssMsg", "danger");
+						} else {
+							objTariffmasterBean.setStatus("1");
+							objTariffmasterDao.save(objTariffmasterBean);
+							redir.addFlashAttribute("msg", "Record Inserted Successfully");
 						}
+
+						redir.addFlashAttribute("cssMsg", "success");
+					} else {
+						if (exId.equals(objTariffmasterBean.getItemId())) {
+							objTariffmasterDao.save(objTariffmasterBean);
+							redir.addFlashAttribute("msg", "Record Updated Successfully");
+						} else {
+							redir.addFlashAttribute("msg", "Already Record Exist");
+							redir.addFlashAttribute("cssMsg", "danger");
+							
+						}
+
 					}
-					if(isUpdate){
-						objTariffmasterDao.save(objTariffmasterBean);
-						redir.addFlashAttribute("msg", "Record Updated Successfully");
-						redir.addFlashAttribute("cssMsg", "warning");
-					}
+				}else{
+					objTariffmasterBean.setStatus("1");
+					objTariffmasterDao.save(objTariffmasterBean);
+					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				}
+				
+				
 
 			} catch (Exception e) {
 				e.printStackTrace();

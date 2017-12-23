@@ -89,7 +89,9 @@
 	<definition name="cylinderDeliver" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/cylinderDeliver.jsp" />
 	</definition>
-	
+	<definition name="qualityCheckHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/returnCylinderQualityCheck.jsp" />
+	</definition>
 	
 	
 </tiles-definitions>
