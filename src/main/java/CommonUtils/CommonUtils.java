@@ -13,7 +13,7 @@ public class CommonUtils {
 	
 	public static String getDate() {
 
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MMM-yyyy");
 		Calendar cal = Calendar.getInstance();
 		 String regDate = dateFormat.format(cal.getTime());
 		return regDate;

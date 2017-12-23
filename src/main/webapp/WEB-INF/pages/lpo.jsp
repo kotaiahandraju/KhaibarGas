@@ -254,13 +254,13 @@ $(function() {
 	$(dummyItems).appendTo("#1item");
 	
 	$("#1expirydate").datepicker({
-		dateFormat : "dd-MM-yy",
+		dateFormat : "dd-M-yy",
 		changeDate : true,
 		changeMonth : true,
 		changeYear : true,
 	});
 	$("#1manufacturingdate").datepicker({
-		dateFormat : "dd-MM-yy",
+		dateFormat : "dd-M-yy",
 		changeDate : true,
 		changeMonth : true,
 		changeYear : true,
