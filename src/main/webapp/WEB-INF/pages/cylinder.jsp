@@ -304,10 +304,10 @@ function getLpoNumber(){
 
 $(function() {
 	$("#expirtdate1").datepicker({
-		dateFormat : "dd-MM-yy",
+		dateFormat : "dd-M-yy",
 		changeDate : true,
 		changeMonth : true,
-		changeYear : true,
+		changeYear : true
 	});
 });
 	
