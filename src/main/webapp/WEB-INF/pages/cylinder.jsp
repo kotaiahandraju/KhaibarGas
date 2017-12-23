@@ -67,7 +67,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Store <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								   	   <form:select path="store" value="" class="form-control chzn-select validate" onchange="removeBorder(this.id),getStoreDetails(this.value)" >
+								   	   <form:select path="store" value="" class="form-control validate" onchange="removeBorder(this.id),getStoreDetails(this.value)" >
 								    	<form:option value="">-- Select Store --</form:option>
 								    	<form:options items="${stores }"></form:options>
 								    	</form:select>
@@ -94,7 +94,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Owner Company <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    <form:select path="ownercompany" value="" class="form-control  chzn-select validate"  onchange="removeBorder(this.id)" >
+								    <form:select path="ownercompany" value="" class="form-control validate"  onchange="removeBorder(this.id)" >
 								    	<form:option value="">-- Select Company --</form:option>
 								    	<form:options items="${companys }"></form:options>
 								    	</form:select>
@@ -136,7 +136,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Expiry Date <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="expirtdate1" value="" class="form-control validate" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" onchange="removeBorder(this.id)"/>
+								    	<form:input path="expirtdate1" class="form-control validate" readonly="true" placeholder="Expiry Date" onblur="isDate(this.id)" onchange="removeBorder(this.id)"/>
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
@@ -150,12 +150,11 @@
 								    </div>
                     			</div>
                     		</div>
-                    		<div class="col-md-6">
+                    		<div class="col-md-12">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Remarks</label>
-								    <div class="col-md-6">
-<%-- 								    	<form:input path="remarks" value="" class="form-control"  placeholder="Remarks"/> --%>
-								    	<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="5" cols="70"></form:textarea>
+                    				<label for="focusedinput" class="col-md-2 control-label">Remarks</label>
+								    <div class="col-md-9">
+								    	<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="5"></form:textarea>
 								      	<span class="hasError" id="remarksError"></span>
 								    </div>
                     			</div>
@@ -174,7 +173,7 @@
 	                    <div class="panel-footer">
 					      	<div class="row">
 					      		<div class="col-sm-12">
-					      			<div class="btn-toolbar  pull-right">
+					      			<div class="btn-toolbar text-center">
 						      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
 						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
@@ -205,43 +204,29 @@ function displayTable(listOrders) {
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
-		
-					if(orderObj.status == "1"){
-						var deleterow = "<a class='deactivate' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
-					}else{  
-						var deleterow = "<a class='activate' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
-					}
-					var edit = "<a class='edit editIt' onclick='editCylinder("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
-					serviceUnitArray[orderObj.id] = orderObj;
-					var tblRow = "<tr >"
-							+ "<td title='"+orderObj.cylinderid+"'>"+ orderObj.cylinderid + "</td>"
-							+ "<td title='"+orderObj.sizeName+"'>"+ orderObj.sizeName + "</td>"
-							+ "<td title='"+orderObj.cylinderstatus+"'>"+ orderObj.cylinderstatus + "</td>"
-							+ "<td title='"+orderObj.companyname+"'>"+ orderObj.companyname+ "</td>"
-							+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
-							+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber+ "</td>"
-							+ "<td title='"+orderObj.color+"'>"+ orderObj.color + "</td>"
-							+ "<td title='"+orderObj.expirtdate1+"'>"+orderObj.expirtdate1+ "</td>"
-							+ "<td title='"+orderObj.remarks+"'>"+orderObj.remarks+ "</td>"
-							+ "<td title='"+orderObj.cylendersstatus+"'>"+ orderObj.cylendersstatus + "</td>"
-							+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
-							+ "</tr >";
-					$(tblRow).appendTo("#tableId table tbody");
-					});
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactivate' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+		}else{  
+			var deleterow = "<a class='activate' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+		}
+		var edit = "<a class='edit editIt' onclick='editCylinder("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr >"
+				+ "<td title='"+orderObj.cylinderid+"'>"+ orderObj.cylinderid + "</td>"
+				+ "<td title='"+orderObj.sizeName+"'>"+ orderObj.sizeName + "</td>"
+				+ "<td class='impFiled' title='"+orderObj.cylinderstatus+"'>"+ orderObj.cylinderstatus + "</td>"
+				+ "<td title='"+orderObj.companyname+"'>"+ orderObj.companyname+ "</td>"
+				+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
+				+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber+ "</td>"
+				+ "<td title='"+orderObj.color+"'>"+ orderObj.color + "</td>"
+				+ "<td title='"+orderObj.expirtdate1+"'>"+orderObj.expirtdate1+ "</td>"
+				+ "<td title='"+orderObj.remarks+"'>"+orderObj.remarks+ "</td>"
+				+ "<td title='"+orderObj.cylendersstatus+"'>"+ orderObj.cylendersstatus + "</td>"
+				+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+				+ "</tr >";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
 	if(isClick=='Yes') $('.datatables').dataTable();
-	
-	/* $('#DataTables_Table_0').DataTable({
-		dom: 'Bfrtip',
-		buttons: [{extend:"print",className:"btn default"},{extend:"pdf",className:"btn default"},{extend:"csv",className:"btn default"}]
-	}); */
-	
-	 /*$('#datatable-buttons').DataTable({
-	        "dom": 'C<"clear">lfrtip',
-	        "colVis": {
-	            "buttonText": "Change columns",
-	        "buttons": [{extend:"copy",className:"btn default"},{extend:"print",className:"btn default"},{extend:"pdf",className:"btn default"},{extend:"csv",className:"btn default"}]
-	        }
-	    });*/
 }
 
 var lpo = "";
@@ -272,24 +257,22 @@ function editCylinder(id) {
 function deleteCylinder(id,status){
 	var checkstr=null;
 	if(status == 0){
-		 checkstr =  confirm('Are you sure you want to Deactivate this?');
+		 checkstr = confirm('Are you sure you want to Deactivate?');
 	}else{
-		 checkstr =  confirm('Are you sure you want to Activate this?');
+		 checkstr = confirm('Are you sure you want to Activate?');
 	}
 	if(checkstr == true){
-	var formData = new FormData();
-     formData.append('id', id);
-     formData.append('status', status);
-	$.fn.makeMultipartRequest('POST', 'deleteCylinder', false,
-			formData, false, 'text', function(data){
-		var jsonobj = $.parseJSON(data);
-// 		window.location.reload();
-		var alldata = jsonobj.allOrders1;
-		console.log(jsonobj.allOrders1);
-		displayTable(alldata);
-	});
+		var formData = new FormData();
+	    formData.append('id', id);
+	    formData.append('status', status);
+		$.fn.makeMultipartRequest('POST', 'deleteCylinder', false, formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			console.log(jsonobj.allOrders1);
+			displayTable(alldata);
+			window.location.reload();
+		});
 	}
-	
 }
 
 function getLpoNumber(){

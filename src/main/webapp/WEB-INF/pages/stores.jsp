@@ -77,7 +77,7 @@
 	                    <div class="panel-footer">
 					      	<div class="row">
 					      		<div class="col-sm-12">
-					      			<div class="btn-toolbar pull-right">
+					      			<div class="btn-toolbar text-center">
 						      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
 						      			<input class="btn-danger btn cancel" type="reset" value="Reset" />
 					      			</div>
@@ -106,11 +106,8 @@ var data = {};
 
 
 function showTableData(response){
-	
 	var table=$('#tableId').html('');
-	
 	serviceUnitArray = {};
-// 	if(response != undefined && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
     	'<thead><tr><th>Store ID</th><th>Store Name</th><th>Store Location</th><th>Status</th><th></th></tr>'+
@@ -118,26 +115,24 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteStore("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='deleteStore("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteStore("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='deleteStore("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 		
-		var edit = "<a class='edit editIt' onclick='editStore("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editStore("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 			
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.id+"'>" + orderObj.storeid + "</td>"
-						+ "<td title='"+orderObj.storename+"'>" + orderObj.storename + "</td>"
-						+ "<td title='"+orderObj.location+"'>" + orderObj.location + "</td>"
-						+ "<td title='"+orderObj.storeStatus+"'>" + orderObj.storeStatus + "</td>"
-						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
-						+"</tr>";
-				$(tblRow).appendTo("#tableId table tbody");
-				//$('.datatables').dataTable({});
-			});
+			+ "<td class='impFiled' title='"+orderObj.storename+"'>" + orderObj.storename + "</td>"
+			+ "<td title='"+orderObj.location+"'>" + orderObj.location + "</td>"
+			+ "<td title='"+orderObj.storeStatus+"'>" + orderObj.storeStatus + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+"</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
 	if(isClick=='Yes') $('.datatables').dataTable();
-// 	}
 }
 function editStore(id) {
 	$("#id").val(id);
@@ -169,10 +164,9 @@ function deleteStore(id,status) {
 		                	 $.unblockUI();
 		                	var resJson=JSON.parse(response);
 		                	showTableData(resJson);
-// 		                	alert("Delete Sucessfully");
 		                	//window.location.reload();
 		                	}
-// 		                 window.location.reload();
+		                 window.location.reload();
 		                 },
 		             error: function (e) { 
 		            	 $.unblockUI();

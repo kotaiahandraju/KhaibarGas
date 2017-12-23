@@ -45,62 +45,51 @@
                     </div>
 	                <form:form modelAttribute="customerForm" action="customerSave" class="form-horizontal" method="Post" >
 	                <div class="panel-body">
+	                	<form:hidden path="id"/>
                     	<div class="row">
-                    		<%-- <div class="col-md-4">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Customer ID<span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-		                            	<form:hidden path="id"/>
-		                            	<form:hidden path="status"/>
-								      	<form:input type="text" path="customerid" class="form-control validate" placeholder="Customer ID"/>
-								  	</div>
-                    			</div>
-                    		</div> --%>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Customer Name<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Customer Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="customername" class="form-control validate" placeholder="Customer Name"/>
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-4">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Mobile<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Mobile<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:hidden path="id"/>
 								      	<form:input type="text" path="mobile" class="form-control validate numericOnly" placeholder="Mobile"/>
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-4">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Land Line</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Land Line</label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="landline" class="form-control  numericOnly" placeholder="Land Line"/>
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-4">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Authorized Person<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Authorized Person<span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="text" path="authorizedperson" class="form-control validate" placeholder="Authorized Person"/>
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-4">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Contact Person<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Contact Person<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:hidden path="id"/>
 								      	<form:input type="text" path="contactperson" class="form-control validate" placeholder="Contact Person"/>
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-4">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label ">Customer Type <span class="impColor">*</span> </label>
+                    				<label for="focusedinput" class="col-md-4 control-label ">Customer Type <span class="impColor">*</span> </label>
                     				<div class="col-md-6">
 		                            	<form:select path="customertype" class="form-control validate">
 		                            		<form:option value="">-- Customer Type --</form:option>
@@ -111,25 +100,22 @@
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-4">
+                    		<div class="col-md-12">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Customer Address<span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-<%-- 		                            	<form:input type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address"/> --%>
+                    				<label for="focusedinput" class="col-md-2 control-label">Customer Address<span class="impColor">*</span></label>
+                    				<div class="col-md-9">
 		                            	<form:textarea type="text" path="customeraddress" class="form-control validate" placeholder="Customer Address" rows="5"></form:textarea>
 								  	</div>
                     			</div>
                     		</div>
                     	</div>
                     </div>
-                    
-                    
                     <div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar pull-right">
+				      			<div class="btn-toolbar text-center">
 					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
-					      			<input class="btn-danger btn cancel" type="reset"  value="Reset" />
+					      			<input class="btn-danger btn cancel" type="reset" value="Reset" />
 				      			</div>
 				      		</div>
 				      	</div>
@@ -137,8 +123,6 @@
          			</form:form>				    
                 </div>
             </div>
-            
-             
             
         </div>
 
@@ -161,42 +145,37 @@ var data = {};
 function showTableData(response){
 	
 	var table=$('#tableId').html('');
-	
 	serviceUnitArray = {};
-// 	if(response != "undefined" && response.length >0){
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Customer Address</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th>Action</th></tr>'+
+    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Customer Address</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
-		
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='customerDelete("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='customerDelete("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='customerDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='customerDelete("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		
-		var edit = "<a class='edit editIt' onclick='editCustomer("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editCustomer("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
-			
 		var tblRow ="<tr>"
-			+ "<td title='"+orderObj.id+"'>" + orderObj.customerid + "</td>"
-						+ "<td title='"+orderObj.customername+"'>" + orderObj.customername + "</td>"
-						+ "<td title='"+orderObj.customeraddress+"'>" + orderObj.customeraddress + "</td>"
-						+ "<td title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
-						+ "<td title='"+orderObj.landline+"'>" + orderObj.landline + "</td>"
-						+ "<td title='"+orderObj.authorizedperson+"'>" + orderObj.authorizedperson + "</td>"
-						+ "<td title='"+orderObj.contactperson+"'>" + orderObj.contactperson + "</td>"
-						+ "<td title='"+orderObj.customertype+"'>" + orderObj.customertype + "</td>"
-						+ "<td title='"+orderObj.custStatus+"'>" + orderObj.custStatus + "</td>"
-						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
-						+"</tr>";
-				$(tblRow).appendTo("#tableId table tbody");
-			});
+			+ "<td class='impFiled' title='"+orderObj.id+"'>" + orderObj.customerid + "</td>"
+			+ "<td title='"+orderObj.customername+"'>" + orderObj.customername + "</td>"
+			+ "<td title='"+orderObj.customeraddress+"'>" + orderObj.customeraddress + "</td>"
+			+ "<td title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
+			+ "<td title='"+orderObj.landline+"'>" + orderObj.landline + "</td>"
+			+ "<td title='"+orderObj.authorizedperson+"'>" + orderObj.authorizedperson + "</td>"
+			+ "<td title='"+orderObj.contactperson+"'>" + orderObj.contactperson + "</td>"
+			+ "<td title='"+orderObj.customertype+"'>" + orderObj.customertype + "</td>"
+			+ "<td title='"+orderObj.custStatus+"'>" + orderObj.custStatus + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+"</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
 	if(isClick=='Yes') $('.datatables').dataTable();
-// 	}
 }
+
 function editCustomer(id) {
 	$("#id").val(id);
 	$("#customerid").val(serviceUnitArray[id].customerid);
@@ -209,7 +188,6 @@ function editCustomer(id) {
 	$("#customertype").val(serviceUnitArray[id].customertype);
 	$("#status").val(serviceUnitArray[id].status);
 	$("#submit1").val("Update");
-	
 	$(window).scrollTop($('#moveTo').offset().top);
 }
 
@@ -235,7 +213,7 @@ function customerDelete(id,status) {
 		                	showTableData(resJson);
 		                	//alert("Delete Sucessfully");
 		                	//window.location.reload();
-// 		                 window.location.reload();
+		                 window.location.reload();
 		                 },
 		                 
 		             error: function (e) { 

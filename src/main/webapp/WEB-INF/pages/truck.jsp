@@ -1,8 +1,9 @@
+<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
-
+<%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -75,7 +76,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Service Due <span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="servicedue1" type="text" class="form-control validate" readonly="true" placeholder="Servicedue" onchange="removeBorder(this.id)"/>
+										<form:input path="servicedue1" type="text" class="form-control validate" readonly="true" placeholder="Service Due" onchange="removeBorder(this.id)"/>
 									</div>
 								</div>
 							</div>
@@ -110,7 +111,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Type Of Service <span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path="typeOfService" class="form-control chzn-select validate" onfocus="removeBorder(this.id)">
+										<form:select path="typeOfService" class="form-control validate" onfocus="removeBorder(this.id)">
 									      	<form:option value="">-- Select Type Of Service --</form:option>
 									  		<form:option value="Maintenance">Maintenance</form:option>
 									  		<form:option value="Agency Repairs">Agency Repairs</form:option>
@@ -120,11 +121,11 @@
 								</div>
 							</div>
 							<div class="clearfix"></div>
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Description</label>
-									<div class="col-md-6">
-										<form:textarea path="description" class="form-control" placeholder="Description"  rows="5"></form:textarea>
+									<label for="focusedinput" class="col-md-2 control-label">Description</label>
+									<div class="col-md-9">
+										<form:textarea path="description" class="form-control" placeholder="Description" rows="5"></form:textarea>
 									</div>
 								</div>
 							</div>
@@ -133,7 +134,7 @@
                     <div class="panel-footer">
 						<div class="row">
 							<div class="col-sm-12">
-				      			<div class="btn-toolbar pull-right">
+				      			<div class="btn-toolbar text-center">
 									<input class="btn-primary btn" type="submit" value="Sumbit" id="submit1">
 					      			<input class="btn-danger btn cancel" type="reset" value="Reset">
 				      			</div>
@@ -184,14 +185,14 @@ function displayTable(listOrders) {
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deletetruckMaster("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='deletetruckMaster("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='deletetruckMaster("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr >"
-			+ "<td title='"+orderObj.trucknumber+"'>"+ orderObj.trucknumber + "</td>"
+			+ "<td class='impFiled' title='"+orderObj.trucknumber+"'>"+ orderObj.trucknumber + "</td>"
 			+ "<td title='"+orderObj.registrationexpirydate1+"'>"+ orderObj.registrationexpirydate1 + "</td>"
 			+ "<td title='"+orderObj.civildefensecardexpirydate1+"'>"+ orderObj.civildefensecardexpirydate1 + "</td>"
 			+ "<td title='"+orderObj.servicedue1+"'>"+ orderObj.servicedue1 + "</td>"
@@ -236,7 +237,7 @@ function deletetruckMaster(id,status){
 	    formData.append('status', status);
 		$.fn.makeMultipartRequest('POST', 'deletetruckMaster', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
-			//window.location.reload();
+			window.location.reload();
 	 		var alldata = jsonobj.allOrders1;
 	 		console.log(jsonobj.allOrders1);
 	 		displayTable(alldata);

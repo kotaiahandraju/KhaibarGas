@@ -55,64 +55,47 @@
 								<div class="form-group">
 									<form:hidden path="id" />
 									<label data-toggle="tooltip" title="Either Cylinder or Accessory Code" class="col-sm-4 control-label required">Asset Code <span class="impColor">*</span></label>
-									<div class="col-sm-6">
+									<div class="col-sm-7">
 										<form:input path="assetcode" class="form-control  validate" autocomplete="off" placeholder="Asset Code" required="required" />
 										<span class="hasError" id="assetcodeError"></span>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-sm-4 control-label required">Item's <span class="impColor">*</span></label>
-									<div class="col-sm-6">
+									<div class="col-sm-7">
 										<form:select path="itemId" class="form-control  validate" onfocus="removeBorder(this.id)">
 											<form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
 											<form:options items="${items}"></form:options>
 										</form:select>
 									</div>
 								</div>
-							</div>
-							
-							<%-- <form:select path="item" id="item1" style="display:none;font-size: small;">
-		<form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
-		<form:options items="${items}"></form:options>
-	</form:select> --%>
-	
-							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-sm-4 control-label required">Asset Description <span class="impColor">*</span></label>
-									<div class="col-sm-6">
+									<div class="col-sm-7">
 										<form:input path="assetdescription" class="form-control  validate" autocomplete="off" placeholder="Asset Description" required="required" />
 										<span class="hasError" id="assetdescriptionError"></span>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
 								<div class="form-group">
 									<label class="col-sm-4 control-label required">Allowed Minimum Price(AED) <span class="impColor">*</span></label>
-									<div class="col-sm-6">
+									<div class="col-sm-7">
 										<form:input path="rate" class="form-control numericOnly validate" autocomplete="off" placeholder="Allowed Minimum Price(AED)" required="required" />
 										<span class="hasError" id="rateError"></span>
 									</div>
 								</div>
-							</div>
-							<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-sm-4 control-label required">Allowed Maximum Discount <span class="impColor">*</span></label>
-									<div class="col-sm-6">
-										<div class="input-group">
-											<form:input path="alloweddiscount" class="form-control numericOnly validate" autocomplete="off" placeholder="Allowed Maximum Discount" required="required" />
-											<span class="input-group-addon"><i class="fa fa-percent"></i> </span>
-										</div>
+									<label class="col-sm-4 control-label required">Allowed Maximum Discount(%) <span class="impColor">*</span></label>
+									<div class="col-sm-7">
+										<form:input path="alloweddiscount" class="form-control numericOnly validate" autocomplete="off" placeholder="Allowed Maximum Discount" required="required" />
 										<span class="hasError" id="alloweddiscountError"></span>
 									</div>
 								</div>
 							</div>
 							<div class="col-md-6">
 								<div class="form-group">
-									<label class="col-sm-4 control-label required">Remarks</label>
-									<div class="col-sm-6">
-										<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="5"></form:textarea>
+									<label class="col-sm-2 control-label required">Remarks</label>
+									<div class="col-sm-8">
+										<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="10"></form:textarea>
 									</div>
 								</div>
 							</div>
@@ -121,7 +104,7 @@
 					<div class="panel-footer">
 						<div class="row">
 							<div class="col-sm-12">
-								<div class="btn-toolbar  pull-right">
+								<div class="btn-toolbar text-center">
 									<input type="submit" value="Submit" id="submit1"
 										class="btn-primary btn" /> <input type="reset" value="Reset"
 										class="btn-danger btn cancel" />
@@ -146,72 +129,70 @@ var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);
 }
-			function displayTable(listOrders) {
-				$('#tableId').html('');
-				var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-					+ '<thead><tr><th>Asset Code</th><th>Item</th><th>Asset Description</th><th>Rate</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
-			$('#tableId').html(tableHead);
-				serviceUnitArray = {};
-				$.each(listOrders, function(i, orderObj) {
-									if(orderObj.status == "1"){
-										var deleterow = "<a class='deactivate' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
-									}else{  
-										var deleterow = "<a class='activate' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
-									}
-									var edit = "<a class='edit editIt' onclick='editTariffMasterDetails(" + orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
-									serviceUnitArray[orderObj.id] = orderObj;
-									var tblRow = "<tr >"
-											+ "<td title='"+orderObj.id+"'>" + orderObj.assetcode + "</td>"
-											+ "<td title='"+orderObj.itemName+"'>" + orderObj.itemName + "</td>"
-											+ "<td title='"+orderObj.id+"'>" + orderObj.assetdescription + "</td>"
-											+ "<td title='"+orderObj.id+"'>" + orderObj.rate + "</td>"
-											+ "<td title='"+orderObj.id+"'>" + orderObj.alloweddiscount + "</td>"
-											+ "<td title='"+orderObj.id+"'>" + orderObj.remarks + "</td>"
-											+ "<td title='"+orderObj.tariffStatus+"'>" + orderObj.tariffStatus + "</td>"
-											+ "<td style='text-align: center;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
-											+ "</tr >";
-									$(tblRow).appendTo("#tableId table tbody");
-								});
-				if(isClick=='Yes') $('.datatables').dataTable();
-// 				$(".datatables").DataTable();
-
-			}
-			
-			function editTariffMasterDetails(id) {
-				$("#id").val(serviceUnitArray[id].id);
-				$("#itemId").val(serviceUnitArray[id].itemId);
-				$("#assetcode").val(serviceUnitArray[id].assetcode);
-				$("#assetdescription").val(serviceUnitArray[id].assetdescription);
-				$("#rate").val(serviceUnitArray[id].rate);
-				$("#alloweddiscount").val(serviceUnitArray[id].alloweddiscount);
-				$("#remarks").val(serviceUnitArray[id].remarks);
-				$("#status").val(serviceUnitArray[id].status);
-				//$("#customerid").val(serviceUnitArray[id].customerid);
-				$("#submit1").val("Update");
-				$(window).scrollTop($('#moveTo').offset().top);
-			}
-			function deleteTariffMasterDetails(id,status) {
-				var checkstr=null;
-				if(status == 0){
-					 checkstr =  confirm('Are you sure you want to Deactivate this?');
-				}else{
-					 checkstr =  confirm('Are you sure you want to Activate this?');
-				}
-				if (checkstr == true) {
-					var formData = new FormData();
-					formData.append('id', id);
-					formData.append('status', status);
-					$.fn.makeMultipartRequest('POST', 'deleteTariffMasterDetails',
-							false, formData, false, 'text', function(data) {
-								var jsonobj = $.parseJSON(data);
-								var alldata = jsonobj.allOrders1;
-								console.log(jsonobj.allOrders1);
-								displayTable(alldata);
-// 								window.location.reload();
-							});
-				}
-
+function displayTable(listOrders) {
+	$('#tableId').html('');
+	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
+		+ '<thead><tr><th>Asset Code</th><th>Item</th><th>Asset Description</th><th>Rate</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+	$('#tableId').html(tableHead);
+	serviceUnitArray = {};
+	$.each(listOrders, function(i, orderObj) {
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactivate' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+		}else{  
+			var deleterow = "<a class='activate' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+		}
+		var edit = "<a class='edit editIt' onclick='editTariffMasterDetails(" + orderObj.id + ")'><i class='fa fa-edit'></i></a>"
+		serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td class='impFiled' title='"+orderObj.id+"'>" + orderObj.assetcode + "</td>"
+			+ "<td title='"+orderObj.itemName+"'>" + orderObj.itemName + "</td>"
+			+ "<td title='"+orderObj.id+"'>" + orderObj.assetdescription + "</td>"
+			+ "<td title='"+orderObj.id+"'>" + orderObj.rate + "</td>"
+			+ "<td title='"+orderObj.id+"'>" + orderObj.alloweddiscount + "</td>"
+			+ "<td title='"+orderObj.id+"'>" + orderObj.remarks + "</td>"
+			+ "<td title='"+orderObj.tariffStatus+"'>" + orderObj.tariffStatus + "</td>"
+			+ "<td style='text-align: center;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			+ "</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
+	if(isClick=='Yes') $('.datatables').dataTable();
 }
+
+function editTariffMasterDetails(id) {
+	$("#id").val(serviceUnitArray[id].id);
+	$("#itemId").val(serviceUnitArray[id].itemId);
+	$("#assetcode").val(serviceUnitArray[id].assetcode);
+	$("#assetdescription").val(serviceUnitArray[id].assetdescription);
+	$("#rate").val(serviceUnitArray[id].rate);
+	$("#alloweddiscount").val(serviceUnitArray[id].alloweddiscount);
+	$("#remarks").val(serviceUnitArray[id].remarks);
+	$("#status").val(serviceUnitArray[id].status);
+	//$("#customerid").val(serviceUnitArray[id].customerid);
+	$("#submit1").val("Update");
+	$(window).scrollTop($('#moveTo').offset().top);
+}
+
+function deleteTariffMasterDetails(id,status) {
+	var checkstr=null;
+	if(status == 0){
+		 checkstr =  confirm('Are you sure you want to Deactivate?');
+	}else{
+		 checkstr =  confirm('Are you sure you want to Activate?');
+	}
+	if (checkstr == true) {
+		var formData = new FormData();
+		formData.append('id', id);
+		formData.append('status', status);
+		$.fn.makeMultipartRequest('POST', 'deleteTariffMasterDetails', false, formData, false, 'text', function(data) {
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			console.log(jsonobj.allOrders1);
+			displayTable(alldata);
+			window.location.reload();
+		});
+	}
+}
+
 $("#pageName").text("Tariff Master");
-$(".tariffMaster").addClass("active"); 
+$(".tariffMaster").addClass("active");
 </script>

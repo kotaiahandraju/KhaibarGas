@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
@@ -48,6 +48,7 @@
 <link rel="stylesheet" href="${baseurl }/assets/css/select2.css">
 
 <style type="text/css">
+#page-container, #page-content{min-height: auto;}
 .control-label {
 	text-align: right;
 	margin-bottom: 0;
@@ -55,7 +56,13 @@
 }
 .impColor{color:red;}
 
-.edit, .delete, .active, .deactive {cursor: pointer;}
+.view, .edit, .delete, .activate, .deactivate {cursor: pointer;}
+.edit {color: blue;}
+.deactivate {color: blue;}
+.activate {color: red;}
+
+ .impFiled {color: blue;}
+ .panel-success {background-color: #4CAF50 !important;}
 
 span.has-error,span.hasError
 {
@@ -86,7 +93,7 @@ span.has-error,span.hasError
 /* 	font-weight: bold; */
 	margin: auto;
 	text-align: center;
-	top: 1.5% !important;
+	top: 3px !important;
 	left:0;
 	right:0;
 	position: fixed;
@@ -99,7 +106,7 @@ span.has-error,span.hasError
 /* 	width: 100% !important; */
 }
 </style>
-	<script>
+<script type="text/javascript">
 	var isClick = 'No';
 		window.setTimeout(function() {
 		    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
@@ -107,6 +114,8 @@ span.has-error,span.hasError
 		    });
 		}, 5000);
 		$(document).ready(function(){
+			$('.view').attr('data-toggle','tooltip');
+			$('.view').attr('data-original-title','View');
 			$('.edit').attr('data-toggle','tooltip');
 			$('.edit').attr('data-original-title','Edit');
 			$('.delete').attr('data-toggle','tooltip');
@@ -132,8 +141,7 @@ span.has-error,span.hasError
 //		 		displayTable(alldata);
 			});
 		});
-	</script>
-	  <script type="text/javascript">
+
 $(function() {
     $(".chzn-select").chosen();
 	$(".select2").select2();
@@ -217,7 +225,7 @@ $(function() {
     </nav>
 
     <div id="page-container">
-    	<div id="page-content">
+    	<div id="page-content" style="min-height: auto;">
     		<div id="wrap">
 	        <div id="page-heading" class="row">
 	        	<div class="col-md-6">
@@ -235,10 +243,3 @@ $(function() {
 	            <div class="clearfix"></div>
 	        </div>
 <!-- Header ends Here -->
-<script type="text/javascript">
-$( document ).ready(function() {
-	
-
-});
-	
-</script>

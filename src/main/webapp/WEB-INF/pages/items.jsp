@@ -48,15 +48,13 @@
 								<div class="form-group">
 									<form:hidden path="id"/>
 									<label for="focusedinput" class="col-md-4 control-label">Item Name <span class="impColor">*</span></label>
-									<div class="col-md-6">
+									<div class="col-md-7">
 										<form:input path="name" class="form-control validate" placeholder="Item Name"/>
 									</div>
                     			</div>
-                    		</div>
-                    		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Item Type <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
+                    				<div class="col-md-7">
 	                    				<form:select path="itemType" class="form-control validate" onfocus="removeBorder(this.id)">
 		                    				<form:option value="Cylinder">Cylinder</form:option>
 		                    				<form:option value="Truck">Truck</form:option>
@@ -66,29 +64,27 @@
 	                    				</form:select>
                     				</div>
                     			</div>
-                    		</div>
-                    		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Price(AED) <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
+                    				<div class="col-md-7">
 		                            	<form:input  path="price" class="form-control numericOnly validate" placeholder="Price(AED)"/>
 								  	</div>
                     			</div>
-                    		</div>
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Description</label>
-                    				<div class="col-md-6">
-		                            	<form:textarea path="description" class="form-control" placeholder="Description"  rows="5"></form:textarea>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+                    				<label for="focusedinput" class="col-md-2 control-label">Description</label>
+                    				<div class="col-md-8">
+		                            	<form:textarea path="description" class="form-control" placeholder="Description" rows="6"></form:textarea>
 								  	</div>
                     			</div>
-                    		</div>
-                    	</div>
+							</div>
+						</div>
                     </div>
                     <div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar pull-right">
+				      			<div class="btn-toolbar text-center">
 					      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
 					      			<input class="btn-danger btn cancel" type="reset" value="Reset" />
 				      			</div>
@@ -124,22 +120,21 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteItem("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='deleteItem("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteItem("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='deleteItem("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editItem("+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editItem("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td title='"+orderObj.name+"'>" + orderObj.name + "</td>"
-			+ "<td title='"+orderObj.itemType+"'>" + orderObj.itemType + "</td>"
+			+ "<td class='impFiled' title='"+orderObj.itemType+"'>" + orderObj.itemType + "</td>"
 			+ "<td title='"+orderObj.description+"'>" + orderObj.description + "</td>"
 			+ "<td title='"+orderObj.price+"'>" + orderObj.price + "</td>"
 			+ "<td title='"+orderObj.Status+"'>" + orderObj.itemstatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
-// 		$('.datatables').dataTable({});
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 }
@@ -175,10 +170,9 @@ function deleteItem(id,status){
 					$.unblockUI();
 		        	var resJson=JSON.parse(response);
 		            showTableData(resJson);
-// 		            alert("Delete Sucessfully");
 		            //window.location.reload();
 				}
-// 		        window.location.reload();
+		        window.location.reload();
 			},
 			error: function (e) { 
 		    	$.unblockUI();

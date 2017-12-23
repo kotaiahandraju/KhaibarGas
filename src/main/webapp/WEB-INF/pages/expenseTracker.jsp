@@ -80,10 +80,10 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-6">
+							<div class="col-md-12">
 								<div class="form-group">
-									<label class="col-sm-4 control-label required">Remarks</label>
-									<div class="col-sm-6">
+									<label class="col-sm-2 control-label required">Remarks</label>
+									<div class="col-sm-9">
 										<form:textarea path="paymentRemarks" rows="5" class="form-control" placeholder="Remarks"></form:textarea>
 									</div>
 								</div>
@@ -93,7 +93,7 @@
 					<div class="panel-footer">
 						<div class="row">
 							<div class="col-sm-12">
-								<div class="btn-toolbar  pull-right">
+								<div class="btn-toolbar text-center">
 									<input type="submit" value="Submit" id="submit1" class="btn-primary btn" />
 									<input type="reset" value="Reset" class="btn-danger btn cancel"  />
 								</div>
@@ -129,14 +129,14 @@ function displayTable(listOrders) {
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj){
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='trckerDelete("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='trckerDelete("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='trckerDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='trckerDelete("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editExpensiveTracker("+ orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editExpensiveTracker("+ orderObj.id + ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr >"
-			+ "<td title='"+orderObj.accountHead+"'>" + orderObj.accountHead + "</td>"
+			+ "<td class='impFiled' title='"+orderObj.accountHead+"'>" + orderObj.accountHead + "</td>"
 			+ "<td title='"+orderObj.dateOfExpense+"'>" + orderObj.dateOfExpense + "</td>"
 			+ "<td title='"+orderObj.itemDescription+"'>" + orderObj.itemDescription + "</td>"
 			+ "<td title='"+orderObj.paymentType+"'>" + orderObj.paymentType + "</td>"
@@ -175,11 +175,11 @@ function trckerDelete(id,status) {
 		$.fn.makeMultipartRequest('POST', 'trckerDelete', false, formData, false, 'text', function(data) {
 			var resJson=JSON.parse(data);
 			displayTable(resJson);
-// 			window.location.reload();
+			window.location.reload();
 		});
 	}
-
 }
+
 $("#pageName").text("Expense Tracker");
 $(".expenseTracker").addClass("active"); 
 </script>

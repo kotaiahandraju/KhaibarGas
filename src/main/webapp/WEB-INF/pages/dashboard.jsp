@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
-<%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
+<%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
@@ -26,12 +26,11 @@ window.onload = function() {
                                     <!--i class="fa fa-bar-chart-o"></i-->
                                     <div class="text-center" id="idleCylinders" >0</div>
                                 </div>
-                                <div class="tiles-footer">more info</div>
                             </a>
                         </div>
                         <div class="col-md-2 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-success" href="#">
-                                <div class="tiles-heading" id="delivered">DELIVERED</div>
+                                <div class="tiles-heading" id="delivered">DELIVERED CYLINDERS</div>
                                 <div class="tiles-body-alt">
                                     <!--i class="fa fa-money"></i-->
                                      <c:if test="${not empty Delivered}">
@@ -41,7 +40,6 @@ window.onload = function() {
                                     <div class="text-center">0</div>
                                     </c:if>
                                 </div>
-                                <div class="tiles-footer">more info</div>
                             </a>
                         </div>
                         <div class="col-md-2 col-xs-12 col-sm-6">
@@ -55,7 +53,6 @@ window.onload = function() {
                                     <div class="text-center" id="emptycylinders">0</div>
                                 </c:if>
                                 </div>
-                                <div class="tiles-footer">more info</div>
                             </a>
                         </div>
                         <div class="col-md-2 col-xs-12 col-sm-6">
@@ -69,25 +66,22 @@ window.onload = function() {
                                     <div class="text-center" id="filledcylinders">0</div>
                                   </c:if>
                                 </div>
-                                <div class="tiles-footer">more info</div>
                             </a>
                         </div>
                         <div class="col-md-2 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-warning" href="#">
-                                <div class="tiles-heading">MISSID CYLINDERS</div>
+                                <div class="tiles-heading">MISSED CYLINDERS</div>
                                 <div class="tiles-body-alt">
                                     <div class="text-center" id="missidcylinders">0</div>
                                 </div>
-                                <div class="tiles-footer">more info</div>
                             </a>
                         </div>
                         <div class="col-md-2 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-info" href="#">
-                                <div class="tiles-heading">IN TRUCK</div>
+                                <div class="tiles-heading">CYLINDERS IN TRUCK</div>
                                 <div class="tiles-body-alt">
                                     <div class="text-center">${Truck }</div>
                                 </div>
-                                <div class="tiles-footer">more info</div>
                             </a>
                         </div>
                     </div>

@@ -24,7 +24,7 @@
 					<div class="panel-body collapse in">
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-								<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance</th><th>UsedGas</th><th>Closing Balance</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG's)</th><th>Status</th><th></th></tr></thead>
+								<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance(in KG's)</th><th>UsedGas</th><th>Closing Balance(in KG's)</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG's)</th><th>Status</th><th></th></tr></thead>
 								<tbody></tbody>
 							</table>
 						</div>
@@ -39,7 +39,7 @@
 					<div class="panel-heading">
 						<h4>Add Filling Station</h4>
 						<div class="pull-right">
-							<a class="btn btn-warning" onclick="PopupFillingStation();">Add Gas</a>
+							<a class="btn btn-danger" onclick="PopupFillingStation();">Add Gas</a>
 						</div>
 					</div>
 					<form:form class="form-horizontal" 	modelAttribute="fillingStationForm" role="form" id="fillingstation-form" action="addfillingstation" method="post">
@@ -48,8 +48,8 @@
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<form:hidden path="id"/>
-									<label for="focusedinput" class="col-md-4 control-label">Station Number <span class="impColor">*</span></label>
-									<div class="col-md-6">
+									<label for="focusedinput" class="col-md-6 control-label">Station Number <span class="impColor">*</span></label>
+									<div class="col-md-5">
 										<form:input path="unitpoint" class="form-control " placeholder="Station Number" />	
 										<span class="hasError" id="unitpointError"></span>
 								    </div>
@@ -57,8 +57,8 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Station Name <span class="impColor">*</span></label>
-									<div class="col-md-6">
+									<label for="focusedinput" class="col-md-6 control-label">Station Name <span class="impColor">*</span></label>
+									<div class="col-md-5">
 										<form:input path="stationname" class="form-control validate onlyCharacters" placeholder="Station Name" />	
 										<span class="hasError" id="stationnameError"></span>
 								    </div>
@@ -66,8 +66,8 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Opening Balance (Gas in KG's) <span class="impColor">*</span></label>
-									<div class="col-md-6">
+									<label for="focusedinput" class="col-md-6 control-label">Opening Balance (Gas in KG's) <span class="impColor">*</span></label>
+									<div class="col-md-5">
 										<form:input path="gasavailability" class="form-control validate numericOnly" placeholder="Opening Balance (Gas in KG's)" />	
 										<span class="hasError" id="gasavailabilityError"></span>
 								    </div>
@@ -75,17 +75,17 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Number of cylinders filled at a time<span class="impColor">*</span></label>
-									<div class="col-md-6">
-										<form:input path="quantity" type="text" class="form-control validate numericOnly" placeholder="Number of cylinders filled at a time" />	
+									<label for="focusedinput" class="col-md-6 control-label">Number of Cylinders filled at a time<span class="impColor">*</span></label>
+									<div class="col-md-5">
+										<form:input path="quantity" type="text" class="form-control validate numericOnly" placeholder="Number of Cylinders filled at a time" />	
 										<span class="hasError" id="quantityError"></span>
 								    </div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Filling Station Total Capacity (Gas in KG's) <span class="impColor">*</span></label>
-									<div class="col-md-6">
+									<label for="focusedinput" class="col-md-6 control-label">Filling Station Total Capacity (Gas in KG's) <span class="impColor">*</span></label>
+									<div class="col-md-5">
 										<form:input path="gascapacity" class="form-control validate numericOnly" placeholder="Total Capacity (Gas in KG's) " />	
 										<span class="hasError" id="gascapacityError"></span>
 								    </div>
@@ -93,8 +93,8 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Filling Machines <span class="impColor">*</span></label>
-									<div class="col-md-6">
+									<label for="focusedinput" class="col-md-6 control-label">Filling Machines <span class="impColor">*</span></label>
+									<div class="col-md-5">
 										<form:input path="numberoffillingmachines"	class="form-control validate numericOnly" placeholder="Filling Machines" />	
 										<span class="hasError" id="numberoffillingmachinesError"></span>
 								    </div>
@@ -137,15 +137,16 @@
 					<div class="col-sm-12">
 						<div class="form-group">
 							<div class="col-md-offset-4 col-md-6">
-						      	<input type="button" id="" value="ADD"  class="btn-primary btn" onclick="addGas();" />
+						      	<input type="button" value="Add" class="btn-primary btn" onclick="addGas();" />
+						      	<button type="button" class="btn btn-danger" data-dismiss="modal">Cancel</button>
 							</div>
 				      	</div>
 					</div>
 				</div>
 			</div>
-        	<div class="modal-footer">
+        	<!-- <div class="modal-footer">
           		<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        	</div>
+        	</div> -->
       	</div>
     </div>
 </div>
@@ -155,7 +156,7 @@
 					<div class="panel-footer">
 				      	<div class="row">
 				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar  pull-right">
+				      			<div class="btn-toolbar text-center">
 					      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
 					      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 				      			</div>
@@ -193,34 +194,32 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance</th><th>UsedGas</th><th>Closing Balance</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG\'s)</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance(in KG\'s)</th><th>UsedGas</th><th>Closing Balance(in KG\'s)</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG\'s)</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
-		
-					if(orderObj.status == "1"){
-						var deleterow = "<a class='deactivate' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
-					}else{  
-						var deleterow = "<a class='activate' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
-					}
-					var edit = "<a class='edit editIt' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-pencil green'></i></a>"
-					serviceUnitArray[orderObj.id] = orderObj;
-					var tblRow = "<tr >"
-						+ "<td title='"+orderObj.unitpoint+"'>"+ orderObj.unitpoint+ "</td>"
-						+ "<td title='"+orderObj.stationname+"'>"+ orderObj.stationname + "</td>"
-						+ "<td title='"+orderObj.gasavailability+"'>"+ orderObj.gasavailability + "</td>"
-						+ "<td title='"+orderObj.usedGas+"'>"+ orderObj.usedGas + "</td>" 
-						+ "<td title='"+orderObj.closingBalanceGas+"'>"+ orderObj.closingBalanceGas+ "</td>"
-						+ "<td title='"+orderObj.numberoffillingmachines+"'>"+ orderObj.numberoffillingmachines + "</td>"
-						+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
-						+ "<td title='"+orderObj.gascapacity+"'>"+ orderObj.gascapacity + "</td>" 
-						+ "<td title='"+orderObj.fillingStatus+"'>"+ orderObj.fillingStatus + "</td>"
-						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
-							+ "</tr >";
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactivate' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+		}else{  
+			var deleterow = "<a class='activate' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+		}
+		var edit = "<a class='edit editIt' onclick='editCylinder("	+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr>"
+			+ "<td title='"+orderObj.unitpoint+"'>"+ orderObj.unitpoint+ "</td>"
+			+ "<td title='"+orderObj.stationname+"'>"+ orderObj.stationname + "</td>"
+			+ "<td class='impFiled' title='"+orderObj.gasavailability+"'>"+ orderObj.gasavailability + "</td>"
+			+ "<td title='"+orderObj.usedGas+"'>"+ orderObj.usedGas + "</td>" 
+			+ "<td title='"+orderObj.closingBalanceGas+"'>"+ orderObj.closingBalanceGas+ "</td>"
+			+ "<td title='"+orderObj.numberoffillingmachines+"'>"+ orderObj.numberoffillingmachines + "</td>"
+			+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
+			+ "<td title='"+orderObj.gascapacity+"'>"+ orderObj.gascapacity + "</td>" 
+			+ "<td title='"+orderObj.fillingStatus+"'>"+ orderObj.fillingStatus + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
-
 }
 
 
@@ -235,28 +234,27 @@ function editCylinder(id) {
 	$("#unitpoint").val(serviceUnitArray[id].unitpoint);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
-	
 }
+
 function deleteCylinder(id,status){
 	var checkstr=null;
 	if(status == 0){
-		 checkstr = confirm('Are you sure you want to Deactivate this?');
+		 checkstr = confirm('Are you sure you want to Deactivate?');
 	}else{
-		 checkstr = confirm('Are you sure you want to Activate this?');
+		 checkstr = confirm('Are you sure you want to Activate?');
 	}
 	if(checkstr == true){
-	var formData = new FormData();
-    formData.append('id', id);
-    formData.append('status', status);
-	$.fn.makeMultipartRequest('POST', 'deletefillingstation', false, formData, false, 'text', function(data){
-		var jsonobj = $.parseJSON(data);
-// 		window.location.reload();
-		var alldata = jsonobj.allOrders1;
-		console.log(jsonobj.allOrders1);
-		displayTable(alldata);
-	});
+		var formData = new FormData();
+	    formData.append('id', id);
+	    formData.append('status', status);
+		$.fn.makeMultipartRequest('POST', 'deletefillingstation', false, formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			window.location.reload();
+			var alldata = jsonobj.allOrders1;
+			console.log(jsonobj.allOrders1);
+			displayTable(alldata);
+		});
 	}
-	
 }
 function PopupFillingStation() {
 	$("#myModal").modal();

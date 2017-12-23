@@ -188,8 +188,8 @@
 													<!-- <span class="impColor">*</span> -->
 												</label>
 												<div class="col-sm-6">
-<%-- 													<form:input path="documents"	class="form-control validate" autocomplete="off" placeholder="" required="required" /> --%>
-													<img id="imageId" style="display: none;    width: 50%;" src="" ><span id="imageLable" style="display: none;"></span>
+<%-- 													<form:input path="documents" class="form-control validate" autocomplete="off" placeholder="" required="required" /> --%>
+													<img id="imageId" style="display: none;" src="" ><span id="imageLable" style="display: none;"></span>
 													<form:hidden path="imagePath"/>
 													<input type="file" name="file" style="margin-top: 3%;" id="documents" onchange="" />
 													<span class="hasError" id="documentsError"></span>
@@ -204,7 +204,7 @@
 								<div class="panel-footer">
 									<div class="row">
 										<div class="col-sm-12">
-											<div class="btn-toolbar  pull-right">
+											<div class="btn-toolbar text-center">
 												<input type="submit" value="Submit" id="submit1" class="btn-primary btn" />
 												<input type="reset" value="Reset" class="btn-danger btn cancel" />
 											</div>
@@ -214,12 +214,9 @@
 							</form:form>
 						</div>
 					</div>
-
 			</div>
 		</div>
 	
-
-
 <script type="text/javascript">
 var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
@@ -235,22 +232,22 @@ function displayTable(listOrders)
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj){
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteStaffMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='deleteStaffMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteStaffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='deleteStaffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 		
-		var edit = "<a class='edit editIt' onclick='editStaffMasterDetails(" + orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' onclick='editStaffMasterDetails(" + orderObj.id + ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr >"
 			+ "<td title='"+orderObj.firstname+"'>" + orderObj.firstname + "</td>"
 			+ "<td title='"+orderObj.lastname+"'>" + orderObj.lastname + "</td>"
-			+ "<td title='"+orderObj.staffcode+"'>" + orderObj.staffcode + "</td>"
-			+ "<td title='"+orderObj.staffcode+"'>" + orderObj.staffno + "</td>"
+			+ "<td class='impFiled' title='"+orderObj.staffcode+"'>" + orderObj.staffcode + "</td>"
+			+ "<td class='impFiled' title='"+orderObj.staffcode+"'>" + orderObj.staffno + "</td>"
 			+ "<td title='"+orderObj.designation+"'>" + orderObj.designation + "</td>"
 			+ "<td title='"+orderObj.nationality+"'>" + orderObj.nationality + "</td>"
 			+ "<td title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
-			+ "<td title='"+orderObj.documents+"'><img style='height: 4%;' src=${baseurl }/"+orderObj.documents +"></td>"
+			+ "<td title='"+orderObj.documents+"'><img style='width: 50px;height: 40px;' src=${baseurl }/"+orderObj.documents +"></td>"
 			+ "<td title='"+orderObj.staffStatus+"'>" + orderObj.staffStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
@@ -300,7 +297,7 @@ function deleteStaffMasterDetails(id,status)
 		formData.append('status', status);
 		$.fn.makeMultipartRequest('POST', 'deleteStaffMasterDetails', false, formData, false, 'text', function(data) {
 				var jsonobj = $.parseJSON(data);
-// 				window.location.reload();
+				window.location.reload();
 				var alldata = jsonobj.allOrders1;
 				console.log(jsonobj.allOrders1);
 				displayTable(alldata);
@@ -320,7 +317,8 @@ $("#documents").change(function(e) {
         
         var img = document.createElement("img");
         img.id='dynamicImage';
-        img.setAttribute('width', '50%');
+//         img.setAttribute('width', '50%');
+        img.setAttribute('style', 'width: 60px;height: 60px;');
         var reader = new FileReader();
         reader.onloadend = function() {
              img.src = reader.result;

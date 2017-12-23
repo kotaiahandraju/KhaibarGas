@@ -36,7 +36,7 @@ table#dependent_table tbody tr td:first-child::before {
                <li>LPO </li>
             </ol>
             <div class="clearfix"></div>
-        <div class="container-fluid">
+        <div class="container">
             <div class="row">
               <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -63,8 +63,7 @@ table#dependent_table tbody tr td:first-child::before {
                     </div>
                 </div>
             </div>
-		</div>
-		<div class="container">
+
             <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
@@ -141,10 +140,10 @@ table#dependent_table tbody tr td:first-child::before {
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-4">
+                    		<div class="col-md-8">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Remarks</label>
-                    				<div class="col-md-6">
+                    				<label for="focusedinput" class="col-md-3 control-label">Remarks</label>
+                    				<div class="col-md-9">
 		                            	<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="5"></form:textarea>
 								  	</div>
                     			</div>
@@ -285,35 +284,35 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='lpoDelete("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='lpoDelete("+ orderObj.id+ ",0)'><i class='fa fa-eye blue'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='lpoDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='lpoDelete("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash red'></i></a>"
 		}
 // 		alert(orderObj.lponumber);
 		
-		var edit = "<a class='edit editIt' id='edit"+orderObj.lponumber+"' onclick=viewDetails(this.id,1)><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' id='edit"+orderObj.lponumber+"' onclick=viewDetails(this.id,1)><i style='color: orange;' class='fa fa-edit'></i></a>"
+		var view = "<a class='view' id='"+orderObj.lponumber+"' onclick=viewDetails(this.id,0)><i class='fa fa-eye red'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		serviceUnitArray1[orderObj.lponumber] = orderObj;
 		var tblRow ="<tr>"
 			+ "<td id='"+orderObj.lponumber+"' style='text-align: center;cursor: pointer;color: red; text-decoration: underline;' onclick=viewDetails(this.id,0) title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
-						+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
-						+ "<td title='"+orderObj.suppliercontactno+"'>" + orderObj.suppliercontactno + "</td>"
-						+ "<td title='"+orderObj.supplieremail+"'>" + orderObj.supplieremail+ "</td>"
-						+ "<td title='"+orderObj.supplieraddress+"'>" + orderObj.supplieraddress + "</td>"
-						+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
-						+ "<td title='"+orderObj.paidamount+"'>" + orderObj.paidamount + "</td>"
-						+ "<td title='"+orderObj.dueamount+"'>" + orderObj.dueamount + "</td>"
-						+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
-						+ "<td title='"+orderObj.lpoStatus+"'>" + orderObj.lpoStatus + "</td>"
-						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
-						
-						+"</tr>";
-				$(tblRow).appendTo("#tableId table tbody");
-			});
+			+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
+			+ "<td title='"+orderObj.suppliercontactno+"'>" + orderObj.suppliercontactno + "</td>"
+			+ "<td title='"+orderObj.supplieremail+"'>" + orderObj.supplieremail+ "</td>"
+			+ "<td title='"+orderObj.supplieraddress+"'>" + orderObj.supplieraddress + "</td>"
+			+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
+			+ "<td title='"+orderObj.paidamount+"'>" + orderObj.paidamount + "</td>"
+			+ "<td title='"+orderObj.dueamount+"'>" + orderObj.dueamount + "</td>"
+			+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
+			+ "<td title='"+orderObj.lpoStatus+"'>" + orderObj.lpoStatus + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + view + "&nbsp;&nbsp;" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+"</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 }
+
 function editLpo(id) {
-	
 	var inputs = $('input[type="text"]');
     inputs.removeAttr('placeholder');
     inputs.css('border','');
@@ -358,10 +357,9 @@ function lpoDelete(id,status) {
 		                 if(response != null ){
 		                	 var resJson=JSON.parse(response);
 		                	showTableData(resJson);
-		                	//alert("Delete Sucessfully");
 		                	//window.location.reload();
 		                	}
-		                 //window.location.reload();
+		                 window.location.reload();
 		                 },
 		             error: function (e) { 
 		            	 $.unblockUI();

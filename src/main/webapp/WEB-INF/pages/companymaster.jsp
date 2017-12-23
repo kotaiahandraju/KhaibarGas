@@ -121,19 +121,19 @@
 											</div>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-12">
 										<div class="form-group">
-											<label class="col-sm-4 control-label required">Address</label>
-											<div class="col-sm-6">
-												<form:textarea path="companyAddress" class="form-control" autocomplete="off" rows="5" placeholder="Company Address"></form:textarea>
+											<label class="col-sm-2 control-label required">Address</label>
+											<div class="col-sm-9">
+												<form:textarea path="companyAddress" class="form-control" autocomplete="off" rows="4" placeholder="Company Address"></form:textarea>
 											</div>
 										</div>
 									</div>
-									<div class="col-md-6">
+									<div class="col-md-12">
 										<div class="form-group">
-											<label class="col-sm-4 control-label required">Remarks</label>
-											<div class="col-sm-6">
-												<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="5"></form:textarea>
+											<label class="col-sm-2 control-label required">Remarks</label>
+											<div class="col-sm-9">
+												<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="4"></form:textarea>
 											</div>
 										</div>
 									</div>
@@ -142,23 +142,18 @@
 							<div class="panel-footer">
 								<div class="row">
 									<div class="col-sm-12">
-										<div class="btn-toolbar  pull-right">
+										<div class="btn-toolbar text-center">
 											<input type="submit" value="Submit" id="submit1" class="btn-primary btn" />
 											<input type="reset" value="Reset" class="btn-danger btn cancel"  />
 										</div>
 									</div>
 								</div>
 							</div>
-							
 						</form:form>
 					</div>
-
 				</div>
-				
 			</div>
 		</div>
-	
-
 
 <script type="text/javascript">
 var listOrders1 = ${allOrders1};
@@ -169,95 +164,70 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-					+ '<thead><tr><th>Company Code</th><th>Company Name</th><th>Contact Person Name</th><th>Contact Person Mobile</th><th>Email Id</th><th>Type of Comapany</th><th>Company Address</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
-			$('#tableId').html(tableHead);
-			serviceUnitArray = {};
-			$.each(listOrders, function(i, orderObj) {
-								
-								if(orderObj.status == "1"){
-									var deleterow = "<a class='deactivate' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
-								}else{  
-									var deleterow = "<a class='activate' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
-								}
-								var edit = "<a class='edit editIt' onclick='editCompanyMasterDetails("+ orderObj.id + ")'><i class='fa fa-pencil green'></i></a>"
-								
-								serviceUnitArray[orderObj.id] = orderObj;
-								var tblRow = "<tr >"
-										+ "<td title='"+orderObj.companycode+"'>"
-										+ orderObj.companycode
-										+ "</td>"
-										+ "<td title='"+orderObj.companyname+"'>"
-										+ orderObj.companyname
-										+ "</td>"
-										+ "<td title='"+orderObj.contactpersonname+"'>"
-										+ orderObj.contactpersonname
-										+ "</td>"
-										+ "<td title='"+orderObj.contactpersonmobile+"'>"
-										+ orderObj.contactpersonmobile
-										+ "</td>"
-										+ "<td title='"+orderObj.emailid+"'>"
-										+ orderObj.emailid
-										+ "</td>"
-										+ "<td title='"+orderObj.typeofcompany+"'>"
-										+ orderObj.typeofcompany
-										+ "</td>"
-										+ "<td title='"+orderObj.companyAddress+"'>"
-										+ orderObj.companyAddress
-										+ "</td>"
-										+ "<td title='"+orderObj.remarks+"'>"
-										+ orderObj.remarks
-										+ "</td>"
-										+ "<td title='"+orderObj.companyStatus+"'>"
-										+ orderObj.companyStatus
-										+ "</td>"
-										+ "<td style='text-align: center;white-space: nowrap;'>"
-										+ edit
-										+ "&nbsp;&nbsp;"
-										+ deleterow + "</td>"
-										+ "</tr >";
-								$(tblRow).appendTo("#tableId table tbody");
-							});
-			if(isClick=='Yes') $('.datatables').dataTable();
-
+		+ '<thead><tr><th>Company Code</th><th>Company Name</th><th>Contact Person Name</th><th>Contact Person Mobile</th><th>Email Id</th><th>Type of Comapany</th><th>Company Address</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+	$('#tableId').html(tableHead);
+	serviceUnitArray = {};
+	$.each(listOrders, function(i, orderObj) {
+		if(orderObj.status == "1"){
+			var deleterow = "<a class='deactivate' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+		}else{  
+			var deleterow = "<a class='activate' onclick='deleteCompanyMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
+		var edit = "<a class='edit editIt' onclick='editCompanyMasterDetails("+ orderObj.id + ")'><i class='fa fa-edit'></i></a>"
+		serviceUnitArray[orderObj.id] = orderObj;
+		var tblRow = "<tr >"
+			+ "<td class='impFiled' title='"+orderObj.companycode+"'>" + orderObj.companycode + "</td>"
+			+ "<td title='"+orderObj.companyname+"'>" + orderObj.companyname + "</td>"
+			+ "<td title='"+orderObj.contactpersonname+"'>" + orderObj.contactpersonname + "</td>"
+			+ "<td title='"+orderObj.contactpersonmobile+"'>" + orderObj.contactpersonmobile + "</td>"
+			+ "<td title='"+orderObj.emailid+"'>" + orderObj.emailid + "</td>"
+			+ "<td title='"+orderObj.typeofcompany+"'>" + orderObj.typeofcompany + "</td>"
+			+ "<td title='"+orderObj.companyAddress+"'>" + orderObj.companyAddress + "</td>"
+			+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
+			+ "<td title='"+orderObj.companyStatus+"'>" + orderObj.companyStatus + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+ "</tr >";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
+	if(isClick=='Yes') $('.datatables').dataTable();
+}
 
-		function editCompanyMasterDetails(id) {
-			$("#id").val(serviceUnitArray[id].id);
-			$("#companycode").val(serviceUnitArray[id].companycode);
-			$("#companyname").val(serviceUnitArray[id].companyname);
-			$("#contactpersonname").val(serviceUnitArray[id].contactpersonname);
-			$("#contactpersonmobile").val(serviceUnitArray[id].contactpersonmobile);
-			$("#emailid").val(serviceUnitArray[id].emailid);
-			$("#remarks").val(serviceUnitArray[id].remarks);
-			$("#companyAddress").val(serviceUnitArray[id].companyAddress);
-			$("#typeofcompany").val(serviceUnitArray[id].typeofcompany);
-			$("#status").val(serviceUnitArray[id].status);
-			//$("#customerid").val(serviceUnitArray[id].customerid);
-			$("#submit1").val("Update");
-			$(window).scrollTop($('#moveTo').offset().top);
-		}
-		function deleteCompanyMasterDetails(id,status) {
-			var checkstr=null;
-			if(status == 0){
-				 checkstr = confirm('Are you sure you want to Deactivate?');
-			}else{
-				 checkstr = confirm('Are you sure you want to Activate?');
-			}
-			if (checkstr == true) {
-				var formData = new FormData();
-				formData.append('id', id);
-				formData.append('status', status);
-				$.fn.makeMultipartRequest('POST', 'deleteCompanyMasterDetails',
-						false, formData, false, 'text', function(data) {
-							var jsonobj = $.parseJSON(data);
-							var alldata = jsonobj.allOrders1;
-							console.log(jsonobj.allOrders1);
-							displayTable(alldata);
-// 							window.location.reload();
-						});
-			}
+function editCompanyMasterDetails(id) {
+	$("#id").val(serviceUnitArray[id].id);
+	$("#companycode").val(serviceUnitArray[id].companycode);
+	$("#companyname").val(serviceUnitArray[id].companyname);
+	$("#contactpersonname").val(serviceUnitArray[id].contactpersonname);
+	$("#contactpersonmobile").val(serviceUnitArray[id].contactpersonmobile);
+	$("#emailid").val(serviceUnitArray[id].emailid);
+	$("#remarks").val(serviceUnitArray[id].remarks);
+	$("#companyAddress").val(serviceUnitArray[id].companyAddress);
+	$("#typeofcompany").val(serviceUnitArray[id].typeofcompany);
+	$("#status").val(serviceUnitArray[id].status);
+	//$("#customerid").val(serviceUnitArray[id].customerid);
+	$("#submit1").val("Update");
+	$(window).scrollTop($('#moveTo').offset().top);
+}
+function deleteCompanyMasterDetails(id,status) {
+	var checkstr=null;
+	if(status == 0){
+		 checkstr = confirm('Are you sure you want to Deactivate?');
+	}else{
+		 checkstr = confirm('Are you sure you want to Activate?');
+	}
+	if (checkstr == true) {
+		var formData = new FormData();
+		formData.append('id', id);
+		formData.append('status', status);
+		$.fn.makeMultipartRequest('POST', 'deleteCompanyMasterDetails', false, formData, false, 'text', function(data) {
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			console.log(jsonobj.allOrders1);
+			displayTable(alldata);
+			window.location.reload();
+		});
+	}
+}
 
-		}
-		$("#pageName").text("Company Master");
-		$(".company").addClass("active"); 
-	</script>
+$("#pageName").text("Company Master");
+$(".company").addClass("active"); 
+</script>

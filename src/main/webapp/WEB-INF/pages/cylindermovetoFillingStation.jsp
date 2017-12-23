@@ -16,7 +16,7 @@
 		<form:form commandName="fillingStationForm">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-				<div class="panel panel-primary">
+				<div class="panel panel-danger">
 					<div class="panel-heading">
 						<h4>Search Form</h4>
 					</div>
@@ -76,7 +76,7 @@
 				</div>
 				<div class="row">
 					<div class="col-md-6">
-						<div class="panel panel-primary">
+						<div class="panel panel-danger">
 							<div class="panel-heading">
 		                    	<h4>Cylinders List</h4>
 								<div class="options">   
@@ -98,7 +98,7 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="panel panel-primary">
+						<div class="panel panel-danger">
 							<div class="panel-heading">
 								<h4>&nbsp;</h4>
 							</div>
