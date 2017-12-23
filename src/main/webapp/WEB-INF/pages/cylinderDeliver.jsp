@@ -37,7 +37,7 @@ table#dependent_table tbody tr td:first-child::before {
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
-		<form:form modelAttribute="lpoForm" id="cylinderDeliverForm" action="" class="form-horizontal" method="post">
+		<form:form modelAttribute="lpoForm" id="cylinderDeliverForm" action="cylinderDeliverSave" class="form-horizontal" method="post">
 <table><tr><td>
 		<div class="row">
 			<div class="col-md-6">
@@ -51,7 +51,7 @@ table#dependent_table tbody tr td:first-child::before {
 								<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                    				<form:select path="truckId" class="form-control select2" onfocus="removeBorder(this.id);" >
+		                    				<form:select path="truckId" class="form-control chzn-select validate" onfocus="removeBorder(this.id);" >
 		                    				<form:option value="">--Select Truck--</form:option>
 		                    				<form:options items="${trucks}"></form:options>
 		                    				</form:select>
@@ -62,7 +62,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Customer Type <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    					<form:select path="customertype" class="form-control select2 validate "  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
+                    					<form:select path="customertype" class="form-control chzn-select  validate"  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
 		                            		<form:option value="">-- Customer Type --</form:option>
 									  		<form:option value="COMMERCIAL">COMMERCIAL</form:option>
 									  		<form:option value="DOMESTIC">DOMESTIC</form:option>
@@ -75,7 +75,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Customer Id <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-                    					<form:select path="customerId" class="form-control select2 validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
+                    					<form:select path="customerId" class="form-control chzn-select validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
 		                            		<form:option value="">-- Select Customer Id --</form:option>
 								  		</form:select>
 								  	</div>
@@ -90,6 +90,30 @@ table#dependent_table tbody tr td:first-child::before {
                     					Mobile: <span id="mobile"></span><br><br>
                     					Land Line: <span id="landline"></span><br>
                     					cylinders : <span id="cylinders"></span>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Last Due Amount <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<span id="lastDueAmount"></span>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Payed Amount <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<input type="text" name="payedAmount" id="payedAmount" onkeyup="payedAmountCal(this.value)">
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Due Amount <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<input type="text" name="dueAmount" id="dueAmount">
 								  	</div>
                     			</div>
                     		</div>
@@ -141,7 +165,12 @@ table#dependent_table tbody tr td:first-child::before {
 		<form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
 		<form:options items="${items}"></form:options>
 	</form:select>
-	vat:<c:out value="${vat}"></c:out>%
+	<c:if test="${not empty vat}">
+	<form:hidden path="vat" value="${vat}"/>
+	</c:if>
+	<c:if test="${empty vat}">
+	<form:hidden path="vat" value="0"/>
+	</c:if>
 		<!-- </div>
 		<div class="row"> -->
 			<div class="col-md-12">
@@ -183,6 +212,13 @@ table#dependent_table tbody tr td:first-child::before {
 								<th><span class="totalInvoiceValue"></span></th>
 								<th><span class="totalDiscounts"></span></th>
 								<th><span class="totalTaxableValue"></span></th>
+							</tr>
+							<tr>
+								<th colspan="5" style="text-align: right;">
+									Net Amount = <span id="netAmount"></span><br>Vat Amount ( ${vat }%)=<span id="vatAmount"></span> <br>Grand Total=<span id="grandTotal"></span>
+								</th>
+								<th></th>
+								<th></th>
 							</tr>
 						</tfoot>
 					</table>
@@ -448,35 +484,33 @@ function showTableData(response){
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='lpoDelete("+ orderObj.id+ ",0)'><i class='fa fa-bell green'></i></a>"
+			var deleterow = "<a class='deactivate' onclick='lpoDelete("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='lpoDelete("+ orderObj.id+ ",1)'><i class='fa fa-bell-o red'></i></a>"
+			var deleterow = "<a class='activate' onclick='lpoDelete("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 // 		alert(orderObj.lponumber);
 		
-		var edit = "<a class='edit editIt' id='edit"+orderObj.lponumber+"' onclick=viewDetails(this.id,1)><i class='fa fa-pencil green'></i></a>"
+		var edit = "<a class='edit editIt' id='edit"+orderObj.lponumber+"' onclick=viewDetails(this.id,1)><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		serviceUnitArray1[orderObj.lponumber] = orderObj;
 		var tblRow ="<tr>"
-			+ "<td id='"+orderObj.lponumber+"' style='text-align: center;cursor: pointer;color: red; text-decoration: underline;' onclick=viewDetails(this.id,0) title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
-						+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
-						+ "<td title='"+orderObj.suppliercontactno+"'>" + orderObj.suppliercontactno + "</td>"
-						+ "<td title='"+orderObj.supplieremail+"'>" + orderObj.supplieremail+ "</td>"
-						+ "<td title='"+orderObj.supplieraddress+"'>" + orderObj.supplieraddress + "</td>"
-						+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
-						+ "<td title='"+orderObj.paidamount+"'>" + orderObj.paidamount + "</td>"
-						+ "<td title='"+orderObj.dueamount+"'>" + orderObj.dueamount + "</td>"
-						+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
-						+ "<td title='"+orderObj.lpoStatus+"'>" + orderObj.lpoStatus + "</td>"
-						+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
-						
-						+"</tr>";
-				$(tblRow).appendTo("#tableId table tbody");
-			});
+			+ "<td id='"+orderObj.lponumber+"' style='text-align: center;cursor: pointer;color: red;text-decoration: underline;' onclick=viewDetails(this.id,0) title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
+			+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
+			+ "<td title='"+orderObj.suppliercontactno+"'>" + orderObj.suppliercontactno + "</td>"
+			+ "<td title='"+orderObj.supplieremail+"'>" + orderObj.supplieremail+ "</td>"
+			+ "<td title='"+orderObj.supplieraddress+"'>" + orderObj.supplieraddress + "</td>"
+			+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
+			+ "<td title='"+orderObj.paidamount+"'>" + orderObj.paidamount + "</td>"
+			+ "<td title='"+orderObj.dueamount+"'>" + orderObj.dueamount + "</td>"
+			+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
+			+ "<td title='"+orderObj.lpoStatus+"'>" + orderObj.lpoStatus + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+"</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 }
 function editLpo(id) {
-	
 	var inputs = $('input[type="text"]');
     inputs.removeAttr('placeholder');
     inputs.css('border','');
@@ -676,11 +710,17 @@ function allcalculate(id){
 	
 	priceCalculator();
 }
+var grandTotal = 0.00;
+var finalAmount = 0.00;
+var lastDueAmount1 = 0.00;
 function priceCalculator(){
 	 var globelTotalValue = 0.00;
 		var globalDiscount = 0.00;
 		var globalTaxable = 0.00;
-		var grandTotal = 0.00;
+		var vatAmount =0.00;
+		
+		
+		var vat = $("#vat").val();
 	var array = $.makeArray($('tbody tr[id]').map(function() {
 		  return this.id;
 		}));
@@ -712,8 +752,17 @@ function priceCalculator(){
 		
 		
 	 }
+	 var lstdue = $("#lastDueAmount").text();
+	 
 	 grandTotal = globalTaxable;
-	 $("#amount").val(grandTotal);
+	 vatAmount = (grandTotal)*(vat/100);
+	 finalAmount = (grandTotal)*(100+vat)/100;
+	if(lstdue !="" && lstdue != null && lstdue != "undefined" ){
+		finalAmount = parseFloat(finalAmount)+parseFloat(lstdue);
+	 }	
+	 $("#netAmount").text(grandTotal);
+	 $("#vatAmount").text(Math.round(vatAmount));
+	 $("#grandTotal").text(Math.round(finalAmount));
 // 	 var paidamount =$("#paidamount").val();
 // 	 if(paidamount.trim().length == 0){
 // 		 $("#dueamount").val(grandTotal);
@@ -804,6 +853,7 @@ function getCustomerIds(value){
 				+ catObj.customerid + '</option>';
 		});
 		$('#customerId').empty().append(html);
+		$("#customerId").trigger("chosen:updated");
 	});
 }
 function getCustomerDetails(value){
@@ -811,8 +861,17 @@ function getCustomerDetails(value){
 	$("#mobile").text(serviceUnitArray2[value].mobile);
 	$("#customeraddress").text(serviceUnitArray2[value].customeraddress);
 	$("#landline").text(serviceUnitArray2[value].landline);
-	$("#cylinders").text(serviceUnitArray2[value].cylinderId1);
-	$("#cylinders").text(serviceUnitArray2[value].name);
+	$("#lastDueAmount").text(serviceUnitArray2[value].dueAmount);
+// 	$("#cylinders").text(serviceUnitArray2[value].cylinderId1);
+// 	$("#cylinders").text(serviceUnitArray2[value].name);
+	if(serviceUnitArray2[value].name != null){
+		var array = (serviceUnitArray2[value].name).split(',');
+		var array1 = (serviceUnitArray2[value].cylinderId1).split(',');
+		for(var i=0;i<array.length;i++){
+			var varcheckBox = "<input name='cylinderId' type='checkbox' value='"+array1[i] +"' />'"+array[i]+"'"; 
+			$("#cylinders").append(varcheckBox);
+		}
+	}
 }
 /* function getTruckCylinders(id){
 	var formData = new FormData();
@@ -844,6 +903,10 @@ function getTarrifPrice(value,id){
 		$("#"+number+"rate").val(jsonobj.rate);
 		allcalculate(number+"rate");
 	});
+}
+function payedAmountCal(value){
+	var dueAmount =  Math.round(finalAmount-value);
+	$("#dueAmount").val(dueAmount);
 }
 $("#pageName").text("Cylinder Deliver Status");
 $(".cylinderDeliver").addClass("active");

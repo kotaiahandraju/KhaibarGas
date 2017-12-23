@@ -23,10 +23,15 @@ protected Date createdTime ;
 protected Date updatedTime ;
 protected String cylindetId ;
 protected String cylinderStatus ;
-protected String createdBy,fillingStation , customerId,truckId,item,customertype,storename ;
+protected String createdBy,fillingStation , customerId,truckId,item,customertype,storename,vat;
 
 
-
+public String getVat() {
+	return vat;
+}
+public void setVat(String vat) {
+	this.vat = vat;
+}
 public String getStorename() {
 	return storename;
 }

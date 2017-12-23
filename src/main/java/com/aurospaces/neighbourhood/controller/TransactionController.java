@@ -437,8 +437,43 @@ public class TransactionController {
 		
 	}
 	@RequestMapping(value = "/cylinderDeliver")
-	public String lpoHome(@ModelAttribute("lpoForm")CylindertransactionBean cylindertransactionBean,HttpServletRequest request,
+	public String cylinderDeliver(@ModelAttribute("lpoForm")CylindertransactionBean cylindertransactionBean,HttpServletRequest request,
 			HttpSession session) {
+		String sJson = null;
+		List<LpomasterBean> lpoList=null;
+		try {
+			String sPropFilePath = objContext.getRealPath("Resources"+ File.separator + "DataBase.properties");
+			if (StringUtils.isNotBlank(sPropFilePath)) {
+				Properties objProperties = new Properties();
+				InputStream objStream = new FileInputStream(sPropFilePath);
+				objProperties.load(objStream);
+				String vat = objProperties.getProperty("vat");
+				System.out.println(vat);
+				request.setAttribute("vat", vat);
+			}
+			/*sJson=lpomasterDao.getAllCustomer();
+			if(sJson !=null){
+				
+				 request.setAttribute("allObjects", sJson);
+			}else{
+				
+				request.setAttribute("allObjects", "''");
+			}*/
+			
+			
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "cylinderDeliver";
+	}
+	@RequestMapping(value = "/cylinderDeliverSave")
+	public String cylinderDeliverSave(@ModelAttribute("lpoForm")CylindertransactionBean cylindertransactionBean,@RequestParam("unit") String[] unit,@RequestParam("rate") String[] rate,
+			@RequestParam("totalvalue") String[] totalvalue,@RequestParam("discount") String[] discount,@RequestParam("item1") String[] item,
+			@RequestParam("taxable") String[] taxable, @RequestParam("cylinderId") String[] cylinderId,  HttpServletRequest request,HttpSession session) {
 		String sJson = null;
 		List<LpomasterBean> lpoList=null;
 		try {
