@@ -141,6 +141,12 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			if(StringUtils.isNotBlank(cylindermasterBean.getTruckId())){
 				buffer.append(" ,truckId= '"+cylindermasterBean.getTruckId()+"'");
 			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getStore())){
+				buffer.append(",store= '"+cylindermasterBean.getStore()+"'");
+			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getCustomerid())){
+				buffer.append(",customerid= '"+cylindermasterBean.getCustomerid()+"'");
+			}
 			if(cylindermasterBean.getId() !=0){
 				buffer.append(" WHERE id= '"+cylindermasterBean.getId()+"'"); 
 			}
@@ -284,5 +290,18 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		return null;
 		 
 	 }
+	 public List<CylindermasterBean> searchReturnQualityChecking(String cylinderType,int limit,String cylinderstatus) {
+			jdbcTemplate = custom.getJdbcTemplate();
+			List<CylindermasterBean> retlis=null;
+			try{
+				String sql =  "select  cm.id, cm.cylinderid,i.name  from cylindermaster cm,items i where  i.id=cm.size and cm.size=? and cm.cylinderstatus=?  limit ?";
+					retlis = jdbcTemplate.query(sql, new Object[] {cylinderType,cylinderstatus,limit },
+						ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+				System.out.println("-----------list----------"+retlis);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return retlis;
+		}
 }
 

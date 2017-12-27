@@ -136,7 +136,8 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Expiry Date <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="expirtdate1"  class="form-control validate" readonly="true" placeholder="Expiry Date"  onchange="removeBorder(this.id)"/>
+
+								    	<form:input path="expirtdate1" class="form-control validate" readonly="true" placeholder="Expiry Date"  onchange="removeBorder(this.id)"/>
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
@@ -240,11 +241,10 @@ function editCylinder(id) {
 	 lpo =  serviceUnitArray[id].lponumber
 	$("#color").val(serviceUnitArray[id].color);
 	$("#madein").val(serviceUnitArray[id].madein);
-	$("#expirtdate1").val(serviceUnitArray[id].expirtdate1);
+	alert(serviceUnitArray[id].expirtdate1);
+	$("#expirtdate1").val(serviceUnitArray[id].expirtdate1).trigger("change");
 	$("#ownercompany").val(serviceUnitArray[id].ownercompany).trigger("change");
-// 	$("#ownercompany").trigger("chosen:updated");
 	$("#store").val(serviceUnitArray[id].store).trigger("change");
-// 	$("#store").trigger("chosen:updated")
 	$("#cylinderstatus").val(serviceUnitArray[id].cylinderstatus);
 	$("#remarks").val(serviceUnitArray[id].remarks).trigger("change");
 	$("#submit1").val("Update");

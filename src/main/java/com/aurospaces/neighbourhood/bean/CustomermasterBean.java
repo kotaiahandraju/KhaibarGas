@@ -17,9 +17,27 @@ protected String authorizedperson ;
 protected String contactperson ;
 protected String customertype ;
 protected String status ;
-protected String custStatus,cylinderId ;
+protected String custStatus,cylinderId,netAmount,payedAmount,dueAmount;
 
 
+public String getNetAmount() {
+	return netAmount;
+}
+public void setNetAmount(String netAmount) {
+	this.netAmount = netAmount;
+}
+public String getPayedAmount() {
+	return payedAmount;
+}
+public void setPayedAmount(String payedAmount) {
+	this.payedAmount = payedAmount;
+}
+public String getDueAmount() {
+	return dueAmount;
+}
+public void setDueAmount(String dueAmount) {
+	this.dueAmount = dueAmount;
+}
 public String getCylinderId() {
 	return cylinderId;
 }

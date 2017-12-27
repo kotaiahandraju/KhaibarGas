@@ -83,16 +83,16 @@ public class QualityCheck {
 	
 	
 	@RequestMapping("returnCylinderQualityCheck")
-	public @ResponseBody String returnCylinderQualityCheck(@RequestParam("store") String sStore,@RequestParam("cylinderType") String cylinderType,@RequestParam("quantity") String limit){
+	public @ResponseBody String returnCylinderQualityCheck(@RequestParam("cylinderType") String cylinderType,@RequestParam("quantity") String limit){
 		ObjectMapper objectMapper=null;
 		String sJson=null;
 		List<CylindermasterBean> retlist=null;
 		try{
-			if(sStore !="" && cylinderType !="" && limit !=""){
+			if(cylinderType !="" && limit !=""){
 				
 				int iLimit=Integer.parseInt(limit);
-				System.out.println("----data------"+sStore+"---name"+cylinderType+"---quantity---"+limit);
-				retlist=cylindermasterDao.searchCylinderMoveToFilling(sStore, cylinderType, iLimit,"7");
+				System.out.println("----data------"+"---name"+cylinderType+"---quantity---"+limit);
+				retlist=cylindermasterDao.searchReturnQualityChecking(cylinderType, iLimit,"7");
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(retlist);
 			}
