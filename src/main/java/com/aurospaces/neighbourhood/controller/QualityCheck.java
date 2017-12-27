@@ -126,6 +126,7 @@ public class QualityCheck {
     CylindertransactionBean cylindertransactionBean =null;
     CylindermasterBean cylindermasterBean =null;
 		try {
+			System.out.println("----------store----: "+cylindertransactionBean1.getStorename());
 			KhaibarUsersBean users = (KhaibarUsersBean)session.getAttribute("cacheUserBean");
 			String cylenderId =cylindertransactionBean1.getCylindetId();
 			System.out.println("storename---"+cylenderId);
@@ -139,6 +140,7 @@ public class QualityCheck {
 			cylindertransactionBean.setCylindetId(cylenderId1[i]);
 			cylindermasterBean.setId(Integer.parseInt(cylenderId1[i]));
 			cylindermasterBean.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
+			cylindermasterBean.setStore(cylindertransactionBean1.getStorename());
 			cylindertransactionDao.save(cylindertransactionBean);
 			cylindermasterDao.updateCylinderStatus(cylindermasterBean);
 			}

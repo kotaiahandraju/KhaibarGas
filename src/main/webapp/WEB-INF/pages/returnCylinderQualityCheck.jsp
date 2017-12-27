@@ -189,13 +189,13 @@ function QualityCheck(){
     	 alert("Please Select Cylinder");
     	 return false;
      }
-    var storename= $("#storename").val();
-     alert(cylenderId);
+    var store= $("#store").val();
+     alert("cylinderId"+cylenderId+"------store---"+store);
      var formData = new FormData();
-     formData.append("storename",storename);
+     formData.append("storename",store);
      formData.append("cylindetId",cylenderId);
      formData.append("cylinderStatus",1);
-     $.fn.makeMultipartRequest('POST', 'updateCylinderStatus8', false,
+      $.fn.makeMultipartRequest('POST', 'updateCylinderStatus8', false,
  			formData, false, 'text', function(data){
 //  		var jsonobj = $.parseJSON(data);
  		window.location.reload();
@@ -203,7 +203,7 @@ function QualityCheck(){
  		var alldata = jsonobj.allOrders1;
  		console.log(jsonobj.allOrders1);
  		displayTable(alldata); */
- 	});
+ 	}); 
      
 }
 
