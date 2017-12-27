@@ -34,7 +34,7 @@ public class LpomasterDao extends BaseLpomasterDao
 		try {
 			
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT l.*, DATE_FORMAT(l.expiryDate, '%d-%M-%Y') as expiryDate1,CASE WHEN l.status IN ('0') THEN 'Deactive' WHEN l.status in ('1') THEN 'Active'  ELSE '-----' END as lpoStatus  from lpomaster l order by id desc";
+			String sql = "SELECT l.*, DATE_FORMAT(l.expiryDate, '%d-%b-%Y') as expiryDate1,CASE WHEN l.status IN ('0') THEN 'Deactive' WHEN l.status in ('1') THEN 'Active'  ELSE '-----' END as lpoStatus  from lpomaster l order by id desc";
 			System.out.println("sql:::"+sql);
 			listLpomasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<LpomasterBean>(LpomasterBean.class));
 			if(listLpomasterBean !=null){
@@ -61,7 +61,7 @@ public class LpomasterDao extends BaseLpomasterDao
 	 public List<LpomasterBean> getLPOdetails(LpomasterBean lpomasterBean) {
 		 List<LpomasterBean> retlist =null;
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select l.suppliername,li.expirydate from lpomaster l ,lpoitems li where l.lponumber =li.lponumber and li.itemid=? and li.lponumber =?";
+			String sql = "select l.suppliername,DATE_FORMAT(l.expiryDate, '%d-%b-%Y') as expiryDate1 from lpomaster l ,lpoitems li where l.lponumber =li.lponumber and li.itemid=? and li.lponumber =?";
 			 retlist = jdbcTemplate.query(sql,
 			new Object[]{lpomasterBean.getItem(),lpomasterBean.getLponumber()},
 			ParameterizedBeanPropertyRowMapper.newInstance(LpomasterBean.class));

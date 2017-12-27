@@ -136,6 +136,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Expiry Date <span class="impColor">*</span></label>
 								    <div class="col-md-6">
+
 								    	<form:input path="expirtdate1" class="form-control validate" readonly="true" placeholder="Expiry Date"  onchange="removeBorder(this.id)"/>
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>

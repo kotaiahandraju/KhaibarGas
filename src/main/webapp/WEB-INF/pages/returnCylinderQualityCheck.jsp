@@ -9,7 +9,7 @@
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="#">Home</a></li>
-		<li>Cylinder Quality Check</li>
+		<li>Return Cylinder Quality Check And Move To Store</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -18,14 +18,7 @@
 			<form:form commandName="qualityCheckForm">
 				<div class="row">
 				  	<div class="col-md-3">
-						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Store Name <span class="impColor">*</span></label>
-							<div class="col-md-7">
-				        		<form:select path="store" class="form-control " onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store Name --</form:option>
-				        			<form:options items="${stores}"></form:options>
-				        		</form:select>
-							</div>
+						
 						</div>
 					</div>
 					<div class="col-md-3">
@@ -33,7 +26,7 @@
 							<label for="focusedinput" class="col-md-5 control-label">Cylinder Type <span class="impColor">*</span></label>
 							<div class="col-md-7">
 				        		<form:select path="cylinderType" class="form-control " onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store --</form:option>
+				        			<form:option value="">-- Select Cylinder Type --</form:option>
 				        			<form:options items="${cylinderTypes}"></form:options>
 				        		</form:select>
 							</div>
@@ -78,7 +71,6 @@
 									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 										<thead>
 											<tr><th>Cylinder ID</th>
-											<th>Store</th>
 											<th>Size</th></tr>
 										</thead>
 										<tbody></tbody>
@@ -99,15 +91,28 @@
 							</div>
 						</div>
 						<div class="row">
+						<div class="col-md-12">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-3 control-label">Store Name <span class="impColor">*</span></label>
+							<div class="col-md-6">
+				        		<form:select path="store" class="form-control " onfocus="removeBorder(this.id)">
+				        			<form:option value="">---- Select Store Name --</form:option>
+				        			<form:options items="${stores}"></form:options>
+				        		</form:select>
+				        		</div>
+							</div>
+							</div>
+						</div>
+						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<div class="col-md-offset-3 col-md-6" style="padding-top: 6px;">
-						        		<input type="button" class="btn btn-primary" value="Cylinder QualityCheck" onclick="QualityCheck()">
+						        		<input type="button" class="btn btn-primary" value="Return Cylinder QualityCheck" onclick="QualityCheck()">
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
+					
 				</div>
 				</form:form>
          	</div>
@@ -146,14 +151,14 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Cylinder ID</th><th>storename</th><th>Size</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Cylinder ID</th><th>Size</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
 					serviceUnitArray[orderObj.id] = orderObj;
 					var tblRow = "<tr >"
 							+ "<td title='"+orderObj.cylinderid+"'><input class='child' name='chkbox' type='checkbox' style='width: 21px;' value='"+orderObj.id+"' >"+ orderObj.cylinderid + "</td>"
-							+ "<td title='"+orderObj.storename+"'>"+ orderObj.storename + "</td>"
+							//+ "<td title='"+orderObj.storename+"'>"+ orderObj.storename + "</td>"
 							+ "<td title='"+orderObj.name+"'>"+ orderObj.name + "</td>"
 							+ "</tr >";
 					$(tblRow).appendTo("#tableId table tbody");
@@ -189,7 +194,7 @@ function QualityCheck(){
      var formData = new FormData();
      formData.append("storename",storename);
      formData.append("cylindetId",cylenderId);
-     formData.append("cylinderStatus",8);
+     formData.append("cylinderStatus",1);
      $.fn.makeMultipartRequest('POST', 'updateCylinderStatus8', false,
  			formData, false, 'text', function(data){
 //  		var jsonobj = $.parseJSON(data);
@@ -204,7 +209,6 @@ function QualityCheck(){
 
 
 function searchData(){
-	var store=$("#store").val();
 	var quantity=$("#quantity").val();
 	var cylinderType=$("#cylinderType").val();
 	 var formData = new FormData();
@@ -213,7 +217,7 @@ function searchData(){
 	 $.ajax({
 			type : "POST",
 			url : "returnCylinderQualityCheck.htm",
-			data :"store="+store+"&quantity="+quantity+"&cylinderType="+cylinderType,
+			data :"quantity="+quantity+"&cylinderType="+cylinderType,
 			beforeSend : function() {
 	             $.blockUI({ message: 'Please wait' });
 	          }, 
@@ -241,7 +245,8 @@ function searchData(){
 	//});
 }
 
-$("#pageName").text("Cylinder Quality Check");
+$("#pageName").text("Return Cylinder Quality Check And Move To Store");
+$("#pageName").css('font-size','32px');
 // $(".transactions").addClass("open");
 // $(".transactions").addClass("active");
 $(".cylinderQualityCheck").addClass("active");

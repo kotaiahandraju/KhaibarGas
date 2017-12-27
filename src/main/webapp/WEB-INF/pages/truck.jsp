@@ -151,21 +151,21 @@
 <script type="text/javascript">
 $(function () {
 	$("#registrationexpirydate1").datepicker({
-		dateFormat: "dd-MM-yy",
+		dateFormat: "dd-M-yy",
 	 	changeDate : true,
 		changeMonth : true,
 		changeYear : true,
 	});
 
 	$("#civildefensecardexpirydate1").datepicker({
-		dateFormat: "dd-MM-yy",
+		dateFormat: "dd-M-yy",
 		changeDate : true,
 		changeMonth : true,
 		changeYear : true,
 	});
 	
 	$("#servicedue1").datepicker({
-		dateFormat: "dd-MM-yy",
+		dateFormat: "dd-M-yy",
 		changeDate : true,
 		changeMonth : true,
 		changeYear : true,
