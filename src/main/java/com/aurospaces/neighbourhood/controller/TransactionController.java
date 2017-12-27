@@ -544,6 +544,7 @@ public class TransactionController {
 							customercylindersDao.save(customercylindersBean);
 							cylinderMasterBean1.setId(cylindermasterbean.getId());
 							cylinderMasterBean1.setCylinderstatus("6");
+							cylinderMasterBean1.setCustomerid(customerId);
 							cylindermasterDao.updateCylinderStatus(cylinderMasterBean1);
 						}
 						// quantity,price,discount,grandTotal,vat,cylinderDeliverTruck,cylinderReturnTruck
