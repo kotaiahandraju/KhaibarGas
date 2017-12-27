@@ -239,7 +239,7 @@ table#dependent_table tbody tr td:first-child::before {
 							</tr>
 							<tr>
 								<th colspan="5" style="text-align: right;">
-									Net Amount = <span id="netAmount"></span><br>
+									Net Amount = <span id="netAmount1"></span><br>
 									Vat Amount ( ${vat }%)=<span id="vatAmount"></span><br>
 									previous Due Amount =<span id="lastDueAmount"></span><br>
 									Gross Amount=<span id="grandTotal"></span>
@@ -590,13 +590,13 @@ function priceCalculator(){
 	 var lstdue = $("#lastDueAmount").text();
 	 
 	 grandTotal = globalTaxable;
-	 vatAmount = (grandTotal)*(vat/100);
-	 finalAmount = (grandTotal)*(100+vat)/100;
+	 vatAmount = parseFloat((grandTotal)*(vat/100));
+	 finalAmount = parseFloat((grandTotal))*(100+parseFloat(vat))/100;
 	if(lstdue !="" && lstdue != null && lstdue != "undefined" ){
 		finalAmount = parseFloat(finalAmount)+parseFloat(lstdue);
 	 }	
 	$("#netAmount").val(finalAmount);
-	 $("#netAmount").text(grandTotal);
+	 $("#netAmount1").text(grandTotal);
 	 $("#vatAmount").text(Math.round(vatAmount));
 	 $("#grandTotal").text(Math.round(finalAmount));
 // 	 var paidamount =$("#paidamount").val();

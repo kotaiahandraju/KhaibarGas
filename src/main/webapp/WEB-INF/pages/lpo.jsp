@@ -463,13 +463,13 @@ function addMoreRowsForDependent() {
 			 + "</tr>";
 	$(dependentRow1).appendTo("#dependent_table tbody");
 	$("#"+dependentRowCount+"manufacturingdate").datepicker({
-		dateFormat : "dd-MM-yy",
+		dateFormat : "dd-M-yy",
 		changeDate : true,
 		changeMonth : true,
 		changeYear : true,
 	});
 	$("#"+dependentRowCount+"expirydate").datepicker({
-		dateFormat : "dd-MM-yy",
+		dateFormat : "dd-M-yy",
 		changeDate : true,
 		changeMonth : true,
 		changeYear : true,
