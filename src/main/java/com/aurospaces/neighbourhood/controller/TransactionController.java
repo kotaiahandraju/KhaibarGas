@@ -556,6 +556,7 @@ public class TransactionController {
 					customercylindersDao.updateCustomerCylinderStatus(cylinderId[i]);
 					cylinderMasterBean2.setId(Integer.parseInt(cylinderId[i]));
 					cylinderMasterBean2.setCylinderstatus("7");
+					cylinderMasterBean2.setOwnercompany(company[i]);
 					cylindermasterDao.updateCylinderStatus(cylinderMasterBean2);
 			}
 			}
