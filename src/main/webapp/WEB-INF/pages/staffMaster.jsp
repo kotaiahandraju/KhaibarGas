@@ -189,7 +189,7 @@
 												</label>
 												<div class="col-sm-6">
 <%-- 													<form:input path="documents" class="form-control validate" autocomplete="off" placeholder="" required="required" /> --%>
-													<img id="imageId" style="display: none;" src="" ><span id="imageLable" style="display: none;"></span>
+													<img id="imageId" style="display: none;    width: 20%;" src="" ><span id="imageLable" style="display: none;"></span>
 													<form:hidden path="imagePath"/>
 													<input type="file" name="file" style="margin-top: 3%;" id="documents" onchange="" />
 													<span class="hasError" id="documentsError"></span>

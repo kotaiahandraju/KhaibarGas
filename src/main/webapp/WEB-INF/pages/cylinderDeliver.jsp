@@ -146,9 +146,9 @@ table#dependent_table tbody tr td:first-child::before {
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Payed Amount</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Payed Amount(AED)</label>
                     				<div class="col-md-6">
-                    					<input type="text" name="payedAmount" id="payedAmount" class="form-control numericOnly" onkeyup="payedAmountCal(this.value)">
+                    					<input type="text" name="payedAmount" id="payedAmount" placeholder="Payed Amount" class="form-control numericOnly" onkeyup="payedAmountCal(this.value)">
 								  	</div>
                     			</div>
                     		</div>
@@ -162,9 +162,9 @@ table#dependent_table tbody tr td:first-child::before {
                     		
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Due Amount</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Due Amount(AED)</label>
                     				<div class="col-md-6">
-                    					<input type="text" name="dueAmount" id="dueAmount" class="form-control numericOnly">
+                    					<input type="text" name="dueAmount" id="dueAmount" placeholder="Due Amount" class="form-control numericOnly">
 								  	</div>
                     			</div>
                     		</div>
@@ -205,10 +205,10 @@ table#dependent_table tbody tr td:first-child::before {
 								<th style="width: 40px;"><span>Sno</span></th>
 						        <th style="width: 200px"><span>Items</span></th>
 						        <th style="width: 70px;"><span>Quantity</span></th>
-						        <th><span>Price</span></th>
-						        <th><span>Total Price</span></th>
-						        <th><span>Discount</span></th>
-						        <th><span>Total value</span></th>
+						        <th><span>Price(AED)</span></th>
+						        <th><span>Total Price(AED)</span></th>
+						        <th><span>Discount(AED)</span></th>
+						        <th><span>Total value(AED)</span></th>
 <!-- 								<th style="width: 200px"><span>VAT (5%)</span></th> -->
 <!-- 								<th style="width: 200px"><span>Net Amount</span></th> -->
 					      </tr>

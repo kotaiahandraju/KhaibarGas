@@ -115,7 +115,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price(AED)</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
