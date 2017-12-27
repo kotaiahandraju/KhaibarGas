@@ -275,10 +275,10 @@ public class CylindermasterDao extends BaseCylindermasterDao
 				return retlist.get(0);
 			return null;
 		}
-	 public List<Map<String, Object>> getInTruckCylinders(String truckId){
+	 public List<CylindermasterBean> getInTruckCylinders(String truckId,String size,int limit){
 		 jdbcTemplate = custom.getJdbcTemplate();
-		 String sql = "select * from cylindermaster where truckId=?";
-		 List<Map<String, Object>> result = jdbcTemplate.queryForList(sql,new Object[]{truckId});
+		 String sql = "select * from cylindermaster where truckId=? and size=? and cylinderstatus='5' limit ? ";
+		 List<CylindermasterBean> result = jdbcTemplate.query(sql,new Object[]{truckId,size,limit},ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 		 if(result.size()>0)
 			 return result;
 		return null;

@@ -33,7 +33,7 @@
 							<label for="focusedinput" class="col-md-5 control-label">Cylinder Type <span class="impColor">*</span></label>
 							<div class="col-md-7">
 				        		<form:select path="cylinderType" class="form-control " onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Store --</form:option>
+				        			<form:option value="">-- Select Cylinder Type --</form:option>
 				        			<form:options items="${cylinderTypes}"></form:options>
 				        		</form:select>
 							</div>

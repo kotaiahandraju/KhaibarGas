@@ -3,11 +3,6 @@ package com.aurospaces.neighbourhood.bean;
 
 import java.util.Date;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
 
 /**
  *
@@ -23,9 +18,44 @@ protected Date createdTime ;
 protected Date updatedTime ;
 protected String cylindetId ;
 protected String cylinderStatus ;
-protected String createdBy,fillingStation , customerId,truckId,item,customertype,storename,vat;
+protected String createdBy,fillingStation , customerId,truckId,item,customertype,storename,vat,ownercompany;
+
+protected String cylinderReturnTruck;
+protected String cylinderDeliverTruck;
+protected String dueAmount,payedAmount;
 
 
+
+public String getDueAmount() {
+	return dueAmount;
+}
+public void setDueAmount(String dueAmount) {
+	this.dueAmount = dueAmount;
+}
+public String getPayedAmount() {
+	return payedAmount;
+}
+public void setPayedAmount(String payedAmount) {
+	this.payedAmount = payedAmount;
+}
+public String getCylinderReturnTruck() {
+	return cylinderReturnTruck;
+}
+public void setCylinderReturnTruck(String cylinderReturnTruck) {
+	this.cylinderReturnTruck = cylinderReturnTruck;
+}
+public String getCylinderDeliverTruck() {
+	return cylinderDeliverTruck;
+}
+public void setCylinderDeliverTruck(String cylinderDeliverTruck) {
+	this.cylinderDeliverTruck = cylinderDeliverTruck;
+}
+public String getOwnercompany() {
+	return ownercompany;
+}
+public void setOwnercompany(String ownercompany) {
+	this.ownercompany = ownercompany;
+}
 public String getVat() {
 	return vat;
 }

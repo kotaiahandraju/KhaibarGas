@@ -111,7 +111,7 @@
 											<div class="col-sm-6">
 												<%-- <form:input path="typeofcompany" class="form-control onlyCharacters" autocomplete="off" placeholder="Type of Company" /> --%>
 												<form:select path="typeofcompany" class="form-control" onfocus="removeBorder(this.id)">
-													<form:option value="">-- Select Customer Type --</form:option>
+													<form:option value="">-- Select Type of Company --</form:option>
 													<form:option value="Owner">Owner</form:option>
 													<form:option value="Competitor">Competitor</form:option>
 													<form:option value="Distributor">Distributor</form:option>
