@@ -45,6 +45,7 @@ table#dependent_table tbody tr td:first-child::before {
 					<div class="panel-heading">
 						<h4>Customer Details</h4>
 					</div>
+					<form:hidden path="netAmount"/>
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-6">
@@ -151,6 +152,7 @@ table#dependent_table tbody tr td:first-child::before {
 								  	</div>
                     			</div>
                     		</div>
+                    		
 		                    		<div  style="display:none" >
 		                    		<form:select path="ownercompany" class="form-control chzn-select " onfocus="removeBorder(this.id);" >
 				                    				<form:option value="">--Select company--</form:option>
@@ -215,7 +217,7 @@ table#dependent_table tbody tr td:first-child::before {
 							<tr id="1" class="rowInc">
 								<td></td>
 								<td>
-									<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id)" class="form-control">
+									<select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id)" class="form-control">
 										<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
 									</select>
 								</td>
@@ -593,6 +595,7 @@ function priceCalculator(){
 	if(lstdue !="" && lstdue != null && lstdue != "undefined" ){
 		finalAmount = parseFloat(finalAmount)+parseFloat(lstdue);
 	 }	
+	$("#netAmount").val(finalAmount);
 	 $("#netAmount").text(grandTotal);
 	 $("#vatAmount").text(Math.round(vatAmount));
 	 $("#grandTotal").text(Math.round(finalAmount));
@@ -603,7 +606,7 @@ function priceCalculator(){
 // 		 $("#dueamount").val(parseInt(grandTotal)-parseInt(paidamount));
 // 	 }
 // 	 alert(grandTotal);
-	 $(".grandTotal").text(grandTotal.toFixed(2));
+// 	 $(".grandTotal").text(grandTotal.toFixed(2));
 // 	 $(".roundOff").text(Math.round(grandTotal).toFixed(2));
 }
 
@@ -677,10 +680,10 @@ function getCustomerIds(value){
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.allOrders1;
-		serviceUnitArray2 ={};
+		
 		var html = "<option value=''>-- Select Customer Id --</option>";
 		$.each(alldata,function(i, catObj) {
-			serviceUnitArray2[catObj.id] = catObj;
+			
 			 html = html + '<option value="'
 				+ catObj.id + '">'
 				+ catObj.customerid + '</option>';
@@ -693,29 +696,32 @@ function getCustomerIds(value){
 	});
 }
 function getCustomerDetails(value){
-	$("#customername").text(serviceUnitArray2[value].customername);
-	$("#mobile").text(serviceUnitArray2[value].mobile);
-	$("#customeraddress").text(serviceUnitArray2[value].customeraddress);
-	$("#landline").text(serviceUnitArray2[value].landline);
-	$("#lastDueAmount").text(serviceUnitArray2[value].dueAmount);
-// 	$("#cylinders").text(serviceUnitArray2[value].cylinderId1);
-// 	$("#cylinders").text(serviceUnitArray2[value].name);
-    $("#cylinders").text("");
-	 if(serviceUnitArray2[value].name != null ){
-		var array = (serviceUnitArray2[value].name).split(',');
-		var array1 = (serviceUnitArray2[value].cylinderId1).split(',');
-		
-		for(var i=0;i<array.length;i++){
-			var varcheckBox = "<input name='cylinderId' type='checkbox' value='"+array1[i] +"' />"+array[i]+" <select  id='"+i+"company' name='company' class='company' ><option value=''>Select Company</option></select> <br>"; 
+	var formData = new FormData();
+    formData.append('customerid', value);
+	$.fn.makeMultipartRequest('POST', 'getCustomerIds', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.allOrders1;
+		$("#cylinders").text("");
+		$.each(alldata,function(i, catObj) {
+			$("#customername").text(catObj.customername);
+			$("#mobile").text(catObj.mobile);
+			$("#customeraddress").text(catObj.customeraddress);
+			$("#landline").text(catObj.landline);
+			$("#lastDueAmount").text(catObj.dueAmount);
+		    
+			if(catObj.cylinderreturn=='0'){
+			var varcheckBox = "<input name='cylinderId' type='checkbox' value='"+catObj.cylinderId1 +"' />"+catObj.name+" <select  id='"+i+"company' name='company' class='company' ><option value=''>Select Company</option></select> <br>"; 
 			$("#cylinders").append(varcheckBox);
 			var dummyCompany = $("#ownercompany").html();
 			$("#"+i+"company").empty();
 			$(dummyCompany).appendTo("#"+i+"company");
-			$("#"+i+"company").val(serviceUnitArray2[value].ownercompany);
-			
-			
-		}
-	} 
+			$("#"+i+"company").val(catObj.ownercompany);
+			}
+		
+	});
+	
+});
 }
 /* function getTruckCylinders(id){
 	var formData = new FormData();

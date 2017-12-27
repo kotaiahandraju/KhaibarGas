@@ -3,6 +3,7 @@ package com.aurospaces.neighbourhood.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,6 +31,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aurospaces.neighbourhood.bean.CustomercylindersBean;
+import com.aurospaces.neighbourhood.bean.CustomermasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.CylindertransactionBean;
@@ -39,6 +41,7 @@ import com.aurospaces.neighbourhood.bean.KhaibarUsersBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CustomercylindersDao;
+import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindertransactionDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
@@ -66,6 +69,8 @@ public class TransactionController {
 	ServletContext objContext;
 	@Autowired
 	CustomercylindersDao customercylindersDao;
+	@Autowired
+	CustomermasterDao customermasterDao;
 	@Autowired
 	DataSourceTransactionManager transactionManager;
 	private Logger logger = Logger.getLogger(TransactionController.class);
@@ -504,7 +509,7 @@ public class TransactionController {
 			@RequestParam("cylinderDeliverTruck") String cylinderDeliverTruck,
 			@RequestParam("cylinderReturnTruck") String cylinderReturnTruck,
 			@RequestParam("customerId") String customerId, @RequestParam("payedAmount") String payedAmount,
-			@RequestParam("dueAmount") String dueAmount, @RequestParam("vat") String vat,
+			@RequestParam("dueAmount") String dueAmount,@RequestParam("netAmount") String netAmount, @RequestParam("vat") String vat,
 			@RequestParam(value = "company", required=false) String[] company,HttpServletRequest request,
 			HttpSession session) {
 		String sJson = null;
@@ -544,6 +549,7 @@ public class TransactionController {
 						// quantity,price,discount,grandTotal,vat,cylinderDeliverTruck,cylinderReturnTruck
 				}
 			}
+			if(cylinderId !=null){
 				for(int i=0;i<cylinderId.length;i++){
 					CylindermasterBean cylinderMasterBean2 = new CylindermasterBean();
 					customercylindersDao.updateCustomerCylinderStatus(cylinderId[i]);
@@ -551,6 +557,27 @@ public class TransactionController {
 					cylinderMasterBean2.setCylinderstatus("7");
 					cylindermasterDao.updateCylinderStatus(cylinderMasterBean2);
 			}
+			}
+			CustomermasterBean dummy = customermasterDao.getById(Integer.parseInt(customerId));
+				CustomermasterBean customermasterBean=new CustomermasterBean();
+				if(StringUtils.isNotBlank(payedAmount)){
+					customermasterBean.setPayedAmount(payedAmount);
+				}
+				if(StringUtils.isNotBlank(dueAmount)){
+					customermasterBean.setDueAmount(dueAmount);			
+				}
+				if(StringUtils.isNotBlank(netAmount)){
+					customermasterBean.setNetAmount(netAmount);
+				}else{
+					customermasterBean.setNetAmount(dummy.getNetAmount());
+				}
+				if(cylinderId != null){
+					String cid =StringUtils.join(cylinderId,"','");
+					System.out.println(Arrays.toString(cylinderId));
+					customermasterBean.setCylinderId(cid);
+				}
+				customermasterBean.setId(Integer.parseInt(customerId));
+				customermasterDao.updateCylinderPrice(customermasterBean);
 			transactionManager.commit(objTransStatus);
 		} catch (Exception e) {
 			transactionManager.rollback(objTransStatus);

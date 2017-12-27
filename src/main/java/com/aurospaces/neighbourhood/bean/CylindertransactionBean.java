@@ -18,7 +18,7 @@ protected Date createdTime ;
 protected Date updatedTime ;
 protected String cylindetId ;
 protected String cylinderStatus ;
-protected String createdBy,fillingStation , customerId,truckId,item,customertype,storename,vat,ownercompany;
+protected String createdBy,fillingStation , customerId,truckId,item,customertype,storename,vat,ownercompany,netAmount;
 
 protected String cylinderReturnTruck;
 protected String cylinderDeliverTruck;
@@ -26,6 +26,12 @@ protected String dueAmount,payedAmount;
 
 
 
+public String getNetAmount() {
+	return netAmount;
+}
+public void setNetAmount(String netAmount) {
+	this.netAmount = netAmount;
+}
 public String getDueAmount() {
 	return dueAmount;
 }

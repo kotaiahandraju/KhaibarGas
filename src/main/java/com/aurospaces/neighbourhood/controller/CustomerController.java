@@ -132,10 +132,8 @@ public class CustomerController {
 		ObjectMapper objectMapper = null;
 		String sJson=null;
 		try{
-			if(StringUtils.isNotBlank(objCustomermasterBean.getCustomertype()))
-			{
+			
 			listOrderBeans = customermasterDao.getCustomers(objCustomermasterBean);
-			}
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				
