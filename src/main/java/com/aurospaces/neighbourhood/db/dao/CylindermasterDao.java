@@ -147,6 +147,9 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			if(StringUtils.isNotBlank(cylindermasterBean.getCustomerid())){
 				buffer.append(",customerid= '"+cylindermasterBean.getCustomerid()+"'");
 			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getOwnercompany())){
+				buffer.append(",ownercompany= '"+cylindermasterBean.getOwnercompany()+"'");
+			}
 			if(cylindermasterBean.getId() !=0){
 				buffer.append(" WHERE id= '"+cylindermasterBean.getId()+"'"); 
 			}
