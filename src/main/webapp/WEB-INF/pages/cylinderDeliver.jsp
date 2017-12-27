@@ -51,7 +51,7 @@ table#dependent_table tbody tr td:first-child::before {
 								<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                    				<form:select path="truckId" class="form-control chzn-select validate" onfocus="removeBorder(this.id);" >
+		                    				<form:select path="cylinderDeliverTruck" class="form-control chzn-select validate" onfocus="removeBorder(this.id);" >
 		                    				<form:option value="">--Select Truck--</form:option>
 		                    				<form:options items="${trucks}"></form:options>
 		                    				</form:select>
@@ -81,39 +81,35 @@ table#dependent_table tbody tr td:first-child::before {
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-12">
+                    		<div class="col-md-6">
                     			<div class="form-group">
-<!--                     				<label for="focusedinput" class="col-md-6 control-label">customerId <span class="impColor">*</span></label> -->
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Name: </label>
                     				<div class="col-md-6">
-                    					Customer Name: <span id="customername"></span><br>
-                    					Customer Address: <span id="customeraddress"></span><br>
-                    					Mobile: <span id="mobile"></span><br><br>
-                    					Land Line: <span id="landline"></span><br>
-                    					cylinders : <span id="cylinders"></span>
+                    					<span id="customername" class="form-control"></span>
 								  	</div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Last Due Amount <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Address: </label>
                     				<div class="col-md-6">
-                    					<span id="lastDueAmount"></span>
+                    					<span id="customeraddress" class="form-control"></span>
 								  	</div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Payed Amount <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Mobile: </label>
                     				<div class="col-md-6">
-                    					<input type="text" name="payedAmount" id="payedAmount" onkeyup="payedAmountCal(this.value)">
+                    					<span id="mobile" class="form-control"></span>
 								  	</div>
                     			</div>
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Due Amount <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Land Line: </label>
                     				<div class="col-md-6">
-                    					<input type="text" name="dueAmount" id="dueAmount">
+                    					<span id="landline" class="form-control"></span>
 								  	</div>
                     			</div>
                     		</div>
@@ -128,19 +124,45 @@ table#dependent_table tbody tr td:first-child::before {
 					</div>
 					<div class="panel-body">
 						<div class="row">
-							<div class="col-md-6">
-								<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Cylinder Size <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-                    					<input name="unit" value="0"  type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/>
+							<div class="col-md-12">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-3 control-label">Cylinders </label>
+                    				<div class="col-md-9">
+                    					<span id="cylinders"></span>
 								  	</div>
                     			</div>
-							</div>
-							<div class="col-md-6">
+                    		</div>
+                    		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Cylinder Id <span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Cylinder Return Truck</label>
                     				<div class="col-md-6">
-                    					<input name="unit" value="0" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/>
+                    					<form:select path="cylinderReturnTruck" class="form-control chzn-select " onfocus="removeBorder(this.id);" >
+		                    				<form:option value="">--Select Truck--</form:option>
+		                    				<form:options items="${trucks}"></form:options>
+		                    				</form:select>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Payed Amount</label>
+                    				<div class="col-md-6">
+                    					<input type="text" name="payedAmount" id="payedAmount" class="form-control numericOnly" onkeyup="payedAmountCal(this.value)">
+								  	</div>
+                    			</div>
+                    		</div>
+		                    		<div  style="display:none" >
+		                    		<form:select path="ownercompany" class="form-control chzn-select " onfocus="removeBorder(this.id);" >
+				                    				<form:option value="">--Select company--</form:option>
+				                    				<form:options items="${companys}"></form:options>
+				                    				</form:select>
+				                    </div>
+                    		
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Due Amount</label>
+                    				<div class="col-md-6">
+                    					<input type="text" name="dueAmount" id="dueAmount" class="form-control numericOnly">
 								  	</div>
                     			</div>
                     		</div>
@@ -215,7 +237,10 @@ table#dependent_table tbody tr td:first-child::before {
 							</tr>
 							<tr>
 								<th colspan="5" style="text-align: right;">
-									Net Amount = <span id="netAmount"></span><br>Vat Amount ( ${vat }%)=<span id="vatAmount"></span> <br>Grand Total=<span id="grandTotal"></span>
+									Net Amount = <span id="netAmount"></span><br>
+									Vat Amount ( ${vat }%)=<span id="vatAmount"></span><br>
+									previous Due Amount =<span id="lastDueAmount"></span><br>
+									Gross Amount=<span id="grandTotal"></span>
 								</th>
 								<th></th>
 								<th></th>
@@ -237,198 +262,6 @@ table#dependent_table tbody tr td:first-child::before {
 		</div>
 </td></tr></table>
 		</form:form>
-<!--             <div class="row"> -->
-<!--               <div class="col-md-12"> -->
-<!--                     <div class="panel panel-primary"> -->
-<!--                         <div class="panel-heading"> -->
-<!--                             <h4>LPO List</h4> -->
-<!--                             <div class="options">    -->
-<!--                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a> -->
-<!--                             </div> -->
-<!--                         </div> -->
-<!--                         <div class="panel-body collapse in"> -->
-<!--                         <div class="table-responsive" id="tableId" > -->
-<!--                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example"> -->
-<!--                                 <thead> -->
-<!--                                 	<tr> -->
-<!--                                 		<th>LPO Number</th><th>Supplier name</th><th>Remarks</th><th>Supplier Address</th> -->
-<!--                                 		<th>Supplier Contact no</th><th>Supplier Email</th><th>Total Amount</th> -->
-<!--                                 		<th>Paid Amount</th><th>Due Amount</th><th>Status</th> -->
-<!--                                 	</tr> -->
-<!--                                 </thead> -->
-<!--                                 <tbody></tbody> -->
-<!--                             </table> -->
-<!--                          </div> -->
-<!--                         </div> -->
-<!--                     </div> -->
-<!--                 </div> -->
-<!--             </div> -->
-                    
-            <%-- <div class="row" id="moveTo">
-            <div class="col-md-10 col-md-offset-1 col-sm-12">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">
-                        <h4>Add LPOs</h4>
-                        <div class="options"></div>
-                    </div>
-	                <form:form modelAttribute="lpoForm" id="formId" action="lpoSave" class="form-horizontal" method="post" >
-<table><tr><td>                    
-                    <div class="panel-body">
-                    	<div class="row">
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">LPO Number <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-								      	<form:input type="text" path="lponumber" class="form-control validate" placeholder="LPO Number"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Supplier Name <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-		                            	<form:input type="hidden" path="id"/>
-								      	<form:input type="text" path="suppliername" class="form-control validate" placeholder="Supplier Name"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Supplier Address <span class="impColor">*</span></label>
-                    				<div class="col-md-6"> 
-		                            	<form:input type="text" path="supplieraddress" class="form-control validate" placeholder="Supplier Address"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Supplier Contact No. <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="suppliercontactno" class="form-control numericOnly validate" placeholder="Supplier Contact No."/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Supplier Email <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-								      	<form:input type="text" path="supplieremail" class="form-control validate" placeholder="Supplier Email"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">LPO Amount(AED) <span class="impColor">*</span></label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="amount"  class="form-control validate numericOnly" placeholder="LPO Amount(AED)"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Paid Amount(AED)</label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="paidamount" onkeyup="PaidCalculation(this.value)" class="form-control numericOnly" placeholder="Paid Amount(AED)"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Due Amount(AED)</label>
-                    				<div class="col-md-6">
-		                            	<form:input type="text" path="dueamount" class="form-control numericOnly" placeholder="Due Amount(AED)"/>
-								  	</div>
-                    			</div>
-                    		</div>
-                    		<div class="col-md-4">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Remarks</label>
-                    				<div class="col-md-6">
-		                            	<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="5"></form:textarea>
-								  	</div>
-                    			</div>
-                    		</div>
-                    	</div>
-                    	<div class="col-md-12">
-                    		<div class="form-group">
-								<table class="notPrintMe">
-									<tr>
-										<td style="height: 20px;" class="hideme"> 
-											<span class="addItemButton" onclick="addMoreRowsForDependent(this.form);">Add Item</span>
-										</td>
-									</tr>
-								</table>
-                    		</div>
-                    	</div>
-                    	<div class="col-md-12">
-                    		<div class="form-group">
-<table class="inventory" id="dependent_table">
-	<thead>
-		<tr>
-			<th style="width: 40px;"><span>Sno</span></th>
-	        <th style="width: 200px"><span>Items</span></th>
-	        <th style="width: 70px;"><span>Quantity</span></th>
-	        <th><span>Price</span></th>
-	        <th><span>Total Price</span></th>
-	        <th><span>Discount</span></th>
-	        <th><span>Total value</span></th>
-			<th style="width: 200px"><span>Manufacturing Date</span></th>
-			<th style="width: 200px"><span>Expiry Date</span></th>
-      </tr>
-	</thead>
-	<form:select path="item" id="item1" style="display:none;font-size: small;">
-		<form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
-		<form:options items="${items}"></form:options>
-	</form:select>
-    <tbody>
-		<tr id="1" class="rowInc">
-			<td></td>
-			<td>
-				<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id),productRateFilter(this.id)" class="form-control">
-					<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
-				</select>
-			</td>
-			<td><input name="unit" value="0" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/></td>
-			<td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly"/></td>
-			<td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-			<td><input name="discount" value="0.00" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control" /></td>
-			<td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-			<td><input name="manufacturingdate" placeholder="Manufacturing Date" id="1manufacturingdate" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-			<td><input name="expirydate" placeholder="Expiry Date"  id="1expirydate" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-		</tr>
-	</tbody>
-	<tfoot>
-		<tr>
-			<th colspan="4"><h3 align="right"></h3></th>
-			<th><span class="totalInvoiceValue"></span></th>
-			<th><span class="totalDiscounts"></span></th>
-			<th><span class="totalTaxableValue"></span></th>
-		</tr>
-	</tfoot>
-    
-</table>
-                    		</div>
-                    	</div>
-                    </div>
-					<div class="panel-footer hideme">
-						<div class="row">
-				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar pull-right">
-					      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
-					      			<input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
-				      			</div>
-				      		</div>
-				    	</div>
-				    </div>
-</td>
-</tr>
-</table>				    
-         			</form:form>	    
-                </div>
-            </div>
-            
-        </div> --%>
-
         </div> <!-- container -->
  
 <div id="dial1"></div>
@@ -854,6 +687,9 @@ function getCustomerIds(value){
 		});
 		$('#customerId').empty().append(html);
 		$("#customerId").trigger("chosen:updated");
+		
+		
+		
 	});
 }
 function getCustomerDetails(value){
@@ -864,14 +700,22 @@ function getCustomerDetails(value){
 	$("#lastDueAmount").text(serviceUnitArray2[value].dueAmount);
 // 	$("#cylinders").text(serviceUnitArray2[value].cylinderId1);
 // 	$("#cylinders").text(serviceUnitArray2[value].name);
-	if(serviceUnitArray2[value].name != null){
+    $("#cylinders").text("");
+	 if(serviceUnitArray2[value].name != null ){
 		var array = (serviceUnitArray2[value].name).split(',');
 		var array1 = (serviceUnitArray2[value].cylinderId1).split(',');
+		
 		for(var i=0;i<array.length;i++){
-			var varcheckBox = "<input name='cylinderId' type='checkbox' value='"+array1[i] +"' />'"+array[i]+"'"; 
+			var varcheckBox = "<input name='cylinderId' type='checkbox' value='"+array1[i] +"' />"+array[i]+" <select  id='"+i+"company' name='company' class='company' ><option value=''>Select Company</option></select> <br>"; 
 			$("#cylinders").append(varcheckBox);
+			var dummyCompany = $("#ownercompany").html();
+			$("#"+i+"company").empty();
+			$(dummyCompany).appendTo("#"+i+"company");
+			$("#"+i+"company").val(serviceUnitArray2[value].ownercompany);
+			
+			
 		}
-	}
+	} 
 }
 /* function getTruckCylinders(id){
 	var formData = new FormData();
@@ -908,6 +752,6 @@ function payedAmountCal(value){
 	var dueAmount =  Math.round(finalAmount-value);
 	$("#dueAmount").val(dueAmount);
 }
-$("#pageName").text("Cylinder Deliver Status");
+$("#pageName").text("Cylinder Deliver To Customer");
 $(".cylinderDeliver").addClass("active");
 </script>
