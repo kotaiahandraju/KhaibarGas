@@ -217,7 +217,7 @@ function movetofillingStation(){
     	 alert("Please Select Filling Station");
     	 return false;
      }
-     alert(cylenderId);
+     //alert(cylenderId);
      var formData = new FormData();
      formData.append("fillingStation",stationname);
      formData.append("cylindetId",cylenderId);
