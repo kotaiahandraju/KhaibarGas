@@ -241,7 +241,7 @@ function editCylinder(id) {
 	 lpo =  serviceUnitArray[id].lponumber
 	$("#color").val(serviceUnitArray[id].color);
 	$("#madein").val(serviceUnitArray[id].madein);
-	alert(serviceUnitArray[id].expirtdate1);
+	//alert(serviceUnitArray[id].expirtdate1);
 	$("#expirtdate1").val(serviceUnitArray[id].expirtdate1).trigger("change");
 	$("#ownercompany").val(serviceUnitArray[id].ownercompany).trigger("change");
 	$("#store").val(serviceUnitArray[id].store).trigger("change");

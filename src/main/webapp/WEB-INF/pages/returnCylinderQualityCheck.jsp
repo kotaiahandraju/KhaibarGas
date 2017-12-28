@@ -190,7 +190,7 @@ function QualityCheck(){
     	 return false;
      }
     var store= $("#store").val();
-     alert("cylinderId"+cylenderId+"------store---"+store);
+    // alert("cylinderId"+cylenderId+"------store---"+store);
      var formData = new FormData();
      formData.append("storename",store);
      formData.append("cylindetId",cylenderId);

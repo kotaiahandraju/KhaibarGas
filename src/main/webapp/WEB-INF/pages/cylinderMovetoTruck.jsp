@@ -200,7 +200,7 @@ function movetoTruck(){
     	 alert("Please Select truckId");
     	 return false;
      }
-     alert(cylenderId);
+    // alert(cylenderId);
      var formData = new FormData();
      formData.append("truckId",truckId);
      formData.append("CylindetId",cylenderId);
