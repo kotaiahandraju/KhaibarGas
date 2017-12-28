@@ -183,7 +183,7 @@ public class LpoMasterController {
 		return sJson;
 	}
 	@RequestMapping(value = "/getLPOdetails")
-	public @ResponseBody String deletetruckMaster( LpomasterBean lpomasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+	public @ResponseBody String getLPOdetails( LpomasterBean lpomasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		System.out.println("deleteEducation page...");
 		List<LpomasterBean> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();

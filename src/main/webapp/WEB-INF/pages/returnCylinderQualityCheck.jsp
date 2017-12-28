@@ -249,5 +249,5 @@ $("#pageName").text("Return Cylinder Quality Check And Move To Store");
 $("#pageName").css('font-size','32px');
 // $(".transactions").addClass("open");
 // $(".transactions").addClass("active");
-$(".cylinderQualityCheck").addClass("active");
+$(".qualityCheckHome").addClass("active");
 </script>
