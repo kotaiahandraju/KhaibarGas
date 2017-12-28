@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
@@ -191,7 +192,9 @@ public class TariffMasterController {
 		int rate=0;
 		try{
 			 itemId = objTariffmasterBean.getItemId();
+			 if(StringUtils.isNotBlank(itemId)){
 			 rate= objTariffmasterDao.getgetTariffPrice(itemId);
+			 }
 			 jsonObj.put("rate", rate);
 			/*if(objTariffmasterBean.getId() != 0 && objTariffmasterBean.getStatus() !=""){
  				delete = objTariffmasterDao.delete(objTariffmasterBean.getId(),objTariffmasterBean.getStatus());

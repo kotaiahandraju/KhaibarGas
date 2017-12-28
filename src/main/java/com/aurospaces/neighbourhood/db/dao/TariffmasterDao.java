@@ -45,10 +45,15 @@ public class TariffmasterDao extends BaseTariffmasterDao
 		return retlist;
 	}
 	public int getgetTariffPrice(String itemId){
-		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "select rate from tariffmaster where itemId=?";
-		int retlist = jdbcTemplate.queryForInt(sql,new Object[]{itemId});
-		
+		int retlist = 0;
+		try{
+			jdbcTemplate = custom.getJdbcTemplate();
+			String sql = "select rate from tariffmaster where itemId=?";
+			retlist = jdbcTemplate.queryForInt(sql,new Object[]{itemId});
+			
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		return retlist;
 	}
 

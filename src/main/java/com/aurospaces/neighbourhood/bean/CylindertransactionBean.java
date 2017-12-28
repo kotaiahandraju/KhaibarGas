@@ -22,10 +22,22 @@ protected String createdBy,fillingStation , customerId,truckId,item,customertype
 
 protected String cylinderReturnTruck;
 protected String cylinderDeliverTruck;
-protected String dueAmount,payedAmount;
+protected String dueAmount,payedAmount,previousDueAmount,invoiceId;
 
 
 
+public String getPreviousDueAmount() {
+	return previousDueAmount;
+}
+public void setPreviousDueAmount(String previousDueAmount) {
+	this.previousDueAmount = previousDueAmount;
+}
+public String getInvoiceId() {
+	return invoiceId;
+}
+public void setInvoiceId(String invoiceId) {
+	this.invoiceId = invoiceId;
+}
 public String getNetAmount() {
 	return netAmount;
 }

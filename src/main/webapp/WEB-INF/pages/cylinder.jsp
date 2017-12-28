@@ -146,7 +146,7 @@
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Store Location</label>
 								    <div class="col-md-6">
-								    	<form:input path="location" value="" readonly="true" class="form-control onlyCharacters" placeholder="Location" />
+								    	<form:input path="location" value="" readonly="true" class="form-control onlyCharacters" placeholder="Store Location" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
