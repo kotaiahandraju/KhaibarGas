@@ -25,7 +25,7 @@ public class BaseCustomercylindersDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO customercylinders( created_time, updated_time, customerId, cylinderId, quantity, price, discount, grandTotal, vat, cylinderreturn,cylinderReturnTruck,cylinderDeliverTruck) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO customercylinders( created_time, updated_time, customerId, cylinderId, quantity, price, discount, grandTotal, vat, cylinderreturn,cylinderReturnTruck,cylinderDeliverTruck,accessoriesId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?,?)"; 
 
 
 
@@ -72,6 +72,7 @@ ps.setString(9, customercylinders.getVat());
 ps.setString(10, customercylinders.getCylinderreturn());
 ps.setString(11, customercylinders.getCylinderReturnTruck());
 ps.setString(12, customercylinders.getCylinderDeliverTruck());
+ps.setString(13, customercylinders.getAccessoriesId());
 							return ps;
 						}
 				},

@@ -104,14 +104,14 @@
 							</div>
 							<div class="panel-body">
 								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group">
-											<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label>
-											<div class="col-md-6">
-								        		<div id="displayCylinders"></div>
-											</div>
-										</div>
-									</div>
+<!-- 									<div class="col-md-12"> -->
+<!-- 										<div class="form-group"> -->
+<!-- 											<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label> -->
+<!-- 											<div class="col-md-6"> -->
+<!-- 								        		<div id="displayCylinders"></div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
 									<div class="col-md-12">
 										<div class="form-group">
 											<label for="focusedinput" class="col-md-3 control-label">Select Filling Station <span class="impColor">*</span></label>
@@ -130,7 +130,7 @@
 						      		<div class="col-md-12">
 						      			<div class="btn-toolbar pull-right">
 							      			<input type="button" class="btn btn-primary" value="Move To Filling Station" onclick="movetofillingStation()">
-							      			<button type="button" onclick="window.location.reload()" class="btn btn-danger">Reset</button>
+<!-- 							      			<button type="button" onclick="window.location.reload()" class="btn btn-danger">Reset</button> -->
 						      			</div>
 						      		</div>
 						    	</div>

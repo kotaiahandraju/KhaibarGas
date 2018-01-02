@@ -97,9 +97,9 @@ ps.setString(16, cylindermaster.getRemarks());
 		else
 		{
 
-			String sql = "UPDATE cylindermaster  set cylinderid = ?,store =?,size = ? ,capacity = ? ,cylinderstatus = ? ,customerid = ? ,location = ? ,lponumber = ? ,color = ? ,madein = ? ,expirydate = ? ,ownercompany = ? ,remarks=?  where id = ? ";
+			String sql = "UPDATE cylindermaster  set cylinderid = ?,store =?,size = ? ,capacity = ?  ,customerid = ? ,location = ? ,lponumber = ? ,color = ? ,madein = ? ,expirydate = ? ,ownercompany = ? ,remarks=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{cylindermaster.getCylinderid(),cylindermaster.getStore(),cylindermaster.getSize(),cylindermaster.getCapacity(),cylindermaster.getCylinderstatus(),cylindermaster.getCustomerid(),cylindermaster.getLocation(),cylindermaster.getLponumber(),cylindermaster.getColor(),cylindermaster.getMadein(),cylindermaster.getExpirydate(),cylindermaster.getOwnercompany(),cylindermaster.getRemarks(),cylindermaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{cylindermaster.getCylinderid(),cylindermaster.getStore(),cylindermaster.getSize(),cylindermaster.getCapacity(),cylindermaster.getCustomerid(),cylindermaster.getLocation(),cylindermaster.getLponumber(),cylindermaster.getColor(),cylindermaster.getMadein(),cylindermaster.getExpirydate(),cylindermaster.getOwnercompany(),cylindermaster.getRemarks(),cylindermaster.getId()});
 		}
 	}
 		

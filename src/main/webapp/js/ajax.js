@@ -9,8 +9,9 @@ $.fn.makeMultipartRequest = function(method, url, processData, formData,
 		contentType : contentType,
 		dataType : dataType,
 		 beforeSend : function() {
-             $.blockUI({ message: '<img src="../img/logo.jpeg" height="50px" class="fa fa-spin" />'});
-             //return false;
+             $.blockUI({ message: '<img src="../img/cylinder.jpg" height="50px" class="fa fa-spin cylinder" />'});
+//			 $.blockUI({ message: '<img src="../img/cylinder.jpg" height="50px" /><span>...<span>'});
+//             return false;
           }, 
           
 		success : successFunction,

@@ -169,9 +169,9 @@ table#dependent_table tbody tr td:first-child::before {
 	        <th style="width: 200px"><span>Items</span></th>
 	        <th style="width: 70px;"><span>Quantity</span></th>
 	        <th><span>Price(AED)</span></th>
-	        <th><span>Total Price(AED)</span></th>
-	        <th><span>Discount(AED)</span></th>
-	        <th><span>Total value(AED)</span></th>
+	        <th><span>Total Amount (AED)</span></th>
+	        <th><span>Discount (AED)</span></th>
+	        <th><span>Net Amount (AED)</span></th>
 			<th style="width: 200px"><span>Manufacturing Date</span></th>
 			<th style="width: 200px"><span>Expiry Date</span></th>
       </tr>

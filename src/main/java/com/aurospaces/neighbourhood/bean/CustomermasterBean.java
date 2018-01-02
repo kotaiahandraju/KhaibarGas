@@ -17,9 +17,16 @@ protected String authorizedperson ;
 protected String contactperson ;
 protected String customertype ;
 protected String status ;
-protected String custStatus,cylinderId,netAmount,payedAmount,dueAmount;
+protected String custStatus,cylinderId,netAmount,payedAmount,dueAmount,previousDueAmount;
 
 
+
+public String getPreviousDueAmount() {
+	return previousDueAmount;
+}
+public void setPreviousDueAmount(String previousDueAmount) {
+	this.previousDueAmount = previousDueAmount;
+}
 public String getNetAmount() {
 	return netAmount;
 }

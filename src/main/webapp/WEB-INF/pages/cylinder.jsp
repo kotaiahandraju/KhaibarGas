@@ -223,7 +223,9 @@ function displayTable(listOrders) {
 				+ "<td title='"+orderObj.expirtdate1+"'>"+orderObj.expirtdate1+ "</td>"
 				+ "<td title='"+orderObj.remarks+"'>"+orderObj.remarks+ "</td>"
 				+ "<td title='"+orderObj.cylendersstatus+"'>"+ orderObj.cylendersstatus + "</td>"
+				+ '<c:if test="${(cacheUserBean.roleId == 1)}">'
 				+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+				+ '</c:if>'
 				+ "</tr >";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

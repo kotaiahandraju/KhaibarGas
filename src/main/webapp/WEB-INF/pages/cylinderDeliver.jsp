@@ -121,7 +121,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<div class="col-md-6">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Recent List</h4>
+						<h4>Returned Cylinders</h4>
 					</div>
 					<div class="panel-body">
 						<div class="row">
@@ -144,6 +144,7 @@ table#dependent_table tbody tr td:first-child::before {
 								  	</div>
                     			</div>
                     		</div>
+                    		<input type="hidden" name="previousDueAmount" value="0"> 
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Payed Amount(AED)</label>
@@ -206,9 +207,9 @@ table#dependent_table tbody tr td:first-child::before {
 						        <th style="width: 200px"><span>Items</span></th>
 						        <th style="width: 70px;"><span>Quantity</span></th>
 						        <th><span>Price(AED)</span></th>
-						        <th><span>Total Price(AED)</span></th>
-						        <th><span>Discount(AED)</span></th>
-						        <th><span>Total value(AED)</span></th>
+						        <th><span>Total Amount (AED)</span></th>
+						        <th><span>Discount (AED)</span></th>
+						        <th><span>Net Amount (AED)</span></th>
 <!-- 								<th style="width: 200px"><span>VAT (5%)</span></th> -->
 <!-- 								<th style="width: 200px"><span>Net Amount</span></th> -->
 					      </tr>
@@ -239,10 +240,10 @@ table#dependent_table tbody tr td:first-child::before {
 							</tr>
 							<tr>
 								<th colspan="5" style="text-align: right;">
-									Net Amount = <span id="netAmount1"></span><br>
-									Vat Amount ( ${vat }%)=<span id="vatAmount"></span><br>
-									previous Due Amount =<span id="lastDueAmount"></span><br>
-									Gross Amount=<span id="grandTotal"></span>
+									Net Amount (AED) = <span id="netAmount1">0</span><br>
+									Vat Amount (AED) ( ${vat }%)=<span id="vatAmount">0</span><br>
+									previous Due Amount (AED) =<span id="lastDueAmount">0</span><br>
+									Gross Amount (AED)=<span id="grandTotal">0</span>
 								</th>
 								<th></th>
 								<th></th>
@@ -595,6 +596,7 @@ function priceCalculator(){
 	if(lstdue !="" && lstdue != null && lstdue != "undefined" ){
 		finalAmount = parseFloat(finalAmount)+parseFloat(lstdue);
 	 }	
+	$("#dueAmount").val(Math.round(finalAmount));
 	$("#netAmount").val(finalAmount);
 	 $("#netAmount1").text(grandTotal);
 	 $("#vatAmount").text(Math.round(vatAmount));
@@ -709,7 +711,8 @@ function getCustomerDetails(value){
 			$("#customeraddress").text(catObj.customeraddress);
 			$("#landline").text(catObj.landline);
 			$("#lastDueAmount").text(catObj.dueAmount);
-		    
+			$("#previousDueAmount").val(catObj.dueAmount);
+			priceCalculator();
 			if(catObj.cylinderreturn=='0'){
 			var varcheckBox = "<input name='cylinderId' type='checkbox' value='"+catObj.cylinderId1 +"' />"+catObj.name+" <select  id='"+i+"company' name='company' class='company' ><option value=''>Select Company</option></select> <br>"; 
 			$("#cylinders").append(varcheckBox);

@@ -41,11 +41,17 @@
 <link href="${baseurl }/assets/css/datepicker1.css" rel="stylesheet" type="text/css" />
 
 <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
+
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 <script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
 <link rel="stylesheet" href="${baseurl }/assets/css/select2.css">
+
+
+
+<script type='text/javascript' src='${baseurl }/js/canvasjs.min.js'></script> 
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <style type="text/css">
 #page-container, #page-content{min-height: auto;}
