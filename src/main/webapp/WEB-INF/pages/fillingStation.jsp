@@ -194,7 +194,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance(in KG\'s)</th><th>UsedGas</th><th>Closing Balance(in KG\'s)</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG\'s)</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance(in KG\'s)</th><th>UsedGas(in KG\'s)</th><th>Closing Balance(in KG\'s)</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG\'s)</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -226,10 +226,12 @@ function displayTable(listOrders) {
 function editCylinder(id) {
 	$("#id").val(serviceUnitArray[id].id);
 	$("#gasavailability").val(serviceUnitArray[id].gasavailability);
+	$("#gasavailability").prop('readonly',true);
 	$("#numberoffillingmachines").val(serviceUnitArray[id].numberoffillingmachines);
 	$("#quantity").val(serviceUnitArray[id].quantity);
 	$("#gascapacity").val(serviceUnitArray[id].gascapacity);
 	$("#availablegas").val(serviceUnitArray[id].availablegas);
+	
 	$("#stationname").val(serviceUnitArray[id].stationname);
 	$("#unitpoint").val(serviceUnitArray[id].unitpoint);
 	$("#submit1").val("Update");

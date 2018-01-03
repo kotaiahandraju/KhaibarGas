@@ -100,6 +100,9 @@ public class CustomermasterDao extends BaseCustomermasterDao
 			if(StringUtils.isNotBlank(customermasterBean.getPayedAmount())){
 				buffer.append(" ,payedAmount="+customermasterBean.getPayedAmount());
 			}
+			if(StringUtils.isNotBlank(customermasterBean.getPreviousDueAmount())){
+				buffer.append(" ,previousDueAmount="+customermasterBean.getPreviousDueAmount());
+			}
 			buffer.append(" where id="+customermasterBean.getId());
 			String sql = buffer.toString();
 			int i = jdbcTemplate.update(sql, new Object[]{});

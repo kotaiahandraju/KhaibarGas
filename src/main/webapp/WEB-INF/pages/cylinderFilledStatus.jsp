@@ -88,7 +88,8 @@
 						</div>
 					</div>
 					<div class="col-md-6">
-						<div class="row">
+					<br><br>
+						<!-- <div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label>
@@ -97,7 +98,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div> -->
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">

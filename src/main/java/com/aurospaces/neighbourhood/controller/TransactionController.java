@@ -30,6 +30,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aurospaces.neighbourhood.bean.CompanymasterBean;
 import com.aurospaces.neighbourhood.bean.CustomercylindersBean;
 import com.aurospaces.neighbourhood.bean.CustomermasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
@@ -40,6 +41,7 @@ import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.KhaibarUsersBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
+import com.aurospaces.neighbourhood.db.dao.CompanymasterDao;
 import com.aurospaces.neighbourhood.db.dao.CustomercylindersDao;
 import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
@@ -71,6 +73,8 @@ public class TransactionController {
 	CustomercylindersDao customercylindersDao;
 	@Autowired
 	CustomermasterDao customermasterDao;
+	@Autowired
+	CompanymasterDao companymasterDao;
 	@Autowired
 	DataSourceTransactionManager transactionManager;
 	private Logger logger = Logger.getLogger(TransactionController.class);
@@ -510,7 +514,7 @@ public class TransactionController {
 			@RequestParam("cylinderReturnTruck") String cylinderReturnTruck,
 			@RequestParam("customerId") String customerId, @RequestParam("payedAmount") String payedAmount,
 			@RequestParam("dueAmount") String dueAmount,@RequestParam("netAmount") String netAmount, @RequestParam("vat") String vat,
-			@RequestParam(value = "company", required=false) String[] company,HttpServletRequest request,
+			@RequestParam(value = "company", required=false) String[] company,HttpServletRequest request,@RequestParam(value = "previousDueAmount", required=false) String previousDueAmount,
 			HttpSession session) {
 		String sJson = null;
 		List<LpomasterBean> lpoList = null;
@@ -525,7 +529,20 @@ public class TransactionController {
 			objTransStatus = transactionManager.getTransaction(objTransDef);
 			System.out.println(customerId);
 			for (int i = 0; i < item.length; i++) {
-
+					
+				ItemsBean itemsBean = itemsDao.getById(Integer.parseInt(item[i]));
+				if(itemsBean.getItemType().equals("Accessories")){
+					customercylindersBean = new CustomercylindersBean();
+					customercylindersBean.setQuantity("1");
+					customercylindersBean.setPrice(rate[i]);
+					customercylindersBean.setTotalPrice(totalvalue[i]);
+					customercylindersBean.setDiscount(discount[i]);
+					customercylindersBean.setVat(vat);
+					customercylindersBean.setAccessoriesId(item[i]);
+					customercylindersBean.setCustomerId(customerId);
+					customercylindersBean.setCylinderDeliverTruck(cylinderDeliverTruck);
+					customercylindersDao.save(customercylindersBean);
+				}
 					List<CylindermasterBean> listOrderBeans = cylindermasterDao.getInTruckCylinders(cylinderDeliverTruck, item[i],Integer.parseInt(unit[i]));
 					if (listOrderBeans != null) {
 						for (CylindermasterBean cylindermasterbean : listOrderBeans) {
@@ -557,6 +574,11 @@ public class TransactionController {
 					cylinderMasterBean2.setId(Integer.parseInt(cylinderId[i]));
 					cylinderMasterBean2.setCylinderstatus("7");
 					cylinderMasterBean2.setOwnercompany(company[i]);
+					CompanymasterBean companymasterBean= companymasterDao.getById(Integer.parseInt(company[i]));
+					if(!companymasterBean.getTypeofcompany().equals("Owner")){
+						cylinderMasterBean2.setCylinderstatus("8");
+						cylinderMasterBean2.setStore("100");
+					}
 					cylindermasterDao.updateCylinderStatus(cylinderMasterBean2);
 			}
 			}
@@ -572,6 +594,9 @@ public class TransactionController {
 					customermasterBean.setNetAmount(netAmount);
 				}else{
 					customermasterBean.setNetAmount(dummy.getNetAmount());
+				}
+				if(StringUtils.isNotBlank(previousDueAmount)){
+					customermasterBean.setPreviousDueAmount(previousDueAmount);
 				}
 				if(cylinderId != null){
 					String cid =StringUtils.join(cylinderId,"','");

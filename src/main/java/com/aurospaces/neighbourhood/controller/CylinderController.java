@@ -96,7 +96,7 @@ public class CylinderController {
 			if(objCylindermasterBean.getSize().equals("3")){
 				objCylindermasterBean.setCapacity("44");
 			}
-			objCylindermasterBean.setCylinderstatus("1");
+			
 			if(StringUtils.isNotBlank(objCylindermasterBean.getExpirtdate1())){
 				Date date=  KhaibarGasUtil.dateFormate(objCylindermasterBean.getExpirtdate1());
 				objCylindermasterBean.setExpirydate(date);
@@ -131,6 +131,7 @@ public class CylinderController {
 			}
 			if(objCylindermasterBean.getId() == 0 && cylindermasterBean == null)
 			{
+				objCylindermasterBean.setCylinderstatus("1");
 				cylindermasterDao.save(objCylindermasterBean);
 				
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");

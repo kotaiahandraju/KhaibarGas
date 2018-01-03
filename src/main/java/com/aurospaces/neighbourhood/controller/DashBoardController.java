@@ -18,9 +18,12 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aurospaces.neighbourhood.bean.AddGasBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.bean.ddd;
+import com.aurospaces.neighbourhood.db.dao.AddGasDao;
 import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
@@ -33,13 +36,32 @@ public class DashBoardController {
 	@Autowired CylindermasterDao cylindermasterDao;
 	@Autowired CustomermasterDao objCustomerDao;
 	@Autowired FillingstationmasterDao fillingstationmasterDao;
+	@Autowired AddGasDao addGasDao;
 	private Logger logger = Logger.getLogger(DashBoardController.class);
 	@RequestMapping(value = "/dashboard")
 	public String fillingStationHome( ModelMap model, HttpServletRequest request,
 			HttpSession session) {
-		
+		List<ddd> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
 		try {
-			
+			listOrderBeans = addGasDao.getdata();
+			 objectMapper = new ObjectMapper();
+				if (listOrderBeans != null && listOrderBeans.size() > 0) {
+					
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("allOrders1", sJson);
+					jsonObj.put("dps", listOrderBeans);
+					// System.out.println(sJson);
+				} else {
+					objectMapper = new ObjectMapper();
+					sJson = objectMapper.writeValueAsString(listOrderBeans);
+					request.setAttribute("dps", "''");
+					jsonObj.put("allOrders1", listOrderBeans);
+				}
 
 		} catch (Exception e) {
 			e.printStackTrace();

@@ -18,6 +18,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link rel="stylesheet" href="${baseurl }/assets/css/styles.css">
+    <link rel="stylesheet" href="${baseurl }/assets/css/animate.min.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries. Placeholdr.js enables the placeholder attribute -->
@@ -41,11 +42,17 @@
 <link href="${baseurl }/assets/css/datepicker1.css" rel="stylesheet" type="text/css" />
 
 <script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
+
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 <script type='text/javascript' src='${baseurl }/js/ajax.js'></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.jquery.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/chosen/1.4.2/chosen.css">
 <link rel="stylesheet" href="${baseurl }/assets/css/select2.css">
+
+
+
+<script type='text/javascript' src='${baseurl }/js/canvasjs.min.js'></script> 
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <style type="text/css">
 #page-container, #page-content{min-height: auto;}

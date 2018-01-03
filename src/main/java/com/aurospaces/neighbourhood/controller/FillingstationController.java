@@ -22,8 +22,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.aurospaces.neighbourhood.bean.AddGasBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.db.dao.AddGasDao;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -36,7 +38,7 @@ public class FillingstationController {
 	FillingstationmasterDao fillingstationmasterDao;
 	@Autowired
 	CylindermasterDao cylindermasterDao;
-	
+	@Autowired AddGasDao addGasDao;
 	@RequestMapping(value = "/fillingStationHome")
 	public String fillingStationHome(@Valid @ModelAttribute("fillingStationForm") FillingstationmasterBean objFillingstationmasterBean, ModelMap model, HttpServletRequest request,
 			HttpSession session) {
@@ -192,8 +194,11 @@ public class FillingstationController {
 		boolean retlist=false;
 		//String retlist=null;
 		JSONObject obj = new JSONObject();
-		 
+		 AddGasBean addGasBean = new AddGasBean();
 		try {
+			addGasBean.setFillingStationId(stationId);
+			addGasBean.setGasInKgs(newGasavail);
+			addGasDao.save(addGasBean);
 			System.out.println("-----gasavail-------"+newGasavail+"-------stationId------"+stationId);
 				retlist=fillingstationmasterDao.updateGas(Integer.parseInt(stationId), newGasavail);
 				fillingstationmasterDao.updateClosingGas();

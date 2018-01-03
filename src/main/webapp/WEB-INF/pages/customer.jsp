@@ -95,7 +95,7 @@
 		                            		<form:option value="">-- Customer Type --</form:option>
 									  		<form:option value="COMMERCIAL">COMMERCIAL</form:option>
 									  		<form:option value="DOMESTIC">DOMESTIC</form:option>
-									  		<form:option value="INDUSTIAL">INDUSTIAL</form:option>
+									  		<form:option value="INDUSTIAL">INDUSTRIAL</form:option>
 								  		</form:select>
 								  	</div>
                     			</div>

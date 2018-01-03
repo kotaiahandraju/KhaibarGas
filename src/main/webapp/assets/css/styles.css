@@ -11418,7 +11418,7 @@ a.shortcut-tiles {
   border-top-left-radius: 1px;
   text-transform: uppercase;
   text-align: center;
-  font-size: 15px;
+  font-size: 16px;
 }
 .info-tiles .tiles-heading .pull-right {
   -webkit-transition: 0.06s ease-in;
@@ -15247,3 +15247,8 @@ fieldset[disabled] .datepicker table tr td span.active.disabled:hover.active {
 .red { color: #F00;}
 .green { color:#090;}
 .top20 { margin-top:20px;}
+
+.fa-spin {
+  -webkit-animation: fa-spin 0.2s infinite linear !important;
+  animation: fa-spin 0.2s infinite linear !important;
+}

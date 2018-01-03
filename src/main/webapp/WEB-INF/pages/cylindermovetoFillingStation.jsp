@@ -65,7 +65,7 @@
 				    	</div>
 					</div>
 				</div>
-				<div class="row">
+				<!-- <div class="row">
 					<div class="col-md-12">
 						<div class="form-group">
 							<div class="col-md-6">
@@ -73,7 +73,7 @@
 							</div>
 						</div>
 					</div>
-				</div>
+				</div> -->
 				<div class="row">
 					<div class="col-md-6">
 						<div class="panel panel-danger">
@@ -84,6 +84,15 @@
 								</div>
 							</div>
 							<div class="panel-body collapse in">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<div class="col-md-6">
+								        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;font-weight: bolder;">Check/Uncheck All</label></p>
+											</div>
+										</div>
+									</div>
+								</div>
 								<div class="table-responsive" id="tableId">
 									<table class="table table-striped table-bordered datatables" id="example">
 										<thead>
@@ -104,14 +113,14 @@
 							</div>
 							<div class="panel-body">
 								<div class="row">
-									<div class="col-md-12">
-										<div class="form-group">
-											<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label>
-											<div class="col-md-6">
-								        		<div id="displayCylinders"></div>
-											</div>
-										</div>
-									</div>
+<!-- 									<div class="col-md-12"> -->
+<!-- 										<div class="form-group"> -->
+<!-- 											<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label> -->
+<!-- 											<div class="col-md-6"> -->
+<!-- 								        		<div id="displayCylinders"></div> -->
+<!-- 											</div> -->
+<!-- 										</div> -->
+<!-- 									</div> -->
 									<div class="col-md-12">
 										<div class="form-group">
 											<label for="focusedinput" class="col-md-3 control-label">Select Filling Station <span class="impColor">*</span></label>
@@ -130,7 +139,7 @@
 						      		<div class="col-md-12">
 						      			<div class="btn-toolbar pull-right">
 							      			<input type="button" class="btn btn-primary" value="Move To Filling Station" onclick="movetofillingStation()">
-							      			<button type="button" onclick="window.location.reload()" class="btn btn-danger">Reset</button>
+<!-- 							      			<button type="button" onclick="window.location.reload()" class="btn btn-danger">Reset</button> -->
 						      			</div>
 						      		</div>
 						    	</div>

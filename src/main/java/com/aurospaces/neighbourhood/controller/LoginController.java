@@ -60,12 +60,12 @@ public class LoginController {
 			}
 			objUserBean = objKhaibarUsersDao.loginChecking(userObj);
 			if (objUserBean != null ) {
-				if(objUserBean.getRoleId().equals("1")){
+//				if(objUserBean.getRoleId().equals("1")){
 					session.setAttribute("cacheUserBean", objUserBean);
 					session.setAttribute("roleId", objUserBean.getRoleId());
 					session.setAttribute("userName", objUserBean.getUserName());
 					return "redirect:admin/dashboard";
-				}
+//				}
 				
 					
 			} else {
