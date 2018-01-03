@@ -44,17 +44,19 @@ public class TariffmasterDao extends BaseTariffmasterDao
 			return retlist;
 		return retlist;
 	}
-	public int getgetTariffPrice(String itemId){
-		int retlist = 0;
+	public TariffmasterBean getgetTariffPrice(String itemId){
+		List<TariffmasterBean> retlist =null;
 		try{
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "select rate from tariffmaster where itemId=?";
-			retlist = jdbcTemplate.queryForInt(sql,new Object[]{itemId});
-			
+			String sql = "select * from tariffmaster where itemId=?";
+			retlist = jdbcTemplate.query(sql,new Object[]{itemId},ParameterizedBeanPropertyRowMapper.newInstance(TariffmasterBean.class));
+			if(retlist.size()>0)
+				return retlist.get(0);
+			return null;
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		return retlist;
+		return null;
 	}
 
 

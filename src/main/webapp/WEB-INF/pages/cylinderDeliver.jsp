@@ -208,7 +208,7 @@ table#dependent_table tbody tr td:first-child::before {
 						        <th style="width: 70px;"><span>Quantity</span></th>
 						        <th><span>Price(AED)</span></th>
 						        <th><span>Total Amount (AED)</span></th>
-						        <th><span>Discount (AED)</span></th>
+						        <th><span>Discount (%)</span></th>
 						        <th><span>Net Amount (AED)</span></th>
 <!-- 								<th style="width: 200px"><span>VAT (5%)</span></th> -->
 <!-- 								<th style="width: 200px"><span>Net Amount</span></th> -->
@@ -539,7 +539,7 @@ function allcalculate(id){
 	
 	total = $('#' + number + 'totalvalue').val();
 	discount = $('#' + number + 'discount').val();
-	var result = total - discount;
+	var result = parseFloat(total)*(100- parseFloat(discount))/100;
 	$('#' + number + 'taxable').val(result.toFixed(2));
 	
 	
