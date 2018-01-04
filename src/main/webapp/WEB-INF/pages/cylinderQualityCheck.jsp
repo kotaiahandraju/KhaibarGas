@@ -193,12 +193,9 @@ function QualityCheck(){
      formData.append("cylinderStatus",4);
      $.fn.makeMultipartRequest('POST', 'updateCylinderStatus1', false,
  			formData, false, 'text', function(data){
-//  		var jsonobj = $.parseJSON(data);
+    	 var jsonobj = $.parseJSON(data);
+  		alert(jsonobj.msg);
  		window.location.reload();
- 		/* alert(jsonobj.message);
- 		var alldata = jsonobj.allOrders1;
- 		console.log(jsonobj.allOrders1);
- 		displayTable(alldata); */
  	});
      
 }
@@ -208,6 +205,20 @@ function searchData(){
 	var stationname=$("#stationname").val();
 	var quantity=$("#quantity").val();
 	var cylinderType=$("#cylinderType").val();
+	
+	if (stationname == null || stationname == "undefined" || stationname == "") {
+		alert("Please Select Stationname");
+		return false;
+	}
+	if (quantity == null || quantity == "undefined" || quantity == "") {
+		alert("Please Select Quantity");
+		return false;
+	}
+	if (cylinderType == null || cylinderType == "undefined" || cylinderType == "") {
+		alert("Please Select CylinderType");
+		return false;
+	}
+	
 	 var formData = new FormData();
      formData.append('stationname', stationname);
      formData.append('quantity', quantity);
