@@ -197,6 +197,9 @@ public class TariffMasterController {
 			 if(tariffmasterBean != null){
 				 jsonObj.put("rate", tariffmasterBean.getRate());
 				 jsonObj.put("discount", tariffmasterBean.getAlloweddiscount());
+			 }else{
+				 jsonObj.put("rate", 0);
+				 jsonObj.put("discount", 0);
 			 }
 			
 		}catch(Exception e){

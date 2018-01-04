@@ -147,9 +147,9 @@ table#dependent_table tbody tr td:first-child::before {
                     		<input type="hidden" name="previousDueAmount" value="0"> 
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Payed Amount(AED)</label>
+                    				<label for="focusedinput" class="col-md-6 control-label">Paid Amount(AED)</label>
                     				<div class="col-md-6">
-                    					<input type="text" name="payedAmount" id="payedAmount" placeholder="Payed Amount" class="form-control numericOnly" onkeyup="payedAmountCal(this.value)">
+                    					<input type="text" name="payedAmount" id="payedAmount" placeholder="Paid Amount" class="form-control numericOnly" onkeyup="payedAmountCal(this.value)">
 								  	</div>
                     			</div>
                     		</div>
@@ -218,14 +218,14 @@ table#dependent_table tbody tr td:first-child::before {
 							<tr id="1" class="rowInc">
 								<td></td>
 								<td>
-									<select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id)" class="form-control">
+									<select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)" class="form-control">
 										<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
 									</select>
 								</td>
 								<td><input name="unit" value="1" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/></td>
-								<td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly"/></td>
+								<td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly" readonly="readonly"/></td>
 								<td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-								<td><input name="discount" value="0.00" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control" /></td>
+								<td><input name="discount" value="0" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="discountCheck(this.id,this.value)" class="form-control" /></td>
 								<td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
 <!-- 								<td><input name="vat" placeholder="Vat" id="1vat" value="5" type="text" onkeydown="removeBorder(this.id);" class="form-control" /></td> -->
 <!-- 								<td><input name="netAmount" placeholder="Net Amount"  id="1netAmount" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td> -->
@@ -241,7 +241,7 @@ table#dependent_table tbody tr td:first-child::before {
 							<tr>
 								<th colspan="5" style="text-align: right;">
 									Net Amount (AED) = <span id="netAmount1">0</span><br>
-									Vat Amount (AED) ( ${vat }%)=<span id="vatAmount">0</span><br>
+									Vat Amount ( ${vat }%) (AED) =<span id="vatAmount">0</span><br>
 									previous Due Amount (AED) =<span id="lastDueAmount">0</span><br>
 									Gross Amount (AED)=<span id="grandTotal">0</span>
 								</th>
@@ -271,16 +271,7 @@ table#dependent_table tbody tr td:first-child::before {
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <script type="text/javascript">
 
-/* $(document).ready(function() {
-    $("body").tooltip({ selector: '[data-toggle=tooltip]' });
-}); */
-/* var lstOrders =${allObjects};
 
-console.log(lstOrders);
-
-if(lstOrders != ""){
-	showTableData(lstOrders);
-} */
 
 $(function() {
 // 	var listOrders=JSON.parse(lstOrders);
@@ -474,7 +465,7 @@ function addMoreRowsForDependent() {
 			+ 'unit" type="text" value="1" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
 			+ '<td class="inputCss"><input name="rate" id="'
 			+ dependentRowCount
-			+ 'rate" type="text" value="0.0" class="form-control numericOnly" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)"/></td>'
+			+ 'rate" type="text" value="0.0" class="form-control numericOnly" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" readonly="readonly"/></td>'
 // 			+ '<td class="inputCss"><select title="Select Rate" name="rate" style="width: 100%;font-size: small;" id="'
 // 			+ dependentRowCount
 // 			+ 'rate" class="form-control" onchange="removeBorder(this.id);"></select></td>'
@@ -483,7 +474,7 @@ function addMoreRowsForDependent() {
 			+ 'totalvalue" value="0.00" type="text"  class="form-control" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
 			+ '<td class="inputCss"><input title="Discount" name="discount" id="'
 			+ dependentRowCount
-			+ 'discount" value="0.00" type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)"/></td>'
+			+ 'discount" value="0" type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" onkeyup="discountCheck(this.id,this.value)" /></td>'
 			+ '<td class="labelCss"><input title="Taxable Value" name="taxable" id="'
 			+ dependentRowCount
 			+ 'taxable" value="0.00" type="text" class="form-control numericOnly" onkeydown="removeBorder(this.id);" readonly="readonly"/></td>'
@@ -539,6 +530,9 @@ function allcalculate(id){
 	
 	total = $('#' + number + 'totalvalue').val();
 	discount = $('#' + number + 'discount').val();
+	if(discount =="" ){
+		discount =0;
+	}
 	var result = parseFloat(total)*(100- parseFloat(discount))/100;
 	$('#' + number + 'taxable').val(result.toFixed(2));
 	
@@ -726,7 +720,7 @@ function getCustomerDetails(value){
 	
 });
 }
-/* function getTruckCylinders(id){
+/* function getTruckCylindersCount(id){
 	var formData = new FormData();
     formData.append('truckId', id);
 	$.fn.makeMultipartRequest('POST', 'getTruckCylinders', false,
@@ -744,7 +738,13 @@ function getCustomerDetails(value){
 		$('#cylindetId').empty().append(html);
 	});
 } */
+var map = new Object(); // or var map = {};
 function getTarrifPrice(value,id){
+	var truckId = $("#cylinderDeliverTruck").val();
+	if(truckId==""){
+		alert("Please Select Truck");
+		return false;
+	}
 	var number = parseInt(id.match(/[0-9]+/)[0], 10);
 	
 	var formData = new FormData();
@@ -753,6 +753,7 @@ function getTarrifPrice(value,id){
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.rate;
+		map[number+"discount"] = jsonobj.discount;
 		$("#"+number+"rate").val(jsonobj.rate);
 		allcalculate(number+"rate");
 	});
@@ -760,6 +761,20 @@ function getTarrifPrice(value,id){
 function payedAmountCal(value){
 	var dueAmount =  Math.round(finalAmount-value);
 	$("#dueAmount").val(dueAmount);
+}
+function discountCheck(id,value){
+// 	alert(map[id]);
+	if(value>map[id]){
+		alert("Please Enter Discount Maximum : "+map[id] );
+		$("#"+id).val("0");
+		allcalculate(id);
+		return false;
+	}
+	allcalculate(id);
+}
+function getTruckInCylinderCount(id,value){
+	
+	
 }
 $("#pageName").text("Cylinder Deliver To Customer");
 $(".cylinderDeliver").addClass("active");

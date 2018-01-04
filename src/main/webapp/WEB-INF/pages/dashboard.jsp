@@ -7,12 +7,12 @@
 
 
 <script>
-window.onload = function() {
+$(document).ready(function(){
     if(!window.location.hash) {
         window.location = window.location + '#loaded';
         window.location.reload();
     }
-}
+});
 </script>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
