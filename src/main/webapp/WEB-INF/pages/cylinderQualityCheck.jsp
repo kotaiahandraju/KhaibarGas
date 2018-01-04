@@ -60,7 +60,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<div class="col-md-6">
-						        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>
+						        		
 									</div>
 								</div>
 							</div>
@@ -74,6 +74,7 @@
 							</div>
 							<div class="panel-body collapse in">
 								<div class="table-responsive" id="tableId">
+						<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>		
 									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 										<thead>
 											<tr><th>Cylinder ID</th>
