@@ -125,6 +125,8 @@ public class QualityCheck {
     JSONObject objJson = new JSONObject();
     CylindertransactionBean cylindertransactionBean =null;
     CylindermasterBean cylindermasterBean =null;
+    int intcount = 0;
+    JSONObject jsonObject = new JSONObject();
 		try {
 			System.out.println("----------store----: "+cylindertransactionBean1.getStorename());
 			KhaibarUsersBean users = (KhaibarUsersBean)session.getAttribute("cacheUserBean");
@@ -142,9 +144,13 @@ public class QualityCheck {
 			cylindermasterBean.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
 			cylindermasterBean.setStore(cylindertransactionBean1.getStorename());
 			cylindertransactionDao.save(cylindertransactionBean);
-			cylindermasterDao.updateCylinderStatus(cylindermasterBean);
+			boolean count = cylindermasterDao.updateCylinderStatus(cylindermasterBean);
+			if(count){
+				intcount++;
 			}
-			
+			System.out.println("count---"+intcount);
+			}
+			jsonObject.put("msg", intcount+" Records Updated ");
 		} catch (Exception e) {
 			objJson.put("msg", e);
 			e.printStackTrace();
@@ -154,7 +160,7 @@ public class QualityCheck {
 		}
 
 
-		return "tariffMasterHome";
+		return String.valueOf(jsonObject);
 	}
 	
 	/*@RequestMapping(value="/updateCylinderStatus")
