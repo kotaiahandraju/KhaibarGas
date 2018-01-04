@@ -233,6 +233,7 @@ function movetofillingStation(){
  			formData, false, 'text', function(data){
     	 var jsonobj = $.parseJSON(data);
  		alert(jsonobj.msg);
+ 		window.location.reload();
  	});
      
 }
