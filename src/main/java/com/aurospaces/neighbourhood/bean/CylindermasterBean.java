@@ -25,11 +25,23 @@ protected String cylendersstatus ;
 protected String store;
 protected String name;
 protected String storename;
-protected String sizeName,stationname,count,companyname,fillingstationId,truckId;
+protected String sizeName,stationname,count,companyname,fillingstationId,truckId,count1;
 
 
 
 
+/**
+ * @return the count1
+ */
+public String getCount1() {
+	return count1;
+}
+/**
+ * @param count1 the count1 to set
+ */
+public void setCount1(String count1) {
+	this.count1 = count1;
+}
 public String getTruckId() {
 	return truckId;
 }

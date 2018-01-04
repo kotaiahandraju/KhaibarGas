@@ -21,7 +21,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">Filling Station <span class="impColor">*</span></label>
 							<div class="col-md-7">
-				        		<form:select path="stationname" class="form-control " onfocus="removeBorder(this.id)">
+				        		<form:select path="stationname" class="form-control " onchange="onChangeCylinderQualityCheck();" onfocus="removeBorder(this.id)">
 				        			<form:option value="">-- Select Filling Station --</form:option>
 				        			<form:options items="${fillingstation}"></form:options>
 				        		</form:select>
@@ -32,8 +32,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">Cylinder Type <span class="impColor">*</span></label>
 							<div class="col-md-7">
-				        		<form:select path="cylinderType" class="form-control " onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Cylinder Type  --</form:option>
+				        		<form:select path="cylinderType" class="form-control " onchange="onChangeCylinderQualityCheck();" onfocus="removeBorder(this.id)">
 				        			<form:options items="${cylinderTypes}"></form:options>
 				        		</form:select>
 							</div>
@@ -218,6 +217,18 @@ function searchData(){
 		var alldata = jsonobj.allOrders1;
 		console.log(jsonobj.allOrders1);
 		displayTable(alldata);
+	});
+}
+function onChangeCylinderQualityCheck(){
+	var stationname=$("#stationname").val();
+	var size=$("#cylinderType").val();
+	 var formData = new FormData();
+     formData.append('stationname', stationname);
+     formData.append('quantity', quantity);
+     formData.append('size', size);
+	$.fn.makeMultipartRequest('POST', 'onChangeCylinderQualityCheck', false,
+			formData, false, 'text', function(data){
+		$("#quantity").val(data);
 	});
 }
 
