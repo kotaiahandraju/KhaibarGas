@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseFillingstationmasterDao;
@@ -26,9 +25,9 @@ public class FillingstationmasterDao extends BaseFillingstationmasterDao
 	JdbcTemplate jdbcTemplate;
 	
 	@SuppressWarnings("unchecked")
-	public List<FillingstationmasterBean> getFillingStationAllData(){  
+	public List<FillingstationmasterBean> getFillingStationAllData(String status){  
 		 jdbcTemplate = custom.getJdbcTemplate();
-		return jdbcTemplate.query("SELECT f.*,CASE WHEN f.status IN ('0') THEN 'Deactive' WHEN f.status in ('1') THEN 'Active'  ELSE '-----' END as fillingStatus  from fillingstationmaster f order by f.id desc", new BeanPropertyRowMapper(FillingstationmasterBean.class));
+		return jdbcTemplate.query("SELECT f.*,CASE WHEN f.status IN ('0') THEN 'Deactive' WHEN f.status in ('1') THEN 'Active'  ELSE '-----' END as fillingStatus  from fillingstationmaster f where f.status='"+status+"' order by f.id desc", new BeanPropertyRowMapper(FillingstationmasterBean.class));
 			
 		    
 		}  

@@ -22,6 +22,7 @@
 						</div>
 					</div>
 					<div class="panel-body collapse in">
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive</label>
 						<div class="table-responsive" id="tableId">
 							<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 								<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance(in KG's)</th><th>UsedGas</th><th>Closing Balance(in KG's)</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG's)</th><th>Status</th><th></th></tr></thead>
@@ -328,6 +329,25 @@ function validate(id, errorMessage)
 	
 }
 
+function inactiveData() {
+	var status="0";
+	if($('#inActive').is(":checked") == true){
+		status="0";
+	}else{
+		status="1";
+	}
+		var formData = new FormData();
+		formData.append('status', status);
+		
+		$.fn.makeMultipartRequest('POST', 'inActiveFillingStation', false,
+				formData, false, 'text', function(data) {
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			displayTable(alldata);
+			console.log(jsonobj.allOrders1);
+				});
+		
+}
 $("#pageName").text("Filling Station Master");
 $(".fillingStation").addClass("active"); 
 </script>

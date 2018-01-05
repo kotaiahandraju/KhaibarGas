@@ -36,7 +36,7 @@ public class ExpenseTrackerController {
 			
 			System.out.println("-------home--------");
 			
-			sJson=expensetrackerDao.getAllExpenseTracker();
+			sJson=expensetrackerDao.getAllExpenseTracker("1");
 			if(sJson !=null){
 				
 				 request.setAttribute("allObjects", sJson);
@@ -119,14 +119,27 @@ public class ExpenseTrackerController {
 		  int dId=Integer.parseInt(id);
 		  isDelete = expensetrackerDao.delete(dId,status);
 		 
-			  sJson=expensetrackerDao.getAllExpenseTracker();
+			  sJson=expensetrackerDao.getAllExpenseTracker("1");
 			  System.out.println("deleted cusmer data--"+sJson);
 				
 		
 		
 		return sJson;
 	}
+	@RequestMapping(value = "/inActiveExpense")
+	public @ResponseBody String inActiveExpense( @RequestParam("status") String status, HttpSession objSession,
+			HttpServletRequest objRequest) throws JsonGenerationException, JsonMappingException, IOException {
+		String sJson = "";
+		 try{
+		  sJson=expensetrackerDao.getAllExpenseTracker(status);
+				
+		 }catch(Exception e){
+			 e.printStackTrace();
+		 }
+		
+		return sJson;
+	}
 	
-
+	
 	
 }

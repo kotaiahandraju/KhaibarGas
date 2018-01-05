@@ -54,7 +54,7 @@ public class FillingstationController {
 		String sJson = null;
 		List<FillingstationmasterBean> listOrderBeans = null;
 		try {
-			listOrderBeans =fillingstationmasterDao.getFillingStationAllData();
+			listOrderBeans =fillingstationmasterDao.getFillingStationAllData("1");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -144,7 +144,7 @@ public class FillingstationController {
  				}
  			}
  				
-			listOrderBeans = fillingstationmasterDao.getFillingStationAllData();
+			listOrderBeans = fillingstationmasterDao.getFillingStationAllData("1");
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				
@@ -170,6 +170,42 @@ public class FillingstationController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	@RequestMapping(value = "/inActiveFillingStation")
+	public @ResponseBody String inActiveFillingStation( CylindermasterBean objCylindermasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		List<FillingstationmasterBean> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
+		try{
+ 				
+			listOrderBeans = fillingstationmasterDao.getFillingStationAllData(objCylindermasterBean.getStatus());
+			 objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			logger.error(e);
+			logger.fatal("error in EducationController class deleteEducation method  ");
+			jsonObj.put("message", "excetption"+e);
+			return String.valueOf(jsonObj);
+			
+		}
+		return String.valueOf(jsonObj);
+	}
+	
 	
 	@ModelAttribute("stationnames")
 	public Map<Integer, String> fillingstationmaster() {

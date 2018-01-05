@@ -24,10 +24,10 @@ public class StaffmasterDao extends BaseStaffmasterDao
 	JdbcTemplate jdbcTemplate;
 	
 	
-	public List<StaffmasterBean> getAllStaffmasterDetails() {
+	public List<StaffmasterBean> getAllStaffmasterDetails(String status) {
 		
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as staffStatus  from staffmaster s order by s.id desc";
+		String sql = "SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as staffStatus  from staffmaster s where s.status='"+status+"' order by s.id desc";
 		List<StaffmasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(StaffmasterBean.class));
 		if (retlist.size() > 0)

@@ -22,9 +22,9 @@ public class TariffmasterDao extends BaseTariffmasterDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 	
-	public List<TariffmasterBean> getAllTariffmasterDetails() {
+	public List<TariffmasterBean> getAllTariffmasterDetails(String status) {
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "SELECT t.*,i.name as itemName,CASE WHEN t.status IN ('0') THEN 'Deactive' WHEN t.status in ('1') THEN 'Active'  ELSE '-----' END as tariffStatus  from tariffmaster t,items i where t.itemId=i.id";
+		String sql = "SELECT t.*,i.name as itemName,CASE WHEN t.status IN ('0') THEN 'Deactive' WHEN t.status in ('1') THEN 'Active'  ELSE '-----' END as tariffStatus  from tariffmaster t,items i where t.itemId=i.id and t.status='"+status+"' ";
 		List<TariffmasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(TariffmasterBean.class));
 		if (retlist.size() > 0)

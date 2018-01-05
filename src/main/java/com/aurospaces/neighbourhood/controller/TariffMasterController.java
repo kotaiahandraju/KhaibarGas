@@ -43,7 +43,7 @@ public class TariffMasterController {
 		String sJson = null;
 		try {
 
-			listOrderBeans = objTariffmasterDao.getAllTariffmasterDetails();
+			listOrderBeans = objTariffmasterDao.getAllTariffmasterDetails("1");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -155,7 +155,7 @@ public class TariffMasterController {
  					jsonObj.put("message", "Failed to Delete..!");
  				}
  			}
- 			listOrderBeans = objTariffmasterDao.getAllTariffmasterDetails();
+ 			listOrderBeans = objTariffmasterDao.getAllTariffmasterDetails("1");
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) 
 			{
@@ -180,6 +180,41 @@ public class TariffMasterController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	@RequestMapping(value = "/inActiveTariff")
+	public @ResponseBody String inActiveTariff( TariffmasterBean objTariffmasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult,RedirectAttributes redir) {
+		System.out.println("deleteTariffMasterDetails page...");
+		List<TariffmasterBean> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		try{
+ 			listOrderBeans = objTariffmasterDao.getAllTariffmasterDetails(objTariffmasterBean.getStatus());
+			objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) 
+			{
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			//System.out.println(e);
+			logger.error(e);
+			logger.fatal("error in CompanyMasterController class deleteCompanyMasterDetails method");
+			jsonObj.put("message", "excetption"+e);
+			return String.valueOf(jsonObj);
+		}
+		return String.valueOf(jsonObj);
+	}
+	
+	
 	@RequestMapping(value = "/getTariffPrice")
 	public @ResponseBody String getTarrifPrice( TariffmasterBean objTariffmasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult,RedirectAttributes redir) {
 		System.out.println("getTariffPrice page...");
