@@ -76,7 +76,13 @@
 								<div class="form-group">
 									<label class="col-sm-4 control-label required">Payment Type <span class="impColor">*</span></label>
 									<div class="col-sm-6">
-										<form:input path="paymentType" class="form-control validate" autocomplete="off" placeholder="Payment Type" required="required" />
+										<form:select path="paymentType" class="form-control  validate" onfocus="removeBorder(this.id)">
+											<form:option value="" selected="selected" disabled="disabled">-- Select Payment Type --</form:option>
+											<form:option value="Check" >Check</form:option>
+											<form:option value="Cash" >Cash</form:option>
+											<form:option value="Credit Card" >Credit Card</form:option>
+											<form:option value="Others" >Others</form:option>
+										</form:select>
 									</div>
 								</div>
 							</div>
@@ -109,7 +115,7 @@
 <script type="text/javascript">
 $(function() {
 	$("#dateOfExpense").datepicker({
-		dateFormat : "dd-MM-yy",
+		dateFormat : "dd-M-yy",
 		changeDate : true,
 		changeMonth : true,
 		changeYear : true,

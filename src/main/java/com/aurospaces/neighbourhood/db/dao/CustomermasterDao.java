@@ -91,14 +91,14 @@ public class CustomermasterDao extends BaseCustomermasterDao
 				buffer.append("netAmount="+customermasterBean.getNetAmount() );
 			}
 			if(StringUtils.isNotBlank(customermasterBean.getCylinderId())){
-				buffer.append(",cylinderId="+customermasterBean.getCylinderId());
+				buffer.append(",cylinderId= '"+customermasterBean.getCylinderId().replace("'", " ")+"' ");
 			}
 			
 			if(StringUtils.isNotBlank(customermasterBean.getDueAmount())){
 				buffer.append(", dueAmount="+customermasterBean.getDueAmount());
 			}
 			if(StringUtils.isNotBlank(customermasterBean.getPayedAmount())){
-				buffer.append(" ,payedAmount="+customermasterBean.getPayedAmount());
+				buffer.append(" ,paidAmount="+customermasterBean.getPayedAmount());
 			}
 			if(StringUtils.isNotBlank(customermasterBean.getPreviousDueAmount())){
 				buffer.append(" ,previousDueAmount="+customermasterBean.getPreviousDueAmount());

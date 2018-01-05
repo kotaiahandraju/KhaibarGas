@@ -5,6 +5,12 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
+<style>
+
+.dataTables_filter {
+display: none; 
+}
+</style>
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -21,7 +27,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-6 control-label">Filling Station <span class="impColor">*</span></label>
 							<div class="col-md-6">
-				        		<form:select path="stationname" class="form-control " onfocus="removeBorder(this.id)">
+				        		<form:select path="stationname" class="form-control " onchange="onChangeCylinderMovetoTruck();" onfocus="removeBorder(this.id)">
 				        			<form:option value="">-- Select Filling Station --</form:option>
 				        			<form:options items="${fillingstation}"></form:options>
 				        		</form:select>
@@ -32,8 +38,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-6 control-label">Cylinder Type <span class="impColor">*</span></label>
 							<div class="col-md-6">
-				        		<form:select path="cylinderType" class="form-control " onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Cylinder Type  --</form:option>
+				        		<form:select path="cylinderType" class="form-control " onchange="onChangeCylinderMovetoTruck();" onfocus="removeBorder(this.id)">
 				        			<form:options items="${cylinderTypes}"></form:options>
 				        		</form:select>
 							</div>
@@ -43,7 +48,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-6 control-label">Quantity <span class="impColor">*</span></label>
 							<div class="col-md-6">
-				        		<form:input type="text" path="quantity" class="form-control " placeholder="Quantity"/>
+				        		<form:input type="text" path="quantity" class="form-control numericOnly" placeholder="Quantity"/>
 							</div>
 						</div>
 					</div>
@@ -61,7 +66,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<div class="col-md-6">
-						        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>
+						        		
 									</div>
 								</div>
 							</div>
@@ -74,6 +79,7 @@
 								</div>
 							</div>
 							<div class="panel-body collapse in">
+							<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Select All/UnSelect All</label></p>
 								<div class="table-responsive" id="tableId">
 									<table class="table table-striped table-bordered datatables" id="example">
 										<thead>
@@ -102,7 +108,6 @@
 									<label for="focusedinput" class="col-md-3 control-label">Select Truck <span class="impColor">*</span></label>
 									<div class="col-md-6">
 						        		<form:select path="truckId" class="form-control validate" onfocus="removeBorder(this.id)">
-						        			<form:option value="">-- Select Truck --</form:option>
 						        			<form:options items="${trucks}"></form:options>
 						        		</form:select>
 									</div>
@@ -187,71 +192,107 @@ function displayTable(listOrders) {
 }
 
 function movetoTruck(){
-	 var cylenderId = [];
-     $('#tableId :checkbox:checked').each(function(i){
-    	 cylenderId[i] = $(this).val();
-     }); 
-     if(cylenderId.length == 0){
-    	 alert("Please Select Cylinder");
-    	 return false;
-     }
-     var truckId = $("#truckId").val();
-     if(truckId == null || truckId == "undefined" || truckId ==""){
-    	 alert("Please Select truckId");
-    	 return false;
-     }
-    // alert(cylenderId);
-     var formData = new FormData();
-     formData.append("truckId",truckId);
-     formData.append("CylindetId",cylenderId);
-     formData.append("cylinderStatus",5);
-     $.fn.makeMultipartRequest('POST', 'updateCylinderStatus3', false,
- 			formData, false, 'text', function(data){
-//  		var jsonobj = $.parseJSON(data);
- 		window.location.reload();
- 		/* alert(jsonobj.message);
- 		var alldata = jsonobj.allOrders1;
- 		console.log(jsonobj.allOrders1);
- 		displayTable(alldata); */
- 	});
-     
-}
+	 
+	var cylenderId = [];
+		$('#tableId :checkbox:checked').each(function(i) {
+			cylenderId[i] = $(this).val();
+		});
+		if (cylenderId.length == 0) {
+			alert("Please Select Cylinder");
+			return false;
+		}
+		var truckId = $("#truckId").val();
+		if (truckId == null || truckId == "undefined" || truckId == "") {
+			alert("Please Select truckId");
+			return false;
+		}
+		// alert(cylenderId);
+		var formData = new FormData();
+		formData.append("truckId", truckId);
+		formData.append("CylindetId", cylenderId);
+		formData.append("cylinderStatus", 5);
+		$.fn.makeMultipartRequest('POST', 'updateCylinderStatus3', false,
+				formData, false, 'text', function(data) {
+					var jsonobj = $.parseJSON(data);
+					alert(jsonobj.msg);
+					window.location.reload();
+				});
 
-function deleteCylinder(id){
-	var checkstr =  confirm('Are you sure you want to delete this?');
-	if(checkstr == true){
-	var formData = new FormData();
-     formData.append('id', id);
-	$.fn.makeMultipartRequest('POST', 'deleteCylinder', false,
-			formData, false, 'text', function(data){
-		var jsonobj = $.parseJSON(data);
-		alert(jsonobj.message);
-		var alldata = jsonobj.allOrders1;
-		console.log(jsonobj.allOrders1);
-		displayTable(alldata);
-	});
 	}
+
+	function deleteCylinder(id) {
+		var checkstr = confirm('Are you sure you want to delete this?');
+		if (checkstr == true) {
+			var formData = new FormData();
+			formData.append('id', id);
+			$.fn.makeMultipartRequest('POST', 'deleteCylinder', false,
+					formData, false, 'text', function(data) {
+						var jsonobj = $.parseJSON(data);
+						alert(jsonobj.message);
+						var alldata = jsonobj.allOrders1;
+						console.log(jsonobj.allOrders1);
+						displayTable(alldata);
+					});
+		}
+
+	}
+
+	function searchData() {
+		var stationname = $("#stationname").val();
+		var quantity = $("#quantity").val();
+		var cylinderType = $("#cylinderType").val();
+		if (stationname == null || stationname == "undefined" || stationname == "") {
+			alert("Please Select Stationname");
+			return false;
+		}
+		if (quantity == null || quantity == "undefined" || quantity == "") {
+			alert("Please Enter Quantity");
+			return false;
+		}
+		if (cylinderType == null || cylinderType == "undefined" || cylinderType == "") {
+			alert("Please Select CylinderType");
+			return false;
+		}
+		var formData = new FormData();
+		formData.append('stationname', stationname);
+		formData.append('quantity', quantity);
+		formData.append('cylinderType', cylinderType);
+		$.fn.makeMultipartRequest('POST', 'searchTruckStatus', false, formData,
+				false, 'text', function(data) {
+					var jsonobj = $.parseJSON(data);
+					var alldata = jsonobj.allOrders1;
+					console.log(jsonobj.allOrders1);
+					displayTable(alldata);
+				});
+	}
+	function onChangeCylinderMovetoTruck() {
+		var stationname = $("#stationname").val();
+		var size = $("#cylinderType").val();
+		var formData = new FormData();
+		formData.append('stationname', stationname);
+		formData.append('size', size);
+		$.fn.makeMultipartRequest('POST', 'onChangeCylinderMovetoTruck', false,
+				formData, false, 'text', function(data) {
+					$("#quantity").val(data);
+				});
+	}
+
+	$("#pageName").text("Cylinder Move to Truck");
+	// $(".transactions").addClass("open");
+	$(".cylinderMovetoTruck").addClass("active");
 	
-}
-
-function searchData(){
-	var stationname=$("#stationname").val();
-	var quantity=$("#quantity").val();
-	var cylinderType=$("#cylinderType").val();
-	 var formData = new FormData();
-     formData.append('stationname', stationname);
-     formData.append('quantity', quantity);
-     formData.append('cylinderType', cylinderType);
-	$.fn.makeMultipartRequest('POST', 'searchTruckStatus', false,
-			formData, false, 'text', function(data){
-		var jsonobj = $.parseJSON(data);
-		var alldata = jsonobj.allOrders1;
-		console.log(jsonobj.allOrders1);
-		displayTable(alldata);
+	
+	$(function(){
+		var listOrders1 = [{"x":10,"y":8,"z":15,"label":"January, 2018"},{"x":15,"y":18,"z":10,"label":"Febuary, 2018"}];
+		var arra=[];
+		$.each(listOrders1, function(v,k){
+			var data=[];
+			var axsis=[];
+			data=[k.x,k.y,k.z];
+			data='[['+data+'],'+k.label+']';
+			console.log(data);
+			arra.push(data);
+		});
+		console.log(arra.join(','));
 	});
-}
-
-$("#pageName").text("Cylinder Move to Truck");
-// $(".transactions").addClass("open");
-$(".cylinderMovetoTruck").addClass("active");
 </script>

@@ -5,6 +5,14 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
+
+<style>
+
+.dataTables_filter {
+display: none; 
+}
+</style>
+
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -26,7 +34,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Store <span class="impColor">*</span></label>
 									<div class="col-md-8">
-						        		<form:select path="store" class="form-control validate" onfocus="removeBorder(this.id)">
+						        		<form:select path="store" class="form-control validate" onchange="onChangeStoreAndCylinderType();" onfocus="removeBorder(this.id)">
 						        			<form:option value="">-- Select Store --</form:option>
 						        			<form:options items="${stores}"></form:options>
 						        		</form:select>
@@ -37,8 +45,7 @@
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Cylinder Type <span class="impColor">*</span></label>
 									<div class="col-md-8">
-						        		<form:select path="cylinderType" class="form-control " onfocus="removeBorder(this.id)">
-						        			<form:option value="">-- Select Cylinder Type --</form:option>
+						        		<form:select path="cylinderType" class="form-control " onchange="onChangeStoreAndCylinderType();" onfocus="removeBorder(this.id)">
 						        			<form:options items="${cylinderTypes}"></form:options>
 						        		</form:select>
 									</div>
@@ -46,9 +53,9 @@
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label numericOnly">Quantity <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-4 control-label ">Quantity <span class="impColor">*</span></label>
 									<div class="col-md-8">
-						        		<form:input type="text" path="quantity" class="form-control " placeholder="Quantity"/>
+						        		<form:input type="text" path="quantity" class="form-control numericOnly " placeholder="Quantity"/>
 									</div>
 								</div>
 							</div>
@@ -88,7 +95,7 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<div class="col-md-6">
-								        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;font-weight: bolder;">Check/Uncheck All</label></p>
+								        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;font-weight: bolder;">Select All/ UnSelect All</label></p>
 											</div>
 										</div>
 									</div>
@@ -126,7 +133,6 @@
 											<label for="focusedinput" class="col-md-3 control-label">Select Filling Station <span class="impColor">*</span></label>
 											<div class="col-md-6">
 								        		<form:select path="stationname" class="form-control validate" onfocus="removeBorder(this.id)">
-								        			<form:option value="">-- Select Filling Station --</form:option>
 								        			<form:options items="${fillingstation}"></form:options>
 								        		</form:select>
 											</div>
@@ -233,12 +239,9 @@ function movetofillingStation(){
      formData.append("cylinderStatus",2);
      $.fn.makeMultipartRequest('POST', 'updateCylinderStatus', false,
  			formData, false, 'text', function(data){
-//  		var jsonobj = $.parseJSON(data);
+    	 var jsonobj = $.parseJSON(data);
+ 		alert(jsonobj.msg);
  		window.location.reload();
- 		/* alert(jsonobj.message);
- 		var alldata = jsonobj.allOrders1;
- 		console.log(jsonobj.allOrders1);
- 		displayTable(alldata); */
  	});
      
 }
@@ -265,7 +268,21 @@ function searchData(){
 	var quantity=$("#quantity").val();
 	var cylinderType=$("#cylinderType").val();
 	 var formData = new FormData();
-    
+	 
+	 if(store == null || store == "undefined" || store ==""){
+    	 alert("Please Select  Store");
+    	 return false;
+     }
+	 
+	 if(quantity == null || quantity == "undefined" || quantity ==""){
+    	 alert("Please Enter Quantity");
+    	 return false;
+     }
+	 
+	 if(cylinderType == null || cylinderType == "undefined" || cylinderType ==""){
+    	 alert("Please Select cylinderType");
+    	 return false;
+     }
 	
 	$.ajax({
 		type : "POST",
@@ -279,11 +296,7 @@ function searchData(){
              if(response != null ){
             	 var resJson=JSON.parse(response);
             	 displayTable(resJson);
-            	/*  $("#store").val("");
-            	 $("#quantity").val("");
-            	 $("#name").val(""); */
-            	//alert("Delete Sucessfully");
-            	//window.location.reload();
+            	
             	}
              //window.location.reload();
              },
@@ -294,6 +307,50 @@ function searchData(){
 	});
 	
 }
+
+function onChangeStoreAndCylinderType(){
+	var store=$("#store").val();
+	var quantity=$("#quantity").val();
+	var size=$("#cylinderType").val();
+	 var formData = new FormData();
+	 
+	 if(store == null || store == "undefined" || store ==""){
+    	// alert("Please Select  Store");
+    	 return false;
+     }
+	 
+	 if(size == null || size == "undefined" || size ==""){
+    	// alert("Please Select cylinderType");
+    	 return false;
+     }
+	
+	$.ajax({
+		type : "POST",
+		url : "onChangeStoreAndCylinderType.htm",
+		data :"store="+store+"&size="+size,
+		 beforeSend : function() {
+             $.blockUI({ message: 'Please wait' });
+          },
+		success: function (response) {
+            	 $.unblockUI();
+             if(response != null ){
+            	// var resJson=JSON.parse(response);
+            	 $("#quantity").val(response);
+            	 //displayTable(resJson);
+            	
+            	}
+             //window.location.reload();
+             },
+         error: function (e) { 
+        	 $.unblockUI();
+				console.log(e);
+         }
+	});
+	
+}
+
+
+
 $("#pageName").text("Cylinder Move to Filling Station");
 // $(".transactions").addClass("open");
 $(".cylinderMovetofillingStation").addClass("active");

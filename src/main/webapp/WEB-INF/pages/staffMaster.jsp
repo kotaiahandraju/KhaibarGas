@@ -206,7 +206,7 @@
 										<div class="col-sm-12">
 											<div class="btn-toolbar text-center">
 												<input type="submit" value="Submit" id="submit1" class="btn-primary btn" />
-												<input type="reset" value="Reset" class="btn-danger btn cancel" />
+												<input type="reset" value="Reset" id="imageClear" class="btn-danger btn cancel"/>
 											</div>
 										</div>
 									</div>
@@ -247,7 +247,7 @@ function displayTable(listOrders)
 			+ "<td title='"+orderObj.designation+"'>" + orderObj.designation + "</td>"
 			+ "<td title='"+orderObj.nationality+"'>" + orderObj.nationality + "</td>"
 			+ "<td title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
-			+ "<td title='"+orderObj.documents+"'><img style='width: 50px;height: 40px;' src=${baseurl }/"+orderObj.documents +"></td>"
+			+ "<td title='image'><img style='width: 50px;height: 40px;' src=${baseurl }/"+orderObj.documents +"></td>"
 			+ "<td title='"+orderObj.staffStatus+"'>" + orderObj.staffStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr>";
@@ -350,6 +350,12 @@ for (var i = 0; i < e.originalEvent.srcElement.files.length; i++) {
 	$("#imageId").attr("src","${baseurl }/"+editImage);
 	$("#imageLable").text(replaceImage); */
 }
+$("#imageClear").click(function() {
+	$("#imageId").val("");
+	$("#imageLable").val("");
+	$("#documents").val("");
+	$("#dynamicImage").remove();
+})
 
 $("#pageName").text("Staff Master");
 $(".staff").addClass("active");

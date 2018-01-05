@@ -129,6 +129,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	public boolean updateCylinderStatus(CylindermasterBean cylindermasterBean) {
 		jdbcTemplate = custom.getJdbcTemplate();
 		boolean update = false;
+		
 		try{
 			StringBuffer buffer = new StringBuffer();
 			buffer.append("Update  cylindermaster set ");
@@ -157,6 +158,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			String sql = buffer.toString();
 			System.out.println("sql------------"+sql);
 			int intDelete = jdbcTemplate.update(sql, new Object[]{});
+			System.out.println("intDelete------------"+intDelete);
 			if(intDelete != 0){
 				update = true;
 			}
@@ -215,6 +217,19 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		}
 		return retlis;
 	}
+	/*public List<CylindermasterBean> onChangeStoreAndCylinderType(String sStore,String cylinderType,String cylinderstatus) {
+		jdbcTemplate = custom.getJdbcTemplate();
+		List<CylindermasterBean> retlis=null;
+		try{
+			String sql =  "select Count(cm.cylinderstatus)as count1 from cylindermaster cm,items i,storesmaster s where cm.store=s.id and i.id=cm.size and cm.store=? and cm.size=? and cm.cylinderstatus=?";
+				retlis = jdbcTemplate.query(sql, new Object[] {sStore,cylinderType,cylinderstatus },
+					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			System.out.println("--------onChangeStoreAndCylinderType---list----------"+retlis.size());
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return retlis;
+	}*/
 	public List<CylindermasterBean> searchFillingStationInQualitycheck(String stationname,String name) {
 		jdbcTemplate = custom.getJdbcTemplate();
 		List<CylindermasterBean> retlis=null;
@@ -301,6 +316,38 @@ public class CylindermasterDao extends BaseCylindermasterDao
 					retlis = jdbcTemplate.query(sql, new Object[] {cylinderType,cylinderstatus,limit },
 						ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 				System.out.println("-----------list----------"+retlis);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return retlis;
+		}
+	 public List<CylindermasterBean> onChangeStoreAndCylinderType(CylindermasterBean cylindermasterBean) {
+			jdbcTemplate = custom.getJdbcTemplate();
+			List<CylindermasterBean> retlis=null;
+			try{
+				StringBuffer buffer = new StringBuffer();
+				buffer.append("select count(cylinderstatus) as count1 from cylindermaster where 1=1");
+				
+				if(StringUtils.isNotBlank(cylindermasterBean.getFillingstationId())){
+					buffer.append(" and fillingstationId="+cylindermasterBean.getFillingstationId() );
+				}
+				if(StringUtils.isNotBlank(cylindermasterBean.getSize())){
+					buffer.append(" and size="+cylindermasterBean.getSize() );			
+				}
+				if(StringUtils.isNotBlank(cylindermasterBean.getStore())){
+					buffer.append(" and store= "+cylindermasterBean.getStore());
+				}
+				if(StringUtils.isNotBlank(cylindermasterBean.getCylinderstatus())){
+					buffer.append(" and cylinderstatus= "+cylindermasterBean.getCylinderstatus());
+				}
+				if(StringUtils.isNotBlank(cylindermasterBean.getTruckId())){
+					buffer.append(" and truckId= "+cylindermasterBean.getTruckId());
+				}
+				String sql = buffer.toString();
+				System.out.println("----sql---"+sql);
+					retlis = jdbcTemplate.query(sql, new Object[] { },
+						ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+					
 			}catch(Exception e){
 				e.printStackTrace();
 			}

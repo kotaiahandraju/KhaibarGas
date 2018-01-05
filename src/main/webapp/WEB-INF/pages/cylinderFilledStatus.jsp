@@ -5,6 +5,14 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
+
+<style>
+
+.dataTables_filter {
+display: none; 
+}
+</style>
+
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -13,25 +21,27 @@
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
-		<form:form commandName="fillingStationForm">
-		<div class="row">
-			<div class="col-md-12 col-sm-12">
-				<div class="panel panel-danger">
-					<div class="panel-heading">
-						<h4>Search Form</h4>
+		
+			<form:form commandName="fillingStationForm">
+				<div class="row">
+				  	<div class="col-md-3">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-5 control-label">Filling Station <span class="impColor">*</span></label>
+							<div class="col-md-7">
+				        		<form:select path="stationname" class="form-control " onchange="onChangeCylinderFilledStatusData();" onfocus="removeBorder(this.id)">
+				        			<form:option value="">-- Select Filling Station --</form:option>
+				        			<form:options items="${fillingstation}"></form:options>
+				        		</form:select>
+							</div>
+						</div>
 					</div>
-					<div class="panel-body">
-						<div class="row">
-							<div class="col-md-4">
-								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label">Filling Station</label>
-									<div class="col-md-8">
-						        		<form:select path="stationname" class="form-control " onfocus="removeBorder(this.id)">
-						        			<form:option value="">-- Select Filling Station --</form:option>
-						        			<form:options items="${fillingstation}"></form:options>
-						        		</form:select>
-									</div>
-								</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-5 control-label">Cylinder Type <span class="impColor">*</span></label>
+							<div class="col-md-7">
+				        		<form:select path="cylinderType" class="form-control " onchange="onChangeCylinderFilledStatusData();" onfocus="removeBorder(this.id)">
+				        			<form:options items="${cylinderTypes}"></form:options>
+				        		</form:select>
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
@@ -72,7 +82,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<div class="col-md-6">
-						        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>
+						        		
 									</div>
 								</div>
 							</div>
@@ -85,6 +95,7 @@
 								</div>
 							</div>
 							<div class="panel-body collapse in">
+								<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Select All/UnSelect All</label></p>
 								<div class="table-responsive" id="tableId">
 									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 										<thead>
@@ -188,52 +199,72 @@ function displayTable(listOrders) {
 }
 
 function QualityCheck(){
-	 var cylenderId = [];
-     $('#tableId :checkbox:checked').each(function(i){
-    	 cylenderId[i] = $(this).val();
-     }); 
-     if(cylenderId.length == 0){
-    	 alert("Please Select Cylinder");
-    	 return false;
-     }
-    var stationname= $("#stationname").val();
-     alert(cylenderId);
-     var formData = new FormData();
-     formData.append("fillingStation",stationname);
-     formData.append("cylindetId",cylenderId);
-     formData.append("cylinderStatus",3);
-     $.fn.makeMultipartRequest('POST', 'updateCylinderStatus2', false,
- 			formData, false, 'text', function(data){
-//  		var jsonobj = $.parseJSON(data);
- 		window.location.reload();
- 		/* alert(jsonobj.message);
- 		var alldata = jsonobj.allOrders1;
- 		console.log(jsonobj.allOrders1);
- 		displayTable(alldata); */
- 	});
-     
-}
+	var cylenderId = [];
+		$('#tableId :checkbox:checked').each(function(i) {
+			cylenderId[i] = $(this).val();
+		});
+		if (cylenderId.length == 0) {
+			alert("Please Select Cylinder");
+			return false;
+		}
+		var stationname = $("#stationname").val();
+		var formData = new FormData();
+		formData.append("fillingStation", stationname);
+		formData.append("cylindetId", cylenderId);
+		formData.append("cylinderStatus", 3);
+		$.fn.makeMultipartRequest('POST', 'updateCylinderStatus2', false,
+				formData, false, 'text', function(data) {
+					var jsonobj = $.parseJSON(data);
+					alert(jsonobj.msg);
+					window.location.reload();
+				});
 
+	}
 
-function searchData(){
-	var stationname=$("#stationname").val();
-	var quantity=$("#quantity").val();
-	var cylinderType=$("#cylinderType").val();
-	 var formData = new FormData();
-     formData.append('stationname', stationname);
-     formData.append('quantity', quantity);
-     formData.append('cylinderType', cylinderType);
-	$.fn.makeMultipartRequest('POST', 'searchQualityCheck1', false,
-			formData, false, 'text', function(data){
-		var jsonobj = $.parseJSON(data);
-		var alldata = jsonobj.allOrders1;
-		console.log(jsonobj.allOrders1);
-		displayTable(alldata);
-	});
-}
+	function searchData() {
+		var stationname = $("#stationname").val();
+		var quantity = $("#quantity").val();
+		var cylinderType = $("#cylinderType").val();
+		if (stationname == null || stationname == "undefined" || stationname == "") {
+			alert("Please Select Stationname");
+			return false;
+		}
+		if (quantity == null || quantity == "undefined" || quantity == "") {
+			alert("Please Enter Quantity");
+			return false;
+		}
+		if (cylinderType == null || cylinderType == "undefined" || cylinderType == "") {
+			alert("Please Select CylinderType");
+			return false;
+		}
+		
+		var formData = new FormData();
+		formData.append('stationname', stationname);
+		formData.append('quantity', quantity);
+		formData.append('cylinderType', cylinderType);
+		$.fn.makeMultipartRequest('POST', 'searchQualityCheck1', false,
+				formData, false, 'text', function(data) {
+					var jsonobj = $.parseJSON(data);
+					var alldata = jsonobj.allOrders1;
+					console.log(jsonobj.allOrders1);
+					displayTable(alldata);
+				});
+	}
+	function onChangeCylinderFilledStatusData() {
+		var stationname = $("#stationname").val();
+		var size = $("#cylinderType").val();
+		var formData = new FormData();
+		formData.append('stationname', stationname);
+		formData.append('quantity', quantity);
+		formData.append('size', size);
+		$.fn.makeMultipartRequest('POST', 'onChangeCylinderFilledStatusData',
+				false, formData, false, 'text', function(data) {
+					$("#quantity").val(data);
+				});
+	}
 
-$("#pageName").text("Cylinder Filled Status");
-// $(".transactions").addClass("open");
-// $(".transactions").addClass("active");
-$(".cylinderFilledStatus").addClass("active");
+	$("#pageName").text("Cylinder Filled Status");
+	// $(".transactions").addClass("open");
+	// $(".transactions").addClass("active");
+	$(".cylinderFilledStatus").addClass("active");
 </script>

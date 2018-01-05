@@ -5,6 +5,13 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
+
+<style>
+.dataTables_filter {
+display: none; 
+}
+</style>
+
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -25,7 +32,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">Cylinder Type <span class="impColor">*</span></label>
 							<div class="col-md-7">
-				        		<form:select path="cylinderType" class="form-control " onfocus="removeBorder(this.id)">
+				        		<form:select path="cylinderType" class="form-control " onchange="onChangeQualityCheckHome();" onfocus="removeBorder(this.id)">
 				        			<form:option value="">-- Select Cylinder Type --</form:option>
 				        			<form:options items="${cylinderTypes}"></form:options>
 				        		</form:select>
@@ -54,7 +61,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<div class="col-md-6">
-						        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>
+						        		
 									</div>
 								</div>
 							</div>
@@ -67,6 +74,7 @@
 								</div>
 							</div>
 							<div class="panel-body collapse in">
+							<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Select All/UnSelect All</label></p>
 								<div class="table-responsive" id="tableId">
 									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 										<thead>
@@ -97,7 +105,6 @@
 							<label for="focusedinput" class="col-md-3 control-label">Store Name <span class="impColor">*</span></label>
 							<div class="col-md-6">
 				        		<form:select path="store" class="form-control " onfocus="removeBorder(this.id)">
-				        			<form:option value="">---- Select Store Name --</form:option>
 				        			<form:options items="${stores}"></form:options>
 				        		</form:select>
 				        		</div>
@@ -191,19 +198,15 @@ function QualityCheck(){
     	 return false;
      }
     var store= $("#store").val();
-    // alert("cylinderId"+cylenderId+"------store---"+store);
      var formData = new FormData();
      formData.append("storename",store);
      formData.append("cylindetId",cylenderId);
      formData.append("cylinderStatus",1);
       $.fn.makeMultipartRequest('POST', 'updateCylinderStatus8', false,
  			formData, false, 'text', function(data){
-//  		var jsonobj = $.parseJSON(data);
+ 		var jsonobj = $.parseJSON(data);
+		alert(jsonobj.msg);
  		window.location.reload();
- 		/* alert(jsonobj.message);
- 		var alldata = jsonobj.allOrders1;
- 		console.log(jsonobj.allOrders1);
- 		displayTable(alldata); */
  	}); 
      
 }
@@ -213,7 +216,14 @@ function searchData(){
 	var quantity=$("#quantity").val();
 	var cylinderType=$("#cylinderType").val();
 	 var formData = new FormData();
-	 
+		if (quantity == null || quantity == "undefined" || quantity == "") {
+			alert("Please Enter Quantity");
+			return false;
+		}
+		if (cylinderType == null || cylinderType == "undefined" || cylinderType == "") {
+			alert("Please Select CylinderType");
+			return false;
+		}
 	 
 	 $.ajax({
 			type : "POST",
@@ -225,8 +235,6 @@ function searchData(){
 			success: function (response) {
 				 $.unblockUI();
              	var resJson=JSON.parse(response);
-             	//var jsonobj = $.parseJSON(response);
-        		//var alldata = jsonobj.allOrders1;
         		console.log(resJson);
         		displayTable(resJson);
               },
@@ -244,6 +252,19 @@ function searchData(){
 // 	$.fn.makeMultipartRequest('POST', 'returnCylinderQualityCheck', false,formData, false, 'text', function(data){
 		
 	//});
+}
+
+function onChangeQualityCheckHome(){
+	//var stationname=$("#stationname").val();
+	var size=$("#cylinderType").val();
+	 var formData = new FormData();
+     //formData.append('stationname', stationname);
+    // formData.append('quantity', quantity);
+     formData.append('size', size);
+	$.fn.makeMultipartRequest('POST', 'onChangeQualityCheckHome', false,
+			formData, false, 'text', function(data){
+		$("#quantity").val(data);
+	});
 }
 
 $("#pageName").text("Return Cylinder Quality Check And Move To Store");

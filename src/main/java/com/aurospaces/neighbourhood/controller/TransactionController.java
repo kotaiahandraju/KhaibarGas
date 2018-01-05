@@ -115,6 +115,8 @@ public class TransactionController {
 		JSONObject objJson = new JSONObject();
 		CylindertransactionBean cylindertransactionBean = null;
 		CylindermasterBean cylindermasterBean = null;
+		int intcount=0;
+		JSONObject jsonObject=new JSONObject();
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean) session.getAttribute("cacheUserBean");
 			String fillingStation = fillingstationmasterBean.getFillingStation();
@@ -132,8 +134,14 @@ public class TransactionController {
 				cylindermasterBean.setCylinderstatus(cylinderStatus);
 				cylindermasterBean.setFillingstationId(fillingStation);
 				cylindertransactionDao.save(cylindertransactionBean);
-				cylindermasterDao.updateCylinderStatus(cylindermasterBean);
-			}
+				boolean count=cylindermasterDao.updateCylinderStatus(cylindermasterBean);
+				 
+				if(count){
+					intcount++;
+				}
+				System.out.println("count---"+intcount);
+				}
+				jsonObject.put("msg", intcount+" Records Updated ");
 
 		} catch (Exception e) {
 			objJson.put("msg", e);
@@ -143,7 +151,7 @@ public class TransactionController {
 			logger.fatal("error in TransactionController class in updateCylinderStatus method");
 		}
 
-		return "tariffMasterHome";
+		 return String.valueOf(jsonObject);
 	}
 
 	@RequestMapping("searchCylinderMoveToFilling")
@@ -161,6 +169,122 @@ public class TransactionController {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(retlist);
 			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sJson;
+
+	}
+	@RequestMapping("onChangeStoreAndCylinderType")
+	public @ResponseBody String onChangeStoreAndCylinderType(CylindermasterBean cylinderBean) {
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		String count1=null;
+		List<CylindermasterBean> retlist = null;
+		try {
+
+				cylinderBean.setCylinderstatus("1");
+				System.out.println("----cylindertransactionBean---" + cylinderBean.getStore()+"-------size-------"+cylinderBean.getSize()+"-------STATUS-------"+cylinderBean.getCylinderstatus());
+				retlist = cylindermasterDao.onChangeStoreAndCylinderType(cylinderBean);
+				for (CylindermasterBean cylindermasterBean : retlist) {
+					 count1 =cylindermasterBean.getCount1();
+				}
+				//objectMapper = new ObjectMapper();
+				//sJson = objectMapper.writeValueAsString(count1);
+				sJson=count1;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sJson;
+
+	}
+	@RequestMapping("onChangeCylinderFilledStatusData")
+	public @ResponseBody String onChangeCylinderFilledStatusData(CylindermasterBean cylinderBean) {
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		String count1=null;
+		List<CylindermasterBean> retlist = null;
+		try {
+
+				cylinderBean.setCylinderstatus("2");
+				System.out.println("----onChangeCylinderFilledStatusData---" + cylinderBean.getStationname()+"-------size-------"+cylinderBean.getSize()+"-------STATUS-------"+cylinderBean.getCylinderstatus());
+				retlist = cylindermasterDao.onChangeStoreAndCylinderType(cylinderBean);
+				for (CylindermasterBean cylindermasterBean : retlist) {
+					 count1 =cylindermasterBean.getCount1();
+				}
+				
+				sJson=count1;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sJson;
+
+	}
+	@RequestMapping("onChangeCylinderQualityCheck")
+	public @ResponseBody String onChangeCylinderQualityCheck(CylindermasterBean cylinderBean) {
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		String count1=null;
+		List<CylindermasterBean> retlist = null;
+		try {
+
+				cylinderBean.setCylinderstatus("3");
+				System.out.println("----onChangeCylinderQualityCheck---" + cylinderBean.getStationname()+"-------size-------"+cylinderBean.getSize()+"-------STATUS-------"+cylinderBean.getCylinderstatus());
+				retlist = cylindermasterDao.onChangeStoreAndCylinderType(cylinderBean);
+				for (CylindermasterBean cylindermasterBean : retlist) {
+					 count1 =cylindermasterBean.getCount1();
+				}
+				
+				sJson=count1;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sJson;
+
+	}
+	@RequestMapping("onChangeCylinderMovetoTruck")
+	public @ResponseBody String onChangeCylinderMovetoTruck(CylindermasterBean cylinderBean) {
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		String count1=null;
+		List<CylindermasterBean> retlist = null;
+		try {
+
+				cylinderBean.setCylinderstatus("4");
+				System.out.println("----onChangeCylinderQualityCheck---" + cylinderBean.getStationname()+"-------size-------"+cylinderBean.getSize()+"-------STATUS-------"+cylinderBean.getCylinderstatus());
+				retlist = cylindermasterDao.onChangeStoreAndCylinderType(cylinderBean);
+				for (CylindermasterBean cylindermasterBean : retlist) {
+					 count1 =cylindermasterBean.getCount1();
+				}
+				
+				sJson=count1;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return sJson;
+
+	}
+	@RequestMapping("onChangeQualityCheckHome")
+	public @ResponseBody String onChangeQualityCheckHome(CylindermasterBean cylinderBean) {
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		String count1=null;
+		List<CylindermasterBean> retlist = null;
+		try {
+
+				cylinderBean.setCylinderstatus("7");
+				System.out.println("----onChangeQualityCheckHome---" + cylinderBean.getStationname()+"-------size-------"+cylinderBean.getSize()+"-------STATUS-------"+cylinderBean.getCylinderstatus());
+				retlist = cylindermasterDao.onChangeStoreAndCylinderType(cylinderBean);
+				for (CylindermasterBean cylindermasterBean : retlist) {
+					 count1 =cylindermasterBean.getCount1();
+				}
+				
+				sJson=count1;
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -237,6 +361,8 @@ public class TransactionController {
 		JSONObject objJson = new JSONObject();
 		CylindertransactionBean cylindertransactionBean = null;
 		CylindermasterBean cylindermasterBean1 = null;
+		int intcount=0;
+		JSONObject jsonObject=new JSONObject();
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean) session.getAttribute("cacheUserBean");
 			String cylenderId = cylindertransactionBean1.getCylindetId();
@@ -265,9 +391,14 @@ public class TransactionController {
 				cylindermasterBean1.setId(Integer.parseInt(cylenderId1[i]));
 				cylindermasterBean1.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
 				cylindertransactionDao.save(cylindertransactionBean);
-				cylindermasterDao.updateCylinderStatus(cylindermasterBean1);
+				boolean count=cylindermasterDao.updateCylinderStatus(cylindermasterBean1);
+				if(count){
+					intcount++;
+				}
+				System.out.println("count---"+intcount);
+				}
+				jsonObject.put("msg", intcount+" Records Updated ");
 
-			}
 
 		} catch (Exception e) {
 			objJson.put("msg", e);
@@ -276,8 +407,7 @@ public class TransactionController {
 			logger.error(e);
 			logger.fatal("error in TransactionController class in updateCylinderStatus method");
 		}
-
-		return "tariffMasterHome";
+		return String.valueOf(jsonObject);
 	}
 
 	@RequestMapping(value = "/cylinderQualityCheck")
@@ -348,6 +478,8 @@ public class TransactionController {
 		JSONObject objJson = new JSONObject();
 		CylindertransactionBean cylindertransactionBean = null;
 		CylindermasterBean cylindermasterBean = null;
+		int intcount=0;
+		JSONObject jsonObject=new JSONObject();
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean) session.getAttribute("cacheUserBean");
 			String cylenderId = cylindertransactionBean1.getCylindetId();
@@ -362,8 +494,13 @@ public class TransactionController {
 				cylindermasterBean.setId(Integer.parseInt(cylenderId1[i]));
 				cylindermasterBean.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
 				cylindertransactionDao.save(cylindertransactionBean);
-				cylindermasterDao.updateCylinderStatus(cylindermasterBean);
-			}
+				boolean count=cylindermasterDao.updateCylinderStatus(cylindermasterBean);
+				if(count){
+					intcount++;
+				}
+				System.out.println("count---"+intcount);
+				}
+				jsonObject.put("msg", intcount+" Records Updated ");
 
 		} catch (Exception e) {
 			objJson.put("msg", e);
@@ -372,8 +509,7 @@ public class TransactionController {
 			logger.error(e);
 			logger.fatal("error in TransactionController class in updateCylinderStatus method");
 		}
-
-		return "tariffMasterHome";
+		return String.valueOf(jsonObject);
 	}
 
 	@RequestMapping(value = "/cylinderMovetoTruck")
@@ -412,6 +548,8 @@ public class TransactionController {
 		JSONObject objJson = new JSONObject();
 		CylindertransactionBean cylindertransactionBean = null;
 		CylindermasterBean cylindermasterBean = null;
+		int intcount=0;
+		JSONObject jsonObject=new JSONObject();
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean) session.getAttribute("cacheUserBean");
 			String cylenderId = cylindertransactionBean1.getCylindetId();
@@ -427,8 +565,13 @@ public class TransactionController {
 				cylindermasterBean.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
 				cylindermasterBean.setTruckId(cylindertransactionBean1.getTruckId());
 				cylindertransactionDao.save(cylindertransactionBean);
-				cylindermasterDao.updateCylinderStatus(cylindermasterBean);
-			}
+				boolean count=cylindermasterDao.updateCylinderStatus(cylindermasterBean);
+				if(count){
+					intcount++;
+				}
+				System.out.println("count---"+intcount);
+				}
+				jsonObject.put("msg", intcount+" Records Updated ");
 
 		} catch (Exception e) {
 			objJson.put("msg", e);
@@ -437,8 +580,7 @@ public class TransactionController {
 			logger.error(e);
 			logger.fatal("error in TransactionController class in updateCylinderStatus method");
 		}
-
-		return "tariffMasterHome";
+		return String.valueOf(jsonObject);
 	}
 
 	@RequestMapping("/searchTruckStatus")
