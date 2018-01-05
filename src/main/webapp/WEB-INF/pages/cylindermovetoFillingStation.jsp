@@ -5,6 +5,14 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
+
+<style>
+
+.dataTables_filter {
+display: none; 
+}
+</style>
+
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -45,9 +53,9 @@
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label numericOnly">Quantity <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-4 control-label ">Quantity <span class="impColor">*</span></label>
 									<div class="col-md-8">
-						        		<form:input type="text" path="quantity" class="form-control " placeholder="Quantity"/>
+						        		<form:input type="text" path="quantity" class="form-control numericOnly " placeholder="Quantity"/>
 									</div>
 								</div>
 							</div>
@@ -87,7 +95,7 @@
 									<div class="col-md-12">
 										<div class="form-group">
 											<div class="col-md-6">
-								        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;font-weight: bolder;">Check/Uncheck All</label></p>
+								        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;font-weight: bolder;">Select All/ UnSelect All</label></p>
 											</div>
 										</div>
 									</div>
@@ -267,7 +275,7 @@ function searchData(){
      }
 	 
 	 if(quantity == null || quantity == "undefined" || quantity ==""){
-    	 alert("Please Select Quantity");
+    	 alert("Please Enter Quantity");
     	 return false;
      }
 	 

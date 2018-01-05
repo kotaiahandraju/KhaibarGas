@@ -5,6 +5,12 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
+<style>
+
+.dataTables_filter {
+display: none; 
+}
+</style>
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -42,7 +48,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-6 control-label">Quantity <span class="impColor">*</span></label>
 							<div class="col-md-6">
-				        		<form:input type="text" path="quantity" class="form-control " placeholder="Quantity"/>
+				        		<form:input type="text" path="quantity" class="form-control numericOnly" placeholder="Quantity"/>
 							</div>
 						</div>
 					</div>
@@ -60,7 +66,7 @@
 							<div class="col-md-12">
 								<div class="form-group">
 									<div class="col-md-6">
-						        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>
+						        		
 									</div>
 								</div>
 							</div>
@@ -73,6 +79,7 @@
 								</div>
 							</div>
 							<div class="panel-body collapse in">
+							<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Select All/UnSelect All</label></p>
 								<div class="table-responsive" id="tableId">
 									<table class="table table-striped table-bordered datatables" id="example">
 										<thead>
@@ -239,7 +246,7 @@ function movetoTruck(){
 			return false;
 		}
 		if (quantity == null || quantity == "undefined" || quantity == "") {
-			alert("Please Select Quantity");
+			alert("Please Enter Quantity");
 			return false;
 		}
 		if (cylinderType == null || cylinderType == "undefined" || cylinderType == "") {
@@ -273,4 +280,19 @@ function movetoTruck(){
 	$("#pageName").text("Cylinder Move to Truck");
 	// $(".transactions").addClass("open");
 	$(".cylinderMovetoTruck").addClass("active");
+	
+	
+	$(function(){
+		var listOrders1 = [{"x":10,"y":8,"z":15,"label":"January, 2018"},{"x":15,"y":18,"z":10,"label":"Febuary, 2018"}];
+		var arra=[];
+		$.each(listOrders1, function(v,k){
+			var data=[];
+			var axsis=[];
+			data=[k.x,k.y,k.z];
+			data='[['+data+'],'+k.label+']';
+			console.log(data);
+			arra.push(data);
+		});
+		console.log(arra.join(','));
+	});
 </script>

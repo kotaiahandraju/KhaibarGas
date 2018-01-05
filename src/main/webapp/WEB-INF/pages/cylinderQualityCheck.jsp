@@ -5,6 +5,14 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
+
+<style>
+
+.dataTables_filter {
+display: none; 
+}
+</style>
+
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -73,8 +81,8 @@
 								</div>
 							</div>
 							<div class="panel-body collapse in">
+						<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Select All/UnSelect All</label></p>		
 								<div class="table-responsive" id="tableId">
-						<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Check/Uncheck All</label></p>		
 									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 										<thead>
 											<tr><th>Cylinder ID</th>
@@ -211,7 +219,7 @@ function searchData(){
 		return false;
 	}
 	if (quantity == null || quantity == "undefined" || quantity == "") {
-		alert("Please Select Quantity");
+		alert("Please Enter Quantity");
 		return false;
 	}
 	if (cylinderType == null || cylinderType == "undefined" || cylinderType == "") {

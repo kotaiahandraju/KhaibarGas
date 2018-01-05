@@ -28,7 +28,7 @@
 							id="example">
 							<thead>
 								<tr>
-									<th>Asset Code</th><th>Item</th> <th>Asset Description</th><th>Rate</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th></th>
+									<th>Item</th> <th>Minimum Selling Price</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th></th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -52,14 +52,15 @@
 					<div class="panel-body">
 						<div class="row">
 							<div class="col-md-6">
-								<div class="form-group">
-									<form:hidden path="id" />
+							<form:hidden path="id" />
+								<%-- <div class="form-group">
+									
 									<label data-toggle="tooltip" title="Either Cylinder or Accessory Code" class="col-sm-4 control-label required">Asset Code <span class="impColor">*</span></label>
 									<div class="col-sm-7">
 										<form:input path="assetcode" class="form-control  validate" autocomplete="off" placeholder="Asset Code" required="required" />
 										<span class="hasError" id="assetcodeError"></span>
 									</div>
-								</div>
+								</div> --%>
 								<div class="form-group">
 									<label class="col-sm-4 control-label required">Item's <span class="impColor">*</span></label>
 									<div class="col-sm-7">
@@ -69,15 +70,15 @@
 										</form:select>
 									</div>
 								</div>
-								<div class="form-group">
+								<%-- <div class="form-group">
 									<label class="col-sm-4 control-label required">Asset Description <span class="impColor">*</span></label>
 									<div class="col-sm-7">
 										<form:input path="assetdescription" class="form-control  validate" autocomplete="off" placeholder="Asset Description" required="required" />
 										<span class="hasError" id="assetdescriptionError"></span>
 									</div>
-								</div>
+								</div> --%>
 								<div class="form-group">
-									<label class="col-sm-4 control-label required">Allowed Minimum Price(AED) <span class="impColor">*</span></label>
+									<label class="col-sm-4 control-label required">Allowed Minimum Selling Price(AED) <span class="impColor">*</span></label>
 									<div class="col-sm-7">
 										<form:input path="rate" class="form-control numericOnly validate" autocomplete="off" placeholder="Allowed Minimum Price(AED)" required="required" />
 										<span class="hasError" id="rateError"></span>
@@ -95,7 +96,7 @@
 								<div class="form-group">
 									<label class="col-sm-2 control-label required">Remarks</label>
 									<div class="col-sm-8">
-										<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="10"></form:textarea>
+										<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="6"></form:textarea>
 									</div>
 								</div>
 							</div>
@@ -132,7 +133,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ '<thead><tr><th>Asset Code</th><th>Item</th><th>Asset Description</th><th>Rate</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+		+ '<thead><tr><th>Item</th><th>Minimum Selling Price</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj) {
@@ -144,9 +145,7 @@ function displayTable(listOrders) {
 		var edit = "<a class='edit editIt' onclick='editTariffMasterDetails(" + orderObj.id + ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
-			+ "<td class='impFiled' title='"+orderObj.id+"'>" + orderObj.assetcode + "</td>"
-			+ "<td title='"+orderObj.itemName+"'>" + orderObj.itemName + "</td>"
-			+ "<td title='"+orderObj.id+"'>" + orderObj.assetdescription + "</td>"
+			+ "<td class='impFiled' title='"+orderObj.itemName+"'>" + orderObj.itemName + "</td>"
 			+ "<td title='"+orderObj.id+"'>" + orderObj.rate + "</td>"
 			+ "<td title='"+orderObj.id+"'>" + orderObj.alloweddiscount + "</td>"
 			+ "<td title='"+orderObj.id+"'>" + orderObj.remarks + "</td>"

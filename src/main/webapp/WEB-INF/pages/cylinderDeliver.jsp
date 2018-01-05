@@ -240,7 +240,7 @@ table#dependent_table tbody tr td:first-child::before {
 							</tr>
 							<tr>
 								<th colspan="5" style="text-align: right;">
-									Net Amount (AED) = <span id="netAmount1">0</span><br>
+									Total Net Amount (AED) = <span id="netAmount1">0</span><br>
 									Vat Amount ( ${vat }%) (AED) =<span id="vatAmount">0</span><br>
 									previous Due Amount (AED) =<span id="lastDueAmount">0</span><br>
 									Gross Amount (AED)=<span id="grandTotal">0</span>

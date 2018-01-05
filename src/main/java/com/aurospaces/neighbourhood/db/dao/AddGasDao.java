@@ -28,8 +28,6 @@ public class AddGasDao extends BaseAddGasDao
 			return retlist;
 
 		}
-	
-
 
 }
 
