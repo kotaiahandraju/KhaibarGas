@@ -56,7 +56,7 @@ public class CylinderController {
 		String sJson = null;
 		List<CylindermasterBean> listOrderBeans = null;
 		try {
-			listOrderBeans = cylindermasterDao.getCylinders();
+			listOrderBeans = cylindermasterDao.getCylinders("1");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -172,7 +172,7 @@ public class CylinderController {
 				}
 			}
 
-			listOrderBeans = cylindermasterDao.getCylinders();
+			listOrderBeans = cylindermasterDao.getCylinders("1");
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
@@ -318,5 +318,42 @@ public class CylinderController {
 			e.printStackTrace();
 		}
 		return String.valueOf(obj);
+	}
+	
+	@RequestMapping(value = "/inActiveCylinder")
+	public @ResponseBody String inActiveCylinder(CylindermasterBean objCylindermasterBean, ModelMap model,
+			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
+		System.out.println("deleteCylinder page...");
+		List<CylindermasterBean> listOrderBeans = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		boolean delete = false;
+		try {
+
+			listOrderBeans = cylindermasterDao.getCylinders(objCylindermasterBean.getStatus());
+			objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+			logger.fatal("error in EducationController class deleteEducation method  ");
+			jsonObj.put("message", "excetption" + e);
+			return String.valueOf(jsonObj);
+
+		}
+		return String.valueOf(jsonObj);
 	}
 }

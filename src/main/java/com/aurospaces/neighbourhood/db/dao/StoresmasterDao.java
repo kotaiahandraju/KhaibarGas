@@ -25,14 +25,14 @@ public class StoresmasterDao extends BaseStoresmasterDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 	
-	public String getAllStore() {
+	public String getAllStore(String status) {
 		List<StoresmasterBean> listStoresmasterBean = null;
 		ObjectMapper objectMapper=null;
 		String sJson=null;
 		try {
 			jdbcTemplate = custom.getJdbcTemplate();
 			
-			String sql = "SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as storeStatus  from storesmaster s order by s.id desc";
+			String sql = "SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as storeStatus  from storesmaster s where status='"+status+"' order by s.id desc";
 			System.out.println("sql:::"+sql);
 			listStoresmasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<StoresmasterBean>(StoresmasterBean.class));
 			if(listStoresmasterBean !=null){

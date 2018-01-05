@@ -27,14 +27,14 @@ public class LpomasterDao extends BaseLpomasterDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 
-	public String getAllCustomer() {
+	public String getAllCustomer(String status) {
 		List<LpomasterBean> listLpomasterBean = null;
 		ObjectMapper objectMapper=null;
 		String sJson=null;
 		try {
 			
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT l.*, DATE_FORMAT(l.expiryDate, '%d-%b-%Y') as expiryDate1,CASE WHEN l.status IN ('0') THEN 'Deactive' WHEN l.status in ('1') THEN 'Active'  ELSE '-----' END as lpoStatus  from lpomaster l order by id desc";
+			String sql = "SELECT l.*, DATE_FORMAT(l.expiryDate, '%d-%b-%Y') as expiryDate1,CASE WHEN l.status IN ('0') THEN 'Deactive' WHEN l.status in ('1') THEN 'Active'  ELSE '-----' END as lpoStatus  from lpomaster l where status='"+status+"' order by id desc";
 			System.out.println("sql:::"+sql);
 			listLpomasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<LpomasterBean>(LpomasterBean.class));
 			if(listLpomasterBean !=null){

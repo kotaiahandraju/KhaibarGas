@@ -22,7 +22,7 @@
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Inactive</label>
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive</label>
 					<div class="table-responsive" id="tableId">
 						<table class="table table-striped table-bordered datatables"
 							id="example">
@@ -208,10 +208,7 @@ function inactiveData() {
             showTableData(resJson);
 					console.log(resJson);
 				});
-		
-	/* }else{
-		alert("previous data....");
-	} */
+	
 }
 function dataClear(){
 	$("#id").val("");

@@ -1,5 +1,6 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -15,11 +16,15 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.CompanymasterBean;
+import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.db.dao.CompanymasterDao;
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 @Controller
 @RequestMapping(value="admin")
@@ -36,7 +41,7 @@ public class CompanyMasterController {
 		String sJson = null;
 		try {
 
-			listOrderBeans = cd.getAllCompanyMasterDetails();
+			listOrderBeans = cd.getAllCompanyMasterDetails("1");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -173,7 +178,41 @@ public class CompanyMasterController {
  					jsonObj.put("message", "Failed to Delete..!");
  				}
  			}
- 			listOrderBeans = cd.getAllCompanyMasterDetails();
+ 			listOrderBeans = cd.getAllCompanyMasterDetails("1");
+			objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) 
+			{
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			System.out.println(e);
+			logger.error(e);
+			logger.fatal("error in CompanyMasterController class deleteCompanyMasterDetails method");
+			jsonObj.put("message", "excetption"+e);
+			return String.valueOf(jsonObj);
+		}
+		return String.valueOf(jsonObj);
+	}
+	@RequestMapping(value = "/inActiveCompany")
+	public @ResponseBody String inActiveCompany( CompanymasterBean objCompanymasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult,RedirectAttributes redir) {
+		System.out.println("deleteCompanyMasterDetails page...");
+		List<CompanymasterBean> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
+		try{
+ 			listOrderBeans = cd.getAllCompanyMasterDetails(objCompanymasterBean.getStatus());
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) 
 			{

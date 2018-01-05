@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.AccessoriesmasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
+import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LpoitemsBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.db.dao.LpoitemsDao;
@@ -45,7 +46,7 @@ public class LpoMasterController {
 		List<LpomasterBean> lpoList=null;
 		try {
 			
-			sJson=lpomasterDao.getAllCustomer();
+			sJson=lpomasterDao.getAllCustomer("1");
 			if(sJson !=null){
 				
 				 request.setAttribute("allObjects", sJson);
@@ -174,7 +175,7 @@ public class LpoMasterController {
 		  isDelete = lpomasterDao.delete(dId,status);
 		 
 		  if(isDelete){
-			  sJson=lpomasterDao.getAllCustomer();
+			  sJson=lpomasterDao.getAllCustomer("1");
 			  System.out.println("deleted cusmer data--"+sJson);
 				
 			}
@@ -277,6 +278,22 @@ public class LpoMasterController {
 		}
 		return statesMap;
 	}
+	@RequestMapping(value = "/inActiveLPO")
+	public @ResponseBody String inActiveLPO(@RequestParam("status") String status) throws JsonGenerationException, JsonMappingException, IOException {
+		boolean isDelete = false;
+		String sJson = "";
+		Boolean itemsmasterBean=null;
+		List<ItemsBean> items=null;
+		ObjectMapper objectMapper = null;
+		sJson=sJson=lpomasterDao.getAllCustomer(status);
+		 /// System.out.println("inActiveItem data--"+sJson);
+			 /// System.out.println("inActiveItem data--"+sJson);
+				
+		
+		
+		return sJson;
+	}
+	
 
 	
 }

@@ -42,7 +42,7 @@ public class StoreController {
 		List<CustomermasterBean> customerList=null;
 		try {
 			
-			sJson=storesmasterDao.getAllStore();
+			sJson=storesmasterDao.getAllStore("1");
 			if(sJson !=null){
 				
 				 request.setAttribute("allObjects", sJson);
@@ -121,7 +121,7 @@ public class StoreController {
 		  isDelete = storesmasterDao.delete(dId,status);
 		 
 		  if(isDelete){
-			  sJson=storesmasterDao.getAllStore();
+			  sJson=storesmasterDao.getAllStore("1");
 			  System.out.println("deleted cusmer data--"+sJson);
 				
 			}
@@ -166,6 +166,22 @@ public class StoreController {
 			
 		}
 		return String.valueOf(jsonObj);
+	}
+	
+	@RequestMapping(value = "/inActiveStore")
+	public @ResponseBody String inActiveStore(@RequestParam("status") String status, HttpSession objSession,
+			HttpServletRequest objRequest) throws JsonGenerationException, JsonMappingException, IOException {
+		boolean isDelete = false;
+		String sJson = "";
+		Boolean accessoriesmasterBean=null;
+		List<AccessoriesmasterBean> accessories=null;
+		ObjectMapper objectMapper = null;
+			  sJson=storesmasterDao.getAllStore(status);
+			  System.out.println("deleted cusmer data--"+sJson);
+				
+		
+		
+		return sJson;
 	}
 	
 }

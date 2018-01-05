@@ -47,6 +47,7 @@ table#dependent_table tbody tr td:first-child::before {
                             </div>
                         </div>
                         <div class="panel-body collapse in">
+                        <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive</label>
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
@@ -622,6 +623,25 @@ function PaidCalculation(value){
 	if(amount !="" && value !=""){
 		$("#dueamount").val(parseInt(amount)-parseInt(value));
 	}
+}
+function inactiveData() {
+	
+	var status="0";
+	if($('#inActive').is(":checked") == true){
+		status="0";
+	}else{
+		status="1";
+	}
+		
+		var formData = new FormData();
+		formData.append('status', status);
+		
+		$.fn.makeMultipartRequest('POST', 'inActiveLPO', false,
+				formData, false, 'text', function(data) {
+			var resJson=JSON.parse(data);
+            showTableData(resJson);
+					console.log(resJson);
+				});
 }
 
 $("#pageName").text("LPO Master");
