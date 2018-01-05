@@ -22,15 +22,24 @@
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-                        <div class="table-responsive" id="tableId" >
-							<table class="table table-striped table-bordered datatables" id="example">
-								<thead>
-									<tr><th>Item Name</th><th>Item Type</th><th>Description</th><th>Price</th><th>Status</th><th></th></tr>
-								</thead>
-								<tbody></tbody>
-							</table>
-						</div>
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Inactive</label>
+					<div class="table-responsive" id="tableId">
+						<table class="table table-striped table-bordered datatables"
+							id="example">
+							<thead>
+								<tr>
+									<th>Item Name</th>
+									<th>Item Type</th>
+									<th>Description</th>
+									<th>Price</th>
+									<th>Status</th>
+									<th></th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
 					</div>
+				</div>
 				</div>
 			</div>
 		</div>
@@ -181,7 +190,29 @@ function deleteItem(id,status){
 		});
 	}
 }
-
+function inactiveData() {
+	
+	var status="0";
+	if($('#inActive').is(":checked") == true){
+		status="0";
+	}else{
+		status="1";
+	}
+		
+		var formData = new FormData();
+		formData.append('status', status);
+		
+		$.fn.makeMultipartRequest('POST', 'inActiveItem', false,
+				formData, false, 'text', function(data) {
+			var resJson=JSON.parse(data);
+            showTableData(resJson);
+					console.log(resJson);
+				});
+		
+	/* }else{
+		alert("previous data....");
+	} */
+}
 function dataClear(){
 	$("#id").val("");
 	$("#Name").val("");

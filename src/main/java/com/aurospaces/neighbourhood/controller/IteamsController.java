@@ -40,7 +40,7 @@ public class IteamsController {
 			List<ItemsBean> itemsList=null;
 			try {
 				
-				sJson=iteamsmasterDao.getAllItems();
+				sJson=iteamsmasterDao.getAllItems("1");
 				if(sJson !=null){
 					
 					 request.setAttribute("allObjects", sJson);
@@ -108,7 +108,8 @@ public class IteamsController {
 				
 			} catch (Exception e) {
 				System.out.println("Exception in Product Controller in productSave()");
-				e.printStackTrace();
+				redirect.addFlashAttribute("msg", "Failed");
+				redirect.addFlashAttribute("cssMsg", "danger");
 			}
 			return "redirect:itemsHome";
 		}
@@ -124,8 +125,23 @@ public class IteamsController {
 			  int dId=Integer.parseInt(id);
 			  	iteamsmasterDao.delete(dId,status);
 			 
-				  sJson=iteamsmasterDao.getAllItems();
-				  System.out.println("deleted cusmer data--"+sJson);
+				  sJson=iteamsmasterDao.getAllItems("1");
+				//  System.out.println("deleted cusmer data--"+sJson);
+					
+			
+			
+			return sJson;
+		}
+		@RequestMapping(value = "/inActiveItem")
+		public @ResponseBody String inActiveItem(@RequestParam("status") String status) throws JsonGenerationException, JsonMappingException, IOException {
+			boolean isDelete = false;
+			String sJson = "";
+			Boolean itemsmasterBean=null;
+			List<ItemsBean> items=null;
+			ObjectMapper objectMapper = null;
+			sJson=iteamsmasterDao.getAllItems(status);
+			 /// System.out.println("inActiveItem data--"+sJson);
+				 /// System.out.println("inActiveItem data--"+sJson);
 					
 			
 			
