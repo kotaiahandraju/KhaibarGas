@@ -23,6 +23,7 @@
 					</div>
 				</div>
 				<div class="panel-body collapse in">
+				<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive</label>
 					<div class="table-responsive" id="tableId">
 						<table class="table table-striped table-bordered datatables"
 							id="example">
@@ -191,7 +192,25 @@ function deleteTariffMasterDetails(id,status) {
 		});
 	}
 }
-
+function inactiveData() {
+	var status="0";
+	if($('#inActive').is(":checked") == true){
+		status="0";
+	}else{
+		status="1";
+	}
+		var formData = new FormData();
+		formData.append('status', status);
+		
+		$.fn.makeMultipartRequest('POST', 'inActiveTariff', false,
+				formData, false, 'text', function(data) {
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			console.log(jsonobj.allOrders1);
+			displayTable(alldata);
+				});
+		
+}
 $("#pageName").text("Tariff Master");
 $(".tariffMaster").addClass("active");
 </script>

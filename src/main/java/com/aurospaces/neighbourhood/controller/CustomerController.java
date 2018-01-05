@@ -43,7 +43,7 @@ public class CustomerController {
 		List<CustomermasterBean> customerList=null;
 		try {
 			
-			sJson=customermasterDao.getAllCustomer();
+			sJson=customermasterDao.getAllCustomer("1");
 			if(sJson !=null){
 				
 				 request.setAttribute("allObjects", sJson);
@@ -117,7 +117,7 @@ public class CustomerController {
 		  isDelete = customermasterDao.delete(dId,status);
 		 
 		  if(isDelete){
-			  sJson=customermasterDao.getAllCustomer();
+			  sJson=customermasterDao.getAllCustomer("1");
 			  System.out.println("deleted cusmer data--"+sJson);
 				
 			}
@@ -159,7 +159,20 @@ public class CustomerController {
 		}
 		return String.valueOf(jsonObj);
 	}
-	
+	@RequestMapping(value = "/inActiveCustomer")
+	public @ResponseBody String inActiveCustomer( @RequestParam("status") String status, HttpSession objSession,
+			HttpServletRequest objRequest) throws JsonGenerationException, JsonMappingException, IOException {
+		boolean isDelete = false;
+		String sJson = "";
+		 try{
+			  sJson=customermasterDao.getAllCustomer(status);
+			  System.out.println("deleted cusmer data--"+sJson);
+		
+		 }catch(Exception e){
+			 e.printStackTrace();
+		 }
+		return sJson;
+	}
 	
 	
 }

@@ -28,12 +28,12 @@ public class CustomermasterDao extends BaseCustomermasterDao
 	JdbcTemplate jdbcTemplate;
 	ObjectMapper objectMapper=null;
 	String sJson=null;
-	public String getAllCustomer() {
+	public String getAllCustomer(String status) {
 		List<CustomermasterBean> listCustomermasterBean = null;
 		try {
 			jdbcTemplate = custom.getJdbcTemplate();
 			
-			String sql = "SELECT c.*,CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as custStatus  from customermaster c order by c.id desc";
+			String sql = "SELECT c.*,CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as custStatus  from customermaster c where c.status='"+status+"' order by c.id desc";
 			System.out.println("sql:::"+sql);
 			listCustomermasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<CustomermasterBean>(CustomermasterBean.class));
 			if(listCustomermasterBean !=null){

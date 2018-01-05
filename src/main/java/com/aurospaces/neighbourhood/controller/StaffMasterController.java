@@ -47,7 +47,7 @@ System.out.println("hello staff");
 		String sJson = null;
 		try {
 
-			listOrderBeans = objStaffmasterDao.getAllStaffmasterDetails();
+			listOrderBeans = objStaffmasterDao.getAllStaffmasterDetails("1");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -195,7 +195,7 @@ System.out.println("hello staff");
  					jsonObj.put("message", "Failed to Delete..!");
  				}
  			}
- 			listOrderBeans = objStaffmasterDao.getAllStaffmasterDetails();
+ 			listOrderBeans = objStaffmasterDao.getAllStaffmasterDetails("1");
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) 
 			{
@@ -220,5 +220,40 @@ System.out.println("hello staff");
 		}
 		return String.valueOf(jsonObj);
 	}
-
+	@RequestMapping(value = "/inActiveStaff")
+	public @ResponseBody String inActiveStaff( StaffmasterBean objStaffmasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult,RedirectAttributes redir) {
+		System.out.println("deleteStaffMasterDetails page...");
+		List<StaffmasterBean> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
+		try{
+			
+ 			listOrderBeans = objStaffmasterDao.getAllStaffmasterDetails(objStaffmasterBean.getStatus());
+			objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) 
+			{
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+			//System.out.println(e);
+			logger.error(e);
+			logger.fatal("error in StaffMasterController class deleteStaffMasterDetails method");
+			jsonObj.put("message", "excetption"+e);
+			return String.valueOf(jsonObj);
+		}
+		return String.valueOf(jsonObj);
+	}
+	
 }

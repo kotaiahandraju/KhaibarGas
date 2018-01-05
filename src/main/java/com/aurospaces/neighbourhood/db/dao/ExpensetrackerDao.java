@@ -23,14 +23,14 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 
-	public String getAllExpenseTracker() {
+	public String getAllExpenseTracker(String status) {
 		List<Expensetracker> expensetracker = null;
 		ObjectMapper objectMapper=null;
 		String sJson=null;
 		try {
 			jdbcTemplate = custom.getJdbcTemplate();
 			
-			String sql = "SELECT e.*,CASE WHEN e.status IN ('0') THEN 'Deactive' WHEN e.status in ('1') THEN 'Active'  ELSE '-----' END as trackrstatus  from expensetracker e order by e.id desc";
+			String sql = "SELECT e.*,CASE WHEN e.status IN ('0') THEN 'Deactive' WHEN e.status in ('1') THEN 'Active'  ELSE '-----' END as trackrstatus  from expensetracker e where e.status='"+status+"'  order by e.id desc";
 			System.out.println("sql:::"+sql);
 			expensetracker = jdbcTemplate.query(sql, new BeanPropertyRowMapper<Expensetracker>(Expensetracker.class));
 			if(expensetracker !=null){

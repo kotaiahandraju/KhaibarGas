@@ -22,6 +22,7 @@
 						</div>
 					</div>
 					<div class="panel-body collapse in">
+					<input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive</label>
 						<div class="table-responsive" id="tableId">
 							<table class="table table-striped table-bordered datatables" id="example">
 								<thead>
@@ -203,7 +204,27 @@ function trckerDelete(id,status) {
 		});
 	}
 }
-
+function inactiveData() {
+	var status="0";
+	if($('#inActive').is(":checked") == true){
+		status="0";
+	}else{
+		status="1";
+	}
+		var formData = new FormData();
+		formData.append('status', status);
+		
+		$.fn.makeMultipartRequest('POST', 'inActiveExpense', false,
+				formData, false, 'text', function(data) {
+			var resJson=JSON.parse(data);
+			displayTable(resJson);
+					console.log(resJson);
+				});
+		
+	/* }else{
+		alert("previous data....");
+	} */
+}
 $("#pageName").text("Expense Tracker");
 $(".expenseTracker").addClass("active"); 
 </script>
