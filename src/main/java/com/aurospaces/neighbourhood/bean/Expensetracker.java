@@ -9,7 +9,7 @@ public class Expensetracker
 
 protected int id = 0;
 
-protected String accountHead ;
+protected String accountHead,amount ;
 
 protected String dateOfExpense ;
 
@@ -25,6 +25,12 @@ protected Date updatedTime ;
 protected String status ;
 protected String trackrstatus ;
 
+public String getAmount() {
+	return amount;
+}
+public void setAmount(String amount) {
+	this.amount = amount;
+}
 public String getTrackrstatus() {
 	return trackrstatus;
 }

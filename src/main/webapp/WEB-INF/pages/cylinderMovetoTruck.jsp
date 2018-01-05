@@ -11,6 +11,8 @@
 display: none; 
 }
 </style>
+ <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<!--  <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.3.0/css/bootstrap.min.css"> -->
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -129,8 +131,12 @@ display: none;
          	</div>
 		</div>
 	</div> <!-- container -->
+<div id="chart-3"></div> 
+ <script type='text/javascript' src="${baseurl }/js/jqBarGraph.1.1.js"></script>
 
 <script type="text/javascript">
+
+
 $(document).ready(function() {
 	  $("#parent").click(function() {
 	    $(".child").prop("checked", this.checked);
@@ -282,17 +288,33 @@ function movetoTruck(){
 	$(".cylinderMovetoTruck").addClass("active");
 	
 	
+			/* var data=[];
+			var sss;
 	$(function(){
-		var listOrders1 = [{"x":10,"y":8,"z":15,"label":"January, 2018"},{"x":15,"y":18,"z":10,"label":"Febuary, 2018"}];
+		var listOrders1 = [{"x":10,"y":8,"z":15,"label":"January 2018"},{"x":15,"y":18,"z":10,"label":"Febuary 2018"}];
 		var arra=[];
 		$.each(listOrders1, function(v,k){
-			var data=[];
 			var axsis=[];
 			data=[k.x,k.y,k.z];
 			data='[['+data+'],'+k.label+']';
-			console.log(data);
+// 			console.log(data);
 			arra.push(data);
 		});
+		 sss=arra.join(',');
 		console.log(arra.join(','));
 	});
+	
+	arrayOfData1 = new Array(
+			sss
+			);
+	$('#chart-3').jqBarGraph({data: arrayOfData1,
+		colors: ['#3D0017','#6B0E1D','#AB2522'],
+		legends: ['800x600','1024x768','Higher'],
+		legend: true,
+		width: 500,
+		color: '#ffffff',
+		type: 'multi',
+		postfix: '%',
+		title: '<h3>Browser Display Statistics <br /><small>multi bar graph</small></h3>'
+	}); */
 </script>

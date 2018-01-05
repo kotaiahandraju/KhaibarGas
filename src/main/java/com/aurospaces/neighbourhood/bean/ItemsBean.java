@@ -1,16 +1,7 @@
 package com.aurospaces.neighbourhood.bean;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-
-
 import java.util.Date;
-import java.math.BigDecimal;
 
 
 /**
@@ -36,7 +27,14 @@ protected String description ;
 protected String price ;
 protected String discount,itemType ;
 protected String status ;
-protected String itemstatus ;
+protected String itemstatus ,amount;
+
+public String getAmount() {
+	return amount;
+}
+public void setAmount(String amount) {
+	this.amount = amount;
+}
 public int getId() {
 	return id;
 }

@@ -27,7 +27,7 @@ public class BaseExpensetrackerDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO expensetracker( accountHead, dateOfExpense, itemDescription, paymentType, paymentRemarks, created_time, updated_time,status) values (?, ?, ?, ?, ?, ?, ?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO expensetracker( accountHead, dateOfExpense, itemDescription, paymentType, paymentRemarks, created_time, updated_time,status,amount) values (?, ?, ?, ?, ?, ?, ?,?,?)"; 
 
 
 
@@ -69,6 +69,7 @@ ps.setString(5, expensetracker.getPaymentRemarks());
 ps.setTimestamp(6, createdTime);
 ps.setTimestamp(7, updatedTime);
 ps.setString(8,expensetracker.getStatus());
+ps.setString(9,expensetracker.getAmount());
 							return ps;
 						}
 				},
@@ -82,9 +83,9 @@ ps.setString(8,expensetracker.getStatus());
 		else
 		{
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "UPDATE expensetracker  set accountHead = ? ,dateOfExpense = ? ,itemDescription = ? ,paymentType = ? ,paymentRemarks = ? ,updated_time = ?  where id = ? ";
+			String sql = "UPDATE expensetracker  set accountHead = ? ,dateOfExpense = ? ,itemDescription = ? ,paymentType = ? ,paymentRemarks = ? ,updated_time = ?,amount=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{expensetracker.getAccountHead(),expensetracker.getDateOfExpense(),expensetracker.getItemDescription(),expensetracker.getPaymentType(),expensetracker.getPaymentRemarks(),expensetracker.getUpdatedTime(),expensetracker.getId()});
+			jdbcTemplate.update(sql, new Object[]{expensetracker.getAccountHead(),expensetracker.getDateOfExpense(),expensetracker.getItemDescription(),expensetracker.getPaymentType(),expensetracker.getPaymentRemarks(),expensetracker.getUpdatedTime(),expensetracker.getAmount(),expensetracker.getId()});
 		}
 	}
 		

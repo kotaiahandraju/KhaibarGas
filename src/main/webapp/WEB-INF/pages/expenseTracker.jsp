@@ -26,7 +26,7 @@
 							<table class="table table-striped table-bordered datatables" id="example">
 								<thead>
 									<tr>
-										<th>Account Head</th><th>Date of Expense</th><th>Item description</th>
+										<th>Account Head</th><th>Expense Amount (AED)</<th>Date of Expense</th><th>Item description</th>
 										<th>Payment Type</th><th>Remarks</th><th></th>
 									</tr>
 								</thead>
@@ -52,7 +52,22 @@
 									<form:hidden path="id" />
 									<label class="col-sm-4 control-label required">Account Head <span class="impColor">*</span></label>
 									<div class="col-sm-6">
-										<form:input path="accountHead" class="form-control validate" autocomplete="off" placeholder="Account Head" required="required" />
+<%-- 										<form:input path="accountHead" class="form-control validate" autocomplete="off" placeholder="Account Head" required="required" /> --%>
+										<form:select path="accountHead" class="form-control  validate" onfocus="removeBorder(this.id)">
+											<form:option value="" selected="selected" disabled="disabled">-- Select Account Head --</form:option>
+											<form:option value="Miscellaneous" >Miscellaneous</form:option>
+											<form:option value="Operating" >Operating</form:option>
+											<form:option value="Workshop" >Workshop</form:option>
+											<form:option value="Recovery" >Recovery</form:option>
+										</form:select>
+									</div>
+								</div>
+							</div>
+							<div class="col-md-6">
+								<div class="form-group">
+									<label class="col-sm-4 control-label required"> Expense Amount (AED) <span class="impColor">*</span></label>
+									<div class="col-sm-6">
+										<form:input path="amount" class="form-control validate numericOnly" autocomplete="off" placeholder="Expense  Amount (AED)" />
 									</div>
 								</div>
 							</div>
@@ -130,7 +145,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Account Head</th><th>Date of Expense</th><th>Item description</th><th>Payment Type</th><th>Remarks</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Account Head</th><th>Expense Amount (AED)</th><th>Date of Expense</th><th>Item description</th><th>Payment Type</th><th>Remarks</th><th>Status</th><th></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj){
@@ -143,6 +158,8 @@ function displayTable(listOrders) {
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr >"
 			+ "<td class='impFiled' title='"+orderObj.accountHead+"'>" + orderObj.accountHead + "</td>"
+			+ "<td class='impFiled' title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
+			
 			+ "<td title='"+orderObj.dateOfExpense+"'>" + orderObj.dateOfExpense + "</td>"
 			+ "<td title='"+orderObj.itemDescription+"'>" + orderObj.itemDescription + "</td>"
 			+ "<td title='"+orderObj.paymentType+"'>" + orderObj.paymentType + "</td>"
@@ -158,6 +175,7 @@ function displayTable(listOrders) {
 function editExpensiveTracker(id) {
 	$("#id").val(serviceUnitArray[id].id);
 	$("#accountHead").val(serviceUnitArray[id].accountHead);
+	$("#amount").val(serviceUnitArray[id].amount);
 	$("#dateOfExpense").val(serviceUnitArray[id].dateOfExpense);
 	$("#dateOfExpense").val(serviceUnitArray[id].dateOfExpense);
 	$("#itemDescription").val(serviceUnitArray[id].itemDescription);
