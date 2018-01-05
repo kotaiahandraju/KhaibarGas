@@ -127,48 +127,38 @@ table#dependent_table tbody tr td:first-child::before {
 						<div class="row">
 							<div class="col-md-12">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-3 control-label">Cylinders </label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Cylinders </label>
                     				<div class="col-md-9">
                     					<span id="cylinders"></span>
 								  	</div>
                     			</div>
                     		</div>
-                    		<div class="col-md-6">
+                    		<div class="col-md-12">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Cylinder Return Truck</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Cylinder Return Truck</label>
                     				<div class="col-md-6">
                     					<form:select path="cylinderReturnTruck" class="form-control chzn-select " onfocus="removeBorder(this.id);" >
 		                    				<form:option value="">--Select Truck--</form:option>
 		                    				<form:options items="${trucks}"></form:options>
-		                    				</form:select>
+		                    			</form:select>
 								  	</div>
                     			</div>
                     		</div>
-                    		<input type="hidden" name="previousDueAmount" value="0"> 
-                    		<div class="col-md-6">
+                    		<input type="hidden" name="previousDueAmount" value="0">
+                    		<div class="col-md-12">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Payed Amount(AED)</label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Previous Due Amount(AED)</label>
                     				<div class="col-md-6">
-                    					<input type="text" name="payedAmount" id="payedAmount" placeholder="Payed Amount" class="form-control numericOnly" onkeyup="payedAmountCal(this.value)">
+                    					<span id="lastDueAmount" class="form-control">0</span>
 								  	</div>
                     			</div>
                     		</div>
-                    		
-		                    		<div  style="display:none" >
-		                    		<form:select path="ownercompany" class="form-control chzn-select " onfocus="removeBorder(this.id);" >
-				                    				<form:option value="">--Select company--</form:option>
-				                    				<form:options items="${companys}"></form:options>
-				                    				</form:select>
-				                    </div>
-                    		
-                    		<div class="col-md-6">
-                    			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-6 control-label">Due Amount(AED)</label>
-                    				<div class="col-md-6">
-                    					<input type="text" name="dueAmount" id="dueAmount" placeholder="Due Amount" class="form-control numericOnly">
-								  	</div>
-                    			</div>
-                    		</div>
+                    		<div style="display: none;">
+		                    	<form:select path="ownercompany" class="form-control chzn-select" onfocus="removeBorder(this.id);" >
+	                   				<form:option value="">--Select company--</form:option>
+	                   				<form:options items="${companys}"></form:options>
+								</form:select>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -239,17 +229,30 @@ table#dependent_table tbody tr td:first-child::before {
 								<th><span class="totalTaxableValue"></span></th>
 							</tr>
 							<tr>
-								<th colspan="5" style="text-align: right;">
+								<th colspan="7" style="text-align: right;">
 									Net Amount (AED) = <span id="netAmount1">0</span><br>
 									Vat Amount (AED) ( ${vat }%)=<span id="vatAmount">0</span><br>
-									previous Due Amount (AED) =<span id="lastDueAmount">0</span><br>
 									Gross Amount (AED)=<span id="grandTotal">0</span>
 								</th>
-								<th></th>
-								<th></th>
 							</tr>
 						</tfoot>
 					</table>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label for="focusedinput" class="col-md-4 control-label">Paid Amount(AED)</label>
+					<div class="col-md-6">
+						<input type="text" name="payedAmount" id="payedAmount" placeholder="Paid Amount" class="form-control numericOnly" onkeyup="payedAmountCal(this.value)">
+					</div>
+				</div>
+			</div>
+			<div class="col-md-12">
+				<div class="form-group">
+					<label for="focusedinput" class="col-md-4 control-label">Due Amount(AED)</label>
+					<div class="col-md-6">
+						<input type="text" name="dueAmount" id="dueAmount" placeholder="Due Amount" class="form-control numericOnly">
+					</div>
 				</div>
 			</div>
 			<div class="panel-footer hideme">
