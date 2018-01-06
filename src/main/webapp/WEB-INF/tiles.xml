@@ -93,6 +93,10 @@
 		<put-attribute name="body" value="/WEB-INF/pages/returnCylinderQualityCheck.jsp" />
 	</definition>
 	
+	<definition name="TruckTrakingHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/truckTracking.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>
 

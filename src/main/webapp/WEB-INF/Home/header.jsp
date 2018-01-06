@@ -166,6 +166,13 @@ $(function() {
 			</div>
 		</div>
 	</c:if>
+	<div class="msgcss row" style="visibility: hidden" >
+			<div class="col-sm-4 col-sm-offset-4">
+				<div class="form-group">
+					<div class="alert alert-success fadeIn animated" id="msg"></div>
+				</div>
+			</div>
+		</div>
 
     <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
         <div class="navbar-header pull-left">
@@ -230,6 +237,8 @@ $(function() {
 					</ul>
 				</li>
 				<li class="expenseTracker"><a href="${baseurl }/admin/expenseTrackerHome"><i class="fa fa-bar-chart-o"></i> <span>Expense Tracker</span></a></li>
+				<li class="truckTracking"><a href="${baseurl }/admin/TruckTrakingHome"><i class="fa fa-bar-chart-o"></i> <span>Truck Tracking</span></a></li>
+				
 			</ul>
 		</div>
     </nav>
