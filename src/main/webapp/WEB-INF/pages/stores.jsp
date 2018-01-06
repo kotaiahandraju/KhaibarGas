@@ -165,6 +165,10 @@ function deleteStore(id,status) {
 		                	 $.unblockUI();
 		                	var resJson=JSON.parse(response);
 		                	showTableData(resJson);
+		                	$(".msgcss").show();
+		                	$("#msg").text("delete success");
+		               		$("#msg").fadeOut(30000);
+		                	
 		                	//window.location.reload();
 		                	}
 		                 window.location.reload();
