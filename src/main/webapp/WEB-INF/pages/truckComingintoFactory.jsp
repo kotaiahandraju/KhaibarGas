@@ -19,21 +19,28 @@
       <link rel="stylesheet" type="text/css" href="https://cdn.rawgit.com/Eonasdan/bootstrap-datetimepicker/a549aa8780dbda16f6cff545aeabc3d71073911e/build/css/bootstrap-datetimepicker.css">
     
     <script type='text/javascript'>//<![CDATA[
+// $(window).load(function(){
+// // $('#outDate').datetimepicker();
+// $('#outDate').datetimepicker({
+// 		 format:"d-MMM-YYYY"
+// });
+// });//]]> 
+
 $(function () {
 
 	 $('#outDate').datetimepicker({        
 
 	    useCurrent: false,
+	    minDate: new Date(),
 	    format: 'DD-MMM-YYYY hh:mm A',
 	    showTodayButton: true,
 	    sideBySide: true,
-// 	    showClose: true,
-// 	    showClear: true,
+	    showClose: true,
+	    showClear: true,
 	    toolbarPlacement: 'top'
 
 	  });
 	});
-
 </script>
 <!-- Body starts heare -->
         <div class="clearfix"></div>
@@ -88,7 +95,7 @@ $(function () {
                         <h4></h4>
                         <div class="options"></div>
                     </div>
-                    <form:form class="form-horizontal" modelAttribute="TruckTrackingForm"  role="form" id="cylider-form" action="addTruckTrack" method="post">
+                    <form:form class="form-horizontal" modelAttribute="TruckTrackingForm"  role="form" id="cylider-form" action="addTruckTrackCommingtoFactory" method="post">
                     <div class="panel-body">
                     <form:hidden path="id"/>
                     		<div class="col-md-6">
@@ -133,7 +140,7 @@ $(function () {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Out Date<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="outDate" value="" class="form-control validate "  placeholder="Out Date/In Date" />
+								    	<form:input path="outDate"  class="form-control validate "  placeholder="Out Date/In Date"  />
 								      	<span class="hasError" id="lponumberError"></span>
 								    </div>
                     			</div>
@@ -251,7 +258,7 @@ function deleteTruckTracking(id,status){
 		var formData = new FormData();
 	    formData.append('id', id);
 	    formData.append('status', status);
-	    formData.append('truckStatus', "Going Out From Factory");
+	    formData.append('truckStatus', "Coming into Factory");
 		$.fn.makeMultipartRequest('POST', 'deleteTruckTracking', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
@@ -287,7 +294,7 @@ function inactiveData() {
 		
 		var formData = new FormData();
 		formData.append('status', status);
-		 formData.append('truckStatus', "Going Out From Factory");
+		 formData.append('truckStatus', "Coming into Factory");
 		$.fn.makeMultipartRequest('POST', 'inActiveTruckTracking', false,
 				formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);
@@ -296,7 +303,7 @@ function inactiveData() {
 			displayTable(alldata);
 				});
 }
- $("#pageName").text("Truck is going out from Factory ");
- $(".truckTracking").addClass("active"); 
+ $("#pageName").text("Truck Coming into Factory ");
+ $(".truckTracking1").addClass("active"); 
  
 </script>

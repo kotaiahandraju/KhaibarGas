@@ -47,7 +47,7 @@ public class TruckTrackingController {
 		String sJson = null;
 		List<TruckTrackingBean> listOrderBeans = null;
 		try {
-			listOrderBeans = truckTrackingDao.getTruckTrackingAll("1");
+			listOrderBeans = truckTrackingDao.getTruckTrackingAll("1","Going Out From Factory");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -75,7 +75,7 @@ public class TruckTrackingController {
 		
 		try
 		{
-			
+			truckTrackingBean.setTruckStatus("Going Out From Factory");
 			truckTrackingBean.setStatus("1");
 			
 			if(truckTrackingBean.getId() == 0){
@@ -120,7 +120,7 @@ public class TruckTrackingController {
 				}
 			}
 
-			listOrderBeans = truckTrackingDao.getTruckTrackingAll("1");
+			listOrderBeans = truckTrackingDao.getTruckTrackingAll("1",truckTrackingBean.getTruckStatus());
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
@@ -155,7 +155,7 @@ public class TruckTrackingController {
 		boolean delete = false;
 		try {
 
-			listOrderBeans = truckTrackingDao.getTruckTrackingAll(truckTrackingBean.getStatus());
+			listOrderBeans = truckTrackingDao.getTruckTrackingAll(truckTrackingBean.getStatus(),truckTrackingBean.getTruckStatus());
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 
@@ -163,7 +163,6 @@ public class TruckTrackingController {
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
 				jsonObj.put("allOrders1", listOrderBeans);
-				// System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -180,7 +179,66 @@ public class TruckTrackingController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	
+	@RequestMapping(value = "/TruckComingintoFactory")
+	public String TruckComingintoFactory(@ModelAttribute("TruckTrackingForm") TruckTrackingBean truckTrackingBean,
+			ModelMap model, HttpServletRequest request, HttpSession session) {
 
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<TruckTrackingBean> listOrderBeans = null;
+		try {
+			listOrderBeans = truckTrackingDao.getTruckTrackingAll("1","Coming into Factory");
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "TruckComingintoFactory";
+	}
+
+	@RequestMapping(value = "/addTruckTrackCommingtoFactory", method = RequestMethod.POST)
+	public String addTruckTrackCommingtoFactory( @ModelAttribute("TruckTrackingForm") TruckTrackingBean truckTrackingBean,
+			BindingResult bindingresults, Model model,RedirectAttributes redir) {
+		
+		try
+		{
+			truckTrackingBean.setTruckStatus("Coming into Factory");
+			truckTrackingBean.setStatus("1");
+			
+			if(truckTrackingBean.getId() == 0){
+				redir.addFlashAttribute("msg", "Record Inserted Successfully");
+				redir.addFlashAttribute("cssMsg", "success");
+			}else{
+				redir.addFlashAttribute("msg", "Record Updated Successfully");
+				redir.addFlashAttribute("cssMsg", "warning");
+			}
+			truckTrackingDao.save(truckTrackingBean);
+			
+			
+			
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+			redir.addFlashAttribute("msg", "Fail");
+
+		}
+		return "redirect:TruckComingintoFactory";
+	}	
+		
 	@ModelAttribute("trucks")
 	public Map<Integer, String> populateTrucks() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
@@ -196,4 +254,7 @@ public class TruckTrackingController {
 		}
 		return statesMap;
 	}
+	
+	
+	
 }

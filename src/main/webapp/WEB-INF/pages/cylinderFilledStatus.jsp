@@ -23,12 +23,17 @@ display: none;
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
+			  <div class="panel panel-danger">
+					<div class="panel-heading">
+						<h4>Search Form</h4>
+					</div>
+					<div class="panel-body">
 			<form:form commandName="fillingStationForm">
 				<div class="row">
-				  	<div class="col-md-3">
+				  	<div class="col-md-4">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Filling Station <span class="impColor">*</span></label>
-							<div class="col-md-7">
+							<label for="focusedinput" class="col-md-4 control-label">Filling Station <span class="impColor">*</span></label>
+							<div class="col-md-8">
 				        		<form:select path="stationname" class="form-control " onchange="onChangeCylinderFilledStatusData();" onfocus="removeBorder(this.id)">
 				        			<form:option value="">-- Select Filling Station --</form:option>
 				        			<form:options items="${fillingstation}"></form:options>
@@ -36,32 +41,45 @@ display: none;
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Cylinder Type <span class="impColor">*</span></label>
-							<div class="col-md-7">
+							<label for="focusedinput" class="col-md-4 control-label">Cylinder Type <span class="impColor">*</span></label>
+							<div class="col-md-8">
 				        		<form:select path="cylinderType" class="form-control " onchange="onChangeCylinderFilledStatusData();" onfocus="removeBorder(this.id)">
 				        			<form:options items="${cylinderTypes}"></form:options>
 				        		</form:select>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-4">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Quantity <span class="impColor">*</span></label>
-							<div class="col-md-7">
+							<label for="focusedinput" class="col-md-4 control-label">Quantity <span class="impColor">*</span></label>
+							<div class="col-md-8">
 				        		<form:input type="text" path="quantity" class="form-control numericOnly" placeholder="Quantity"/>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
+				</div>
+				</div>	
+					<div class="panel-footer">
+				      	<div class="row">
+				      		<div class="col-sm-12">
+				      			<div class="btn-toolbar pull-right">
+					      			<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
+				      			</div>
+				      		</div>
+				    	</div>
+					</div>
+					</div>
+					<!-- <div class="col-md-3">
 						<div class="form-group">
 							<div class="col-md-offset-3 col-md-6" style="">
 				        		<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
 							</div>
 						</div>
-					</div>
-				</div>
+					</div> -->
+				
+			</div>
 				<div class="row">
 					<div class="col-md-6">
 						<div class="row">
@@ -73,7 +91,7 @@ display: none;
 								</div>
 							</div>
 						</div>
-						<div class="panel panel-primary">
+						<div class="panel panel-danger">
 							<div class="panel-heading">
 		                    	<h4>Cylinders List</h4>
 								<div class="options">   

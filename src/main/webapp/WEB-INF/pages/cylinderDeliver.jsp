@@ -459,7 +459,7 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
-			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id)"><option>Select</option></select></td>'
+			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
 			+ dependentRowCount
 			+ 'unit" type="text" value="1" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
@@ -743,6 +743,7 @@ function getTarrifPrice(value,id){
 	var truckId = $("#cylinderDeliverTruck").val();
 	if(truckId==""){
 		alert("Please Select Truck");
+		$("#"+id).val("");
 		return false;
 	}
 	var number = parseInt(id.match(/[0-9]+/)[0], 10);
@@ -773,7 +774,21 @@ function discountCheck(id,value){
 	allcalculate(id);
 }
 function getTruckInCylinderCount(id,value){
-	
+	var items=[];
+	$("#dependent_table").closest('tr').find("[name^=item1]").each(function() {
+		items.push(this.id);
+	});
+	alert(items);
+	var formData = new FormData();
+    formData.append('itemId', value);
+	$.fn.makeMultipartRequest('POST', 'getTariffPrice', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.rate;
+		map[number+"discount"] = jsonobj.discount;
+		$("#"+number+"rate").val(jsonobj.rate);
+		allcalculate(number+"rate");
+	});
 	
 }
 $("#pageName").text("Cylinder Deliver To Customer");

@@ -97,6 +97,10 @@
 		<put-attribute name="body" value="/WEB-INF/pages/truckTracking.jsp" />
 	</definition>
 	
+	<definition name="TruckComingintoFactory" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/truckComingintoFactory.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>
 

@@ -23,11 +23,11 @@ public class TruckTrackingDao extends BaseTruckTrackingDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 	
-	public List<TruckTrackingBean> getTruckTrackingAll(String status){  
+	public List<TruckTrackingBean> getTruckTrackingAll(String status,String truckStatus){  
 		jdbcTemplate = custom.getJdbcTemplate();
 		 
 		
-		 String sql =  "select tm.trucknumber ,tt.*,CASE WHEN tt.status IN ('0') THEN 'Deactive' WHEN tt.status in ('1') THEN 'Active'  ELSE '-----' END as truckTrackingStatus from truck_tracking tt,trucksmaster tm where tm.id=tt.truckId and tt.status= '"+status+"' order by id desc";
+		 String sql =  "select tm.trucknumber ,tt.*,CASE WHEN tt.status IN ('0') THEN 'Deactive' WHEN tt.status in ('1') THEN 'Active'  ELSE '-----' END as truckTrackingStatus from truck_tracking tt,trucksmaster tm where tm.id=tt.truckId and tt.status= '"+status+"' and truckStatus='"+truckStatus+"' order by id desc";
 		List<TruckTrackingBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(TruckTrackingBean.class));
 		
