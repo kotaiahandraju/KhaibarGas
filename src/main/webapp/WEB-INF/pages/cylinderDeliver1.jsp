@@ -4,290 +4,269 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
-<style>
-table #dependent_table {
-	/* 	width: 100%; */
+ 
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+ <style>
+table #dependent_table{
+/* 	width: 100%; */
 	counter-reset: rowNumber;
 }
-table tbody tr.rowInc {
+
+table tbody tr.rowInc{
 	counter-increment: rowNumber;
 }
- table#dependent_table tbody tr td:first-child::before {
- content: counter(rowNumber);
+
+table#dependent_table tbody tr td:first-child::before {
+	content: counter(rowNumber);
 /* 	min-width: 1em; */
 /* 	margin-right: 0.5em; */
 }
-.addItemButton {
-	cursor: pointer;
-	font-size: small;
-	background: green;
-	color: white;
-	padding: 3px 10px 3px 10px;
+
+.addItemButton{
+	cursor: pointer;font-size: small;background: green;color: white;padding: 3px 10px 3px 10px;
 }
-#ui-datepicker-div {
+
+#ui-datepicker-div{
 /* 	width: auto !important; */
 }
 </style>
-<ol class="breadcrumb">
-  <li><a href="#">Home</a></li>
-  <li>Cylinder Delivered</li>
-</ol>
-<div class="clearfix"></div>
-<div class="container">
-  <form:form modelAttribute="lpoForm" id="cylinderDeliverForm" action="cylinderDeliverSave" class="form-horizontal" method="post">
-    <table width="100%">
-      <tr> 
-        <td><div class="row">    
-            <div class="col-md-6">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h4>Customer Details</h4>
-                </div>
-                <form:hidden path="netAmount"/>
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
-                        <div class="col-md-6">
-                          <form:select path="cylinderDeliverTruck" class="form-control  validate" onfocus="removeBorder(this.id);" >
-                            <form:option value="">--Select Truck--</form:option>
-                            <form:options items="${trucks}"></form:options>
-                          </form:select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Customer Type <span class="impColor">*</span></label>
-                        <div class="col-md-6">
-                          <form:select path="customertype" class="form-control   validate"  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
-                            <form:option value="">-- Customer Type --</form:option>
-                            <form:option value="COMMERCIAL">COMMERCIAL</form:option>
-                            <form:option value="DOMESTIC">DOMESTIC</form:option>
-                            <form:option value="INDUSTIAL">INDUSTIAL</form:option>
-                          </form:select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Customer Id <span class="impColor">*</span></label>
-                        <div class="col-md-6">
-                          <form:select path="customerId" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
-                            <form:option value="">-- Select Customer Id --</form:option>
-                          </form:select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group" style="margin-bottom:0;">
-                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Customer Name: </label>
-                        <div class="col-md-6"> <span id="customername" class="form-control" style="border:none;"></span> </div>
-                      </div>
-                      <div class="form-group" style="margin-bottom:0;">
-                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Customer Address: </label>
-                        <div class="col-md-6"> <span id="customeraddress" class="form-control"  style="border:none;"></span> </div>
-                      </div>
-                      <div class="form-group" style="margin-bottom:0;">
-                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Mobile: </label>
-                        <div class="col-md-6"> <span id="mobile" class="form-control"  style="border:none;"></span> </div>
-                      </div>
-                      <div class="form-group" style="margin-bottom:0;">
-                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Land Line: </label>
-                        <div class="col-md-6"> <span id="landline" class="form-control"  style="border:none;"></span> </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h4>Returned Cylinders</h4>
-                </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-5 control-label" style="margin-top:0; padding-top:0; vertical-align:text-top;">Cylinders </label>
-                        <div class="col-md-7"> <span id="cylinders"></span> </div>
-                      </div>
-                    </div>
-                  
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-5 control-label">Cylinder Return Truck</label>
-                        <div class="col-md-7">
-                          <form:select path="cylinderReturnTruck" class="form-control " onfocus="removeBorder(this.id);" >
-                            <form:option value="">--Select Truck--</form:option>
-                            <form:options items="${trucks}"></form:options>
-                          </form:select>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-5 control-label">previous Due Amount (AED)</label>
-                        <div class="col-md-5" style="padding-top:5px; color:#C00;">
-                        <span id="lastDueAmount" style="padding-top:5px; color:#C00"><strong>0</strong></span>
-                        </div>
-                      </div>
-                    <br />
-
-                    </div>
-
-                    <br />
-                    
-                    
-                    
-               
-               
-               
-                   <input type="hidden" name="previousDueAmount" value="0">
-                  
-                    
-                    <div  style="display:none" >
-                      <form:select path="ownercompany" class="form-control chzn-select " onfocus="removeBorder(this.id);" >
-                        <form:option value="">--Select company--</form:option>
-                        <form:options items="${companys}"></form:options>
-                      </form:select>
-                    </div>
-                    
-                    
-                
-                
-                
-                
-                
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-		
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <div class="row"> 
-                    <div class="col-md-12">
-                    
-               <div class="panel panel-primary">
-                <div class="panel-heading">
-                <h4>Deliver Cylinders</h4>
-                 <table class="options notPrintMe">
-                  <tr>
-                    <td class="hideme"><span class="addItemButton btn-danger" onclick="addMoreRowsForDependent(this.form);">Add Item</span></td>
-                  </tr>
-                </table>
-                
-                </div>
-                   
-                    
-                    
-                    
-                    
-            <div class="panel-body">         
-         
-            <form:select path="item" id="item1" style="display:none;font-size: small;">
-              <form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
-              <form:options items="${items}"></form:options>
-            </form:select>
-            <c:if test="${not empty vat}">
-              <form:hidden path="vat" value="${vat}"/>
-            </c:if>
-            <c:if test="${empty vat}">
-              <form:hidden path="vat" value="0"/>
-            </c:if>
-            <!-- </div>
+	<div class="clearfix"></div>
+	<ol class="breadcrumb">
+		<li><a href="#">Home</a></li>
+		<li>Cylinder Delivered</li>
+	</ol>
+	<div class="clearfix"></div>
+	<div class="container">
+		<form:form modelAttribute="lpoForm" id="cylinderDeliverForm" action="cylinderDeliverSave" class="form-horizontal" method="post">
+<table><tr><td>
+		<div class="row">
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Customer Details</h4>
+					</div>
+					<form:hidden path="netAmount"/>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-6">
+								<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+		                    				<form:select path="cylinderDeliverTruck" class="form-control chzn-select validate" onfocus="removeBorder(this.id);" >
+		                    				<form:option value="">--Select Truck--</form:option>
+		                    				<form:options items="${trucks}"></form:options>
+		                    				</form:select>
+								  	</div>
+                    			</div>
+							</div>
+							<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Type <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<form:select path="customertype" class="form-control chzn-select  validate"  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
+		                            		<form:option value="">-- Customer Type --</form:option>
+									  		<form:option value="COMMERCIAL">COMMERCIAL</form:option>
+									  		<form:option value="DOMESTIC">DOMESTIC</form:option>
+									  		<form:option value="INDUSTIAL">INDUSTIAL</form:option>
+								  		</form:select>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Id <span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+                    					<form:select path="customerId" class="form-control chzn-select validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
+		                            		<form:option value="">-- Select Customer Id --</form:option>
+								  		</form:select>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Name: </label>
+                    				<div class="col-md-6">
+                    					<span id="customername" class="form-control"></span>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Customer Address: </label>
+                    				<div class="col-md-6">
+                    					<span id="customeraddress" class="form-control"></span>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Mobile: </label>
+                    				<div class="col-md-6">
+                    					<span id="mobile" class="form-control"></span>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Land Line: </label>
+                    				<div class="col-md-6">
+                    					<span id="landline" class="form-control"></span>
+								  	</div>
+                    			</div>
+                    		</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-6">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h4>Returned Cylinders</h4>
+					</div>
+					<div class="panel-body">
+						<div class="row">
+							<div class="col-md-12">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-3 control-label">Cylinders </label>
+                    				<div class="col-md-9">
+                    					<span id="cylinders"></span>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Cylinder Return Truck</label>
+                    				<div class="col-md-6">
+                    					<form:select path="cylinderReturnTruck" class="form-control chzn-select " onfocus="removeBorder(this.id);" >
+		                    				<form:option value="">--Select Truck--</form:option>
+		                    				<form:options items="${trucks}"></form:options>
+		                    				</form:select>
+								  	</div>
+                    			</div>
+                    		</div>
+                    		<input type="hidden" name="previousDueAmount" value="0"> 
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Paid Amount(AED)</label>
+                    				<div class="col-md-6">
+                    					<input type="text" name="payedAmount" id="payedAmount" placeholder="Paid Amount" class="form-control numericOnly" onkeyup="payedAmountCal(this.value)">
+								  	</div>
+                    			</div>
+                    		</div>
+                    		
+		                    		<div  style="display:none" >
+		                    		<form:select path="ownercompany" class="form-control chzn-select " onfocus="removeBorder(this.id);" >
+				                    				<form:option value="">--Select company--</form:option>
+				                    				<form:options items="${companys}"></form:options>
+				                    				</form:select>
+				                    </div>
+                    		
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-6 control-label">Due Amount(AED)</label>
+                    				<div class="col-md-6">
+                    					<input type="text" name="dueAmount" id="dueAmount" placeholder="Due Amount" class="form-control numericOnly">
+								  	</div>
+                    			</div>
+                    		</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		<!-- </div>
 		<div class="row"> -->
-            <div >
-              <div class="form-group">
-                <table class="table table-bordered" id="dependent_table">
-                  <thead >
-                    <tr class="default" style="background:#EBEBEB">
-                      <th style="width: 40px;"><span>Sno</span></th>
-                      <th style="width: 200px"><span>Items</span></th>
-                      <th style="width: 70px;"><span>Quantity</span></th>
-                      <th><span>Price(AED)</span></th>
-                      <th><span>Total Amount (AED)</span></th>
-                      <th><span>Discount (%)</span></th>
-                      <th><span>Net Amount (AED)</span></th>
-                      <!-- 								<th style="width: 200px"><span>VAT (5%)</span></th> -->
-                      <!-- 								<th style="width: 200px"><span>Net Amount</span></th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr id="1" class="rowInc">
-                      <td></td>
-                      <td><select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)">
-                        <option value="" selected="selected" disabled="disabled">-- Select Item --</option>
-                        </select> </td>
-                      <td><input name="unit" value="1" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/></td>
-                      <td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly" readonly="readonly"/></td>
-                      <td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-                      <td><input name="discount" value="0" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="discountCheck(this.id,this.value)" class="form-control" /></td>
-                      <td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-                      <!-- 								<td><input name="vat" placeholder="Vat" id="1vat" value="5" type="text" onkeydown="removeBorder(this.id);" class="form-control" /></td> -->
-                      <!-- 								<td><input name="netAmount" placeholder="Net Amount"  id="1netAmount" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td> -->
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th colspan="4"><h3 align="right"></h3></th>
-                      <th><span class="totalInvoiceValue"></span></th>
-                      <th><span class="totalDiscounts"></span></th>
-                      <th><span class="totalTaxableValue"></span></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;"> Total Net Amount (AED)</th>
-                      <th> <span id="netAmount1">0</span></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;">
-                        Vat Amount ( ${vat }%) (AED)</th>
-                      <th> <span id="vatAmount">0</span></th>
-                    </tr>
-                    
-                    <tr>
-                      <th colspan="6" style="text-align: right;"> Paid Amount(AED)</th>
-                      <th> <input type="text" id="payedAmount" name="payedAmount" placeholder="Paid Amount(AED)" onkeyup="payedAmountCal(this.value)" class="form-control numericOnly"/></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;"> Due Amount(AED)</th>
-                      <th> <input type="text"  id="dueAmount" name="dueAmount" class="form-control numericOnly" placeholder="Due Amount(AED)" /></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;">
-                        Gross Amount (AED)</th>
-                      <th> <span id="grandTotal">0</span></th>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-            </div>
-            <div class="panel-footer hideme">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="btn-toolbar pull-right">
-                    <input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
-                    <input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div></td>
-      </tr>
-    </table>
-  </form:form>
-</div>
-<!-- container -->
+			<div class="col-md-12">
+				<div class="form-group">
+					<table class="notPrintMe">
+						<tr>
+							<td style="height: 20px;" class="hideme"> 
+								<span class="addItemButton" onclick="addMoreRowsForDependent(this.form);">Add Item</span>
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div>
+			<form:select path="item" id="item1" style="display:none;font-size: small;">
+		<form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
+		<form:options items="${items}"></form:options>
+	</form:select>
+	<c:if test="${not empty vat}">
+	<form:hidden path="vat" value="${vat}"/>
+	</c:if>
+	<c:if test="${empty vat}">
+	<form:hidden path="vat" value="0"/>
+	</c:if>
+		<!-- </div>
+		<div class="row"> -->
+			<div class="col-md-12">
+				<div class="form-group">
+					<table class="table table-bordered" id="dependent_table">
+						<thead>
+							<tr>
+								<th style="width: 40px;"><span>Sno</span></th>
+						        <th style="width: 200px"><span>Items</span></th>
+						        <th style="width: 70px;"><span>Quantity</span></th>
+						        <th><span>Price(AED)</span></th>
+						        <th><span>Total Amount (AED)</span></th>
+						        <th><span>Discount (%)</span></th>
+						        <th><span>Net Amount (AED)</span></th>
+<!-- 								<th style="width: 200px"><span>VAT (5%)</span></th> -->
+<!-- 								<th style="width: 200px"><span>Net Amount</span></th> -->
+					      </tr>
+						</thead>
+					    <tbody>
+							<tr id="1" class="rowInc">
+								<td></td>
+								<td>
+									<select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)" class="form-control">
+										<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
+									</select>
+								</td>
+								<td><input name="unit" value="1" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/></td>
+								<td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly" readonly="readonly"/></td>
+								<td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
+								<td><input name="discount" value="0" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="discountCheck(this.id,this.value)" class="form-control" /></td>
+								<td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
+<!-- 								<td><input name="vat" placeholder="Vat" id="1vat" value="5" type="text" onkeydown="removeBorder(this.id);" class="form-control" /></td> -->
+<!-- 								<td><input name="netAmount" placeholder="Net Amount"  id="1netAmount" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td> -->
+							</tr>
+						</tbody>
+						<tfoot>
+							<tr>
+								<th colspan="4"><h3 align="right"></h3></th>
+								<th><span class="totalInvoiceValue"></span></th>
+								<th><span class="totalDiscounts"></span></th>
+								<th><span class="totalTaxableValue"></span></th>
+							</tr>
+							<tr>
+								<th colspan="5" style="text-align: right;">
+									Total Net Amount (AED) = <span id="netAmount1">0</span><br>
+									Vat Amount ( ${vat }%) (AED) =<span id="vatAmount">0</span><br>
+									previous Due Amount (AED) =<span id="lastDueAmount">0</span><br>
+									Gross Amount (AED)=<span id="grandTotal">0</span>
+								</th>
+								<th></th>
+								<th></th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+			</div>
+			<div class="panel-footer hideme">
+				<div class="row">
+		      		<div class="col-sm-12">
+		      			<div class="btn-toolbar pull-right">
+			      			<input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
+			      			<input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
+		      			</div>
+		      		</div>
+		    	</div>
+		    </div>
+		</div>
+</td></tr></table>
+		</form:form>
+        </div> <!-- container -->
+ 
 <div id="dial1"></div>
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <script type="text/javascript">
@@ -480,7 +459,7 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
-			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id)"><option>Select</option></select></td>'
+			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
 			+ dependentRowCount
 			+ 'unit" type="text" value="1" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
@@ -729,7 +708,7 @@ function getCustomerDetails(value){
 			$("#previousDueAmount").val(catObj.dueAmount);
 			priceCalculator();
 			if(catObj.cylinderreturn=='0'){
-			var varcheckBox = "<input name='cylinderId' type='checkbox' value='"+catObj.cylinderId1 +"' />"+catObj.name+" <select  id='"+i+"company' name='company' class='company' ><option value=''>Select Company</option></select> <br>"; 
+			var varcheckBox = "<input name='cylinderId' class='form-control' type='checkbox' value='"+catObj.cylinderId1 +"' />"+catObj.name+" <select  id='"+i+"company' name='company' class='company form-control' ><option value=''>Select Company</option></select> <br>"; 
 			$("#cylinders").append(varcheckBox);
 			var dummyCompany = $("#ownercompany").html();
 			$("#"+i+"company").empty();
@@ -764,6 +743,7 @@ function getTarrifPrice(value,id){
 	var truckId = $("#cylinderDeliverTruck").val();
 	if(truckId==""){
 		alert("Please Select Truck");
+		$("#"+id).val("");
 		return false;
 	}
 	var number = parseInt(id.match(/[0-9]+/)[0], 10);
@@ -794,7 +774,21 @@ function discountCheck(id,value){
 	allcalculate(id);
 }
 function getTruckInCylinderCount(id,value){
-	
+	var items=[];
+	$("#dependent_table").closest('tr').find("[name^=item1]").each(function() {
+		items.push(this.id);
+	});
+	alert(items);
+	var formData = new FormData();
+    formData.append('itemId', value);
+	$.fn.makeMultipartRequest('POST', 'getTariffPrice', false,
+			formData, false, 'text', function(data){
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.rate;
+		map[number+"discount"] = jsonobj.discount;
+		$("#"+number+"rate").val(jsonobj.rate);
+		allcalculate(number+"rate");
+	});
 	
 }
 $("#pageName").text("Cylinder Deliver To Customer");
