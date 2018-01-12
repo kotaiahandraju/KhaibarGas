@@ -25,11 +25,17 @@ protected String ReadingKM ;
 
 protected String PetrolLevel ;
 
-protected String driverName,truckStatus,status,trucknumber,truckTrackingStatus;
+protected String driverName,truckStatus,status,trucknumber,truckTrackingStatus,tableJoinId;
 
 
 
 
+public String getTableJoinId() {
+	return tableJoinId;
+}
+public void setTableJoinId(String tableJoinId) {
+	this.tableJoinId = tableJoinId;
+}
 public String getTruckTrackingStatus() {
 	return truckTrackingStatus;
 }

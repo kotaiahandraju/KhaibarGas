@@ -24,6 +24,7 @@ import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.TruckTrackingBean;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.TruckTrackingDao;
+import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 
@@ -47,7 +48,7 @@ public class TruckTrackingController {
 		String sJson = null;
 		List<TruckTrackingBean> listOrderBeans = null;
 		try {
-			listOrderBeans = truckTrackingDao.getTruckTrackingAll("1","Going Out From Factory");
+			listOrderBeans = truckTrackingDao.getTruckTrackingAll("1","Out");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -75,9 +76,17 @@ public class TruckTrackingController {
 		
 		try
 		{
-			truckTrackingBean.setTruckStatus("Going Out From Factory");
+			TruckTrackingBean bean = truckTrackingDao.getTruckDetails(truckTrackingBean.getTruckId());
+			if(bean != null){
+				 if(bean.getTruckStatus().equals("Out")){
+					 redir.addFlashAttribute("msg", "Alredy Truck is went out from Factory");
+						redir.addFlashAttribute("cssMsg", "warning");
+					 return "redirect:TruckTrakingHome";
+				 }
+			}
+			truckTrackingBean.setTruckStatus("Out");
 			truckTrackingBean.setStatus("1");
-			
+			truckTrackingBean.setTableJoinId(new KhaibarGasUtil().randNum());
 			if(truckTrackingBean.getId() == 0){
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
@@ -188,7 +197,7 @@ public class TruckTrackingController {
 		String sJson = null;
 		List<TruckTrackingBean> listOrderBeans = null;
 		try {
-			listOrderBeans = truckTrackingDao.getTruckTrackingAll("1","Coming into Factory");
+			listOrderBeans = truckTrackingDao.getTruckTrackingAll("1","In");
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -214,9 +223,21 @@ public class TruckTrackingController {
 		
 		try
 		{
-			truckTrackingBean.setTruckStatus("Coming into Factory");
+			 TruckTrackingBean bean = truckTrackingDao.getTruckDetails(truckTrackingBean.getTruckId());
+			 if(bean == null){
+				 redir.addFlashAttribute("msg", "Alredy Truck  in Factory ");
+					redir.addFlashAttribute("cssMsg", "warning");
+				 return "redirect:TruckComingintoFactory";
+			 }else{
+				 if(!bean.getTruckStatus().equals("Out")){
+					 redir.addFlashAttribute("msg", "truck no out ");
+						redir.addFlashAttribute("cssMsg", "warning");
+					 return "redirect:TruckComingintoFactory";
+				 }
+			 }
+			truckTrackingBean.setTruckStatus("In");
 			truckTrackingBean.setStatus("1");
-			
+			truckTrackingBean.setTableJoinId(bean.getTableJoinId());
 			if(truckTrackingBean.getId() == 0){
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");

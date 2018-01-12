@@ -663,6 +663,7 @@ public class TransactionController {
 		CustomercylindersBean customercylindersBean = null;
 		TransactionStatus objTransStatus = null;
 		TransactionDefinition objTransDef = null;
+		CylindertransactionBean cylindertransactionBean1 = null;
 //		String company = null;
 		try {
 //			cylinderId = request.getParameter("cylinderId");
@@ -705,6 +706,11 @@ public class TransactionController {
 							cylinderMasterBean1.setCylinderstatus("6");
 							cylinderMasterBean1.setCustomerid(customerId);
 							cylindermasterDao.updateCylinderStatus(cylinderMasterBean1);
+							cylindertransactionBean1 = new CylindertransactionBean();
+							cylindertransactionBean1.setCylinderStatus("6");
+							cylindertransactionBean1.setCustomerId(customerId);
+							cylindertransactionBean1.setCylindetId(String.valueOf(cylindermasterbean.getId()));
+							cylindertransactionDao.save(cylindertransactionBean1);
 						}
 						// quantity,price,discount,grandTotal,vat,cylinderDeliverTruck,cylinderReturnTruck
 				}
@@ -713,15 +719,23 @@ public class TransactionController {
 				for(int i=0;i<cylinderId.length;i++){
 					CylindermasterBean cylinderMasterBean2 = new CylindermasterBean();
 					customercylindersDao.updateCustomerCylinderStatus(cylinderId[i]);
+					
+					cylindertransactionBean1 = new CylindertransactionBean();
+					cylindertransactionBean1.setCylinderStatus("7");
+					cylindertransactionBean1.setCustomerId(customerId);
+					cylindertransactionBean1.setCylindetId(cylinderId[i]);
+					
 					cylinderMasterBean2.setId(Integer.parseInt(cylinderId[i]));
 					cylinderMasterBean2.setCylinderstatus("7");
 					cylinderMasterBean2.setOwnercompany(company[i]);
 					CompanymasterBean companymasterBean= companymasterDao.getById(Integer.parseInt(company[i]));
 					if(!companymasterBean.getTypeofcompany().equals("Owner")){
 						cylinderMasterBean2.setCylinderstatus("8");
+						cylindertransactionBean1.setCylinderStatus("8");
 						cylinderMasterBean2.setStore("100");
 					}
 					cylindermasterDao.updateCylinderStatus(cylinderMasterBean2);
+					cylindertransactionDao.save(cylindertransactionBean1);
 			}
 			}
 			CustomermasterBean dummy = customermasterDao.getById(Integer.parseInt(customerId));

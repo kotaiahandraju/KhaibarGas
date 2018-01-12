@@ -5,14 +5,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
-
-<style>
-
-.dataTables_filter {
-display: none; 
-}
-</style>
-
 	<div class="clearfix"></div>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
@@ -24,10 +16,8 @@ display: none;
 		<form:form commandName="fillingStationForm">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-				<div class="panel panel-danger">
-					<div class="panel-heading">
-						<h4>Search Form</h4>
-					</div>
+				<div class="panel panel-primary">
+					
 					<div class="panel-body">
 						<div class="row">
 						  	<div class="col-md-4">
@@ -53,9 +43,9 @@ display: none;
 							</div>
 							<div class="col-md-4">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-4 control-label ">Quantity <span class="impColor">*</span></label>
+									<label for="focusedinput" class="col-md-4 control-label numericOnly">Quantity <span class="impColor">*</span></label>
 									<div class="col-md-8">
-						        		<form:input type="text" path="quantity" class="form-control numericOnly " placeholder="Quantity"/>
+						        		<form:input type="text" path="quantity" class="form-control " placeholder="Quantity"/>
 									</div>
 								</div>
 							</div>
@@ -82,8 +72,8 @@ display: none;
 					</div>
 				</div> -->
 				<div class="row">
-					<div class="col-md-6">
-						<div class="panel panel-danger">
+					<div class="col-md-8">
+						<div class="panel panel-primary">
 							<div class="panel-heading">
 		                    	<h4>Cylinders List</h4>
 								<div class="options">   
@@ -95,7 +85,7 @@ display: none;
 									<div class="col-md-12">
 										<div class="form-group">
 											<div class="col-md-6">
-								        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;font-weight: bolder;">Select All/ UnSelect All</label></p>
+								        		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;font-weight: bolder;">Check/Uncheck All</label></p>
 											</div>
 										</div>
 									</div>
@@ -113,8 +103,8 @@ display: none;
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<div class="panel panel-danger">
+					<div class="col-md-4">
+						<div class="panel panel-primary">
 							<div class="panel-heading">
 								<h4>&nbsp;</h4>
 							</div>
@@ -130,7 +120,7 @@ display: none;
 <!-- 									</div> -->
 									<div class="col-md-12">
 										<div class="form-group">
-											<label for="focusedinput" class="col-md-3 control-label">Select Filling Station <span class="impColor">*</span></label>
+											<label for="focusedinput" class="col-md-6 control-label">Select Filling Station <span class="impColor">*</span></label>
 											<div class="col-md-6">
 								        		<form:select path="stationname" class="form-control validate" onfocus="removeBorder(this.id)">
 								        			<form:options items="${fillingstation}"></form:options>
@@ -275,7 +265,7 @@ function searchData(){
      }
 	 
 	 if(quantity == null || quantity == "undefined" || quantity ==""){
-    	 alert("Please Enter Quantity");
+    	 alert("Please Select Quantity");
     	 return false;
      }
 	 

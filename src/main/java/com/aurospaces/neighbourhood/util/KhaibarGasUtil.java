@@ -64,7 +64,7 @@ public class KhaibarGasUtil {
 		return new String(result);
 	}
 
-	public String randNum() {
+	public  String randNum() {
 		String randNum = randomString(CHARSET_AZ_09, 5);
 		return randNum;
 

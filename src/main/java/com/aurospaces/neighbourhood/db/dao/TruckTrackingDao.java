@@ -4,6 +4,7 @@ package com.aurospaces.neighbourhood.db.dao;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
@@ -36,7 +37,16 @@ public class TruckTrackingDao extends BaseTruckTrackingDao
 		return null;
 		    
 		}  
-
+  public TruckTrackingBean getTruckDetails(String truckId){
+	  jdbcTemplate = custom.getJdbcTemplate();
+	  
+	  String sql = "SELECT * FROM `truck_tracking` WHERE truckId=? ORDER BY `created_time` DESC";
+	  List<TruckTrackingBean>  retlist = jdbcTemplate.query(sql,new Object[]{truckId},ParameterizedBeanPropertyRowMapper.newInstance(TruckTrackingBean.class));
+	  if(retlist.size() > 0)
+			return retlist.get(0);
+		return null;
+	  
+  }
 
 }
 

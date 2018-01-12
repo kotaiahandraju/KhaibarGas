@@ -20,11 +20,6 @@ protected String companyAddress ;
 protected String status ;
 protected String companyStatus ;
 
-
-
-
-
-
 public String getCompanyAddress() {
 	return companyAddress;
 }

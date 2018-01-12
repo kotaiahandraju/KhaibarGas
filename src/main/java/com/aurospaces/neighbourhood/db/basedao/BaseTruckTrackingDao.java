@@ -25,7 +25,7 @@ public class BaseTruckTrackingDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO truck_tracking( created_time, updated_time, truckId, outDate, location, ReadingKM, PetrolLevel, driverName,truckStatus,status) values (?,?,?, ?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO truck_tracking( created_time, updated_time, truckId, outDate, location, ReadingKM, PetrolLevel, driverName,truckStatus,status,tableJoinId) values (?,?,?, ?, ?, ?, ?, ?, ?, ?,?)"; 
 
 
 
@@ -70,6 +70,7 @@ ps.setString(7, truckTracking.getPetrolLevel());
 ps.setString(8, truckTracking.getDriverName());
 ps.setString(9, truckTracking.getTruckStatus());
 ps.setString(10, truckTracking.getStatus());
+ps.setString(11, truckTracking.getTableJoinId());
 
 							return ps;
 						}

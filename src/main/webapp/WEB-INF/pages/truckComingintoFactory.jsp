@@ -138,7 +138,7 @@ $(function () {
                     		</div> --%>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Out Date<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">In Date<span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:input path="outDate"  class="form-control validate "  placeholder="Out Date/In Date"  />
 								      	<span class="hasError" id="lponumberError"></span>
@@ -167,7 +167,16 @@ $(function () {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Petrol Level <span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="PetrolLevel" value="" class="form-control validate " placeholder="Petrol Level" />
+								    	 <form:select path="PetrolLevel"  class="form-control validate" onfocus="removeBorder(this.id)" >
+								    	<form:option value="">-- Select Petrol Level --</form:option>
+								    	<form:option value="FULL">FULL</form:option>
+								    	<form:option value="7/8">7/8</form:option>
+								    	<form:option value="5/8">5/8</form:option>
+								    	<form:option value="3/8">3/8</form:option>
+								    	<form:option value="1/4">1/4</form:option>
+								    	<form:option value="1/8">1/8</form:option>
+								    	<form:option value="NIL">NIL</form:option>
+								    </form:select>
 								      	<span class="hasError" id="madeinError"></span>
 								    </div>
                     			</div>
@@ -258,7 +267,7 @@ function deleteTruckTracking(id,status){
 		var formData = new FormData();
 	    formData.append('id', id);
 	    formData.append('status', status);
-	    formData.append('truckStatus', "Coming into Factory");
+	    formData.append('truckStatus', "In");
 		$.fn.makeMultipartRequest('POST', 'deleteTruckTracking', false, formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
