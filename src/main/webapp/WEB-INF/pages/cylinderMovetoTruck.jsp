@@ -25,10 +25,14 @@ display: none;
 			<div class="col-md-12 col-sm-12">
 			<form:form commandName="fillingStationForm">
 				<div class="row">
-				  	<div class="col-md-3">
+				
+				<div class="panel panel-primary">
+				<div class="panel-body">
+				
+				  	<div class="col-md-4">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-6 control-label">Filling Station <span class="impColor">*</span></label>
-							<div class="col-md-6">
+							<label for="focusedinput" class="col-md-5 control-label">Filling Station <span class="impColor">*</span></label>
+							<div class="col-md-7">
 				        		<form:select path="stationname" class="form-control " onchange="onChangeCylinderMovetoTruck();" onfocus="removeBorder(this.id)">
 				        			<form:option value="">-- Select Filling Station --</form:option>
 				        			<form:options items="${fillingstation}"></form:options>
@@ -38,8 +42,8 @@ display: none;
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-6 control-label">Cylinder Type <span class="impColor">*</span></label>
-							<div class="col-md-6">
+							<label for="focusedinput" class="col-md-5 control-label">Cylinder Type <span class="impColor">*</span></label>
+							<div class="col-md-7">
 				        		<form:select path="cylinderType" class="form-control " onchange="onChangeCylinderMovetoTruck();" onfocus="removeBorder(this.id)">
 				        			<form:options items="${cylinderTypes}"></form:options>
 				        		</form:select>
@@ -48,31 +52,38 @@ display: none;
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-6 control-label">Quantity <span class="impColor">*</span></label>
-							<div class="col-md-6">
+							<label for="focusedinput" class="col-md-4 control-label">Quantity <span class="impColor">*</span></label>
+							<div class="col-md-7">
 				        		<form:input type="text" path="quantity" class="form-control numericOnly" placeholder="Quantity"/>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group">
-							<div class="col-md-6">
+							<div class="col-md-12">
 				        		<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
 							</div>
 						</div>
 					</div>
+					
+					
+					
+					
+					</div>
+					</div>
 				</div>
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
+        		
         		<div class="row">
-					<div class="col-md-6">
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<div class="col-md-6">
-						        		
-									</div>
-								</div>
-							</div>
-						</div>
+					<div class="col-md-8">
+						
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 		                    	<h4>Cylinders List</h4>
@@ -93,37 +104,47 @@ display: none;
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<!-- <div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label>
-									<div class="col-md-6">
-						        		<div id="displayCylinders"></div>
-									</div>
+					<div class="col-md-4">
+						<div>
+						
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+		                    	<h4>Select Truck</h4>
+								<div class="options">   
+									<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 								</div>
+							
 							</div>
-						</div> --><br><br>
-						<div class="row">
+							
+							<div class="panel-body">
+						
+						
 							<div class="col-md-12">
 								<div class="form-group">
-									<label for="focusedinput" class="col-md-3 control-label">Select Truck <span class="impColor">*</span></label>
-									<div class="col-md-6">
+									<label for="focusedinput" class="col-md-4 control-label">Select Truck <span class="impColor">*</span></label>
+									<div class="col-md-8">
 						        		<form:select path="truckId" class="form-control validate" onfocus="removeBorder(this.id)">
 						        			<form:options items="${trucks}"></form:options>
 						        		</form:select>
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="row">
+						
+							</div>
+							
+							<div class="panel-footer" style="text-align:right;">
+							<input type="button" class="btn btn-primary" value="Move Truck" onclick="movetoTruck()">
+							</div>
+							
 							<div class="col-md-12">
 								<div class="form-group">
 									<div class="col-md-offset-3 col-md-6" style="padding-top: 6px;">
-						        		<input type="button" class="btn btn-primary" value="Move Truck" onclick="movetoTruck()">
+						        		
 									</div>
 								</div>
 							</div>
+							
+							</div></div>
 						</div>
 					</div>
 				</div>

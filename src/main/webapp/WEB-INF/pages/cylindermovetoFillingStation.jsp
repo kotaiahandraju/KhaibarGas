@@ -66,6 +66,7 @@ display: none;
 				      		<div class="col-sm-12">
 				      			<div class="btn-toolbar pull-right">
 					      			<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
+					      			<button type="button" onclick="window.location.reload()" class="btn btn-danger">Reset</button>
 				      			</div>
 				      		</div>
 				    	</div>

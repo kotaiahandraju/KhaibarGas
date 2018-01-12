@@ -25,10 +25,14 @@ display: none;
 			<div class="col-md-12 col-sm-12">
 			<form:form commandName="fillingStationForm">
 				<div class="row">
-				  	<div class="col-md-3">
+				
+				
+				<div class="panel panel-primary">
+				<div class="panel-body">
+				  	<div class="col-md-4">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Filling Station <span class="impColor">*</span></label>
-							<div class="col-md-7">
+							<label for="focusedinput" class="col-md-4 control-label">Filling Station <span class="impColor">*</span></label>
+							<div class="col-md-8">
 				        		<form:select path="stationname" class="form-control " onchange="onChangeCylinderQualityCheck();" onfocus="removeBorder(this.id)">
 				        			<form:option value="">-- Select Filling Station --</form:option>
 				        			<form:options items="${fillingstation}"></form:options>
@@ -54,16 +58,25 @@ display: none;
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group">
 							<div class="col-md-6">
 				        		<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
 							</div>
 						</div>
 					</div>
+					</div>
+					</div>
 				</div>
+        		
+        		
+        		
+        		
+        		
+        		
+        		
         		<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-8 col-md-offset-2">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -73,6 +86,11 @@ display: none;
 								</div>
 							</div>
 						</div>
+						
+						
+						
+						
+						
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 		                    	<h4>Cylinders List</h4>
@@ -93,6 +111,10 @@ display: none;
 									</table>
 								</div>
 							</div>
+							<div class="panel-footer" style="text-align:right;">
+							
+							<input type="button" class="btn btn-primary" value="Cylinder QualityCheck" onclick="QualityCheck()">
+							</div>
 						</div>
 					</div>
 					<div class="col-md-6">
@@ -111,7 +133,7 @@ display: none;
 							<div class="col-md-12">
 								<div class="form-group">
 									<div class="col-md-offset-3 col-md-6" style="padding-top: 6px;">
-						        		<input type="button" class="btn btn-primary" value="Cylinder QualityCheck" onclick="QualityCheck()">
+						        		
 									</div>
 								</div>
 							</div>

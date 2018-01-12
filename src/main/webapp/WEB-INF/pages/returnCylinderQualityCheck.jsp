@@ -24,10 +24,11 @@ display: none;
 			<div class="col-md-12 col-sm-12">
 			<form:form commandName="qualityCheckForm">
 				<div class="row">
-				  	<div class="col-md-3">
-						
-						</div>
-					</div>
+				<div class="panel panel-primary">
+				<div class="panel-body">
+				
+				 	
+				
 					<div class="col-md-3">
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">Cylinder Type <span class="impColor">*</span></label>
@@ -54,18 +55,13 @@ display: none;
 							</div>
 						</div>
 					</div>
+					</div>
+					</div>
 				</div>
         		<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-8">
 						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<div class="col-md-6">
-						        		
-									</div>
-								</div>
-							</div>
-						</div>
+													</div>
 						<div class="panel panel-primary">
 							<div class="panel-heading">
 		                    	<h4>Cylinders List</h4>
@@ -87,23 +83,21 @@ display: none;
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<!-- <div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<label for="focusedinput" class="col-md-3 control-label">Cylinders <span class="impColor">*</span></label>
-									<div class="col-md-6">
-						        		<div id="displayCylinders"></div>
-									</div>
-								</div>
-							</div>
-						</div> -->
-						<br><br>
+					<div class="col-md-4">
+						
 						<div class="row">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+							<h4>Return to Store</h4>
+							
+						</div>	
+						
+						<div class="panel-body">
+							
 						<div class="col-md-12">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-3 control-label">Store Name <span class="impColor">*</span></label>
-							<div class="col-md-6">
+							<label for="focusedinput" class="col-md-4 control-label">Store Name <span class="impColor">*</span></label>
+							<div class="col-md-8">
 				        		<form:select path="store" class="form-control " onfocus="removeBorder(this.id)">
 				        			<form:options items="${stores}"></form:options>
 				        		</form:select>
@@ -111,16 +105,13 @@ display: none;
 							</div>
 							</div>
 						</div>
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<div class="col-md-offset-3 col-md-6" style="padding-top: 6px;">
-						        		<input type="button" class="btn btn-primary" value="Return Cylinder QualityCheck" onclick="QualityCheck()">
-									</div>
-								</div>
-							</div>
+						
+						<div class="panel-footer" style="text-align:right;">
+						<input type="button" class="btn btn-primary" value="Return Cylinder QualityCheck" onclick="QualityCheck()">
 						</div>
-					
+						
+						
+					</div>
 				</div>
 				</form:form>
          	</div>

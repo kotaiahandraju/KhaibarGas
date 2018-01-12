@@ -23,13 +23,13 @@ display: none;
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 col-sm-12">
-			  <div class="panel panel-danger">
-					<div class="panel-heading">
-						<h4>Search Form</h4>
-					</div>
-					<div class="panel-body">
 			<form:form commandName="fillingStationForm">
 				<div class="row">
+				
+				<div class="panel panel-primary">
+				<div class="panel-body">			
+				
+				
 				  	<div class="col-md-4">
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-4 control-label">Filling Station <span class="impColor">*</span></label>
@@ -41,47 +41,55 @@ display: none;
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Cylinder Type <span class="impColor">*</span></label>
-							<div class="col-md-8">
+							<label for="focusedinput" class="col-md-5 control-label">Cylinder Type <span class="impColor">*</span></label>
+							<div class="col-md-7">
 				        		<form:select path="cylinderType" class="form-control " onchange="onChangeCylinderFilledStatusData();" onfocus="removeBorder(this.id)">
 				        			<form:options items="${cylinderTypes}"></form:options>
 				        		</form:select>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-4">
+					<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Quantity <span class="impColor">*</span></label>
-							<div class="col-md-8">
+							<label for="focusedinput" class="col-md-5 control-label">Quantity <span class="impColor">*</span></label>
+							<div class="col-md-7">
 				        		<form:input type="text" path="quantity" class="form-control numericOnly" placeholder="Quantity"/>
 							</div>
 						</div>
 					</div>
-				</div>
-				</div>	
-					<div class="panel-footer">
-				      	<div class="row">
-				      		<div class="col-sm-12">
-				      			<div class="btn-toolbar pull-right">
-					      			<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
-				      			</div>
-				      		</div>
-				    	</div>
-					</div>
-					</div>
-					<!-- <div class="col-md-3">
+					<div class="col-md-2">
 						<div class="form-group">
-							<div class="col-md-offset-3 col-md-6" style="">
+							<div class="col-md-6" style="text-align:left;">
 				        		<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
 							</div>
 						</div>
-					</div> -->
+					</div>
+					</div>
+					</div>
+				</div>
 				
-			</div>
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				
 				<div class="row">
-					<div class="col-md-6">
+					<div class="col-md-8 col-md-offset-2">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -91,7 +99,9 @@ display: none;
 								</div>
 							</div>
 						</div>
-						<div class="panel panel-danger">
+						
+						
+						<div class="panel panel-primary">
 							<div class="panel-heading">
 		                    	<h4>Cylinders List</h4>
 								<div class="options">   
@@ -99,7 +109,7 @@ display: none;
 								</div>
 							</div>
 							<div class="panel-body collapse in">
-								<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Select All/UnSelect All</label></p>
+		<p><input type="checkbox" id="parent" style="cursor: pointer;"/> <label for="parent" style="cursor: pointer;">Select All/UnSelect All</label></p>
 								<div class="table-responsive" id="tableId">
 									<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
 										<thead>
@@ -111,9 +121,19 @@ display: none;
 									</table>
 								</div>
 							</div>
+							
+							
+							<div class="panel-footer" style="text-align:right;" >
+							
+							<input type="button" class="btn btn-primary" value="Cylinder Filled Status" onclick="QualityCheck()">
+							
+							</div>
+							
+							
+							
 						</div>
 					</div>
-					<div class="col-md-6">
+					<div class="col-md-12">
 					<br><br>
 						<!-- <div class="row">
 							<div class="col-md-12">
@@ -125,15 +145,15 @@ display: none;
 								</div>
 							</div>
 						</div> -->
-						<div class="row">
-							<div class="col-md-12">
-								<div class="form-group">
-									<div class="col-md-6">
-						        		<input type="button" class="btn btn-primary" value="Cylinder Filled Status" onclick="QualityCheck()">
-									</div>
-								</div>
-							</div>
-						</div>
+						
+						
+						
+						
+						
+						
+						
+						
+						
 					</div>
 				</div>
 				</form:form>
