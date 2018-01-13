@@ -221,6 +221,7 @@ function displayTable(listOrders) {
 		$(tblRow).appendTo("#tableId table tbody");
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
+	
 }
 
 

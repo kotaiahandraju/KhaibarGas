@@ -72,7 +72,7 @@ $(function () {
 								<tr>
 									<th>Truck Number</th>
 									<th>Driver Name</th>
-									<th>Out Date/In Date</th>
+									<th>In Date</th>
 									<th>Location</th>
 									<th>Reading (KM)</th>
 									<th>Petrol Level</th>
@@ -214,7 +214,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Truck Number</th><th>Driver Name</th><th>Out Date/In Date</th><th>Location</th><th>Reading (KM)</th><th>Petrol Level</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Truck Number</th><th>Driver Name</th><th>In Date</th><th>Location</th><th>Reading (KM)</th><th>Petrol Level</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {

@@ -148,7 +148,7 @@ span.has-error,span.hasError
 //		 		displayTable(alldata);
 			});
 		});
-
+		
 $(function() {
     $(".chzn-select").chosen();
 	$(".select2").select2();
