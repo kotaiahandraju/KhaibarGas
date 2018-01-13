@@ -244,6 +244,7 @@ $(function() {
 					</ul>
 				</li>
 				<li class="expenseTracker"><a href="${baseurl }/admin/expenseTrackerHome"><i class="fa fa-bar-chart-o"></i> <span>Expense Tracker</span></a></li>
+				  <li class="CylinderReport"><a href="${baseurl }/admin/reportsHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Report</span></a></li>
 				
 				
 			</ul>

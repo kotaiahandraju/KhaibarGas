@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
@@ -352,6 +353,60 @@ public class CylindermasterDao extends BaseCylindermasterDao
 				e.printStackTrace();
 			}
 			return retlis;
+		}
+	 public String onChangeReports(CylindermasterBean cylindermasterBean) {
+			jdbcTemplate = custom.getJdbcTemplate();
+			List<CylindermasterBean> retlis=null;
+			List<CylindermasterBean> retlis1=null;
+			 JSONObject jsonObject= new JSONObject();
+			try{
+				if(StringUtils.isNotBlank(cylindermasterBean.getOwnercompany())){
+					String sql = "select count(ownercompany)as count1 from cylindermaster where ownercompany=?";
+					System.out.println("----sql---"+sql);
+					retlis = jdbcTemplate.query(sql, new Object[] {cylindermasterBean.getOwnercompany()},
+						ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+					
+					String sql1 = "select lponumber,cylinderid,color from cylindermaster where ownercompany=?";
+					System.out.println("----sql1---"+sql1);
+					retlis1 =jdbcTemplate.query(sql1, new Object[] {cylindermasterBean.getOwnercompany()},
+						ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+					
+				}else if(StringUtils.isNotBlank(cylindermasterBean.getStorename())){
+					String sql = "select count(store)as count1 from cylindermaster where store=?";
+					System.out.println("----sql---"+sql);
+					retlis = jdbcTemplate.query(sql, new Object[] {cylindermasterBean.getStorename() },
+						ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+					
+					String sql1 = "select lponumber,cylinderid,color from cylindermaster where store=?";
+					System.out.println("----sql1---"+sql1);
+					retlis1 =  jdbcTemplate.query(sql1, new Object[] {cylindermasterBean.getStorename() },
+						ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+					
+				}else if(StringUtils.isNotBlank(cylindermasterBean.getCylinderstatus())){
+					String sql = "select count(cylinderstatus)as count1 from cylindermaster where cylinderstatus=?";
+					System.out.println("----sql---"+sql);
+					retlis = jdbcTemplate.query(sql, new Object[] {cylindermasterBean.getCylinderstatus()},
+						ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+					
+					String sql1 = "select lponumber,cylinderid,color from cylindermaster where cylinderstatus=?";
+					System.out.println("----sql1---"+sql1);
+					retlis1 = jdbcTemplate.query(sql1, new Object[] {cylindermasterBean.getCylinderstatus()},
+						ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+					
+				}
+				
+				jsonObject.put("count", retlis);
+				jsonObject.put("listJson", retlis1);
+				
+				 // retlis.addAll(retlis1);
+				  
+				System.out.println("----list---"+jsonObject);
+				
+					
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return String.valueOf(jsonObject);
 		}
 }
 

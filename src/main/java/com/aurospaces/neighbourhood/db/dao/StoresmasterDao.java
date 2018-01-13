@@ -9,6 +9,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
+import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
@@ -71,6 +72,11 @@ public class StoresmasterDao extends BaseStoresmasterDao
 	 public List<StoresmasterBean> populate(String sql ){
 		 jdbcTemplate = custom.getJdbcTemplate();
 				List<StoresmasterBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(StoresmasterBean.class));
+					return retlist;
+		 }
+	 public List<ItemsBean> populateCylenderstatus(String sql ){
+		 jdbcTemplate = custom.getJdbcTemplate();
+				List<ItemsBean> retlist = jdbcTemplate.query(sql,ParameterizedBeanPropertyRowMapper.newInstance(ItemsBean.class));
 					return retlist;
 		 }
 	 
