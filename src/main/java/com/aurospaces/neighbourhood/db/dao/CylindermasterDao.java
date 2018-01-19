@@ -408,5 +408,36 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			}
 			return String.valueOf(jsonObject);
 		}
+	 public List<CylindermasterBean> getCylindersReport(CylindermasterBean cylindermasterBean){  
+			jdbcTemplate = custom.getJdbcTemplate();
+			 
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("SELECT co.companyname , c. *,cs.name as cylinderstatus,i.name As sizeName,DATE_FORMAT(c.expirydate,'%d-%b-%Y') AS expirtdate1 , CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylendersstatus   FROM companymaster co,cylindermaster c,items i,cylinderstatus cs where c.size=i.id and cs.id=c.cylinderstatus and co.id=c.ownercompany ");
+			if(StringUtils.isNotBlank(cylindermasterBean.getOwnercompany())){
+				buffer.append(" and c.ownercompany = "+cylindermasterBean.getOwnercompany());
+			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getStorename())){
+				buffer.append(" and c.store = "+cylindermasterBean.getStorename() +"  and c.cylinderstatus = '1' "  );
+			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getCylinderstatus())){
+				buffer.append(" and c.cylinderstatus = "+cylindermasterBean.getCylinderstatus());
+			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getLponumber())){
+				buffer.append(" and c.lponumber = '"+cylindermasterBean.getLponumber()+"' ");
+			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getSize())){
+				buffer.append(" and c.size = '"+cylindermasterBean.getSize()+"' ");
+			}
+			String sql = buffer.toString();
+			System.out.println(sql);
+//			 String sql =  "SELECT co.companyname , c. *,cs.name as cylinderstatus,i.name As sizeName,DATE_FORMAT(c.expirydate,'%d-%b-%Y') AS expirtdate1 , CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylendersstatus   FROM companymaster co,cylindermaster c,items i,cylinderstatus cs where c.size=i.id and cs.id=c.cylinderstatus and co.id=c.ownercompany  order by c.id desc";
+			List<CylindermasterBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
+					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			
+			if (retlist.size() > 0)
+				return retlist;
+			return null;
+			    
+			} 
 }
 

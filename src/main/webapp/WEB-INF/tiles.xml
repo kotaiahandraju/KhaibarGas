@@ -100,9 +100,9 @@
 	<definition name="TruckComingintoFactory" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/truckComingintoFactory.jsp" />
 	</definition>
-	<definition name="reportsHome" extends="base.definition">
+	<!-- <definition name="reportsHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/reports.jsp" />
-	</definition>
+	</definition> -->
 	
 	
 </tiles-definitions>

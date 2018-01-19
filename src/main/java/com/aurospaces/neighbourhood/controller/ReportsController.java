@@ -1,44 +1,27 @@
 package com.aurospaces.neighbourhood.controller;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.util.Arrays;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.TransactionDefinition;
-import org.springframework.transaction.TransactionStatus;
-import org.springframework.transaction.support.DefaultTransactionDefinition;
 import org.springframework.ui.ModelMap;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.aurospaces.neighbourhood.bean.CompanymasterBean;
-import com.aurospaces.neighbourhood.bean.CustomercylindersBean;
-import com.aurospaces.neighbourhood.bean.CustomermasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
-import com.aurospaces.neighbourhood.bean.CylindertransactionBean;
-import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
-import com.aurospaces.neighbourhood.bean.KhaibarUsersBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CompanymasterDao;
@@ -80,8 +63,7 @@ public class ReportsController {
 	private Logger logger = Logger.getLogger(ReportsController.class);
 
 	@RequestMapping(value = "/reportsHome")
-	public String reportsHome(
-			@ModelAttribute("reportsForm") CylindermasterBean cylindermasterBean, ModelMap model,
+	public String reportsHome(@ModelAttribute("reportsForm") CylindermasterBean cylindermasterBean, ModelMap model,
 			HttpServletRequest request, HttpSession session) {
 
 		ObjectMapper objectMapper = null;
@@ -148,29 +130,57 @@ public class ReportsController {
 		return statesMap;
 	}
 	
-	@RequestMapping("onChangeReports")
-	public @ResponseBody String onChangeReports(CylindermasterBean cylinderBean) {
-		ObjectMapper objectMapper = null;
-		String sJson = null;
-		String count1=null;
-		String retlist = null;
+	@ModelAttribute("LPONumbers")
+	public Map<String, String> populateLPONumbers() {
+		Map<String, String> statesMap = new LinkedHashMap<String, String>();
 		try {
+			String sSql = "SELECT lponumber,`lponumber` FROM `lpoitems`   GROUP BY `lponumber` ";
+			List<LpomasterBean> list = cylindermasterDao.populate(sSql);
+			for (LpomasterBean bean : list) {
+				statesMap.put(bean.getLponumber(), bean.getLponumber());
+			}
 
-				System.out.println("----cylindertransactionBean---" + cylinderBean.getStore()+"-------size-------"+cylinderBean.getOwnercompany()+"-------STATUS-------"+cylinderBean.getCylinderstatus());
-				retlist = cylindermasterDao.onChangeReports(cylinderBean);
-				
-				System.out.println("---------sJson----"+sJson);
-				
-				/*for (CylindermasterBean cylindermasterBean : retlist) {
-					 count1 =cylindermasterBean.getCount1();
-				}*/
-				//objectMapper = new ObjectMapper();
-				//sJson = objectMapper.writeValueAsString(count1);
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
+	@ModelAttribute("cylinderTypes")
+	public Map<Integer, String> populateUsers() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			List<CylinderTypesBean> list= cylindermasterDao.getCylinderstypes();
+			for(CylinderTypesBean bean: list){
+				statesMap.put(bean.getId(), bean.getName());
+			}
+					
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
+	@RequestMapping("onChangeReports")
+	public @ResponseBody String onChangeReports(CylindermasterBean cylinderBean ) {
+		ObjectMapper objectMapper = null;
+		JSONObject jsonObject = new JSONObject();
+		List<CylindermasterBean> listOrderBeans = null;
+		try {
+			listOrderBeans = cylindermasterDao.getCylindersReport(cylinderBean);
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				// System.out.println(sJson);
+				jsonObject.put("allOrders1", listOrderBeans);
+			} else {
+				objectMapper = new ObjectMapper();
+				jsonObject.put("allOrders1", listOrderBeans);
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return retlist;
+		return String.valueOf(jsonObject);
 
 	}
 	

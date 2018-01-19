@@ -110,14 +110,14 @@
                     				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder <span class="impColor">*</span></label>
 								    <div class="col-md-6">
 								    	<form:select path="color" class="form-control validate" onfocus="removeBorder(this.id)">
-									  		<form:option value="red">Red</form:option>
-									  		<form:option value="green">Green</form:option>
-									  		<form:option value="yellow">Yellow</form:option>
-			                                <form:option value="blue">Blue</form:option>
-			                                <form:option value="pink">Pink</form:option>
-			                                <form:option value="indigo">Indigo</form:option>
-			                                <form:option value="violet">Violet</form:option>
-			                                <form:option value="orange">Orange</form:option>
+									  		<form:option value="Red">Red</form:option>
+									  		<form:option value="Green">Green</form:option>
+									  		<form:option value="Yellow">Yellow</form:option>
+			                                <form:option value="Blue">Blue</form:option>
+			                                <form:option value="Pink">Pink</form:option>
+			                                <form:option value="Indigo">Indigo</form:option>
+			                                <form:option value="Violet">Violet</form:option>
+			                                <form:option value="Orange">Orange</form:option>
 			                               </form:select>
 			                                
 								      	<span class="hasError" id="colorError"></span>
