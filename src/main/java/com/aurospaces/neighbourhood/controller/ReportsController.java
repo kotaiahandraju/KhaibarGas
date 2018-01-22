@@ -1,5 +1,6 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -8,6 +9,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.json.JSONObject;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
+import com.aurospaces.neighbourhood.bean.Expensetracker;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
@@ -29,10 +32,12 @@ import com.aurospaces.neighbourhood.db.dao.CustomercylindersDao;
 import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindertransactionDao;
+import com.aurospaces.neighbourhood.db.dao.ExpensetrackerDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
+import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 
 @Controller
 @RequestMapping("admin")
@@ -60,6 +65,7 @@ public class ReportsController {
 	CompanymasterDao companymasterDao;
 	@Autowired
 	DataSourceTransactionManager transactionManager;
+	@Autowired ExpensetrackerDao expensetrackerDao;
 	private Logger logger = Logger.getLogger(ReportsController.class);
 
 	@RequestMapping(value = "/reportsHome")
@@ -79,7 +85,86 @@ public class ReportsController {
 		}
 		return "reportsHome";
 	}
+	@RequestMapping("onChangeReports")
+	public @ResponseBody String onChangeReports(CylindermasterBean cylinderBean ) {
+		ObjectMapper objectMapper = null;
+		JSONObject jsonObject = new JSONObject();
+		List<CylindermasterBean> listOrderBeans = null;
+		try {
+			listOrderBeans = cylindermasterDao.getCylindersReport(cylinderBean);
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				// System.out.println(sJson);
+				jsonObject.put("allOrders1", listOrderBeans);
+			} else {
+				objectMapper = new ObjectMapper();
+				jsonObject.put("allOrders1", listOrderBeans);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return String.valueOf(jsonObject);
+
+	}
+	@RequestMapping(value = "/expensesReport")
+	public String gasReport(@ModelAttribute("reportsForm") Expensetracker expensetracker, ModelMap model,
+			HttpServletRequest request, HttpSession session) {
+
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<CylindermasterBean> listOrderBeans = null;
+		try {
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "expenseReport";
+	}
 	
+	@RequestMapping("searchExpensesReport")
+	public @ResponseBody String searchExpensesReport(Expensetracker expensetracker ) {
+		ObjectMapper objectMapper = null;
+		JSONObject jsonObject = new JSONObject();
+		List<Expensetracker> listOrderBeans = null;
+		String monthnumber = null;
+		String year = null;
+		try {
+			if(StringUtils.isNotBlank(expensetracker.getMonth())){
+				String month1 = expensetracker.getMonth();
+				 String [] arrOfStr = month1.split("/");
+				  monthnumber = arrOfStr[0];
+				  year = arrOfStr[1];
+			}
+			if(StringUtils.isNotBlank(expensetracker.getFromDate())){
+				Date date=  KhaibarGasUtil.dateFormate(expensetracker.getFromDate());
+				java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+				expensetracker.setFromDate(String.valueOf(sqlDate));
+			}
+			if(StringUtils.isNotBlank(expensetracker.getToDate())){
+				Date date=  KhaibarGasUtil.dateFormate(expensetracker.getToDate());
+						java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+				expensetracker.setToDate(String.valueOf(sqlDate));
+			}
+			listOrderBeans = expensetrackerDao.getExpensesReport(expensetracker,monthnumber,year);
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				// System.out.println(sJson);
+				jsonObject.put("allOrders1", listOrderBeans);
+			} else {
+				objectMapper = new ObjectMapper();
+				jsonObject.put("allOrders1", listOrderBeans);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return String.valueOf(jsonObject);
+
+	}
 	@ModelAttribute("companys")
 	public Map<Integer, String> populatecompanys() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
@@ -161,28 +246,10 @@ public class ReportsController {
 		}
 		return statesMap;
 	}
-	@RequestMapping("onChangeReports")
-	public @ResponseBody String onChangeReports(CylindermasterBean cylinderBean ) {
-		ObjectMapper objectMapper = null;
-		JSONObject jsonObject = new JSONObject();
-		List<CylindermasterBean> listOrderBeans = null;
-		try {
-			listOrderBeans = cylindermasterDao.getCylindersReport(cylinderBean);
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-				objectMapper = new ObjectMapper();
-				// System.out.println(sJson);
-				jsonObject.put("allOrders1", listOrderBeans);
-			} else {
-				objectMapper = new ObjectMapper();
-				jsonObject.put("allOrders1", listOrderBeans);
-			}
-
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return String.valueOf(jsonObject);
-
-	}
+	
+	
+	
+	
 	
 	/*@RequestMapping(value = "/updateCylinderStatus")
 	public @ResponseBody String tariffMasterHome(CylindertransactionBean fillingstationmasterBean, ModelMap model,

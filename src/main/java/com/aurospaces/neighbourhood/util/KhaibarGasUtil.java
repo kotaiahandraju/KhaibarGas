@@ -6,6 +6,7 @@ import java.net.URL;
 import java.security.SecureRandom;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 import org.apache.commons.lang.StringUtils;
@@ -25,7 +26,19 @@ public class KhaibarGasUtil {
 				}
 		return date1;
 		}
-	
+	public static String  monthFormate(String date){
+		String month_name = null;
+		if(StringUtils.isNotBlank(date)){
+					 try {
+						 Calendar cal=Calendar.getInstance();
+						 SimpleDateFormat month_date = new SimpleDateFormat("MMM-yyyy");
+						 month_name = month_date.format(cal.getTime());
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
+		return month_name;
+		}
 	/*public  String  sessionChecking(HttpSession session){
 		String sessionUser = null;
 //		UsersBean objuserBean = null;

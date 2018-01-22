@@ -323,7 +323,6 @@ public class CylinderController {
 	@RequestMapping(value = "/inActiveCylinder")
 	public @ResponseBody String inActiveCylinder(CylindermasterBean objCylindermasterBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
-		System.out.println("deleteCylinder page...");
 		List<CylindermasterBean> listOrderBeans = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;

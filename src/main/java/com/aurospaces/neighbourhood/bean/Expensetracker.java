@@ -23,8 +23,27 @@ protected Date createdTime ;
 
 protected Date updatedTime ;
 protected String status ;
-protected String trackrstatus ;
+protected String trackrstatus,fromDate,toDate,month ;
 
+
+public String getMonth() {
+	return month;
+}
+public void setMonth(String month) {
+	this.month = month;
+}
+public String getFromDate() {
+	return fromDate;
+}
+public void setFromDate(String fromDate) {
+	this.fromDate = fromDate;
+}
+public String getToDate() {
+	return toDate;
+}
+public void setToDate(String toDate) {
+	this.toDate = toDate;
+}
 public String getAmount() {
 	return amount;
 }

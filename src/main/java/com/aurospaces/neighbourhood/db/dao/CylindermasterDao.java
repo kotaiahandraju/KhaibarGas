@@ -188,7 +188,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		jdbcTemplate = custom.getJdbcTemplate();
 		boolean delete = false;
 		try{
-			String sql = "update cylindermaster c set  c.cylinderid= concat((select SUBSTR(cy.name,1,1) from cylindertypes cy where cy.id=c.size),LPAD( c.id, 9, '0')) ";
+			String sql = "update cylindermaster c set  c.cylinderid= concat((select SUBSTR(cy.name,1,1) from items cy where cy.id=c.size),LPAD( c.id, 9, '0')) ";
 			int intDelete = jdbcTemplate.update(sql, new Object[]{});
 			if(intDelete != 0){
 				delete = true;
