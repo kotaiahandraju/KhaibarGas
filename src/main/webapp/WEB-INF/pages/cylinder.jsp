@@ -176,7 +176,7 @@
 					      	<div class="row">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
-						      			<input type="submit" id="submit1" value="Submit" class="btn-primary btn"/>
+						      			<input type="submit" id="submit11" value="Submit" class="btn-primary btn"/>
 						      			<input type="reset" value="Reset" class="btn-danger btn cancel"/>
 					      			</div>
 					      		</div>
@@ -250,7 +250,7 @@ function editCylinder(id) {
 	$("#store").val(serviceUnitArray[id].store).trigger("change");
 	$("#cylinderstatus").val(serviceUnitArray[id].cylinderstatus);
 	$("#remarks").val(serviceUnitArray[id].remarks).trigger("change");
-	$("#submit1").val("Update");
+	$("#submit11").val("Update");
 	getLpoNumber();
 	$("#lponumber").val(lpo);
 	$("#lponumber").trigger("chosen:updated");
@@ -313,7 +313,8 @@ $(function() {
 		changeYear : true
 	});
 });
-	
+var countList="";
+
 function getLPOdetails(value){
 	var item=$("#size").val();
 	var formData = new FormData();
@@ -328,6 +329,11 @@ function getLPOdetails(value){
 			$("#madein").val(orderObj.suppliername);
 			$("#expirtdate1").val(orderObj.expirydate);
 		});
+		alert(jsonobj.retlist)
+		if(jsonobj.retlist==true){
+			countList=jsonobj.retlist;
+		}
+		
 	});
 }
 function getStoreDetails(value){
@@ -363,6 +369,46 @@ function inactiveData() {
 			displayTable(alldata);
 				});
 }
+
+
+$('#submit11').click(function(event) {
+	validation = true;
+	if(countList==""){
+		alert("In this LPO Number having no Cylinders");
+		validation = false;
+	}
+	$.each(idArray, function(i, val) {
+		 
+		var value = $("#" + idArray[i]).val();
+		var placeholder = $("#" + idArray[i]).attr('placeholder');
+		
+		if (value == null || value == "" || value == "undefined") {
+			
+			
+			 $("#" + idArray[i] ).attr("placeholder", placeholder);
+			 $("#" + idArray[i] ).css('border-color','#e73d4a');
+			    $("#" + idArray[i] ).css('color','#e73d4a');
+			    $("#" + idArray[i] ).addClass('your-class');
+			    
+//			$("#" + idArray[i] + "Error").text("Please " + placeholder);
+			validation = false;
+		} 
+	});
+	if (validation) {
+		
+		$("#submit11").attr("disabled",true);
+		 $("#submit11").val("Please wait...");
+		 $("form").submit();											
+			event.preventDefault();
+		
+	} else {
+		return false;
+		event.preventDefault();
+	}
+	
+	
+});
+
  $("#pageName").text("Cylinder Master");
  $(".cylinder").addClass("active"); 
  

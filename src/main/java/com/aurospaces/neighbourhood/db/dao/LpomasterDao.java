@@ -89,5 +89,25 @@ public class LpomasterDao extends BaseLpomasterDao
 			String sql = "update lpomaster  set  lponumber= concat('LPO','1' ,LPAD( id, 6, '0'))";
 			jdbcTemplate.update(sql, new Object[]{});
 		}
+	 @SuppressWarnings("deprecation")
+	public boolean getCountFromLPOItemsAndCylindermaster(LpomasterBean lpomasterBean) {
+		 int retlist =0;
+		 boolean count=false;
+		 jdbcTemplate = custom.getJdbcTemplate();
+		String sql1 = "select ifnull((SELECT count(*) from cylindermaster where lponumber = ? AND size=? group by lponumber,size),0) AS count1 ";
+		 String sql = "select sum(quantity) from lpoitems where lponumber = ? AND itemId=? group by lponumber,itemId";
+		 System.out.println("---lpomasterBean.getLponumber(),----"+lpomasterBean.getLponumber()+"-----lpomasterBean.getItem()---"+lpomasterBean.getItem());
+			@SuppressWarnings("deprecation")
+			int resultList = jdbcTemplate.queryForInt(sql1,	new Object[]{lpomasterBean.getLponumber(),lpomasterBean.getItem()});
+			 retlist = jdbcTemplate.queryForInt(sql,	new Object[]{lpomasterBean.getLponumber(),lpomasterBean.getItem()});
+			 
+			int result=retlist-resultList;
+			System.out.println("---result----"+result);
+			if(result>0){
+				count=true;
+			}
+			 
+			return count;
+		}
 }
 
