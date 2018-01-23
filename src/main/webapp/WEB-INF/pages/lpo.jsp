@@ -200,7 +200,7 @@ table#dependent_table tbody tr td:first-child::before {
 	</tbody>
 	<tfoot>
 		<tr>
-			<th colspan="6"><h3 align="right"></h3></th>
+			<th colspan="4"><h3 align="right"></h3></th>
 			<th><span class="totalInvoiceValue"></span></th>
 			<th><span class="totalDiscounts"></span></th>
 			<th><span class="totalTaxableValue"></span></th>
