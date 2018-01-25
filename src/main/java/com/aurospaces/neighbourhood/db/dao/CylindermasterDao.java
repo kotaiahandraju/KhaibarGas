@@ -439,5 +439,17 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			return null;
 			    
 			} 
+	 public int truckincylinderscount(String truckId,String itemId) {
+ 			jdbcTemplate = custom.getJdbcTemplate();
+			int  retlis=0;
+			try{
+				String sql =  "SELECT COUNT(*) FROM `cylindermaster` WHERE `size`=? AND `truckId` =? AND `cylinderstatus`='5'";
+					retlis = jdbcTemplate.queryForInt(sql, new Object[] {itemId,truckId });
+				System.out.println("-----------list----------"+retlis);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return retlis;
+		}
 }
 

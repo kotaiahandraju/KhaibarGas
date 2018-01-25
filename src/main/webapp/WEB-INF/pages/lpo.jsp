@@ -242,8 +242,7 @@ table#dependent_table tbody tr td:first-child::before {
 <br>
 <br>
 <div><strong>LOCAL PURCHASE ORDER</strong></div>
-	<table class="table table-bordered" align="center" style="min-width: 680px;min-height:200px" id="printTable">
-	<thead> 
+	<table class="table table-bordered" align="center" style="min-width: 680px;min-height:200px" id="printTable"> 
 		<tr >
 			<p><td colspan="2">Supplier</p>
 				<p>NGC	ENERGY <br>
@@ -253,7 +252,6 @@ table#dependent_table tbody tr td:first-child::before {
 			<p>This PO No. should appear on the invoice and all correspondence</td></p>
 		</tr>
 		
-		
 		<tr class="bordertopbottom">
 			<th style="width:50px">S .No</th>
 			<th style="width:600px">Description</th>
@@ -261,7 +259,7 @@ table#dependent_table tbody tr td:first-child::before {
 		    <th style="width:75px">Unit Price AED.</th>
 		    <th style="width:200px">Total Amount AED.</th>
 		</tr>
-		</thead>
+		
 		
 		<tbody></tbody>
 		<tfoot>

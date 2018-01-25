@@ -51,7 +51,7 @@ table tbody tr.rowInc {
                       <div class="form-group">
                         <label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
                         <div class="col-md-6">
-                          <form:select path="cylinderDeliverTruck" class="form-control  validate" onfocus="removeBorder(this.id);" >
+                          <form:select path="cylinderDeliverTruck" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="selectReturnTruck(this.value);" >
                             <form:option value="">--Select Truck--</form:option>
                             <form:options items="${trucks}"></form:options>
                           </form:select>
@@ -276,7 +276,7 @@ table tbody tr.rowInc {
               <div class="row">
                 <div class="col-sm-12">
                   <div class="btn-toolbar pull-right">
-                    <input class="btn-primary btn" type="submit" id="submit1" value="Submit" />
+                    <input class="btn-primary btn" type="submit" id="submit11" value="Submit" />
                     <input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
                   </div>
                 </div>
@@ -480,7 +480,7 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
-			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id)"><option>Select</option></select></td>'
+			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
 			+ dependentRowCount
 			+ 'unit" type="text" value="1" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
@@ -764,6 +764,7 @@ function getTarrifPrice(value,id){
 	var truckId = $("#cylinderDeliverTruck").val();
 	if(truckId==""){
 		alert("Please Select Truck");
+		$("#"+id).val("");
 		return false;
 	}
 	var number = parseInt(id.match(/[0-9]+/)[0], 10);
@@ -793,10 +794,93 @@ function discountCheck(id,value){
 	}
 	allcalculate(id);
 }
+var cylinderAvailable=true;
 function getTruckInCylinderCount(id,value){
 	
 	
+	var truckId = $("#cylinderDeliverTruck").val();
+	if(truckId==""){
+		$("#"+id).val("");
+		return false;
+	}
+	
+	var array = $.makeArray($('tbody tr[id]').map(function() {
+		  return this.id;
+		}));
+		var item ="";
+		var unit="";
+		var myarray = []; 
+		var myarray1 = []; 
+	 for(var i=0;i<array.length;i++){
+		 item = $('#' + array[i] + 'item').val();
+		 unit = $('#' + array[i] + 'unit').val();
+		 myarray.push(item);
+		 myarray1.push(unit);
+	 }
+	 var existingItems = {};
+
+	 myarray.forEach(function(value, index) {
+	     existingItems[value] = index;
+	 });
+	 
+	 var formData = new FormData();
+	    formData.append('myarray', myarray);
+	    formData.append('myarray1', myarray1);
+	    formData.append('truckId', truckId);
+		$.fn.makeMultipartRequest('POST', 'getTruckInCylinderCount', false,
+				formData, false, 'text', function(data){
+			var jsonobj = $.parseJSON(data);
+			var msg = jsonobj.msg;
+		if(msg!="ok"){
+			alert(msg);
+			cylinderAvailable = false;
+		}else{
+			cylinderAvailable = true;
+		}
+		});
+	 
 }
+
+function selectReturnTruck(value){
+	$("#cylinderReturnTruck").val(value);
+}
+$('#submit11').click(function(event) {
+	validation = true;
+	$.each(idArray, function(i, val) {
+		var value = $("#" + idArray[i]).val();
+		var placeholder = $("#" + idArray[i]).attr('placeholder');
+		if (value == null || value == "" || value == "undefined") {
+			$('style').append(styleBlock);
+			$("#" + idArray[i] ).attr("placeholder", placeholder);
+			$("#" + idArray[i] ).css('border-color','#e73d4a');
+			$("#" + idArray[i] ).css('color','#e73d4a');
+			$("#" + idArray[i] ).addClass('placeholder-style your-class');
+			 var id11 = $("#" + idArray[i]+"_chosen").length;
+			if ($("#" + idArray[i]+"_chosen").length)
+			{
+				$("#" + idArray[i]+"_chosen").children('a').css('border-color','#e73d4a');
+			}
+//			$("#" + idArray[i] + "Error").text("Please " + placeholder);
+			validation = false;
+		} 
+		
+	});
+	if(!cylinderAvailable){
+		alert("cylinders not available");
+		return false;
+		event.preventDefault();
+	}
+	if(validation) {
+		$("#submit11").attr("disabled",true);
+		$("#submit11").val("Please wait...");
+		$("form").submit();											
+		event.preventDefault();
+	}else {
+		return false;
+		event.preventDefault();
+	}
+	
+});
 $("#pageName").text("Cylinder Deliver To Customer");
 $(".cylinderDeliver").addClass("active");
 </script>

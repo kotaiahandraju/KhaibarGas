@@ -1,6 +1,7 @@
 package com.aurospaces.neighbourhood.controller;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,17 +21,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.CompanymasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
+import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LpoitemsBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.db.dao.CompanymasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
+import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -48,6 +52,7 @@ public class CylinderController {
 	CylindermasterDao cylindermasterDao;
 	@Autowired StoresmasterDao storesmasterDao;
 	@Autowired CompanymasterDao companymasterDao;
+	@Autowired ItemsDao objItemsDao;
 	@RequestMapping(value = "/CylinderHome")
 	public String cylinderHome(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
@@ -355,4 +360,39 @@ public class CylinderController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	@RequestMapping(value = "/getTruckInCylinderCount")
+	public @ResponseBody String getTruckInCylinderCount(  ModelMap model,
+			HttpServletRequest request, HttpSession session) {
+		JSONObject jsonObj = new JSONObject();
+		 String myarray=request.getParameter("myarray");
+		 String myarray1=request.getParameter("myarray1");
+		 String truckId=request.getParameter("truckId");
+		 String[] items=myarray.split(",");
+		 String[] quantity=myarray1.split(",");
+		
+		try {
+			for(int i=0;i<items.length;i++){
+				
+			int count=	cylindermasterDao.truckincylinderscount(truckId,items[i]);
+			if(count<Integer.parseInt(quantity[i])){
+			 ItemsBean objItemsBean =  objItemsDao.getById(Integer.parseInt(items[i]));
+			 jsonObj.put("msg", objItemsBean.getName()+" available in Truck :" +count);
+			 objItemsBean.getName();
+			}else{
+				 jsonObj.put("msg", "ok");
+			}
+			
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(e);
+			logger.fatal("error in cylinder master controller class ");
+			jsonObj.put("message", "excetption" + e);
+			return String.valueOf(jsonObj);
+
+		}
+		return String.valueOf(jsonObj);
+	}
+	
 }
