@@ -8,6 +8,10 @@
  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
  <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
  <style>
+ .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td
+ {
+ border: 0px solid black !important;
+ }
 table #dependent_table{
 /* 	width: 100%; */
 	counter-reset: rowNumber;
@@ -255,11 +259,11 @@ table#dependent_table tbody tr td:first-child::before {
 		
 		
 		<tr class="bordertopbottom">
-			<th style="width:50px">S .No</th>
-			<th style="width:600px">Description</th>
-			<th style="width:50px">Qty</th>
-		    <th style="width:75px">Unit Price AED.</th>
-		    <th style="width:200px">Total Amount AED.</th>
+			<th style="width:50px" class="bordertopbottom">S .No</th>
+			<th style="width:600px" class="bordertopbottom">Description</th>
+			<th style="width:50px" class="bordertopbottom">Qty</th>
+		    <th style="width:100px" class="bordertopbottom">Unit Price AED.</th>
+		    <th style="width:200px" class="bordertopbottom">Total Amount AED.</th>
 		</tr>
 		</thead>
 		
