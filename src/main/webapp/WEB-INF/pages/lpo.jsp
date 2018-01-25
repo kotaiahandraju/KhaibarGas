@@ -276,11 +276,13 @@ table#dependent_table tbody tr td:first-child::before {
 		</tr>
 		</tfoot>
 	</table>
-	<div class="footer">
+	<div class="footer" id="printFooter" style="display: none;">
 		<hr style="border-top: dotted 1px;" />
 		<p style="text-align: center;"> P O BOX 14915, JURF – AJMAN, UAE |Email: admin@khaibargas.com|Website : www.khaibargas.com</p>
 	</div>
-	 <button class="printbtn" onclick="PrintElem('#printDiv');">Print</button>
+	<div style="float:right">
+	 <button class="printbtn btn-primary" onclick="PrintElem('#printDiv');">Print</button>
+	 </div>
 </div>
 <!-- end print div -->
  
@@ -805,7 +807,9 @@ var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY
 function PrintElem(elem)
 {
 	$(".printbtn").hide();
+	 $("#printFooter").show();
     Popup($(elem).html());
+    
 }
 
 
@@ -817,6 +821,7 @@ function Popup(data)
     var isPrinting = false;
     mywindow.document.write('<html><head><title>Donor Details</title> <link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
     mywindow.document.write(data);
+   
     mywindow.document.write('</body></html>');
     mywindow.document.close(); // necessary for IE >= 10 and necessary before onload for chrome
 
