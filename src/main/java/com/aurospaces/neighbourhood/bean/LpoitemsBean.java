@@ -40,9 +40,21 @@ protected String discount ;
 protected String grandtotal ;
 protected String suppliername ;
 protected String expirydate;
-protected String manufacturingdate;
+protected String manufacturingdate,amount,name;
 
 
+public String getAmount() {
+	return amount;
+}
+public void setAmount(String amount) {
+	this.amount = amount;
+}
+public String getName() {
+	return name;
+}
+public void setName(String name) {
+	this.name = name;
+}
 public String getExpirydate() {
 	return expirydate;
 }

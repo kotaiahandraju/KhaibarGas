@@ -3,6 +3,7 @@ package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -73,7 +74,7 @@ public class LpomasterDao extends BaseLpomasterDao
 		 List<LpoitemsBean> retlist =null;
 		 jdbcTemplate = custom.getJdbcTemplate();
 //			String sql = "select li.lponumber,li.quantity,li.price,li.totalprice,li.discount,li.grandtotal,i.name as itemid from lpoitems li ,items i where i.id=li.itemid and li.lponumber=? ";
-		 String sql = "select * from lpoitems where lponumber = ?";
+		 String sql = "select li.*,i.name,lm.amount from lpoitems li,lpomaster lm,items i where i.id=li.itemid and li.lponumber=lm.lponumber and li.lponumber = ?";
 			 retlist = jdbcTemplate.query(sql,	new Object[]{lpomasterBean.getLponumber()},ParameterizedBeanPropertyRowMapper.newInstance(LpoitemsBean.class));
 			if(retlist.size() > 0)
 				return retlist;
@@ -91,23 +92,28 @@ public class LpomasterDao extends BaseLpomasterDao
 		}
 	 @SuppressWarnings("deprecation")
 	public boolean getCountFromLPOItemsAndCylindermaster(LpomasterBean lpomasterBean) {
-		 int retlist =0;
-		 boolean count=false;
-		 jdbcTemplate = custom.getJdbcTemplate();
+		int retlist = 0;
+		boolean count = false;
+		jdbcTemplate = custom.getJdbcTemplate();
 		String sql1 = "select ifnull((SELECT count(*) from cylindermaster where lponumber = ? AND size=? group by lponumber,size),0) AS count1 ";
-		 String sql = "select sum(quantity) from lpoitems where lponumber = ? AND itemId=? group by lponumber,itemId";
-		 System.out.println("---lpomasterBean.getLponumber(),----"+lpomasterBean.getLponumber()+"-----lpomasterBean.getItem()---"+lpomasterBean.getItem());
-			@SuppressWarnings("deprecation")
-			int resultList = jdbcTemplate.queryForInt(sql1,	new Object[]{lpomasterBean.getLponumber(),lpomasterBean.getItem()});
-			 retlist = jdbcTemplate.queryForInt(sql,	new Object[]{lpomasterBean.getLponumber(),lpomasterBean.getItem()});
-			 
-			int result=retlist-resultList;
-			System.out.println("---result----"+result);
-			if(result>0){
-				count=true;
+		String sql = "select sum(quantity) from lpoitems where lponumber = ? AND itemId=? group by lponumber,itemId";
+		if (StringUtils.isNotBlank(lpomasterBean.getLponumber()) && StringUtils.isNotBlank(lpomasterBean.getItem())) {
+
+			System.out.println("---lpomasterBean.getLponumber(),----" + lpomasterBean.getLponumber()
+					+ "-----lpomasterBean.getItem()---" + lpomasterBean.getItem());
+			int resultList = jdbcTemplate.queryForInt(sql1,
+					new Object[] { lpomasterBean.getLponumber(), lpomasterBean.getItem() });
+			retlist = jdbcTemplate.queryForInt(sql,
+					new Object[] { lpomasterBean.getLponumber(), lpomasterBean.getItem() });
+
+			int result = retlist - resultList;
+			System.out.println("---result----" + result);
+			if (result > 0) {
+				count = true;
 			}
-			 
-			return count;
+
 		}
+		return count;
+	}
 }
 

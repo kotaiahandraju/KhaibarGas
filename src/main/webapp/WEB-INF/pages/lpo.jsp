@@ -6,6 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
  
  <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
+ <link rel="stylesheet" type="text/css" href="../assets/css/img.css">
  <style>
 table #dependent_table{
 /* 	width: 100%; */
@@ -29,6 +30,7 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
+
 </style>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
@@ -36,8 +38,8 @@ table#dependent_table tbody tr td:first-child::before {
                <li>LPO </li>
             </ol>
             <div class="clearfix"></div>
-        <div class="container">
-            <div class="row">
+        <div class="container" id="lpoMain">
+            <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
@@ -231,6 +233,56 @@ table#dependent_table tbody tr td:first-child::before {
         </div>
 
         </div> <!-- container -->
+<!--  -print Div -->
+        
+        
+        <div class="container well" id="printDiv" style="display: none;">
+       
+<img src="../img/khaibarlogo.png" alt="KHAIBAR logo">
+<br>
+<br>
+<div><strong>LOCAL PURCHASE ORDER</strong></div>
+	<table class="table table-bordered" align="center" style="min-width: 680px;min-height:200px" id="printTable"> 
+		<tr >
+			<p><td colspan="2">Supplier</p>
+				<p>NGC	ENERGY <br>
+				  P O Box 3629	<br>
+				  UAE  </td></p>
+				  <p><td colspan="3">LPO No. : 1000015/L1, Date : 02/12/2017 </p>
+			<p>This PO No. should appear on the invoice and all correspondence</td></p>
+		</tr>
+		
+		<tr class="bordertopbottom">
+			<th style="width:50px">S .No</th>
+			<th style="width:600px">Description</th>
+			<th style="width:50px">Qty</th>
+		    <th style="width:75px">Unit Price AED.</th>
+		    <th style="width:200px">Total Amount AED.</th>
+		</tr>
+		
+		
+		<tbody></tbody>
+		<tfoot>
+		<tr>
+			<td style="padding-top: 300px">*Note*</td>
+			<td style="padding-top: 300px">This is computer generated L.P.O. and does not require seal and signature.</td>
+            <td></td>
+            <td></td>
+            <td></td>
+		</tr>
+		<tr class="bordertopbottom">
+			<td colspan="4" id="numberToWords"> </td>
+			<td id="printTotal"></td>
+		</tr>
+		</tfoot>
+	</table>
+	<div class="footer">
+		<hr style="border-top: dotted 1px;" />
+		<p style="text-align: center;"> P O BOX 14915, JURF – AJMAN, UAE |Email: admin@khaibargas.com|Website : www.khaibargas.com</p>
+	</div>
+	 <button class="printbtn" onclick="PrintElem('#printDiv');">Print</button>
+</div>
+<!-- end print div -->
  
 <div id="dial1"></div>
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
@@ -293,6 +345,7 @@ function showTableData(response){
 		
 		var edit = "<a class='edit editIt' id='edit"+orderObj.lponumber+"' onclick=viewDetails(this.id,1)><i style='color: orange;' class='fa fa-edit'></i></a>"
 		var view = "<a class='view' id='"+orderObj.lponumber+"' onclick=viewDetails(this.id,0)><i class='fa fa-eye red'></i></a>"
+		var printImage = "<a class='printImage' id='print"+orderObj.lponumber+"'><img src='../img/print1.jpg' alt='Paris' width='20' height='20'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		serviceUnitArray1[orderObj.lponumber] = orderObj;
 		var tblRow ="<tr>"
@@ -306,7 +359,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.dueamount+"'>" + orderObj.dueamount + "</td>"
 			+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
 			+ "<td title='"+orderObj.lpoStatus+"'>" + orderObj.lpoStatus + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + view + "&nbsp;&nbsp;" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>" + view + "&nbsp;&nbsp;" + edit + "&nbsp;&nbsp;" + deleterow + "&nbsp;&nbsp;"+printImage+"</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -642,6 +695,159 @@ function inactiveData() {
             showTableData(resJson);
 					console.log(resJson);
 				});
+}
+$(".printImage").click(function(id) {
+	//alert(this.id);
+	 var printId=this.id;
+	 
+	//window.location.href="lpoPrintHome";
+	$("#lpoMain").hide();
+	$("#printDiv").show();
+var	id = printId.replace("print", "");
+
+	var formData = new FormData();
+    formData.append('lponumber', id);
+	$.fn.makeMultipartRequest('POST', 'viewLPOdetails', false,
+			formData, false, 'text', function(data){
+		var lponumbertitle=null;
+		var jsonobj = $.parseJSON(data);
+		var alldata = jsonobj.allOrders1;
+		//alert(alldata);
+		var j=1;
+		var numberToWords="";
+		$.each(alldata,function(i, orderObj) {
+			
+		var dependentRow1 = '<tr><td>'+j+'</td><td>'+orderObj.name+'</td><td>'+orderObj.quantity+'</td><td>'+orderObj.price+'</td><td>'+orderObj.grandtotal+'</td></tr>'
+		  j++;
+		$("#printTotal").text(orderObj.amount);
+		//alert(convert_number(orderObj.amount));
+		numberToWords=convert_number(parseInt(orderObj.amount));
+$(dependentRow1).appendTo("#printTable tbody");
+		});
+		
+		$("#numberToWords").text(numberToWords);
+	});
+	
+})
+
+
+function convert_number(number)
+{
+   if ((number < 0) || (number > 999999999)) 
+   { 
+       return "NUMBER OUT OF RANGE!";
+   }
+   var Gn = Math.floor(number / 10000000);  / Crore / 
+   number -= Gn * 10000000; 
+   var kn = Math.floor(number / 100000);     / lakhs / 
+   number -= kn * 100000; 
+   var Hn = Math.floor(number / 1000);      / thousand / 
+   number -= Hn * 1000; 
+   var Dn = Math.floor(number / 100);       / Tens (deca) / 
+   number = number % 100;               / Ones / 
+   var tn= Math.floor(number / 10); 
+   var one=Math.floor(number % 10); 
+   var res = ""; 
+
+   if (Gn>0) 
+   { 
+       res += (convert_number(Gn) + " CRORE"); 
+   } 
+   if (kn>0) 
+   { 
+           res += (((res=="") ? "" : " ") + 
+           convert_number(kn) + " LAKH"); 
+   } 
+   if (Hn>0) 
+   { 
+       res += (((res=="") ? "" : " ") +
+           convert_number(Hn) + " THOUSAND"); 
+   } 
+
+   if (Dn) 
+   { 
+       res += (((res=="") ? "" : " ") + 
+           convert_number(Dn) + " HUNDRED"); 
+   } 
+
+
+   var ones = Array("", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX","SEVEN", "EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE", "THIRTEEN","FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN", "EIGHTEEN","NINETEEN"); 
+var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY", "EIGHTY", "NINETY"); 
+
+   if (tn>0 || one>0) 
+   { 
+       if (!(res=="")) 
+       { 
+           res += " AND "; 
+       } 
+       if (tn < 2) 
+       { 
+           res += ones[tn * 10 + one]; 
+       } 
+       else 
+       { 
+
+           res += tens[tn];
+           if (one>0) 
+           { 
+               res += ("-" + ones[one]); 
+           } 
+       } 
+   }
+
+   if (res=="")
+   { 
+       res = "zero"; 
+   } 
+   return res;
+}
+
+function PrintElem(elem)
+{
+	$(".printbtn").hide();
+    Popup($(elem).html());
+}
+
+
+function Popup(data)
+{
+	var mywindow = window.open('','new div');
+
+    var is_chrome = Boolean(mywindow.chrome);
+    var isPrinting = false;
+    mywindow.document.write('<html><head><title>Donor Details</title> <link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
+    mywindow.document.write(data);
+    mywindow.document.write('</body></html>');
+    mywindow.document.close(); // necessary for IE >= 10 and necessary before onload for chrome
+
+$(".printbtn").show();
+    if (is_chrome) {
+        mywindow.onload = function() { // wait until all resources loaded 
+            mywindow.focus(); // necessary for IE >= 10
+            mywindow.print();  // change window to mywindow
+            mywindow.close();// change window to mywindow
+        };
+    
+    
+   } else {
+        mywindow.document.close(); // necessary for IE >= 10
+        mywindow.focus(); // necessary for IE >= 10
+
+        mywindow.print();
+        mywindow.close();
+        $(".printbtn").show();
+   }
+	
+	
+	
+   /* var mywindow = window.open('', 'new div');
+    mywindow.document.write('<html><head><title>Donor Details</title></head><body>');
+    mywindow.document.write(data);
+    mywindow.document.write('</body></html>');
+    mywindow.print();
+    mywindow.close();
+    $(".printbtn").show();*/
+    return true;
 }
 
 $("#pageName").text("LPO Master");
