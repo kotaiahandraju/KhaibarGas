@@ -160,7 +160,7 @@ public class LpoMasterController {
 				System.out.println("Exception in Product Controller in productSave()");
 				e.printStackTrace();
 			}
-			return "redirect:lpoHome";
+			return "redirect:lpoHome?lpoNum="+lpo.getLponumber();
 		}
 	
 	@RequestMapping(value = "/lpoDelete")

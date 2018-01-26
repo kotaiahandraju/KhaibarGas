@@ -246,7 +246,8 @@ table#dependent_table tbody tr td:first-child::before {
 <br>
 <br>
 <div><strong>LOCAL PURCHASE ORDER</strong></div>
-	<table class="table table-bordered" align="center" style="min-width: 680px;min-height:200px" id="printTable"> 
+	<table class="table table-bordered" align="center" style="min-width: 680px;min-height:200px" id="printTable">
+	<thead> 
 		<tr >
 			<p><td colspan="2">Supplier</p>
 				<p>NGC	ENERGY <br>
@@ -256,6 +257,7 @@ table#dependent_table tbody tr td:first-child::before {
 			<p>This PO No. should appear on the invoice and all correspondence</td></p>
 		</tr>
 		
+		
 		<tr class="bordertopbottom">
 			<th style="width:50px" class="bordertopbottom">S .No</th>
 			<th style="width:600px" class="bordertopbottom">Description</th>
@@ -263,7 +265,7 @@ table#dependent_table tbody tr td:first-child::before {
 		    <th style="width:100px" class="bordertopbottom">Unit Price AED.</th>
 		    <th style="width:200px" class="bordertopbottom">Total Amount AED.</th>
 		</tr>
-		
+		</thead>
 		
 		<tbody></tbody>
 		<tfoot>
@@ -291,6 +293,18 @@ table#dependent_table tbody tr td:first-child::before {
 <!-- end print div -->
  
 <div id="dial1"></div>
+
+
+<c:choose>
+<c:when test="${empty param.lpoNum}">
+   <script> var lpoNmberForPrint = "";</script>
+</c:when>
+<c:otherwise>
+   <script> var lpoNmberForPrint = "${param.lpoNum}";</script>
+</c:otherwise>
+</c:choose>
+
+
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <script type="text/javascript">
 
@@ -351,7 +365,7 @@ function showTableData(response){
 		
 		var edit = "<a class='edit editIt' id='edit"+orderObj.lponumber+"' onclick=viewDetails(this.id,1)><i style='color: orange;' class='fa fa-edit'></i></a>"
 		var view = "<a class='view' id='"+orderObj.lponumber+"' onclick=viewDetails(this.id,0)><i class='fa fa-eye red'></i></a>"
-		var printImage = "<a class='printImage' id='print"+orderObj.lponumber+"'><img src='../img/print1.jpg' alt='Paris' width='20' height='20'></i></a>"
+		var printImage = "<a class='printImage' id='print"+orderObj.lponumber+"' onclick=lpoPrint(this.id)><img src='../img/print1.jpg' alt='Paris' width='20' height='20'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		serviceUnitArray1[orderObj.lponumber] = orderObj;
 		var tblRow ="<tr>"
@@ -702,9 +716,9 @@ function inactiveData() {
 					console.log(resJson);
 				});
 }
-$(".printImage").click(function(id) {
+	function lpoPrint(id){
 	//alert(this.id);
-	 var printId=this.id;
+	 var printId=id;
 	 
 	//window.location.href="lpoPrintHome";
 	$("#lpoMain").hide();
@@ -734,7 +748,7 @@ $(dependentRow1).appendTo("#printTable tbody");
 		$("#numberToWords").text(numberToWords);
 	});
 	
-})
+}
 
 
 function convert_number(number)
@@ -857,6 +871,9 @@ $(".printbtn").show();
     mywindow.close();
     $(".printbtn").show();*/
     return true;
+}
+if(lpoNmberForPrint!=""){
+	lpoPrint(lpoNmberForPrint);
 }
 
 $("#pageName").text("LPO Master");
