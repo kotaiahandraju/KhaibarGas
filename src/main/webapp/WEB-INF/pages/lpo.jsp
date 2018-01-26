@@ -241,8 +241,8 @@ table#dependent_table tbody tr td:first-child::before {
         
         
         <div class="container well" id="printDiv" style="display: none;">
-       
-<img src="../img/khaibarlogo.png" alt="KHAIBAR logo">
+       <div class="col-md-12 noPrint" style="padding: 5px;border-bottom: 2px solid;border-top: 2px solid;"  ><div class="col-md-4"><button class="printbtn btn-primary" onclick="PrintElem('#printDiv');">Print</button></div><div class="col-md-4"></div><div class="col-md-4" style="float:right;text-align: right;"><a style="cursor: pointer;float: right;color: red;" onclick="getBack()"><i class="fa fa-2x fa-close"></i></a></div>
+</div><img src="../img/khaibarlogo.png" alt="KHAIBAR logo">
 <br>
 <br>
 <div><strong>LOCAL PURCHASE ORDER</strong></div>
@@ -260,10 +260,10 @@ table#dependent_table tbody tr td:first-child::before {
 		
 		<tr class="bordertopbottom">
 			<th style="width:50px" class="bordertopbottom">S .No</th>
-			<th style="width:600px" class="bordertopbottom">Description</th>
+			<th style="width:550px" class="bordertopbottom">Description</th>
 			<th style="width:50px" class="bordertopbottom">Qty</th>
-		    <th style="width:100px" class="bordertopbottom">Unit Price AED.</th>
-		    <th style="width:200px" class="bordertopbottom">Total Amount AED.</th>
+		    <th style="width:130px" class="bordertopbottom">Unit Price (AED).</th>
+		    <th style="width:150px" class="bordertopbottom">Total Amount (AED).</th>
 		</tr>
 		</thead>
 		
@@ -286,9 +286,6 @@ table#dependent_table tbody tr td:first-child::before {
 		<hr style="border-top: dotted 1px;" />
 		<p style="text-align: center;"> P O BOX 14915, JURF – AJMAN, UAE |Email: admin@khaibargas.com|Website : www.khaibargas.com</p>
 	</div>
-	<div style="float:right">
-	 <button class="printbtn btn-primary" onclick="PrintElem('#printDiv');">Print</button>
-	 </div>
 </div>
 <!-- end print div -->
  
@@ -745,7 +742,7 @@ var	id = printId.replace("print", "");
 $(dependentRow1).appendTo("#printTable tbody");
 		});
 		
-		$("#numberToWords").text(numberToWords);
+		$("#numberToWords").text("Total (in Words ).  "+numberToWords);
 	});
 	
 }
@@ -824,6 +821,7 @@ var tens = Array("", "", "TWENTY", "THIRTY", "FOURTY", "FIFTY", "SIXTY","SEVENTY
 
 function PrintElem(elem)
 {
+	$(".noPrint").hide();
 	$(".printbtn").hide();
 	 $("#printFooter").show();
     Popup($(elem).html());
@@ -844,6 +842,8 @@ function Popup(data)
     mywindow.document.close(); // necessary for IE >= 10 and necessary before onload for chrome
 
 $(".printbtn").show();
+$(".noPrint").show();
+$("#printFooter").hide();
     if (is_chrome) {
         mywindow.onload = function() { // wait until all resources loaded 
             mywindow.focus(); // necessary for IE >= 10
@@ -858,7 +858,6 @@ $(".printbtn").show();
 
         mywindow.print();
         mywindow.close();
-        $(".printbtn").show();
    }
 	
 	
@@ -874,6 +873,21 @@ $(".printbtn").show();
 }
 if(lpoNmberForPrint!=""){
 	lpoPrint(lpoNmberForPrint);
+}
+function getBack(){
+	$("#lpoMain").show();
+	$("#printDiv").hide();
+	ChangeUrl('lpoNum', 'lpoHome?lpoNum=');
+
+}
+
+function ChangeUrl(page, url) {
+    if (typeof (history.pushState) != "undefined") {
+        var obj = { Page: page, Url: url };
+        history.pushState(obj, obj.Page, obj.Url);
+    } else {
+        alert("Browser does not support HTML5.");
+    }
 }
 
 $("#pageName").text("LPO Master");
