@@ -26,7 +26,7 @@ public class BaseAddGasDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO addgas( created_time, updated_time, fillingStationId,gasInKgs) values (?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO addgas( created_time, updated_time, fillingStationId,gasInKgs,closedgas) values (?,?, ?, ?, ?)"; 
 
 
 
@@ -66,6 +66,7 @@ public class BaseAddGasDao{
 ps.setTimestamp(2, updatedTime);
 ps.setString(3, addGasBean.getFillingStationId());
 ps.setString(4, addGasBean.getGasInKgs());
+ps.setString(5, addGasBean.getClosedgas());
 
 							return ps;
 						}

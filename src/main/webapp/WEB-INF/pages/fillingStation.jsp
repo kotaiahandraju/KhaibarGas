@@ -269,9 +269,12 @@ function addGas() {
 	
 	var stationId =$("#stationnames").val();
 	var newGasavail=$("#gasavail").val();
+	var oldBal =serviceUnitArray[stationId].closingBalanceGas;
+	var closedgas= parseInt(oldBal)+parseInt(newGasavail);
+ 	//alert(closedgas);
 	if((stationId == null || stationId == "" || stationId == "undefined" || newGasavail == null || newGasavail == "" || newGasavail == "undefined"))
 	{
-	 	if(stationId == null || stationId == "" || stationId == "undefined"){
+	 	if(stationId == null || stationId == "" || stationId == "undefined" ){
 		 	$('#stationnames').css('border-color','#cc0000');
 			$('#stationnames').css('color','#cc0000');
 			$('#stationnames').addClass('placeholder-style your-class');
@@ -288,7 +291,7 @@ function addGas() {
 		$.ajax({
 			type : "POST",
 			url : "updateGas.htm",
-			data :"stationId="+stationId+"&newGasavail="+newGasavail,
+			data :"stationId="+stationId+"&newGasavail="+newGasavail+"&closedgas="+closedgas,
 			beforeSend : function() {
             	$.blockUI({ message: 'Please wait' });
           	}, 

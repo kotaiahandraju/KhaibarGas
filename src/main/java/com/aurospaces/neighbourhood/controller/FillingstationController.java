@@ -81,12 +81,17 @@ public class FillingstationController {
 	public String addCylinder(@Valid @ModelAttribute("fillingStationForm") FillingstationmasterBean objFillingstationmasterBean,
 			BindingResult bindingresults, Model model,RedirectAttributes redir) {
 		int id = 0;
+		AddGasBean addGasBean=null;
 		
 		try
 		{
 			objFillingstationmasterBean.setStatus("1");
 			FillingstationmasterBean fillingstationmasterBean = fillingstationmasterDao.getByFillingstationById(objFillingstationmasterBean);
 			int dummyId =0;
+//			addGasBean =new AddGasBean();
+//			addGasBean.setFillingStationId(String.valueOf(objFillingstationmasterBean.getId()));
+//			addGasBean.setGasInKgs(objFillingstationmasterBean.getGasavailability());
+//			addGasBean.setClosedgas(objFillingstationmasterBean.getClosingBalanceGas());
 			if(fillingstationmasterBean != null){
 				dummyId = fillingstationmasterBean.getId();
 			}
@@ -96,6 +101,7 @@ public class FillingstationController {
 				if(id == dummyId || fillingstationmasterBean == null )
 				{
 					fillingstationmasterDao.save(objFillingstationmasterBean);
+					//addGasDao.save(addGasBean);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
 				}
@@ -108,7 +114,7 @@ public class FillingstationController {
 			if(objFillingstationmasterBean.getId() == 0 && fillingstationmasterBean == null)
 			{
 				fillingstationmasterDao.save(objFillingstationmasterBean);
-				
+				//addGasDao.save(addGasBean);
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
@@ -225,7 +231,7 @@ public class FillingstationController {
 	}
 	
 	@RequestMapping("/updateGas")
-	public  @ResponseBody  String updateGas(@RequestParam("stationId") String stationId,@RequestParam("newGasavail") String newGasavail, HttpServletRequest request, HttpSession session)
+	public  @ResponseBody  String updateGas(@RequestParam("stationId") String stationId,@RequestParam("newGasavail") String newGasavail,@RequestParam("closedgas") String closedgas, HttpServletRequest request, HttpSession session)
 	{  
 		boolean retlist=false;
 		//String retlist=null;
@@ -234,6 +240,7 @@ public class FillingstationController {
 		try {
 			addGasBean.setFillingStationId(stationId);
 			addGasBean.setGasInKgs(newGasavail);
+			addGasBean.setClosedgas(closedgas);
 			addGasDao.save(addGasBean);
 			System.out.println("-----gasavail-------"+newGasavail+"-------stationId------"+stationId);
 				retlist=fillingstationmasterDao.updateGas(Integer.parseInt(stationId), newGasavail);

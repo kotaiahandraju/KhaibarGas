@@ -10,9 +10,16 @@ public class AddGasBean
 protected int id   = 0;
 protected Date createdTime,date ;
 protected Date updatedTime ;
-protected String fillingStationId ;
+protected String fillingStationId,closedgas ;
 protected String gasInKgs,units ,x,y;
 
+
+public String getClosedgas() {
+	return closedgas;
+}
+public void setClosedgas(String closedgas) {
+	this.closedgas = closedgas;
+}
 public String getX() {
 	return x;
 }
