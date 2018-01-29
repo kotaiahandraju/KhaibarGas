@@ -265,7 +265,7 @@ function onChangeCylinderQualityCheck(){
 	var stationname=$("#stationname").val();
 	var size=$("#cylinderType").val();
 	 var formData = new FormData();
-     formData.append('stationname', stationname);
+     formData.append('fillingstationId', stationname);
      formData.append('quantity', quantity);
      formData.append('size', size);
 	$.fn.makeMultipartRequest('POST', 'onChangeCylinderQualityCheck', false,

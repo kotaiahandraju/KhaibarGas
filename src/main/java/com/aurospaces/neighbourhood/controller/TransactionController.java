@@ -41,6 +41,7 @@ import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.KhaibarUsersBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
+import com.aurospaces.neighbourhood.bean.UsedGasBean;
 import com.aurospaces.neighbourhood.db.dao.CompanymasterDao;
 import com.aurospaces.neighbourhood.db.dao.CustomercylindersDao;
 import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
@@ -50,6 +51,7 @@ import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
+import com.aurospaces.neighbourhood.db.dao.UsedGasDao;
 
 @Controller
 @RequestMapping("admin")
@@ -77,6 +79,7 @@ public class TransactionController {
 	CompanymasterDao companymasterDao;
 	@Autowired
 	DataSourceTransactionManager transactionManager;
+	@Autowired UsedGasDao usedGasDao;
 	private Logger logger = Logger.getLogger(TransactionController.class);
 
 	@RequestMapping(value = "/cylinderMovetofillingStation")
@@ -368,15 +371,16 @@ public class TransactionController {
 			String cylenderId = cylindertransactionBean1.getCylindetId();
 
 			String[] cylenderId1 = cylenderId.split(",");
+			int totalUsedGas = 0;
 			for (int i = 0; i < cylenderId1.length; i++) {
 
-				CylindermasterBean cylindermasterBean = cylindermasterDao
-						.getByCylinderName(Integer.parseInt(cylenderId1[i]));
+				CylindermasterBean cylindermasterBean = cylindermasterDao.getByCylinderName(Integer.parseInt(cylenderId1[i]));
 				int cylinderCapacity = 0;
 				if (cylindermasterBean != null) {
 					if (StringUtils.isNotBlank(cylindermasterBean.getName())) {
 						String numberOnly = cylindermasterBean.getName().replaceAll("[^0-9]", "");
 						cylinderCapacity = Integer.parseInt(numberOnly);
+						totalUsedGas = totalUsedGas+cylinderCapacity;
 						fillingstationmasterDao.updateUsedGas(Integer.parseInt(cylindertransactionBean1.getFillingStation()), cylinderCapacity);
 						fillingstationmasterDao.updateClosingGas();
 					}
@@ -396,6 +400,12 @@ public class TransactionController {
 				}
 				System.out.println("count---"+intcount);
 				}
+			FillingstationmasterBean objfillFillingstationmasterBean = fillingstationmasterDao.getById(Integer.parseInt(cylindertransactionBean1.getFillingStation()));
+			UsedGasBean objUsedGasBean = new UsedGasBean();
+			objUsedGasBean.setFillingStationId(cylindertransactionBean1.getFillingStation());
+			objUsedGasBean.setGasInKgs(String.valueOf(totalUsedGas));
+			objUsedGasBean.setClosedgas(objfillFillingstationmasterBean.getClosingBalanceGas());
+			usedGasDao.save(objUsedGasBean);
 				jsonObject.put("msg", intcount+" Records Updated ");
 
 
