@@ -377,8 +377,7 @@ public class TransactionController {
 					if (StringUtils.isNotBlank(cylindermasterBean.getName())) {
 						String numberOnly = cylindermasterBean.getName().replaceAll("[^0-9]", "");
 						cylinderCapacity = Integer.parseInt(numberOnly);
-						fillingstationmasterDao.updateUsedGas(
-								Integer.parseInt(cylindertransactionBean1.getFillingStation()), cylinderCapacity);
+						fillingstationmasterDao.updateUsedGas(Integer.parseInt(cylindertransactionBean1.getFillingStation()), cylinderCapacity);
 						fillingstationmasterDao.updateClosingGas();
 					}
 				}
