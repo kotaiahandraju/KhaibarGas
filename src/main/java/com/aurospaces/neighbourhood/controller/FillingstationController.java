@@ -238,13 +238,16 @@ public class FillingstationController {
 		JSONObject obj = new JSONObject();
 		 AddGasBean addGasBean = new AddGasBean();
 		try {
-			addGasBean.setFillingStationId(stationId);
-			addGasBean.setGasInKgs(newGasavail);
-			addGasBean.setClosedgas(closedgas);
-			addGasDao.save(addGasBean);
+			
 			System.out.println("-----gasavail-------"+newGasavail+"-------stationId------"+stationId);
 				retlist=fillingstationmasterDao.updateGas(Integer.parseInt(stationId), newGasavail);
 				fillingstationmasterDao.updateClosingGas();
+				FillingstationmasterBean bean = fillingstationmasterDao.getById(Integer.parseInt(stationId));
+				addGasBean.setFillingStationId(stationId);
+				addGasBean.setGasInKgs(newGasavail);
+				addGasBean.setClosedgas(closedgas);
+				addGasBean.setFillingstationname(bean.getStationname());
+				addGasDao.save(addGasBean);
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();

@@ -5,7 +5,6 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" href='${baseurl }/assets/css/cylinderdeliverPrint.css' />
 <style>
 table #dependent_table {
 	/* 	width: 100%; */
@@ -29,278 +28,158 @@ table tbody tr.rowInc {
 #ui-datepicker-div {
 /* 	width: auto !important; */
 }
+.printTable table {
+  border: 1px solid #ccc;
+  border-collapse: collapse;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  table-layout: fixed;
+}
+.printTable table caption {
+  font-size: 1.5em;
+  margin: .5em 0 .75em;
+}
+.printTable table tr {
+  background: #f8f8f8;
+  border: 1px solid #ddd;
+  padding: .35em;
+}
+.printTable table th,
+.printTable table td {
+  padding: .165em;
+  text-align: left;
+}
+.printTable table th {
+  font-size:12.5px;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+@media screen and (max-width: 600px) {
+  .printTable table {
+    border: 0;
+  }
+ .printTable  table caption {
+    font-size: 1.3em;
+  }
+ .printTable  table thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+  }
+ .printTable  table tr {
+    border-bottom: 3px solid #ddd;
+    display: block;
+    margin-bottom: .625em;
+  }
+  .printTable table td {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    font-size: .8em;
+    text-align: right;
+  }
+ .printTable  table td:before {
+    /*
+    * aria-label has no advantage, it won't be read inside a table
+    content: attr(aria-label);
+    */
+    content: attr(data-label);
+    float: left;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+ .printTable  table td:last-child {
+    border-bottom: 0;
+  }
+}
+.printTable table {
+width:47%;
+float:left;
+margin:3px;
+}
+.printTable tr{
+	width:100%;
+	margin-left:10px;}
+.printTable th {
+	
+	float:left;
+	
+	}
+	.det {
+	width:100%;
+	float:left;
+	padding:0px;
+	}
 
+	.printTable td {
+		
+		float:left;
+		margin-left:2px;}
+		.custom {
+			border-top-right-radius: 1px;
+    border-top-left-radius: 1px;
+  
+			background:#4f8edc !important;
+			color:#fff !important;
+			Padding:2px !important;
+			font-size:18px !important;
+			}
+			.deliver {
+				width:95%;
+			}
+	label {
+	margin-bottom:0px;	
+	font-size: 13px;
+	}
+#wrap > .container {
+    padding: 5px;
+}
+		@media print {
+body {-webkit-print-color-adjust: exact;}
+}
+.sno {
+width:26px;
+float:left;
+}
+.ite {
+width:60px;
+float:left;
+}
+.quant {
+width:60px;
+float:left;
+}
+.pri {
+width:60px;
+float:left;
+}
+.tot {
+width:140px;
+float:left;
+}
+.dis {
+width:90px;
+float:left;
+}
+.net {
+width:100px;
+float:left;
+}
 </style>
 <ol class="breadcrumb">
   <li><a href="#">Home</a></li>
   <li>Cylinder Delivered</li>
 </ol>
 <div class="clearfix"></div>
-<div class="container" id="cylinderdataId">
-  <form:form modelAttribute="lpoForm" id="cylinderDeliverForm" action="cylinderDeliverSave" class="form-horizontal" method="post">
-    <table width="100%">
-      <tr> 
-        <td><div class="row">    
-            <div class="col-md-6">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h4>Customer Details</h4>
-                </div>
-                <form:hidden path="netAmount"/>
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
-                        <div class="col-md-6">
-                          <form:select path="cylinderDeliverTruck" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="selectReturnTruck(this.value);" >
-                            <form:option value="">--Select Truck--</form:option>
-                            <form:options items="${trucks}"></form:options>
-                          </form:select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Customer Type <span class="impColor">*</span></label>
-                        <div class="col-md-6">
-                          <form:select path="customertype" class="form-control   validate"  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
-                            <form:option value="">-- Customer Type --</form:option>
-                            <form:option value="COMMERCIAL">COMMERCIAL</form:option>
-                            <form:option value="DOMESTIC">DOMESTIC</form:option>
-                            <form:option value="INDUSTIAL">INDUSTIAL</form:option>
-                          </form:select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Customer Id <span class="impColor">*</span></label>
-                        <div class="col-md-6">
-                          <form:select path="customerId" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
-                            <form:option value="">-- Select Customer Id --</form:option>
-                          </form:select>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group" style="margin-bottom:0;">
-                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Customer Name: </label>
-                        <div class="col-md-6"> <span id="customername" class="form-control" style="border:none;"></span> </div>
-                      </div>
-                      <div class="form-group" style="margin-bottom:0;">
-                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Customer Address: </label>
-                        <div class="col-md-6"> <span id="customeraddress" class="form-control"  style="border:none;"></span> </div>
-                      </div>
-                      <div class="form-group" style="margin-bottom:0;">
-                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Mobile: </label>
-                        <div class="col-md-6"> <span id="mobile" class="form-control"  style="border:none;"></span> </div>
-                      </div>
-                      <div class="form-group" style="margin-bottom:0;">
-                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Land Line: </label>
-                        <div class="col-md-6"> <span id="landline" class="form-control"  style="border:none;"></span> </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div class="col-md-6">
-              <div class="panel panel-primary">
-                <div class="panel-heading">
-                  <h4>Returned Cylinders</h4>
-                </div>
-                <div class="panel-body">
-                  <div class="row">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-5 control-label" style="margin-top:0; padding-top:0; vertical-align:text-top;">Cylinders </label>
-                        <div class="col-md-7"> <span id="cylinders"></span> </div>
-                      </div>
-                    </div>
-                  
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-5 control-label">Cylinder Return Truck</label>
-                        <div class="col-md-7">
-                          <form:select path="cylinderReturnTruck" class="form-control " onfocus="removeBorder(this.id);" >
-                            <form:option value="">--Select Truck--</form:option>
-                            <form:options items="${trucks}"></form:options>
-                          </form:select>
-                        </div>
-                      </div>
-                    </div>
-                    
-                    
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-5 control-label">previous Due Amount (AED)</label>
-                        <div class="col-md-5" style="padding-top:5px; color:#C00;">
-                        <span id="lastDueAmount" style="padding-top:5px; color:#C00"><strong>0</strong></span>
-                        </div>
-                      </div>
-                    <br />
-
-                    </div>
-
-                    <br />
-                    
-                    
-                    
-               
-               
-               
-                   <input type="hidden" name="previousDueAmount" value="0">
-                  
-                    
-                    <div  style="display:none" >
-                      <form:select path="ownercompany" class="form-control chzn-select " onfocus="removeBorder(this.id);" >
-                        <form:option value="">--Select company--</form:option>
-                        <form:options items="${companys}"></form:options>
-                      </form:select>
-                    </div>
-                    
-                    
-                
-                
-                
-                
-                
-                    
-                  </div>
-                </div>
-              </div>
-            </div>
-		
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <div class="row"> 
-                    <div class="col-md-12">
-                    
-               <div class="panel panel-primary">
-                <div class="panel-heading">
-                <h4>Deliver Cylinders</h4>
-                 <table class="options notPrintMe">
-                  <tr>
-                    <td class="hideme"><span class="addItemButton btn-danger" onclick="addMoreRowsForDependent(this.form);">Add Item</span></td>
-                  </tr>
-                </table>
-                
-                </div>
-                   
-                    
-                    
-                    
-                    
-            <div class="panel-body">         
-         
-            <form:select path="item" id="item1" style="display:none;font-size: small;">
-              <form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
-              <form:options items="${items}"></form:options>
-            </form:select>
-            <c:if test="${not empty vat}">
-              <form:hidden path="vat" value="${vat}"/>
-            </c:if>
-            <c:if test="${empty vat}">
-              <form:hidden path="vat" value="0"/>
-            </c:if>
-            <!-- </div>
-		<div class="row"> -->
-            <div >
-              <div class="form-group">
-                <table class="table table-bordered" id="dependent_table">
-                  <thead >
-                    <tr class="default" style="background:#EBEBEB">
-                      <th style="width: 40px;"><span>Sno</span></th>
-                      <th style="width: 200px"><span>Items</span></th>
-                      <th style="width: 70px;"><span>Quantity</span></th>
-                      <th><span>Price(AED)</span></th>
-                      <th><span>Total Amount (AED)</span></th>
-                      <th><span>Discount (%)</span></th>
-                      <th><span>Net Amount (AED)</span></th>
-                      <!-- 								<th style="width: 200px"><span>VAT (5%)</span></th> -->
-                      <!-- 								<th style="width: 200px"><span>Net Amount</span></th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr id="1" class="rowInc">
-                      <td></td>
-                      <td><select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)">
-                        <option value="" selected="selected" disabled="disabled">-- Select Item --</option>
-                        </select> </td>
-                      <td><input name="unit" value="1" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/></td>
-                      <td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly" readonly="readonly"/></td>
-                      <td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-                      <td><input name="discount" value="0" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="discountCheck(this.id,this.value)" class="form-control" /></td>
-                      <td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-                      <!-- 								<td><input name="vat" placeholder="Vat" id="1vat" value="5" type="text" onkeydown="removeBorder(this.id);" class="form-control" /></td> -->
-                      <!-- 								<td><input name="netAmount" placeholder="Net Amount"  id="1netAmount" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td> -->
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th colspan="4"><h3 align="right"></h3></th>
-                      <th><span class="totalInvoiceValue"></span></th>
-                      <th><span class="totalDiscounts"></span></th>
-                      <th><span class="totalTaxableValue"></span></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;"> Total Net Amount (AED)</th>
-                      <th> <span id="netAmount1">0</span></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;">
-                        Vat Amount ( ${vat }%) (AED)</th>
-                      <th> <span id="vatAmount">0</span></th>
-                    </tr>
-                    
-                    <tr>
-                      <th colspan="6" style="text-align: right;"> Paid Amount(AED)</th>
-                      <th> <input type="text" id="payedAmount" name="payedAmount" placeholder="Paid Amount(AED)" onkeyup="payedAmountCal(this.value)" class="form-control numericOnly"/></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;"> Due Amount(AED)</th>
-                      <th> <input type="text"  id="dueAmount" name="dueAmount" class="form-control numericOnly" placeholder="Due Amount(AED)" /></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;">
-                        Gross Amount (AED)</th>
-                      <th> <span id="grandTotal">0</span></th>
-                    </tr>
-                  </tfoot>
-                </table>
-              </div>
-            </div>
-            <div class="panel-footer hideme">
-              <div class="row">
-                <div class="col-sm-12">
-                  <div class="btn-toolbar pull-right">
-                    <input class="btn-primary btn" type="submit" id="submit11" value="Submit" />
-                    <input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div></td>
-      </tr>
-    </table>
-  </form:form>
-</div>
-<!-- container -->
-
-
-
-<!-- print table -->
-
-
-<div class="container" id="printCylinder">
-<div class="col-md-6 printTable">
-<button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button>
+<div class="container">
+<div class="col-md-6">
 <img height="50" src="../img/khaibarlogo.png"/><div class="clearfix"></div>
- <table class="table-responsive " >
+ <table class="table-responsive printTable" id="printTable">
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
     <tr><td ><label for="focusedinput"  >Customer Name </label></td><td></td></tr>
@@ -319,7 +198,7 @@ table tbody tr.rowInc {
               <tr><td ><label for="focusedinput"  >Cylinder Return Truck </label></td><td></td></tr>
               <tr><td ><label for="focusedinput"  >Provision Due Amount </label></td><td></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
  </tbody>   </table>
-  <table class="table-responsive" style="width:96%">
+  <table class="table-responsive deliver ">
     <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr>
     <tbody style="padding:10px;
 			border:1px solid lightgray;">
@@ -356,11 +235,8 @@ table tbody tr.rowInc {
                   
                           </tbody>
     
-    </table>
-    </div>
-    <div class="clearfix"></div>
-    <br><br><br>
-    <div class="col-md-6 printTable">
+    </table></div>
+    <div class="col-md-6">
     <img height="50" src="../img/khaibarlogo.png"/><div class="clearfix"></div>
  <table class="table-responsive">
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
@@ -381,7 +257,7 @@ table tbody tr.rowInc {
               <tr><td ><label for="focusedinput"  >Cylinder Return Truck </label></td><td></td></tr>
               <tr><td ><label for="focusedinput"  >Provision Due Amount </label></td><td></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
  </tbody>   </table>
-  <table class="table-responsive deliver " style="width:96%">
+  <table class="table-responsive deliver ">
     <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;"><tr class="default" style="background:#EBEBEB">
                       
@@ -419,10 +295,7 @@ table tbody tr.rowInc {
     </table></div>
   
 </div>
-
-
-
-
+<!-- container -->
 <div id="dial1"></div>
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <script type="text/javascript">
@@ -615,7 +488,7 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
-			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)"><option>Select</option></select></td>'
+			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
 			+ dependentRowCount
 			+ 'unit" type="text" value="1" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
@@ -899,7 +772,6 @@ function getTarrifPrice(value,id){
 	var truckId = $("#cylinderDeliverTruck").val();
 	if(truckId==""){
 		alert("Please Select Truck");
-		$("#"+id).val("");
 		return false;
 	}
 	var number = parseInt(id.match(/[0-9]+/)[0], 10);
@@ -929,146 +801,9 @@ function discountCheck(id,value){
 	}
 	allcalculate(id);
 }
-var cylinderAvailable=true;
 function getTruckInCylinderCount(id,value){
 	
 	
-	var truckId = $("#cylinderDeliverTruck").val();
-	if(truckId==""){
-		$("#"+id).val("");
-		return false;
-	}
-	
-	var array = $.makeArray($('tbody tr[id]').map(function() {
-		  return this.id;
-		}));
-		var item ="";
-		var unit="";
-		var myarray = []; 
-		var myarray1 = []; 
-	 for(var i=0;i<array.length;i++){
-		 item = $('#' + array[i] + 'item').val();
-		 unit = $('#' + array[i] + 'unit').val();
-		 myarray.push(item);
-		 myarray1.push(unit);
-	 }
-	 var existingItems = {};
-
-	 myarray.forEach(function(value, index) {
-	     existingItems[value] = index;
-	 });
-	 
-	 var formData = new FormData();
-	    formData.append('myarray', myarray);
-	    formData.append('myarray1', myarray1);
-	    formData.append('truckId', truckId);
-		$.fn.makeMultipartRequest('POST', 'getTruckInCylinderCount', false,
-				formData, false, 'text', function(data){
-			var jsonobj = $.parseJSON(data);
-			var msg = jsonobj.msg;
-		if(msg!="ok"){
-			alert(msg);
-			cylinderAvailable = false;
-		}else{
-			cylinderAvailable = true;
-		}
-		});
-	 
-}
-
-function selectReturnTruck(value){
-	$("#cylinderReturnTruck").val(value);
-}
-$('#submit11').click(function(event) {
-	validation = true;
-	$.each(idArray, function(i, val) {
-		var value = $("#" + idArray[i]).val();
-		var placeholder = $("#" + idArray[i]).attr('placeholder');
-		if (value == null || value == "" || value == "undefined") {
-			$('style').append(styleBlock);
-			$("#" + idArray[i] ).attr("placeholder", placeholder);
-			$("#" + idArray[i] ).css('border-color','#e73d4a');
-			$("#" + idArray[i] ).css('color','#e73d4a');
-			$("#" + idArray[i] ).addClass('placeholder-style your-class');
-			 var id11 = $("#" + idArray[i]+"_chosen").length;
-			if ($("#" + idArray[i]+"_chosen").length)
-			{
-				$("#" + idArray[i]+"_chosen").children('a').css('border-color','#e73d4a');
-			}
-//			$("#" + idArray[i] + "Error").text("Please " + placeholder);
-			validation = false;
-		} 
-		
-	});
-	if(!cylinderAvailable){
-		alert("cylinders not available");
-		return false;
-		event.preventDefault();
-	}
-	if(validation) {
-		$("#submit11").attr("disabled",true);
-		$("#submit11").val("Please wait...");
-		$("form").submit();											
-		event.preventDefault();
-	}else {
-		return false;
-		event.preventDefault();
-	}
-	
-});
-function PrintElem(elem)
-{
-	$(".noPrint").hide();
-	$(".printbtn").hide();
-	 $("#cylinderdataId").hide();
-	 $("#printCylinder").show();
-    Popup($(elem).html());
-    
-}
-
-
-function Popup(data)
-{
-	var mywindow = window.open('','new div');
-
-    var is_chrome = Boolean(mywindow.chrome);
-    var isPrinting = false;
-    mywindow.document.write('<html><head><title>Donor Details</title><link rel="stylesheet" href="../assets/css/cylinderdeliverPrint.css" /> <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"><style>body{font-size:normal;}</style></head><body>');
-    mywindow.document.write(data);
-   
-    mywindow.document.write('</body></html>');
-    mywindow.document.close(); // necessary for IE >= 10 and necessary before onload for chrome
-
-$(".printbtn").show();
-$(".noPrint").show();
-// $("#printFooter").hide();
-// $("#printCylinder").show();
-    if (is_chrome) {
-        mywindow.onload = function() { // wait until all resources loaded 
-            mywindow.focus(); // necessary for IE >= 10
-            mywindow.print();  // change window to mywindow
-            mywindow.close();// change window to mywindow
-        };
-    
-    
-   } else {
-        mywindow.document.close(); // necessary for IE >= 10
-        mywindow.focus(); // necessary for IE >= 10
-
-        mywindow.print();
-        mywindow.close();
-   }
-	
-	
-	
-   /* var mywindow = window.open('', 'new div');
-    mywindow.document.write('<html><head><title>Donor Details</title></head><body>');
-    mywindow.document.write(data);
-    mywindow.document.write('</body></html>');
-    mywindow.print();
-    mywindow.close();
-    $(".printbtn").show();*/
-    return true;
 }
 $("#pageName").text("Cylinder Deliver To Customer");
 $(".cylinderDeliver").addClass("active");

@@ -199,7 +199,7 @@ h1, .h1 {
 		        ]
 		    } );
 		} ); */
-		var documentMessage = "Expenses Report";
+		var documentMessage = "Gas Report";
 		/* $(document).ready(function() {
 			  $('#example').DataTable({
 			    dom: 'Bfrtip',
@@ -325,6 +325,7 @@ h1, .h1 {
 					<ul class="dropdown-menu" style="margin-left:-50px;">
 						<li class="CylinderReport"><a href="${baseurl }/admin/reportsHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Report </span></a></li>
 						<li class="expensesReport"><a href="${baseurl }/admin/expensesReport"><i class="fa fa-bar-chart-o"></i> <span>Expenses Report</span></a></li>
+						<li class="gasReport"><a href="${baseurl }/admin/gasReport"><i class="fa fa-bar-chart-o"></i> <span>Gas Report</span></a></li>
 					</ul>
 				</li>
 				
@@ -363,7 +364,7 @@ display: none;
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="#">Home</a></li>
-		<li>Expenses Report</li>
+		<li>Gas Report</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -418,7 +419,7 @@ display: none;
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Expenses Report List</h4>
+                            <h4>Gas Report List</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
@@ -426,12 +427,7 @@ display: none;
                         <div class="panel-body collapse in">
                         <div class="table-responsive" id="tableId">
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-                              <thead>
-									<tr>
-										<th>Account Head</th><th>Expense Amount (AED)</<th>Date of Expense</th><th>Item description</th>
-										<th>Payment Type</th><th>Remarks</th>
-									</tr>
-								</thead>
+                             <thead><tr><th>Date</th><th>Fillingstation Name</th><th>Gas</th><th>Gas InKgs</th><th>Closed Gas InKgs</th></tr></thead><tbody></tbody></table>
                                 <tbody></tbody>
                             </table>
                             </div>
@@ -471,20 +467,23 @@ $(function() {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ '<thead><tr><th>Account Head</th><th>Expense Amount (AED)</th><th>Date of Expense</th><th>Item description</th><th>Payment Type</th><th>Remarks</th></tr></thead><tbody></tbody></table>';
+		+ '<thead><tr><th>Date</th><th>Fillingstation Name</th><th>Gas</th><th>Gas InKgs</th><th>Closed Gas InKgs</th></tr></thead><tbody></tbody></table>';
 $('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
-	
+	var stationName = "";
 	serviceUnitArray[orderObj.id] = orderObj;
+	if(orderObj.fillingstationname ==undefined){
+		stationName="";
+	}else{
+		stationName=orderObj.fillingstationname;
+	}
 	var tblRow = "<tr >"
-		+ "<td class='impFiled' title='"+orderObj.accountHead+"'>" + orderObj.accountHead + "</td>"
-		+ "<td class='impFiled' title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
-		
-		+ "<td title='"+orderObj.dateOfExpense+"'>" + orderObj.dateOfExpense + "</td>"
-		+ "<td title='"+orderObj.itemDescription+"'>" + orderObj.itemDescription + "</td>"
-		+ "<td title='"+orderObj.paymentType+"'>" + orderObj.paymentType + "</td>"
-		+ "<td title='"+orderObj.paymentRemarks+"'>" + orderObj.paymentRemarks + "</td>"
+		+ "<td class='impFiled' title='"+orderObj.expirtdate1+"'>" + orderObj.expirtdate1 + "</td>"
+		+ "<td class='impFiled' title='"+stationName+"'>" + stationName + "</td>"
+		+ "<td class='impFiled' title='"+orderObj.addedGas+"'>" + orderObj.addedGas + "</td>"
+		+ "<td title='"+orderObj.gasInKgs+"'>" + orderObj.gasInKgs + "</td>"
+		+ "<td title='"+orderObj.closedgas+"'>" + orderObj.closedgas + "</td>"
 		+ "</tr >";
 	$(tblRow).appendTo("#tableId table tbody");
 });
@@ -498,7 +497,7 @@ $('#tableId').html(tableHead);
 			                        extend: 'pdfHtml5',
 			                        messageTop : documentMessage,
 // 			                        title : documentMessage,
-									exportOptions: {columns: [0,1,2,3,4,5]},
+									exportOptions: {columns: [0,1,2,3,4]},
 			                        customize: function ( doc ) {
 										doc.content.splice( 1, 0, {
 											margin: [ 0, 0, 0, 12 ],
@@ -562,10 +561,10 @@ $('#tableId').html(tableHead);
 	}
 	
 
-	$("#pageName").text("Expenses Report");
+	$("#pageName").text("Gas Report");
 	// $(".transactions").addClass("open");
 	// $(".transactions").addClass("active");
-	$(".expensesReport").addClass("active");
+	$(".gasReport").addClass("active");
 	var isClick = 'Yes';
 </script>
 

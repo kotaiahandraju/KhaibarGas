@@ -125,7 +125,7 @@ public class ReportsController {
 		}
 		return "expenseReport";
 	}
-	@RequestMapping(value = "/gasReports")
+	@RequestMapping(value = "/gasReport")
 	public String gasReports(@ModelAttribute("gasReportsForm") Expensetracker expensetracker, ModelMap model,
 			HttpServletRequest request, HttpSession session) {
 

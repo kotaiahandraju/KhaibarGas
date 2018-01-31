@@ -59,8 +59,7 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			}
 			if(StringUtils.isNotBlank(expensetracker.getMonth())){
 				buffer.append(" AND MONTH(STR_TO_DATE(`dateOfExpense`, '%d-%b-%Y'))='"+month+"'  AND YEAR(STR_TO_DATE(`dateOfExpense`, '%d-%b-%Y')) ='"+year+"' " );
-			}
-			if(StringUtils.isNotBlank(expensetracker.getFromDate()) &&  StringUtils.isNotBlank(expensetracker.getToDate())){
+			}else if(StringUtils.isNotBlank(expensetracker.getFromDate()) &&  StringUtils.isNotBlank(expensetracker.getToDate())){
 				buffer.append(" HAVING  date1 BETWEEN '"+expensetracker.getFromDate()+"' AND '"+expensetracker.getToDate()+"' " );
 			}
 			
@@ -80,12 +79,18 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			jdbcTemplate = custom.getJdbcTemplate();
 			 
 			StringBuffer buffer = new StringBuffer();
-			buffer.append("SELECT *,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'addgas' AS addgas FROM addgas WHERE 1=1 ");
-			if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
+			buffer.append("SELECT *,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'Added Gas' AS AddedGas FROM addgas WHERE 1=1 ");
+			if(StringUtils.isNotBlank(month)){
+				 
+				buffer.append("  AND  MONTH(created_time) ='"+month+"' AND YEAR(created_time) ='"+year+"' " );
+			}else if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
 				buffer.append(" and  date(created_time) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
 			}
-			buffer.append(" UNION ALL SELECT *,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'usedgas' AS usedgas FROM usedgas where 1=1 ");
-			if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
+			buffer.append(" UNION ALL SELECT *,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'Used Gas' AS UsedGas FROM usedgas where 1=1 ");
+			if(StringUtils.isNotBlank(month)){
+				 
+				buffer.append("  AND  MONTH(created_time) ='"+month+"' AND YEAR(created_time) ='"+year+"' " );
+			}else if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
 				buffer.append(" and  date(created_time) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
 			}
 			buffer.append(" ORDER BY created_time ");

@@ -129,20 +129,20 @@ public class DashBoardController {
 		return "NewFile";
 	}
 	@RequestMapping(value = "/NewFile1")
-	public String fillingStationHome11( ModelMap model, HttpServletRequest request,	HttpSession session,@RequestBody NewClassBean bean) {
+	public String fillingStationHome11( ModelMap model, HttpServletRequest request,	HttpSession session) {
 		List<ddd> listOrderBeans  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
 		boolean delete = false;
 		try {
-			System.out.println("bean--------:"+bean.getName()+"----a--- "+bean.toString());
+//			System.out.println("bean--------:"+bean.getName()+"----a--- "+bean.toString());
 
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);
 
 		}
-		return "NewFile";
+		return "printcustomer";
 	}
 }
