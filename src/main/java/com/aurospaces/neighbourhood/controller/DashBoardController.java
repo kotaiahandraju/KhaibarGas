@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -22,6 +23,7 @@ import com.aurospaces.neighbourhood.bean.AddGasBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.bean.NewClassBean;
 import com.aurospaces.neighbourhood.bean.ddd;
 import com.aurospaces.neighbourhood.db.dao.AddGasDao;
 import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
@@ -108,5 +110,39 @@ public class DashBoardController {
 		return String.valueOf(objJson);
 	}
 	
-	
+	@RequestMapping(value = "/NewFile")
+	public String fillingStationHome1( ModelMap model, HttpServletRequest request,
+			HttpSession session) {
+		List<ddd> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
+		try {
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "NewFile";
+	}
+	@RequestMapping(value = "/NewFile1")
+	public String fillingStationHome11( ModelMap model, HttpServletRequest request,	HttpSession session,@RequestBody NewClassBean bean) {
+		List<ddd> listOrderBeans  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		boolean delete = false;
+		try {
+			System.out.println("bean--------:"+bean.getName()+"----a--- "+bean.toString());
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "NewFile";
+	}
 }
