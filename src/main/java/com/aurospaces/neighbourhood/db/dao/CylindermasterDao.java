@@ -276,7 +276,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			String sql = buffer.toString();
 				retlis = jdbcTemplate.query(sql, new Object[] { },
 					ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
-			System.out.println("-----------list----------"+retlis);
+			System.out.println("-----------list----------"+retlis+"sql----"+sql);
 		}catch(Exception e){
 			e.printStackTrace();
 		}

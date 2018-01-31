@@ -10,10 +10,40 @@ public class UsedGasBean
 protected int id   = 0;
 protected Date createdTime,date ;
 protected Date updatedTime ;
-protected String fillingStationId,closedgas ;
-protected String gasInKgs,units ,x,y;
+protected String fillingStationId,closedgas,fillingstationname ;
+protected String gasInKgs,units ,x,y,fromDate,toDate,month,expirtdate1;
 
 
+public String getExpirtdate1() {
+	return expirtdate1;
+}
+public void setExpirtdate1(String expirtdate1) {
+	this.expirtdate1 = expirtdate1;
+}
+public String getFromDate() {
+	return fromDate;
+}
+public void setFromDate(String fromDate) {
+	this.fromDate = fromDate;
+}
+public String getToDate() {
+	return toDate;
+}
+public void setToDate(String toDate) {
+	this.toDate = toDate;
+}
+public String getMonth() {
+	return month;
+}
+public void setMonth(String month) {
+	this.month = month;
+}
+public String getFillingstationname() {
+	return fillingstationname;
+}
+public void setFillingstationname(String fillingstationname) {
+	this.fillingstationname = fillingstationname;
+}
 public String getClosedgas() {
 	return closedgas;
 }

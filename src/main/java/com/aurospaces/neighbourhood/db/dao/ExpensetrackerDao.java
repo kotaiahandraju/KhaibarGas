@@ -12,6 +12,7 @@ import org.springframework.stereotype.Repository;
 
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.Expensetracker;
+import com.aurospaces.neighbourhood.bean.UsedGasBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseExpensetrackerDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -68,6 +69,30 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 //			 String sql =  "SELECT co.companyname , c. *,cs.name as cylinderstatus,i.name As sizeName,DATE_FORMAT(c.expirydate,'%d-%b-%Y') AS expirtdate1 , CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylendersstatus   FROM companymaster co,cylindermaster c,items i,cylinderstatus cs where c.size=i.id and cs.id=c.cylinderstatus and co.id=c.ownercompany  order by c.id desc";
 			List<Expensetracker> retlist = jdbcTemplate.query(sql, new Object[] {  },
 					ParameterizedBeanPropertyRowMapper.newInstance(Expensetracker.class));
+			
+			if (retlist.size() > 0)
+				return retlist;
+			return null;
+			    
+			} 
+	 
+	 public List<UsedGasBean> getSearchReport(UsedGasBean usedGasBean,String month,String year){  
+			jdbcTemplate = custom.getJdbcTemplate();
+			 
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("SELECT *,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'addgas' AS addgas FROM addgas WHERE 1=1 ");
+			if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
+				buffer.append(" and  date(created_time) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
+			}
+			buffer.append(" UNION ALL SELECT *,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'usedgas' AS usedgas FROM usedgas where 1=1 ");
+			if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
+				buffer.append(" and  date(created_time) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
+			}
+			buffer.append(" ORDER BY created_time ");
+			String sql = buffer.toString();
+			System.out.println(sql);
+			List<UsedGasBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
+					ParameterizedBeanPropertyRowMapper.newInstance(UsedGasBean.class));
 			
 			if (retlist.size() > 0)
 				return retlist;

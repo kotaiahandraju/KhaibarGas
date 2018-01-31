@@ -329,7 +329,7 @@ function getLPOdetails(value){
 			$("#madein").val(orderObj.suppliername);
 			$("#expirtdate1").val(orderObj.expirydate);
 		});
-		alert(jsonobj.retlist)
+		//alert(jsonobj.retlist)
 		if(jsonobj.retlist==true){
 			countList=jsonobj.retlist;
 		}

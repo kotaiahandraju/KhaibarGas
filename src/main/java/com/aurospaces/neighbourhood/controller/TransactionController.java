@@ -405,6 +405,7 @@ public class TransactionController {
 			objUsedGasBean.setFillingStationId(cylindertransactionBean1.getFillingStation());
 			objUsedGasBean.setGasInKgs(String.valueOf(totalUsedGas));
 			objUsedGasBean.setClosedgas(objfillFillingstationmasterBean.getClosingBalanceGas());
+			objUsedGasBean.setFillingstationname(objfillFillingstationmasterBean.getStationname());
 			usedGasDao.save(objUsedGasBean);
 				jsonObject.put("msg", intcount+" Records Updated ");
 
