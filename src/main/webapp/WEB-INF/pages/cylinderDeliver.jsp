@@ -296,7 +296,7 @@ table tbody tr.rowInc {
 <!-- print table -->
 
 
-<div class="container" id="printCylinder">
+<div class="container" id="printCylinder" style="display: none;">
 <div class="col-md-6 printTable">
 <button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button>
 <img height="50" src="../img/khaibarlogo.png"/><div class="clearfix"></div>
