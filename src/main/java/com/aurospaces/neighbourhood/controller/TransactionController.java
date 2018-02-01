@@ -48,10 +48,12 @@ import com.aurospaces.neighbourhood.db.dao.CustomermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.CylindertransactionDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
+import com.aurospaces.neighbourhood.db.dao.InvoiceDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 import com.aurospaces.neighbourhood.db.dao.UsedGasDao;
+import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 
 @Controller
 @RequestMapping("admin")
@@ -77,6 +79,8 @@ public class TransactionController {
 	CustomermasterDao customermasterDao;
 	@Autowired
 	CompanymasterDao companymasterDao;
+	@Autowired
+	InvoiceDao invoiceDao;
 	@Autowired
 	DataSourceTransactionManager transactionManager;
 	@Autowired UsedGasDao usedGasDao;
@@ -681,6 +685,8 @@ public class TransactionController {
 			objTransDef = new DefaultTransactionDefinition();
 			objTransStatus = transactionManager.getTransaction(objTransDef);
 			System.out.println(customerId);
+			KhaibarGasUtil objKhaibarGasUtil =new KhaibarGasUtil();
+			String invoiceId = objKhaibarGasUtil.randNum();
 			for (int i = 0; i < item.length; i++) {
 					
 				ItemsBean itemsBean = itemsDao.getById(Integer.parseInt(item[i]));
@@ -697,6 +703,7 @@ public class TransactionController {
 					customercylindersDao.save(customercylindersBean);
 				}
 					List<CylindermasterBean> listOrderBeans = cylindermasterDao.getInTruckCylinders(cylinderDeliverTruck, item[i],Integer.parseInt(unit[i]));
+					
 					if (listOrderBeans != null) {
 						for (CylindermasterBean cylindermasterbean : listOrderBeans) {
 							CylindermasterBean cylinderMasterBean1 = new CylindermasterBean();
@@ -711,6 +718,7 @@ public class TransactionController {
 							customercylindersBean.setCylinderReturnTruck(cylinderReturnTruck);
 							customercylindersBean.setCylinderId(String.valueOf(cylindermasterbean.getId()));
 							customercylindersBean.setCylinderreturn("0");
+							customercylindersBean.setInvoiceId(invoiceId);
 							customercylindersDao.save(customercylindersBean);
 							cylinderMasterBean1.setId(cylindermasterbean.getId());
 							cylinderMasterBean1.setCylinderstatus("6");
@@ -728,7 +736,7 @@ public class TransactionController {
 			if(cylinderId !=null){
 				for(int i=0;i<cylinderId.length;i++){
 					CylindermasterBean cylinderMasterBean2 = new CylindermasterBean();
-					customercylindersDao.updateCustomerCylinderStatus(cylinderId[i]);
+					customercylindersDao.updateCustomerCylinderStatus(cylinderId[i],invoiceId);
 					
 					cylindertransactionBean1 = new CylindertransactionBean();
 					cylindertransactionBean1.setCylinderStatus("7");
@@ -770,7 +778,10 @@ public class TransactionController {
 					customermasterBean.setCylinderId(cid);
 				}
 				customermasterBean.setId(Integer.parseInt(customerId));
+				customermasterBean.setInvoiceId(invoiceId);
 				customermasterDao.updateCylinderPrice(customermasterBean);
+				customermasterBean.setId(0);
+				invoiceDao.save(customermasterBean);
 			transactionManager.commit(objTransStatus);
 		} catch (Exception e) {
 			transactionManager.rollback(objTransStatus);

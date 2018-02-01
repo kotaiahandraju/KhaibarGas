@@ -17,10 +17,10 @@ public class CustomercylindersDao extends BaseCustomercylindersDao
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-	public boolean updateCustomerCylinderStatus(String cylinderID) {
+	public boolean updateCustomerCylinderStatus(String cylinderID,String invoiceId) {
 		boolean result=false;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "update  customercylinders  set cylinderreturn='1' where cylinderId=? order by created_time desc limit 1";
+		String sql = "update  customercylinders  set cylinderreturn='1',returnCylinderInvoiceId='"+invoiceId+"' where cylinderId=? order by created_time desc limit 1";
 		 int results=jdbcTemplate.update(sql, new Object[]{cylinderID});
 			if(results!=0){
 				result= true;

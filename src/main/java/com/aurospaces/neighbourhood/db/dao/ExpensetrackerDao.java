@@ -10,7 +10,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.Expensetracker;
 import com.aurospaces.neighbourhood.bean.UsedGasBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;

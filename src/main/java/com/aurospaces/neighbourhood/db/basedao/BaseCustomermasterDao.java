@@ -25,7 +25,7 @@ public class BaseCustomermasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO customermaster( created_time, updated_time, customerid, customername, customeraddress, mobile, landline, authorizedperson, contactperson, customertype, status) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO customermaster( created_time, updated_time, customerid, customername, customeraddress, mobile, landline, authorizedperson, contactperson, customertype, status,invoiceId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"; 
 
 
 
@@ -72,6 +72,7 @@ ps.setString(8, customermaster.getAuthorizedperson());
 ps.setString(9, customermaster.getContactperson());
 ps.setString(10, customermaster.getCustomertype());
 ps.setString(11, customermaster.getStatus());
+ps.setString(12, customermaster.getInvoiceId());
 
 							return ps;
 						}

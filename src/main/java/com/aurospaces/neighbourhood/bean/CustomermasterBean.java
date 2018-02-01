@@ -17,10 +17,16 @@ protected String authorizedperson ;
 protected String contactperson ;
 protected String customertype ;
 protected String status ;
-protected String custStatus,cylinderId,netAmount,payedAmount,dueAmount,previousDueAmount;
+protected String custStatus,cylinderId,netAmount,payedAmount,dueAmount,previousDueAmount,invoiceId;
 
 
 
+public String getInvoiceId() {
+	return invoiceId;
+}
+public void setInvoiceId(String invoiceId) {
+	this.invoiceId = invoiceId;
+}
 public String getPreviousDueAmount() {
 	return previousDueAmount;
 }

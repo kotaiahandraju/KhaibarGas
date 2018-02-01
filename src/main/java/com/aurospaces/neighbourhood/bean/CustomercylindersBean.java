@@ -25,8 +25,22 @@ protected String totalPrice ;
 protected String vat ;
 protected String cylinderreturn ;
 protected String cylinderReturnTruck;
-protected String cylinderDeliverTruck,accessoriesId;
+protected String cylinderDeliverTruck,accessoriesId,invoiceId,returnCylinderInvoiceId;
 
+
+
+public String getReturnCylinderInvoiceId() {
+	return returnCylinderInvoiceId;
+}
+public void setReturnCylinderInvoiceId(String returnCylinderInvoiceId) {
+	this.returnCylinderInvoiceId = returnCylinderInvoiceId;
+}
+public String getInvoiceId() {
+	return invoiceId;
+}
+public void setInvoiceId(String invoiceId) {
+	this.invoiceId = invoiceId;
+}
 public String getAccessoriesId() {
 	return accessoriesId;
 }
