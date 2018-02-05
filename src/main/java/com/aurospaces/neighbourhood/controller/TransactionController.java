@@ -678,15 +678,16 @@ public class TransactionController {
 		TransactionStatus objTransStatus = null;
 		TransactionDefinition objTransDef = null;
 		CylindertransactionBean cylindertransactionBean1 = null;
-//		String company = null;
+		KhaibarGasUtil objKhaibarGasUtil =new KhaibarGasUtil();
+		String invoiceId = objKhaibarGasUtil.randNum();
 		try {
 //			cylinderId = request.getParameter("cylinderId");
 //			company = request.getParameter("company");
 			objTransDef = new DefaultTransactionDefinition();
 			objTransStatus = transactionManager.getTransaction(objTransDef);
 			System.out.println(customerId);
-			KhaibarGasUtil objKhaibarGasUtil =new KhaibarGasUtil();
-			String invoiceId = objKhaibarGasUtil.randNum();
+			
+			
 			for (int i = 0; i < item.length; i++) {
 					
 				ItemsBean itemsBean = itemsDao.getById(Integer.parseInt(item[i]));
@@ -782,6 +783,9 @@ public class TransactionController {
 				customermasterDao.updateCylinderPrice(customermasterBean);
 				customermasterBean.setId(0);
 				invoiceDao.save(customermasterBean);
+				
+				
+				
 			transactionManager.commit(objTransStatus);
 		} catch (Exception e) {
 			transactionManager.rollback(objTransStatus);
@@ -789,7 +793,7 @@ public class TransactionController {
 			System.out.println(e);
 
 		}
-		return "redirect:cylinderDeliver";
+		return "redirect:cylinderDeliver?invoiceId="+invoiceId;
 	}
 
 	@RequestMapping(value = "/getTruckCylinders")
@@ -828,6 +832,45 @@ public class TransactionController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	
+	@RequestMapping(value = "/getInvoiceData")
+	public @ResponseBody String getInvoiceData( ModelMap model,	HttpServletRequest request, HttpSession session) {
+		List<Map<String, Object>> listOrderBeans = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		String invoiceId = null;
+		try {
+			invoiceId =request.getParameter("invoiceId");
+			if (StringUtils.isNotBlank(invoiceId)) {
+				listOrderBeans = customercylindersDao.getInvoiceData(invoiceId);
+			}
+			objectMapper = new ObjectMapper();
+			if (listOrderBeans != null) {
+
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+			logger.error(e);
+			logger.fatal("error in EducationController class deleteEducation method  ");
+			jsonObj.put("message", "excetption" + e);
+			return String.valueOf(jsonObj);
+
+		}
+		return String.valueOf(jsonObj);
+	}
+
 
 	@ModelAttribute("fillingstation")
 	public Map<Integer, String> populateCity() {
