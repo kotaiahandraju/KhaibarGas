@@ -33,11 +33,11 @@ public class CustomercylindersDao extends BaseCustomercylindersDao
 	public List<Map<String, Object>>  getInvoiceData(String invoiceId) {
 		List<Map<String, Object>> result=null;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "SELECT cm.`customername`,cm.`mobile`,cm.`customeraddress`,cm.`landline`,cm.`customertype`,cm.`customerid`, "
-					+" cc.`cylinderId`,cc.`quantity`,cc.`price`,cc.`discount`,cc.`grandTotal`,cc.`vat`,cc.`cylinderDeliverTruck`,ind.`payedAmount`, "
-					+" ind.`dueAmount`,ind.`netAmount`,ind.`previousDueAmount`,cc.`invoiceId` " 
-					 +" FROM `customercylinders` cc,`invoicedata` ind,`customermaster` cm "
-					  +" WHERE cc.`invoiceId`=`ind`.invoiceId AND cm.id=cc.`customerId` AND `cylinderreturn`=0 AND cc.`invoiceId`=?";
+		String sql = "SELECT cm.`customername`,cm.`mobile`,cm.`customeraddress`,cm.`landline`,cm.`customertype`,cm.`customerid`, "		
+						+"	pd.`items`,pd.`quantity`,pd.`price`,pd.`totalamount`,pd.`discount`,pd.`netamount`,pd.`totalnetamount`,"
+						+" pd.`vatamount`,pd.`paidamount`,pd.`dueamount`,pd.`grossamount`,pd.`previousdueamount`,pd.`invoiceid` "	
+						+" FROM `printdata` pd,`customermaster` cm " 
+						+"  WHERE cm.`id`=pd.`customerid`  AND pd.`invoiceid`=? ";
 		 result =jdbcTemplate.queryForList(sql, new Object[]{invoiceId});
 		return result;
 	}

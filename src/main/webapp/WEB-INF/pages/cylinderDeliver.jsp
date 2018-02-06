@@ -79,6 +79,10 @@ table tbody tr.rowInc {
                         </div>
                       </div>
                     </div>
+<!--                     vat amount -->
+				<input type="hidden" name="vatamount" id="vatamount1" >
+				<input type="hidden" name="grossamount" id="grossamount">  
+				<input type="hidden" name ="totalNetamount" id ="totalNetamount"/>
                     <div class="col-md-6">
                       <div class="form-group" style="margin-bottom:0;">
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Customer Name: </label>
@@ -297,17 +301,17 @@ table tbody tr.rowInc {
 
 
 <div class="container" id="printCylinder" style="display: none;">
-<div class="col-md-6 printTable">
+<div class="col-md-12 printTable">
 <button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button>
 <img height="50" src="../img/khaibarlogo.png"/><div class="clearfix"></div>
  <table class="table-responsive " >
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
-    <tr><td ><label for="focusedinput "  >Customer Name </label></td><td><span class="customerNameId"></span></td></tr>
+    <tr><td ><label for="focusedinput "  >Customer Name :</label></td><td><span class="customerNameId"></span></td></tr>
                           
-              <tr><td ><label for="focusedinput "  >Customer Type</label></td><td><span class="customerTypeId"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Customer Address </label></td><td><span class="customerAddress"></span></td></tr>
-              <tr><td ><label for="focusedinput mobile"  >Mobile </label></td><td><span class="mobile"></span></td></tr>       
+              <tr><td ><label for="focusedinput "  >Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr>
+              <tr><td ><label for="focusedinput "  >Customer Address :</label></td><td><span class="customerAddress"></span></td></tr>
+              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr>       
                           
                           </tbody>
     
@@ -316,8 +320,8 @@ table tbody tr.rowInc {
     <tr><td class="det"><div class="custom">Returned Cylinders</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
      <tr><td ><label for="focusedinput"  >Cylinders </label></td><td></td></tr>
-              <tr><td ><label for="focusedinput"  >Cylinder Return Truck </label></td><td></td></tr>
-              <tr><td ><label for="focusedinput "  >Previous Due Amount </label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
+              <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td></td></tr>
+              <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
  </tbody>   </table>
   <table class="table-responsive deliverCylinders" style="width:96%" >
     <thead style="padding:10px;	border:1px solid lightgray;">
@@ -326,21 +330,14 @@ table tbody tr.rowInc {
             <tr><th scope="col">Sno</th><th scope="col">Items</th><th scope="col">Quantity</th><th scope="col">Price(AED)</th><th scope="col">Total Amount (AED)</th><th scope="col">Discount (%)</th><th scope="col">Net Amount (AED)
 			</th></tr> </thead>
 			<tbody>   
-                      <tr><td scope="col"><span class="sno">1</span></td>
-                      <td scope="col"><span class="ite">items</span></td>
-                      <td scope="col"><span class="quant">0.0</span></td>
-                      <td scope="col"><span class="pri">0.0</span></td>
-                      <td scope="col"><span class="tot">0.0</span></td>
-			          <td scope="col"><span class="dis" >00</span></td>
-			          <td scope="col"><span class="net">00</span></td></tr>    
 			 </tbody>       
 						  
                   <tfoot>
- 		<tr><td width="350"></td><td width="150">Total Amount (AED)</td><td><span class="totalAmount" id="netAmount1">0000000</span></td></tr>       
-         <tr><td width="350"></td><td width="150">Vat Amount (AED) </td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
-         <tr><td width="350"></td><td width="150">Paid Amount(AED) </td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
-         <tr><td width="350"></td><td width="150" >Due Amount(AED)  </td><td><span   class="dueAmount" id="netAmount1"> 0000000</span></td></tr>      
-          <tr><td width="350"></td><td width="150" >Gross Amount (AED)  </td><td><span   class="grassAmount" id="netAmount1"> 0000000</span></td></tr> 
+ 		<tr><td width="350"></td><td width="150">Total Amount (AED) :</td><td><span class="totalAmount" id="netAmount1">0000000</span></td></tr>       
+         <tr><td width="350"></td><td width="150">Vat Amount (AED) :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
+         <tr><td width="350"></td><td width="150">Paid Amount(AED) :</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
+         <tr><td width="350"></td><td width="150" >Due Amount(AED)  :</td><td><span   class="dueAmount" id="netAmount1"> 0000000</span></td></tr>      
+          <tr><td width="350"></td><td width="150" >Gross Amount (AED)  :</td><td><span   class="grassAmount" id="netAmount1"> 0000000</span></td></tr> 
                   
 </tfoot>
     
@@ -348,16 +345,16 @@ table tbody tr.rowInc {
     </div>
     <div class="clearfix"></div>
     <br><br><br>
-    <div class="col-md-6 printTable">
-    <img height="50" src="../img/khaibarlogo.png"/><div class="clearfix"></div>
- <table class="table-responsive">
+    <div class="col-md-12 printTable">
+<img height="50" src="../img/khaibarlogo.png"/><div class="clearfix"></div>
+ <table class="table-responsive " >
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
-    <tr><td ><label for="focusedinput"  >Customer Name </label></td><td></td></tr>
+    <tr><td ><label for="focusedinput "  >Customer Name :</label></td><td><span class="customerNameId"></span></td></tr>
                           
-              <tr><td ><label for="focusedinput"  >Customer Type</label></td><td><label for="focusedinput"  >Customer Name </label></td></tr>
-              <tr><td ><label for="focusedinput"  >Customer Address </label></td><td></td></tr>
-              <tr><td ><label for="focusedinput"  >Mobile </label></td><td></td></tr>       
+              <tr><td ><label for="focusedinput "  >Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr>
+              <tr><td ><label for="focusedinput "  >Customer Address :</label></td><td><span class="customerAddress"></span></td></tr>
+              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr>       
                           
                           </tbody>
     
@@ -366,45 +363,29 @@ table tbody tr.rowInc {
     <tr><td class="det"><div class="custom">Returned Cylinders</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
      <tr><td ><label for="focusedinput"  >Cylinders </label></td><td></td></tr>
-              <tr><td ><label for="focusedinput"  >Cylinder Return Truck </label></td><td></td></tr>
-              <tr><td ><label for="focusedinput"  >Provision Due Amount </label></td><td></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
+              <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td></td></tr>
+              <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
  </tbody>   </table>
-  <table class="table-responsive deliver " style="width:96%">
-    <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr><tbody style="padding:10px;
-			border:1px solid lightgray;"><tr class="default" style="background:#EBEBEB">
-                      
+  <table class="table-responsive deliverCylinders" style="width:96%" >
+    <thead style="padding:10px;	border:1px solid lightgray;">
+    <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr>    
+			<tr class="default" style="background:#EBEBEB">
             <tr><th scope="col">Sno</th><th scope="col">Items</th><th scope="col">Quantity</th><th scope="col">Price(AED)</th><th scope="col">Total Amount (AED)</th><th scope="col">Discount (%)</th><th scope="col">Net Amount (AED)
-</th></tr>   
-
-                      <tr><th scope="col"><span class="sno">1</span></th>
-                      <th scope="col"><span class="ite">items</span></th>
-                      <th scope="col"><span class="quant">0.0</span></th>
-                      <th scope="col"><span class="pri">0.0</span></th>
-                      <th scope="col"><span class="tot">0.0</span></th>
-              <th scope="col"><span class="dis" >00</span></th>
-              <th scope="col"><span class="net">00</span></th></tr>    
-<tr><th scope="col"><span class="sno">2</span></th>
-                      <th scope="col"><span class="ite">item1</span></th>
-                      <th scope="col"><span class="quant">0.0</span></th>
-                      <th scope="col"><span class="pri">0.0</span></th>
-                      <th scope="col"><span class="tot">0.0</span></th>
-              <th scope="col"><span class="dis" >00</span></th>
-              <th scope="col"><span class="net">00</span></th></tr>   
-              <tr><th scope="col"><span class="sno">3</span></th>
-                      <th scope="col"><span class="ite">item2</span></th>
-                      <th scope="col"><span class="quant">0.0</span></th>
-                      <th scope="col"><span class="pri">0.0</span></th>
-                      <th scope="col"><span class="tot">0.0</span></th>
-              <th scope="col"><span class="dis" >00</span></th>
-              <th scope="col"><span class="net">00</span></th></tr>   
-                   <tr><th width="350"></th><th width="150">Total Amount (AED)</th><th><span id="netAmount1">0000000</span></th></tr>       
-         <tr><th width="350"></th><th width="150">Vat Amount (AED) </th><th><span id="netAmount1">  0</span></th></tr>       
-         <tr><th width="350"></th><th width="150">Paid Amount(AED) </th><th><span id="netAmount1"> 0</span></th></tr>       
-         <tr><th width="350"></th><th width="150" >Due Amount(AED)  </th><th><span id="netAmount1"> 0000000</span></th></tr>    
-                          
-                          </tbody>
+			</th></tr> </thead>
+			<tbody>   
+			 </tbody>       
+						  
+                  <tfoot>
+ 		<tr><td width="350"></td><td width="150">Total Amount (AED) :</td><td><span class="totalAmount" id="netAmount1">0000000</span></td></tr>       
+         <tr><td width="350"></td><td width="150">Vat Amount (AED) :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
+         <tr><td width="350"></td><td width="150">Paid Amount(AED) :</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
+         <tr><td width="350"></td><td width="150" >Due Amount(AED)  :</td><td><span   class="dueAmount" id="netAmount1"> 0000000</span></td></tr>      
+          <tr><td width="350"></td><td width="150" >Gross Amount (AED)  :</td><td><span   class="grassAmount" id="netAmount1"> 0000000</span></td></tr> 
+                  
+</tfoot>
     
-    </table></div>
+    </table>
+    </div>
   
 </div>
 
@@ -744,8 +725,11 @@ function priceCalculator(){
 	$("#dueAmount").val(Math.round(finalAmount));
 	$("#netAmount").val(finalAmount);
 	 $("#netAmount1").text(grandTotal);
+	 $("#totalNetamount").val(grandTotal);
 	 $("#vatAmount").text(Math.round(vatAmount));
+	 $("#vatamount1").val(Math.round(vatAmount));
 	 $("#grandTotal").text(Math.round(finalAmount));
+	 $("#grossamount").val(Math.round(finalAmount));
 // 	 var paidamount =$("#paidamount").val();
 // 	 if(paidamount.trim().length == 0){
 // 		 $("#dueamount").val(grandTotal);
@@ -1087,31 +1071,40 @@ function invoicePrint(id){
 		var table=$('.deliverCylinders tbody').html('');
 		$(".deliverCylinders tbody").html("");
 
-
+var j=0;
 		$.each(alldata,function(i, orderObj) {
+		j=i+1;
+		
 		
 			$(".customerNameId").text(orderObj.customername);
 			$(".customerTypeId").text(orderObj.customertype);
 			$(".customerAddress").text(orderObj.customeraddress);
 			$(".mobile").text(orderObj.mobile);
-			$(".totalAmount").text(orderObj.grandTotal);
-			$(".vat").text(orderObj.vat);
-			$(".paidAmount").text(orderObj.payedAmount);
-			$(".dueAmount").text(orderObj.dueAmount);
-			$(".previousdueamount").text(orderObj.previousDueAmount);
-			$(".grassAmount").text(orderObj.netAmount);
+			$(".totalAmount").text(orderObj.totalnetamount);
+			$(".vat").text(orderObj.vatamount);
+			$(".paidAmount").text(orderObj.paidamount);
+			$(".dueAmount").text(orderObj.dueamount);
+			$(".previousdueamount").text(orderObj.previousdueamount);
+			$(".grassAmount").text(orderObj.grossamount);
+
 			
 			
+			id="'+ dependentRowCount+ 'taxable"
 			
-			
-			var tblRow =	'   <tr><th scope="col"><span class="sno">'+i+'</span></th>'
-				           +'   <th scope="col"><span class="ite">items</span></th>'
-				           +'    <th scope="col"><span class="quant">0.0</span></th>'
-				           +'    <th scope="col"><span class="pri">0.0</span></th>'
-				           +'    <th scope="col"><span class="tot">0.0</span></th>'
-				           +'    <th scope="col"><span class="dis" >00</span></th>'
-				           +'    <th scope="col"><span class="net">00</span></th></tr>    ';
+			var tblRow =	'   <tr><th scope="col"><span class="sno">'+j+'</span></th>'
+				           +'   <th scope="col"><span class="ite" id="ite'+j+'">items</span></th>'
+				           +'    <th scope="col"><span class="quant" id="quant'+j+'">0.0</span></th>'
+				           +'    <th scope="col"><span class="pri" id="pri'+j+'">0.0</span></th>'
+				           +'    <th scope="col"><span class="tot" id="tot'+j+'">0.0</span></th>'
+				           +'    <th scope="col"><span class="dis" id="dis'+j+'">00</span></th>'
+				           +'    <th scope="col"><span class="net" id="net'+j+'">00</span></th></tr> ';
 							$(tblRow).appendTo(".deliverCylinders tbody");
+							$("#ite"+j).text(orderObj.items);
+							$("#quant"+j).text(orderObj.quantity);
+							$("#pri"+j).text(orderObj.price);
+							$("#tot"+j).text(orderObj.totalamount);
+							$("#dis"+j).text(orderObj.discount);
+							$("#net"+j).text(orderObj.netamount);
 			
 			
 	});

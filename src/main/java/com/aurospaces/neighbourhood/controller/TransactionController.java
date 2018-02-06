@@ -40,6 +40,7 @@ import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.KhaibarUsersBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
+import com.aurospaces.neighbourhood.bean.PrintDataBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.bean.UsedGasBean;
 import com.aurospaces.neighbourhood.db.dao.CompanymasterDao;
@@ -51,6 +52,7 @@ import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.aurospaces.neighbourhood.db.dao.InvoiceDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
+import com.aurospaces.neighbourhood.db.dao.PrintDataDao;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 import com.aurospaces.neighbourhood.db.dao.UsedGasDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
@@ -81,6 +83,7 @@ public class TransactionController {
 	CompanymasterDao companymasterDao;
 	@Autowired
 	InvoiceDao invoiceDao;
+	@Autowired PrintDataDao printDataDao;
 	@Autowired
 	DataSourceTransactionManager transactionManager;
 	@Autowired UsedGasDao usedGasDao;
@@ -670,7 +673,12 @@ public class TransactionController {
 			@RequestParam("cylinderReturnTruck") String cylinderReturnTruck,
 			@RequestParam("customerId") String customerId, @RequestParam("payedAmount") String payedAmount,
 			@RequestParam("dueAmount") String dueAmount,@RequestParam("netAmount") String netAmount, @RequestParam("vat") String vat,
-			@RequestParam(value = "company", required=false) String[] company,HttpServletRequest request,@RequestParam(value = "previousDueAmount", required=false) String previousDueAmount,
+			@RequestParam(value = "company", required=false) String[] company,HttpServletRequest request,
+			@RequestParam(value = "previousDueAmount", required=false) String previousDueAmount,
+			@RequestParam(value = "grossamount", required=false) String grossamount,
+			@RequestParam(value = "vatamount", required=false) String vatamount,
+			@RequestParam(value = "totalNetamount", required=false) String totalNetamount,
+			
 			HttpSession session) {
 		String sJson = null;
 		List<LpomasterBean> lpoList = null;
@@ -680,6 +688,7 @@ public class TransactionController {
 		CylindertransactionBean cylindertransactionBean1 = null;
 		KhaibarGasUtil objKhaibarGasUtil =new KhaibarGasUtil();
 		String invoiceId = objKhaibarGasUtil.randNum();
+		PrintDataBean printDataBean = null;
 		try {
 //			cylinderId = request.getParameter("cylinderId");
 //			company = request.getParameter("company");
@@ -689,7 +698,27 @@ public class TransactionController {
 			
 			
 			for (int i = 0; i < item.length; i++) {
-					
+				//print data for invoice
+				printDataBean =new PrintDataBean();
+				printDataBean.setItems(item[i]);
+				printDataBean.setQuantity(unit[i]);
+				printDataBean.setPrice(rate[i]);
+				printDataBean.setTotalamount(totalvalue[i]);
+				printDataBean.setDiscount(discount[i]);
+				printDataBean.setNetamount(taxable[i]);
+				printDataBean.setTotalnetamount(totalNetamount);
+				printDataBean.setGrossamount(grossamount);
+				printDataBean.setPreviousdueamount(previousDueAmount);
+				printDataBean.setInvoiceid(invoiceId);
+				printDataBean.setVatamount(vatamount);
+				printDataBean.setDueamount(dueAmount);
+				printDataBean.setPaidamount(payedAmount);
+				printDataBean.setCustomerId(customerId);
+				printDataDao.save(printDataBean);
+				
+				
+				
+				
 				ItemsBean itemsBean = itemsDao.getById(Integer.parseInt(item[i]));
 				if(itemsBean.getItemType().equals("Accessories")){
 					customercylindersBean = new CustomercylindersBean();
@@ -781,10 +810,17 @@ public class TransactionController {
 				customermasterBean.setId(Integer.parseInt(customerId));
 				customermasterBean.setInvoiceId(invoiceId);
 				customermasterDao.updateCylinderPrice(customermasterBean);
-				customermasterBean.setId(0);
-				invoiceDao.save(customermasterBean);
+//				customermasterBean.setId(0);
+//				invoiceDao.save(customermasterBean);
 				
 				
+//				`items` ,  `quantity` ,  `price`  ,  `totalamount`  ,  `discount`  ,  `netamount`  , 
+//				`totalnetamount`  ,  `vatamount`  ,  `paidamount`  , 
+//				`dueamount`  ,    `grossamount`  ,    `previousdueamount`  ,    invoiceid 
+				
+				/*PrintDataBean printDataBean =new PrintDataBean();
+				printDataBean.setItems(items);
+				printDataDao.save(printDataBean);*/
 				
 			transactionManager.commit(objTransStatus);
 		} catch (Exception e) {
