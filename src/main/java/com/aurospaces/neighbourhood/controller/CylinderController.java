@@ -394,5 +394,80 @@ public class CylinderController {
 		}
 		return String.valueOf(jsonObj);
 	}
+
+	@RequestMapping(value = "/cylinderAutoGenHome")
+	public String cylinderAutoGenHome(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
+			ModelMap model, HttpServletRequest request, HttpSession session) {
+
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<CylindermasterBean> listOrderBeans = null;
+		try {
+			listOrderBeans = cylindermasterDao.getCylinders("1");
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "cylinderAutoGenHome";
+	}
+	@RequestMapping(value = "/autoGenaddingcylinder", method = RequestMethod.POST)
+	public String autoGenaddingcylinder( @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
+			BindingResult bindingresults, Model model,RedirectAttributes redir) {
+		
+		//List<CylindermasterBean> cylinderMaster=null;
+		
+		int id = 0;
+		String size=null; 
+		
+		try
+		{
+			if(objCylindermasterBean.getSize().equals("1")){
+				objCylindermasterBean.setCapacity("11");
+			}
+			if(objCylindermasterBean.getSize().equals("2")){
+				objCylindermasterBean.setCapacity("22");
+			}
+			if(objCylindermasterBean.getSize().equals("3")){
+				objCylindermasterBean.setCapacity("44");
+			}
+			
+			if(StringUtils.isNotBlank(objCylindermasterBean.getExpirtdate1())){
+				Date date=  KhaibarGasUtil.dateFormate(objCylindermasterBean.getExpirtdate1());
+				objCylindermasterBean.setExpirydate(date);
+			}
+			objCylindermasterBean.setStatus("1");
+			CylindermasterBean cylindermasterBean = cylindermasterDao.getByCylinderId(objCylindermasterBean);
+			if(objCylindermasterBean.getId() == 0 && cylindermasterBean == null)
+			{
+				int noOfCylinders=Integer.parseInt(objCylindermasterBean.getNoOfCylinders());
+				for(int i=1;i<noOfCylinders;i++){
+					objCylindermasterBean.setCylinderstatus("1");
+					System.out.println("....save...."+i);
+					cylindermasterDao.save(objCylindermasterBean);
+				}
+				redir.addFlashAttribute("msg", "Record Inserted Successfully");
+				redir.addFlashAttribute("cssMsg", "success");
+			}
+			
+			cylindermasterDao.updateCylinderIds();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "redirect:cylinderAutoGenHome";
+	}
 	
 }

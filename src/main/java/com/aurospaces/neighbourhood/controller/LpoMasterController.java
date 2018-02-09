@@ -210,8 +210,9 @@ public class LpoMasterController {
 				request.setAttribute("allOrders1", "''");
 				jsonObj.put("allOrders1", listOrderBeans);
 			}
-			boolean retlist=lpomasterDao.getCountFromLPOItemsAndCylindermaster(lpomasterBean);
-			jsonObj.put("retlist", retlist);
+			Map resultMap=lpomasterDao.getCountFromLPOItemsAndCylindermaster(lpomasterBean);
+			jsonObj.put("retlist", resultMap.get("result"));
+			jsonObj.put("count", resultMap.get("count"));
 			}
 		}catch(Exception e){
 			e.printStackTrace();

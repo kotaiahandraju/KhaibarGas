@@ -1,7 +1,9 @@
 
 package com.aurospaces.neighbourhood.db.dao;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,9 +93,10 @@ public class LpomasterDao extends BaseLpomasterDao
 			jdbcTemplate.update(sql, new Object[]{});
 		}
 	 @SuppressWarnings("deprecation")
-	public boolean getCountFromLPOItemsAndCylindermaster(LpomasterBean lpomasterBean) {
+	public Map getCountFromLPOItemsAndCylindermaster(LpomasterBean lpomasterBean) {
 		int retlist = 0;
 		boolean count = false;
+		Map  listMap=new HashMap();
 		jdbcTemplate = custom.getJdbcTemplate();
 		String sql1 = "select ifnull((SELECT count(*) from cylindermaster where lponumber = ? AND size=? group by lponumber,size),0) AS count1 ";
 		String sql = "select sum(quantity) from lpoitems where lponumber = ? AND itemId=? group by lponumber,itemId";
@@ -110,10 +113,13 @@ public class LpomasterDao extends BaseLpomasterDao
 			System.out.println("---result----" + result);
 			if (result > 0) {
 				count = true;
+				
 			}
+			listMap.put("count", count);
+			listMap.put("result", result);
 
 		}
-		return count;
+		return listMap;
 	}
 }
 

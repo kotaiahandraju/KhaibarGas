@@ -49,9 +49,8 @@
                         <h4>Add Cylinder</h4>
                         <div class="options"></div>
                     </div>
-                    <form:form class="form-horizontal" modelAttribute="cylinderForm"  role="form" id="cylider-form" action="addcylinder" method="post">
+                    <form:form class="form-horizontal" modelAttribute="cylinderForm"  role="form" id="cylider-form" action="autoGenaddingcylinder" method="post">
                     <div class="panel-body">
-                    <form:hidden path="id"/>
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Size <span class="impColor">*</span></label>
@@ -148,6 +147,15 @@
                     				<label for="focusedinput" class="col-md-4 control-label">Store Location</label>
 								    <div class="col-md-6">
 								    	<form:input path="location" value="" readonly="true" class="form-control onlyCharacters" placeholder="Store Location" />
+								      	<span class="hasError" id="locationError"></span>
+								    </div>
+                    			</div>
+                    		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-4 control-label">No Of Cylinders</label>
+								    <div class="col-md-6">
+								    	<form:input path="noOfCylinders" value=""  class="form-control numericOnly" placeholder="No Of Cylinders" />
 								      	<span class="hasError" id="locationError"></span>
 								    </div>
                     			</div>
@@ -314,6 +322,7 @@ $(function() {
 	});
 });
 var countList="";
+var countList1="";
 
 function getLPOdetails(value){
 	var item=$("#size").val();
@@ -330,8 +339,10 @@ function getLPOdetails(value){
 			$("#expirtdate1").val(orderObj.expirydate);
 		});
 		//alert(jsonobj.retlist)
-		if(jsonobj.count==true){
+		if(jsonobj.retlist != null){
 			countList=jsonobj.count;
+			countList1=jsonobj.retlist;
+			$("#noOfCylinders").val(jsonobj.retlist);
 		}
 		
 	});
@@ -373,8 +384,15 @@ function inactiveData() {
 
 $('#submit11').click(function(event) {
 	validation = true;
+	
 	if(countList==""){
 		alert("In this LPO Number having no Cylinders");
+		validation = false;
+	}
+	var noOfCylinders=$("#noOfCylinders").val();
+	//alert(countList1 <= parseInt(noOfCylinders));
+	if(countList1=="" || countList1 <= parseInt(noOfCylinders)){
+		alert("In this LPO Number having more Cylinders.");
 		validation = false;
 	}
 	$.each(idArray, function(i, val) {

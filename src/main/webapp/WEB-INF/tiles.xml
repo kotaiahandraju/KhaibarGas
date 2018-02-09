@@ -103,7 +103,9 @@
 	<!-- <definition name="reportsHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/reports.jsp" />
 	</definition> -->
-	
+	<definition name="cylinderAutoGenHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/cylindefrAutoGenaration.jsp" />
+	</definition>
 	
 </tiles-definitions>
 
