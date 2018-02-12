@@ -22,22 +22,16 @@ public class PrintDataDao extends BasePrintDataDao
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
 	
-	 public List<AccessoriesmasterBean> getAllAccessories() {
-			List<AccessoriesmasterBean> retlist = null;
-			try {
-				jdbcTemplate = custom.getJdbcTemplate();
-				
-				String sql = "SELECT a.*,CASE WHEN a.status IN ('0') THEN 'Deactive' WHEN a.status in ('1') THEN 'Active'  ELSE '-----' END as accessoriesStatus  from accessoriesmaster a";
-				System.out.println("sql:::"+sql);
-				//lstDamage = jdbcTemplate.query(sql, new BeanPropertyRowMapper<AccessoriesmasterBean>(AccessoriesmasterBean.class));
-				 retlist = jdbcTemplate.query(sql, new Object[] {  },ParameterizedBeanPropertyRowMapper.newInstance(AccessoriesmasterBean.class));
-				//System.out.println("lstDamage:::"+lstDamage);
-			} catch (Exception e) {
-				//logger.error("Exception in getAllDamage in PopulateDaoImpl"+ e);
-				e.printStackTrace();
+	public boolean updatePrintdataCylinderStatus(String cylinderID,String invoiceId,String customerId) {
+		boolean result=false;
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "update  printdata  set returnCylinderInvoiceId='"+invoiceId+"' where cylinderId=? order by created_time desc limit 1";
+		 int results=jdbcTemplate.update(sql, new Object[]{cylinderID});
+			if(results!=0){
+				result= true;
 			}
-			return retlist;
-		}
+			return result;
+	}
 
 
 }

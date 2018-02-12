@@ -211,7 +211,7 @@ $(function() {
                 <i class="fa fa-bars"></i>
             </button>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar">
+        <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar" style="padding:0px">
             <ul class="nav navbar-nav">
             
             <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
@@ -219,7 +219,17 @@ $(function() {
              <li class="lpo"><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
               <li class="company"><a href="${baseurl }/admin/companymaster"><i class="fa fa-building"></i> <span>Company</span></a></li>
               <li class="stores"><a href="${baseurl }/admin/storeHome"><i class="fa fa-th"></i> <span>Stores</span></a></li>
-              <li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Cylinders</span></a></li>
+              
+              <li class="transactions">
+            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Cylinder</span> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						<li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Cylinders</span></a></li>
+						<li class="cylinderAutoGenHome"><a href="${baseurl }/admin/cylinderAutoGenHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder AutoGenHome</span></a></li>
+					</ul>
+				</li>
+              
+              
+              
              <li class="truck"><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>Trucks</span></a></li>
                 <li class="fillingStation"><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>Filling Stations</span></a></li>
                 <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>Customers</span></a></li>
@@ -251,6 +261,8 @@ $(function() {
 						<li class="CylinderReport"><a href="${baseurl }/admin/reportsHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Report </span></a></li>
 						<li class="expensesReport"><a href="${baseurl }/admin/expensesReport"><i class="fa fa-bar-chart-o"></i> <span>Expenses Report</span></a></li>
 						<li class="gasReport"><a href="${baseurl }/admin/gasReport"><i class="fa fa-bar-chart-o"></i> <span>Gas Report</span></a></li>
+						
+						
 					</ul>
 				</li>
 				

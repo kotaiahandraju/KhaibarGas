@@ -12,8 +12,41 @@ protected Date createdTime ;
 protected Date updatedTime ;
 
 //protected String accessoriesStatus ;
-protected String   items ,  quantity ,  price  ,  totalamount  ,  discount  ,  netamount  ,  totalnetamount  ,  vatamount  ,  paidamount  ,  dueamount  ,    grossamount  ,    previousdueamount  ,    invoiceid,customerId;
+protected String   items ,  quantity ,  price  ,  totalamount  ,  discount  ,  netamount  ,  totalnetamount  ,  vatamount  ,  paidamount  ,  dueamount  ,    grossamount  ,    previousdueamount  ,    invoiceid,customerId,returncylinderinvoice,cylinderDeliverTruck,cylinderReturnTruck,cylinderId;
 
+
+
+public String getCylinderId() {
+	return cylinderId;
+}
+
+public void setCylinderId(String cylinderId) {
+	this.cylinderId = cylinderId;
+}
+
+public String getCylinderDeliverTruck() {
+	return cylinderDeliverTruck;
+}
+
+public void setCylinderDeliverTruck(String cylinderDeliverTruck) {
+	this.cylinderDeliverTruck = cylinderDeliverTruck;
+}
+
+public String getCylinderReturnTruck() {
+	return cylinderReturnTruck;
+}
+
+public void setCylinderReturnTruck(String cylinderReturnTruck) {
+	this.cylinderReturnTruck = cylinderReturnTruck;
+}
+
+public String getReturncylinderinvoice() {
+	return returncylinderinvoice;
+}
+
+public void setReturncylinderinvoice(String returncylinderinvoice) {
+	this.returncylinderinvoice = returncylinderinvoice;
+}
 
 public String getCustomerId() {
 	return customerId;

@@ -20,7 +20,7 @@ public class CustomercylindersDao extends BaseCustomercylindersDao
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
-	public boolean updateCustomerCylinderStatus(String cylinderID,String invoiceId) {
+	public boolean updateCustomerCylinderStatus(String cylinderID,String invoiceId,String customerId) {
 		boolean result=false;
 		jdbcTemplate = custom.getJdbcTemplate();
 		String sql = "update  customercylinders  set cylinderreturn='1',returnCylinderInvoiceId='"+invoiceId+"' where cylinderId=? order by created_time desc limit 1";
@@ -41,6 +41,19 @@ public class CustomercylindersDao extends BaseCustomercylindersDao
 		 result =jdbcTemplate.queryForList(sql, new Object[]{invoiceId});
 		return result;
 	}
+	
+	public List<Map<String, Object>>  getInvoiceDataReturnCylinder(String invoiceId) {
+		List<Map<String, Object>> result=null;
+		jdbcTemplate = custom.getJdbcTemplate();
+		String sql = "SELECT cm.`customername`,cm.`mobile`,cm.`customeraddress`,cm.`landline`,cm.`customertype`,cm.`customerid`, "		
+						+"	pd.`items`,pd.`quantity`,pd.`price`,pd.`totalamount`,pd.`discount`,pd.`netamount`,pd.`totalnetamount`,"
+						+" pd.`vatamount`,pd.`paidamount`,pd.`dueamount`,pd.`grossamount`,pd.`previousdueamount`,pd.`invoiceid` "	
+						+" FROM `printdata` pd,`customermaster` cm " 
+						+"  WHERE cm.`id`=pd.`customerid`  AND pd.`invoiceid`=? ";
+		 result =jdbcTemplate.queryForList(sql, new Object[]{invoiceId});
+		return result;
+	}
+
 
 }
 

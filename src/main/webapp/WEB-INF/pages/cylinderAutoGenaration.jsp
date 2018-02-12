@@ -10,37 +10,11 @@
         <div class="clearfix"></div>
              <ol class="breadcrumb">
               <li><a href="#">Home</a></li>
-               <li>Cylinder</li>
+               <li>Cylinder AutoGeneration</li>
             </ol>
             <div class="clearfix"></div>
         <div class="container">
             
-            <div class="row">
-              <div class="col-md-12">
-                    <div class="panel panel-primary">
-                        <div class="panel-heading">
-                            <h4>Cylinders List</h4>
-                            <div class="options">   
-                                <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
-                            </div>
-                        </div>
-                        <div class="panel-body collapse in">
-                        <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
-                        <div class="table-responsive" id="tableId">
-                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-                                <thead>
-                                    <tr>
-                                        <th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Customer ID</th><th>Owner Company</th>
-                                        <th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Remarks</th><th>Status</th><th></th>
-                                    </tr>
-                                </thead>
-                                <tbody></tbody>
-                            </table>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             
             <div class="row" id="moveTo">
             <div class="col-md-12 col-sm-12">
@@ -203,43 +177,11 @@
 
 <script type="text/javascript">
 
-var listOrders1 = ${allOrders1};
+/* var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);
-}
-function displayTable(listOrders) {
-	$('#tableId').html('');
-	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Owner Company</th><th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
-	$('#tableId').html(tableHead);
-	serviceUnitArray = {};
-	$.each(listOrders,function(i, orderObj) {
-		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
-		}else{  
-			var deleterow = "<a class='activate' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
-		}
-		var edit = "<a class='edit editIt' onclick='editCylinder("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
-		serviceUnitArray[orderObj.id] = orderObj;
-		var tblRow = "<tr >"
-				+ "<td title='"+orderObj.cylinderid+"'>"+ orderObj.cylinderid + "</td>"
-				+ "<td title='"+orderObj.sizeName+"'>"+ orderObj.sizeName + "</td>"
-				+ "<td class='impFiled' title='"+orderObj.cylinderstatus+"'>"+ orderObj.cylinderstatus + "</td>"
-				+ "<td title='"+orderObj.companyname+"'>"+ orderObj.companyname+ "</td>"
-				+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
-				+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber+ "</td>"
-				+ "<td title='"+orderObj.color+"'>"+ orderObj.color + "</td>"
-				+ "<td title='"+orderObj.expirtdate1+"'>"+orderObj.expirtdate1+ "</td>"
-				+ "<td title='"+orderObj.remarks+"'>"+orderObj.remarks+ "</td>"
-				+ "<td title='"+orderObj.cylendersstatus+"'>"+ orderObj.cylendersstatus + "</td>"
-				+ '<c:if test="${(cacheUserBean.roleId == 1)}">'
-				+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
-				+ '</c:if>'
-				+ "</tr >";
-		$(tblRow).appendTo("#tableId table tbody");
-	});
-	if(isClick=='Yes') $('.datatables').dataTable();
-}
+} */
+
 
 var lpo = "";
 function editCylinder(id) {
@@ -391,7 +333,7 @@ $('#submit11').click(function(event) {
 	}
 	var noOfCylinders=$("#noOfCylinders").val();
 	//alert(countList1 <= parseInt(noOfCylinders));
-	if(countList1=="" || countList1 <= parseInt(noOfCylinders)){
+	if(countList1=="" || countList1 < parseInt(noOfCylinders)){
 		alert("In this LPO Number having more Cylinders.");
 		validation = false;
 	}
@@ -427,7 +369,7 @@ $('#submit11').click(function(event) {
 	
 });
 
- $("#pageName").text("Cylinder Master");
- $(".cylinder").addClass("active"); 
+ $("#pageName").text("Cylinder AutoGenaration");
+ $(".cylinderAutoGenHome").addClass("active"); 
  
 </script>

@@ -698,23 +698,7 @@ public class TransactionController {
 			
 			
 			for (int i = 0; i < item.length; i++) {
-				//print data for invoice
-				printDataBean =new PrintDataBean();
-				printDataBean.setItems(item[i]);
-				printDataBean.setQuantity(unit[i]);
-				printDataBean.setPrice(rate[i]);
-				printDataBean.setTotalamount(totalvalue[i]);
-				printDataBean.setDiscount(discount[i]);
-				printDataBean.setNetamount(taxable[i]);
-				printDataBean.setTotalnetamount(totalNetamount);
-				printDataBean.setGrossamount(grossamount);
-				printDataBean.setPreviousdueamount(previousDueAmount);
-				printDataBean.setInvoiceid(invoiceId);
-				printDataBean.setVatamount(vatamount);
-				printDataBean.setDueamount(dueAmount);
-				printDataBean.setPaidamount(payedAmount);
-				printDataBean.setCustomerId(customerId);
-				printDataDao.save(printDataBean);
+				
 				
 				
 				
@@ -759,6 +743,28 @@ public class TransactionController {
 							cylindertransactionBean1.setCustomerId(customerId);
 							cylindertransactionBean1.setCylindetId(String.valueOf(cylindermasterbean.getId()));
 							cylindertransactionDao.save(cylindertransactionBean1);
+							
+							
+							//print data for invoice
+							printDataBean =new PrintDataBean();
+							printDataBean.setItems(item[i]);
+							printDataBean.setQuantity(unit[i]);
+							printDataBean.setPrice(rate[i]);
+							printDataBean.setTotalamount(totalvalue[i]);
+							printDataBean.setDiscount(discount[i]);
+							printDataBean.setNetamount(taxable[i]);
+							printDataBean.setTotalnetamount(totalNetamount);
+							printDataBean.setGrossamount(grossamount);
+							printDataBean.setPreviousdueamount(previousDueAmount);
+							printDataBean.setInvoiceid(invoiceId);
+							printDataBean.setVatamount(vatamount);
+							printDataBean.setDueamount(dueAmount);
+							printDataBean.setPaidamount(payedAmount);
+							printDataBean.setCustomerId(customerId);
+							printDataBean.setCylinderId(String.valueOf(cylindermasterbean.getId()));
+							printDataBean.setCylinderDeliverTruck(cylinderDeliverTruck);
+						
+							printDataDao.save(printDataBean);
 						}
 						// quantity,price,discount,grandTotal,vat,cylinderDeliverTruck,cylinderReturnTruck
 				}
@@ -766,7 +772,7 @@ public class TransactionController {
 			if(cylinderId !=null){
 				for(int i=0;i<cylinderId.length;i++){
 					CylindermasterBean cylinderMasterBean2 = new CylindermasterBean();
-					customercylindersDao.updateCustomerCylinderStatus(cylinderId[i],invoiceId);
+					customercylindersDao.updateCustomerCylinderStatus(cylinderId[i],invoiceId,customerId);
 					
 					cylindertransactionBean1 = new CylindertransactionBean();
 					cylindertransactionBean1.setCylinderStatus("7");
@@ -784,6 +790,7 @@ public class TransactionController {
 					}
 					cylindermasterDao.updateCylinderStatus(cylinderMasterBean2);
 					cylindertransactionDao.save(cylindertransactionBean1);
+					printDataDao.updatePrintdataCylinderStatus(cylinderId[i],invoiceId,customerId);
 			}
 			}
 			CustomermasterBean dummy = customermasterDao.getById(Integer.parseInt(customerId));

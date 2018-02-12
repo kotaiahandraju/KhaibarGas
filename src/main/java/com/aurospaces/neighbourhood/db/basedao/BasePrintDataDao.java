@@ -26,7 +26,7 @@ public class BasePrintDataDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO printdata( `created_time` ,  `updated_time` ,  `items` ,  `quantity` ,  `price`  ,  `totalamount`  ,  `discount`  ,  `netamount`  ,  `totalnetamount`  ,  `vatamount`  ,  `paidamount`  ,  `dueamount`  ,    `grossamount`  ,    `previousdueamount`  ,    invoiceid,customerId ) values (?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO printdata( `created_time` ,  `updated_time` ,  `items` ,  `quantity` ,  `price`  ,  `totalamount`  ,  `discount`  ,  `netamount`  ,  `totalnetamount`  ,  `vatamount`  ,  `paidamount`  ,  `dueamount`  ,    `grossamount`  ,    `previousdueamount`  ,    invoiceid,customerId,returncylinderinvoice,cylinderDeliverTruck,cylinderReturnTruck,cylinderId ) values (?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?,?,?,?)"; 
 
 
 
@@ -82,6 +82,10 @@ ps.setString(13, printDataBean.getGrossamount());
 ps.setString(14, printDataBean.getPreviousdueamount());
 ps.setString(15, printDataBean.getInvoiceid());
 ps.setString(16, printDataBean.getCustomerId());
+ps.setString(17, printDataBean.getReturncylinderinvoice());
+ps.setString(18, printDataBean.getCylinderDeliverTruck());
+ps.setString(19, printDataBean.getCylinderReturnTruck());
+ps.setString(20, printDataBean.getCylinderId());
 
 
 

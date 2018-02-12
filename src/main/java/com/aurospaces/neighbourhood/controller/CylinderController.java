@@ -452,7 +452,8 @@ public class CylinderController {
 			if(objCylindermasterBean.getId() == 0 && cylindermasterBean == null)
 			{
 				int noOfCylinders=Integer.parseInt(objCylindermasterBean.getNoOfCylinders());
-				for(int i=1;i<noOfCylinders;i++){
+				for(int i=1;i<=noOfCylinders;i++){
+					objCylindermasterBean.setId(0);
 					objCylindermasterBean.setCylinderstatus("1");
 					System.out.println("....save...."+i);
 					cylindermasterDao.save(objCylindermasterBean);
