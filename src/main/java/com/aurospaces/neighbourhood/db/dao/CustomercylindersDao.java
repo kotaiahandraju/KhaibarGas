@@ -33,24 +33,25 @@ public class CustomercylindersDao extends BaseCustomercylindersDao
 	public List<Map<String, Object>>  getInvoiceData(String invoiceId) {
 		List<Map<String, Object>> result=null;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "SELECT cm.`customername`,cm.`mobile`,cm.`customeraddress`,cm.`landline`,cm.`customertype`,cm.`customerid`, "		
+		String sql = "SELECT i.`name`,cm.`customername`,cm.`mobile`,cm.`customeraddress`,cm.`landline`,cm.`customertype`,cm.`customerid`, "		
 						+"	pd.`items`,pd.`quantity`,pd.`price`,pd.`totalamount`,pd.`discount`,pd.`netamount`,pd.`totalnetamount`,"
 						+" pd.`vatamount`,pd.`paidamount`,pd.`dueamount`,pd.`grossamount`,pd.`previousdueamount`,pd.`invoiceid` "	
-						+" FROM `printdata` pd,`customermaster` cm " 
-						+"  WHERE cm.`id`=pd.`customerid`  AND pd.`invoiceid`=? ";
+						+" FROM `printdata` pd,`customermaster` cm,`cylindermaster` cm1,`items` i " 
+						+"  WHERE cm.`id`=pd.`customerid` AND pd.`cylinderId`=cm1.`id` AND cm1.size=i.id   AND pd.`invoiceid`=? ";
 		 result =jdbcTemplate.queryForList(sql, new Object[]{invoiceId});
+		 System.out.println(sql);
 		return result;
 	}
 	
 	public List<Map<String, Object>>  getInvoiceDataReturnCylinder(String invoiceId) {
 		List<Map<String, Object>> result=null;
 		jdbcTemplate = custom.getJdbcTemplate();
-		String sql = "SELECT cm.`customername`,cm.`mobile`,cm.`customeraddress`,cm.`landline`,cm.`customertype`,cm.`customerid`, "		
-						+"	pd.`items`,pd.`quantity`,pd.`price`,pd.`totalamount`,pd.`discount`,pd.`netamount`,pd.`totalnetamount`,"
-						+" pd.`vatamount`,pd.`paidamount`,pd.`dueamount`,pd.`grossamount`,pd.`previousdueamount`,pd.`invoiceid` "	
-						+" FROM `printdata` pd,`customermaster` cm " 
-						+"  WHERE cm.`id`=pd.`customerid`  AND pd.`invoiceid`=? ";
+		String sql = "SELECT t.`trucknumber`,pd.`cylinderId`,i.`name`,cm.`customername`,cm.`mobile`,cm.`customeraddress`,cm.`landline`,cm.`customertype`,cm.`customerid`, 	"
+						+" pd.`totalnetamount`,	 pd.`vatamount`,pd.`paidamount`,pd.`dueamount`,pd.`grossamount`,pd.`previousdueamount`,pd.`invoiceid` " 
+					 +" FROM `returncylinder` pd,`customermaster` cm ,`cylindermaster` cm1,`items` i,`trucksmaster` t  "
+					  +" WHERE cm.`id`=pd.`customerId` AND pd.`cylinderId`=cm1.`id` AND t.id=pd.`cylinderReturnTruck` AND cm1.size=i.id  AND pd.`invoiceid`= ? ";
 		 result =jdbcTemplate.queryForList(sql, new Object[]{invoiceId});
+		 System.out.println(sql);
 		return result;
 	}
 

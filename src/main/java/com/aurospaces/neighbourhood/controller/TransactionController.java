@@ -53,6 +53,7 @@ import com.aurospaces.neighbourhood.db.dao.InvoiceDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.aurospaces.neighbourhood.db.dao.PrintDataDao;
+import com.aurospaces.neighbourhood.db.dao.ReturnCylinderDao;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 import com.aurospaces.neighbourhood.db.dao.UsedGasDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
@@ -87,6 +88,7 @@ public class TransactionController {
 	@Autowired
 	DataSourceTransactionManager transactionManager;
 	@Autowired UsedGasDao usedGasDao;
+	@Autowired ReturnCylinderDao returnCylinderDao;
 	private Logger logger = Logger.getLogger(TransactionController.class);
 
 	@RequestMapping(value = "/cylinderMovetofillingStation")
@@ -790,7 +792,19 @@ public class TransactionController {
 					}
 					cylindermasterDao.updateCylinderStatus(cylinderMasterBean2);
 					cylindertransactionDao.save(cylindertransactionBean1);
-					printDataDao.updatePrintdataCylinderStatus(cylinderId[i],invoiceId,customerId);
+//					printDataDao.updatePrintdataCylinderStatus(cylinderId[i],invoiceId,customerId);
+					printDataBean =new PrintDataBean();
+					printDataBean.setTotalnetamount(totalNetamount);
+					printDataBean.setGrossamount(grossamount);
+					printDataBean.setPreviousdueamount(previousDueAmount);
+					printDataBean.setInvoiceid(invoiceId);
+					printDataBean.setVatamount(vatamount);
+					printDataBean.setDueamount(dueAmount);
+					printDataBean.setPaidamount(payedAmount);
+					printDataBean.setCustomerId(customerId);
+					printDataBean.setCylinderReturnTruck(cylinderReturnTruck);
+					printDataBean.setCylinderId(cylinderId[i]);
+					returnCylinderDao.save(printDataBean);
 			}
 			}
 			CustomermasterBean dummy = customermasterDao.getById(Integer.parseInt(customerId));
@@ -879,6 +893,7 @@ public class TransactionController {
 	@RequestMapping(value = "/getInvoiceData")
 	public @ResponseBody String getInvoiceData( ModelMap model,	HttpServletRequest request, HttpSession session) {
 		List<Map<String, Object>> listOrderBeans = null;
+		List<Map<String, Object>> listOrderBeans1 = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson = null;
@@ -888,6 +903,9 @@ public class TransactionController {
 			if (StringUtils.isNotBlank(invoiceId)) {
 				listOrderBeans = customercylindersDao.getInvoiceData(invoiceId);
 			}
+			if (StringUtils.isNotBlank(invoiceId)) {
+				listOrderBeans1 = customercylindersDao.getInvoiceDataReturnCylinder(invoiceId);
+			}
 			objectMapper = new ObjectMapper();
 			if (listOrderBeans != null) {
 
@@ -895,12 +913,14 @@ public class TransactionController {
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", sJson);
 				jsonObj.put("allOrders1", listOrderBeans);
+				jsonObj.put("allOrders2", listOrderBeans1);
 				// System.out.println(sJson);
 			} else {
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
 				request.setAttribute("allOrders1", "''");
-				jsonObj.put("allOrders1", listOrderBeans);
+				jsonObj.put("allOrders1", "''");
+				jsonObj.put("allOrders2", "''");
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
