@@ -76,7 +76,7 @@ public class LpomasterDao extends BaseLpomasterDao
 		 List<LpoitemsBean> retlist =null;
 		 jdbcTemplate = custom.getJdbcTemplate();
 //			String sql = "select li.lponumber,li.quantity,li.price,li.totalprice,li.discount,li.grandtotal,i.name as itemid from lpoitems li ,items i where i.id=li.itemid and li.lponumber=? ";
-		 String sql = "select li.*,i.name,lm.amount from lpoitems li,lpomaster lm,items i where i.id=li.itemid and li.lponumber=lm.lponumber and li.lponumber = ?";
+		 String sql = "select li.*,i.name,lm.amount,lm.`suppliername`, lm.`supplieraddress`,DATE_FORMAT(Date(lm.`created_time`), '%d-%b-%Y') as lpoDate from lpoitems li,lpomaster lm,items i where i.id=li.itemid and li.lponumber=lm.lponumber and li.lponumber = ?";
 			 retlist = jdbcTemplate.query(sql,	new Object[]{lpomasterBean.getLponumber()},ParameterizedBeanPropertyRowMapper.newInstance(LpoitemsBean.class));
 			if(retlist.size() > 0)
 				return retlist;

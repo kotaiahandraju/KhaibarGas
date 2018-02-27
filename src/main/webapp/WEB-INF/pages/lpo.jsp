@@ -245,15 +245,15 @@ table#dependent_table tbody tr td:first-child::before {
 </div><img src="../img/khaibarlogo.png" alt="KHAIBAR logo">
 <br>
 <br>
-<div><strong>LOCAL PURCHASE ORDER</strong></div>
+<div><h3 style="text-align:center;">LOCAL PURCHASE ORDER</h3></div>
 	<table class="table table-bordered" align="center" style="min-width: 680px;min-height:200px" id="printTable">
 	<thead> 
 		<tr >
 			<p><td colspan="2">Supplier</p>
-				<p>NGC	ENERGY <br>
-				  P O Box 3629	<br>
-				  UAE  </td></p>
-				  <p><td colspan="3">LPO No. : 1000015/L1, Date : 02/12/2017 </p>
+				<p><span id="printSuplierName"></span></p> 
+				 <p> <span id="printSuplieraddress"></span></p>
+				    </td>
+				  <p><td colspan="3">LPO No. : <span id="printLpoNum"></span>, LPO Date :<span id="printLpoDate"> </span> </p>
 			<p>This PO No. should appear on the invoice and all correspondence</td></p>
 		</tr>
 		
@@ -739,6 +739,10 @@ var	id = printId.replace("print", "");
 		$("#printTotal").text(orderObj.amount);
 		//alert(convert_number(orderObj.amount));
 		numberToWords=convert_number(parseInt(orderObj.amount));
+		$("#printSuplierName").text(orderObj.suppliername);
+		$("#printSuplieraddress").text(orderObj.supplieraddress);
+		$("#printLpoNum").text(orderObj.lponumber);
+		$("#printLpoDate").text(orderObj.lpoDate);
 $(dependentRow1).appendTo("#printTable tbody");
 		});
 		

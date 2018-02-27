@@ -29,7 +29,7 @@
 							id="example">
 							<thead>
 								<tr>
-									<th>Item</th> <th>Minimum Selling Price</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th></th>
+									<th>Item</th> <th> Selling Price</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th></th>
 								</tr>
 							</thead>
 							<tbody></tbody>
@@ -79,9 +79,9 @@
 									</div>
 								</div> --%>
 								<div class="form-group">
-									<label class="col-sm-4 control-label required">Allowed Minimum Selling Price(AED) <span class="impColor">*</span></label>
+									<label class="col-sm-4 control-label required"> Selling Price(AED) <span class="impColor">*</span></label>
 									<div class="col-sm-7">
-										<form:input path="rate" class="form-control numericOnly validate" autocomplete="off" placeholder="Allowed Minimum Price(AED)" required="required" />
+										<form:input path="rate" class="form-control numericOnly validate" autocomplete="off" placeholder="Selling Price(AED)" required="required" />
 										<span class="hasError" id="rateError"></span>
 									</div>
 								</div>
@@ -134,7 +134,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ '<thead><tr><th>Item</th><th>Minimum Selling Price</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+		+ '<thead><tr><th>Item</th><th> Selling Price</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj) {

@@ -1,16 +1,7 @@
 package com.aurospaces.neighbourhood.bean;
 
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-
-
-
 import java.util.Date;
-import java.math.BigDecimal;
 
 
 
@@ -40,9 +31,23 @@ protected String discount ;
 protected String grandtotal ;
 protected String suppliername ;
 protected String expirydate;
-protected String manufacturingdate,amount,name;
+protected String manufacturingdate,amount,name,supplieraddress,lpoDate;
 
 
+
+
+public String getLpoDate() {
+	return lpoDate;
+}
+public void setLpoDate(String lpoDate) {
+	this.lpoDate = lpoDate;
+}
+public String getSupplieraddress() {
+	return supplieraddress;
+}
+public void setSupplieraddress(String supplieraddress) {
+	this.supplieraddress = supplieraddress;
+}
 public String getAmount() {
 	return amount;
 }

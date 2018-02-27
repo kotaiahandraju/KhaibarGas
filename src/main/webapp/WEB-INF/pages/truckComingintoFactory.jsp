@@ -27,11 +27,17 @@
 // });//]]> 
 
 $(function () {
+	var myDate = new Date();
+	var date = myDate.getDate()+1; 
+	var month = myDate.getMonth()+1;
+	var year = myDate.getFullYear();
+	var tommorow = month + "/" + date  + "/" + year;
 
 	 $('#outDate').datetimepicker({        
 
 	    useCurrent: false,
 	    minDate: new Date(),
+	    maxDate: tommorow,
 	    format: 'DD-MMM-YYYY hh:mm A',
 	    showTodayButton: true,
 	    sideBySide: true,
@@ -140,7 +146,7 @@ $(function () {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">In Date<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="outDate"  class="form-control validate "  placeholder="Out Date/In Date"  />
+								    	<form:input path="outDate"  class="form-control validate "  placeholder="In Date"  />
 								      	<span class="hasError" id="lponumberError"></span>
 								    </div>
                     			</div>

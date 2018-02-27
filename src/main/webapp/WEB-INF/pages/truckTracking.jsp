@@ -65,7 +65,7 @@ $(function () {
 								<tr>
 									<th>Truck Number</th>
 									<th>Driver Name</th>
-									<th>Out Date</th>
+									<th>Exit Date</th>
 									<th>Location</th>
 									<th>Reading (KM)</th>
 									<th>Petrol Level</th>
@@ -131,9 +131,9 @@ $(function () {
                     		</div> --%>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">Out Date<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">Exit Date<span class="impColor">*</span></label>
 								    <div class="col-md-6">
-								    	<form:input path="outDate" value="" class="form-control validate "  placeholder="Out Date/In Date" />
+								    	<form:input path="outDate" value="" class="form-control validate "  placeholder="Exit Date" />
 								      	<span class="hasError" id="lponumberError"></span>
 								    </div>
                     			</div>
@@ -209,7 +209,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Truck Number</th><th>Driver Name</th><th>Out Date</th><th>Location</th><th>Reading (KM)</th><th>Petrol Level</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Truck Number</th><th>Driver Name</th><th>Exit Date</th><th>Location</th><th>Reading (KM)</th><th>Petrol Level</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {

@@ -5,8 +5,22 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
 <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
-<link rel="stylesheet" href='${baseurl }/assets/css/cylinderdeliverPrint.css' />
+<link rel="stylesheet" href='${baseurl }/assets/css/cylinderdeliverPrint1.css' />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
+
+
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+<!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.1.135/jspdf.min.js"></script>
+<script type="text/javascript" src="http://cdn.uriit.ru/jsPDF/libs/adler32cs.js/adler32cs.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2014-11-29/FileSaver.min.js"></script>
+<script type="text/javascript" src="libs/Blob.js/BlobBuilder.js"></script>
+<script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.addimage.js"></script>
+<script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.standard_fonts_metrics.js"></script>
+<script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.split_text_to_size.js"></script>
+<script type="text/javascript" src="http://cdn.immex1.com/js/jspdf/plugins/jspdf.plugin.from_html.js"></script> -->
+<!-- <script type="text/javascript" src="js/basic.js"></script> -->
+
 <style>
 table #dependent_table {
 	/* 	width: 100%; */
@@ -219,9 +233,9 @@ table tbody tr.rowInc {
                 <table class="table table-bordered" id="dependent_table">
                   <thead >
                     <tr class="default" style="background:#EBEBEB">
-                      <th style="width: 40px;"><span>Sno</span></th>
-                      <th style="width: 200px"><span>Items</span></th>
-                      <th style="width: 70px;"><span>Quantity</span></th>
+                      <th><span>Sno</span></th>
+                      <th><span>Items</span></th>
+                      <th><span>Quantity</span></th>
                       <th><span>Price(AED)</span></th>
                       <th><span>Total Amount (AED)</span></th>
                       <th><span>Discount (%)</span></th>
@@ -301,7 +315,7 @@ table tbody tr.rowInc {
 <!-- print table -->
 
 
-<div class="container" id="printCylinder" style="display: none;">
+<div class="container" id="printCylinder" style="display: none;font-size: 20px !important;">
 <div class="col-md-12 printTable">
 <button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button>
 <img height="50" src="../img/khaibarlogo.png"/><div class="clearfix"></div>
@@ -334,11 +348,11 @@ table tbody tr.rowInc {
 			 </tbody>       
 						  
                   <tfoot>
- 		<tr><td width="450"></td><td width="150">Total Amount (AED) :</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
-         <tr><td width="450"></td><td width="150">Vat Amount (AED) :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
-         <tr><td width="450"></td><td width="150">Paid Amount(AED) :</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
-         <tr><td width="450"></td><td width="150" >Due Amount(AED)  :</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
-          <tr><td width="450"></td><td width="150" >Gross Amount (AED)  :</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
+ 		<tr><td width="400"></td><td width="200">Total Amount (AED)</td><td> :</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
+         <tr><td width="400"></td><td width="200">Vat Amount (AED)</td><td> :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
+         <tr><td width="400"></td><td width="200">Paid Amount(AED)</td><td> :</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
+         <tr><td width="400"></td><td width="200" >Due Amount(AED)</td><td>  :</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
+          <tr><td width="400"></td><td width="200" >Gross Amount (AED)</td><td>  :</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
                   
 </tfoot>
     
@@ -376,18 +390,18 @@ table tbody tr.rowInc {
 			<tbody>   
 			 </tbody>       
 						  
-                  <tfoot>
- 		<tr><td width="440"></td><td width="150">Total Amount (AED) :</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
-         <tr><td width="450"></td><td width="150">Vat Amount (AED) :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
-         <tr><td width="450"></td><td width="150">Paid Amount(AED) :</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
-         <tr><td width="450"></td><td width="150" >Due Amount(AED)  :</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
-          <tr><td width="450"></td><td width="150" >Gross Amount (AED)  :</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
+                  <tfoot >
+ 		<tr><td class="tfoot1" width="400"></td><td width="200">Total Amount (AED)</td><td> :</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
+         <tr><td width="400"></td><td width="200">Vat Amount (AED)</td><td> :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
+         <tr><td width="400"></td><td width="200">Paid Amount(AED) </td><td>:</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
+         <tr><td width="400"></td><td width="200" >Due Amount(AED) </td><td> :</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
+          <tr><td width="400"></td><td width="200" >Gross Amount (AED)</td><td>  :</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
                   
 </tfoot>
     
     </table>
     </div>
-  
+  <div id="editor"></div>
 </div>
 
 
@@ -996,6 +1010,7 @@ $('#submit11').click(function(event) {
 	}
 	
 });
+
 function PrintElem(elem)
 {
 	$(".noPrint").hide();
@@ -1003,11 +1018,46 @@ function PrintElem(elem)
 	 $("#cylinderdataId").hide();
 	 $("#printCylinder").show();
 	 
-	 var options = {background:"#fff"};
+	 var options = {
+			 pagesplit: false,
+			 useOverflow:true,
+			 background:"#fff",
+			 lineheight:3,
+// 			line-height:"3",
+			paddingtop:100,
+// 			padding:10,
+			 width: 1360
+			 };
+	 
 	  var pdf = new jsPDF('p', 'pt', 'a4');
-	  pdf.addHTML($(elem), 15, 15, options, function() {
+	 var margins = {
+			   top: 25,
+			   bottom: 60,
+			   left: 20,
+			   background:"#fff",
+			   width: 522
+			};
+			// all coords and widths are in jsPDF instance's declared units
+			// 'inches' in this case
+			/*pdf.addHTML($(elem), margins.top, margins.left, {}, function() {
+			    pdf.save('test.pdf');
+			});  */
+			
+			 console.log(options);
+	   var pdf = new jsPDF('p', 'pt', 'a4');
+	  pdf.addHTML($(elem), 50, 150, options, function() {
+// 		   pdf.setFontSize(40);
 	    pdf.save('pageContent.pdf');
-	  });
+	  });  
+	 
+		 /*  $('#cmd').click(function() {
+		    doc.fromHTML($('#target').html(), 15, 15, {
+		      'width': 170,
+		      'elementHandlers': specialElementHandlers
+		    });
+		    doc.save('sample-file.pdf');
+		  });
+		}); */
      
     Popup($(elem).html());
     
@@ -1015,6 +1065,34 @@ function PrintElem(elem)
     
     
 }
+
+	 
+$(function() {
+	  var doc = new jsPDF();
+	  var specialElementHandlers = {
+	    '#editor': function(element, renderer) {
+	      return true;
+	    }
+	  };
+	  $('.printbtn').click(function() {
+		  $("#printCylinder").css('display', 'block');
+		  console.log($('#printCylinder').html());
+	    doc.fromHTML('<div class="col-md-12 printTable"><button class="printbtn btn-primary" >Print</button><div class="clearfix"></div> <table class="table-responsive "> <tbody><tr><td class="det"><div class="custom">Customer Details</div></td></tr></tbody><tbody style="padding:10px;   border:1px solid lightgray;"> <tr><td><label for="focusedinput ">Customer Name :</label></td><td><span class="customerNameId"></span></td></tr> <tr><td><label for="focusedinput ">Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr> <tr><td><label for="focusedinput ">Customer Address :</label></td><td><span class="customerAddress"></span></td></tr> <tr><td><label for="focusedinput mobile">Mobile :</label></td><td><span class="mobile"></span></td></tr> </tbody> </table>', 15, 15, {
+	      'width': 170,
+	      'elementHandlers': specialElementHandlers
+	    });
+	    doc.save('sample-file.pdf');
+	  });
+	});
+	 
+
+
+
+
+
+
+
+
 
 
 function Popup(data)
@@ -1031,8 +1109,8 @@ function Popup(data)
 
 $(".printbtn").show();
 $(".noPrint").show();
-// $("#printFooter").hide();
-// $("#printCylinder").show();
+$("#printFooter").hide();
+$("#printCylinder").show();
     if (is_chrome) {
         mywindow.onload = function() { // wait until all resources loaded 
             mywindow.focus(); // necessary for IE >= 10
@@ -1103,13 +1181,13 @@ var j=0;
 			
 			id="'+ dependentRowCount+ 'taxable"
 			
-			var tblRow =	'   <tr><th scope="col"><span class="sno">'+j+'</span></th>'
-				           +'   <th scope="col" width="150px;" ><span  class="ite'+j+' ite">items</span></th>'
-				           +'    <th scope="col"><span  class="quant'+j+' quant">0.0</span></th>'
-				           +'    <th scope="col"><span  class="pri'+j+' pri">0.0</span></th>'
-				           +'    <th scope="col"><span  class="tot'+j+' tot">0.0</span></th>'
-				           +'    <th scope="col"><span  class="dis'+j+' dis">00</span></th>'
-				           +'    <th scope="col"><span  class="net'+j+' net">00</span></th></tr> ';
+			var tblRow =	'   <tr><th scope="col" style="font-weight:normal;"><span class="sno">'+j+'</span></th>'
+				           +'   <th scope="col" style="font-weight:normal;" ><span  class="ite'+j+' ite">items</span></th>'
+				           +'    <th scope="col" style="font-weight:normal;"><span  class="quant'+j+' quant">0.0</span></th>'
+				           +'    <th scope="col" style="font-weight:normal;"><span  class="pri'+j+' pri">0.0</span></th>'
+				           +'    <th scope="col" style="font-weight:normal;"><span  class="tot'+j+' tot">0.0</span></th>'
+				           +'    <th scope="col" style="font-weight:normal;"><span  class="dis'+j+' dis">00</span></th>'
+				           +'    <th scope="col" style="font-weight:normal;"><span  class="net'+j+' net">00</span></th></tr> ';
 							$(tblRow).appendTo(".deliverCylinders tbody");
 							$(".ite"+j).text(orderObj.name);
 							$(".quant"+j).text(orderObj.quantity);
