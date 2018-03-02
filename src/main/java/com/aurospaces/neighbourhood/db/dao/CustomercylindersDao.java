@@ -37,7 +37,7 @@ public class CustomercylindersDao extends BaseCustomercylindersDao
 						+"	pd.`items`,pd.`quantity`,pd.`price`,pd.`totalamount`,pd.`discount`,pd.`netamount`,pd.`totalnetamount`,"
 						+" pd.`vatamount`,pd.`paidamount`,pd.`dueamount`,pd.`grossamount`,pd.`previousdueamount`,pd.`invoiceid` "	
 						+" FROM `printdata` pd,`customermaster` cm,`cylindermaster` cm1,`items` i " 
-						+"  WHERE cm.`id`=pd.`customerid` AND pd.`cylinderId`=cm1.`id` AND cm1.size=i.id   AND pd.`invoiceid`=? ";
+						+"  WHERE cm.`id`=pd.`customerid` AND pd.`cylinderId`=cm1.`id` AND cm1.size=i.id   AND pd.`invoiceid`=?  GROUP BY NAME,items,quantity,price,invoiceid";
 		 result =jdbcTemplate.queryForList(sql, new Object[]{invoiceId});
 		 System.out.println(sql);
 		return result;

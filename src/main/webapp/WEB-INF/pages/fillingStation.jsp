@@ -257,6 +257,7 @@ function deleteCylinder(id,status){
 			var alldata = jsonobj.allOrders1;
 			console.log(jsonobj.allOrders1);
 			displayTable(alldata);
+			tooltip();
 		});
 	}
 }
@@ -348,6 +349,7 @@ function inactiveData() {
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
 			displayTable(alldata);
+			tooltip();
 			console.log(jsonobj.allOrders1);
 				});
 		

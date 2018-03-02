@@ -380,6 +380,26 @@ public class TransactionController {
 			String cylenderId = cylindertransactionBean1.getCylindetId();
 
 			String[] cylenderId1 = cylenderId.split(",");
+			
+			// filling station gas is available or not checking 
+			FillingstationmasterBean fillingstationBean =  fillingstationmasterDao.getById(Integer.parseInt(cylindertransactionBean1.getFillingStation()));
+			int cylinderLength =  cylenderId1.length;
+			int totalgaswant = 0;
+			CylindermasterBean cylindercountBean = cylindermasterDao.getByCylinderName(Integer.parseInt(cylenderId1[0]));
+			if (cylindercountBean != null) {
+				if (StringUtils.isNotBlank(cylindercountBean.getName())) {
+					String numberOnly = cylindercountBean.getName().replaceAll("[^0-9]", "");
+					 totalgaswant = cylinderLength * (Integer.parseInt(numberOnly));
+					
+				}
+			}
+			// gas evailabe checking 
+				if( (Integer.parseInt(fillingstationBean.getClosingBalanceGas()) < totalgaswant)){
+					jsonObject.put("msg", "Gas is available in filling station : "+fillingstationBean.getClosingBalanceGas()+" KG's only"); 
+				}			
+				else{
+				// gas available in filling station 	
+				
 			int totalUsedGas = 0;
 			for (int i = 0; i < cylenderId1.length; i++) {
 
@@ -417,7 +437,8 @@ public class TransactionController {
 			objUsedGasBean.setFillingstationname(objfillFillingstationmasterBean.getStationname());
 			usedGasDao.save(objUsedGasBean);
 				jsonObject.put("msg", intcount+" Records Updated ");
-
+				
+				}
 
 		} catch (Exception e) {
 			objJson.put("msg", e);

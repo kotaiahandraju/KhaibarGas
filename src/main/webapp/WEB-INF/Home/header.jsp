@@ -121,8 +121,10 @@ span.has-error,span.hasError
 		        $(this).remove(); 
 		    });
 		}, 5000);
+		
 		$(document).ready(function(){
-			$('.view').attr('data-toggle','tooltip');
+			tooltip();
+			/* $('.view').attr('data-toggle','tooltip');
 			$('.view').attr('data-original-title','View');
 			$('.edit').attr('data-toggle','tooltip');
 			$('.edit').attr('data-original-title','Edit');
@@ -130,9 +132,11 @@ span.has-error,span.hasError
 			$('.delete').attr('data-original-title','Delete');
 			$('.activate').attr('data-toggle','tooltip');
 			$('.activate').attr('data-original-title','Activate');
+			$('.printlpo').attr('data-toggle','tooltip');
+			$('.printlpo').attr('data-original-title','Print');
 			$('.deactivate').attr('data-toggle','tooltip');
 			$('.deactivate').attr('data-original-title','Deactivate');
-			$('[data-toggle="tooltip"]').tooltip();
+			$('[data-toggle="tooltip"]').tooltip(); */
 			
 			var formData = new FormData();
 		    
@@ -154,6 +158,22 @@ $(function() {
     $(".chzn-select").chosen();
 	$(".select2").select2();
 });
+
+function tooltip(){
+	$('.view').attr('data-toggle','tooltip');
+	$('.view').attr('data-original-title','View');
+	$('.edit').attr('data-toggle','tooltip');
+	$('.edit').attr('data-original-title','Edit');
+	$('.delete').attr('data-toggle','tooltip');
+	$('.delete').attr('data-original-title','Delete');
+	$('.activate').attr('data-toggle','tooltip');
+	$('.activate').attr('data-original-title','Activate');
+	$('.printlpo').attr('data-toggle','tooltip');
+	$('.printlpo').attr('data-original-title','Print');
+	$('.deactivate').attr('data-toggle','tooltip');
+	$('.deactivate').attr('data-original-title','Deactivate');
+		$('[data-toggle="tooltip"]').tooltip();
+}
 </script>
 </head>
 

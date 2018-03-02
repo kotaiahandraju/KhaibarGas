@@ -200,6 +200,7 @@ function trckerDelete(id,status) {
 		$.fn.makeMultipartRequest('POST', 'trckerDelete', false, formData, false, 'text', function(data) {
 			var resJson=JSON.parse(data);
 			displayTable(resJson);
+			tooltip();
 			window.location.reload();
 		});
 	}
@@ -218,6 +219,7 @@ function inactiveData() {
 				formData, false, 'text', function(data) {
 			var resJson=JSON.parse(data);
 			displayTable(resJson);
+			tooltip();
 					console.log(resJson);
 				});
 		

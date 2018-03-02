@@ -165,6 +165,7 @@ function deleteStore(id,status) {
 		                	 $.unblockUI();
 		                	var resJson=JSON.parse(response);
 		                	showTableData(resJson);
+		                	tooltip();
 		                	$(".msgcss").show();
 		                	$("#msg").text("delete success");
 		               		$("#msg").fadeOut(30000);
@@ -196,6 +197,7 @@ function inactiveData() {
 				formData, false, 'text', function(data) {
 			var resJson=JSON.parse(data);
             showTableData(resJson);
+            tooltip();
 					console.log(resJson);
 				});
 }

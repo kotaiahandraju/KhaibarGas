@@ -250,7 +250,7 @@ table tbody tr.rowInc {
                       <td><select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)">
                         <option value="" selected="selected" disabled="disabled">-- Select Item --</option>
                         </select> </td>
-                      <td><input name="unit" value="1" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)"/></td>
+                      <td><input name="unit" value="1" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onblur="getTruckInCylinderCount(this.id,this.value)"/></td>
                       <td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly" readonly="readonly"/></td>
                       <td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
                       <td><input name="discount" value="0" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="discountCheck(this.id,this.value)" class="form-control" /></td>
@@ -317,7 +317,8 @@ table tbody tr.rowInc {
 
 <div class="container" id="printCylinder" style="display: none;font-size: 20px !important;">
 <div class="col-md-12 printTable">
-<button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button>
+ <div class="col-md-12 noPrint" style="padding: 5px;border-bottom: 2px solid;border-top: 2px solid;"  ><div class="col-md-4"><button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button></div><div class="col-md-4"></div><div class="col-md-4" style="float:right;text-align: right;"><a style="cursor: pointer;float: right;color: red;" onclick="getBack()"><i class="fa fa-2x fa-close"></i></a></div></div>
+<!-- <button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button> -->
 <img height="50" src="../img/khaibarlogo.png"/><div class="clearfix"></div>
  <table class="table-responsive " >
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
@@ -335,7 +336,7 @@ table tbody tr.rowInc {
     <tr><td class="det"><div class="custom">Returned Cylinders</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
      <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr>
-              <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td><span class="retunCylinders"></span></td></tr>
+              <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td><span class="returnTruck"></span></td></tr>
               <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
  </tbody>   </table>
   <table class="table-responsive deliverCylinders" style="width:96%" >
@@ -349,7 +350,7 @@ table tbody tr.rowInc {
 						  
                   <tfoot>
  		<tr><td width="400"></td><td width="200">Total Amount (AED)</td><td> :</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
-         <tr><td width="400"></td><td width="200">Vat Amount (AED)</td><td> :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
+         <tr><td width="400"></td><td width="200">Vat Amount( ${vat }%) (AED)</td><td> :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
          <tr><td width="400"></td><td width="200">Paid Amount(AED)</td><td> :</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
          <tr><td width="400"></td><td width="200" >Due Amount(AED)</td><td>  :</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
           <tr><td width="400"></td><td width="200" >Gross Amount (AED)</td><td>  :</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
@@ -392,7 +393,7 @@ table tbody tr.rowInc {
 						  
                   <tfoot >
  		<tr><td class="tfoot1" width="400"></td><td width="200">Total Amount (AED)</td><td> :</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
-         <tr><td width="400"></td><td width="200">Vat Amount (AED)</td><td> :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
+         <tr><td width="400"></td><td width="200">Vat Amount( ${vat }%) (AED)</td><td> :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
          <tr><td width="400"></td><td width="200">Paid Amount(AED) </td><td>:</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
          <tr><td width="400"></td><td width="200" >Due Amount(AED) </td><td> :</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
           <tr><td width="400"></td><td width="200" >Gross Amount (AED)</td><td>  :</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
@@ -609,7 +610,7 @@ function addMoreRowsForDependent() {
 			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
 			+ dependentRowCount
-			+ 'unit" type="text" value="1" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
+			+ 'unit" type="text" value="1" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);" onblur="getTruckInCylinderCount(this.id.this.value)"/></td>'
 			+ '<td class="inputCss"><input name="rate" id="'
 			+ dependentRowCount
 			+ 'rate" type="text" value="0.0" class="form-control numericOnly" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" readonly="readonly"/></td>'
@@ -820,6 +821,10 @@ function PaidCalculation(value){
 	}
 }
 function getCustomerIds(value){
+	$("#customername").text(" ");
+	$("#customeraddress").text(" ");
+	$("#mobile").text(" ");
+	$("#landline").text(" ");
 	var formData = new FormData();
     formData.append('customertype', value);
 	$.fn.makeMultipartRequest('POST', 'getCustomerIds', false,
@@ -995,7 +1000,7 @@ $('#submit11').click(function(event) {
 		
 	});
 	if(!cylinderAvailable){
-		alert("cylinders not available");
+		alert("cylinders not available in turck");
 		return false;
 		event.preventDefault();
 	}
@@ -1101,7 +1106,7 @@ function Popup(data)
 
     var is_chrome = Boolean(mywindow.chrome);
     var isPrinting = false;
-    mywindow.document.write('<html><head><title>Donor Details</title><link rel="stylesheet" href="../assets/css/cylinderdeliverPrint.css" /> <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"><style>body{font-size:normal;}</style></head><body>');
+    mywindow.document.write('<html><head><title>Customer Details</title><link rel="stylesheet" href="../assets/css/cylinderdeliverPrint.css" /> <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"><style>body{font-size:normal;}</style></head><body>');
     mywindow.document.write(data);
    
     mywindow.document.write('</body></html>');
@@ -1239,6 +1244,21 @@ var j=0;
 	});
 	
 }
+function getBack(){
+	$("#cylinderdataId").show();
+	 $("#printCylinder").hide();
+	ChangeUrl('lpoNum', 'cylinderDeliver?invoiceId=');
+
+}
+function ChangeUrl(page, url) {
+    if (typeof (history.pushState) != "undefined") {
+        var obj = { Page: page, Url: url };
+        history.pushState(obj, obj.Page, obj.Url);
+    } else {
+        alert("Browser does not support HTML5.");
+    }
+}
+
 
 $("#pageName").text("Cylinder Deliver To Customer");
 $(".cylinderDeliver").addClass("active");

@@ -249,9 +249,8 @@ table#dependent_table tbody tr td:first-child::before {
 	<table class="table table-bordered" align="center" style="min-width: 680px;min-height:200px" id="printTable">
 	<thead> 
 		<tr >
-			<p><td colspan="2">Supplier</p>
-				<p><span id="printSuplierName"></span></p> 
-				 <p> <span id="printSuplieraddress"></span></p>
+			<p><td colspan="2">Supplier : 	<span id="printSuplierName"></span></p>
+				 <p style="width:250px"> <span id="printSuplieraddress" ></span></p>
 				    </td>
 				  <p><td colspan="3">LPO No. : <span id="printLpoNum"></span>, LPO Date :<span id="printLpoDate"> </span> </p>
 			<p>This PO No. should appear on the invoice and all correspondence</td></p>
@@ -362,7 +361,7 @@ function showTableData(response){
 		
 		var edit = "<a class='edit editIt' id='edit"+orderObj.lponumber+"' onclick=viewDetails(this.id,1)><i style='color: orange;' class='fa fa-edit'></i></a>"
 		var view = "<a class='view' id='"+orderObj.lponumber+"' onclick=viewDetails(this.id,0)><i class='fa fa-eye red'></i></a>"
-		var printImage = "<a class='printImage' id='print"+orderObj.lponumber+"' onclick=lpoPrint(this.id)><img src='../img/print1.jpg' alt='Paris' width='20' height='20'></i></a>"
+		var printImage = "<a class='printlpo' id='print"+orderObj.lponumber+"' onclick=lpoPrint(this.id)><img src='../img/print1.jpg' alt='Paris' width='20' height='20'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		serviceUnitArray1[orderObj.lponumber] = orderObj;
 		var tblRow ="<tr>"
@@ -428,6 +427,7 @@ function lpoDelete(id,status) {
 		                 if(response != null ){
 		                	 var resJson=JSON.parse(response);
 		                	showTableData(resJson);
+		                	tooltip();
 		                	//window.location.reload();
 		                	}
 		                 window.location.reload();
@@ -710,6 +710,7 @@ function inactiveData() {
 				formData, false, 'text', function(data) {
 			var resJson=JSON.parse(data);
             showTableData(resJson);
+            tooltip();
 					console.log(resJson);
 				});
 }
@@ -746,7 +747,7 @@ var	id = printId.replace("print", "");
 $(dependentRow1).appendTo("#printTable tbody");
 		});
 		
-		$("#numberToWords").text("Total (in Words ).  "+numberToWords);
+		$("#numberToWords").text("AED.  "+numberToWords);
 	});
 	
 }
@@ -839,7 +840,7 @@ function Popup(data)
 
     var is_chrome = Boolean(mywindow.chrome);
     var isPrinting = false;
-    mywindow.document.write('<html><head><title>Donor Details</title> <link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
+    mywindow.document.write('<html><head><title>Lpo Details</title> <link rel="stylesheet" type="text/css" href="../assets/css/img.css"><link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css"></head><body>');
     mywindow.document.write(data);
    
     mywindow.document.write('</body></html>');

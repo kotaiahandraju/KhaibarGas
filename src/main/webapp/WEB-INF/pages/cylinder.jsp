@@ -31,7 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Customer ID</th><th>Owner Company</th>
-                                        <th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Remarks</th><th>Status</th><th></th>
+                                        <th>Store </th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Remarks</th><th>Status</th><th></th>
                                     </tr>
                                 </thead>
                                 <tbody></tbody>
@@ -202,7 +202,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Owner Company</th><th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Owner Company</th><th>Store </th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -218,7 +218,7 @@ function displayTable(listOrders) {
 				+ "<td title='"+orderObj.sizeName+"'>"+ orderObj.sizeName + "</td>"
 				+ "<td class='impFiled' title='"+orderObj.cylinderstatus+"'>"+ orderObj.cylinderstatus + "</td>"
 				+ "<td title='"+orderObj.companyname+"'>"+ orderObj.companyname+ "</td>"
-				+ "<td title='"+orderObj.location+"'>"+ orderObj.location + "</td>"
+				+ "<td title='"+orderObj.storename+"'>"+ orderObj.storename + "</td>"
 				+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber+ "</td>"
 				+ "<td title='"+orderObj.color+"'>"+ orderObj.color + "</td>"
 				+ "<td title='"+orderObj.expirtdate1+"'>"+orderObj.expirtdate1+ "</td>"
@@ -273,6 +273,7 @@ function deleteCylinder(id,status){
 			var alldata = jsonobj.allOrders1;
 			console.log(jsonobj.allOrders1);
 			displayTable(alldata);
+			tooltip();
 			window.location.reload();
 		});
 	}
@@ -367,6 +368,7 @@ function inactiveData() {
 			var alldata = jsonobj.allOrders1;
 			console.log(jsonobj.allOrders1);
 			displayTable(alldata);
+			tooltip();
 				});
 }
 

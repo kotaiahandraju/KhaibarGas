@@ -279,6 +279,7 @@ function deleteTruckTracking(id,status){
 			var alldata = jsonobj.allOrders1;
 			console.log(jsonobj.allOrders1);
 			displayTable(alldata);
+			tooltip();
 			window.location.reload();
 		});
 	}
@@ -316,6 +317,7 @@ function inactiveData() {
 			var alldata = jsonobj.allOrders1;
 			console.log(jsonobj.allOrders1);
 			displayTable(alldata);
+			tooltip();
 				});
 }
  $("#pageName").text("Truck Coming into Factory ");

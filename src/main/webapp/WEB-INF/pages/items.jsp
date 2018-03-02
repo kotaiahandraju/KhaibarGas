@@ -128,6 +128,7 @@ function showTableData(response){
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
+		
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick='deleteItem("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
@@ -144,6 +145,7 @@ function showTableData(response){
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
+		
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 }
@@ -179,6 +181,8 @@ function deleteItem(id,status){
 					$.unblockUI();
 		        	var resJson=JSON.parse(response);
 		            showTableData(resJson);
+		        	tooltip();
+		            
 		            //window.location.reload();
 				}
 		        window.location.reload();
@@ -206,6 +210,8 @@ function inactiveData() {
 				formData, false, 'text', function(data) {
 			var resJson=JSON.parse(data);
             showTableData(resJson);
+			  tooltip();
+          
 					console.log(resJson);
 				});
 	

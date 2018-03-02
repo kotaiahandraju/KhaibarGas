@@ -212,6 +212,7 @@ function customerDelete(id,status) {
 						 $.unblockUI();
 		                	var resJson=JSON.parse(response);
 		                	showTableData(resJson);
+		                	tooltip();
 		                	//alert("Delete Sucessfully");
 		                	//window.location.reload();
 		                 window.location.reload();
@@ -251,6 +252,7 @@ function inactiveData() {
 				formData, false, 'text', function(data) {
 			var resJson=JSON.parse(data);
             showTableData(resJson);
+            tooltip();
 					console.log(resJson);
 				});
 		

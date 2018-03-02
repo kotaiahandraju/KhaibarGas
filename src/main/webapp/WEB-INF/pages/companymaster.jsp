@@ -224,6 +224,7 @@ function deleteCompanyMasterDetails(id,status) {
 			var alldata = jsonobj.allOrders1;
 			console.log(jsonobj.allOrders1);
 			displayTable(alldata);
+			tooltip();
 			window.location.reload();
 		});
 	}
@@ -246,6 +247,7 @@ function inactiveData() {
 			var alldata = jsonobj.allOrders1;
 			console.log(jsonobj.allOrders1);
 			displayTable(alldata);
+			tooltip();
 				});
 }
 
