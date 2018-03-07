@@ -317,9 +317,24 @@ table tbody tr.rowInc {
 
 <div class="container" id="printCylinder" style="display: none;font-size: 20px !important;">
 <div class="col-md-12 printTable">
- <div class="col-md-12 noPrint" style="padding: 5px;border-bottom: 2px solid;border-top: 2px solid;"  ><div class="col-md-4"><button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button></div><div class="col-md-4"></div><div class="col-md-4" style="float:right;text-align: right;"><a style="cursor: pointer;float: right;color: red;" onclick="getBack()"><i class="fa fa-2x fa-close"></i></a></div></div>
+ <div class="col-md-12 noPrint" style="padding: 5px;border-bottom: 2px solid;border-top: 2px solid;"  >
+ <div class="col-md-4"><button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button></div><div class="col-md-4"></div>
+ <div class="col-md-4" style="float:right;text-align: right;"><a style="cursor: pointer;float: right;color: red;" onclick="getBack()">
+ <i class="fa fa-2x fa-close"></i></a></div></div>
 <!-- <button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button> -->
-<img height="50" src="../img/khaibarlogo.png"/><div class="clearfix"></div>
+<div class="col-md-6">
+<img height="" src="../img/khaibarlogo.png"/></div>
+<div class="col-md-6" style="float:right; right:50px; text-align:right; ">
+<h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>
+<p style="font-size:15px;">Ajman  - U.A.E, 
+ Al Jurf Industrial Area 1,
+ Tel. : (+971) 6 7448668, 
+ TRN : 100027344900003</p>
+</div><div class="clearfix"></div>
+<div class="col-md-12">
+<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # 0001</h3><hr style="margin:2px;"><p>Date:  01-01-2018</p>
+</div><div class="clearfix"></div>
+<div class="clearfix"></div>
  <table class="table-responsive " >
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
@@ -362,7 +377,18 @@ table tbody tr.rowInc {
     <div class="clearfix"></div>
     <br><br><br>
     <div class="col-md-12 printTable">
-<img height="50" src="../img/khaibarlogo.png"/><div class="clearfix"></div>
+<div class="col-md-6">
+<img height="" src="../img/khaibarlogo.png"/></div>
+<div class="col-md-6" style="float:right; right:50px; text-align:right; ">
+<h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>
+<p style="font-size:15px;">Ajman  - U.A.E, 
+ Al Jurf Industrial Area 1
+ Tel. : (+971) 6 7448668
+ TRN : 100027344900003</p>
+</div><div class="clearfix"></div>
+<div class="col-md-12">
+<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # 0001</h3><hr style="margin:2px;"><p>Date:  01-01-2018</p>
+</div><div class="clearfix"></div>
  <table class="table-responsive " >
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
