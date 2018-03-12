@@ -106,6 +106,10 @@
 	<definition name="cylinderAutoGenHome" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/cylinderAutoGenaration.jsp" />
 	</definition>
+	<definition name="customerTariffMaster" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/customerTariffMaster.jsp" />
+	</definition>
+	
 	
 </tiles-definitions>
 

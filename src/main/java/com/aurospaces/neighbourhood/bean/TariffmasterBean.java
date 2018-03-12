@@ -16,9 +16,21 @@ protected String remarks ;
 protected String status ;
 protected String tariffStatus ;
 protected String itemId ;
-protected String itemName ;
+protected String itemName,customerId ,customername;
 
 
+public String getCustomername() {
+	return customername;
+}
+public void setCustomername(String customername) {
+	this.customername = customername;
+}
+public String getCustomerId() {
+	return customerId;
+}
+public void setCustomerId(String customerId) {
+	this.customerId = customerId;
+}
 public String getItemName() {
 	return itemName;
 }

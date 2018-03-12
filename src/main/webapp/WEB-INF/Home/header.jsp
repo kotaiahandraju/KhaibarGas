@@ -285,7 +285,7 @@ function tooltip(){
 						
 					</ul>
 				</li>
-				
+				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Customer Tariff Master</span></a></li>
 				
 				
 				

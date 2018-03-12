@@ -8,7 +8,7 @@
 <link rel="stylesheet" href='${baseurl }/assets/css/cylinderdeliverPrint1.css' />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 
- 
+
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 <!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.1.135/jspdf.min.js"></script>
@@ -59,7 +59,7 @@ table tbody tr.rowInc {
     <table width="100%">
       <tr> 
         <td><div class="row">    
-            <div class="col-md-6">
+            <div class="col-md-12">
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   <h4>Customer Details</h4>
@@ -68,7 +68,7 @@ table tbody tr.rowInc {
                 <div class="panel-body">
                   <div class="row">
                     <div class="col-md-6">
-                      <div class="form-group">
+                     <%--  <div class="form-group">
                         <label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
                         <div class="col-md-6">
                           <form:select path="cylinderDeliverTruck" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="selectReturnTruck(this.value);" >
@@ -76,7 +76,8 @@ table tbody tr.rowInc {
                             <form:options items="${trucks}"></form:options>
                           </form:select>
                         </div>
-                      </div>
+                      </div> --%>
+                     
                       <div class="form-group">
                         <label for="focusedinput" class="col-md-6 control-label">Customer Type <span class="impColor">*</span></label>
                         <div class="col-md-6">
@@ -96,23 +97,12 @@ table tbody tr.rowInc {
                           </form:select>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label"> Security Deposit </label>
-                        <div class="col-md-6">
-                          <form:select path="securityDeposit" class="form-control " onfocus="removeBorder(this.id);" onchange="">
-                            <form:option value="">-- Select Security Deposit --</form:option>
-                             <form:option value="Amount">Amount</form:option>
-                              <form:option value="Cylinder">Cylinder</form:option>
-                          </form:select>
+                       <div class="form-group">
+                        <label for="focusedinput" class="col-md-6 control-label">previous Due Amount (AED)</label>
+                        <div class="col-md-6" style="padding-top:5px; color:#C00;">
+                        <span id="lastDueAmount" style="padding-top:5px; color:#C00"><strong>0</strong></span>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label"> Security Deposit </label>
-                        <div class="col-md-6">
-                         <form:input path="securityAmount"  class="form-control" placeholder="Security Deposit"/>
-                        </div>
-                      </div>
-                     
                     </div>
 <!--                     vat amount -->
 				<input type="hidden" name="vatamount" id="vatamount1" >
@@ -140,7 +130,7 @@ table tbody tr.rowInc {
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+           <%-- <di v class="col-md-6">
               <div class="panel panel-primary">
                 <div class="panel-heading">
                   <h4>Returned Cylinders</h4>
@@ -205,7 +195,7 @@ table tbody tr.rowInc {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --%>
 		
         
         

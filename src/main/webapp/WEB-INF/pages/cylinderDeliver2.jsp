@@ -8,7 +8,7 @@
 <link rel="stylesheet" href='${baseurl }/assets/css/cylinderdeliverPrint1.css' />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 
- 
+
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 <!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.1.135/jspdf.min.js"></script>
@@ -22,9 +22,6 @@
 <!-- <script type="text/javascript" src="js/basic.js"></script> -->
 
 <style>
-
-
-
 table #dependent_table {
 	/* 	width: 100%; */
 	counter-reset: rowNumber;
@@ -96,23 +93,6 @@ table tbody tr.rowInc {
                           </form:select>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label"> Security Deposit </label>
-                        <div class="col-md-6">
-                          <form:select path="securityDeposit" class="form-control " onfocus="removeBorder(this.id);" onchange="">
-                            <form:option value="">-- Select Security Deposit --</form:option>
-                             <form:option value="Amount">Amount</form:option>
-                              <form:option value="Cylinder">Cylinder</form:option>
-                          </form:select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label"> Security Deposit </label>
-                        <div class="col-md-6">
-                         <form:input path="securityAmount"  class="form-control" placeholder="Security Deposit"/>
-                        </div>
-                      </div>
-                     
                     </div>
 <!--                     vat amount -->
 				<input type="hidden" name="vatamount" id="vatamount1" >
@@ -342,18 +322,17 @@ table tbody tr.rowInc {
  <div class="col-md-4" style="float:right;text-align: right;"><a style="cursor: pointer;float: right;color: red;" onclick="getBack()">
  <i class="fa fa-2x fa-close"></i></a></div></div>
 <!-- <button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button> -->
-<div class="col-md-6 col-xs-6">
-<img height="70" src="../img/khaibarlogo.png"/></div>
-<div class="col-md-6 col-xs-6" style="float:right; right:50px; text-align:right; ">
-
-<!-- <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
-<p style="font-size:15px; margin-top:10px;">Ajman  - U.A.E, 
- Al Jurf Industrial Area 1
- Tel. : (+971) 6 7448668
+<div class="col-md-6">
+<img height="" src="../img/khaibarlogo.png"/></div>
+<div class="col-md-6" style="float:right; right:50px; text-align:right; ">
+<h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>
+<p style="font-size:15px;">Ajman  - U.A.E, 
+ Al Jurf Industrial Area 1,
+ Tel. : (+971) 6 7448668, 
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p>Date:  01-01-2018</p>
+<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # 0001</h3><hr style="margin:2px;"><p>Date:  01-01-2018</p>
 </div><div class="clearfix"></div>
 <div class="clearfix"></div>
  <table class="table-responsive " >
@@ -396,19 +375,19 @@ table tbody tr.rowInc {
     </table>
     </div>
     <div class="clearfix"></div>
-    <br>
+    <br><br><br>
     <div class="col-md-12 printTable">
-<div class="col-md-6 col-xs-6">
-<img height="70" src="../img/khaibarlogo.png" /></div>
-<div class="col-md-6 col-xs-6" style="float:right; right:50px; text-align:right; ">
-<!--  <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
+<div class="col-md-6">
+<img height="" src="../img/khaibarlogo.png"/></div>
+<div class="col-md-6" style="float:right; right:50px; text-align:right; ">
+<h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>
 <p style="font-size:15px;">Ajman  - U.A.E, 
  Al Jurf Industrial Area 1
  Tel. : (+971) 6 7448668
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p>Date:  01-01-2018</p>
+<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # 0001</h3><hr style="margin:2px;"><p>Date:  01-01-2018</p>
 </div><div class="clearfix"></div>
  <table class="table-responsive " >
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
@@ -1228,7 +1207,8 @@ var j=0;
 			$(".dueAmount").text(orderObj.dueamount);
 			$(".previousdueamount").text(orderObj.previousdueamount);
 			$(".grassAmount").text(orderObj.grossamount);
-			$(".taxinvoice").text(orderObj.invoiceid);
+
+			
 			
 			id="'+ dependentRowCount+ 'taxable"
 			
