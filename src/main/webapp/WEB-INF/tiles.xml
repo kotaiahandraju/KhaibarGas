@@ -109,7 +109,12 @@
 	<definition name="customerTariffMaster" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/customerTariffMaster.jsp" />
 	</definition>
-	
+	<definition name="privateCylinderFiled" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/privatecustomerCylinderFilledSta.jsp" />
+	</definition>
+	<definition name="securedeposit" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/securedeposit.jsp" />
+	</definition>
 	
 </tiles-definitions>
 

@@ -960,7 +960,7 @@ public class TransactionController {
 	public Map<Integer, String> populateCity() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
 		try {
-			String sSql = "select id,stationname from fillingstationmaster";
+			String sSql = "select id,stationname from fillingstationmaster where status='1' ";
 			List<FillingstationmasterBean> list = fillingstationmasterDao.populate(sSql);
 			for (FillingstationmasterBean bean : list) {
 				statesMap.put(bean.getId(), bean.getStationname());

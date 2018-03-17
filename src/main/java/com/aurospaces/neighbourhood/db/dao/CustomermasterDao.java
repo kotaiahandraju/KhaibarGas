@@ -11,7 +11,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.aurospaces.neighbourhood.bean.CustomermasterBean;
-import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseCustomermasterDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -104,6 +103,21 @@ public class CustomermasterDao extends BaseCustomermasterDao
 				buffer.append(" ,previousDueAmount="+customermasterBean.getPreviousDueAmount());
 			}
 			buffer.append(" where id="+customermasterBean.getId());
+			String sql = buffer.toString();
+			int i = jdbcTemplate.update(sql, new Object[]{});
+			 if(i>0)
+				 result = true;
+				return result;
+		}
+	 public boolean updateDueAmount(String dueAmount,String customerId) {
+			boolean result=false;
+			jdbcTemplate = custom.getJdbcTemplate();
+			StringBuffer buffer =new StringBuffer();
+			buffer.append("update customermaster set  ");
+			if(StringUtils.isNotBlank(dueAmount)){
+				buffer.append(" dueAmount="+dueAmount);
+			}
+			buffer.append(" where id="+customerId);
 			String sql = buffer.toString();
 			int i = jdbcTemplate.update(sql, new Object[]{});
 			 if(i>0)

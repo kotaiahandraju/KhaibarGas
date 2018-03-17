@@ -36,8 +36,8 @@ $(function () {
 	 $('#outDate').datetimepicker({        
 
 	    useCurrent: false,
-	    minDate: new Date(),
-	    maxDate: tommorow,
+// 	    minDate: new Date(),
+	    maxDate: new Date(),
 	    format: 'DD-MMM-YYYY hh:mm A',
 	    showTodayButton: true,
 	    sideBySide: true,

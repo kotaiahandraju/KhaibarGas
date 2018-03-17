@@ -329,6 +329,9 @@ h1, .h1 {
 						
 					</ul>
 				</li>
+				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Customer Tariff Master</span></a></li>
+				<li class="privateCylinderFilled"><a href="${baseurl }/admin/privateCylinderFilled"><i class="fa fa-bar-chart-o"></i> <span>Private Cylinder Filled </span></a></li>
+				
 				
 			</ul>
 		</div>
@@ -490,7 +493,7 @@ $('#tableId').html(tableHead);
 });
 	if(isClick=='Yes'){
 		$('.datatables').dataTable({
-			 dom: 'Bfrtip',
+			 dom: 'lBfrtip',
 			 
 			 
 			 buttons: [

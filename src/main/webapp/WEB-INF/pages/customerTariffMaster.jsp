@@ -169,14 +169,11 @@ function displayTable(listOrders) {
 
 function editTariffMasterDetails(id) {
 	$("#id").val(serviceUnitArray[id].id);
+	$("#customerId").val(serviceUnitArray[id].customerId);
 	$("#itemId").val(serviceUnitArray[id].itemId);
-	$("#assetcode").val(serviceUnitArray[id].assetcode);
-	$("#assetdescription").val(serviceUnitArray[id].assetdescription);
+	$("#remarks").val(serviceUnitArray[id].remarks);
 	$("#rate").val(serviceUnitArray[id].rate);
 	$("#alloweddiscount").val(serviceUnitArray[id].alloweddiscount);
-	$("#remarks").val(serviceUnitArray[id].remarks);
-	$("#status").val(serviceUnitArray[id].status);
-	//$("#customerid").val(serviceUnitArray[id].customerid);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }
@@ -192,7 +189,7 @@ function deleteTariffMasterDetails(id,status) {
 		var formData = new FormData();
 		formData.append('id', id);
 		formData.append('status', status);
-		$.fn.makeMultipartRequest('POST', 'deleteTariffMasterDetails', false, formData, false, 'text', function(data) {
+		$.fn.makeMultipartRequest('POST', 'deleteCustomerTariffMasterDetails', false, formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
 			console.log(jsonobj.allOrders1);
@@ -212,7 +209,7 @@ function inactiveData() {
 		var formData = new FormData();
 		formData.append('status', status);
 		
-		$.fn.makeMultipartRequest('POST', 'inActiveTariff', false,
+		$.fn.makeMultipartRequest('POST', 'customerinActiveTariff', false,
 				formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;

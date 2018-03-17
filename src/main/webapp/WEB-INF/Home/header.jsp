@@ -286,6 +286,10 @@ function tooltip(){
 					</ul>
 				</li>
 				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Customer Tariff Master</span></a></li>
+				<li class="privateCylinderFilled"><a href="${baseurl }/admin/privateCylinderFilled"><i class="fa fa-bar-chart-o"></i> <span>Private Cylinder Filled </span></a></li>
+				<li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>
+				
+				
 				
 				
 				

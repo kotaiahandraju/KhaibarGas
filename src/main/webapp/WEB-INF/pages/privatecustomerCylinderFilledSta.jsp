@@ -55,7 +55,7 @@ table tbody tr.rowInc {
 </ol>
 <div class="clearfix"></div>
 <div class="container" id="cylinderdataId">
-  <form:form modelAttribute="lpoForm" id="cylinderDeliverForm" action="cylinderDeliverSave" class="form-horizontal" method="post">
+  <form:form modelAttribute="lpoForm" id="cylinderDeliverForm" action="savePrivateCylinderFilled" class="form-horizontal" method="post">
     <table width="100%">
       <tr> 
         <td><div class="row">    
@@ -78,25 +78,27 @@ table tbody tr.rowInc {
                         </div>
                       </div> --%>
                      
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Customer Type <span class="impColor">*</span></label>
-                        <div class="col-md-6">
-                          <form:select path="customertype" class="form-control   validate"  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
-                            <form:option value="">-- Customer Type --</form:option>
-                            <form:option value="COMMERCIAL">COMMERCIAL</form:option>
-                            <form:option value="DOMESTIC">DOMESTIC</form:option>
-                            <form:option value="INDUSTIAL">INDUSTIAL</form:option>
-                          </form:select>
-                        </div>
-                      </div>
+                      
                       <div class="form-group">
                         <label for="focusedinput" class="col-md-6 control-label">Customer Id <span class="impColor">*</span></label>
                         <div class="col-md-6">
                           <form:select path="customerId" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
-                            <form:option value="">-- Select Customer Id --</form:option>
+                            <form:option value="">-- Select Customer Name --</form:option>
+                            <form:options items="${customers }"/>
                           </form:select>
                         </div>
                       </div>
+                       <div class="form-group">
+                        <label for="focusedinput" class="col-md-6 control-label">Filling Station <span class="impColor">*</span></label>
+                        <div class="col-md-6">
+                          <form:select path="fillingStation" class="form-control  validate" onfocus="removeBorder(this.id);" >
+                            <form:option value="">-- Select Filling Station --</form:option>
+                            <form:options items="${fillingstation }"/>
+                          </form:select>
+                        </div>
+                      </div>
+                      
+                      
                        <div class="form-group">
                         <label for="focusedinput" class="col-md-6 control-label">previous Due Amount (AED)</label>
                         <div class="col-md-6" style="padding-top:5px; color:#C00;">
@@ -211,7 +213,7 @@ table tbody tr.rowInc {
                     
                <div class="panel panel-primary">
                 <div class="panel-heading">
-                <h4>Deliver Cylinders</h4>
+                <h4>Filled Cylinders</h4>
                  <table class="options notPrintMe">
                   <tr>
                     <td class="hideme"><span class="addItemButton btn-danger" onclick="addMoreRowsForDependent(this.form);">Add Item</span></td>
@@ -257,13 +259,13 @@ table tbody tr.rowInc {
                   <tbody>
                     <tr id="1" class="rowInc">
                       <td></td>
-                      <td><select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)">
+                      <td><select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id);">
                         <option value="" selected="selected" disabled="disabled">-- Select Item --</option>
                         </select> </td>
-                      <td><input name="unit" value="1" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onblur="getTruckInCylinderCount(this.id,this.value)"/></td>
+                      <td><input name="unit" value="1" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)" /></td>
                       <td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly" readonly="readonly"/></td>
                       <td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-                      <td><input name="discount" value="0" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="discountCheck(this.id,this.value)" class="form-control" /></td>
+                      <td><input name="discount" value="0" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="discountCheck(this.id,this.value),allcalculate(this.id)" class="form-control" /></td>
                       <td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
                       <!-- 								<td><input name="vat" placeholder="Vat" id="1vat" value="5" type="text" onkeydown="removeBorder(this.id);" class="form-control" /></td> -->
                       <!-- 								<td><input name="netAmount" placeholder="Net Amount"  id="1netAmount" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td> -->
@@ -644,10 +646,10 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
-			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)"><option>Select</option></select></td>'
+			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
 			+ dependentRowCount
-			+ 'unit" type="text" value="1" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);" onblur="getTruckInCylinderCount(this.id.this.value)"/></td>'
+			+ 'unit" type="text" value="1" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);" /></td>'
 			+ '<td class="inputCss"><input name="rate" id="'
 			+ dependentRowCount
 			+ 'rate" type="text" value="0.0" class="form-control numericOnly" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" readonly="readonly"/></td>'
@@ -932,9 +934,9 @@ function getCustomerDetails(value){
 } */
 var map = new Object(); // or var map = {};
 function getTarrifPrice(value,id){
-	var truckId = $("#cylinderDeliverTruck").val();
-	if(truckId==""){
-		alert("Please Select Truck");
+	var customerId = $("#customerId").val();
+	if(customerId==""){
+		alert("Please Select Customer");
 		$("#"+id).val("");
 		return false;
 	}
@@ -942,7 +944,8 @@ function getTarrifPrice(value,id){
 	
 	var formData = new FormData();
     formData.append('itemId', value);
-	$.fn.makeMultipartRequest('POST', 'getTariffPrice', false,
+    formData.append('customerId', customerId);
+	$.fn.makeMultipartRequest('POST', 'getCustomerTariffPrice', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.rate;
@@ -1001,13 +1004,13 @@ function getTruckInCylinderCount(id,value){
 		$.fn.makeMultipartRequest('POST', 'getTruckInCylinderCount', false,
 				formData, false, 'text', function(data){
 			var jsonobj = $.parseJSON(data);
-			var msg = jsonobj.msg;
+			/* var msg = jsonobj.msg;
 		if(msg!="ok"){
 			alert(msg);
 			cylinderAvailable = false;
 		}else{
 			cylinderAvailable = true;
-		}
+		} */
 		});
 	 
 }
@@ -1296,6 +1299,6 @@ function ChangeUrl(page, url) {
 }
 
 
-$("#pageName").text("Cylinder Deliver To Customer");
-$(".cylinderDeliver").addClass("active");
+$("#pageName").text("Cylinder Filled Status");
+$(".privateCylinderFilled").addClass("active");
 </script>

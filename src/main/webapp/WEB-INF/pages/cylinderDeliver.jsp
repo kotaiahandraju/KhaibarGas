@@ -96,22 +96,6 @@ table tbody tr.rowInc {
                           </form:select>
                         </div>
                       </div>
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label"> Security Deposit </label>
-                        <div class="col-md-6">
-                          <form:select path="securityDeposit" class="form-control " onfocus="removeBorder(this.id);" onchange="">
-                            <form:option value="">-- Select Security Deposit --</form:option>
-                             <form:option value="Amount">Amount</form:option>
-                              <form:option value="Cylinder">Cylinder</form:option>
-                          </form:select>
-                        </div>
-                      </div>
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label"> Security Deposit </label>
-                        <div class="col-md-6">
-                         <form:input path="securityAmount"  class="form-control" placeholder="Security Deposit"/>
-                        </div>
-                      </div>
                      
                     </div>
 <!--                     vat amount -->
