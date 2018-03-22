@@ -129,6 +129,9 @@ public class TransactionController {
 		CylindermasterBean cylindermasterBean = null;
 		int intcount=0;
 		JSONObject jsonObject=new JSONObject();
+		KhaibarGasUtil objKhaibarGasUtil =new KhaibarGasUtil();
+		String invoiceId = objKhaibarGasUtil.randNum();
+		PrintDataBean printDataBean = null;
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean) session.getAttribute("cacheUserBean");
 			String fillingStation = fillingstationmasterBean.getFillingStation();
@@ -142,9 +145,11 @@ public class TransactionController {
 				cylindertransactionBean.setCylinderStatus(cylinderStatus);
 				cylindertransactionBean.setFillingStation(fillingStation);
 				cylindertransactionBean.setCylindetId(cylenderId1[i]);
+				cylindertransactionBean.setInvoiceId(invoiceId);
 				cylindermasterBean.setId(Integer.parseInt(cylenderId1[i]));
 				cylindermasterBean.setCylinderstatus(cylinderStatus);
 				cylindermasterBean.setFillingstationId(fillingStation);
+				cylindermasterBean.setInvoiceId(invoiceId);
 				cylindertransactionDao.save(cylindertransactionBean);
 				boolean count=cylindermasterDao.updateCylinderStatus(cylindermasterBean);
 				 
@@ -375,6 +380,8 @@ public class TransactionController {
 		CylindermasterBean cylindermasterBean1 = null;
 		int intcount=0;
 		JSONObject jsonObject=new JSONObject();
+		KhaibarGasUtil objKhaibarGasUtil =new KhaibarGasUtil();
+		String invoiceId = objKhaibarGasUtil.randNum();
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean) session.getAttribute("cacheUserBean");
 			String cylenderId = cylindertransactionBean1.getCylindetId();
@@ -420,8 +427,10 @@ public class TransactionController {
 				cylindertransactionBean.setCylinderStatus(cylindertransactionBean1.getCylinderStatus());
 				cylindertransactionBean.setFillingStation(cylindertransactionBean1.getFillingStation());
 				cylindertransactionBean.setCylindetId(cylenderId1[i]);
+				cylindertransactionBean.setInvoiceId(invoiceId);
 				cylindermasterBean1.setId(Integer.parseInt(cylenderId1[i]));
 				cylindermasterBean1.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
+				cylindermasterBean1.setInvoiceId(invoiceId);
 				cylindertransactionDao.save(cylindertransactionBean);
 				boolean count=cylindermasterDao.updateCylinderStatus(cylindermasterBean1);
 				if(count){
@@ -435,6 +444,8 @@ public class TransactionController {
 			objUsedGasBean.setGasInKgs(String.valueOf(totalUsedGas));
 			objUsedGasBean.setClosedgas(objfillFillingstationmasterBean.getClosingBalanceGas());
 			objUsedGasBean.setFillingstationname(objfillFillingstationmasterBean.getStationname());
+			objUsedGasBean.setCustomerType("public");
+			objUsedGasBean.setInvoiceId(invoiceId);
 			usedGasDao.save(objUsedGasBean);
 				jsonObject.put("msg", intcount+" Records Updated ");
 				
@@ -520,6 +531,8 @@ public class TransactionController {
 		CylindermasterBean cylindermasterBean = null;
 		int intcount=0;
 		JSONObject jsonObject=new JSONObject();
+		KhaibarGasUtil objKhaibarGasUtil =new KhaibarGasUtil();
+		String invoiceId = objKhaibarGasUtil.randNum();
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean) session.getAttribute("cacheUserBean");
 			String cylenderId = cylindertransactionBean1.getCylindetId();
@@ -531,8 +544,10 @@ public class TransactionController {
 				cylindertransactionBean.setCylinderStatus(cylindertransactionBean1.getCylinderStatus());
 				cylindertransactionBean.setFillingStation(cylindertransactionBean1.getFillingStation());
 				cylindertransactionBean.setCylindetId(cylenderId1[i]);
+				cylindertransactionBean.setInvoiceId(invoiceId);
 				cylindermasterBean.setId(Integer.parseInt(cylenderId1[i]));
 				cylindermasterBean.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
+				cylindermasterBean.setInvoiceId(invoiceId);
 				cylindertransactionDao.save(cylindertransactionBean);
 				boolean count=cylindermasterDao.updateCylinderStatus(cylindermasterBean);
 				if(count){
@@ -590,6 +605,8 @@ public class TransactionController {
 		CylindermasterBean cylindermasterBean = null;
 		int intcount=0;
 		JSONObject jsonObject=new JSONObject();
+		KhaibarGasUtil objKhaibarGasUtil =new KhaibarGasUtil();
+		String invoiceId = objKhaibarGasUtil.randNum();
 		try {
 			KhaibarUsersBean users = (KhaibarUsersBean) session.getAttribute("cacheUserBean");
 			String cylenderId = cylindertransactionBean1.getCylindetId();
@@ -601,9 +618,11 @@ public class TransactionController {
 				cylindertransactionBean.setCylinderStatus(cylindertransactionBean1.getCylinderStatus());
 				cylindertransactionBean.setTruckId(cylindertransactionBean1.getTruckId());
 				cylindertransactionBean.setCylindetId(cylenderId1[i]);
+				cylindertransactionBean.setInvoiceId(invoiceId);
 				cylindermasterBean.setId(Integer.parseInt(cylenderId1[i]));
 				cylindermasterBean.setCylinderstatus(cylindertransactionBean1.getCylinderStatus());
 				cylindermasterBean.setTruckId(cylindertransactionBean1.getTruckId());
+				cylindermasterBean.setInvoiceId(invoiceId);
 				cylindertransactionDao.save(cylindertransactionBean);
 				boolean count=cylindermasterDao.updateCylinderStatus(cylindermasterBean);
 				if(count){
@@ -765,6 +784,7 @@ public class TransactionController {
 							cylindertransactionBean1.setCylinderStatus("6");
 							cylindertransactionBean1.setCustomerId(customerId);
 							cylindertransactionBean1.setCylindetId(String.valueOf(cylindermasterbean.getId()));
+							cylindertransactionBean1.setInvoiceId(invoiceId);
 							cylindertransactionDao.save(cylindertransactionBean1);
 							
 							
@@ -801,6 +821,7 @@ public class TransactionController {
 					cylindertransactionBean1.setCylinderStatus("7");
 					cylindertransactionBean1.setCustomerId(customerId);
 					cylindertransactionBean1.setCylindetId(cylinderId[i]);
+					cylindertransactionBean1.setInvoiceId(invoiceId);
 					
 					cylinderMasterBean2.setId(Integer.parseInt(cylinderId[i]));
 					cylinderMasterBean2.setCylinderstatus("7");

@@ -14,6 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aurospaces.neighbourhood.bean.CompanymasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
@@ -57,6 +58,32 @@ public class SecuredepositController {
 
 		}
 		return "securedeposit";
+	}
+	
+	@RequestMapping(value="/saveSecurityDeposit")
+	public String savePrivateCylinderFilled(@ModelAttribute("securedepositForm")SecuredepositBean securedepositBean,
+			@RequestParam("unit") String[] unit, 
+			@RequestParam("company1") String[] company, 
+			@RequestParam("item1") String[] item, 
+			HttpServletRequest request,HttpSession session) {
+		try{
+			if(securedepositBean.getSecurityDeposit().equals("Amount")){
+				securedepositDao.save(securedepositBean);
+			}
+			if(securedepositBean.getSecurityDeposit().equals("Cylinder")){
+				for(int i=0;i<item.length;i++){
+					securedepositBean.setQuantity(unit[i]);
+					securedepositBean.setItemId(item[i]);
+					securedepositBean.setCompanyId(company[i]);
+					securedepositBean.setAmount("");
+					securedepositDao.save(securedepositBean);
+				}
+			}
+			System.out.println("security deposit ");
+		}catch(Exception e){
+			e.printStackTrace();
+		}
+		return "redirect:securedeposit";
 	}
 	@ModelAttribute("items")
 	public Map<Integer, String> populateCity() {

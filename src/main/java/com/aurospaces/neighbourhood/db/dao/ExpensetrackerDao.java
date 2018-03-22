@@ -78,19 +78,54 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			jdbcTemplate = custom.getJdbcTemplate();
 			 
 			StringBuffer buffer = new StringBuffer();
-			buffer.append("SELECT *,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'Added Gas' AS AddedGas FROM addgas WHERE 1=1 ");
+			buffer.append("SELECT `created_time`,`fillingStationId`,`fillingstationname`,`gasInKgs`,`closedgas`,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'Added Gas' AS AddedGas FROM addgas WHERE 1=1 ");
 			if(StringUtils.isNotBlank(month)){
 				 
 				buffer.append("  AND  MONTH(created_time) ='"+month+"' AND YEAR(created_time) ='"+year+"' " );
 			}else if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
 				buffer.append(" and  date(created_time) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
 			}
-			buffer.append(" UNION ALL SELECT *,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'Used Gas' AS UsedGas FROM usedgas where 1=1 ");
+			if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
+				buffer.append(" and fillingStationId='"+usedGasBean.getFillingStationId()+"'  ");
+			}
+			buffer.append(" UNION ALL SELECT `created_time`,`fillingStationId`,`fillingstationname`,`gasInKgs`,`closedgas`,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'Used Gas' AS UsedGas FROM usedgas where 1=1 ");
 			if(StringUtils.isNotBlank(month)){
 				 
 				buffer.append("  AND  MONTH(created_time) ='"+month+"' AND YEAR(created_time) ='"+year+"' " );
 			}else if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
 				buffer.append(" and  date(created_time) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
+			}
+			if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
+				buffer.append(" and fillingStationId='"+usedGasBean.getFillingStationId()+"'  ");
+			}
+			buffer.append(" ORDER BY created_time ");
+			String sql = buffer.toString();
+			System.out.println(sql);
+			List<UsedGasBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
+					ParameterizedBeanPropertyRowMapper.newInstance(UsedGasBean.class));
+			
+			if (retlist.size() > 0)
+				return retlist;
+			return null;
+			    
+			} 
+	 
+	 public List<UsedGasBean> getGasReport(UsedGasBean usedGasBean,String month,String year){  
+			jdbcTemplate = custom.getJdbcTemplate();
+			 
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("  SELECT `created_time`,`fillingStationId`,`fillingstationname`,`gasInKgs`,`closedgas`,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'Used Gas' AS AddedGas FROM usedgas where 1=1 ");
+			if(StringUtils.isNotBlank(month)){
+				 
+				buffer.append("  AND  MONTH(created_time) ='"+month+"' AND YEAR(created_time) ='"+year+"' " );
+			}else if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
+				buffer.append(" and  date(created_time) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
+			}
+			if(StringUtils.isNotBlank(usedGasBean.getCustomerType())){
+				buffer.append(" and customerType='"+usedGasBean.getCustomerType()+"'  ");
+			}
+			if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
+				buffer.append(" and fillingStationId='"+usedGasBean.getFillingStationId()+"'  ");
 			}
 			buffer.append(" ORDER BY created_time ");
 			String sql = buffer.toString();

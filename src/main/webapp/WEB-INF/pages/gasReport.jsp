@@ -115,6 +115,9 @@ h1, .h1 {
     font-size: 24px;
     text-align: center;
 }
+.search {
+	margin-top:10px;
+}
 
 </style>
 <script type="text/javascript" src="https://code.jquery.com/jquery-1.12.4.js"></script>
@@ -331,7 +334,7 @@ h1, .h1 {
 				</li>
 				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Customer Tariff Master</span></a></li>
 				<li class="privateCylinderFilled"><a href="${baseurl }/admin/privateCylinderFilled"><i class="fa fa-bar-chart-o"></i> <span>Private Cylinder Filled </span></a></li>
-				
+				<li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>
 				
 			</ul>
 		</div>
@@ -408,11 +411,41 @@ display: none;
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
+							<label for="focusedinput" class="col-md-5 control-label">Customer Type (used gas)</label>
 							<div class="col-md-7">
-				        		<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
+<%-- 				        		<form:input path="customerType" class="form-control "  onkeydown="removeBorder(this.id)"/> --%>
+				        		<form:select path="customerType"  class="form-control "  onfocus="removeBorder(this.id)">
+				        		<form:option value="">-- Select Customer Type --</form:option>
+				        			<form:option value="public">Khaibar Customer</form:option>
+				        			<form:option value="Private">Private Customer</form:option>
+				        		</form:select>
+							</div>
+						</div>
+						
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-5 control-label">Filling Station</label>
+							<div class="col-md-7">
+				        		<form:select path="fillingStationId"  class="form-control "  onfocus="removeBorder(this.id)">
+				        		<form:option value="">-- Select Customer Type --</form:option>
+				        			<form:options items="${fillingstation }"></form:options>
+				        		</form:select>
 							</div>
 						</div>
 					</div>
+					
+					</div>
+					<div class="col-md-5"></div>
+					<div class="col-md-7 pull-right">
+						<div class="form-group search"  style="float:right;">
+							<div  class="col-md-5">
+				        		<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
+							</div>
+							<div  class="col-md-2" style=" margin-left:5px;">
+				        		<input type="reset" class="btn btn-danger" value="Reset" >
+							</div>
+						</div>
 					</div>
 					</div>
 					</div>
@@ -551,10 +584,14 @@ $('#tableId').html(tableHead);
 		var fromDate = $("#fromDate").val();
 		var toDate = $("#toDate").val();
 		var month=$("#month").val();
+		var customerType=$("#customerType").val();
+		var fillingStationId=$("#fillingStationId").val();
 		var formData = new FormData();
 		formData.append('fromDate', fromDate);
 		formData.append('toDate', toDate);
 		formData.append('month', month);
+		formData.append('customerType', customerType);
+		formData.append("fillingStationId",fillingStationId)
 		$.fn.makeMultipartRequest('POST', 'searchGasReport', false,
 				formData, false, 'text', function(data) {
 					var jsonobj = $.parseJSON(data);

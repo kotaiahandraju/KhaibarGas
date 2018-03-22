@@ -27,7 +27,7 @@ public class BaseUsedGasDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO usedgas( created_time, updated_time, fillingStationId,gasInKgs,closedgas,fillingstationname) values (?,?, ?, ?, ?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO usedgas( created_time, updated_time, fillingStationId,gasInKgs,closedgas,fillingstationname,customerType,invoiceId) values (?,?, ?, ?, ?,?,?,?)"; 
 
 
 
@@ -69,7 +69,8 @@ ps.setString(3, addGasBean.getFillingStationId());
 ps.setString(4, addGasBean.getGasInKgs());
 ps.setString(5, addGasBean.getClosedgas());
 ps.setString(6, addGasBean.getFillingstationname());
-
+ps.setString(7, addGasBean.getCustomerType());
+ps.setString(8, addGasBean.getInvoiceId());
 							return ps;
 						}
 				},

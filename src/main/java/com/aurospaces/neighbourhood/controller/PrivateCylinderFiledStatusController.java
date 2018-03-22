@@ -127,6 +127,8 @@ public class PrivateCylinderFiledStatusController {
 			objUsedGasBean.setGasInKgs(String.valueOf(totalgaswant));
 			objUsedGasBean.setClosedgas(objfillFillingstationmasterBean.getClosingBalanceGas());
 			objUsedGasBean.setFillingstationname(objfillFillingstationmasterBean.getStationname());
+			objUsedGasBean.setCustomerType("Private");
+			objUsedGasBean.setInvoiceId(invoiceId);
 			usedGasDao.save(objUsedGasBean);
 			if(StringUtils.isNotBlank(dueAmount)){
 			customermasterDao.updateDueAmount(dueAmount, cylindertransactionBean.getCustomerId());

@@ -17,10 +17,22 @@ protected String authorizedperson ;
 protected String contactperson ;
 protected String customertype ;
 protected String status ;
-protected String custStatus,cylinderId,netAmount,payedAmount,dueAmount,previousDueAmount,invoiceId;
+protected String custStatus,cylinderId,netAmount,payedAmount,dueAmount,previousDueAmount,invoiceId,securityDeposit,securityAmount;
 
 
 
+public String getSecurityAmount() {
+	return securityAmount;
+}
+public void setSecurityAmount(String securityAmount) {
+	this.securityAmount = securityAmount;
+}
+public String getSecurityDeposit() {
+	return securityDeposit;
+}
+public void setSecurityDeposit(String securityDeposit) {
+	this.securityDeposit = securityDeposit;
+}
 public String getInvoiceId() {
 	return invoiceId;
 }

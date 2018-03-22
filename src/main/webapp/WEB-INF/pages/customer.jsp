@@ -26,7 +26,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th>Action</th></tr>
+                                	<tr><th>Customer ID</th><th>Customer Name</th><th>Supplier name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Security Deposit</th><th>Status</th><th>Action</th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -150,10 +150,13 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Customer Address</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Customer Address</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>securityDeposit</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
+		if(orderObj.securityDeposit=="Amount"){
+			orderObj.securityDeposit =orderObj.securityAmount;
+		}
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick='customerDelete("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
 		}else{  
@@ -170,6 +173,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.authorizedperson+"'>" + orderObj.authorizedperson + "</td>"
 			+ "<td title='"+orderObj.contactperson+"'>" + orderObj.contactperson + "</td>"
 			+ "<td title='"+orderObj.customertype+"'>" + orderObj.customertype + "</td>"
+			+ "<td title='"+orderObj.securityDeposit+"'>" + orderObj.securityDeposit + "</td>"
 			+ "<td title='"+orderObj.custStatus+"'>" + orderObj.custStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";

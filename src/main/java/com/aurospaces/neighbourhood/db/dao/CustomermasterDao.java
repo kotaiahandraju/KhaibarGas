@@ -32,7 +32,7 @@ public class CustomermasterDao extends BaseCustomermasterDao
 		try {
 			jdbcTemplate = custom.getJdbcTemplate();
 			
-			String sql = "SELECT c.*,CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as custStatus  from customermaster c where c.status='"+status+"' order by c.id desc";
+			String sql = "SELECT c.*,IFNULL(s.`securityDeposit`,'--') AS securityDeposit,s.`amount` as securityAmount,CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status IN ('1') THEN 'Active'  ELSE '-----' END AS custStatus FROM customermaster c LEFT JOIN `securedeposit` s ON c.id=s.`customerId`  where c.status='"+status+"' GROUP BY c.id order by c.id desc";
 			System.out.println("sql:::"+sql);
 			listCustomermasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<CustomermasterBean>(CustomermasterBean.class));
 			if(listCustomermasterBean !=null){

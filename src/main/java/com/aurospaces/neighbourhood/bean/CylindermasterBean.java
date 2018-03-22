@@ -25,11 +25,17 @@ protected String cylendersstatus ;
 protected String store;
 protected String name;
 protected String storename;
-protected String sizeName,stationname,count,companyname,fillingstationId,truckId,count1,noOfCylinders;
+protected String sizeName,stationname,count,companyname,fillingstationId,truckId,count1,noOfCylinders,invoiceId;
 
 
 
 
+public String getInvoiceId() {
+	return invoiceId;
+}
+public void setInvoiceId(String invoiceId) {
+	this.invoiceId = invoiceId;
+}
 public String getNoOfCylinders() {
 	return noOfCylinders;
 }

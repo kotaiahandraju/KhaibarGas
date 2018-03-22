@@ -26,7 +26,7 @@ public class BaseSecuredepositDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO securedeposit( created_time, updated_time, customerId, amount, itemId, quantity, companyId,remarks) values (?, ?, ?, ?, ?, ?, ?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO securedeposit( created_time, updated_time, customerId, amount, itemId, quantity, companyId,remarks,securityDeposit) values (?, ?, ?, ?, ?, ?, ?,?,?)"; 
 
 
 	java.sql.Timestamp expiryDate=null;
@@ -70,6 +70,7 @@ ps.setString(5, securedepositBean.getItemId());
 ps.setString(6, securedepositBean.getQuantity());
 ps.setString(7, securedepositBean.getCompanyId());
 ps.setString(8, securedepositBean.getRemarks());
+ps.setString(9, securedepositBean.getSecurityDeposit());
 
 							return ps;
 						}

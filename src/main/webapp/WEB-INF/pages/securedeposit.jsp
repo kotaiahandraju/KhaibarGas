@@ -28,7 +28,7 @@ table tbody tr.rowInc {
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="#">Home</a></li>
-	    <li>Truck</li>
+	    <li>Security Deposit</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -36,7 +36,7 @@ table tbody tr.rowInc {
 			<div class="col-md-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Truck List</h4>
+						<h4>Security Deposit List</h4>
 						<div class="options">   
 							<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
 						</div>
@@ -45,12 +45,7 @@ table tbody tr.rowInc {
 					 <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
 						<div class="table-responsive" id="tableId">
 							<table class="table table-striped table-bordered datatables" id="example">
-								<thead>
-									<tr>
-										<th>Truck Number</th><th>Registration Expiry</th><th>Civil Defense Card Expiry</th><th>Service Due</th><th>Make</th>
-										<th>Description</th><th>Capacity of Truck</th><th>LPO Number</th><th>Truck Status</th><th></th>
-									</tr>
-								</thead>
+								<thead><tr><th>Customer Name</th><th>Security Deposit</th><th>Item Name</th><th>Quantity</th><th>Company Name</th><th>Amount</th></tr></thead>
 								<tbody> </tbody>
 							</table>
 						</div>
@@ -65,7 +60,7 @@ table tbody tr.rowInc {
 					<div class="panel-heading">
 						<h4>Add Truck</h4>
                     </div>
-					<form:form modelAttribute="securedepositForm" class="form-horizontal" action="addTruck">
+					<form:form modelAttribute="securedepositForm" class="form-horizontal" action="saveSecurityDeposit">
 					<table width="100%">
      			 <tr>
      			 <td>
@@ -248,7 +243,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Truck Number</th><th>Registration Expiry</th><th>Civil Defense Card Expiry</th><th>Service Due</th><th>Make</th><th>Description</th><th>Capacity of Truck</th><th>LPO Number</th><th>Truck Status</th><th></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Customer Name</th><th>Security Deposit</th><th>Item Name</th><th>Quantity</th><th>Company Name</th><th>Amount</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -260,16 +255,17 @@ function displayTable(listOrders) {
 		var edit = "<a class='edit editIt' onclick='editTruckMaster("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr >"
-			+ "<td class='impFiled' title='"+orderObj.trucknumber+"'>"+ orderObj.trucknumber + "</td>"
-			+ "<td title='"+orderObj.registrationexpirydate1+"'>"+ orderObj.registrationexpirydate1 + "</td>"
-			+ "<td title='"+orderObj.civildefensecardexpirydate1+"'>"+ orderObj.civildefensecardexpirydate1 + "</td>"
-			+ "<td title='"+orderObj.servicedue1+"'>"+ orderObj.servicedue1 + "</td>"
-			+ "<td title='"+orderObj.make+"'>"+ orderObj.make + "</td>"
-			+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
-			+ "<td title='"+orderObj.capacityoftruck+"'>"+ orderObj.capacityoftruck + "</td>"
-			+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber + "</td>"
-			+ "<td title='"+orderObj.truckStatus+"'>"+ orderObj.truckStatus + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			+ "<td class='impFiled' title='"+orderObj.customername+"'>"+ orderObj.customername + "</td>"
+			+ "<td title='"+orderObj.securityDeposit+"'>"+ orderObj.securityDeposit + "</td>"
+			+ "<td title='"+orderObj.itemName+"'>"+ orderObj.itemName + "</td>"
+			+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
+			+ "<td title='"+orderObj.companyId+"'>"+ orderObj.companyId + "</td>"
+			+ "<td title='"+orderObj.amount+"'>"+ orderObj.amount + "</td>"
+// 			+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
+// 			+ "<td title='"+orderObj.capacityoftruck+"'>"+ orderObj.capacityoftruck + "</td>"
+// 			+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber + "</td>"
+// 			+ "<td title='"+orderObj.truckStatus+"'>"+ orderObj.truckStatus + "</td>"
+// 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
 			+ "</tr >";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -458,5 +454,5 @@ function removeDependentRow(dependentRowCount) {
 	
 }
 $("#pageName").text("Security Deposit");
-$(".truck").addClass("active");
+$(".securedeposit").addClass("active");
 </script>

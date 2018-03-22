@@ -34,7 +34,7 @@ public class BasePrivateCylinderFilledPriceDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO privatecylinderfilledprice( `created_time` ,  `updated_time` ,  customerId ,  `items` ,`quantity` ,`price` ,`totalamount` , `discount` ,`netamount` ,`totalnetamount` ,`vatamount` ,`paidamount` ,`dueamount` ,`grossamount` ,  `previousdueamount`,invoiceId  ) values (?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO privatecylinderfilledprice( `created_time` ,  `updated_time` ,  customerId ,  `items` ,`quantity` ,`price` ,`totalamount` , `discount` ,`netamount` ,`totalnetamount` ,`vatamount` ,`paidamount` ,`dueamount` ,`grossamount` ,  `previousdueamount`,invoiceId,fillingstationId  ) values (?, ?, ?, ?, ?, ?, ?,?,?,?,?,?,?,?,?,?,?)"; 
 
 
 
@@ -90,6 +90,7 @@ ps.setString(13, printDataBean.getDueamount());
 ps.setString(14, printDataBean.getGrossamount());
 ps.setString(15, printDataBean.getPreviousdueamount());
 ps.setString(16, printDataBean.getInvoiceid());
+ps.setString(17, printDataBean.getFillingstationId());
 
 
 

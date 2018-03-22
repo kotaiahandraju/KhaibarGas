@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.Expensetracker;
+import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
@@ -208,7 +209,12 @@ public class ReportsController {
 						java.sql.Date sqlDate = new java.sql.Date(date.getTime());
 						usedGasBean.setToDate(String.valueOf(sqlDate));
 			}
-			listOrderBeans = expensetrackerDao.getSearchReport(usedGasBean,monthnumber,year);
+			if(StringUtils.isNotBlank(usedGasBean.getCustomerType())){
+				listOrderBeans = expensetrackerDao.getGasReport(usedGasBean,monthnumber,year);
+			}else{
+				
+				listOrderBeans = expensetrackerDao.getSearchReport(usedGasBean,monthnumber,year);
+			}
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				// System.out.println(sJson);
@@ -307,7 +313,22 @@ public class ReportsController {
 		return statesMap;
 	}
 	
-	
+	@ModelAttribute("fillingstation")
+	public Map<Integer, String> populateCity() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			String sSql = "select id,stationname from fillingstationmaster where status='1' ";
+			List<FillingstationmasterBean> list = fillingstationmasterDao.populate(sSql);
+			for (FillingstationmasterBean bean : list) {
+				statesMap.put(bean.getId(), bean.getStationname());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
 	
 	
 	
