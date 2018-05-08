@@ -404,7 +404,7 @@ public class TransactionController {
 				}
 			}
 			// gas evailabe checking 
-				if( (Integer.parseInt(fillingstationBean.getClosingBalanceGas()) < totalgaswant)){
+				if( (Double.parseDouble(fillingstationBean.getClosingBalanceGas()) < totalgaswant)){
 					jsonObject.put("msg", "Gas is available in filling station : "+fillingstationBean.getClosingBalanceGas()+" KG's only"); 
 				}			
 				else{

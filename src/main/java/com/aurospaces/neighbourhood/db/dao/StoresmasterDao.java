@@ -33,7 +33,8 @@ public class StoresmasterDao extends BaseStoresmasterDao
 		try {
 			jdbcTemplate = custom.getJdbcTemplate();
 			
-			String sql = "SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as storeStatus  from storesmaster s where status='"+status+"' order by s.id desc";
+//			String sql = "SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as storeStatus  from storesmaster s where status='"+status+"' order by s.id desc";
+			String sql="SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status IN ('1') THEN 'Active'  ELSE '-----' END AS storeStatus,(SELECT  COUNT(*)   FROM cylindermaster cm   WHERE cm.cylinderstatus='1' AND cm.store=s.id) counts  FROM storesmaster s WHERE STATUS='"+status+"' ORDER BY s.id DESC ";
 			System.out.println("sql:::"+sql);
 			listStoresmasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<StoresmasterBean>(StoresmasterBean.class));
 			if(listStoresmasterBean !=null){

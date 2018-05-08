@@ -27,7 +27,7 @@
                         <div class="table-responsive" id="tableId" >
                             <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
                                 <thead>
-                                	<tr><th>Store ID</th><th>Store Name</th><th>Location</th><th>Status</th><th>Action</th></tr>
+                                	<tr><th>Store ID</th><th>Store Name</th><th>Location</th><th>Available Cylinders</th><th>Status</th><th>Action</th></tr>
                                 </thead>
                                 <tbody></tbody>
                             </table>
@@ -111,7 +111,7 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Store ID</th><th>Store Name</th><th>Store Location</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Store ID</th><th>Store Name</th><th>Store Location</th><th>Available Cylinders</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
@@ -128,6 +128,7 @@ function showTableData(response){
 			+ "<td title='"+orderObj.id+"'>" + orderObj.storeid + "</td>"
 			+ "<td class='impFiled' title='"+orderObj.storename+"'>" + orderObj.storename + "</td>"
 			+ "<td title='"+orderObj.location+"'>" + orderObj.location + "</td>"
+			+ "<td title='"+orderObj.counts+"'><a target='_blank' href='reportsHome?store="+orderObj.id+"' >" + orderObj.counts + "</a></td>"
 			+ "<td title='"+orderObj.storeStatus+"'>" + orderObj.storeStatus + "</td>"
 			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
 			+"</tr>";

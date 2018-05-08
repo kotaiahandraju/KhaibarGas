@@ -459,8 +459,39 @@ display: none;
          	</div>
 		</div>
 	</div> <!-- container -->
+	<c:choose>
+		<c:when test="${empty param.cylinderstatus}">
+			<c:set var="cylinderstatus" value="0"/> 
+	    </c:when>
+	    <c:otherwise>
+			<c:set var="cylinderstatus" value="${param.cylinderstatus}"/> 
+	    </c:otherwise>
+	</c:choose>
+	
+	<c:choose>
+		<c:when test="${empty param.store}">
+			<c:set var="store" value="0"/> 
+	    </c:when>
+	    <c:otherwise>
+			<c:set var="store" value="${param.store}"/> 
+	    </c:otherwise>
+	</c:choose>
+	
+	
 
 <script type="text/javascript">
+var param = ${cylinderstatus};
+if(param != "0"){
+	$("#cylendersstatus").val(param);
+	onChangeReports(param,"cylendersstatus");
+}
+
+var param1 = ${store};
+if(param1 != "0"){
+	$("#storename").val(param1);
+	onChangeReports(param,"storename");
+}
+
 $(document).ready(function() {
 	  $("#parent").click(function() {
 	    $(".child").prop("checked", this.checked);

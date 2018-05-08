@@ -224,7 +224,7 @@ public class PrivateCylinderFiledStatusController {
 	public Map<Integer, String> populateCustomers() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
 		try {
-			String sSql = " select id,customerid as name from customermaster where status='1' and customertype='PRIVATE' ";
+			String sSql = " select id,CONCAT(`customerid`,'( ',customername,' )') as name from customermaster where status='1' and customertype='PRIVATE' ";
 			List<CylinderTypesBean> list = lpomasterDao.populate(sSql);
 			for (CylinderTypesBean bean : list) {
 				statesMap.put(bean.getId(), bean.getName());

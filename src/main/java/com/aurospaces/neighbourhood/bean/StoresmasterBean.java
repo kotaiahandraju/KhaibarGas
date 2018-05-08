@@ -12,7 +12,14 @@ protected Date updatedTime ;
 protected String storeid ;
 protected String storename ;
 protected String location ;
-protected String status ;
+protected String status,counts ;
+
+public String getCounts() {
+	return counts;
+}
+public void setCounts(String counts) {
+	this.counts = counts;
+}
 public String getStoreStatus() {
 	return storeStatus;
 }

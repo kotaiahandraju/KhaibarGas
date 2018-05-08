@@ -70,20 +70,20 @@ $(document).ready(function(){
         <div class="container">
             <div class="row">
 	            		<div class="col-md-3 col-xs-12 col-sm-6">
-	                            <a class="info-tiles tiles-orange" href="#">
+	                            <a class="info-tiles tiles-orange" target='_blank' href="reportsHome?cylinderstatus=1">
 	                                <div class="tiles-heading">EMPTY CYLINDERS</div>
 	                                <div class="tiles-body-alt">
 	                                <c:if test="${not empty Empty}">
 	                                    <div class="text-center" id="emptycylinders">${Empty }</div>
 	                                </c:if>
-	                                <c:if test="${ empty Empty}">
-	                                    <div class="text-center" id="emptycylinders">0</div>
-	                                </c:if>
+<%-- 	                                <c:if test="${ empty Empty}"> --%>
+<!-- 	                                    <div class="text-center" id="emptycylinders">0</div> -->
+<%-- 	                                </c:if> --%>
 	                                </div>
 	                            </a>
 	                        </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                            <a class="info-tiles tiles-toyo" href="#">
+                            <a class="info-tiles tiles-toyo" target='_blank' href="reportsHome?cylinderstatus=2">
                                 <div class="tiles-heading">CYLINDER IN FILLING STATION</div>
                                 <div class="tiles-body-alt">
                                     <!--i class="fa fa-bar-chart-o"></i-->
@@ -92,33 +92,31 @@ $(document).ready(function(){
                             </a>
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                            <a class="info-tiles tiles-alizarin" href="#">
+                            <a class="info-tiles tiles-alizarin" target='_blank' href="reportsHome?cylinderstatus=3">
                                 <div class="tiles-heading">FILLED CYLINDERS</div>
                                 <div class="tiles-body-alt">
                                  <c:if test="${not empty Filled}">
                                     <div class="text-center" id="filledcylinders">${Filled }</div>
                                   </c:if>
-                                   <c:if test="${empty Filled}">
-                                    <div class="text-center" id="filledcylinders">0</div>
-                                  </c:if>
+<%--                                    <c:if test="${empty Filled}"> --%>
+<!--                                     <div class="text-center" id="filledcylinders">0</div> -->
+<%--                                   </c:if> --%>
                                 </div>
                             </a>
                         </div>
                          <div class="col-md-3 col-xs-12 col-sm-6">
-                            <a class="info-tiles tiles-alizarin" href="#">
+                            <a class="info-tiles tiles-alizarin" target='_blank' href="reportsHome?cylinderstatus=4">
                                 <div class="tiles-heading">QUALITY CHECK CYLINDERS</div>
                                 <div class="tiles-body-alt">
                                  <c:if test="${not empty QualityCheck}">
                                     <div class="text-center" id="filledcylinders">${QualityCheck }</div>
                                   </c:if>
-                                   <c:if test="${empty QualityCheck}">
-                                    <div class="text-center" id="filledcylinders">0</div>
-                                  </c:if>
+                                   
                                 </div>
                             </a>
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                            <a class="info-tiles tiles-info" href="#">
+                            <a class="info-tiles tiles-info" target='_blank' href="reportsHome?cylinderstatus=5">
                                 <div class="tiles-heading">CYLINDERS IN TRUCK</div>
                                 <div class="tiles-body-alt">
                                     <div class="text-center">${Truck }</div>
@@ -126,21 +124,19 @@ $(document).ready(function(){
                             </a>
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                            <a class="info-tiles tiles-success" href="#">
+                            <a class="info-tiles tiles-success" target='_blank' href="reportsHome?cylinderstatus=6">
                                 <div class="tiles-heading" id="delivered">DELIVERED CYLINDERS</div>
                                 <div class="tiles-body-alt">
                                     <!--i class="fa fa-money"></i-->
                                      <c:if test="${not empty Delivered}">
                                     <div class="text-center">${Delivered }</div>
                                     </c:if>
-                                     <c:if test="${empty Delivered}">
-                                    <div class="text-center">0</div>
-                                    </c:if>
+                                    
                                 </div>
                             </a>
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                            <a class="info-tiles tiles-warning" href="#">
+                            <a class="info-tiles tiles-warning" target='_blank' href="reportsHome?cylinderstatus=7">
                                 <div class="tiles-heading">RECEIVED CYLINDERS</div>
                                 <div class="tiles-body-alt">
                                     <div class="text-center" id="returned">${Returned }</div>
@@ -149,7 +145,7 @@ $(document).ready(function(){
                         </div>
                         
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                            <a class="info-tiles tiles-warning" href="#">
+                            <a class="info-tiles tiles-warning" target='_blank' href="reportsHome?cylinderstatus=8">
                                 <div class="tiles-heading">MISSED CYLINDERS</div>
                                 <div class="tiles-body-alt">
                                     <div class="text-center" id="missidcylinders">${MissedCylinder }</div>
