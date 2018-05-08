@@ -28,7 +28,7 @@ public class SecuredepositDao extends BaseSecuredepositDao {
 		 
 		 //String sql="SELECT *, DATE_FORMAT(expirydate,'%d/%m/%Y') AS expirtdate1  FROM cylindermaster";
 		
-		 String sql =  "SELECT sd.`customerId`,`securityDeposit`,`amount`,`itemId`,IFNULL(`quantity`,'--') as quantity,`companyId`,`remarks`,IFNULL(i.name,'--') AS itemName,cm.`customername` FROM  `securedeposit` sd LEFT JOIN `items` i ON sd.`itemId`=i.id LEFT JOIN `customermaster` cm ON cm.id=sd.`customerId` order by sd.id desc";
+		 String sql =  "SELECT com.companyname as companyName,sd.`customerId`,`securityDeposit`,`amount`,`itemId`,IFNULL(`quantity`,'--') as quantity,`companyId`,sd.`remarks`,IFNULL(i.name,'--') AS itemName,cm.`customername`,cm.customerid as userId  FROM  `securedeposit` sd LEFT JOIN `items` i ON sd.`itemId`=i.id LEFT JOIN `customermaster` cm ON cm.id=sd.`customerId` left join companymaster com on com.id=sd.companyId order by sd.id desc";
 		List<SecuredepositBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
 				ParameterizedBeanPropertyRowMapper.newInstance(SecuredepositBean.class));
 		

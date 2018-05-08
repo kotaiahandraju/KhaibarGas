@@ -18,8 +18,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.aurospaces.neighbourhood.bean.CompanymasterBean;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
+import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.SecuredepositBean;
 import com.aurospaces.neighbourhood.db.dao.CompanymasterDao;
+import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.aurospaces.neighbourhood.db.dao.SecuredepositDao;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -34,6 +36,7 @@ public class SecuredepositController {
 	@Autowired SecuredepositDao securedepositDao;
 	@Autowired LpomasterDao lpomasterDao;
 	@Autowired CompanymasterDao companymasterDao;
+	@Autowired CylindermasterDao cylindermasterDao;
 	@RequestMapping(value = "/securedeposit")
 	public String accessoriesHome(@ModelAttribute("securedepositForm")SecuredepositBean securedepositBean, HttpServletRequest request,
 			HttpSession session) {
@@ -77,7 +80,19 @@ public class SecuredepositController {
 					securedepositBean.setCompanyId(company[i]);
 					securedepositBean.setAmount("");
 					securedepositDao.save(securedepositBean);
+					for(int j=0;j<Integer.parseInt(unit[i]);j++){
+						CylindermasterBean cylindermasterBean = new CylindermasterBean();
+						cylindermasterBean.setStore("100");
+						cylindermasterBean.setSize(item[i]);
+						cylindermasterBean.setCylinderstatus("8");
+						cylindermasterBean.setLponumber("LPO1000100");
+						cylindermasterBean.setColor("Red");
+						cylindermasterBean.setOwnercompany(securedepositBean.getCompanyId());
+						cylindermasterDao.save(cylindermasterBean);
+					}
+					
 				}
+				cylindermasterDao.updateCylinderIds();
 			}
 			System.out.println("security deposit ");
 		}catch(Exception e){

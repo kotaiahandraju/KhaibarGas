@@ -4,11 +4,10 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
-<link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
 <link rel="stylesheet" href='${baseurl }/assets/css/cylinderdeliverPrint1.css' />
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.3.4/jspdf.min.js"></script>
 
-
+ <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
 <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
 <!-- <script type="text/javascript" src="https://code.jquery.com/ui/1.12.0-beta.1/jquery-ui.min.js"></script>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.1.135/jspdf.min.js"></script>
@@ -24,7 +23,10 @@
 <style>
 
 
+.customerdet td{
+width:180px;
 
+}
 table #dependent_table {
 	/* 	width: 100%; */
 	counter-reset: rowNumber;
@@ -83,7 +85,7 @@ table tbody tr.rowInc {
                         <label for="focusedinput" class="col-md-6 control-label">Customer Id <span class="impColor">*</span></label>
                         <div class="col-md-6">
                           <form:select path="customerId" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
-                            <form:option value="">-- Select Customer Name --</form:option>
+                            <form:option value="">-- Select Customer Id --</form:option>
                             <form:options items="${customers }"/>
                           </form:select>
                         </div>
@@ -95,6 +97,13 @@ table tbody tr.rowInc {
                             <form:option value="">-- Select Filling Station --</form:option>
                             <form:options items="${fillingstation }"/>
                           </form:select>
+                        </div>
+                      </div>
+                       <div class="form-group">
+                        <label for="focusedinput" class="col-md-6 control-label">Cylinder Filled Date <span class="impColor">*</span></label>
+                        <div class="col-md-6">
+                        
+                          <form:input path="cylinderFilledDate" placeholder="Cylinder Filled Date" class="form-control  validate" onclick="removeBorder(this.id);" readonly="true"/>
                         </div>
                       </div>
                       
@@ -110,6 +119,7 @@ table tbody tr.rowInc {
 				<input type="hidden" name="vatamount" id="vatamount1" >
 				<input type="hidden" name="grossamount" id="grossamount">  
 				<input type="hidden" name ="totalNetamount" id ="totalNetamount"/>
+				 <input type="hidden" id="previousDueAmount" name="previousDueAmount" value="0">
                     <div class="col-md-6">
                       <div class="form-group" style="margin-bottom:0;">
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Customer Name: </label>
@@ -345,28 +355,30 @@ table tbody tr.rowInc {
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p>Date:  01-01-2018</p>
+<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="invoiceDate">Date:  </p>
 </div><div class="clearfix"></div>
-<div class="clearfix"></div>
- <table class="table-responsive " >
-    <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
+
+<div class="col-md-12">
+ <table class="table-responsive customerdet"  style="width:96%">
+ 
+    <tr><td class="det" style="width:100%;"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
-    <tr><td ><label for="focusedinput "  >Customer Name :</label></td><td><span class="customerNameId"></span></td></tr>
+    <tr><td style="margin-left:150px;" ><label for="focusedinput "  >Customer Id </label></td><td><span class="customerid"></span></td><td style="margin-left:80px;" ><label for="focusedinput "  >Customer Name </label></td><td><span class="customerNameId"></span></td></tr>
                           
-              <tr><td ><label for="focusedinput "  >Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Customer Address :</label></td><td><span class="customerAddress"></span></td></tr>
-              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr>       
-                          
+              <tr><td  style="margin-left:150px;"><label for="focusedinput "  >Customer Type </label></td><td><span class="customerTypeId"></span></td><td style="margin-left:80px;"><label for="focusedinput "  >Customer Address </label></td><td><span class="customerNameId"></span></td></tr>
+              <tr><td style="margin-left:150px;"><label for="focusedinput "  >Filling Station </label></td><td><span class="stationname"></span></td><td style="margin-left:80px;"><label for="focusedinput "  >Mobile</label></td><td><span class="mobile"></span></td></tr>
+              <tr><td style="margin-left:150px;"><label for="focusedinput "  >Previous Due Amount </label></td><td><span class="previousdueamount"> </span></td><td style="margin-left:80px;"><label for="focusedinput "  >Land Line </label></td><td><span class="landline"></span></td></tr>       
                           </tbody>
+                          </div>
+                          
     
     </table>
-     <table class="table-responsive">
-    <tr><td class="det"><div class="custom">Returned Cylinders</div></td></tr><tbody style="padding:10px;
-			border:1px solid lightgray;">
-     <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr>
-              <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td><span class="returnTruck"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
- </tbody>   </table>
+  
+             
+            
+   </div>
+
+   
   <table class="table-responsive deliverCylinders" style="width:96%" >
     <thead style="padding:10px;	border:1px solid lightgray;">
     <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr>    
@@ -400,27 +412,29 @@ table tbody tr.rowInc {
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p>Date:  01-01-2018</p>
+<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="invoiceDate">Date:  </p>
 </div><div class="clearfix"></div>
- <table class="table-responsive " >
-    <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
+
+<div class="col-md-12">
+ <table class="table-responsive customerdet"  style="width:96%">
+ 
+    <tr><td class="det" style="width:100%;"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
-    <tr><td ><label for="focusedinput "  >Customer Name :</label></td><td><span class="customerNameId"></span></td></tr>
+    <tr><td style="margin-left:150px;" ><label for="focusedinput "  >Customer Id </label></td><td><span class="customerid"></span></td><td style="margin-left:80px;" ><label for="focusedinput "  >Customer Name </label></td><td><span class="customerNameId"></span></td></tr>
                           
-              <tr><td ><label for="focusedinput "  >Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Customer Address :</label></td><td><span class="customerAddress"></span></td></tr>
-              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr>       
-                          
+              <tr><td  style="margin-left:150px;"><label for="focusedinput "  >Customer Type </label></td><td><span class="customerTypeId"></span></td><td style="margin-left:80px;"><label for="focusedinput "  >Customer Address </label></td><td><span class="customerNameId"></span></td></tr>
+              <tr><td style="margin-left:150px;"><label for="focusedinput "  >Filling Station </label></td><td><span class="stationname"></span></td><td style="margin-left:80px;"><label for="focusedinput "  >Mobile</label></td><td><span class="mobile"></span></td></tr>
+              <tr><td style="margin-left:150px;"><label for="focusedinput "  >Previous Due Amount </label></td><td><span class="previousdueamount"> </span></td><td style="margin-left:80px;"><label for="focusedinput "  >Land Line </label></td><td><span class="landline"></span></td></tr>       
                           </tbody>
+                          </div>
+                          
     
     </table>
-     <table class="table-responsive">
-    <tr><td class="det"><div class="custom">Returned Cylinders</div></td></tr><tbody style="padding:10px;
-			border:1px solid lightgray;">
-     <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr>
-              <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td><span class="returnTruck"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
- </tbody>   </table>
+  
+             
+            
+   </div>
+   
   <table class="table-responsive deliverCylinders" style="width:96%" >
     <thead style="padding:10px;	border:1px solid lightgray;">
     <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr>    
@@ -1196,7 +1210,7 @@ function invoicePrint(id){
 
 	var formData = new FormData();
     formData.append('invoiceId', id);
-	$.fn.makeMultipartRequest('POST', 'getInvoiceData', false,
+	$.fn.makeMultipartRequest('POST', 'getInvoiceDataFilledCylinders', false,
 			formData, false, 'text', function(data){
 		var lponumbertitle=null;
 		var jsonobj = $.parseJSON(data);
@@ -1222,7 +1236,10 @@ var j=0;
 			$(".previousdueamount").text(orderObj.previousdueamount);
 			$(".grassAmount").text(orderObj.grossamount);
 			$(".taxinvoice").text(orderObj.invoiceid);
-			
+			$(".invoiceDate").text("Date:"+orderObj.created_time);
+			$(".stationname").text(orderObj.stationname);
+			$(".landline").text(orderObj.landline);
+			$(".customerid").text(orderObj.customerid);
 			id="'+ dependentRowCount+ 'taxable"
 			
 			var tblRow =	'   <tr><th scope="col" style="font-weight:normal;"><span class="sno">'+j+'</span></th>'
@@ -1257,6 +1274,8 @@ var j=0;
 				$(".dueAmount").text(orderObj.dueamount);
 				$(".previousdueamount").text(orderObj.previousdueamount);
 				$(".grassAmount").text(orderObj.grossamount);
+				
+				
 
 				var varcheckBox = "<div>"+orderObj.name+"</div>"; 
 				$(".retunCylinders").append(varcheckBox);
@@ -1286,7 +1305,7 @@ var j=0;
 function getBack(){
 	$("#cylinderdataId").show();
 	 $("#printCylinder").hide();
-	ChangeUrl('lpoNum', 'cylinderDeliver?invoiceId=');
+	ChangeUrl('lpoNum', 'privateCylinderFilled?invoiceId=');
 
 }
 function ChangeUrl(page, url) {
@@ -1297,7 +1316,15 @@ function ChangeUrl(page, url) {
         alert("Browser does not support HTML5.");
     }
 }
-
+$(function() {
+	$("#cylinderFilledDate").datepicker({
+		dateFormat : "dd-MM-yy",
+		maxDate:0,
+		changeDate : true,
+		changeMonth : true,
+		changeYear : true,
+	});
+});
 
 $("#pageName").text("Cylinder Filled Status");
 $(".privateCylinderFilled").addClass("active");

@@ -281,6 +281,8 @@ function tooltip(){
 						<li class="CylinderReport"><a href="${baseurl }/admin/reportsHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Report </span></a></li>
 						<li class="expensesReport"><a href="${baseurl }/admin/expensesReport"><i class="fa fa-bar-chart-o"></i> <span>Expenses Report</span></a></li>
 						<li class="gasReport"><a href="${baseurl }/admin/gasReport"><i class="fa fa-bar-chart-o"></i> <span>Gas Report</span></a></li>
+						<li class="paymentReport"><a href="${baseurl }/admin/paymentreport"><i class="fa fa-bar-chart-o"></i> <span>Payment Report</span></a></li>
+						
 						
 						
 					</ul>
@@ -288,6 +290,8 @@ function tooltip(){
 				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Customer Tariff Master</span></a></li>
 				<li class="privateCylinderFilled"><a href="${baseurl }/admin/privateCylinderFilled"><i class="fa fa-bar-chart-o"></i> <span>Private Cylinder Filled </span></a></li>
 				<li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>
+				<li class="dueamount"><a href="${baseurl }/admin/dueamount"><i class="fa fa-bar-chart-o"></i> <span>Due Amount Pay </span></a></li>
+				
 				
 				
 				

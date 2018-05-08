@@ -51,11 +51,11 @@ table tbody tr.rowInc {
 </style>
 <ol class="breadcrumb">
   <li><a href="#">Home</a></li>
-  <li>Cylinder Delivered</li>
+  <li>Due Amount Pay</li>
 </ol>
 <div class="clearfix"></div>
 <div class="container" id="cylinderdataId">
-  <form:form modelAttribute="lpoForm" id="cylinderDeliverForm" action="cylinderDeliverSave" class="form-horizontal" method="post">
+  <form:form modelAttribute="lpoForm" id="cylinderDeliverForm" action="savedueamount" class="form-horizontal" method="post">
     <table width="100%">
       <tr> 
         <td><div class="row">    
@@ -68,15 +68,7 @@ table tbody tr.rowInc {
                 <div class="panel-body">
                   <div class="row">
                     <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
-                        <div class="col-md-6">
-                          <form:select path="cylinderDeliverTruck" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="selectReturnTruck(this.value);" >
-                            <form:option value="">--Select Truck--</form:option>
-                            <form:options items="${trucks}"></form:options>
-                          </form:select>
-                        </div>
-                      </div>
+                      
                       <div class="form-group">
                         <label for="focusedinput" class="col-md-6 control-label">Customer Type <span class="impColor">*</span></label>
                         <div class="col-md-6">
@@ -85,6 +77,7 @@ table tbody tr.rowInc {
                             <form:option value="COMMERCIAL">COMMERCIAL</form:option>
                             <form:option value="DOMESTIC">DOMESTIC</form:option>
                             <form:option value="INDUSTIAL">INDUSTIAL</form:option>
+                             <form:option value="PRIVATE">PRIVATE</form:option>
                           </form:select>
                         </div>
                       </div>
@@ -97,11 +90,35 @@ table tbody tr.rowInc {
                         </div>
                       </div>
                      
+                      <div class="form-group">
+                        <label for="focusedinput" class="col-md-6 control-label">Previous Due Amount :</label>
+                        
+                        <div class="col-md-6" style="margin-top:8px;">
+                        <span  id="previousDueAmount"></span>
+                        </div>
+                      </div>
+                      
+                       <div class="form-group">
+                        <label for="focusedinput" class="col-md-6 control-label">Paid Amount</label>
+                        
+                        <div class="col-md-6" style="margin-top:8px;">
+                        <input type="text" id="paidAmount" class="validate" name="payedAmount" onkeyup="PaidCalculation(this.value),removeBorder(this.id)">
+                        </div>
+                      </div>
+                      <div class="form-group">
+                        <label for="focusedinput" class="col-md-6 control-label">Due Amount</label>
+                        
+                        <div class="col-md-6" style="margin-top:8px;">
+                        <input type="text" id="dueAmount" name="dueAmount" readonly="true" >
+                        </div>
+                      </div>
+                    
                     </div>
 <!--                     vat amount -->
 				<input type="hidden" name="vatamount" id="vatamount1" >
 				<input type="hidden" name="grossamount" id="grossamount">  
 				<input type="hidden" name ="totalNetamount" id ="totalNetamount"/>
+				 <input type="hidden" id="prviousInvoiceId" name="prviousInvoiceId">
                     <div class="col-md-6">
                       <div class="form-group" style="margin-bottom:0;">
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Customer Name: </label>
@@ -119,57 +136,69 @@ table tbody tr.rowInc {
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Land Line: </label>
                         <div class="col-md-6"> <span id="landline" class="form-control"  style="border:none;"></span> </div>
                       </div>
+                      <div class="col-md-12">
+                      <div class="form-group">
+<!--                         <label for="focusedinput" class="col-md-5 control-label">previous Due Amount (AED)</label> -->
+<!--                         <div class="col-md-5" style="padding-top:5px; color:#C00;"> -->
+<!-- <!--                         <span id="lastDueAmount" style="padding-top:5px; color:#C00"><strong>0</strong></span> -->
+<!--                         </div> -->
+                      </div>
+                    <br />
+
+                    </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="col-md-6">
+        <div class="col-md-6">
               <div class="panel panel-primary">
                 <div class="panel-heading">
-                  <h4>Returned Cylinders</h4>
+                  <h4>Previous Invoice Data</h4>
                 </div>
-                <div class="panel-body">
+                <div class="panel-body"style="min-height:267px;">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
-                        <label for="focusedinput" class="col-md-5 control-label" style="margin-top:0; padding-top:0; vertical-align:text-top;">Cylinders </label>
-                        <div class="col-md-7"> <span id="cylinders"></span> </div>
+<!--                         <label for="focusedinput" class="col-md-5 control-label" style="margin-top:0; padding-top:0; vertical-align:text-top;">Cylinders </label> -->
+<!--                         <div class="col-md-7"> <span id="cylinders"></span> </div> -->
                       </div>
                     </div>
-                  
-                    <div class="col-md-12">
+                   <div class="col-md-6">
                       <div class="form-group">
-                        <label for="focusedinput" class="col-md-5 control-label">Cylinder Return Truck</label>
-                        <div class="col-md-7">
-                          <form:select path="cylinderReturnTruck" class="form-control " onfocus="removeBorder(this.id);" >
-                            <form:option value="">--Select Truck--</form:option>
-                            <form:options items="${trucks}"></form:options>
-                          </form:select>
-                        </div>
+                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Items :</label>
+                         <div class="col-md-6"> <span id="previouesitems" class="form-control"  style="border:none;"></span> </div>
                       </div>
                     </div>
-                    
-                    
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                       <div class="form-group">
-                        <label for="focusedinput" class="col-md-5 control-label">previous Due Amount (AED)</label>
-                        <div class="col-md-5" style="padding-top:5px; color:#C00;">
-                        <span id="lastDueAmount" style="padding-top:5px; color:#C00"><strong>0</strong></span>
-                        </div>
+                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Invoice ID :</label>
+                         <div class="col-md-6"> <span id="previouesInvoiceId" class="form-control"  style="border:none;"></span> </div>
                       </div>
-                    <br />
-
                     </div>
+                     <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Total Amount :</label>
+                         <div class="col-md-6"> <span id="previouesgrossamount" class="form-control"  style="border:none;"></span> </div>
+                      </div>
+                    </div>  
+                     <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Paid Amount  :</label>
+                         <div class="col-md-6"> <span id="previouespaidamount" class="form-control"  style="border:none;"></span> </div>
+                      </div>
+                    </div>
+                     <div class="col-md-6">
+                      <div class="form-group">
+                        <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Due Amount :</label>
+                         <div class="col-md-6"> <span id="previouesdueamount" class="form-control"  style="border:none;"></span> </div>
+                      </div>
+                    </div>
+                    
+                    
 
                     <br />
-                    
-                    
-                    
-               
-               
-               
-                   <input type="hidden" id="previousDueAmount" name="previousDueAmount" value="0">
+<!--                     <div id="previousDueAmount"></div> -->
                   
                     
                     <div  style="display:none" >
@@ -178,136 +207,26 @@ table tbody tr.rowInc {
                         <form:options items="${companys}"></form:options>
                       </form:select>
                     </div>
-                    
-                    
-                
-                
-                
-                
-                
-                    
                   </div>
                 </div>
-              </div>
-            </div>
-		
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <div class="row"> 
-                    <div class="col-md-12">
-                    
-               <div class="panel panel-primary">
-                <div class="panel-heading">
-                <h4>Deliver Cylinders</h4>
-                 <table class="options notPrintMe">
-                  <tr>
-                    <td class="hideme"><span class="addItemButton btn-danger" onclick="addMoreRowsForDependent(this.form);">Add Item</span></td>
-                  </tr>
-                </table>
-                
-                </div>
-                   
-                    
-                    
-                    
-                    
-            <div class="panel-body">         
-         
-            <form:select path="item" id="item1" style="display:none;font-size: small;">
-              <form:option value="" selected="selected" disabled="disabled">-- Select Item --</form:option>
-              <form:options items="${items}"></form:options>
-            </form:select>
-            <c:if test="${not empty vat}">
-              <form:hidden path="vat" value="${vat}"/>
-            </c:if>
-            <c:if test="${empty vat}">
-              <form:hidden path="vat" value="0"/>
-            </c:if>
-            <!-- </div>
-		<div class="row"> -->
-            <div >
-              <div class="form-group">
-                <table class="table table-bordered" id="dependent_table">
-                  <thead >
-                    <tr class="default" style="background:#EBEBEB">
-                      <th><span>Sno</span></th>
-                      <th><span>Items</span></th>
-                      <th><span>Quantity</span></th>
-                      <th><span>Price(AED)</span></th>
-                      <th><span>Total Amount (AED)</span></th>
-                      <th><span>Discount (%)</span></th>
-                      <th><span>Net Amount (AED)</span></th>
-                      <!-- 								<th style="width: 200px"><span>VAT (5%)</span></th> -->
-                      <!-- 								<th style="width: 200px"><span>Net Amount</span></th> -->
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr id="1" class="rowInc">
-                      <td></td>
-                      <td><select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)">
-                        <option value="" selected="selected" disabled="disabled">-- Select Item --</option>
-                        </select> </td>
-                      <td><input name="unit" value="1" id="1unit" type="text" title="Unit" onkeydown="removeBorder(this.id);" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onblur="getTruckInCylinderCount(this.id,this.value)"/></td>
-                      <td><input name="rate" value="0.0" id="1rate" type="text" onkeydown="removeBorder(this.id);" onkeyup="allcalculate(this.id)" class="form-control numericOnly" readonly="readonly"/></td>
-                      <td><input name="totalvalue" value="0.00" title="Total Value" id="1totalvalue" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-                      <td><input name="discount" value="0" title="Discount" id="1discount" type="text" onkeydown="removeBorder(this.id);" onkeyup="discountCheck(this.id,this.value)" class="form-control" /></td>
-                      <td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
-                      <!-- 								<td><input name="vat" placeholder="Vat" id="1vat" value="5" type="text" onkeydown="removeBorder(this.id);" class="form-control" /></td> -->
-                      <!-- 								<td><input name="netAmount" placeholder="Net Amount"  id="1netAmount" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td> -->
-                    </tr>
-                  </tbody>
-                  <tfoot>
-                    <tr>
-                      <th colspan="4"><h3 align="right"></h3></th>
-                      <th><span class="totalInvoiceValue"></span></th>
-                      <th><span class="totalDiscounts"></span></th>
-                      <th><span class="totalTaxableValue"></span></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;"> Total Net Amount (AED)</th>
-                      <th> <span id="netAmount1">0</span></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;">
-                        Vat Amount ( ${vat }%) (AED)</th>
-                      <th> <span id="vatAmount">0</span></th>
-                    </tr>
-                    
-                    <tr>
-                      <th colspan="6" style="text-align: right;"> Paid Amount(AED)</th>
-                      <th> <input type="text" id="payedAmount" name="payedAmount" placeholder="Paid Amount(AED)" onkeyup="payedAmountCal(this.value)" class="form-control numericOnly"/></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;"> Due Amount(AED)</th>
-                      <th> <input type="text"  id="dueAmount" name="dueAmount" class="form-control numericOnly" placeholder="Due Amount(AED)" /></th>
-                    </tr>
-                    <tr>
-                      <th colspan="6" style="text-align: right;">
-                        Gross Amount (AED)</th>
-                      <th> <span id="grandTotal">0</span></th>
-                    </tr>
-                  </tfoot>
-                </table>
               </div>
             </div>
             <div class="panel-footer hideme">
               <div class="row">
                 <div class="col-sm-12">
                   <div class="btn-toolbar pull-right">
-                    <input class="btn-primary btn" type="submit" id="submit11" value="Submit" />
-                    <input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" />
+                    <input class="btn-primary btn" type="submit" id="submit11" value="Submit">
+                    <input class="btn-danger btn cancel" type="reset" id="clearData" value="Reset" placeholder="">
                   </div>
                 </div>
               </div>
             </div>
-          </div></td>
+        <div class="row"> 
+                    <div class="col-md-12">
+                    
+               <div class="panel panel-primary">
+                    
+            </td>
       </tr>
     </table>
   </form:form>
@@ -319,7 +238,7 @@ table tbody tr.rowInc {
 <!-- print table -->
 
 
-<div class="container" id="printCylinder" style="display: none;font-size: 20px !important;">
+<div class="container" id="printCylinder" style="display:none; font-size: 20px !important;">
 <div class="col-md-12 printTable">
  <div class="col-md-12 noPrint" style="padding: 5px;border-bottom: 2px solid;border-top: 2px solid;"  >
  <div class="col-md-4"><button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button></div><div class="col-md-4"></div>
@@ -347,37 +266,26 @@ table tbody tr.rowInc {
                           
               <tr><td ><label for="focusedinput "  >Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr>
               <tr><td ><label for="focusedinput "  >Customer Address :</label></td><td><span class="customerAddress"></span></td></tr>
-              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr>       
+              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr> 
+               <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr>
+                <tr><td ><label for="focusedinput "  >Paid Amount :</label></td><td><span class="paidamount"> </span></td></tr>         
+                <tr><td ><label for="focusedinput "  >Due Amount :</label></td><td><span class="Dueamount"> </span></td></tr>                  
                           
                           </tbody>
     
     </table>
      <table class="table-responsive">
-    <tr><td class="det"><div class="custom">Returned Cylinders</div></td></tr><tbody style="padding:10px;
+    <tr><td class="det"><div class="custom">Previous Invoice Data</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
-     <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr>
-              <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td><span class="returnTruck"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
+<!--      <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr> -->
+              <tr><td ><label for="focusedinput"  >Items :</label></td><td><span class="previousitems"></span></td></tr>
+              <tr><td ><label for="focusedinput "  >Total  Amount :</label></td><td><span class="previouesamount"> </span></td></tr>
+              <tr><td ><label for="focusedinput "  >Due Amount :</label></td><td><span class="previouesdueamount1"> </span></td></tr>    
+              <tr><td ><label for="focusedinput "  >Invoice ID :</label></td><td><span class="previouesInvoiceId"> </span></td></tr>     
+              <tr><td ><label for="focusedinput "  >Paid Amount :</label></td><td><span class="previouespaidamount"> </span></td></tr>
+               <tr height="26px"><td><label for="focusedinput"  > </label></td> </tr>
+                <tr height="26px"><td><label for="focusedinput"  > </label></td> </tr>    
  </tbody>   </table>
-  <table class="table-responsive deliverCylinders" style="width:96%" >
-    <thead style="padding:10px;	border:1px solid lightgray;">
-    <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr>    
-			<tr class="default" style="background:#EBEBEB">
-            <tr><th scope="col">Sno</th><th width="150px;"  scope="col">Items</th><th scope="col">Quantity</th><th scope="col">Price(AED)</th><th scope="col">Total Amount (AED)</th><th scope="col">Discount (%)</th><th scope="col">Net Amount (AED)
-			</th></tr> </thead>
-			<tbody>   
-			 </tbody>       
-						  
-                  <tfoot>
- 		<tr><td width="400"></td><td width="200">Total Amount (AED)</td><td> :</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
-         <tr><td width="400"></td><td width="200">Vat Amount( ${vat }%) (AED)</td><td> :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
-         <tr><td width="400"></td><td width="200">Paid Amount(AED)</td><td> :</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
-         <tr><td width="400"></td><td width="200" >Due Amount(AED)</td><td>  :</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
-          <tr><td width="400"></td><td width="200" >Gross Amount (AED)</td><td>  :</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
-                  
-</tfoot>
-    
-    </table>
     </div>
     <div class="clearfix"></div>
     <br>
@@ -394,6 +302,7 @@ table tbody tr.rowInc {
 <div class="col-md-12">
 <h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="printdateId"></p>
 </div><div class="clearfix"></div>
+<div class="clearfix"></div>
  <table class="table-responsive " >
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
@@ -401,37 +310,26 @@ table tbody tr.rowInc {
                           
               <tr><td ><label for="focusedinput "  >Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr>
               <tr><td ><label for="focusedinput "  >Customer Address :</label></td><td><span class="customerAddress"></span></td></tr>
-              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr>       
+              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr> 
+               <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr>
+                <tr><td ><label for="focusedinput "  >Paid Amount :</label></td><td><span class="paidamount"> </span></td></tr>         
+                <tr><td ><label for="focusedinput "  >Due Amount :</label></td><td><span class="Dueamount"> </span></td></tr>                  
                           
                           </tbody>
     
     </table>
      <table class="table-responsive">
-    <tr><td class="det"><div class="custom">Returned Cylinders</div></td></tr><tbody style="padding:10px;
+    <tr><td class="det"><div class="custom">Previous Invoice Data</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
-     <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr>
-              <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td><span class="returnTruck"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
+<!--      <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr> -->
+              <tr><td ><label for="focusedinput"  >Items :</label></td><td><span class="previousitems"></span></td></tr>
+              <tr><td ><label for="focusedinput "  >Total  Amount :</label></td><td><span class="previouesamount"> </span></td></tr>
+              <tr><td ><label for="focusedinput "  >Due Amount :</label></td><td><span class="previouesdueamount1"> </span></td></tr>    
+              <tr><td ><label for="focusedinput "  >Invoice ID :</label></td><td><span class="previouesInvoiceId"> </span></td></tr>     
+              <tr><td ><label for="focusedinput "  >Paid Amount :</label></td><td><span class="previouespaidamount"> </span></td></tr>
+               <tr height="26px"><td><label for="focusedinput"  > </label></td> </tr>
+                <tr height="26px"><td><label for="focusedinput"  > </label></td> </tr>    
  </tbody>   </table>
-  <table class="table-responsive deliverCylinders" style="width:96%" >
-    <thead style="padding:10px;	border:1px solid lightgray;">
-    <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr>    
-			<tr class="default" style="background:#EBEBEB">
-            <tr><th scope="col">Sno</th><th width="150px" scope="col">Items</th><th  scope="col">Quantity</th><th scope="col">Price(AED)</th><th scope="col">Total Amount (AED)</th><th scope="col">Discount (%)</th><th scope="col">Net Amount (AED)
-			</th></tr> </thead>
-			<tbody>   
-			 </tbody>       
-						  
-                  <tfoot >
- 		<tr><td class="tfoot1" width="400"></td><td width="200">Total Amount (AED)</td><td> :</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
-         <tr><td width="400"></td><td width="200">Vat Amount( ${vat }%) (AED)</td><td> :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
-         <tr><td width="400"></td><td width="200">Paid Amount(AED) </td><td>:</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
-         <tr><td width="400"></td><td width="200" >Due Amount(AED) </td><td> :</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
-          <tr><td width="400"></td><td width="200" >Gross Amount (AED)</td><td>  :</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
-                  
-</tfoot>
-    
-    </table>
     </div>
   <div id="editor"></div>
 </div>
@@ -447,132 +345,29 @@ table tbody tr.rowInc {
 </c:choose>
 
 
+<c:choose>
+<c:when test="${empty param.previousInvoice}">
+   <script> var previousInvoice = "";</script>
+</c:when>
+<c:otherwise>
+   <script> var previousInvoice = "${param.previousInvoice}";</script>
+</c:otherwise>
+</c:choose>
+
+
+
 <!-- <script type="text/javascript" src="js/jquery-2.1.3.min.js"></script> -->
 <script type="text/javascript">
 
 
 
-$(function() {
-// 	var listOrders=JSON.parse(lstOrders);
-	
-	var dummyItems = $("#item1").html();
-	$("#1item").empty();
-	$(dummyItems).appendTo("#1item");
-	
-	$("#1expirydate").datepicker({
-		dateFormat : "dd-MM-yy",
-		changeDate : true,
-		changeMonth : true,
-		changeYear : true,
-	});
-	$("#1manufacturingdate").datepicker({
-		dateFormat : "dd-MM-yy",
-		changeDate : true,
-		changeMonth : true,
-		changeYear : true,
-	});
-});
 var damageId = 0;
 // var serviceUnitArray ={};
 // var serviceUnitArray1 ={};
 var data = {};
 
 
-function showTableData(response){
-	serviceUnitArray ={};
-	serviceUnitArray1 ={};
-	var table=$('#tableId').html('');
-	
-	var protectType = null;
-	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>LPO Number</th><th>Supplier name</th><th>Supplier Contact no</th><th>Supplier Email</th><th>Supplier Address</th><th>Total Amount</th><th>Paid Amount</th><th>Due Amount</th><th>Remarks</th><th>Status</th><th></th></tr>'+
-    	"</thead><tbody></tbody></table>";
-	$("#tableId").html(tableHead);
-	$.each(response,function(i, orderObj) {
-		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='lpoDelete("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
-		}else{  
-			var deleterow = "<a class='activate' onclick='lpoDelete("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
-		}
-// 		alert(orderObj.lponumber);
-		
-		var edit = "<a class='edit editIt' id='edit"+orderObj.lponumber+"' onclick=viewDetails(this.id,1)><i class='fa fa-edit'></i></a>"
-		serviceUnitArray[orderObj.id] = orderObj;
-		serviceUnitArray1[orderObj.lponumber] = orderObj;
-		var tblRow ="<tr>"
-			+ "<td id='"+orderObj.lponumber+"' style='text-align: center;cursor: pointer;color: red;text-decoration: underline;' onclick=viewDetails(this.id,0) title='"+orderObj.lponumber+"'>" + orderObj.lponumber + "</td>"
-			+ "<td title='"+orderObj.suppliername+"'>" + orderObj.suppliername + "</td>"
-			+ "<td title='"+orderObj.suppliercontactno+"'>" + orderObj.suppliercontactno + "</td>"
-			+ "<td title='"+orderObj.supplieremail+"'>" + orderObj.supplieremail+ "</td>"
-			+ "<td title='"+orderObj.supplieraddress+"'>" + orderObj.supplieraddress + "</td>"
-			+ "<td title='"+orderObj.amount+"'>" + orderObj.amount + "</td>"
-			+ "<td title='"+orderObj.paidamount+"'>" + orderObj.paidamount + "</td>"
-			+ "<td title='"+orderObj.dueamount+"'>" + orderObj.dueamount + "</td>"
-			+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
-			+ "<td title='"+orderObj.lpoStatus+"'>" + orderObj.lpoStatus + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
-			+"</tr>";
-		$(tblRow).appendTo("#tableId table tbody");
-	});
-	if(isClick=='Yes') $('.datatables').dataTable();
-}
-function editLpo(id) {
-	var inputs = $('input[type="text"]');
-    inputs.removeAttr('placeholder');
-    inputs.css('border','');
-    inputs.addClass('default-class');
-    inputs.css('color','black ');
-	
-	$("#id").val(id);
-	$("#lponumber").val(serviceUnitArray[id].lponumber);
-	$("#supplieraddress").val(serviceUnitArray[id].supplieraddress);
-	$("#suppliercontactno").val(serviceUnitArray[id].suppliercontactno);
-	$("#item").val(serviceUnitArray[id].item);
-	$("#remarks").val(serviceUnitArray[id].remarks);
-	$("#amount").val(serviceUnitArray[id].amount);
-	$("#suppliername").val(serviceUnitArray[id].suppliername);
-	$("#amount").val(serviceUnitArray[id].amount);
-	$("#supplieremail").val(serviceUnitArray[id].supplieremail);
-	$("#status").val(serviceUnitArray[id].status);
-	$("#paidamount").val(serviceUnitArray[id].paidamount);
-	$("#dueamount").val(serviceUnitArray[id].dueamount);
-	
-	$("#submit1").val("Update");
-	$(window).scrollTop($('#moveTo').offset().top);
-}
 
-function lpoDelete(id,status) {
-	var checkstr=null;
-	if(status == 0){
-		 checkstr =  confirm('Are you sure you want to Deactivate?');
-	}else{
-		 checkstr =  confirm('Are you sure you want to Activate?');
-	}
-	if(checkstr == true){
-		$.ajax({
-					type : "POST",
-					url : "lpoDelete.htm",
-					data :"id="+id+"&status="+status,
-					 beforeSend : function() {
-			             $.blockUI({ message: 'Please wait' });
-			          },
-					success: function (response) {
-		                	 $.unblockUI();
-		                 if(response != null ){
-		                	 var resJson=JSON.parse(response);
-		                	showTableData(resJson);
-		                	//alert("Delete Sucessfully");
-		                	//window.location.reload();
-		                	}
-		                 //window.location.reload();
-		                 },
-		             error: function (e) { 
-		            	 $.unblockUI();
-							console.log(e);
-		             }
-				});
-	}
-}
 
 function dataClear(){
 	
@@ -586,21 +381,6 @@ function dataClear(){
 	$("#suplieraddress").val("");
 	$("#supliercontactno").val("");
 	$("#amount").val("");
-}
-$(function() {
-	$("#expiryDate1").datepicker({
-		dateFormat : "dd-MM-yy",
-		changeDate : true,
-		changeMonth : true,
-		changeYear : true,
-	});
-});
-function showexpiryDate(value){
-	if(value=="1"){
-		 $('#exporydatediv').show();
-	}else{
-		$('#exporydatediv').hide();
-	}
 }
 
 
@@ -769,7 +549,6 @@ function priceCalculator(){
 	if(lstdue !="" && lstdue != null && lstdue != "undefined" ){
 		finalAmount = parseFloat(finalAmount)+parseFloat(lstdue);
 	 }	
-	$("#dueAmount").val(Math.round(finalAmount));
 	$("#netAmount").val(finalAmount);
 	 $("#netAmount1").text(grandTotal);
 	 $("#totalNetamount").val(grandTotal);
@@ -846,9 +625,9 @@ dependentRowCount = 1;
 }
 
 function PaidCalculation(value){
-	var amount = $("#amount").val();
+	var amount = $("#previousDueAmount").text();
 	if(amount !="" && value !=""){
-		$("#dueamount").val(parseInt(amount)-parseInt(value));
+		$("#dueAmount").val(parseInt(amount)-parseInt(value));
 	}
 }
 function getCustomerIds(value){
@@ -857,13 +636,23 @@ function getCustomerIds(value){
 	$("#mobile").text(" ");
 	$("#landline").text(" ");
 	$("#lastDueAmount").text(" ");
-	$("#previousDueAmount").val(" ");
+	$("#previousDueAmount").text(" ");
+	
+	$("#previouesInvoiceId").text(" ");
+	$("#previouesgrossamount").text(" ");
+	$("#previouespaidamount").text(" ");
+	$("#previouesdueamount").text(" ");
+	$("#previouesitems").text(" ");
+	$("#prviousInvoiceId").val(" ");
+	
+	
 	var formData = new FormData();
     formData.append('customertype', value);
 	$.fn.makeMultipartRequest('POST', 'getCustomerIds', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.allOrders1;
+		var alldata1 = jsonobj.allOrders2;
 		
 		var html = "<option value=''>-- Select Customer Id --</option>";
 		$.each(alldata,function(i, catObj) {
@@ -873,7 +662,7 @@ function getCustomerIds(value){
 				+ catObj.customerid + '</option>';
 		});
 		$('#customerId').empty().append(html);
-		$("#customerId").trigger("chosen:updated");
+// 		$("#customerId").trigger("chosen:updated");
 		
 		
 		
@@ -882,10 +671,12 @@ function getCustomerIds(value){
 function getCustomerDetails(value){
 	var formData = new FormData();
     formData.append('customerid', value);
-	$.fn.makeMultipartRequest('POST', 'getCustomerIds', false,
+	$.fn.makeMultipartRequest('POST', 'getCustomerInvoiceData', false,
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.allOrders1;
+		var alldata1 = jsonobj.allOrders2;
+		console.log(alldata1);
 		$("#cylinders").text("");
 		$.each(alldata,function(i, catObj) {
 			$("#customername").text(catObj.customername);
@@ -893,39 +684,27 @@ function getCustomerDetails(value){
 			$("#customeraddress").text(catObj.customeraddress);
 			$("#landline").text(catObj.landline);
 			$("#lastDueAmount").text(catObj.dueAmount);
-			$("#previousDueAmount").val(catObj.dueAmount);
+			$("#previousDueAmount").text(catObj.dueAmount);
+			
+			$("#dueAmount").val(catObj.dueAmount);
 			priceCalculator();
-			if(catObj.cylinderreturn=='0'){
-			var varcheckBox = "<input name='cylinderId' type='checkbox' value='"+catObj.cylinderId1 +"' />"+catObj.name+" <select  id='"+i+"company' name='company' class='company' ><option value=''>Select Company</option></select> <br>"; 
-			$("#cylinders").append(varcheckBox);
-			var dummyCompany = $("#ownercompany").html();
-			$("#"+i+"company").empty();
-			$(dummyCompany).appendTo("#"+i+"company");
-			$("#"+i+"company").val(catObj.ownercompany);
-			}
+			
 		
 	});
+		$.each(alldata1,function(i, catObj) {
+			$("#previouesInvoiceId").text(catObj.invoiceid);
+			$("#previouesgrossamount").text(catObj.grossamount);
+			$("#previouespaidamount").text(catObj.paidamount);
+			$("#previouesdueamount").text(catObj.dueamount);
+			$("#previouesitems").text(catObj.itemName);
+			$("#prviousInvoiceId").val(catObj.invoiceid);
+			
+		});
+		    
 	
 });
 }
-/* function getTruckCylindersCount(id){
-	var formData = new FormData();
-    formData.append('truckId', id);
-	$.fn.makeMultipartRequest('POST', 'getTruckCylinders', false,
-			formData, false, 'text', function(data){
-		var jsonobj = $.parseJSON(data);
-		var alldata = jsonobj.allOrders1;
-		serviceUnitArray2 ={};
-		var html = "<option value=''>-- Select Customer Id --</option>";
-		$.each(alldata,function(i, catObj) {
-			serviceUnitArray2[catObj.id] = catObj;
-			 html = html + '<option value="'
-				+ catObj.id + '">'
-				+ catObj.cylinderid + '</option>';
-		});
-		$('#cylindetId').empty().append(html);
-	});
-} */
+
 var map = new Object(); // or var map = {};
 function getTarrifPrice(value,id){
 	var truckId = $("#cylinderDeliverTruck").val();
@@ -947,10 +726,7 @@ function getTarrifPrice(value,id){
 		allcalculate(number+"rate");
 	});
 }
-function payedAmountCal(value){
-	var dueAmount =  Math.round(finalAmount-value);
-	$("#dueAmount").val(dueAmount);
-}
+
 function discountCheck(id,value){
 // 	alert(map[id]);
 	if(value>map[id]){
@@ -1032,11 +808,7 @@ $('#submit11').click(function(event) {
 		} 
 		
 	});
-	if(!cylinderAvailable){
-		alert("cylinders not available in turck");
-		return false;
-		event.preventDefault();
-	}
+	
 	if(validation) {
 		$("#submit11").attr("disabled",true);
 		$("#submit11").val("Please wait...");
@@ -1177,20 +949,21 @@ $("#printCylinder").show();
     return true;
 }
 
-if(invoiceId != ""){
-	invoicePrint(invoiceId);
+if(invoiceId != "" && previousInvoice != ""){
+	invoicePrint(invoiceId,previousInvoice);
 }
-function invoicePrint(id){
+function invoicePrint(invoiceId,previousInvoice){
 	//alert(this.id);
 	 $("#cylinderdataId").hide();
 	 $("#printCylinder").show();
-	 var invoiceId=id;
 	 
 
 	var formData = new FormData();
-    formData.append('invoiceId', id);
-	$.fn.makeMultipartRequest('POST', 'getInvoiceData', false,
+    formData.append('invoiceId', invoiceId);
+    formData.append('previousInvoice', previousInvoice);
+	$.fn.makeMultipartRequest('POST', 'getDueamountInvoiceData', false,
 			formData, false, 'text', function(data){
+		console.log(data);
 		var lponumbertitle=null;
 		var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.allOrders1;
@@ -1199,89 +972,36 @@ function invoicePrint(id){
 		var table=$('.deliverCylinders tbody').html('');
 		$(".deliverCylinders tbody").html("");
 
-var j=0;
 		$.each(alldata,function(i, orderObj) {
-		j=i+1;
 		
-		
+// 			customerNameId customerTypeId customerAddress mobile paidamount previousdueamount1 Dueamount  previouesgrossamount  previouesdueamount previouesInvoiceId previouespaidamount
 			$(".customerNameId").text(orderObj.customername);
 			$(".customerTypeId").text(orderObj.customertype);
 			$(".customerAddress").text(orderObj.customeraddress);
 			$(".mobile").text(orderObj.mobile);
-			$(".totalAmount").text(orderObj.totalnetamount);
-			$(".vat").text(orderObj.vatamount);
-			$(".paidAmount").text(orderObj.paidamount);
-			$(".dueAmount").text(orderObj.dueamount);
-			$(".previousdueamount").text(orderObj.previousdueamount);
-			$(".grassAmount").text(orderObj.grossamount);
-			$(".taxinvoice").text(orderObj.invoiceid);
-			$(".printdateId").text(orderObj.created_time);
-			
-			id="'+ dependentRowCount+ 'taxable"
-			
-			var tblRow =	'   <tr><th scope="col" style="font-weight:normal;"><span class="sno">'+j+'</span></th>'
-				           +'   <th scope="col" style="font-weight:normal;" ><span  class="ite'+j+' ite">items</span></th>'
-				           +'    <th scope="col" style="font-weight:normal;"><span  class="quant'+j+' quant">0.0</span></th>'
-				           +'    <th scope="col" style="font-weight:normal;"><span  class="pri'+j+' pri">0.0</span></th>'
-				           +'    <th scope="col" style="font-weight:normal;"><span  class="tot'+j+' tot">0.0</span></th>'
-				           +'    <th scope="col" style="font-weight:normal;"><span  class="dis'+j+' dis">00</span></th>'
-				           +'    <th scope="col" style="font-weight:normal;"><span  class="net'+j+' net">00</span></th></tr> ';
-							$(tblRow).appendTo(".deliverCylinders tbody");
-							$(".ite"+j).text(orderObj.name);
-							$(".quant"+j).text(orderObj.quantity);
-							$(".pri"+j).text(orderObj.price);
-							$(".tot"+j).text(orderObj.totalamount);
-							$(".dis"+j).text(orderObj.discount);
-							$(".net"+j).text(orderObj.netamount);
+				$(".Dueamount").text(orderObj.dueAmount);
+				$(".paidamount").text(orderObj.paidAmount);
+				$(".taxinvoice").text(orderObj.invoiceId);
+				
 			
 			
 	});
-		
-		$.each(alldata1,function(i, orderObj) {
-			j=i+1;
-			
-				$(".returnTruck").text(orderObj.trucknumber);
-				$(".customerNameId").text(orderObj.customername);
-				$(".customerTypeId").text(orderObj.customertype);
-				$(".customerAddress").text(orderObj.customeraddress);
-				$(".mobile").text(orderObj.mobile);
-				$(".totalAmount").text(orderObj.totalnetamount);
-				$(".vat").text(orderObj.vatamount);
-				$(".paidAmount").text(orderObj.paidamount);
-				$(".dueAmount").text(orderObj.dueamount);
-				$(".previousdueamount").text(orderObj.previousdueamount);
-				$(".grassAmount").text(orderObj.grossamount);
-				$(".taxinvoice").text(orderObj.invoiceid);
-				$(".printdateId").text(orderObj.created_time);
-				var varcheckBox = "<div>"+orderObj.name+"</div>"; 
-				$(".retunCylinders").append(varcheckBox);
-				
-				/* id="'+ dependentRowCount+ 'taxable"
-				
-				var tblRow =	'   <tr><th scope="col"><span class="sno">'+j+'</span></th>'
-					           +'   <th scope="col"><span class="ite" id="ite'+j+'">items</span></th>'
-					           +'    <th scope="col"><span class="quant" id="quant'+j+'">0.0</span></th>'
-					           +'    <th scope="col"><span class="pri" id="pri'+j+'">0.0</span></th>'
-					           +'    <th scope="col"><span class="tot" id="tot'+j+'">0.0</span></th>'
-					           +'    <th scope="col"><span class="dis" id="dis'+j+'">00</span></th>'
-					           +'    <th scope="col"><span class="net" id="net'+j+'">00</span></th></tr> ';
-								$(tblRow).appendTo(".deliverCylinders tbody");
-								$("#ite"+j).text(orderObj.items);
-								$("#quant"+j).text(orderObj.quantity);
-								$("#pri"+j).text(orderObj.price);
-								$("#tot"+j).text(orderObj.totalamount);
-								$("#dis"+j).text(orderObj.discount);
-								$("#net"+j).text(orderObj.netamount); */
-				
-				
+		$.each(alldata1,function(i, catObj) {
+			$(".previouesamount").text(catObj.grossamount);
+			$(".previouespaidamount").text(catObj.paidAmount);
+			$(".previouesdueamount1").text(catObj.dueAmount);
+			$(".previousitems").text(catObj.itemName);
+			$(".previouesInvoiceId").text(catObj.invoiceId);
+			$(".previousdueamount").text(catObj.dueAmount)
 		});
+		
 	});
 	
 }
 function getBack(){
 	$("#cylinderdataId").show();
 	 $("#printCylinder").hide();
-	ChangeUrl('lpoNum', 'cylinderDeliver?invoiceId=');
+	ChangeUrl('lpoNum', 'dueamount?invoiceId=');
 
 }
 function ChangeUrl(page, url) {
@@ -1294,6 +1014,6 @@ function ChangeUrl(page, url) {
 }
 
 
-$("#pageName").text("Cylinder Deliver To Customer");
-$(".cylinderDeliver").addClass("active");
+$("#pageName").text("Due Amount Pay");
+$(".dueamount").addClass("active");
 </script>

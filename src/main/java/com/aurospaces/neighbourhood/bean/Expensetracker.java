@@ -23,10 +23,22 @@ protected Date createdTime ;
 
 protected Date updatedTime ;
 protected String status ;
-protected String trackrstatus,fromDate,toDate,month ,customerType,fillingStationId;
+protected String trackrstatus,fromDate,toDate,month ,customerType,fillingStationId,customertype,customerId;
 
 
 
+public String getCustomertype() {
+	return customertype;
+}
+public void setCustomertype(String customertype) {
+	this.customertype = customertype;
+}
+public String getCustomerId() {
+	return customerId;
+}
+public void setCustomerId(String customerId) {
+	this.customerId = customerId;
+}
 public String getFillingStationId() {
 	return fillingStationId;
 }

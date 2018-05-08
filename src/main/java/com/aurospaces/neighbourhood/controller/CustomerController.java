@@ -126,13 +126,15 @@ public class CustomerController {
 		return sJson;
 	}
 	@RequestMapping(value = "/getCustomerIds")
-	public @ResponseBody String deletetruckMaster( CustomermasterBean objCustomermasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+	public @ResponseBody String getCustomerIds( CustomermasterBean objCustomermasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		List<Map<String, Object>> listOrderBeans  = null;
+		List<Map<String, Object>> listOrderBeans1  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
 		try{
 			
+
 			listOrderBeans = customermasterDao.getCustomers(objCustomermasterBean);
 			 objectMapper = new ObjectMapper();
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
@@ -148,6 +150,7 @@ public class CustomerController {
 				request.setAttribute("allOrders1", "''");
 				jsonObj.put("allOrders1", listOrderBeans);
 			}
+			
 		}catch(Exception e){
 			e.printStackTrace();
 	System.out.println(e);
@@ -159,6 +162,66 @@ public class CustomerController {
 		}
 		return String.valueOf(jsonObj);
 	}
+	@RequestMapping(value = "/getCustomerInvoiceData")
+	public @ResponseBody String getCustomerInvoiceData( CustomermasterBean objCustomermasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
+		List<Map<String, Object>> listOrderBeans  = null;
+		List<Map<String, Object>> listOrderBeans1  = null;
+		JSONObject jsonObj = new JSONObject();
+		ObjectMapper objectMapper = null;
+		String sJson=null;
+		try{
+			
+			listOrderBeans = customermasterDao.getCustomersDetails(objCustomermasterBean);
+			String invoiceId = null;
+			if(listOrderBeans !=null){
+			for (Map<String, Object> map : listOrderBeans) {
+				
+				 invoiceId = String.valueOf(map.get("invoiceId"));
+			   
+			}
+			if(StringUtils.isNotBlank(invoiceId)){
+				listOrderBeans1 = customermasterDao.getCustomersPrintData(invoiceId);
+			}
+			}
+			 objectMapper = new ObjectMapper();
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", sJson);
+				jsonObj.put("allOrders1", listOrderBeans);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans);
+				request.setAttribute("allOrders1", "''");
+				jsonObj.put("allOrders1", listOrderBeans);
+			}
+			if (listOrderBeans1 != null && listOrderBeans1.size() > 0) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans1);
+				request.setAttribute("allOrders2", sJson);
+				jsonObj.put("allOrders2", listOrderBeans1);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listOrderBeans1);
+				request.setAttribute("allOrders2", "''");
+				jsonObj.put("allOrders2", listOrderBeans1);
+			}
+		}catch(Exception e){
+			e.printStackTrace();
+	System.out.println(e);
+			logger.error(e);
+			logger.fatal("error in EducationController class deleteEducation method  ");
+			jsonObj.put("message", "excetption"+e);
+			return String.valueOf(jsonObj);
+			
+		}
+		return String.valueOf(jsonObj);
+	}
+	
 	@RequestMapping(value = "/inActiveCustomer")
 	public @ResponseBody String inActiveCustomer( @RequestParam("status") String status, HttpSession objSession,
 			HttpServletRequest objRequest) throws JsonGenerationException, JsonMappingException, IOException {

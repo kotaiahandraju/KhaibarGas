@@ -58,7 +58,7 @@ table tbody tr.rowInc {
 			<div class="col-md-12 col-sm-12">
 				<div class="panel panel-primary">
 					<div class="panel-heading">
-						<h4>Add Truck</h4>
+						<h4>Add Security Deposit</h4>
                     </div>
 					<form:form modelAttribute="securedepositForm" class="form-horizontal" action="saveSecurityDeposit">
 					<table width="100%">
@@ -94,7 +94,7 @@ table tbody tr.rowInc {
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Security Deposit <span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:select path="securityDeposit" class="form-control " onfocus="removeBorder(this.id);" onchange="selectDeposit(this.value)">
+										<form:select path="securityDeposit" class="form-control validate" onfocus="removeBorder(this.id);" onchange="selectDeposit(this.value)">
 				                            <form:option value="">-- Select Security Deposit --</form:option>
 				                             <form:option value="Amount">Amount</form:option>
 				                              <form:option value="Cylinder">Cylinder</form:option>
@@ -148,7 +148,7 @@ table tbody tr.rowInc {
 								<div class="form-group">
 									<label for="focusedinput" class="col-md-4 control-label">Security Amount (AED) <span class="impColor">*</span></label>
 									<div class="col-md-6">
-										<form:input path="amount" type="text"  class="form-control " placeholder="Security Amount (AED)" onchange="removeBorder(this.id)"/>
+										<form:input path="amount" type="text"  class="form-control numericOnly" placeholder="Security Amount (AED)" onchange="removeBorder(this.id)"/>
 									</div>
 								</div>
 							</div>
@@ -205,7 +205,7 @@ table tbody tr.rowInc {
 						<div class="row">
 							<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
-									<input class="btn-primary btn" type="submit" value="Sumbit" id="submit1">
+									<input class="btn-primary btn" type="submit" value="Submit" id="submit1">
 					      			<input class="btn-danger btn cancel" type="reset" value="Reset">
 				      			</div>
 				      		</div>
@@ -243,7 +243,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Customer Name</th><th>Security Deposit</th><th>Item Name</th><th>Quantity</th><th>Company Name</th><th>Amount</th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Customer Name</th><th>Customer Id</th><th>Security Deposit</th><th>Item Name</th><th>Quantity</th><th>Company Name</th><th>Amount</th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -256,10 +256,11 @@ function displayTable(listOrders) {
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr >"
 			+ "<td class='impFiled' title='"+orderObj.customername+"'>"+ orderObj.customername + "</td>"
+			+ "<td class='impFiled' title='"+orderObj.userId+"'>"+ orderObj.userId + "</td>"
 			+ "<td title='"+orderObj.securityDeposit+"'>"+ orderObj.securityDeposit + "</td>"
 			+ "<td title='"+orderObj.itemName+"'>"+ orderObj.itemName + "</td>"
 			+ "<td title='"+orderObj.quantity+"'>"+ orderObj.quantity + "</td>"
-			+ "<td title='"+orderObj.companyId+"'>"+ orderObj.companyId + "</td>"
+			+ "<td title='"+orderObj.companyName+"'>"+ orderObj.companyName + "</td>"
 			+ "<td title='"+orderObj.amount+"'>"+ orderObj.amount + "</td>"
 // 			+ "<td title='"+orderObj.description+"'>"+ orderObj.description+ "</td>"
 // 			+ "<td title='"+orderObj.capacityoftruck+"'>"+ orderObj.capacityoftruck + "</td>"
@@ -456,3 +457,37 @@ function removeDependentRow(dependentRowCount) {
 $("#pageName").text("Security Deposit");
 $(".securedeposit").addClass("active");
 </script>
+<!-- 
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <title></title>
+    <style type="text/css">
+        body
+        {
+            font-family: Arial;
+            font-size: 10pt;
+        }
+    </style>
+</head>
+<body>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBof-nUbLfnD7fyKZ2DvfLXwWX-RPgdU8c&libraries=places&sensor=false"></script>    
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBof-nUbLfnD7fyKZ2DvfLXwWX-RPgdU8c&callback=initMap"></script>
+    <script type="text/javascript">
+        google.maps.event.addDomListener(window, 'load', function () {
+            var places = new google.maps.places.Autocomplete(document.getElementById('txtPlaces'));
+            google.maps.event.addListener(places, 'place_changed', function () {
+                var place = places.getPlace();
+                var address = place.formatted_address;
+                var latitude = place.geometry.location.lat();
+                var longitude = place.geometry.location.lng();
+                var mesg = "Address: " + address;
+                mesg += "\nLatitude: " + latitude;
+                mesg += "\nLongitude: " + longitude;
+                alert(mesg);
+            });
+        });
+    </script>
+    <span>Location:</span>
+    <input type="text" id="txtPlaces" style="width: 250px" placeholder="Enter a location" />
+</body>
+</html> -->

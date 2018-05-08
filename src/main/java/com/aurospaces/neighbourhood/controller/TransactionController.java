@@ -40,6 +40,7 @@ import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.bean.KhaibarUsersBean;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
+import com.aurospaces.neighbourhood.bean.PaymentHistoryBean;
 import com.aurospaces.neighbourhood.bean.PrintDataBean;
 import com.aurospaces.neighbourhood.bean.StoresmasterBean;
 import com.aurospaces.neighbourhood.bean.UsedGasBean;
@@ -52,6 +53,7 @@ import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
 import com.aurospaces.neighbourhood.db.dao.InvoiceDao;
 import com.aurospaces.neighbourhood.db.dao.ItemsDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
+import com.aurospaces.neighbourhood.db.dao.PaymentHistoryDao;
 import com.aurospaces.neighbourhood.db.dao.PrintDataDao;
 import com.aurospaces.neighbourhood.db.dao.ReturnCylinderDao;
 import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
@@ -89,6 +91,7 @@ public class TransactionController {
 	DataSourceTransactionManager transactionManager;
 	@Autowired UsedGasDao usedGasDao;
 	@Autowired ReturnCylinderDao returnCylinderDao;
+	@Autowired PaymentHistoryDao paymentHistoryDao;
 	private Logger logger = Logger.getLogger(TransactionController.class);
 
 	@RequestMapping(value = "/cylinderMovetofillingStation")
@@ -873,17 +876,16 @@ public class TransactionController {
 				customermasterBean.setId(Integer.parseInt(customerId));
 				customermasterBean.setInvoiceId(invoiceId);
 				customermasterDao.updateCylinderPrice(customermasterBean);
-//				customermasterBean.setId(0);
-//				invoiceDao.save(customermasterBean);
 				
-				
-//				`items` ,  `quantity` ,  `price`  ,  `totalamount`  ,  `discount`  ,  `netamount`  , 
-//				`totalnetamount`  ,  `vatamount`  ,  `paidamount`  , 
-//				`dueamount`  ,    `grossamount`  ,    `previousdueamount`  ,    invoiceid 
-				
-				/*PrintDataBean printDataBean =new PrintDataBean();
-				printDataBean.setItems(items);
-				printDataDao.save(printDataBean);*/
+				PaymentHistoryBean paymentHistoryBean = new PaymentHistoryBean();
+				paymentHistoryBean.setGrossAmount(grossamount);
+				paymentHistoryBean.setInvoiceId(invoiceId);
+				paymentHistoryBean.setVatAmount(vatamount);
+				paymentHistoryBean.setDueAmount(dueAmount);
+				paymentHistoryBean.setPaidAmount(payedAmount);
+				paymentHistoryBean.setCustomerId(customerId);
+				paymentHistoryBean.setNetAmount(totalNetamount);
+				paymentHistoryDao.save(paymentHistoryBean);
 				
 			transactionManager.commit(objTransStatus);
 		} catch (Exception e) {

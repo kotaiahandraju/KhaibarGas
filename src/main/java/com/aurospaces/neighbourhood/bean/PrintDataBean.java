@@ -12,9 +12,18 @@ protected Date createdTime ;
 protected Date updatedTime ;
 
 //protected String accessoriesStatus ;
-protected String   items ,  quantity ,  price  ,  totalamount  ,  discount  ,  netamount  ,  totalnetamount  ,  vatamount  ,  paidamount  ,  dueamount  ,    grossamount  ,    previousdueamount  ,    invoiceid,customerId,returncylinderinvoice,cylinderDeliverTruck,cylinderReturnTruck,cylinderId,fillingstationId;
+protected String   items ,  quantity ,  price  ,  totalamount  ,  discount  ,  netamount  ,  totalnetamount  ,  vatamount  ,  paidamount  ,  dueamount  ,    grossamount  ,    previousdueamount  ,    invoiceid,customerId,returncylinderinvoice,cylinderDeliverTruck,cylinderReturnTruck,cylinderId,fillingstationId,cylinderFilledDate;
 
 
+
+
+public String getCylinderFilledDate() {
+	return cylinderFilledDate;
+}
+
+public void setCylinderFilledDate(String cylinderFilledDate) {
+	this.cylinderFilledDate = cylinderFilledDate;
+}
 
 public String getFillingstationId() {
 	return fillingstationId;

@@ -115,6 +115,9 @@
 	<definition name="securedeposit" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/securedeposit.jsp" />
 	</definition>
+	<definition name="dueamountpay" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/dueamountpay.jsp" />
+	</definition>
 	
 </tiles-definitions>
 

@@ -13,11 +13,23 @@ public class SecuredepositBean {
 	protected int id   = 0;
 	protected Date createdTime,date ;
 	protected Date updatedTime ;
-	protected String customerId, amount, itemId, quantity, companyId,remarks,customertype,securityDeposit,itemName,customername;
+	protected String customerId, amount, itemId, quantity, companyId,remarks,customertype,securityDeposit,itemName,customername,companyName,userId;
 	
 	
 	
 	
+	public String getCompanyName() {
+		return companyName;
+	}
+	public String getUserId() {
+		return userId;
+	}
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 	public String getItemName() {
 		return itemName;
 	}
