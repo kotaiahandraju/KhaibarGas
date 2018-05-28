@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
+<%--  <%@ page language="java" import="java.util.*" pageEncoding="ISO-8859-1"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@ taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
@@ -295,29 +295,25 @@ function tooltip(){
               
               
              <li class="truck"><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>Trucks</span></a></li>
-             <li class="fillingStation"><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>Filling Stations</span></a></li>
-             <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>Customers</span></a></li>
-          <li class="transactions dropdown-submenu">
-            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-bar-chart-o"></i> <span>Tariff</span> </a>
-					<ul class="dropdown-menu">
-                <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
-				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Private Tariff Master</span></a></li>
-				</ul>
-	    </li>
-	    <li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>
-                
+                <li class="fillingStation"><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>Filling Stations</span></a></li>
 					</ul>
 				</li>
           
            <li class="users">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-users"></i> <span>Users</span> <span class="caret"></span></a>
-					
 					<ul class="dropdown-menu">
-              
+                <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>Customers</span></a></li>
                 <li class="staff"><a href="${baseurl }/admin/staffMaster"><i class="fa fa-user"></i> <span>Staff</span></a></li>
-                <c:if test="${(cacheUserBean.roleId == 1)}">
                 	<li class="usermanagement"><a href="${baseurl }/admin/usermanagement"><i class="fa fa-bar-chart-o"></i> <span>User Management </span></a></li>
-                </c:if>
+                <li class="transactions dropdown-submenu">
+            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-bar-chart-o"></i> <span>Tariff</span> </a>
+					<ul class="dropdown-menu">
+                <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
+				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Private Tariff Master</span></a></li>
+				</ul>
+				</li>
+				<li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>
+				
 				</ul>
 				</li>
 				<li class="transactions">
@@ -329,8 +325,6 @@ function tooltip(){
 						<li class="cylinderMovetoTruck"><a href="${baseurl }/admin/cylinderMovetoTruck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to Truck</span></a></li>
 						<li class="cylinderDeliver"><a href="${baseurl }/admin/cylinderDeliver"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Delivered to Customer</span></a></li>
 						<li class="qualityCheckHome"><a href="${baseurl }/admin/qualityCheckHome"><i class="fa fa-bar-chart-o"></i> <span>Return Cylinder Quality Check And Move To Store</span></a></li>
-						<li class="privateCylinderFilled"><a href="${baseurl }/admin/privateCylinderFilled"><i class="fa fa-bar-chart-o"></i> <span>Private Cylinder Filled </span></a></li>
-						<li class="dueamount"><a href="${baseurl }/admin/dueamount"><i class="fa fa-bar-chart-o"></i> <span>Due Amount Pay </span></a></li>
 						
 					</ul>
 				</li>
@@ -349,9 +343,22 @@ function tooltip(){
 						<li class="expensesReport"><a href="${baseurl }/admin/expensesReport"><i class="fa fa-bar-chart-o"></i> <span>Expenses Report</span></a></li>
 						<li class="gasReport"><a href="${baseurl }/admin/gasReport"><i class="fa fa-bar-chart-o"></i> <span>Gas Report</span></a></li>
 						<li class="paymentReport"><a href="${baseurl }/admin/paymentreport"><i class="fa fa-bar-chart-o"></i> <span>Payment Report</span></a></li>
-						 <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-bar-chart-o"></i> <span>Dashboard</span></a></li>
+						
+						
+						
 					</ul>
 				</li>
+				
+				<li class="privateCylinderFilled"><a href="${baseurl }/admin/privateCylinderFilled"><i class="fa fa-bar-chart-o"></i> <span>Private Cylinder Filled </span></a></li>
+				
+				<li class="dueamount"><a href="${baseurl }/admin/dueamount"><i class="fa fa-bar-chart-o"></i> <span>Due Amount Pay </span></a></li>
+			
+				
+				
+				
+				
+				
+				
 				
 			</ul>
 		</div>
@@ -375,4 +382,4 @@ function tooltip(){
 	            </div>
 	            <div class="clearfix"></div>
 	        </div>
-<!-- Header ends Here -->
+<!-- Header ends Here --> --%>

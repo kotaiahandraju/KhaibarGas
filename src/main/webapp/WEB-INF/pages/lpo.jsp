@@ -375,7 +375,15 @@ function showTableData(response){
 			+ "<td title='"+orderObj.dueamount+"'>" + orderObj.dueamount + "</td>"
 			+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
 			+ "<td title='"+orderObj.lpoStatus+"'>" + orderObj.lpoStatus + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + view + "&nbsp;&nbsp;" + edit + "&nbsp;&nbsp;" + deleterow + "&nbsp;&nbsp;"+printImage+"</td>"
+			+ '<c:if test="${(cacheUserBean.edit == 1)}">'
+			+ "<td style='text-align: center;white-space: nowrap;'>" + edit +"&nbsp;&nbsp;"
+			+ '</c:if>'
+			+ view + "&nbsp;&nbsp;" 
+			+ '<c:if test="${(cacheUserBean.delete1 == 1)}">'+ deleterow + '</c:if>'
+			+ "&nbsp;&nbsp;"+printImage
+			+ "</td>" 
+			
+// 			+ "<td style='text-align: center;white-space: nowrap;'>" + view + "&nbsp;&nbsp;" + edit + "&nbsp;&nbsp;" + deleterow + "&nbsp;&nbsp;"+printImage+"</td>"
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

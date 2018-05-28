@@ -142,7 +142,152 @@ h1, .h1 {
 <script type='text/javascript' src='${baseurl }/assets/js/bootstrap.min.js'></script>  
 <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
 <script type='text/javascript' src='${baseurl }/js/MonthPicker.min.js'></script>
+<style>
+#menu {
+  position: fixed;
+  background-color: #222;
+  height: 100%;
+  z-index: 9999;
+  width: 280px;
+  color: #bbb;
+  top: 0;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  opacity: 1;
+  font-family: 'Source Sans Pro', sans-serif;
+ 
+}
 
+
+#menu ul {
+  list-style: none;
+  margin-top: 0;
+  padding: 0
+}
+
+#menu ul li { border-bottom: 1px solid #2a2a2a; }
+
+#menu>ul>li>a { border-left: 4px solid #222; }
+
+#menu ul li a {
+  color: inherit;
+  font-size: 16px;
+  display: block;
+  padding: 8px 0 8px 7px;
+  text-decoration: none;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+  font-weight: 600;
+}
+
+#menu ul a i {
+  margin-right: 10px;
+  font-size: 18px;
+  margin-top: 3px;
+  width: 20px;
+}
+
+#menu ul a i[class*='fa-caret'] { float: right; }
+
+#menu ul a:hover,
+#menu ul a.active {
+  background-color: #111;
+  border-left-color: #FFCC33;
+  color: #FFCC33;
+}
+
+#menu ul a:hover i:first-child { color: #FFCC33; }
+
+/* Submenu */
+
+#menu ul li a.active+ul { display: block }
+
+#menu ul li ul {
+  margin-top: 0;
+  display: none;
+}
+
+#menu ul li ul li { border-bottom: none; }
+
+#menu ul li ul li a { padding-left: 30px; }
+
+#menu ul li ul li a:hover { background-color: #1A1A1A; }
+
+/* /Submenu */
+
+
+/* Cuando este a la Izq, para esconderlo posicionarlo a la Izq a -width */
+
+.left { left: -280px; }
+
+.show { left: 0; }
+
+#showmenu {
+  margin-left: 100%;
+  position: absolute;
+  top: 0;
+  padding: 18px 10px 7px 30px;
+  font-size: 1.3em;
+  color: #2bbce0;
+  -webkit-transition: all 0.3s ease;
+  -moz-transition: all 0.3s ease;
+  transition: all 0.3s ease;
+}
+.navbar-brand {
+    float: left;
+    padding: 5px 64px;
+    font-size: 18px;
+    line-height: auto;
+}
+#page-container, #page-content {
+    min-height: auto;
+   
+}
+#page-heading h1 {
+    margin: 0;
+    padding: 20px 10px 0px 20px;
+    float: left;
+    line-height: 30px;
+    font-weight: 300;
+    font-size: 42px;
+}
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+ 
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+::-moz-scrollbar {
+width: 3px;
+}
+::-moz-scrollbar-track {
+-moz-box-shadow: inset 0 0 6px #fff);
+background:#f1f1f1;
+}
+::-moz-scrollbar-thumb {
+border-radius: 10px;
+-moz-box-shadow: inset 0 0 6px #fff;
+background:#888;
+}
+scrollbar{
+-moz-appearance: none !important;
+}
+#container { padding: 50px; }
+</style>
 
 <script type="text/javascript">
 	var isClick = 'No';
@@ -282,27 +427,146 @@ h1, .h1 {
 	        </ul>
         </div>
     </header>
-
-    <nav class="navbar navbar-default yamm top20" role="navigation">
+    <body id="home-page">
+     $('#home-page .navigation')
+    
+<%-- <nav id="menu" class="left">
+  <ul>
+    <li class="active"><a  href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i><span  >Dashboard</span></a></li>
+    <li> <a href="#"><i class="fa fa-user"></i>Master <i class="fa fa-caret-down"></i></a>
+      <ul>
+        <li class="items"><a href="${baseurl }/admin/itemsHome"><i class="fa fa-tint"></i> <span>Items</span></a></li>
+             <li class="lpo"><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
+              <li class="company"><a href="${baseurl }/admin/companymaster"><i class="fa fa-building"></i> <span>Company</span></a></li>
+              <li class="stores"><a href="${baseurl }/admin/storeHome"><i class="fa fa-th"></i> <span>Stores</span></a></li>
+        <li><a href="#"><i class="fa fa-list"></i>Cylinders  <i class="fa fa-caret-down"></i></a>
+ <ul>
+        <li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Cylinder</span></a></li>
+						<li class="cylinderAutoGenHome"><a href="${baseurl }/admin/cylinderAutoGenHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder AutoGeneration</span></a></li>
+      </ul>
+          <li class="truck"><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>Trucks</span></a></li>
+                <li class="fillingStation"><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>Filling Stations</span></a></li>
+                 <li><a href="#"><i class="fa fa-bar-chart-o"></i>Tariff <i class="fa fa-caret-down"></i></a>
+ 		<ul>
+        <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
+				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Private Tariff Master</span></a></li>
+      </ul>
+       <li><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i>Security Deposit </a>
+       
+        </li>
+				
+        </li>
+      </ul>
+    </li>
+    <li> <a href="#"><i class="fa fa-users"></i>Users <i class="fa fa-caret-down"></i></a>
+      <ul>
+        <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>Customers</span></a></li>
+        <li class="staff"><a href="${baseurl }/admin/staffMaster"><i class="fa fa-user"></i> <span>Staff</span></a></li>
+        <li class="usermanagement"><a href="${baseurl }/admin/usermanagement"><i class="fa fa-bar-chart-o"></i> <span>User Management </span></a></li>
+       
+      </ul>
+    </li>
+    <li>
+            		<a href="#"><i class="fa fa-list"></i> Transactions <i class="fa fa-caret-down"></i></a>
+					<ul>
+						<li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
+						<li class="cylinderFilledStatus"><a href="${baseurl }/admin/cylinderFilledStatus"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Filled Status</span></a></li>
+                		<li class="cylinderQualityCheck"><a href="${baseurl }/admin/cylinderQualityCheck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Quality Check</span></a></li>
+						<li class="cylinderMovetoTruck"><a href="${baseurl }/admin/cylinderMovetoTruck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to Truck</span></a></li>
+						<li class="cylinderDeliver"><a href="${baseurl }/admin/cylinderDeliver"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Delivered to Customer</span></a></li>
+						<li class="qualityCheckHome"><a href="${baseurl }/admin/qualityCheckHome"><i class="fa fa-bar-chart-o"></i> <span>Return Cylinder Quality Check And Move To Store</span></a></li>
+						<li><a href="${baseurl }/admin/privateCylinderFilled"><i class="fa fa-bar-chart-o"></i> <span>Private Cylinder Filled </span></a></li>
+						<li><a href="${baseurl }/admin/dueamount"><i class="fa fa-bar-chart-o"></i> <span>Due Amount Pay </span></a></li>
+						
+					</ul>
+				</li>
+				<li>
+            		<a href="#"><i class="fa fa-list"></i> Truck Tracking <i class="fa fa-caret-down"></i></a>
+					<ul>
+						<li class="truckTracking"><a href="${baseurl }/admin/TruckTrakingHome"><i class="fa fa-bar-chart-o"></i> <span>Truck is going out from Factory </span></a></li>
+						<li class="truckTracking1"><a href="${baseurl }/admin/TruckComingintoFactory"><i class="fa fa-bar-chart-o"></i> <span>Truck Coming into Factory</span></a></li>
+					</ul>
+				</li>
+				<li><a href="${baseurl }/admin/expenseTrackerHome"><i class="fa fa-bar-chart-o"></i> <span>Expense Tracker</span></a></li>
+				<li>
+            		<a href="#"><i class="fa fa-list"></i> Reports <i class="fa fa-caret-down"></i></a>
+					<ul>
+						<li class="CylinderReport"><a href="${baseurl }/admin/reportsHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Report </span></a></li>
+						<li class="expensesReport"><a href="${baseurl }/admin/expensesReport"><i class="fa fa-bar-chart-o"></i> <span>Expenses Report</span></a></li>
+						<li class="gasReport"><a href="${baseurl }/admin/gasReport"><i class="fa fa-bar-chart-o"></i> <span>Gas Report</span></a></li>
+						<li class="paymentReport"><a href="${baseurl }/admin/paymentreport"><i class="fa fa-bar-chart-o"></i> <span>Payment Report</span></a></li>
+						<li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-bar-chart-o"></i> <span>Dashboard</span></a></li>
+					</ul>
+				</li>
+  </ul>
+  <a href="#" id="showmenu"> <i class="fa fa-align-justify"></i> </a> </nav>
+  <script>
+$("#showmenu").click(function(e){
+			e.preventDefault();
+			$("#menu").toggleClass("show");
+		});
+		 $("#menu a").click(function(event){
+			//event.preventDefault();
+			if($(this).next('ul').length){
+				$(this).next().toggle('fast');
+				$(this).children('i:last-child').toggleClass('fa-caret-down fa-caret-left');
+			}
+		}); 
+</script> --%>
+     <nav class="navbar navbar-default yamm " role="navigation">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
                 <i class="fa fa-bars"></i>
             </button>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar">
+       <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar">
             <ul class="nav navbar-nav">
             
             <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-            <li class="items"><a href="${baseurl }/admin/itemsHome"><i class="fa fa-tint"></i> <span>Items</span></a></li>
+             <li class="master">
+            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> <span>Master</span> <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+						  <li class="items"><a href="${baseurl }/admin/itemsHome"><i class="fa fa-tint"></i> <span>Items</span></a></li>
              <li class="lpo"><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
               <li class="company"><a href="${baseurl }/admin/companymaster"><i class="fa fa-building"></i> <span>Company</span></a></li>
               <li class="stores"><a href="${baseurl }/admin/storeHome"><i class="fa fa-th"></i> <span>Stores</span></a></li>
-              <li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Cylinders</span></a></li>
+              
+              <li class="transactions dropdown-submenu">
+            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Cylinders</span> </a>
+					<ul class="dropdown-menu">
+						<li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Cylinder</span></a></li>
+						<li class="cylinderAutoGenHome"><a href="${baseurl }/admin/cylinderAutoGenHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder AutoGeneration</span></a></li>
+					</ul>
+				</li>
+              
+              
+              
              <li class="truck"><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>Trucks</span></a></li>
-                <li class="fillingStation"><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>Filling Stations</span></a></li>
-                <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>Customers</span></a></li>
-                <li class="staff"><a href="${baseurl }/admin/staffMaster"><i class="fa fa-user"></i> <span>Staff</span></a></li>
+             <li class="fillingStation"><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>Filling Stations</span></a></li>
+             <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>Customers</span></a></li>
+          <li class="transactions dropdown-submenu">
+            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-bar-chart-o"></i> <span>Tariff</span> </a>
+					<ul class="dropdown-menu">
                 <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
+				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Private Tariff Master</span></a></li>
+				</ul>
+	    </li>
+	    <li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>
+                
+					</ul>
+				</li>
+          
+           <li class="users">
+            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-users"></i> <span>Users</span> <span class="caret"></span></a>
+					
+					<ul class="dropdown-menu">
+              
+                <li class="staff"><a href="${baseurl }/admin/staffMaster"><i class="fa fa-user"></i> <span>Staff</span></a></li>
+                <c:if test="${(cacheUserBean.roleId == 1)}">
+                	<li class="usermanagement"><a href="${baseurl }/admin/usermanagement"><i class="fa fa-bar-chart-o"></i> <span>User Management </span></a></li>
+                </c:if>
+				</ul>
+				</li>
 				<li class="transactions">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Transactions</span> <span class="caret"></span></a>
 					<ul class="dropdown-menu">
@@ -312,6 +576,8 @@ h1, .h1 {
 						<li class="cylinderMovetoTruck"><a href="${baseurl }/admin/cylinderMovetoTruck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to Truck</span></a></li>
 						<li class="cylinderDeliver"><a href="${baseurl }/admin/cylinderDeliver"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Delivered to Customer</span></a></li>
 						<li class="qualityCheckHome"><a href="${baseurl }/admin/qualityCheckHome"><i class="fa fa-bar-chart-o"></i> <span>Return Cylinder Quality Check And Move To Store</span></a></li>
+						<li class="privateCylinderFilled"><a href="${baseurl }/admin/privateCylinderFilled"><i class="fa fa-bar-chart-o"></i> <span>Private Cylinder Filled </span></a></li>
+						<li class="dueamount"><a href="${baseurl }/admin/dueamount"><i class="fa fa-bar-chart-o"></i> <span>Due Amount Pay </span></a></li>
 						
 					</ul>
 				</li>
@@ -323,25 +589,20 @@ h1, .h1 {
 					</ul>
 				</li>
 				<li class="expenseTracker"><a href="${baseurl }/admin/expenseTrackerHome"><i class="fa fa-bar-chart-o"></i> <span>Expense Tracker</span></a></li>
-				
 				<li class="reports">
             		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
-					<ul class="dropdown-menu" style="margin-left:-50px;">
+					<ul class="dropdown-menu">
 						<li class="CylinderReport"><a href="${baseurl }/admin/reportsHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Report </span></a></li>
 						<li class="expensesReport"><a href="${baseurl }/admin/expensesReport"><i class="fa fa-bar-chart-o"></i> <span>Expenses Report</span></a></li>
 						<li class="gasReport"><a href="${baseurl }/admin/gasReport"><i class="fa fa-bar-chart-o"></i> <span>Gas Report</span></a></li>
 						<li class="paymentReport"><a href="${baseurl }/admin/paymentreport"><i class="fa fa-bar-chart-o"></i> <span>Payment Report</span></a></li>
-						
+						 <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-bar-chart-o"></i> <span>Dashboard</span></a></li>
 					</ul>
 				</li>
-				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Customer Tariff Master</span></a></li>
-				<li class="privateCylinderFilled"><a href="${baseurl }/admin/privateCylinderFilled"><i class="fa fa-bar-chart-o"></i> <span>Private Cylinder Filled </span></a></li>
-				<li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>
-				<li class="dueamount"><a href="${baseurl }/admin/dueamount"><i class="fa fa-bar-chart-o"></i> <span>Due Amount Pay </span></a></li>
 				
 			</ul>
-		</div>
-    </nav>
+		</div> 
+		   </nav> 
 
     <div id="page-container">
     	<div id="page-content" style="min-height: auto;">

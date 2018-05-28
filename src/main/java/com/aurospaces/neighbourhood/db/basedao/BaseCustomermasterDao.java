@@ -25,7 +25,7 @@ public class BaseCustomermasterDao{
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO customermaster( created_time, updated_time, customerid, customername, customeraddress, mobile, landline, authorizedperson, contactperson, customertype, status,invoiceId) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO customermaster( created_time, updated_time, customerid, customername, customeraddress, mobile, landline, authorizedperson, contactperson, customertype, status,invoiceId,trnNumber) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?,?)"; 
 
 
 
@@ -73,6 +73,7 @@ ps.setString(9, customermaster.getContactperson());
 ps.setString(10, customermaster.getCustomertype());
 ps.setString(11, customermaster.getStatus());
 ps.setString(12, customermaster.getInvoiceId());
+ps.setString(13, customermaster.getTrnNumber());
 
 							return ps;
 						}
@@ -87,9 +88,9 @@ ps.setString(12, customermaster.getInvoiceId());
 		else
 		{
 
-			String sql = "UPDATE customermaster  set customerid = ? ,customername = ? ,customeraddress = ? ,mobile = ? ,landline = ? ,authorizedperson = ? ,contactperson = ? ,customertype = ?   where id = ? ";
+			String sql = "UPDATE customermaster  set customerid = ? ,customername = ? ,customeraddress = ? ,mobile = ? ,landline = ? ,authorizedperson = ? ,contactperson = ? ,customertype = ?,trnNumber=?   where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{customermaster.getCustomerid(),customermaster.getCustomername(),customermaster.getCustomeraddress(),customermaster.getMobile(),customermaster.getLandline(),customermaster.getAuthorizedperson(),customermaster.getContactperson(),customermaster.getCustomertype(),customermaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{customermaster.getCustomerid(),customermaster.getCustomername(),customermaster.getCustomeraddress(),customermaster.getMobile(),customermaster.getLandline(),customermaster.getAuthorizedperson(),customermaster.getContactperson(),customermaster.getCustomertype(),customermaster.getTrnNumber(),customermaster.getId()});
 		}
 	}
 		

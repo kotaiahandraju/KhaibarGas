@@ -202,7 +202,12 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.capacityoftruck+"'>"+ orderObj.capacityoftruck + "</td>"
 			+ "<td title='"+orderObj.lponumber+"'>"+ orderObj.lponumber + "</td>"
 			+ "<td title='"+orderObj.truckStatus+"'>"+ orderObj.truckStatus + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			+ "<td style='text-align: center;white-space: nowrap;'>"
+			+ '<c:if test="${(cacheUserBean.edit == 1)}">'
+			 + edit +"&nbsp;&nbsp;"
+			+ '</c:if>'
+			+ '<c:if test="${(cacheUserBean.delete1 == 1)}">'+ deleterow + '</c:if>'
+			+ "</td>" 
 			+ "</tr >";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

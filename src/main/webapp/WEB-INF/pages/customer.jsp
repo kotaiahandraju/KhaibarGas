@@ -102,6 +102,14 @@
 								  	</div>
                     			</div>
                     		</div>
+                    		<div class="col-md-6">
+                    			<div class="form-group">
+                    				<label for="focusedinput" class="col-md-4 control-label">TRN Number<span class="impColor">*</span></label>
+                    				<div class="col-md-6">
+								      	<form:input type="text" path="trnNumber" class="form-control validate" placeholder="TRN Number" maxlength="25"/>
+								  	</div>
+                    			</div>
+                    		</div>
                     		<div class="col-md-12">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-2 control-label">Customer Address<span class="impColor">*</span></label>
@@ -150,12 +158,18 @@ function showTableData(response){
 	serviceUnitArray = {};
 	var protectType = null;
 	var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
-    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Customer Address</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>securityDeposit</th><th>Status</th><th></th></tr>'+
+    	'<thead><tr><th>Customer ID</th><th>Customer Name</th><th>Mobile</th><th>Land Line</th><th>Authorized person</th><th>Contact person</th><th>Customer Type</th><th>TRN Number</th><th>Customer Address</th><th>securityDeposit</th><th>Status</th><th></th></tr>'+
     	"</thead><tbody></tbody></table>";
 	$("#tableId").html(tableHead);
 	$.each(response,function(i, orderObj) {
 		if(orderObj.securityDeposit=="Amount"){
 			orderObj.securityDeposit =orderObj.securityAmount;
+		}
+		var trnNumber = "";
+		if(orderObj.trnNumber==null || orderObj.trnNumber ==""){
+			trnNumber ="---";
+		}else{
+			trnNumber = orderObj.trnNumber;
 		}
 		if(orderObj.status == "1"){
 			var deleterow = "<a class='deactivate' onclick='customerDelete("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
@@ -167,15 +181,21 @@ function showTableData(response){
 		var tblRow ="<tr>"
 			+ "<td class='impFiled' title='"+orderObj.id+"'>" + orderObj.customerid + "</td>"
 			+ "<td title='"+orderObj.customername+"'>" + orderObj.customername + "</td>"
-			+ "<td title='"+orderObj.customeraddress+"'>" + orderObj.customeraddress + "</td>"
 			+ "<td title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
 			+ "<td title='"+orderObj.landline+"'>" + orderObj.landline + "</td>"
 			+ "<td title='"+orderObj.authorizedperson+"'>" + orderObj.authorizedperson + "</td>"
 			+ "<td title='"+orderObj.contactperson+"'>" + orderObj.contactperson + "</td>"
 			+ "<td title='"+orderObj.customertype+"'>" + orderObj.customertype + "</td>"
+			+ "<td title='"+trnNumber+"'>" + trnNumber + "</td>"
+			+ "<td title='"+orderObj.customeraddress+"'>" + orderObj.customeraddress + "</td>"
 			+ "<td title='"+orderObj.securityDeposit+"'>" + orderObj.securityDeposit + "</td>"
 			+ "<td title='"+orderObj.custStatus+"'>" + orderObj.custStatus + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>"
+			+ "<td style='text-align: center;white-space: nowrap;'>"
+			+ '<c:if test="${(cacheUserBean.edit == 1)}">'
+			 + edit +"&nbsp;&nbsp;"
+			+ '</c:if>'
+			+ '<c:if test="${(cacheUserBean.delete1 == 1)}">'+ deleterow + '</c:if>'
+			+ "</td>" 
 			+"</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -193,6 +213,7 @@ function editCustomer(id) {
 	$("#contactperson").val(serviceUnitArray[id].contactperson);
 	$("#customertype").val(serviceUnitArray[id].customertype);
 	$("#status").val(serviceUnitArray[id].status);
+	$("#trnNumber").val(serviceUnitArray[id].trnNumber);
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }

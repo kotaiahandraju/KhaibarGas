@@ -109,7 +109,7 @@ table tbody tr.rowInc {
                       </div>
                       <div class="form-group" style="margin-bottom:0;">
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Customer Address: </label>
-                        <div class="col-md-6"> <span id="customeraddress" class="form-control"  style="border:none;"></span> </div>
+                        <div class="col-md-6"> <span id="customeraddress" class="form-control"  style="border:none; height:auto !important;"></span> </div>
                       </div>
                       <div class="form-group" style="margin-bottom:0;">
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Mobile: </label>
@@ -347,7 +347,8 @@ table tbody tr.rowInc {
                           
               <tr><td ><label for="focusedinput "  >Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr>
               <tr><td ><label for="focusedinput "  >Customer Address :</label></td><td><span class="customerAddress"></span></td></tr>
-              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr>       
+              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr> 
+               <tr><td ><label for="focusedinput "  >TRN Number :</label></td><td><span class="trnnumber"></span></td></tr>        
                           
                           </tbody>
     
@@ -357,7 +358,7 @@ table tbody tr.rowInc {
 			border:1px solid lightgray;">
      <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr>
               <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td><span class="returnTruck"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
+              <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>  <tr><td><label for="focusedinput"  > </label></td> </tr>
  </tbody>   </table>
   <table class="table-responsive deliverCylinders" style="width:96%" >
     <thead style="padding:10px;	border:1px solid lightgray;">
@@ -401,7 +402,8 @@ table tbody tr.rowInc {
                           
               <tr><td ><label for="focusedinput "  >Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr>
               <tr><td ><label for="focusedinput "  >Customer Address :</label></td><td><span class="customerAddress"></span></td></tr>
-              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr>       
+              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr>   
+              <tr><td ><label for="focusedinput "  >TRN Number :</label></td><td><span class="trnnumber"></span></td></tr>      
                           
                           </tbody>
     
@@ -411,7 +413,7 @@ table tbody tr.rowInc {
 			border:1px solid lightgray;">
      <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr>
               <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td><span class="returnTruck"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
+              <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
  </tbody>   </table>
   <table class="table-responsive deliverCylinders" style="width:96%" >
     <thead style="padding:10px;	border:1px solid lightgray;">
@@ -705,7 +707,7 @@ function allcalculate(id){
 
 	taxable = $('#' + number + 'taxable').val();
 	
-	$('#' + number + 'totalvalue').val(total1.toFixed(2));
+	$('#' + number + 'totalvalue').val(total1.toFixed(3));
 	
 	total = $('#' + number + 'totalvalue').val();
 	discount = $('#' + number + 'discount').val();
@@ -713,7 +715,7 @@ function allcalculate(id){
 		discount =0;
 	}
 	var result = parseFloat(total)*(100- parseFloat(discount))/100;
-	$('#' + number + 'taxable').val(result.toFixed(2));
+	$('#' + number + 'taxable').val(result.toFixed(3));
 	
 	
 	
@@ -755,9 +757,9 @@ function priceCalculator(){
 		
 		
 		
-		$(".totalInvoiceValue").text(globelTotalValue.toFixed(2));
-		$(".totalDiscounts").text(globalDiscount.toFixed(2));
-		$(".totalTaxableValue").text(globalTaxable.toFixed(2));
+		$(".totalInvoiceValue").text(globelTotalValue.toFixed(3));
+		$(".totalDiscounts").text(globalDiscount.toFixed(3));
+		$(".totalTaxableValue").text(globalTaxable.toFixed(3));
 		
 		
 	 }
@@ -769,14 +771,14 @@ function priceCalculator(){
 	if(lstdue !="" && lstdue != null && lstdue != "undefined" ){
 		finalAmount = parseFloat(finalAmount)+parseFloat(lstdue);
 	 }	
-	$("#dueAmount").val(Math.round(finalAmount));
-	$("#netAmount").val(finalAmount);
-	 $("#netAmount1").text(grandTotal);
-	 $("#totalNetamount").val(grandTotal);
-	 $("#vatAmount").text(Math.round(vatAmount));
-	 $("#vatamount1").val(Math.round(vatAmount));
-	 $("#grandTotal").text(Math.round(finalAmount));
-	 $("#grossamount").val(Math.round(finalAmount));
+	$("#dueAmount").val(finalAmount.toFixed(3));
+	$("#netAmount").val(finalAmount.toFixed(3));
+	 $("#netAmount1").text(grandTotal.toFixed(3));
+	 $("#totalNetamount").val(grandTotal.toFixed(3));
+	 $("#vatAmount").text(vatAmount.toFixed(3));
+	 $("#vatamount1").val(vatAmount.toFixed(3));
+	 $("#grandTotal").text(finalAmount.toFixed(3));
+	 $("#grossamount").val(finalAmount.toFixed(3));
 // 	 var paidamount =$("#paidamount").val();
 // 	 if(paidamount.trim().length == 0){
 // 		 $("#dueamount").val(grandTotal);
@@ -784,8 +786,8 @@ function priceCalculator(){
 // 		 $("#dueamount").val(parseInt(grandTotal)-parseInt(paidamount));
 // 	 }
 // 	 alert(grandTotal);
-// 	 $(".grandTotal").text(grandTotal.toFixed(2));
-// 	 $(".roundOff").text(Math.round(grandTotal).toFixed(2));
+// 	 $(".grandTotal").text(grandTotal.toFixed(3));
+// 	 $(".roundOff").text(Math.round(grandTotal).toFixed(3));
 }
 
 function viewDetails(id,value){
@@ -946,12 +948,12 @@ function getTarrifPrice(value,id){
 	});
 }
 function payedAmountCal(value){
-	var dueAmount =  Math.round(finalAmount-value);
-	$("#dueAmount").val(dueAmount);
+	var dueAmount =  finalAmount-value;
+	$("#dueAmount").val(dueAmount.toFixed(3));
 }
 function discountCheck(id,value){
 // 	alert(map[id]);
-	if(value>map[id]){
+	if(parseInt(value)>parseInt(map[id])){
 		alert("Please Enter Discount Maximum : "+map[id] );
 		$("#"+id).val("0");
 		allcalculate(id);
@@ -1214,7 +1216,7 @@ var j=0;
 			$(".grassAmount").text(orderObj.grossamount);
 			$(".taxinvoice").text(orderObj.invoiceid);
 			$(".printdateId").text(orderObj.created_time);
-			
+			$(".trnnumber").text(orderObj.trnNumber);
 			id="'+ dependentRowCount+ 'taxable"
 			
 			var tblRow =	'   <tr><th scope="col" style="font-weight:normal;"><span class="sno">'+j+'</span></th>'
@@ -1253,7 +1255,7 @@ var j=0;
 				$(".printdateId").text(orderObj.created_time);
 				var varcheckBox = "<div>"+orderObj.name+"</div>"; 
 				$(".retunCylinders").append(varcheckBox);
-				
+				$(".trnnumber").text(orderObj.trnNumber);
 				/* id="'+ dependentRowCount+ 'taxable"
 				
 				var tblRow =	'   <tr><th scope="col"><span class="sno">'+j+'</span></th>'

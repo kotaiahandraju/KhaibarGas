@@ -4,7 +4,17 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
+<style>
+.nchange {
+color:#fff!important;
+font-size:24px;
+}
+.nch1 {
+font-size:19px;
+display:block;
+}
 
+</style>
 	<!-- <style type="text/css">
 table { border-collapse: collapse; }
 
@@ -71,10 +81,10 @@ $(document).ready(function(){
             <div class="row">
 	            		<div class="col-md-3 col-xs-12 col-sm-6">
 	                            <a class="info-tiles tiles-orange" target='_blank' href="reportsHome?cylinderstatus=1">
-	                                <div class="tiles-heading">EMPTY CYLINDERS</div>
+	                                <div class="tiles-heading"><span class="pull-left">EMPTY CYLINDERS </span><span class="pull-right nchange" id="emptycylinders">${Empty }</span> </div>
 	                                <div class="tiles-body-alt">
 	                                <c:if test="${not empty Empty}">
-	                                    <div class="text-center" id="emptycylinders">${Empty }</div>
+	                                    <div class="text-center" ><span class="nch1">55Kg <i class="fa fa-long-arrow-right"></i></span><span class="nch1">55Kg <i class="fa fa-long-arrow-right"></i></span><span class="nch1">55Kg<i class="fa fa-long-arrow-right"></i></span></div>
 	                                </c:if>
 <%-- 	                                <c:if test="${ empty Empty}"> --%>
 <!-- 	                                    <div class="text-center" id="emptycylinders">0</div> -->

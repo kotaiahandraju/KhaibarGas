@@ -5,6 +5,12 @@ import java.util.Date;
 
 public class CustomermasterBean 
 {
+public String getTrnNumber() {
+		return trnNumber;
+	}
+	public void setTrnNumber(String trnNumber) {
+		this.trnNumber = trnNumber;
+	}
 protected int id   = 0;
 protected Date createdTime ;
 protected Date updatedTime ;
@@ -16,7 +22,7 @@ protected String landline ;
 protected String authorizedperson ;
 protected String contactperson ;
 protected String customertype ;
-protected String status ;
+protected String status ,trnNumber;
 protected String custStatus,cylinderId,netAmount,payedAmount,dueAmount,previousDueAmount,invoiceId,securityDeposit,securityAmount;
 
 

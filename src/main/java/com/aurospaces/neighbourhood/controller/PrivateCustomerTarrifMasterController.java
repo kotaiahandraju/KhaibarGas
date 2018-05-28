@@ -80,6 +80,10 @@ public class PrivateCustomerTarrifMasterController {
 
 		try {
 			
+			if(StringUtils.isBlank(objTariffmasterBean.getVatallow())){
+				objTariffmasterBean.setVatallow("0");
+			}
+			
 			List<TariffmasterBean> TariffmasterBean = objTariffmasterDao.getByName(objTariffmasterBean);
 
 				System.out.println("list--"+TariffmasterBean.size());
@@ -229,6 +233,7 @@ public class PrivateCustomerTarrifMasterController {
 			 if(tariffmasterBean != null){
 				 jsonObj.put("rate", tariffmasterBean.getRate());
 				 jsonObj.put("discount", tariffmasterBean.getAlloweddiscount());
+				 jsonObj.put("vatallow", tariffmasterBean.getVatallow());
 			 }else{
 				 jsonObj.put("rate", 0);
 				 jsonObj.put("discount", 0);

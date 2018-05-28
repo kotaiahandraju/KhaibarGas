@@ -250,7 +250,12 @@ function displayTable(listOrders)
 			+ "<td title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
 			+ "<td title='image'><img style='width: 50px;height: 40px;' src=${baseurl }/"+orderObj.documents +"></td>"
 			+ "<td title='"+orderObj.staffStatus+"'>" + orderObj.staffStatus + "</td>"
-			+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			+ "<td style='text-align: center;white-space: nowrap;'>"
+			+ '<c:if test="${(cacheUserBean.edit == 1)}">'
+			 + edit +"&nbsp;&nbsp;"
+			+ '</c:if>'
+			+ '<c:if test="${(cacheUserBean.delete1 == 1)}">'+ deleterow + '</c:if>'
+			+ "</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

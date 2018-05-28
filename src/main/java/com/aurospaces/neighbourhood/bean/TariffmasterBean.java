@@ -16,7 +16,14 @@ protected String remarks ;
 protected String status ;
 protected String tariffStatus ;
 protected String itemId ;
-protected String itemName,customerId ,customername;
+protected String itemName,customerId ,customername,vatallow;
+public String getVatallow() {
+	return vatallow;
+}
+public void setVatallow(String vatallow) {
+	this.vatallow = vatallow;
+}
+
 
 
 public String getCustomername() {

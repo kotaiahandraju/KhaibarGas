@@ -5,6 +5,15 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>
+<style>
+.vatcheckbox {
+width:25px;
+height:25px;
+padding-left:0px;
+
+}
+
+</style>
 
 <div class="clearfix"></div>
 <ol class="breadcrumb">
@@ -107,6 +116,15 @@
 										<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="6"></form:textarea>
 									</div>
 								</div>
+								<div class="form-group">
+								<label class="col-sm-2 control-label required">VAT Allow  </label>
+									<label class=" control-label required">
+									
+									</label>
+									 <div class="col-sm-2">
+										<form:checkbox path="vatallow" class="form-control vatcheckbox" value="1" placeholder="VAT Allow" ></form:checkbox>
+									</div>  
+								</div>
 							</div>
 						</div>
 					</div>
@@ -141,7 +159,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ '<thead><tr><th>Customer Name</th><th>Item</th><th> Selling Price</th><th>Allowed Discount</th><th>Remarks</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+		+ '<thead><tr><th>Customer Name</th><th>Item</th><th> Selling Price</th><th>Allowed Discount</th><th>Remarks</th><th>Vat Allow</th> <th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders, function(i, orderObj) {
@@ -151,16 +169,28 @@ function displayTable(listOrders) {
 			var deleterow = "<a class='activate' onclick='deleteTariffMasterDetails("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
 		}
 		var edit = "<a class='edit editIt' onclick='editTariffMasterDetails(" + orderObj.id + ")'><i class='fa fa-edit'></i></a>"
+		var vatallow = "No";
+		if(orderObj.vatallow=="0"){
+			 vatallow = "No";
+		}else{
+			 vatallow = "Yes";
+		}
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr>"
 			+ "<td  title='"+orderObj.customername+"'>" + orderObj.customername + "</td>"
 			
 			+ "<td class='impFiled' title='"+orderObj.itemName+"'>" + orderObj.itemName + "</td>"
-			+ "<td title='"+orderObj.id+"'>" + orderObj.rate + "</td>"
-			+ "<td title='"+orderObj.id+"'>" + orderObj.alloweddiscount + "</td>"
-			+ "<td title='"+orderObj.id+"'>" + orderObj.remarks + "</td>"
+			+ "<td title='"+orderObj.rate+"'>" + orderObj.rate + "</td>"
+			+ "<td title='"+orderObj.alloweddiscount+"'>" + orderObj.alloweddiscount + "</td>"
+			+ "<td title='"+orderObj.remarks+"'>" + orderObj.remarks + "</td>"
+			+ "<td title='"+vatallow+"'>" + vatallow + "</td>"
 			+ "<td title='"+orderObj.tariffStatus+"'>" + orderObj.tariffStatus + "</td>"
-			+ "<td style='text-align: center;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			+ "<td style='text-align: center;white-space: nowrap;'>"
+			+ '<c:if test="${(cacheUserBean.edit == 1)}">'
+			 + edit +"&nbsp;&nbsp;"
+			+ '</c:if>'
+			+ '<c:if test="${(cacheUserBean.delete1 == 1)}">'+ deleterow + '</c:if>'
+			+ "</td>"  
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});
@@ -174,6 +204,9 @@ function editTariffMasterDetails(id) {
 	$("#remarks").val(serviceUnitArray[id].remarks);
 	$("#rate").val(serviceUnitArray[id].rate);
 	$("#alloweddiscount").val(serviceUnitArray[id].alloweddiscount);
+	if(serviceUnitArray[id].vatallow == "1"){
+		$("#vatallow1").prop('checked', true);
+	}
 	$("#submit1").val("Update");
 	$(window).scrollTop($('#moveTo').offset().top);
 }

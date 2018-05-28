@@ -207,11 +207,11 @@ function displayTable(listOrders) {
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
 		if(orderObj.status == "1"){
-			var deleterow = "<a class='deactivate' onclick='deleteCylinder("+ orderObj.id+ ",0)'><i class='fa fa-eye'></i></a>"
+			var deleterow = "<a class='deactivate' onclick=deleteCylinder("+ orderObj.id+ ",0)><i class='fa fa-eye'></i></a>"
 		}else{  
-			var deleterow = "<a class='activate' onclick='deleteCylinder("+ orderObj.id+ ",1)'><i class='fa fa-eye-slash'></i></a>"
+			var deleterow = "<a class='activate' onclick=deleteCylinder("+ orderObj.id+ ",1)><i class='fa fa-eye-slash'></i></a>"
 		}
-		var edit = "<a class='edit editIt' onclick='editCylinder("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
+		var edit = "<a class='edit editIt' onclick=editCylinder("+ orderObj.id+ ")><i class='fa fa-edit'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		var tblRow = "<tr >"
 				+ "<td title='"+orderObj.cylinderid+"'>"+ orderObj.cylinderid + "</td>"
@@ -224,9 +224,12 @@ function displayTable(listOrders) {
 				+ "<td title='"+orderObj.expirtdate1+"'>"+orderObj.expirtdate1+ "</td>"
 				+ "<td title='"+orderObj.remarks+"'>"+orderObj.remarks+ "</td>"
 				+ "<td title='"+orderObj.cylendersstatus+"'>"+ orderObj.cylendersstatus + "</td>"
-				+ '<c:if test="${(cacheUserBean.roleId == 1)}">'
-				+ "<td style='text-align: center;white-space: nowrap;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+				+ "<td style='text-align: center;white-space: nowrap;'>"
+				+ '<c:if test="${(cacheUserBean.edit == 1)}">'
+				 + edit +"&nbsp;&nbsp;"
 				+ '</c:if>'
+				+ '<c:if test="${(cacheUserBean.delete1 == 1)}">'+ deleterow + '</c:if>'
+				+ "</td>" 
 				+ "</tr >";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

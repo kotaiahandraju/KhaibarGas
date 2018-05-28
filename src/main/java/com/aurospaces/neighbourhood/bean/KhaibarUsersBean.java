@@ -20,7 +20,47 @@ protected String userName ;
 protected String password ;
 protected String roleId ;
 protected String status ;
+protected String edit;
+protected String delete1,userstatus ;
 
+
+
+public String getUserstatus() {
+	return userstatus;
+}
+public void setUserstatus(String userstatus) {
+	this.userstatus = userstatus;
+}
+public String getUserName() {
+	return userName;
+}
+public void setUserName(String userName) {
+	this.userName = userName;
+}
+public String getDelete1() {
+	return delete1;
+}
+public void setDelete1(String delete1) {
+	this.delete1 = delete1;
+}
+
+protected String mobileapp ;
+
+
+
+
+public String getEdit() {
+	return edit;
+}
+public void setEdit(String edit) {
+	this.edit = edit;
+}
+public String getMobileapp() {
+	return mobileapp;
+}
+public void setMobileapp(String mobileapp) {
+	this.mobileapp = mobileapp;
+}
 public int getId()
 {
   return id;
@@ -45,14 +85,7 @@ public void setUpdatedTime(final Date updatedTime)
 {
   this.updatedTime = updatedTime;
 }
-public String getUserName()
-{
-  return userName;
-}
-public void setUserName(final String userName)
-{
-  this.userName = userName;
-}
+
 public String getPassword()
 {
   return password;
@@ -77,5 +110,6 @@ public void setStatus(final String status)
 {
   this.status = status;
 }
+
 
 }

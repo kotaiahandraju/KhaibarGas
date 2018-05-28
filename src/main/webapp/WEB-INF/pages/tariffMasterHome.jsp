@@ -151,7 +151,12 @@ function displayTable(listOrders) {
 			+ "<td title='"+orderObj.id+"'>" + orderObj.alloweddiscount + "</td>"
 			+ "<td title='"+orderObj.id+"'>" + orderObj.remarks + "</td>"
 			+ "<td title='"+orderObj.tariffStatus+"'>" + orderObj.tariffStatus + "</td>"
-			+ "<td style='text-align: center;'>" + edit + "&nbsp;&nbsp;" + deleterow + "</td>" 
+			+ "<td style='text-align: center;white-space: nowrap;'>"
+			+ '<c:if test="${(cacheUserBean.edit == 1)}">'
+			 + edit +"&nbsp;&nbsp;"
+			+ '</c:if>'
+			+ '<c:if test="${(cacheUserBean.delete1 == 1)}">'+ deleterow + '</c:if>'
+			+ "</td>" 
 			+ "</tr>";
 		$(tblRow).appendTo("#tableId table tbody");
 	});

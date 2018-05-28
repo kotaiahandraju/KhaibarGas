@@ -26,7 +26,7 @@ public class BaseKhaibarUsersDao{
 	JdbcTemplate jdbcTemplate;
 
  
-	public final String INSERT_SQL = "INSERT INTO khaibar_users( created_time, updated_time, userName, password, roleId, status) values (?, ?, ?, ?, ?, ?)"; 
+	public final String INSERT_SQL = "INSERT INTO khaibar_users( created_time, updated_time, userName, password, roleId, status,edit, delete1, mobileapp) values (?, ?, ?, ?, ?, ?,?,?,?)"; 
 
 
 
@@ -67,6 +67,10 @@ ps.setString(3, khaibarUsers.getUserName());
 ps.setString(4, khaibarUsers.getPassword());
 ps.setString(5, khaibarUsers.getRoleId());
 ps.setString(6, khaibarUsers.getStatus());
+ps.setString(7, khaibarUsers.getEdit());
+ps.setString(8, khaibarUsers.getDelete1());
+ps.setString(9, khaibarUsers.getMobileapp());
+
 
 							return ps;
 						}
@@ -81,17 +85,22 @@ ps.setString(6, khaibarUsers.getStatus());
 		else
 		{
 
-			String sql = "UPDATE khaibar_users  set userName = ? ,password = ? ,roleId = ?   where id = ? ";
+			String sql = "UPDATE khaibar_users  set userName = ? ,password = ? ,edit=?, delete1=?, mobileapp=?   where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{khaibarUsers.getUserName(),khaibarUsers.getPassword(),khaibarUsers.getRoleId(),khaibarUsers.getId()});
+			jdbcTemplate.update(sql, new Object[]{khaibarUsers.getUserName(),khaibarUsers.getPassword(),khaibarUsers.getEdit(),khaibarUsers.getDelete1(),khaibarUsers.getMobileapp(),khaibarUsers.getId()});
 		}
 	}
 		
 		@Transactional
-		public void delete(int id) {
+		public boolean delete(int id,String status) {
+			boolean result=false;
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "DELETE FROM khaibar_users WHERE id=?";
-			jdbcTemplate.update(sql, new Object[]{id});
+			String sql = "update  khaibar_users set status='"+status+"' where id = ?";
+			int results=jdbcTemplate.update(sql, new Object[]{id});
+			if(results!=0){
+				result= true;
+			}
+			return result;
 		}
 		
 

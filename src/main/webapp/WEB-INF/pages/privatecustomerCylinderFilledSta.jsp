@@ -727,7 +727,7 @@ function allcalculate(id){
 
 	taxable = $('#' + number + 'taxable').val();
 	
-	$('#' + number + 'totalvalue').val(total1.toFixed(2));
+	$('#' + number + 'totalvalue').val(total1.toFixed(3));
 	
 	total = $('#' + number + 'totalvalue').val();
 	discount = $('#' + number + 'discount').val();
@@ -735,7 +735,7 @@ function allcalculate(id){
 		discount =0;
 	}
 	var result = parseFloat(total)*(100- parseFloat(discount))/100;
-	$('#' + number + 'taxable').val(result.toFixed(2));
+	$('#' + number + 'taxable').val(result.toFixed(3));
 	
 	
 	
@@ -777,9 +777,9 @@ function priceCalculator(){
 		
 		
 		
-		$(".totalInvoiceValue").text(globelTotalValue.toFixed(2));
-		$(".totalDiscounts").text(globalDiscount.toFixed(2));
-		$(".totalTaxableValue").text(globalTaxable.toFixed(2));
+		$(".totalInvoiceValue").text(globelTotalValue.toFixed(3));
+		$(".totalDiscounts").text(globalDiscount.toFixed(3));
+		$(".totalTaxableValue").text(globalTaxable.toFixed(3));
 		
 		
 	 }
@@ -791,14 +791,14 @@ function priceCalculator(){
 	if(lstdue !="" && lstdue != null && lstdue != "undefined" ){
 		finalAmount = parseFloat(finalAmount)+parseFloat(lstdue);
 	 }	
-	$("#dueAmount").val(Math.round(finalAmount));
-	$("#netAmount").val(finalAmount);
-	 $("#netAmount1").text(grandTotal);
-	 $("#totalNetamount").val(grandTotal);
-	 $("#vatAmount").text(Math.round(vatAmount));
-	 $("#vatamount1").val(Math.round(vatAmount));
-	 $("#grandTotal").text(Math.round(finalAmount));
-	 $("#grossamount").val(Math.round(finalAmount));
+	$("#dueAmount").val(finalAmount.toFixed(3));
+	$("#netAmount").val(finalAmount.toFixed(3));
+	 $("#netAmount1").text(grandTotal.toFixed(3));
+	 $("#totalNetamount").val(grandTotal.toFixed(3));
+	 $("#vatAmount").text(vatAmount.toFixed(3));
+	 $("#vatamount1").val(vatAmount.toFixed(3));
+	 $("#grandTotal").text(finalAmount.toFixed(3));
+	 $("#grossamount").val(finalAmount.toFixed(3));
 // 	 var paidamount =$("#paidamount").val();
 // 	 if(paidamount.trim().length == 0){
 // 		 $("#dueamount").val(grandTotal);
@@ -806,8 +806,8 @@ function priceCalculator(){
 // 		 $("#dueamount").val(parseInt(grandTotal)-parseInt(paidamount));
 // 	 }
 // 	 alert(grandTotal);
-// 	 $(".grandTotal").text(grandTotal.toFixed(2));
-// 	 $(".roundOff").text(Math.round(grandTotal).toFixed(2));
+// 	 $(".grandTotal").text(grandTotal.toFixed(3));
+// 	 $(".roundOff").text(Math.round(grandTotal).toFixed(3));
 }
 
 function viewDetails(id,value){
@@ -963,18 +963,21 @@ function getTarrifPrice(value,id){
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.rate;
+		if(jsonobj.vatallow == "0"){
+			$("#vat").val(0);
+		}
 		map[number+"discount"] = jsonobj.discount;
 		$("#"+number+"rate").val(jsonobj.rate);
 		allcalculate(number+"rate");
 	});
 }
 function payedAmountCal(value){
-	var dueAmount =  Math.round(finalAmount-value);
-	$("#dueAmount").val(dueAmount);
+	var dueAmount =  finalAmount-value;
+	$("#dueAmount").val(dueAmount.toFixed(3));
 }
 function discountCheck(id,value){
 // 	alert(map[id]);
-	if(value>map[id]){
+	if(parseInt(value)>parseInt(map[id])){
 		alert("Please Enter Discount Maximum : "+map[id] );
 		$("#"+id).val("0");
 		allcalculate(id);

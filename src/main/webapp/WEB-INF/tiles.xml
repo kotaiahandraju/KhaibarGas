@@ -119,6 +119,12 @@
 		<put-attribute name="body" value="/WEB-INF/pages/dueamountpay.jsp" />
 	</definition>
 	
+	<definition name="usermanagement" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/usermanagement.jsp" />
+	</definition>
+	
+	
+	
 </tiles-definitions>
 
 
