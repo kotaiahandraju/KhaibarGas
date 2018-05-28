@@ -10,10 +10,21 @@ color:#fff!important;
 font-size:24px;
 }
 .nch1 {
-font-size:19px;
+font-size:16px;
 display:block;
+text-align:left;
 }
-
+.lef {
+font-size:19px;
+}
+.info-tiles .tiles-body-alt, .info-tiles .tiles-body {
+    padding: 5px 20px;
+    font-weight: 300;
+}
+.ich {
+font-size: 15px !important;
+color: #fff !important;
+}
 </style>
 	<!-- <style type="text/css">
 table { border-collapse: collapse; }
@@ -81,10 +92,10 @@ $(document).ready(function(){
             <div class="row">
 	            		<div class="col-md-3 col-xs-12 col-sm-6">
 	                            <a class="info-tiles tiles-orange" target='_blank' href="reportsHome?cylinderstatus=1">
-	                                <div class="tiles-heading"><span class="pull-left">EMPTY CYLINDERS </span><span class="pull-right nchange" id="emptycylinders">${Empty }</span> </div>
+	                                <div class="tiles-heading"><span class="pull-left lef">EMPTY CYLINDERS </span><span class="pull-right nchange" id="emptycylinders">${Empty }</span> </div>
 	                                <div class="tiles-body-alt">
 	                                <c:if test="${not empty Empty}">
-	                                    <div class="text-center" ><span class="nch1">55Kg <i class="fa fa-long-arrow-right"></i></span><span class="nch1">55Kg <i class="fa fa-long-arrow-right"></i></span><span class="nch1">55Kg<i class="fa fa-long-arrow-right"></i></span></div>
+	                                    <div class="text-center" ><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class=" ich fa fa-long-arrow-right"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span></div>
 	                                </c:if>
 <%-- 	                                <c:if test="${ empty Empty}"> --%>
 <!-- 	                                    <div class="text-center" id="emptycylinders">0</div> -->
@@ -94,19 +105,19 @@ $(document).ready(function(){
 	                        </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-toyo" target='_blank' href="reportsHome?cylinderstatus=2">
-                                <div class="tiles-heading">CYLINDER IN FILLING STATION</div>
+                                <div class="tiles-heading"><span class="pull-left lef">CYLINDER IN FILLING STATION</span><span class="pull-right nchange"  id="idleCylinders">${FillingStation}</span> </div>
                                 <div class="tiles-body-alt">
                                     <!--i class="fa fa-bar-chart-o"></i-->
-                                    <div class="text-center" id="idleCylinders" >${FillingStation}</div>
+                                     <div class="text-center" ><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class=" ich fa fa-long-arrow-right"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span></div>
                                 </div>
                             </a>
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-alizarin" target='_blank' href="reportsHome?cylinderstatus=3">
-                                <div class="tiles-heading">FILLED CYLINDERS</div>
+                                <div class="tiles-heading"><span class="pull-left lef">FILLED CYLINDERS</span><span class="pull-right nchange" id="filledcylinders">${Filled }</span></div>
                                 <div class="tiles-body-alt">
                                  <c:if test="${not empty Filled}">
-                                    <div class="text-center" id="filledcylinders">${Filled }</div>
+                                  <div class="text-center" ><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class=" ich fa fa-long-arrow-right"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span></div>
                                   </c:if>
 <%--                                    <c:if test="${empty Filled}"> --%>
 <!--                                     <div class="text-center" id="filledcylinders">0</div> -->
@@ -116,30 +127,32 @@ $(document).ready(function(){
                         </div>
                          <div class="col-md-3 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-alizarin" target='_blank' href="reportsHome?cylinderstatus=4">
-                                <div class="tiles-heading">QUALITY CHECK CYLINDERS</div>
+                                <div class="tiles-heading"><span class="pull-left lef">QUALITY CHECK CYLINDERS</span><span class="pull-right nchange" id="filledcylinders">${QualityCheck }</span></div>
                                 <div class="tiles-body-alt">
                                  <c:if test="${not empty QualityCheck}">
-                                    <div class="text-center" id="filledcylinders">${QualityCheck }</div>
+                                  <div class="text-center" ><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class=" ich fa fa-long-arrow-right"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span></div>
                                   </c:if>
+                                   
+                                </div>
+                            </a>
+                        </div></div>
+                        <div class="row">
+                        <div class="col-md-3 col-xs-12 col-sm-6">
+                            <a class="info-tiles tiles-info" target='_blank' href="reportsHome?cylinderstatus=5">
+                                <div class="tiles-heading"><span class="pull-left lef">CYLINDERS IN TRUCK</span><span class="pull-right nchange">${Truck }</span></div>
+                                <div class="tiles-body-alt">
+                                 <div class="text-center" ><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class=" ich fa fa-long-arrow-right"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span></div>
                                    
                                 </div>
                             </a>
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
-                            <a class="info-tiles tiles-info" target='_blank' href="reportsHome?cylinderstatus=5">
-                                <div class="tiles-heading">CYLINDERS IN TRUCK</div>
-                                <div class="tiles-body-alt">
-                                    <div class="text-center">${Truck }</div>
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col-md-3 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-success" target='_blank' href="reportsHome?cylinderstatus=6">
-                                <div class="tiles-heading" id="delivered">DELIVERED CYLINDERS</div>
+                                <div class="tiles-heading" id="delivered"><span class="pull-left lef">DELIVERED CYLINDERS</span><span class="pull-right nchange" >${Delivered }</span></div>
                                 <div class="tiles-body-alt">
                                     <!--i class="fa fa-money"></i-->
                                      <c:if test="${not empty Delivered}">
-                                    <div class="text-center">${Delivered }</div>
+                                      <div class="text-center" ><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class=" ich fa fa-long-arrow-right"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span></div>
                                     </c:if>
                                     
                                 </div>
@@ -147,18 +160,18 @@ $(document).ready(function(){
                         </div>
                         <div class="col-md-3 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-warning" target='_blank' href="reportsHome?cylinderstatus=7">
-                                <div class="tiles-heading">RECEIVED CYLINDERS</div>
+                                <div class="tiles-heading"><span class="pull-left lef">RECEIVED CYLINDERS</span><span class="pull-right nchange"  id="returned">${Returned }</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center" id="returned">${Returned }</div>
+                                 <div class="text-center" ><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class=" ich fa fa-long-arrow-right"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span></div>
                                 </div>
                             </a>
                         </div>
                         
                         <div class="col-md-3 col-xs-12 col-sm-6">
                             <a class="info-tiles tiles-warning" target='_blank' href="reportsHome?cylinderstatus=8">
-                                <div class="tiles-heading">MISSED CYLINDERS</div>
+                                <div class="tiles-heading"><span class="pull-left lef">MISSED CYLINDERS</span><span class="pull-right nchange" id="missidcylinders">${MissedCylinder }</div>
                                 <div class="tiles-body-alt">
-                                    <div class="text-center" id="missidcylinders">${MissedCylinder }</div>
+                                 <div class="text-center" ><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class=" ich fa fa-long-arrow-right"></i> <span class="amountp">800</span></span><span class="nch1"> 55Kg  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp">800</span></span></div>
                                 </div>
                             </a>
                         </div>
