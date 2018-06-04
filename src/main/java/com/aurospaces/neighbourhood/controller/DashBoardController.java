@@ -61,8 +61,8 @@ public class DashBoardController {
 				} else {
 					objectMapper = new ObjectMapper();
 					sJson = objectMapper.writeValueAsString(listOrderBeans);
-					request.setAttribute("dps", "''");
-					jsonObj.put("allOrders1", listOrderBeans);
+					request.setAttribute("allOrders1", "''");
+					jsonObj.put("dps", "''");
 				}
 
 		} catch (Exception e) {
@@ -145,4 +145,17 @@ public class DashBoardController {
 		}
 		return "printcustomer";
 	}
+	@RequestMapping(value = "/getCylindersStatusCount")
+	public  @ResponseBody String getCylindersStatusCount( ModelMap model, HttpServletRequest request,	HttpSession session) {
+		JSONObject jsonObj = new JSONObject();
+		try {
+			jsonObj=	cylindermasterDao.getCylindersStatusCount();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+		}
+		return String.valueOf(jsonObj);
+	}
+	
+	
 }

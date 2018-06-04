@@ -77,7 +77,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		public   List<Map<String, Object>>  getCylindersCount(){  
 			 jdbcTemplate = custom.getJdbcTemplate();
 			 
-			 String sql="SELECT a.name as cylinderstatus, IFNULL(b.statuscount,0) as count	FROM cylinderstatus a	left outer join (SELECT cylinderstatus, IFNULL(count(cylinderstatus), 0) as statuscount FROM cylindermaster group by cylinderstatus) b	on a.id = b.cylinderstatus; ";
+			 String sql="SELECT a.name as cylinderstatus, IFNULL(b.statuscount,0) as count	FROM cylinderstatus a	left outer join (SELECT cylinderstatus, IFNULL(count(cylinderstatus), 0) as statuscount FROM cylindermaster,`items` i WHERE i.id=cylindermaster.`size` AND i.`itemType`='Cylinder'  group by cylinderstatus) b	on a.id = b.cylinderstatus; ";
 			   
 			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
 				return retlist;
@@ -286,7 +286,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		public  int  getTotalcylindersCount(){  
 			 jdbcTemplate = custom.getJdbcTemplate();
 			 
-			 String sql="SELECT  count(*)    FROM cylindermaster";
+			 String sql=" SELECT  COUNT(*)    FROM cylindermaster cm,items i WHERE cm.`size`=i.id AND i.`itemType`='Cylinder' ";
 			   
 			   return jdbcTemplate.queryForInt(sql);
 		}
@@ -451,5 +451,64 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			}
 			return retlis;
 		}
+	 
+	 
+		public   JSONObject  getCylindersStatusCount(){  
+			JSONObject jsonObject = new JSONObject();
+			 jdbcTemplate = custom.getJdbcTemplate();
+			 String sql = null;
+			 
+			  sql="SELECT   i.id,i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm   WHERE cm.cylinderstatus='1' AND cm.size=i.id AND cm.`status`='1') count FROM `items` i  WHERE `itemType`='Cylinder' AND i.status='1'; ";
+			   
+			 List<CylindermasterBean> emptylist =  jdbcTemplate.query(sql, new Object[] {  },	ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			 jsonObject.put("emptylist", emptylist);
+			 
+			 
+			  sql="SELECT  i.id, i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm   WHERE cm.cylinderstatus='2' AND cm.size=i.id AND cm.`status`='1') count FROM `items` i  WHERE `itemType`='Cylinder' AND i.status='1'; ";
+			 List<CylindermasterBean> fillingStation =  jdbcTemplate.query(sql, new Object[] {  },	ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			 jsonObject.put("fillingStation", fillingStation);
+			 
+			 
+			  sql="SELECT   i.id,i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm   WHERE cm.cylinderstatus='3' AND cm.size=i.id AND cm.`status`='1') count FROM `items` i  WHERE `itemType`='Cylinder' AND i.status='1'; ";
+			 List<CylindermasterBean> filled =  jdbcTemplate.query(sql, new Object[] {  },	ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			 jsonObject.put("filled", filled);
+			 
+			 
+			  sql="SELECT   i.id,i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm   WHERE cm.cylinderstatus='4' AND cm.size=i.id AND cm.`status`='1') count FROM `items` i  WHERE `itemType`='Cylinder' AND i.status='1'; ";
+			 List<CylindermasterBean> qualitycheck =  jdbcTemplate.query(sql, new Object[] {  },	ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			 jsonObject.put("qualitycheck", qualitycheck);
+			 
+			 
+			  sql="SELECT   i.id,i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm   WHERE cm.cylinderstatus='5' AND cm.size=i.id AND cm.`status`='1') count FROM `items` i  WHERE `itemType`='Cylinder' AND i.status='1'; ";
+			 List<CylindermasterBean> truck =  jdbcTemplate.query(sql, new Object[] {  },	ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			 jsonObject.put("truck", truck);
+			 
+			 
+			  sql="SELECT   i.id,i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm   WHERE cm.cylinderstatus='6' AND cm.size=i.id AND cm.`status`='1') count FROM `items` i  WHERE `itemType`='Cylinder' AND i.status='1'; ";
+			 List<CylindermasterBean> delivered =  jdbcTemplate.query(sql, new Object[] {  },	ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			 jsonObject.put("delivered", delivered);
+			 
+			 
+			  sql="SELECT   i.id,i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm   WHERE cm.cylinderstatus='7' AND cm.size=i.id AND cm.`status`='1') count FROM `items` i  WHERE `itemType`='Cylinder' AND i.status='1'; ";
+			 List<CylindermasterBean> returned =  jdbcTemplate.query(sql, new Object[] {  },	ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			 jsonObject.put("returned", returned);
+			 
+			 
+			  sql="SELECT   i.id,i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm   WHERE cm.cylinderstatus='8' AND cm.size=i.id AND cm.`status`='1') count FROM `items` i  WHERE `itemType`='Cylinder' AND i.status='1'; ";
+			 List<CylindermasterBean> missedCylinder =  jdbcTemplate.query(sql, new Object[] {  },	ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
+			 jsonObject.put("missedCylinder", missedCylinder);
+			 
+			 
+			 
+			 
+			 
+			 
+				return jsonObject;
+		}
+		
+		
+		
+	 
+//	 SELECT  i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm	   WHERE cm.cylinderstatus='1' AND cm.size=i.id ) counts	FROM `items` i  WHERE `itemType`='Cylinder'
 }
 

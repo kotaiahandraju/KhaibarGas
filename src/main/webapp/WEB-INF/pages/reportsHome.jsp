@@ -507,20 +507,34 @@ display: none;
 			<c:set var="store" value="${param.store}"/> 
 	    </c:otherwise>
 	</c:choose>
+	<c:choose>
+		<c:when test="${empty param.cylindersize}">
+			<c:set var="cylindersize" value="0"/> 
+	    </c:when>
+	    <c:otherwise>
+			<c:set var="cylindersize" value="${param.cylindersize}"/> 
+	    </c:otherwise>
+	</c:choose>
 	
 	
 
 <script type="text/javascript">
+var param1 = ${store};
+if(param1 != "0"){
+	$("#storename").val(param1);
+	onChangeReports(param1,"storename");
+}
+
 var param = ${cylinderstatus};
 if(param != "0"){
 	$("#cylendersstatus").val(param);
 	onChangeReports(param,"cylendersstatus");
 }
 
-var param1 = ${store};
-if(param1 != "0"){
-	$("#storename").val(param1);
-	onChangeReports(param,"storename");
+var param2 = ${cylindersize};
+if(param2 != "0"){
+	$("#size").val(param2);
+	searchcylinderstatussize();
 }
 
 $(document).ready(function() {
@@ -732,6 +746,24 @@ function QualityCheck(){
 		formData.append('storename', storename);
 		formData.append('cylinderstatus', cylendersstatus);
 		formData.append('lponumber', lponumber);
+		formData.append('size', size);
+		$.fn.makeMultipartRequest('POST', 'onChangeReports',
+				false, formData, false, 'text', function(data) {
+			console.log(data);
+			var jsonobj = $.parseJSON(data);
+			var alldata = jsonobj.allOrders1;
+			displayTable(alldata);
+			
+		});
+	}
+	
+	function searchcylinderstatussize() {
+		
+		
+		var cylendersstatus = $("#cylendersstatus").val(); 
+		var size = $("#size").val();
+		var formData = new FormData();
+		formData.append('cylinderstatus', cylendersstatus);
 		formData.append('size', size);
 		$.fn.makeMultipartRequest('POST', 'onChangeReports',
 				false, formData, false, 'text', function(data) {
