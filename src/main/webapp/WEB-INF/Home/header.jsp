@@ -38,6 +38,7 @@
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/form-toggle/toggles.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/datatables/dataTables.css' /> 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+ <link rel="stylesheet" href="${baseurl }/assets/css/MonthPicker.min.css">
 
 <link href="${baseurl }/assets/css/datepicker1.css" rel="stylesheet" type="text/css" />
 

@@ -77,6 +77,7 @@ public class DueAmountPayController {
 		printDataBean.setDueamount(cylindertransactionBean.getDueAmount());
 		printDataBean.setPaidamount(cylindertransactionBean.getPayedAmount());
 		printDataBean.setCustomerId(cylindertransactionBean.getCustomerId());
+		printDataBean.setPreviousdueamount(cylindertransactionBean.getPreviousDueAmount());
 		printDataDao.save(printDataBean);
 		customermasterDao.updateDueAmount(cylindertransactionBean.getDueAmount(), cylindertransactionBean.getCustomerId(),invoiceId);
 		transactionManager.commit(objTransStatus);

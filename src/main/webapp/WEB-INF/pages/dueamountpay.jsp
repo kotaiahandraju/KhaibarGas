@@ -94,7 +94,7 @@ table tbody tr.rowInc {
                         <label for="focusedinput" class="col-md-6 control-label">Previous Due Amount :</label>
                         
                         <div class="col-md-6" style="margin-top:8px;">
-                        <span  id="previousDueAmount"></span>
+                        <span  id="pDueAmount"></span>
                         </div>
                       </div>
                       
@@ -111,10 +111,12 @@ table tbody tr.rowInc {
                         <div class="col-md-6" style="margin-top:8px;">
                         <input type="text" id="dueAmount" name="dueAmount" readonly="true" >
                         </div>
+                        
                       </div>
                     
                     </div>
 <!--                     vat amount -->
+				<input type="hidden" id="previousDueAmount" name="previousDueAmount" >
 				<input type="hidden" name="vatamount" id="vatamount1" >
 				<input type="hidden" name="grossamount" id="grossamount">  
 				<input type="hidden" name ="totalNetamount" id ="totalNetamount"/>
@@ -191,7 +193,7 @@ table tbody tr.rowInc {
                      <div class="col-md-6">
                       <div class="form-group">
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Due Amount :</label>
-                         <div class="col-md-6"> <span id="previouesdueamount" class="form-control"  style="border:none;"></span> </div>
+                         <div class="col-md-6"> <span id="previouesdueamount1" class="form-control"  style="border:none;"></span> </div>
                       </div>
                     </div>
                     
@@ -535,9 +537,9 @@ function priceCalculator(){
 		
 		
 		
-		$(".totalInvoiceValue").text(globelTotalValue.toFixed(2));
-		$(".totalDiscounts").text(globalDiscount.toFixed(2));
-		$(".totalTaxableValue").text(globalTaxable.toFixed(2));
+		$(".totalInvoiceValue").text(globelTotalValue.toFixed(3));
+		$(".totalDiscounts").text(globalDiscount.toFixed(3));
+		$(".totalTaxableValue").text(globalTaxable.toFixed(3));
 		
 		
 	 }
@@ -627,7 +629,7 @@ dependentRowCount = 1;
 function PaidCalculation(value){
 	var amount = $("#previousDueAmount").text();
 	if(amount !="" && value !=""){
-		$("#dueAmount").val(parseInt(amount)-parseInt(value));
+		$("#dueAmount").val(parseFloat(amount)-parseFloat(value));
 	}
 }
 function getCustomerIds(value){
@@ -636,12 +638,13 @@ function getCustomerIds(value){
 	$("#mobile").text(" ");
 	$("#landline").text(" ");
 	$("#lastDueAmount").text(" ");
-	$("#previousDueAmount").text(" ");
+	$("#previousDueAmount").val(" ");
+	$("#pDueAmount").text(" ");
 	
 	$("#previouesInvoiceId").text(" ");
 	$("#previouesgrossamount").text(" ");
 	$("#previouespaidamount").text(" ");
-	$("#previouesdueamount").text(" ");
+	$("#previouesdueamount1").text(" ");
 	$("#previouesitems").text(" ");
 	$("#prviousInvoiceId").val(" ");
 	
@@ -682,8 +685,9 @@ function getCustomerDetails(value){
 			$("#customeraddress").text(catObj.customeraddress);
 			$("#landline").text(catObj.landline);
 			$("#lastDueAmount").text(catObj.dueAmount);
-			$("#previousDueAmount").text(catObj.dueAmount);
-			
+// 			$("#previousDueAmount").text(catObj.dueAmount);
+			$("#pDueAmount").text(catObj.dueAmount);
+			$("#previousDueAmount").val(catObj.dueAmount);
 			$("#dueAmount").val(catObj.dueAmount);
 			priceCalculator();
 			
@@ -693,7 +697,8 @@ function getCustomerDetails(value){
 			$("#previouesInvoiceId").text(catObj.invoiceid);
 			$("#previouesgrossamount").text(catObj.grossamount);
 			$("#previouespaidamount").text(catObj.paidamount);
-			$("#previouesdueamount").text(catObj.dueamount);
+			$("#previouesdueamount1").text(catObj.dueamount);
+			$("#previousDueAmount").text(catObj.dueamount);
 			$("#previouesitems").text(catObj.itemName);
 			$("#prviousInvoiceId").val(catObj.invoiceid);
 			

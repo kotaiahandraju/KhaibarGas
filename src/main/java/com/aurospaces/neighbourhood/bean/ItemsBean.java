@@ -27,8 +27,14 @@ protected String description ;
 protected String price ;
 protected String discount,itemType ;
 protected String status ;
-protected String itemstatus ,amount;
+protected String itemstatus ,amount,createddate;
 
+public String getCreateddate() {
+	return createddate;
+}
+public void setCreateddate(String createddate) {
+	this.createddate = createddate;
+}
 public String getAmount() {
 	return amount;
 }

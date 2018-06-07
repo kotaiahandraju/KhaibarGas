@@ -9,7 +9,6 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
-import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.ItemsBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 import com.aurospaces.neighbourhood.db.basedao.BaseItemsDao;
@@ -32,7 +31,7 @@ public class ItemsDao extends BaseItemsDao
 		try {
 			jdbcTemplate = custom.getJdbcTemplate();
 			
-			String sql = "SELECT s.*,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as itemstatus  from items s where status='"+status+"' order by s.id desc";
+			String sql = "SELECT s.*,DATE_FORMAT(s.createdtime,'%d-%b-%Y') AS createddate,CASE WHEN s.status IN ('0') THEN 'Deactive' WHEN s.status in ('1') THEN 'Active'  ELSE '-----' END as itemstatus  from items s where status='"+status+"' order by s.id desc";
 			System.out.println("sql:::"+sql);
 			listItemsmasterBean = jdbcTemplate.query(sql, new BeanPropertyRowMapper<ItemsBean>(ItemsBean.class));
 			if(listItemsmasterBean !=null){

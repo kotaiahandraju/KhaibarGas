@@ -123,6 +123,19 @@
 		<put-attribute name="body" value="/WEB-INF/pages/usermanagement.jsp" />
 	</definition>
 	
+	<definition name="paymentreport" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/paymentreport.jsp" />
+	</definition>
+	<definition name="reportsHome" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/reportsHome.jsp" />
+	</definition>
+	<definition name="gasReport" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/gasReport.jsp" />
+	</definition>
+	<definition name="expenseReport" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/expenseReport.jsp" />
+	</definition>
+	
 	
 	
 </tiles-definitions>
