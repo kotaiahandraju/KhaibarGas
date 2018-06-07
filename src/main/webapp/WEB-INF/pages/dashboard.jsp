@@ -90,15 +90,6 @@ tbody tr:nth-child(even) th {
 }
 </style> -->
 
-<script>
-$(document).ready(function(){
-    if(!window.location.hash) {
-        window.location = window.location + '#loaded';
-        window.location.reload();
-    }
-});
-</script>
-
 <script type="text/javascript" src="${baseurl }/js/TableBarChart.js"></script>
 	<link rel="stylesheet" href="${baseurl }/assets/css/TableBarChart.css" />
 	
@@ -245,49 +236,17 @@ $(document).ready(function(){
 </div> <!-- page-content -->
  
  
- <table id="source" >
-      <caption>
-  Locating Element By Id
-  </caption>
-      <thead>
-    <tr>
-          <th></th>
-          <th>Run 1</th>
-          <th>Run 2</th>
-          <th>Run 3</th>
-        </tr>
-  </thead>
-      <tbody>
-    <tr>
-          <th>Chrome</th>
-          <td>1595</td>
-          <td>1578</td>
-          <td>1584</td>
-        </tr>
-    <tr>
-          <th>Firefox</th>
-          <td>1470</td>
-          <td>1430</td>
-          <td>1500</td>
-        </tr>
-    <tr>
-          <th>Internet Explorer</th>
-          <td>2750</td>
-          <td>3140</td>
-          <td>3162</td>
-        </tr>
-    <tr>
-          <th>HTMLUnit with JS</th>
-          <td>170</td>
-          <td>100</td>
-          <td>90</td>
-        </tr>
-  </tbody>
-    </table>
-
 <br/>
-<br/>
-
+						<div class="table-responsive" id="tableId" style="display: none" >
+                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+                                <thead>
+                                	<tr>
+                                		<th>Business Name</th><th>Product Categeory</th><th>Product Sub Categeory </th><th>Item Code</th><th>Item Description</th><th>Quantity</th>
+                                	</tr>
+                                </thead>
+                                <tbody></tbody>
+                            </table>
+                         </div>
 
 <!-- Body Ends Here -->
 <script type="text/javascript">
@@ -335,15 +294,62 @@ $(document).ready(function(){
 	});
 });
 
+var branches = ${branches_map};
+var lstOrders =${delivered_qty_list};
+createTableHeader(branches);
+//console.log(lstOrders);
 
+if(lstOrders != ""){
+	showTableData(lstOrders,branches);
+}
 
+function createTableHeader(branch_map){
+	//serviceUnitArray ={};
+	//serviceUnitArray1 ={};
+	var table=$('#tableId').html('');
+	
+	
+	var tableHead = '<table  id="example"><thead><tr ><th></th>';
+	$.each(branch_map,function(key, value) {
+		var tempStr = '<th>'+value+'</th>';
+		tableHead += tempStr;
+	});
+	/* tableHead += '<th colspan="4"  style="max-width:80px; min-width:80px;">Overall Orders</th></tr><tr><th align="center">Category</th><th align="center">Subcategory</th><th align="center">Item Code</th>'; 
+	$.each(branch_map,function(key, value) {
+		var tempStr = '<th align="center"  style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:80px; min-width:80px;">Pending</th>';
+		tableHead += tempStr;
+	});
+	tableHead += '<th align="center" style="max-width:80px; min-width:80px;">Ordered</th><th  style="max-width:90px; min-width:90px;">Delivered</th><th  style="max-width:80px; min-width:80px;">Nullified</th><th  style="max-width:100px; min-width:100px;">Pending</th></tr></thead><tbody></tbody></table>'; */
+	tableHead += '</tr></thead><tbody></tbody></table>';
+	$("#tableId").html(tableHead);
+	//if(isClick=='Yes') $('.datatables').dataTable();
+}
+function showTableData(prod_map,branch_map){
+	/* var tableHead = '<table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">'+
+	'<thead><tr><th>key</th><th>value</th></tr>'+
+	"</thead><tbody></tbody></table>"; 
+$("#tableId").html(tableHead); */
+	$.each(prod_map,function(key,value) {
+		var total_ordered=0,total_delivered=0,total_nullified=0,total_pending=0;
+		var tblRow ="<tr><th>" + key + "</th>";
+		var branch_map = value;
+		$.each(branch_map,function(key2,value2) {
+			
+			var temp_td = "<td >" + value2 + "</td>";
+			tblRow += temp_td;
+		});
+		tblRow += "</tr>";
+		$(tblRow).appendTo("#tableId table tbody");
+	});
+	//if(isClick=='Yes') $('.datatables').dataTable();
+}
 
 
 </script>
 	<script type="text/javascript">
-	var listOrders1 = ${allOrders1};
+	/* var listOrders1 = ${allOrders1};
 	var data = JSON.stringify(listOrders1);
-	var myJSON = $.parseJSON(data);
+	var myJSON = $.parseJSON(data); */
 	
 	/* window.onload = function () {
 		var chart = new CanvasJS.Chart("chartContainer", {
@@ -361,31 +367,15 @@ $(document).ready(function(){
 		chart.render();
 	} */
 	$(function() {
-		$('#source').tableBarChart('#target', '', false);
+		$('#example').tableBarChart('#target', '', false);
 // 		$('#source2').tableBarChart('#target2', '', true);
 	});
 	
-	var A=[{'name':'44kg','count':'35','label':'May, 2018'},{'name':'12kg','count':'3','label':'June, 2018'},{'name':'44kg','count':'5','label':'June, 2018'}];
-	/* var data=[];
-	var rows=[];
-	$.each(recs, function(k,v){
-		data[v.name]=[];
-		data[v.name].push(v);
+	$(document).ready(function(){
+	    if(!window.location.hash) {
+	        window.location = window.location + '#loaded';
+	        window.location.reload();
+	    }
 	});
-	console.log(data); */
-	var temp=[];
-	for (var i=0; i<A.length; i++) {
-	    temp[A[i].name] =
-	        temp[A[i].name] === undefined ?
-	            {'label':A[i].label,'count':A[i]} :
-	            temp[A[i].count] + ',' + A[i].label;
-	}
-
-	A = [];
-
-	for (var key in temp) {
-	    A.push({a: key, b:temp[key]})
-	}
-	console.log(A);
 	</script>
 	

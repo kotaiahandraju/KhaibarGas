@@ -84,7 +84,7 @@
 								<div class="form-group">
 									<label class="col-sm-4 control-label required">Item Description <span class="impColor">*</span></label>
 									<div class="col-sm-6">
-										<form:input path="itemDescription" class="form-control onlyCharacters validate" autocomplete="off" placeholder="Item Description" required="required" />
+										<form:input path="itemDescription" class="form-control  validate" autocomplete="off" placeholder="Item Description" required="required" />
 									</div>
 								</div>
 							</div>

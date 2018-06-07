@@ -695,7 +695,7 @@ function QualityCheck(){
 		var cylendersstatus=null;
 		var lponumber = null;
 		var size = null;
-		if(name== "cylendersstatus"){
+		/* if(name== "cylendersstatus"){
 			documentMessage = "Cylinder Status Report";
 			 $("#companyname").val("");
 			 cylendersstatus = $("#cylendersstatus").val();
@@ -735,7 +735,7 @@ function QualityCheck(){
 			  $("#cylendersstatus").val("");
 			  $("#lponumber").val("");
 		}
-		
+		 */
 		var companyname = $("#companyname").val();
 		var storename = $("#storename").val();
 		var cylendersstatus = $("#cylendersstatus").val(); 

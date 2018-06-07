@@ -92,7 +92,9 @@ span.has-error,span.hasError
 
 .default-class::-webkit-input-placeholder {color: #e73d4a !important;}
 .default-class::-moz-placeholder {color: #e73d4a !important;}
-
+.red {
+color:red;
+}
 .msgcss
 {
 /* 	width: 50% !important; */
@@ -710,7 +712,12 @@ display: none;
 				        		<input type="reset" class="btn btn-danger" value="Reset" >
 							</div>
 						</div>
-					</div>
+					</div><div class="clearfix"></div>
+					<div class="col-md-2"><span class="red" >Item Amount :<span id="amount"></span></span></div>
+					<div class="col-md-2"><span class="red" >Vat Amount :<span id="vatamount"></span></span></div>
+					<div class="col-md-2"><span class="red">Total Amount:<span id="totalamount"></span></span></div>
+					<div class="col-md-2"><span class="red">Paid Amount :<span id="paidamount"></span></span></div>
+					<div class="col-md-3"><span class="red">Due Amount :<span id="dueamount"></span></span></div>
 					</div>
 					</div>
 				</div>
@@ -766,10 +773,21 @@ $(function() {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ ' <thead><tr><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Items</th><th>Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody></table>';
+		+ ' <thead><tr><th>Payment Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Items</th><th>Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody></table>';
 $('#tableId').html(tableHead);
 	serviceUnitArray = {};
+	var amount = 0.00;
+	var vatamount =0.00;
+	var dueamount =0.00;
+	var paidamount =0.00;
 	$.each(listOrders,function(i, orderObj) {
+		
+		amount =amount+parseInt(orderObj.netamount);
+		vatamount =vatamount+parseInt(orderObj.vatamount);
+		if(orderObj.paidAmount !=""){
+			paidamount =paidamount+parseInt(orderObj.paidAmount);
+		}
+		
 	var stationName = "";
 	serviceUnitArray[orderObj.id] = orderObj;
 	if(orderObj.grossamount ==undefined){
@@ -788,6 +806,7 @@ $('#tableId').html(tableHead);
 		itemName=orderObj.itemName;
 	}
 	var tblRow = "<tr >"
+		+ "<td class='impFiled' title='"+orderObj.created_time+"'>" + orderObj.created_time + "</td>"
 		+ "<td class='impFiled' title='"+orderObj.customername+"'>" + orderObj.customername + "</td>"
 		+ "<td class='impFiled' title='"+orderObj.customerid+"'>" + orderObj.customerid + "</td>"
 		+ "<td class='impFiled' title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
@@ -798,7 +817,14 @@ $('#tableId').html(tableHead);
 		+ "</tr >";
 	$(tblRow).appendTo("#tableId table tbody");
 });
+	dueamount = (amount+vatamount)-paidamount;
+	$("#amount").text(amount);
+	$("#vatamount").text(vatamount);
+	$("#totalamount").text(amount+vatamount);
+	$("#paidamount").text(paidamount);
+	$("#dueamount").text(dueamount);
 	if(isClick=='Yes'){
+		
 		$('.datatables').dataTable({
 			 dom: 'lBfrtip',
 			 
@@ -808,7 +834,7 @@ $('#tableId').html(tableHead);
 			                        extend: 'pdfHtml5',
 			                        messageTop : documentMessage,
 // 			                        title : documentMessage,
-									exportOptions: {columns: [0,1,2,3,4]},
+									exportOptions: {columns: [0,1,2,3,4,5,6,7]},
 			                        customize: function ( doc ) {
 										doc.content.splice( 1, 0, {
 											margin: [ 0, 0, 0, 12 ],

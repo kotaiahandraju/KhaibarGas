@@ -125,6 +125,17 @@
 							</div>
                     	</div>
                     </div>
+                    <div class="col-md-12">
+                    	<div class="form-group">
+                    		<label for="focusedinput" class="col-md-4 control-label">LPO Number <span class="impColor">*</span></label>
+                    		<div class="col-md-6">
+								<form:select path="lponumber" class="form-control" onfocus="removeBorder(this.id)" >
+									<form:option value="">-- Select LPO Number  --</form:option>
+									<form:options items="${LPONumbers}"></form:options>
+								</form:select>
+							</div>
+                    	</div>
+                    </div>
 					<div class="col-md-12">
                     	<div class="form-group">
                     		<label for="focusedinput" class="col-md-4 control-label">Adding Gas(in KG's) <span class="impColor">*</span></label>
@@ -277,19 +288,26 @@ function addGas() {
 	var newGasavail=$("#gasavail").val();
 	var oldBal =serviceUnitArray[stationId].closingBalanceGas;
 	var closedgas= parseInt(oldBal)+parseInt(newGasavail);
+	var lponumber =$("#lponumber").val();
  	//alert(closedgas);
-	if((stationId == null || stationId == "" || stationId == "undefined" || newGasavail == null || newGasavail == "" || newGasavail == "undefined"))
+	if((stationId == null || stationId == "" || stationId == "undefined" || newGasavail == null || newGasavail == "" || newGasavail == "undefined"  ||   lponumber == null || lponumber == "" || lponumber == "undefined" ))
 	{
 	 	if(stationId == null || stationId == "" || stationId == "undefined" ){
 		 	$('#stationnames').css('border-color','#cc0000');
 			$('#stationnames').css('color','#cc0000');
 			$('#stationnames').addClass('placeholder-style your-class');
 			return false;
-	 	}else  if(newGasavail == null || newGasavail == ""){
+	 	}  if(newGasavail == null || newGasavail == ""){
 	 		$('#gasavail').css('border-color','#cc0000');
 	 		$('#gasavail').css('color','#cc0000');
 	 		$('#gasavail').attr('placeholder','Please Enter Gas');
 	 		$('#gasavail').addClass('placeholder-style your-class');
+	 		return false;
+	 	}  if(lponumber == null || lponumber == ""){
+	 		$('#lponumber').css('border-color','#cc0000');
+	 		$('#lponumber').css('color','#cc0000');
+	 		$('#lponumber').attr('placeholder','Please select lpo number');
+	 		$('#lponumber').addClass('placeholder-style your-class');
 	 		return false;
 	 	}
 	}
@@ -297,7 +315,7 @@ function addGas() {
 		$.ajax({
 			type : "POST",
 			url : "updateGas.htm",
-			data :"stationId="+stationId+"&newGasavail="+newGasavail+"&closedgas="+closedgas,
+			data :"stationId="+stationId+"&newGasavail="+newGasavail+"&closedgas="+closedgas+"&lponumber="+lponumber,
 			beforeSend : function() {
             	$.blockUI({ message: 'Please wait' });
           	}, 

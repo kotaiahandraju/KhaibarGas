@@ -26,7 +26,7 @@ public class PaymentHistoryDao extends BasePaymentHistoryDao
 		 List<Map<String,Object>> retlist =null;
 		 jdbcTemplate = custom.getJdbcTemplate();
 		 StringBuffer buffer = new StringBuffer();
-		 buffer.append( "SELECT cm.customerid, GROUP_CONCAT(i.name) AS itemName, p.grossamount,p.paidAmount,p.invoiceId,cm.customertype,cm.`customername`, "
+		 buffer.append( "SELECT IFNULL(p.`previousdueamount`,0) AS previousdueamount, IFNULL(p.`netamount`,0) AS netamount,IFNULL(p.`vatamount`,0) AS vatamount,IFNULL(p.`paidamount`,0) AS paidamount, DATE_FORMAT(p.created_time,'%d-%b-%Y') as created_time, cm.customerid, GROUP_CONCAT(i.name) AS itemName, p.grossamount,p.paidAmount,p.invoiceId,cm.customertype,cm.`customername`, "
 						+" cm.`customeraddress`,cm.`mobile`,cm.`landline`,p.`dueAmount` FROM `printdata` p LEFT JOIN " 
 						+" `customermaster` cm ON p.`customerid`=cm.id  LEFT JOIN  items i ON p.`items` =i.id where 1=1 " );
 		 

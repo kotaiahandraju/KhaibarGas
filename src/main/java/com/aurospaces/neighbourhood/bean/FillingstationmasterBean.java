@@ -24,8 +24,14 @@ protected String cylinderType;
 protected String truckId;
 protected String closingBalanceGas;
 protected String usedGas;
-protected String stationnames;
+protected String stationnames,lponumber;
 
+public String getLponumber() {
+	return lponumber;
+}
+public void setLponumber(String lponumber) {
+	this.lponumber = lponumber;
+}
 public String getStationnames() {
 	return stationnames;
 }

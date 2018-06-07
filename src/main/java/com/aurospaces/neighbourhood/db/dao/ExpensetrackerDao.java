@@ -78,7 +78,7 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			jdbcTemplate = custom.getJdbcTemplate();
 			 
 			StringBuffer buffer = new StringBuffer();
-			buffer.append("SELECT `created_time`,`fillingStationId`,`fillingstationname`,`gasInKgs`,`closedgas`,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'Added Gas' AS AddedGas FROM addgas WHERE 1=1 ");
+			buffer.append("SELECT `created_time`,`fillingStationId`,`fillingstationname`,`gasInKgs`,`closedgas`,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,CONCAT('Added Gas', '(', IFNULL(addgas.lponumber,'--'), ')') AS AddedGas FROM addgas WHERE 1=1 ");
 			if(StringUtils.isNotBlank(month)){
 				 
 				buffer.append("  AND  MONTH(created_time) ='"+month+"' AND YEAR(created_time) ='"+year+"' " );

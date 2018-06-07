@@ -457,10 +457,14 @@ display: none;
 					</div>
 					</div>
 										<br><br>	
-					<div class="col-md-2 col-md-offset-5">
+					<div class="col-md-12 ">
 						<div class="form-group">
-							<div class="col-md-7" style="text-align:left; float: right;">
+						<div class="col-md-6"></div>
+							<div class="col-md-1" style="text-align:left;">
 				        		<input type="button" class="btn btn-primary" value="Search" onclick="searchData();">
+							</div>
+							<div class="col-md-5 pull-right">
+							<p style="padding-top:8px; color:red;"><b>Total Expenses :</b> <span id="totalamount"></span></p>
 							</div>
 						</div>
 					</div>
@@ -530,8 +534,9 @@ function displayTable(listOrders) {
 		+ '<thead><tr><th>Account Head</th><th>Expense Amount (AED)</th><th>Date of Expense</th><th>Item description</th><th>Payment Type</th><th>Remarks</th></tr></thead><tbody></tbody></table>';
 $('#tableId').html(tableHead);
 	serviceUnitArray = {};
+	var totalAmount = 0.00;
 	$.each(listOrders,function(i, orderObj) {
-	
+		totalAmount =totalAmount+parseInt(orderObj.amount);
 	serviceUnitArray[orderObj.id] = orderObj;
 	var tblRow = "<tr >"
 		+ "<td class='impFiled' title='"+orderObj.accountHead+"'>" + orderObj.accountHead + "</td>"
@@ -544,6 +549,8 @@ $('#tableId').html(tableHead);
 		+ "</tr >";
 	$(tblRow).appendTo("#tableId table tbody");
 });
+	$("#totalamount").text(totalAmount);
+// 	alert(totalAmount);
 	if(isClick=='Yes'){
 		$('.datatables').dataTable({
 			 dom: 'lBfrtip',

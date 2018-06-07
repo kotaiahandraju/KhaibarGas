@@ -98,6 +98,7 @@ jQuery.fn.tableBarChart = function(targetDiv, caption, reverseGroup) {
 			var stepValue = yAxisMin + step * i;
 			if (stepValue % 1 !== 0) {
 				stepValue = parseFloat(Math.round(stepValue * 100) / 100).toFixed(2);
+				stepValue = Math.round(stepValue);
 			}
 			result.push(stepValue);
 		}
@@ -166,7 +167,7 @@ jQuery.fn.tableBarChart = function(targetDiv, caption, reverseGroup) {
 		var barGroupWidth = graphWidth / groupTitles.length - 2 * defaultMargin;
 		target.find('.bar-group').css('width', barGroupWidth).css('margin', '0 ' + defaultMargin);
 		target.find('.x-axis li').css('width', barGroupWidth);
-		var barWidth = barGroupWidth / legends.length - 2;
+		var barWidth = 46;
 		target.find('.bar').css('width', barWidth);
 		for (var i = 0; i < legends.length; i++) {
 			target.find('.bar.item-' + i).css('left', i * (barWidth + 2));

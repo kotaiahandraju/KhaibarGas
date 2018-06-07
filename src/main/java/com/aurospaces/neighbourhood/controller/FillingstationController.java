@@ -25,6 +25,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.aurospaces.neighbourhood.bean.AddGasBean;
 import com.aurospaces.neighbourhood.bean.CylindermasterBean;
 import com.aurospaces.neighbourhood.bean.FillingstationmasterBean;
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.db.dao.AddGasDao;
 import com.aurospaces.neighbourhood.db.dao.CylindermasterDao;
 import com.aurospaces.neighbourhood.db.dao.FillingstationmasterDao;
@@ -231,7 +232,7 @@ public class FillingstationController {
 	}
 	
 	@RequestMapping("/updateGas")
-	public  @ResponseBody  String updateGas(@RequestParam("stationId") String stationId,@RequestParam("newGasavail") String newGasavail,@RequestParam("closedgas") String closedgas, HttpServletRequest request, HttpSession session)
+	public  @ResponseBody  String updateGas(@RequestParam("stationId") String stationId,@RequestParam("newGasavail") String newGasavail,@RequestParam("closedgas") String closedgas,@RequestParam("lponumber") String lponumber, HttpServletRequest request, HttpSession session)
 	{  
 		boolean retlist=false;
 		//String retlist=null;
@@ -246,6 +247,7 @@ public class FillingstationController {
 				addGasBean.setFillingStationId(stationId);
 				addGasBean.setGasInKgs(newGasavail);
 				addGasBean.setClosedgas(closedgas);
+				addGasBean.setLponumber(lponumber);
 				addGasBean.setFillingstationname(bean.getStationname());
 				addGasDao.save(addGasBean);
 		} catch (Exception e) {
@@ -255,5 +257,20 @@ public class FillingstationController {
 		return String.valueOf(obj);
 	}
 	
+	@ModelAttribute("LPONumbers")
+	public Map<String, String> populateLPONumbers() {
+		Map<String, String> statesMap = new LinkedHashMap<String, String>();
+		try {
+			String sSql = "SELECT * FROM lpoitems lpn,items i ,lpomaster lpm WHERE lpn.itemid=i.id AND lpm.lponumber=lpn.lponumber AND  i.itemType='Gas' AND lpm.status='1' GROUP BY lpn.lponumber";
+			List<LpomasterBean> list = cylindermasterDao.populate(sSql);
+			for (LpomasterBean bean : list) {
+				statesMap.put(bean.getLponumber(), bean.getLponumber());
+			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
+	}
 }

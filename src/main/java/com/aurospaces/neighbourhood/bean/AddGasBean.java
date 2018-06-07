@@ -11,8 +11,16 @@ protected int id   = 0;
 protected Date createdTime,date ;
 protected Date updatedTime ;
 protected String fillingStationId,closedgas,fillingstationname ;
-protected String gasInKgs,units ,x,y;
+protected String gasInKgs,units ,x,y,lponumber;
 
+
+
+public String getLponumber() {
+	return lponumber;
+}
+public void setLponumber(String lponumber) {
+	this.lponumber = lponumber;
+}
 public String getFillingstationname() {
 	return fillingstationname;
 }
