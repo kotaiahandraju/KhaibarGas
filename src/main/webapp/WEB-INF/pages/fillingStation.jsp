@@ -51,7 +51,7 @@
                     				<form:hidden path="id"/>
 									<label for="focusedinput" class="col-md-6 control-label">Station Number <span class="impColor">*</span></label>
 									<div class="col-md-5">
-										<form:input path="unitpoint" class="form-control " placeholder="Station Number" />	
+										<form:input path="unitpoint" class="form-control validate" placeholder="Station Number" />	
 										<span class="hasError" id="unitpointError"></span>
 								    </div>
                     			</div>

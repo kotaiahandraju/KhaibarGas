@@ -84,11 +84,6 @@
 							</div>
 						</div>
 					</div><div class="clearfix"></div>
-					<div class="col-md-2"><span class="red" >Item Amount :<span id="amount"></span></span></div>
-					<div class="col-md-2"><span class="red" >Vat Amount :<span id="vatamount"></span></span></div>
-					<div class="col-md-2"><span class="red">Total Amount:<span id="totalamount"></span></span></div>
-					<div class="col-md-2"><span class="red">Paid Amount :<span id="paidamount"></span></span></div>
-					<div class="col-md-3"><span class="red">Due Amount :<span id="dueamount"></span></span></div>
 					</div>
 					</div>
 				</div>
@@ -144,38 +139,31 @@ $(function() {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ ' <thead><tr><th>Payment Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Items</th><th>Invoice</th><th>Item Amount</th><th>Discount Amount</th><th> Net Amount</th><th> Vat Amount</th><th> Previous Due Amount</th><th>Gross Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody><tfoot class="table table-bordered table-striped" style="padding:10px"><tr><th colspan="7" style="text-align:right">Item Amount</th><th colspan="">Discount Amount</th><th colspan="">Net Amount</th><th colspan="">Vat Amount</th><th>Previous Due Amount</th><th>Gross Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr><tr><td colspan="7" style="text-align:right;">0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tfoot></table>';
+		+ ' <thead><tr><th>Payment Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Items</th><th>Invoice</th><th>Item Amount</th><th>Discount Amount</th><th> Net Amount</th><th> Vat Amount</th><th> Previous Due Amount</th><th>Gross Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody><tfoot><tr><th colspan="6" style="text-align:center;"  >Total</th><th id="itemamount"></th><th id="discount">1</th><th id="netamount">1</th><th id="vatamount">1</th><th id="pdueamount">1</th><th id="grossamount"></th><th id="paidamount"></th><th id="dueamount"></th></tfoot></table>';
 $('#tableId').html(tableHead);
 	serviceUnitArray = {};
-	var amount = 0.00;
-	var vatamount =0.00;
-	var dueamount =0.00;
+ 	var price =0.00;
+	 var discount =0.00;
+	 var netamount =0.00;
+	var	vatamount =0.00;
+	var previousdueamount =0.00;
+	var totalamount =0.00;
 	var paidamount =0.00;
+	var dueAmount =0.00;
 	$.each(listOrders,function(i, orderObj) {
 		
-		/* amount =amount+parseInt(orderObj.netamount);
-		vatamount =vatamount+parseInt(orderObj.vatamount);
-		if(orderObj.paidAmount !=""){
-			paidamount =paidamount+parseInt(orderObj.paidAmount);
+		price =price+parseFloat(orderObj.price);
+		discount =discount+parseFloat(orderObj.discount);
+		netamount =netamount+parseFloat(orderObj.netamount);
+		vatamount =vatamount+parseFloat(orderObj.vatamount);
+		previousdueamount =previousdueamount+parseFloat(orderObj.previousdueamount);
+		totalamount =totalamount+parseFloat(orderObj.totalamount);
+		if(orderObj.paidamount !=""){
+			
+		paidamount =paidamount+parseFloat(orderObj.paidamount);
 		}
+		dueAmount =dueAmount+parseFloat(orderObj.dueAmount);
 		
-	var stationName = "";
-	serviceUnitArray[orderObj.id] = orderObj;
-	if(orderObj.grossamount ==undefined){
-		grossamount="";
-	}else{
-		grossamount=orderObj.grossamount;
-	}
-	if(orderObj.paidAmount ==undefined){
-		paidAmount="";
-	}else{
-		paidAmount=orderObj.paidAmount;
-	}
-	if(orderObj.itemName ==undefined){
-		itemName="";
-	}else{
-		itemName=orderObj.itemName;
-	} */
 	var tblRow = "<tr >"
 		+ "<td class='impFiled' title='"+orderObj.created_time+"'>" + orderObj.created_time + "</td>"
 		+ "<td class='impFiled' title='"+orderObj.customername+"'>" + orderObj.customername + "</td>"
@@ -195,12 +183,15 @@ $('#tableId').html(tableHead);
 	$(tblRow).appendTo("#tableId table tbody");
 });
 	
-	dueamount = (amount+vatamount)-paidamount;
-	$("#amount").text(amount);
+	$("#itemamount").text(price);
+	$("#discount").text(discount);
+	$("#netamount").text(netamount);
 	$("#vatamount").text(vatamount);
-	$("#totalamount").text(amount+vatamount);
+	$("#pdueamount").text(previousdueamount);
+	$("#grossamount").text(totalamount);
 	$("#paidamount").text(paidamount);
-	$("#dueamount").text(dueamount);
+	$("#dueamount").text(dueAmount);
+	
 	if(isClick=='Yes'){
 		
 		$('.datatables').dataTable({
@@ -211,6 +202,7 @@ $('#tableId').html(tableHead);
 			           {
 			                        extend: 'pdfHtml5',
 			                        messageTop : documentMessage,
+			                        footer: true,
 // 			                        title : documentMessage,
  										 orientation : 'landscape',
 							                pageSize : 'LEGAL',
@@ -229,11 +221,16 @@ $('#tableId').html(tableHead);
 			                    }, {
 		      extend: 'excel',
 		      title: documentMessage,
-		      filename: documentMessage
+		      filename: documentMessage,
+		      footer: true,
+		      exportOptions: {
+	                columns: ':visible'
+	                 }
 		    }, 
 		    {
                 extend: 'print',
                 title: 'Khaibar Gas LLC',
+                footer: true,
                 customize: function(doc) {
                   doc.styles.title = {
                     color: 'red',
@@ -242,7 +239,18 @@ $('#tableId').html(tableHead);
                     alignment: 'center'
                   }   
                 } , 
+                
+                exportOptions: {
+                    columns: ':visible'
+                     },
                 customize: function ( win ) {
+                	$("td[colspan]").closest("tr").hide();
+                	var footer = $('tfoot');
+                    if (footer.length > 0) {
+                        var exportFooter = $(win.document.body).find('thead:eq(1)');
+                        exportFooter.after(footer.clone());
+                        exportFooter.remove();
+                    }
                     $(win.document.body)
                         .css( 'font-size', '10pt' )
                           
@@ -254,7 +262,9 @@ $('#tableId').html(tableHead);
                     $(win.document.body).find( 'table' )
                         .addClass( 'compact' )
                         .css( 'font-size', 'inherit' );
-                }
+                },
+               
+                
             }]
 		
 		});
@@ -272,7 +282,7 @@ $(function(){
 		var fromDate = $("#fromDate").val();
 		var toDate = $("#toDate").val();
 		var month=$("#month").val();
-		var customerType=$("#customerType").val();
+		var customerType=$("#customertype").val();
 		var customerId=$("#customerId").val();
 		var formData = new FormData();
 		formData.append('fromDate', fromDate);

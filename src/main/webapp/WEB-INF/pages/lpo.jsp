@@ -570,17 +570,13 @@ function allcalculate(id){
 	     var rate=0.00;
 	     var total1 =0.00;
 	     var discount=0.00;
-
-	
 	var number = parseInt(id.match(/[0-9]+/)[0], 10);
 	unit = $('#' + number + 'unit').val();
 	rate = $('#' + number + 'rate').val();
 	total1 =  unit * rate;
 
 	taxable = $('#' + number + 'taxable').val();
-	
 	$('#' + number + 'totalvalue').val(total1.toFixed(2));
-	
 	total = $('#' + number + 'totalvalue').val();
 	discount = $('#' + number + 'discount').val();
 	var result = total - discount;
