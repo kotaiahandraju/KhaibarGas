@@ -105,8 +105,7 @@
                         </div>
                         <div class="panel-body collapse in">
                         <div class="table-responsive" id="tableId">
-                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
-                             <thead><tr><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Items</th><th>Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody></table>
+                            <table id="example" class="table table-striped table-bordered datatables"><thead><tr><th>Payment Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Items</th><th>Invoice</th><th>Item Amount</th><th>Discount Amount</th><th> Net Amount</th><th> Vat Amount</th><th> Previous Due Amount</th><th>Gross Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody></table>
                             </div>
                         </div>
                     </div>
@@ -145,7 +144,7 @@ $(function() {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ ' <thead><tr><th>Payment Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Items</th><th>Invoice</th><th>Item Amount</th><th>Discount Amount</th><th> Net Amount</th><th> Vat Amount</th><th> Previous Due Amount</th><th>Gross Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody></table>';
+		+ ' <thead><tr><th>Payment Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Items</th><th>Invoice</th><th>Item Amount</th><th>Discount Amount</th><th> Net Amount</th><th> Vat Amount</th><th> Previous Due Amount</th><th>Gross Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody><tfoot class="table table-bordered table-striped" style="padding:10px"><tr><th colspan="7" style="text-align:right">Item Amount</th><th colspan="">Discount Amount</th><th colspan="">Net Amount</th><th colspan="">Vat Amount</th><th>Previous Due Amount</th><th>Gross Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr><tr><td colspan="7" style="text-align:right;">0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tfoot></table>';
 $('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	var amount = 0.00;
