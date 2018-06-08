@@ -40,9 +40,13 @@ color: #fff !important;
 width: 100px;
     text-align: center;
 }
-.kgs {
+.nch1 .kgs {
 width:100px;
 text-align:left;
+}
+.empkgs th,td{
+font-size:16px;
+width:100px
 }
 </style>
 	<!-- <style type="text/css">
@@ -106,6 +110,8 @@ tbody tr:nth-child(even) th {
 	                                <div class="tiles-body-alt">
 	                                <c:if test="${not empty Empty}">
 	                                   <div class="text-center" id="emptylist">
+	                                   <!-- <table class="empkgs" >
+	                                   <tr><td>44Kg</td><td><i class="fa fa-long-arrow-right ich"></i> </td><td>15</td></tr>  <tr><td>4Kg</td><td><i class="fa fa-long-arrow-right ich"></i> </td><td>15</td></tr></table> -->
 	                                   </div>
 	                                </c:if>
 	                                </div>
@@ -259,35 +265,35 @@ $(document).ready(function(){
 		var jsonobj = $.parseJSON(data);
 		//console.log(data);
 	$.each(jsonobj.emptylist,function(i, orderObj) {
-		var list =' <span class="nch1"> <span class="kgs"> '+orderObj.name+' </span> <i class="fa fa-long-arrow-right ich"></i> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+1+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></span>';
+		var list ='  <table class="empkgs"><tr><td> <span class="kgs"> '+orderObj.name+' </span></td><td> <i class="fa fa-long-arrow-right ich"></i></td><td><span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+1+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></td></tr></table>';
 		$("#emptylist").append(list);
 	});
 	$.each(jsonobj.fillingStation,function(i, orderObj) {
-		var list =' <span class="nch1"> <span class="kgs"> '+orderObj.name+' </span> <i class="fa fa-long-arrow-right ich"></i> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+2+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></span>';
+		var list =' <table class="empkgs"><tr><td>  <span class="kgs"> '+orderObj.name+' </span></td><td> <i class="fa fa-long-arrow-right ich"></i></td><td> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+2+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></td></tr></table>';
 		$("#fillingstationlist").append(list);
 			});
 	$.each(jsonobj.filled,function(i, orderObj) {
-		var list =' <span class="nch1"> <span class="kgs"> '+orderObj.name+' </span> <i class="fa fa-long-arrow-right ich"></i> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+3+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></span>';
+		var list =' <table class="empkgs"><tr><td>  <span class="kgs"> '+orderObj.name+' </span></td><td> <i class="fa fa-long-arrow-right ich"></i></td><td> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+3+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></td></tr></table>';
 		$("#filledlist").append(list);
 	});
 	$.each(jsonobj.qualitycheck,function(i, orderObj) {
-		var list =' <span class="nch1"> <span class="kgs"> '+orderObj.name+' </span>  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+4+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></span>';
+		var list =' <table class="empkgs"><tr><td> <span class="kgs"> '+orderObj.name+' </span></td><td>  <i class="fa fa-long-arrow-right ich"></i></td><td> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+4+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></td></tr></table>';
 		$("#qualitychecklist").append(list);
 	});
 	$.each(jsonobj.truck,function(i, orderObj) {
-		var list =' <span class="nch1"> <span class="kgs"> '+orderObj.name+' </span>  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+5+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></span>';
+		var list =' <table class="empkgs"><tr><td>  <span class="kgs"> '+orderObj.name+' </span></td><td>  <i class="fa fa-long-arrow-right ich"></i></td><td> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+5+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></td></tr></table>';
 		$("#cylinderintrucklist").append(list);
 	});
 	$.each(jsonobj.delivered,function(i, orderObj) {
-		var list =' <span class="nch1"> <span class="kgs"> '+orderObj.name+' </span> <i class="fa fa-long-arrow-right ich"></i> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+6+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></span>';
+		var list =' <table class="empkgs"><tr><td>  <span class="kgs"> '+orderObj.name+' </span></td><td> <i class="fa fa-long-arrow-right ich"></i></td><td> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+6+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></td></tr></table>';
 		$("#deliveredlist").append(list);
 	});
 	$.each(jsonobj.returned,function(i, orderObj) {
-		var list =' <span class="nch1"> <span class="kgs"> '+orderObj.name+' </span>  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+7+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></span>';
+		var list =' <table class="empkgs"><tr><td>  <span class="kgs"> '+orderObj.name+' </span> </td><td> <i class="fa fa-long-arrow-right ich"></i></td><td> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+7+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></td></tr></table>';
 		$("#receivedlist").append(list);
 	});
 	$.each(jsonobj.missedCylinder,function(i, orderObj) {
-		var list =' <span class="nch1"> <span class="kgs"> '+orderObj.name+' </span>  <i class="fa fa-long-arrow-right ich"></i> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+8+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></span>';
+		var list =' <table class="empkgs"><tr><td>  <span class="kgs"> '+orderObj.name+' </span></td><td>  <i class="fa fa-long-arrow-right ich"></i></td><td> <span class="amountp"><a class="white" target="blank" href="reportsHome?cylinderstatus='+8+'&cylindersize='+orderObj.id+'">'+orderObj.count+'</a></span></td></tr></table>';
 		$("#missedlist").append(list);
 	});
 		
