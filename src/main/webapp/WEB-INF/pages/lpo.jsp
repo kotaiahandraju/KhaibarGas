@@ -191,7 +191,7 @@ table#dependent_table tbody tr td:first-child::before {
 		<tr id="1" class="rowInc">
 			<td></td>
 			<td>
-				<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id),productRateFilter(this.id)" class="form-control">
+				<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" class="form-control">
 					<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
 				</select>
 			</td>
@@ -512,7 +512,7 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
-			+ 'item" class="form-control validate" onchange="removeBorder(this.id),productRateFilter(this.id)"><option>Select</option></select></td>'
+			+ 'item" class="form-control validate" onchange="removeBorder(this.id)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
 			+ dependentRowCount
 			+ 'unit" type="text" value="0" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
@@ -726,7 +726,7 @@ function inactiveData() {
 	$("#lpoMain").hide();
 	$("#printDiv").show();
 var	id = printId.replace("print", "");
-
+$("#printTable > tbody").html("");
 	var formData = new FormData();
     formData.append('lponumber', id);
 	$.fn.makeMultipartRequest('POST', 'viewLPOdetails', false,
