@@ -26,7 +26,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">From Date<span class="impColor">*</span></label>
 							<div class="col-md-7">
-							<form:input path="fromDate" class="form-control "   onkeydown="removeBorder(this.id)"/>
+							<form:input path="fromDate" class="form-control " readonly="true"    onkeydown="removeBorder(this.id)"/>
 							</div>
 						</div>
 					</div>
@@ -34,7 +34,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">To Date<span class="impColor">*</span></label>
 							<div class="col-md-7">
-				        		<form:input path="toDate" class="form-control "   onkeydown="removeBorder(this.id)"/>
+				        		<form:input path="toDate" class="form-control " readonly="true"   onkeydown="removeBorder(this.id)"/>
 							</div>
 						</div>
 					</div>
@@ -42,7 +42,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">Month</label>
 							<div class="col-md-7">
-				        		<form:input path="month" class="form-control "  onkeydown="removeBorder(this.id)"/>
+				        		<form:input path="month" class="form-control "  readonly="true"  onkeydown="removeBorder(this.id)"/>
 							</div>
 						</div>
 					</div>
@@ -173,7 +173,7 @@ $('#tableId').html(tableHead);
 		+ "<td title='"+orderObj.invoiceid+"'>" + orderObj.invoiceid + "</td>"
 		+ "<td title='"+orderObj.price+"'>" + orderObj.price + "</td>"
 		+ "<td title='"+orderObj.discount+"'>" + orderObj.discount + "</td>"
-		+ "<td title='"+orderObj.netamount+"'>" + orderObj.netamount + "</td>"
+		+ "<td rowspan='3' title='"+orderObj.netamount+"'>" + orderObj.netamount + "</td>"
 		+ "<td title='"+orderObj.vatamount+"'>" + orderObj.vatamount + "</td>"
 		+ "<td title='"+orderObj.previousdueamount+"'>" + orderObj.previousdueamount + "</td>"
 		+ "<td title='"+orderObj.totalamount+"'>" + orderObj.totalamount + "</td>"

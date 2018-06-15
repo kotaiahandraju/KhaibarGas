@@ -85,8 +85,9 @@ public class SecuredepositController {
 						cylindermasterBean.setStore("100");
 						cylindermasterBean.setSize(item[i]);
 						cylindermasterBean.setCylinderstatus("8");
-						cylindermasterBean.setLponumber("LPO1000100");
+						cylindermasterBean.setLponumber("LPO1001000");
 						cylindermasterBean.setColor("Red");
+						cylindermasterBean.setStatus("1");
 						cylindermasterBean.setOwnercompany(securedepositBean.getCompanyId());
 						cylindermasterDao.save(cylindermasterBean);
 					}

@@ -33,30 +33,29 @@ public class BaseCustomerTariffmasterDao{
 
 	/* this should be conditional based on whether the id is present or not */
 	@Transactional
-	public void save(final TariffmasterBean tariffmaster) 
+	public void save(final TariffmasterBean tariffmaster,boolean status) 
 	{
+		if(tariffmaster.getCreatedTime() == null)
+		{
+		tariffmaster.setCreatedTime( new Date());
+		}
+		final java.sql.Timestamp createdTime = 		new java.sql.Timestamp(tariffmaster.getCreatedTime().getTime()); 
+				
+		if(tariffmaster.getUpdatedTime() == null)
+		{
+		tariffmaster.setUpdatedTime( new Date());
+		}
+		final java.sql.Timestamp updatedTime = 	new java.sql.Timestamp(tariffmaster.getUpdatedTime().getTime()); 
 		jdbcTemplate = custom.getJdbcTemplate();
 	if(tariffmaster.getId() == 0)	{
-
+		
 	KeyHolder keyHolder = new GeneratedKeyHolder();
 	int update = jdbcTemplate.update(
 			new PreparedStatementCreator() {
 					public PreparedStatement 
 					createPreparedStatement(Connection connection) throws SQLException {
 	
-					if(tariffmaster.getCreatedTime() == null)
-					{
-					tariffmaster.setCreatedTime( new Date());
-					}
-					java.sql.Timestamp createdTime = 
-						new java.sql.Timestamp(tariffmaster.getCreatedTime().getTime()); 
-							
-					if(tariffmaster.getUpdatedTime() == null)
-					{
-					tariffmaster.setUpdatedTime( new Date());
-					}
-					java.sql.Timestamp updatedTime = 
-						new java.sql.Timestamp(tariffmaster.getUpdatedTime().getTime()); 
+					
 							
 					PreparedStatement ps =
 									connection.prepareStatement(INSERT_SQL,new String[]{"id"});
@@ -70,6 +69,7 @@ ps.setString(7, tariffmaster.getRemarks());
 ps.setString(8, tariffmaster.getStatus());
 ps.setString(9, tariffmaster.getItemId());
 ps.setString(10, tariffmaster.getCustomerId());
+ps.setString(11, tariffmaster.getVatallow());
 
 
 
@@ -85,10 +85,16 @@ ps.setString(10, tariffmaster.getCustomerId());
 		}
 		else
 		{
+			java.sql.Timestamp updatedTime1 =null;
+			if(status){
+				 updatedTime1 = updatedTime;
+			}else{
+				 updatedTime1 = new java.sql.Timestamp(tariffmaster.getUpdatedTime().getTime()); 
+			}
 
-			String sql = "UPDATE customertariffmaster  set assetcode = ? ,assetdescription = ? ,rate = ? ,alloweddiscount = ? ,remarks = ? ,itemId=?,customerId=?,vatallow=?  where id = ? ";
+			String sql = "UPDATE customertariffmaster  set updated_time =?, assetcode = ? ,assetdescription = ? ,rate = ? ,alloweddiscount = ? ,remarks = ? ,itemId=?,customerId=?,vatallow=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{tariffmaster.getAssetcode(),tariffmaster.getAssetdescription(),tariffmaster.getRate(),tariffmaster.getAlloweddiscount(),tariffmaster.getRemarks(),tariffmaster.getItemId(),tariffmaster.getCustomerId(),tariffmaster.getVatallow(),tariffmaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{updatedTime1,tariffmaster.getAssetcode(),tariffmaster.getAssetdescription(),tariffmaster.getRate(),tariffmaster.getAlloweddiscount(),tariffmaster.getRemarks(),tariffmaster.getItemId(),tariffmaster.getCustomerId(),tariffmaster.getVatallow(),tariffmaster.getId()});
 		}
 	}
 		

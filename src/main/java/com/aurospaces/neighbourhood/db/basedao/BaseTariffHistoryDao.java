@@ -19,13 +19,13 @@ import com.aurospaces.neighbourhood.bean.TariffmasterBean;
 import com.aurospaces.neighbourhood.daosupport.CustomConnection;
 
 
-public class BaseTariffmasterDao{
+public class BaseTariffHistoryDao{
 
 	@Autowired
 	CustomConnection custom;
 	JdbcTemplate jdbcTemplate;
  
-	public final String INSERT_SQL = "INSERT INTO tariffmaster( created_time, updated_time, assetcode, assetdescription, rate, alloweddiscount, remarks, status,itemId) values (?, ?, ?, ?, ?, ?, ?, ?,?)"; 
+	public final String INSERT_SQL = "INSERT INTO tariffhistory( created_time, updated_time, assetcode, assetdescription, rate, alloweddiscount, remarks, status,itemId) values (?, ?, ?, ?, ?, ?, ?, ?,?)"; 
 
 
 
@@ -33,19 +33,8 @@ public class BaseTariffmasterDao{
 
 	/* this should be conditional based on whether the id is present or not */
 	@Transactional
-	public void save(final TariffmasterBean tariffmaster,boolean status) 
+	public void save(final TariffmasterBean tariffmaster) 
 	{
-		if(tariffmaster.getCreatedTime() == null)
-		{
-		tariffmaster.setCreatedTime( new Date());
-		}
-		final java.sql.Timestamp createdTime = 		new java.sql.Timestamp(tariffmaster.getCreatedTime().getTime()); 
-				
-		if(tariffmaster.getUpdatedTime() == null)
-		{
-		tariffmaster.setUpdatedTime( new Date());
-		}
-		final java.sql.Timestamp updatedTime = 		new java.sql.Timestamp(tariffmaster.getUpdatedTime().getTime()); 
 		jdbcTemplate = custom.getJdbcTemplate();
 	if(tariffmaster.getId() == 0)	{
 
@@ -55,7 +44,19 @@ public class BaseTariffmasterDao{
 					public PreparedStatement 
 					createPreparedStatement(Connection connection) throws SQLException {
 	
-					
+					if(tariffmaster.getCreatedTime() == null)
+					{
+					tariffmaster.setCreatedTime( new Date());
+					}
+					java.sql.Timestamp createdTime = 
+						new java.sql.Timestamp(tariffmaster.getCreatedTime().getTime()); 
+							
+					if(tariffmaster.getUpdatedTime() == null)
+					{
+					tariffmaster.setUpdatedTime( new Date());
+					}
+					java.sql.Timestamp updatedTime = 
+						new java.sql.Timestamp(tariffmaster.getUpdatedTime().getTime()); 
 							
 					PreparedStatement ps =
 									connection.prepareStatement(INSERT_SQL,new String[]{"id"});
@@ -83,15 +84,10 @@ ps.setString(9, tariffmaster.getItemId());
 		}
 		else
 		{
-			java.sql.Timestamp updatedTime1 =null;
-			if(status){
-				 updatedTime1 = updatedTime;
-			}else{
-				 updatedTime1 = new java.sql.Timestamp(tariffmaster.getUpdatedTime().getTime()); 
-			}
-			String sql = "UPDATE tariffmaster  set updated_time =?,  assetcode = ? ,assetdescription = ? ,rate = ? ,alloweddiscount = ? ,remarks = ? ,itemId=?  where id = ? ";
+
+			String sql = "UPDATE tariffhistory  set assetcode = ? ,assetdescription = ? ,rate = ? ,alloweddiscount = ? ,remarks = ? ,itemId=?  where id = ? ";
 	
-			jdbcTemplate.update(sql, new Object[]{updatedTime1,tariffmaster.getAssetcode(),tariffmaster.getAssetdescription(),tariffmaster.getRate(),tariffmaster.getAlloweddiscount(),tariffmaster.getRemarks(),tariffmaster.getItemId(),tariffmaster.getId()});
+			jdbcTemplate.update(sql, new Object[]{tariffmaster.getAssetcode(),tariffmaster.getAssetdescription(),tariffmaster.getRate(),tariffmaster.getAlloweddiscount(),tariffmaster.getRemarks(),tariffmaster.getItemId(),tariffmaster.getId()});
 		}
 	}
 		
@@ -100,7 +96,7 @@ ps.setString(9, tariffmaster.getItemId());
 			jdbcTemplate = custom.getJdbcTemplate();
 			boolean delete = false;
 			try{
-			String sql = "update tariffmaster set status='"+status+"'  WHERE id=?";
+			String sql = "update tariffhistory set status='"+status+"'  WHERE id=?";
 			int intDelete = jdbcTemplate.update(sql, new Object[]{id});
 			jdbcTemplate.update(sql, new Object[]{id});
 			if(intDelete != 0){
@@ -116,7 +112,7 @@ ps.setString(9, tariffmaster.getItemId());
 
 	 public TariffmasterBean getById(int id) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT * from tariffmaster where id = ? ";
+			String sql = "SELECT * from tariffhistory where id = ? ";
 			List<TariffmasterBean> retlist = jdbcTemplate.query(sql,
 			new Object[]{id},
 			ParameterizedBeanPropertyRowMapper.newInstance(TariffmasterBean.class));

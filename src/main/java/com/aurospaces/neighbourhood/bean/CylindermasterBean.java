@@ -22,7 +22,7 @@ protected String expirtdate1;
 protected String ownercompany ;
 protected String remarks ;
 protected String cylendersstatus ;
-protected String store;
+protected String store,createdOn;
 protected String name;
 protected String storename;
 protected String sizeName,stationname,count,companyname,fillingstationId,truckId,count1,noOfCylinders,invoiceId;
@@ -30,6 +30,12 @@ protected String sizeName,stationname,count,companyname,fillingstationId,truckId
 
 
 
+public String getCreatedOn() {
+	return createdOn;
+}
+public void setCreatedOn(String createdOn) {
+	this.createdOn = createdOn;
+}
 public String getInvoiceId() {
 	return invoiceId;
 }

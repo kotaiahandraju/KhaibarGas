@@ -189,7 +189,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ '<thead><tr><th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Owner Company</th><th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Remarks</th></tr></thead><tbody></tbody></table>';
+		+ '<thead><tr><th>Created Date</th><th>Cylinder ID</th><th>Size</th><th>Cylinder Status</th><th>Owner Company</th><th>Location</th><th>LPO No</th><th>Color</th><th>Expiry Date</th><th>Remarks</th></tr></thead><tbody></tbody></table>';
 $('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -201,6 +201,8 @@ $('#tableId').html(tableHead);
 	var edit = "<a class='edit editIt' onclick='editCylinder("+ orderObj.id+ ")'><i class='fa fa-edit'></i></a>"
 	serviceUnitArray[orderObj.id] = orderObj;
 	var tblRow = "<tr >"
+		
+		+ "<td title='"+orderObj.createdOn+"'>"+ orderObj.createdOn + "</td>"
 			+ "<td title='"+orderObj.cylinderid+"'>"+ orderObj.cylinderid + "</td>"
 			+ "<td title='"+orderObj.sizeName+"'>"+ orderObj.sizeName + "</td>"
 			+ "<td class='impFiled' title='"+orderObj.cylinderstatus+"'>"+ orderObj.cylinderstatus + "</td>"
