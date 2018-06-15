@@ -42,7 +42,7 @@ table#dependent_table tbody tr td:first-child::before {
                <li>LPO </li>
             </ol>
             <div class="clearfix"></div>
-        <div class="container" id="lpoMain">
+        <div class="container-fluid" id="lpoMain">
             <div class="row" id="row1">
               <div class="col-md-12">
                     <div class="panel panel-primary">
@@ -361,7 +361,7 @@ function showTableData(response){
 		
 		var edit = "<a class='edit editIt' id='edit"+orderObj.lponumber+"' onclick=viewDetails(this.id,1)><i style='color: orange;' class='fa fa-edit'></i></a>"
 		var view = "<a class='view' id='"+orderObj.lponumber+"' onclick=viewDetails(this.id,0)><i class='fa fa-eye red'></i></a>"
-		var printImage = "<a class='printlpo' id='print"+orderObj.lponumber+"' onclick=lpoPrint(this.id)><img src='../img/print1.jpg' alt='Paris' width='20' height='20'></i></a>"
+		var printImage = "<a class='printlpo' id='print"+orderObj.lponumber+"' onclick=lpoPrint(this.id)><i style='color: ;' class='fa fa-print'></i></a>"
 		serviceUnitArray[orderObj.id] = orderObj;
 		serviceUnitArray1[orderObj.lponumber] = orderObj;
 		var tblRow ="<tr>"
