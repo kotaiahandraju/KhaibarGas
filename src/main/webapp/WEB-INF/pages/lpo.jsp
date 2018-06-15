@@ -191,7 +191,7 @@ table#dependent_table tbody tr td:first-child::before {
 		<tr id="1" class="rowInc">
 			<td></td>
 			<td>
-				<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id),productRateFilter(this.id)" class="form-control">
+				<select name="item1" class="form-control validate" id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" class="form-control">
 					<option value="" selected="selected" disabled="disabled">-- Select Item --</option>
 				</select>
 			</td>
@@ -512,7 +512,7 @@ function addMoreRowsForDependent() {
 			+ '<td class="labelCss"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
-			+ 'item" class="form-control validate" onchange="removeBorder(this.id),productRateFilter(this.id)"><option>Select</option></select></td>'
+			+ 'item" class="form-control validate" onchange="removeBorder(this.id)"><option>Select</option></select></td>'
 			+ '<td class="inputCss"><input title="Unit" name="unit" id="'
 			+ dependentRowCount
 			+ 'unit" type="text" value="0" class="form-control numericOnly" onkeyup="allcalculate(this.id)" onkeydown="removeBorder(this.id);"/></td>'
@@ -570,17 +570,13 @@ function allcalculate(id){
 	     var rate=0.00;
 	     var total1 =0.00;
 	     var discount=0.00;
-
-	
 	var number = parseInt(id.match(/[0-9]+/)[0], 10);
 	unit = $('#' + number + 'unit').val();
 	rate = $('#' + number + 'rate').val();
 	total1 =  unit * rate;
 
 	taxable = $('#' + number + 'taxable').val();
-	
 	$('#' + number + 'totalvalue').val(total1.toFixed(2));
-	
 	total = $('#' + number + 'totalvalue').val();
 	discount = $('#' + number + 'discount').val();
 	var result = total - discount;
@@ -730,7 +726,7 @@ function inactiveData() {
 	$("#lpoMain").hide();
 	$("#printDiv").show();
 var	id = printId.replace("print", "");
-
+$("#printTable > tbody").html("");
 	var formData = new FormData();
     formData.append('lponumber', id);
 	$.fn.makeMultipartRequest('POST', 'viewLPOdetails', false,

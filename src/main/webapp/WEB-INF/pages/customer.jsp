@@ -104,9 +104,9 @@
                     		</div>
                     		<div class="col-md-6">
                     			<div class="form-group">
-                    				<label for="focusedinput" class="col-md-4 control-label">TRN Number<span class="impColor">*</span></label>
+                    				<label for="focusedinput" class="col-md-4 control-label">TRN Number</label>
                     				<div class="col-md-6">
-								      	<form:input type="text" path="trnNumber" class="form-control validate" placeholder="TRN Number" maxlength="25"/>
+								      	<form:input type="text" path="trnNumber" class="form-control " placeholder="TRN Number" maxlength="25"/>
 								  	</div>
                     			</div>
                     		</div>

@@ -7,6 +7,7 @@ $.fn.makeMultipartRequest = function(method, url, processData, formData,
 		processData : processData,
 		data : formData,
 		contentType : contentType,
+		  async: false,
 		dataType : dataType,
 		 beforeSend : function() {
 //             $.blockUI({ message: '<img src="../img/cylinder.jpg" height="50px" class="fa fa-spin cylinder" />'});

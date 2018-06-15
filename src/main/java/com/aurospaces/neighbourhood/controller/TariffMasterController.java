@@ -23,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.TariffmasterBean;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
+import com.aurospaces.neighbourhood.db.dao.TariffHistoryDao;
 import com.aurospaces.neighbourhood.db.dao.TariffmasterDao;
 
 @Controller
@@ -32,7 +33,7 @@ public class TariffMasterController {
 
 	@Autowired	TariffmasterDao objTariffmasterDao;
 	@Autowired LpomasterDao lpomasterDao;
-
+	@Autowired TariffHistoryDao tariffHistoryDao;
 	@RequestMapping(value="/tariffMaster")
 	public String tariffMasterHome(@ModelAttribute("tariffMaster")TariffmasterBean objTariffmasterBean, ModelMap model, HttpServletRequest request,
 			HttpSession session){
@@ -99,15 +100,27 @@ public class TariffMasterController {
 							redir.addFlashAttribute("cssMsg", "danger");
 						} else {
 							objTariffmasterBean.setStatus("1");
-							objTariffmasterDao.save(objTariffmasterBean);
+							objTariffmasterDao.save(objTariffmasterBean,false);
 							redir.addFlashAttribute("msg", "Record Inserted Successfully");
 						}
 
 						redir.addFlashAttribute("cssMsg", "success");
 					} else {
 						if (exId.equals(objTariffmasterBean.getItemId())) {
-							objTariffmasterDao.save(objTariffmasterBean);
+							
+							/*if(!existModel.getRate().equals(objTariffmasterBean.getRate())){
+								
+								objTariffmasterDao.save(objTariffmasterBean,true);
+								objTariffmasterBean.setId(0);
+								objTariffmasterBean.setUpdatedTime(null);
+								tariffHistoryDao.save(objTariffmasterBean);
+							}else{
+								objTariffmasterBean.setUpdatedTime(existModel.getUpdatedTime());
+								objTariffmasterDao.save(objTariffmasterBean,false);
+							}*/
+							objTariffmasterDao.save(objTariffmasterBean,false);
 							redir.addFlashAttribute("msg", "Record Updated Successfully");
+							redir.addFlashAttribute("cssMsg", "warning");
 						} else {
 							redir.addFlashAttribute("msg", "Already Record Exist");
 							redir.addFlashAttribute("cssMsg", "danger");
@@ -117,7 +130,7 @@ public class TariffMasterController {
 					}
 				}else{
 					objTariffmasterBean.setStatus("1");
-					objTariffmasterDao.save(objTariffmasterBean);
+					objTariffmasterDao.save(objTariffmasterBean,false);
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				}
 				

@@ -40,6 +40,9 @@ public class PaymentHistoryDao extends BasePaymentHistoryDao
 		 if(StringUtils.isNotBlank(expensetracker.getCustomerId())){
 			 buffer.append(" and cm.id= "+expensetracker.getCustomerId() );
 		 }
+		 if(StringUtils.isNotBlank(expensetracker.getCustomerType())){
+			 buffer.append(" and cm.customertype= '"+expensetracker.getCustomerType()+"'" );
+		 }
 		 buffer.append("  order by p.created_time asc,cm.customerid asc");
 		 String sql =buffer.toString();
 		 System.out.println(sql);

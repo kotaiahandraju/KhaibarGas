@@ -261,7 +261,7 @@ public class FillingstationController {
 	public Map<String, String> populateLPONumbers() {
 		Map<String, String> statesMap = new LinkedHashMap<String, String>();
 		try {
-			String sSql = "SELECT * FROM lpoitems lpn,items i ,lpomaster lpm WHERE lpn.itemid=i.id AND lpm.lponumber=lpn.lponumber AND  i.itemType='Gas' AND lpm.status='1' GROUP BY lpn.lponumber";
+			String sSql = "SELECT * FROM lpoitems lpn,items i ,lpomaster lpm WHERE lpn.itemid=i.id AND lpm.lponumber=lpn.lponumber AND  i.itemType='Gas' AND lpm.lponumber NOT IN (SELECT `lponumber` FROM `addgas`) AND lpm.status='1' GROUP BY lpn.lponumber";
 			List<LpomasterBean> list = cylindermasterDao.populate(sSql);
 			for (LpomasterBean bean : list) {
 				statesMap.put(bean.getLponumber(), bean.getLponumber());

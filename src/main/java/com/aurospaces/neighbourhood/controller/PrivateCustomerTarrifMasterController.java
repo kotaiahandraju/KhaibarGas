@@ -22,6 +22,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.TariffmasterBean;
+import com.aurospaces.neighbourhood.db.dao.CTariffHistoryDao;
 import com.aurospaces.neighbourhood.db.dao.CustomerTariffmasterDao;
 import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 
@@ -32,7 +33,7 @@ public class PrivateCustomerTarrifMasterController {
 
 	@Autowired	CustomerTariffmasterDao objTariffmasterDao;
 	@Autowired LpomasterDao lpomasterDao;
-
+	@Autowired CTariffHistoryDao cTariffHistoryDao;
 	@RequestMapping(value="/customerTariffMaster")
 	public String tariffMasterHome(@ModelAttribute("tariffMaster")TariffmasterBean objTariffmasterBean, ModelMap model, HttpServletRequest request,
 			HttpSession session){
@@ -100,14 +101,23 @@ public class PrivateCustomerTarrifMasterController {
 							redir.addFlashAttribute("cssMsg", "danger");
 						} else {
 							objTariffmasterBean.setStatus("1");
-							objTariffmasterDao.save(objTariffmasterBean);
+							objTariffmasterDao.save(objTariffmasterBean,false);
 							redir.addFlashAttribute("msg", "Record Inserted Successfully");
 						}
 
 						redir.addFlashAttribute("cssMsg", "success");
 					} else {
 						if (exId.equals(objTariffmasterBean.getItemId())) {
-							objTariffmasterDao.save(objTariffmasterBean);
+							/*if(!existModel.getRate().equals(objTariffmasterBean.getRate())){
+								objTariffmasterDao.save(objTariffmasterBean,true);
+								objTariffmasterBean.setId(0);
+								objTariffmasterBean.setUpdatedTime(null);
+								cTariffHistoryDao.save(objTariffmasterBean);
+							}else{
+								objTariffmasterBean.setUpdatedTime(existModel.getUpdatedTime());
+								objTariffmasterDao.save(objTariffmasterBean,false);
+							}*/
+							objTariffmasterDao.save(objTariffmasterBean,false);
 							redir.addFlashAttribute("msg", "Record Updated Successfully");
 						} else {
 							redir.addFlashAttribute("msg", "Already Record Exist");
@@ -118,7 +128,7 @@ public class PrivateCustomerTarrifMasterController {
 					}
 				}else{
 					objTariffmasterBean.setStatus("1");
-					objTariffmasterDao.save(objTariffmasterBean);
+					objTariffmasterDao.save(objTariffmasterBean,false);
 					redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				}
 				
