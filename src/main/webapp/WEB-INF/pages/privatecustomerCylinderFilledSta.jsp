@@ -127,7 +127,7 @@ table tbody tr.rowInc {
                       </div>
                       <div class="form-group" style="margin-bottom:0;">
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Customer Address: </label>
-                        <div class="col-md-6"> <span id="customeraddress" class="form-control"  style="border:none;"></span> </div>
+                        <div class="col-md-6"> <span id="customeraddress"  style="border:none;"></span> </div>
                       </div>
                       <div class="form-group" style="margin-bottom:0;">
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Mobile: </label>
@@ -906,6 +906,7 @@ function getCustomerDetails(value){
 			formData, false, 'text', function(data){
 		var jsonobj = $.parseJSON(data);
 		var alldata = jsonobj.allOrders1;
+		var allitems = jsonobj.items;
 		$("#cylinders").text("");
 		$.each(alldata,function(i, catObj) {
 			$("#customername").text(catObj.customername);
@@ -925,7 +926,20 @@ function getCustomerDetails(value){
 			}
 		
 	});
-	
+		
+			var html = "<option value=''>-- Select Item --</option>";
+		$.each(allitems,function(i, catObj) {
+			 html = html + '<option value="'
+				+ catObj.id + '">'
+				+ catObj.name + '</option>';
+	/* 	var dummyItems = $("#item1").html();
+		$("#1item").empty();
+		$(dummyItems).appendTo("#1item"); */
+		});
+		$('#item1').empty().append(html);
+		var dummyItems = $("#item1").html();
+		$("#1item").empty();
+		$(dummyItems).appendTo("#1item");
 });
 }
 /* function getTruckCylindersCount(id){

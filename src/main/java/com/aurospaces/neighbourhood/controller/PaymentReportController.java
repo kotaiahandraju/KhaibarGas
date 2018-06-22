@@ -3,11 +3,17 @@
  */
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.lang.StringUtils;
@@ -21,8 +27,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.aurospaces.neighbourhood.bean.Expensetracker;
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
+import com.aurospaces.neighbourhood.bean.PrintDataBean;
 import com.aurospaces.neighbourhood.db.dao.PaymentHistoryDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
+import com.aurospaces.neighbourhood.util.SendAttachmentInEmail;
 
 /**
  * @author Kotaiah
@@ -32,6 +41,7 @@ import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 @RequestMapping("admin")
 public class PaymentReportController {
 	@Autowired PaymentHistoryDao paymentHistoryDao;
+	@Autowired ServletContext objContext;
 	@RequestMapping(value = "/paymentreport")
 	public String paymentreport(@ModelAttribute("gasReportsForm") Expensetracker expensetracker, ModelMap model,
 			HttpServletRequest request, HttpSession session) {
@@ -87,5 +97,85 @@ public class PaymentReportController {
 		return String.valueOf(jsonObject);
 
 	}
-//	getPaymentReport
+	
+	@RequestMapping("getInvoiceData1")
+	public @ResponseBody String getInvoiceData(PrintDataBean printDataBean) {
+		ObjectMapper objectMapper = null;
+		JSONObject jsonObject = new JSONObject();
+		List<Map<String,Object>> listOrderBeans = null;
+		String monthnumber = null;
+		String year = null;
+		try {
+			
+			listOrderBeans = paymentHistoryDao.getInvoiceData(printDataBean.getInvoiceid());
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				// System.out.println(sJson);
+				jsonObject.put("allOrders", listOrderBeans);
+			} else {
+				objectMapper = new ObjectMapper();
+				jsonObject.put("allOrders", listOrderBeans);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return String.valueOf(jsonObject);
+
+	}
+	
+
+	@RequestMapping(value = "/backupData")
+	public String backUpdata(
+			HttpServletResponse response, HttpServletRequest request,
+			HttpSession objSession)  {
+		
+	
+		try{
+			
+	        
+			String propertiespath = objContext.getRealPath("Resources"+ File.separator + "DataBase.properties");
+
+			FileInputStream input = new FileInputStream(propertiespath);
+			Properties prop = new Properties();
+			// load a properties file
+			prop.load(input);
+			String  usermail = prop.getProperty("usermail");
+			String  to = prop.getProperty("to");
+			String mailpassword = prop.getProperty("mailpassword");
+			String port = prop.getProperty("port");
+			String userName = prop.getProperty("userName");
+			String password = prop.getProperty("password");
+			String dbname = prop.getProperty("db");
+			String dbport = prop.getProperty("dbport");
+			LpomasterBean lpobean = 	paymentHistoryDao.getmysqlpath();
+			String mysqlpath = null;
+			if(lpobean != null){
+				mysqlpath =lpobean.getRemarks();
+			}
+			mysqlpath = mysqlpath.replace("Data", "bin"); 
+//			select @@datadir
+//			Properties prop = new Properties();
+//			   String propertiespath = objContext.getRealPath("Resources"
+//						+ File.separator + "DataBase.properties");
+//			   FileInputStream input = new FileInputStream(propertiespath);
+//				// load a properties file
+//				prop.load(input);
+//				String couponcode = prop.getProperty("usermail");
+			
+	        
+			 byte[] data = SendAttachmentInEmail.getData("localhost", dbport,
+					 userName, password, dbname,mysqlpath ).getBytes();		
+					   File filedst = new File("backup1.sql");
+					   FileOutputStream dest = new FileOutputStream(filedst);
+					   dest.write(data);
+			SendAttachmentInEmail.send( to , usermail , mailpassword, port);
+		}catch(Exception e){
+e.printStackTrace();
+	System.out.println(e);
+		}
+	  return "redirect:dashBoard.htm";
+
+
+	}
 }

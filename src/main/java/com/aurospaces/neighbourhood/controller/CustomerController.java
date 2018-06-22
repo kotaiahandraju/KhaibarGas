@@ -128,7 +128,7 @@ public class CustomerController {
 	@RequestMapping(value = "/getCustomerIds")
 	public @ResponseBody String getCustomerIds( CustomermasterBean objCustomermasterBean,ModelMap model,HttpServletRequest request,HttpSession session,BindingResult objBindingResult) {
 		List<Map<String, Object>> listOrderBeans  = null;
-		List<Map<String, Object>> listOrderBeans1  = null;
+		List<Map<String, Object>> listcustomeritems  = null;
 		JSONObject jsonObj = new JSONObject();
 		ObjectMapper objectMapper = null;
 		String sJson=null;
@@ -137,7 +137,7 @@ public class CustomerController {
 
 			listOrderBeans = customermasterDao.getCustomers(objCustomermasterBean);
 			 objectMapper = new ObjectMapper();
-			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+			if (listOrderBeans != null ) {
 				
 				objectMapper = new ObjectMapper();
 				sJson = objectMapper.writeValueAsString(listOrderBeans);
@@ -150,6 +150,22 @@ public class CustomerController {
 				request.setAttribute("allOrders1", "''");
 				jsonObj.put("allOrders1", listOrderBeans);
 			}
+			
+			listcustomeritems = customermasterDao.getcustomeritems(objCustomermasterBean);
+			
+			if (listcustomeritems != null ) {
+				
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listcustomeritems);
+				jsonObj.put("items", listcustomeritems);
+				// System.out.println(sJson);
+			} else {
+				objectMapper = new ObjectMapper();
+				sJson = objectMapper.writeValueAsString(listcustomeritems);
+				jsonObj.put("items", listcustomeritems);
+			}
+			
+			
 			
 		}catch(Exception e){
 			e.printStackTrace();

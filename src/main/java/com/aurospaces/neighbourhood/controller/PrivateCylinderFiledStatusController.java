@@ -6,6 +6,7 @@ package com.aurospaces.neighbourhood.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -155,6 +156,8 @@ public class PrivateCylinderFiledStatusController {
 				transactionManager.rollback(objTransStatus);
 				return "privateCylinderFiled";
 			}
+			
+		
 			fillingstationmasterDao.updateUsedGas(Integer.parseInt(cylindertransactionBean.getFillingStation()), totalgaswant);
 			fillingstationmasterDao.updateClosingGas();
 			FillingstationmasterBean objfillFillingstationmasterBean = fillingstationmasterDao.getById(Integer.parseInt(cylindertransactionBean.getFillingStation()));
@@ -165,6 +168,12 @@ public class PrivateCylinderFiledStatusController {
 			objUsedGasBean.setFillingstationname(objfillFillingstationmasterBean.getStationname());
 			objUsedGasBean.setCustomerType("Private");
 			objUsedGasBean.setInvoiceId(invoiceId);
+			String cylinderfilleddate=	cylindertransactionBean.getCylinderFilledDate();
+			Date date = null;
+			if(StringUtils.isNotBlank(cylinderfilleddate)){
+			 date= KhaibarGasUtil.dateFormate(cylinderfilleddate);
+			 objUsedGasBean.setCreatedTime(date);
+			}
 			usedGasDao.save(objUsedGasBean);
 			if(StringUtils.isNotBlank(dueAmount)){
 			customermasterDao.updateDueAmount(dueAmount, cylindertransactionBean.getCustomerId(),invoiceId);

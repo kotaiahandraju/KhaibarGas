@@ -128,7 +128,7 @@ table tbody tr.rowInc {
                       </div>
                       <div class="form-group" style="margin-bottom:0;">
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Customer Address: </label>
-                        <div class="col-md-6"> <span id="customeraddress" class="form-control"  style="border:none;"></span> </div>
+                        <div class="col-md-6"> <span id="customeraddress"   style="border:none;"></span> </div>
                       </div>
                       <div class="form-group" style="margin-bottom:0;">
                         <label for="focusedinput" class="col-md-6 control-label" style="padding-top:4px;">Mobile: </label>
@@ -627,9 +627,9 @@ dependentRowCount = 1;
 }
 
 function PaidCalculation(value){
-	var amount = $("#previousDueAmount").text();
+	var amount = $("#pDueAmount").text();
 	if(amount !="" && value !=""){
-		$("#dueAmount").val(parseFloat(amount)-parseFloat(value));
+		$("#dueAmount").val(parseFloat(amount).toFixed(3)-parseFloat(value).toFixed(3));
 	}
 }
 function getCustomerIds(value){
@@ -686,9 +686,9 @@ function getCustomerDetails(value){
 			$("#landline").text(catObj.landline);
 			$("#lastDueAmount").text(catObj.dueAmount);
 // 			$("#previousDueAmount").text(catObj.dueAmount);
-			$("#pDueAmount").text(catObj.dueAmount);
+			$("#pDueAmount").text(parseFloat(catObj.dueAmount).toFixed(3));
 			$("#previousDueAmount").val(catObj.dueAmount);
-			$("#dueAmount").val(catObj.dueAmount);
+			$("#dueAmount").val(parseFloat(catObj.dueAmount).toFixed(3));
 			priceCalculator();
 			
 		

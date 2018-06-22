@@ -173,6 +173,20 @@ public class CustomermasterDao extends BaseCustomermasterDao
 				return retlist;
 			return null;
 		}
+	 public List<Map<String, Object>> getcustomeritems(CustomermasterBean objCustomermasterBean) {
+			jdbcTemplate = custom.getJdbcTemplate();
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("SELECT i.id,i.name FROM items i,`customertariffmaster` ctf WHERE i.id=ctf.`itemId` AND ctf.customerId=?  ");
+					
+					String sql = buffer.toString();
+					System.out.println(sql);
+//					buffer.append( "  group by cm.id ");
+//			String sql = "select cm.*,GROUP_CONCAT(cc.cylinderId) as cylinderId1,GROUP_CONCAT(i.name) as name,cym.ownercompany from customermaster cm  ,customercylinders cc ,  cylindermaster cym ,  items i   where cc.customerId = cm.id and cym.id=cc.cylinderId and cym.size=i.id  and cm.customertype=?  group by cm.id";
+			List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql, new Object[] {objCustomermasterBean.getCustomerid()  });
+			if (retlist.size() > 0)
+				return retlist;
+			return null;
+		}
 	 
 }
 

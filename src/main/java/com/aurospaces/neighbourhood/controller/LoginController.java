@@ -1,7 +1,12 @@
 package com.aurospaces.neighbourhood.controller;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.util.Map;
+import java.util.Properties;
 
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -16,11 +21,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.aurospaces.neighbourhood.bean.KhaibarUsersBean;
+import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.db.dao.KhaibarUsersDao;
+import com.aurospaces.neighbourhood.db.dao.PaymentHistoryDao;
+import com.aurospaces.neighbourhood.util.SendAttachmentInEmail;
 
 @Controller
 public class LoginController {
 	@Autowired KhaibarUsersDao objKhaibarUsersDao;
+	@Autowired PaymentHistoryDao paymentHistoryDao;
+	@Autowired ServletContext objContext;
 	@RequestMapping(value = "/LoginHome")
 	public String LoginHome(Map<String, Object> model1, ModelMap model, HttpServletRequest request,
 			HttpSession session)  {
@@ -110,5 +120,58 @@ public class LoginController {
 			System.out.println(e);
 		}
 		return "redirect:LoginHome";
+	}
+	@RequestMapping(value = "/backupData1")
+	public String backUpdata(
+			HttpServletResponse response, HttpServletRequest request,
+			HttpSession objSession)  {
+		
+	
+		try{
+			
+	        
+			String propertiespath = objContext.getRealPath("Resources"+ File.separator + "DataBase.properties");
+
+			FileInputStream input = new FileInputStream(propertiespath);
+			Properties prop = new Properties();
+			// load a properties file
+			prop.load(input);
+			String  usermail = prop.getProperty("usermail");
+			String  to = prop.getProperty("to");
+			String mailpassword = prop.getProperty("mailpassword");
+			String port = prop.getProperty("port");
+			String userName = prop.getProperty("userName");
+			String password = prop.getProperty("password");
+			String dbname = prop.getProperty("db");
+			String dbport = prop.getProperty("dbport");
+			LpomasterBean lpobean = 	paymentHistoryDao.getmysqlpath();
+			String mysqlpath = null;
+			if(lpobean != null){
+				mysqlpath =lpobean.getRemarks();
+			}
+			mysqlpath = mysqlpath.replace("Data", "bin"); 
+//			select @@datadir
+//			Properties prop = new Properties();
+//			   String propertiespath = objContext.getRealPath("Resources"
+//						+ File.separator + "DataBase.properties");
+//			   FileInputStream input = new FileInputStream(propertiespath);
+//				// load a properties file
+//				prop.load(input);
+//				String couponcode = prop.getProperty("usermail");
+			
+	        
+			 byte[] data = SendAttachmentInEmail.getData("localhost", dbport,
+					 userName, password, dbname,mysqlpath ).getBytes();		
+					   File filedst = new File("backup56.sql");
+					   FileOutputStream dest = new FileOutputStream(filedst);
+					   dest.write(data);
+			SendAttachmentInEmail.send( to , usermail , mailpassword, port);
+		}catch(Exception e){
+e.printStackTrace();
+	System.out.println(e);
+		}
+	  return "redirect:dashBoard.htm";
+
+
 	}
 }
