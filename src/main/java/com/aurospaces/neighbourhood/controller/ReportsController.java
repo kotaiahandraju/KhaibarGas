@@ -215,6 +215,8 @@ public class ReportsController {
 				
 				listOrderBeans = expensetrackerDao.getSearchReport(usedGasBean,monthnumber,year);
 			}
+			
+			
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
 				objectMapper = new ObjectMapper();
 				// System.out.println(sJson);

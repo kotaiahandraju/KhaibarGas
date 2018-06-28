@@ -152,7 +152,7 @@
 
 
 	
-	
+	/* 
 		    var cylenderId = [];
 	$('#parent').on('click', function(){
 		 var table = $('#example').DataTable();
@@ -176,11 +176,37 @@
 		       table.$('input[type="checkbox"]').each(function(i){
 			       	 cylenderId[i] = $(this).val();
 			 }); 
-	  });
+	  }); */
 /* var listOrders1 = ${allOrders1};
 if (listOrders1 != "") {
 	displayTable(listOrders1);
 } */
+
+
+$(document).ready(function() {
+	  $("#parent").click(function() {
+	    $(".child").prop("checked", this.checked);
+	    var cylenderId = [];
+      $('#tableId :checkbox:checked').each(function(i){
+     	 cylenderId[i] = $(this).val();
+      }); 
+      $("#displayCylinders").text(cylenderId);
+//       alert(cylenderId);
+	    $('.child').click(function() {
+	    	 var cylenderId = [];
+	         $('#tableId :checkbox:checked').each(function(i){
+	        	 cylenderId[i] = $(this).val();
+	         }); 
+	         $("#displayCylinders").text(cylenderId);
+//	         alert(cylenderId);
+	        if ($('.child:checked').length == $('.child').length) {
+	          $('#parent').prop('checked', true);
+	        } else {
+	          $('#parent').prop('checked', false);
+	        }
+	      });
+	  });
+});
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
@@ -196,7 +222,7 @@ function displayTable(listOrders) {
 				+ "</tr >";
 		$(tblRow).appendTo("#tableId table tbody");
 					
-		/*  $('.child').click(function() {
+		  $('.child').click(function() {
 			var cylenderId = [];
 			$('#tableId :checkbox:checked').each(function(i){
 				cylenderId[i] = $(this).val();
@@ -208,19 +234,17 @@ function displayTable(listOrders) {
 			} else {
 				$('#parent').prop('checked', false);
 			}
-		}); */
+		}); 
 	});
 	if(isClick=='Yes') $('.datatables').dataTable();
 }
 
 function movetofillingStation(){
 	var table = $('#example').DataTable();
-    // Check/uncheck all checkboxes in the table
-//     var rows = table.rows({ 'search': 'applied' }).nodes();
-     table.$('input[type="checkbox"]').prop('checked', this.checked);
-     table.$('input[type="checkbox"]').each(function(i){
-	       	 cylenderId[i] = $(this).val();
-	        }); 
+	var cylenderId = [];
+	table.$('input[type="checkbox"]:checked').each(function(i){
+      	 cylenderId[i] = $(this).val();
+       }); 
      if(cylenderId.length == 0){
     	 alert("Please Select Cylinder");
     	 return false;

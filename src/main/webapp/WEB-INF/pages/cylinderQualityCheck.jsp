@@ -207,10 +207,11 @@ function displayTable(listOrders) {
 }
 
 function QualityCheck(){
-	 var cylenderId = [];
-     $('#tableId :checkbox:checked').each(function(i){
-    	 cylenderId[i] = $(this).val();
-     }); 
+	var table = $('#example').DataTable();
+	var cylenderId = [];
+	table.$('input[type="checkbox"]:checked').each(function(i){
+      	 cylenderId[i] = $(this).val();
+       }); 
      if(cylenderId.length == 0){
     	 alert("Please Select Cylinder");
     	 return false;

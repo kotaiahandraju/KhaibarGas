@@ -24,7 +24,7 @@
 				<div class="form-group">
 				  	<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">From Date<span class="impColor">*</span></label>
+							<label for="focusedinput" class="col-md-5 control-label">From Date</label>
 							<div class="col-md-7">
 							<form:input path="fromDate" class="form-control "   onkeydown="removeBorder(this.id)"/>
 							</div>
@@ -32,7 +32,7 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">To Date<span class="impColor">*</span></label>
+							<label for="focusedinput" class="col-md-5 control-label">To Date</label>
 							<div class="col-md-7">
 				        		<form:input path="toDate" class="form-control "   onkeydown="removeBorder(this.id)"/>
 							</div>
@@ -48,7 +48,7 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Customer Type (used gas)</label>
+							<label for="focusedinput" class="col-md-5 control-label">Customer Type</label>
 							<div class="col-md-7">
 <%-- 				        		<form:input path="customerType" class="form-control "  onkeydown="removeBorder(this.id)"/> --%>
 				        		<form:select path="customerType"  class="form-control "  onfocus="removeBorder(this.id)">
@@ -65,8 +65,20 @@
 							<label for="focusedinput" class="col-md-5 control-label">Filling Station</label>
 							<div class="col-md-7">
 				        		<form:select path="fillingStationId"  class="form-control "  onfocus="removeBorder(this.id)">
-				        		<form:option value="">-- Select Customer Type --</form:option>
+				        		<form:option value="">-- Select Filling Station --</form:option>
 				        			<form:options items="${fillingstation }"></form:options>
+				        		</form:select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-5 control-label">Gas Type</label>
+							<div class="col-md-7">
+				        		<form:select path="gasType"  class="form-control "  onfocus="removeBorder(this.id)">
+				        		<form:option value="">-- Select gas type --</form:option>
+				        		<form:option value="Used Gas">Used Gas</form:option>
+				        		<form:option value="Added gas">Added Gas</form:option>
 				        		</form:select>
 							</div>
 						</div>
@@ -224,12 +236,14 @@ $('#tableId').html(tableHead);
 		var month=$("#month").val();
 		var customerType=$("#customerType").val();
 		var fillingStationId=$("#fillingStationId").val();
+		var gasType = $("#gasType").val();
 		var formData = new FormData();
 		formData.append('fromDate', fromDate);
 		formData.append('toDate', toDate);
 		formData.append('month', month);
 		formData.append('customerType', customerType);
-		formData.append("fillingStationId",fillingStationId)
+		formData.append("fillingStationId",fillingStationId);
+		formData.append("gasType",gasType)
 		$.fn.makeMultipartRequest('POST', 'searchGasReport', false,
 				formData, false, 'text', function(data) {
 					var jsonobj = $.parseJSON(data);

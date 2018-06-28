@@ -2,10 +2,13 @@ package com.aurospaces.neighbourhood.controller;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Map;
 import java.util.Properties;
 
+import javax.mail.MessagingException;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -173,5 +176,34 @@ e.printStackTrace();
 	  return "redirect:dashBoard.htm";
 
 
+	}
+	
+	@RequestMapping(value = "/sendmail")
+	public String logoutHome1(ModelMap model, HttpServletRequest request, HttpSession objSession,
+			HttpServletResponse response) throws IOException  {
+		SendAttachmentInEmail ss= new SendAttachmentInEmail();
+		try {
+			
+			String propertiespath = objContext.getRealPath("Resources"+ File.separator + "DataBase.properties");
+
+			FileInputStream input = new FileInputStream(propertiespath);
+			Properties prop = new Properties();
+			// load a properties file
+			prop.load(input);
+			String  usermail = prop.getProperty("usermail");
+			String  to = prop.getProperty("to");
+			String mailpassword = prop.getProperty("mailpassword");
+			String port = prop.getProperty("port");
+		
+			
+			
+			
+			ss.SendMail(usermail,mailpassword,to);
+		} catch (MessagingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				return null;
+		
 	}
 }
