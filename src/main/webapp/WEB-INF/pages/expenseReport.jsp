@@ -25,7 +25,7 @@
 				<div class="form-group">
 				  	<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">From Date<span class="impColor">*</span></label>
+							<label for="focusedinput" class="col-md-5 control-label">From Date</label>
 							<div class="col-md-7">
 							<form:input path="fromDate" class="form-control "   onkeydown="removeBorder(this.id)"/>
 							</div>
@@ -33,7 +33,7 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">To Date<span class="impColor">*</span></label>
+							<label for="focusedinput" class="col-md-5 control-label">To Date</label>
 							<div class="col-md-7">
 				        		<form:input path="toDate" class="form-control "   onkeydown="removeBorder(this.id)"/>
 							</div>

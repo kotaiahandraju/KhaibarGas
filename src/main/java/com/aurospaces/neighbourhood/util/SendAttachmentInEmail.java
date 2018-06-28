@@ -13,6 +13,7 @@ import javax.mail.Message;
 import javax.mail.MessagingException;
 import javax.mail.Multipart;
 import javax.mail.PasswordAuthentication;
+import javax.mail.SendFailedException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -132,5 +133,57 @@ public class SendAttachmentInEmail {
    }*/
    /*after I execute it I 
    */
+   
+   public void SendMail(String usermail,String mailpassword,String to) throws MessagingException {
+	   
+	   
+//	   to=andraju.kotaiah@gmail.com
+//			   host=smtp.gmail.com
+//			   port=587
+//			   usermail=andraju.kotaiah@gmail.com
+//			   mailpassword=koti@1989
+			   
+			   
+       String host = "smtp.gmail.com";
+       String Password = mailpassword;
+       String from = usermail;
+       String toAddress =to;
+       String filename = "khaibardb.sql";
+       // Get system properties  /home/khaibargassqlbackup/mydb.sql  C:/Users/Lyratech/Downloads/all-databases.sql
+       Properties props = System.getProperties();
+       props.put("mail.smtp.host", host);
+       props.put("mail.smtps.auth", "true");
+       props.put("mail.smtp.starttls.enable", "true");
+       Session session = Session.getInstance(props, null);
+
+       MimeMessage message = new MimeMessage(session);
+       message.setFrom(new InternetAddress(from));
+       message.setRecipients(Message.RecipientType.TO, toAddress);
+       message.setSubject("Khaibar DB Backup");
+       BodyPart messageBodyPart = new MimeBodyPart();
+       messageBodyPart.setText("Please find attachment ");
+       Multipart multipart = new MimeMultipart();
+       multipart.addBodyPart(messageBodyPart);
+       messageBodyPart = new MimeBodyPart();
+       DataSource source = new FileDataSource("C:/Users/Lyratech/Downloads/all-databases.sql");
+       messageBodyPart.setDataHandler(new DataHandler(source));
+       messageBodyPart.setFileName(filename);
+       multipart.addBodyPart(messageBodyPart);
+       message.setContent(multipart);
+
+       try {
+           Transport tr = session.getTransport("smtps");
+           tr.connect(host, from, Password);
+           tr.sendMessage(message, message.getAllRecipients());
+           System.out.println("Mail Sent Successfully");
+           tr.close();
+       } catch (SendFailedException sfe) {
+           System.out.println(sfe);
+       }
+       
+       
+       
+       
+   }
    
 }

@@ -35,8 +35,9 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Store<span class="impColor">*</span></label>
-							<div class="col-md-5">
+							
+							<label for="focusedinput" class="col-md-5 control-label">Store</label>
+							<div class="col-md-7">
 				        		<form:select path="storename" class="form-control " onchange="onChangeReports(id,name);" onfocus="removeBorder(this.id)">
 				        		<form:option value="">-Select Store-</form:option>
 				        			<form:options items="${stores}"></form:options>
@@ -46,8 +47,8 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-4 control-label">Cylinder Status<span class="impColor">*</span></label>
-							<div class="col-md-5">
+							<label for="focusedinput" class="col-md-5 control-label">Cylinder Status</label>
+							<div class="col-md-7">
 				        		<form:select path="cylendersstatus" class="form-control " onchange="onChangeReports(id,name);" onfocus="removeBorder(this.id)">
 				        		<form:option value="">-- Select Cylinder Status --</form:option>
 				        			<form:options items="${Cylinderstatus}"></form:options>

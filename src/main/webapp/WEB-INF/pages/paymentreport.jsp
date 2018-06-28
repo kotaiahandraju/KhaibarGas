@@ -34,7 +34,7 @@
 				<div class="form-group">
 				  	<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">From Date<span class="impColor">*</span></label>
+							<label for="focusedinput" class="col-md-5 control-label">From Date</label>
 							<div class="col-md-7">
 							<form:input path="fromDate" class="form-control " readonly="true"    onkeydown="removeBorder(this.id)"/>
 							</div>
@@ -42,7 +42,7 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">To Date<span class="impColor">*</span></label>
+							<label for="focusedinput" class="col-md-5 control-label">To Date</label>
 							<div class="col-md-7">
 				        		<form:input path="toDate" class="form-control " readonly="true"   onkeydown="removeBorder(this.id)"/>
 							</div>
@@ -58,9 +58,9 @@
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Customer Type (used gas)</label>
+							<label for="focusedinput" class="col-md-5 control-label">Customer Type</label>
 							<div class="col-md-7">
-				        		<form:select path="customertype" class="form-control   validate"  onfocus="removeBorder(this.id);" onchange="searchData(),getCustomerIds(this.value)">
+				        		<form:select path="customertype" class="form-control   "  onfocus="removeBorder(this.id);" onchange="searchData(),getCustomerIds(this.value)">
                             <form:option value="">-- Customer Type --</form:option>
                             <form:option value="COMMERCIAL">COMMERCIAL</form:option>
                             <form:option value="DOMESTIC">DOMESTIC</form:option>
@@ -75,7 +75,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">Customer Id</label>
 							<div class="col-md-7">
-				        		<form:select path="customerId" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
+				        		<form:select path="customerId" class="form-control  " onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
                             <form:option value="">-- Select Customer Id --</form:option>
                           </form:select>
 							</div>

@@ -78,7 +78,7 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			jdbcTemplate = custom.getJdbcTemplate();
 			 
 			StringBuffer buffer = new StringBuffer();
-			buffer.append("SELECT `created_time`,`fillingStationId`,`fillingstationname`,`gasInKgs`,`closedgas`,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,CONCAT('Added Gas', '(', IFNULL(addgas.lponumber,'--'), ')') AS AddedGas FROM addgas WHERE 1=1 ");
+			buffer.append(" select * from (SELECT `created_time`,`fillingStationId`,`fillingstationname`,`gasInKgs`,`closedgas`,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,CONCAT('Added Gas', '(', IFNULL(addgas.lponumber,'--'), ')') AS AddedGas FROM addgas WHERE 1=1 ");
 			if(StringUtils.isNotBlank(month)){
 				 
 				buffer.append("  AND  MONTH(created_time) ='"+month+"' AND YEAR(created_time) ='"+year+"' " );
@@ -97,6 +97,10 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			}
 			if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
 				buffer.append(" and fillingStationId='"+usedGasBean.getFillingStationId()+"'  ");
+			}
+			buffer.append(" ) foo where 1=1 ");
+			if(StringUtils.isNotBlank(usedGasBean.getGasType())){
+				buffer.append(" and  foo.AddedGas LIKE '%"+usedGasBean.getGasType()+"%' ");
 			}
 			buffer.append(" ORDER BY created_time ");
 			String sql = buffer.toString();

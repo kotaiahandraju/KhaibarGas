@@ -106,7 +106,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="col-sm-4 control-label required">Designation</label>
+												<label class="col-sm-4 control-label required">Designation</label><span class="impColor">*</span>
 												<div class="col-sm-6">
 													<form:input path="designation"
 														class="form-control onlyCharacters validate"
@@ -120,7 +120,7 @@
 										</div>
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="col-sm-4 control-label required">Nationality
+												<label class="col-sm-4 control-label required">Nationality<span class="impColor">*</span>
 												</label>
 												<div class="col-sm-6">
 												      <form:input path="nationality"
