@@ -4,7 +4,12 @@
 <%@ taglib uri="http://displaytag.sf.net" prefix="display"%>
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
-
+<style>
+.form-group {
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+</style>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="#">Home</a></li>
@@ -258,7 +263,7 @@ $('#tableId').html(tableHead);
 	// $(".transactions").addClass("open");
 	// $(".transactions").addClass("active");
 	$(".gasReport").addClass("active");
-	$(".report").addClass("active");
+	$(".reports").addClass("active");
 
 	var isClick = 'Yes';
 </script>

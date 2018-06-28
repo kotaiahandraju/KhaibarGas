@@ -5,7 +5,12 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 
-
+<style>
+.form-group {
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
+</style>
 	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="#">Home</a></li>
@@ -36,8 +41,8 @@
 					<div class="col-md-6">
 						<div class="form-group">
 							
-							<label for="focusedinput" class="col-md-5 control-label">Store</label>
-							<div class="col-md-7">
+							<label for="focusedinput" class="col-md-4 control-label">Store</label>
+							<div class="col-md-5">
 				        		<form:select path="storename" class="form-control " onchange="onChangeReports(id,name);" onfocus="removeBorder(this.id)">
 				        		<form:option value="">-Select Store-</form:option>
 				        			<form:options items="${stores}"></form:options>
@@ -47,8 +52,8 @@
 					</div>
 					<div class="col-md-6">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Cylinder Status</label>
-							<div class="col-md-7">
+							<label for="focusedinput" class="col-md-4 control-label">Cylinder Status</label>
+							<div class="col-md-5">
 				        		<form:select path="cylendersstatus" class="form-control " onchange="onChangeReports(id,name);" onfocus="removeBorder(this.id)">
 				        		<form:option value="">-- Select Cylinder Status --</form:option>
 				        			<form:options items="${Cylinderstatus}"></form:options>
@@ -403,7 +408,7 @@ function QualityCheck(){
 	// $(".transactions").addClass("open");
 	// $(".transactions").addClass("active");
 	$(".CylinderReport").addClass("active");
-	$(".report").addClass("active");
+	$(".reports").addClass("active");
 
 	var isClick = 'Yes';
 </script>

@@ -308,9 +308,9 @@ function tooltip(){
               <!-- Menu Body -->
               <li class="user-body">
                 <div class="row no-gutters">
-                  <div class="col-12 text-left">
+                 <!--  <div class="col-12 text-left">
                     <a href="#"><i class="pull-right fa fa-pencil"></i>Edit Profile </a>
-                  </div>
+                  </div> -->
                   <div class="col-12 text-left">
                     <a href="#"> <i class="pull-right fa fa-cog"></i>Change Password</a>
                   </div>
@@ -423,7 +423,7 @@ function tooltip(){
      
       </ul>
       <li class="expenseTracker"><a href="${baseurl }/admin/expenseTrackerHome"><i class="fa fa-bar-chart-o"></i> <span>Expense Tracker</span></a></li>
-      <li class="treeview">
+      <li class="treeview reports">
           <a href="#">
           <i class="fa fa-list"></i> <span>Reports</span>
             <span class="pull-right-container">

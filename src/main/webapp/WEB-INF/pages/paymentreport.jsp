@@ -9,6 +9,10 @@
     width: 89%;
     margin: 30px auto;
 }
+.form-group {
+    margin-bottom: 25px;
+    margin-top: 10px;
+}
 .modal-header {
     padding: 7px;
     border-bottom: 1px solid #e5e5e5;
@@ -399,7 +403,7 @@ function getinvoicedata(invoiceId){
 	// $(".transactions").addClass("open");
 	// $(".transactions").addClass("active");
 	$(".paymentReport").addClass("active");
-	$(".report").addClass("active");
+	$(".reports").addClass("active");
 	var isClick = 'Yes';
 	
 </script>
