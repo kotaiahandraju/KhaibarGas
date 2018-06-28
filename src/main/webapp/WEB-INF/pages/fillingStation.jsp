@@ -379,4 +379,5 @@ function inactiveData() {
 }
 $("#pageName").text("Filling Station Master");
 $(".fillingStation").addClass("active"); 
+$(".master").addClass("active");
 </script>

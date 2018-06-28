@@ -278,4 +278,6 @@ $("#pageName").text("Cylinder Quality Check");
 // $(".transactions").addClass("open");
 // $(".transactions").addClass("active");
 $(".cylinderQualityCheck").addClass("active");
+$(".transactions").addClass("active");
+
 </script>

@@ -65,7 +65,7 @@
 	                    		</div>
 	                    		<div class="col-md-6">
 	                    			<div class="form-group">
-	                    				<label for="focusedinput" class="col-md-4 control-label">Store Location <span class="impColor">*</span></label>
+	                    				<label for="focusedinput" class="col-md-6 control-label">Store Location <span class="impColor">*</span></label>
 	                    				<div class="col-md-6">
 			                            	<form:input  path="location" class="form-control validate " placeholder="Store Location"/>
 									  	</div>
@@ -76,7 +76,7 @@
 	                    </div>
 	                    
 	                    <div class="panel-footer">
-					      	<div class="row">
+					      	<div class="row pull-right">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
 						      			<input class="btn-primary btn" type="submit" value="Submit" id="submit1"/>
@@ -216,5 +216,5 @@ function dataClear(){
 }
 $("#pageName").text("Store Master");
 $(".stores").addClass("active"); 
-
+$(".master").addClass("active");
 </script>

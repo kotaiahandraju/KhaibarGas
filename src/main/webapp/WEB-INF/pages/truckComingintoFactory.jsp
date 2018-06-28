@@ -126,7 +126,7 @@ $(function () {
 								    </div>
                     			</div>
                     		</div>
-                    		
+                    		<div class="clearfix"></div>
                     		<%-- <div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Truck Status <span class="impColor">*</span></label>
@@ -325,5 +325,6 @@ function inactiveData() {
 }
  $("#pageName").text("Truck Coming into Factory ");
  $(".truckTracking1").addClass("active"); 
- 
+ $(".trucktracking").addClass("active");
+
 </script>

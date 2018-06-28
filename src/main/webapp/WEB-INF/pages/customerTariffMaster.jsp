@@ -254,4 +254,5 @@ function inactiveData() {
 }
 $("#pageName").text("Customer Tariff Master");
 $(".customerTariffMaster").addClass("active");
+$(".master").addClass("active");
 </script>

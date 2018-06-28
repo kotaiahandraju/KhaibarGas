@@ -352,6 +352,7 @@ function onChangeStoreAndCylinderType(){
 $("#pageName").text("Cylinder Move to Filling Station");
 // $(".transactions").addClass("open");
 $(".cylinderMovetofillingStation").addClass("active");
+$(".transactions").addClass("active");
 
 
 

@@ -335,4 +335,6 @@ $(function(){
 // $.fn.dataTable.ext.errMode = 'none';
 $("#pageName").text("Item Master");
 $(".items").addClass("active"); 
+$(".master").addClass("active"); 
+
 </script>

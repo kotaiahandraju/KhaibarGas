@@ -141,7 +141,7 @@
 								</div>
 							</div>
 							<div class="panel-footer">
-								<div class="row">
+								<div class="row pull-right">
 									<div class="col-sm-12">
 										<div class="btn-toolbar text-center">
 											<input type="submit" value="Submit" id="submit1" class="btn-primary btn" />
@@ -258,4 +258,5 @@ function inactiveData() {
 
 $("#pageName").text("Company Master");
 $(".company").addClass("active"); 
+$(".master").addClass("active");
 </script>

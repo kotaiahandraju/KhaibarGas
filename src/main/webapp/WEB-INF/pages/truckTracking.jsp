@@ -112,7 +112,7 @@ $(function () {
 								      	<span class="hasError" id="expirydateError"></span>
 								    </div>
                     			</div>
-                    		</div>
+                    		</div><div class="clearfix"></div>
                     		
                     		<%-- <div class="col-md-6">
                     			<div class="form-group">
@@ -316,5 +316,6 @@ function inactiveData() {
 }
  $("#pageName").text("Truck is going out from Factory ");
  $(".truckTracking").addClass("active"); 
- 
+ $(".trucktracking").addClass("active");
+
 </script>

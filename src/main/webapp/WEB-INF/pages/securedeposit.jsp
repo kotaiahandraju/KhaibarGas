@@ -454,6 +454,7 @@ function removeDependentRow(dependentRowCount) {
 }
 $("#pageName").text("Security Deposit");
 $(".securedeposit").addClass("active");
+$(".master").addClass("active");
 </script>
 <!-- 
 <html xmlns="http://www.w3.org/1999/xhtml">

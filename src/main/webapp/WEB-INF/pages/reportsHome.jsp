@@ -18,36 +18,36 @@
 			<form:form commandName="reportsForm">
 				<div class="row">
 				
-				<div class="panel panel-primary">
-				<div class="panel-body">			
+				<div class="panel panel-primary" style="width:100%;">
+				<div class="panel-body">
 				
 				
-				  	<div class="col-md-3">
+				  	<div class="col-md-6">
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-4 control-label">Company<span class="impColor">*</span></label>
-							<div class="col-md-7">
+							<div class="col-md-5">
 				        		<form:select path="companyname" class="form-control " onchange="onChangeReports(id,name);" onfocus="removeBorder(this.id)">
-				        			<form:option value="">-- Select Company --</form:option>
+				        			<form:option value="">- Select Company -</form:option>
 				        			<form:options items="${companys}"></form:options>
 				        		</form:select>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-6">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Store<span class="impColor">*</span></label>
-							<div class="col-md-7">
+							<label for="focusedinput" class="col-md-4 control-label">Store<span class="impColor">*</span></label>
+							<div class="col-md-5">
 				        		<form:select path="storename" class="form-control " onchange="onChangeReports(id,name);" onfocus="removeBorder(this.id)">
-				        		<form:option value="">--Select Store--</form:option>
+				        		<form:option value="">-Select Store-</form:option>
 				        			<form:options items="${stores}"></form:options>
 				        		</form:select>
 							</div>
 						</div>
 					</div>
-					<div class="col-md-3">
+					<div class="col-md-6">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Cylinder Status<span class="impColor">*</span></label>
-							<div class="col-md-7">
+							<label for="focusedinput" class="col-md-4 control-label">Cylinder Status<span class="impColor">*</span></label>
+							<div class="col-md-5">
 				        		<form:select path="cylendersstatus" class="form-control " onchange="onChangeReports(id,name);" onfocus="removeBorder(this.id)">
 				        		<form:option value="">-- Select Cylinder Status --</form:option>
 				        			<form:options items="${Cylinderstatus}"></form:options>
@@ -56,10 +56,10 @@
 						</div>
 					</div>
 					
-					<div class="col-md-3">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-4 control-label">LPO Number</label>
-							<div class="col-md-7">
+							<div class="col-md-5">
 				        		<form:select path="lponumber" class="form-control " onchange="onChangeReports(id,name);" onfocus="removeBorder(this.id)">
 				        			<form:option value="">-- Select LPO Number --</form:option>
 				        			<form:options items="${LPONumbers}"></form:options>
@@ -69,10 +69,10 @@
 					</div>
 					<br><br>
 					
-					<div class="col-md-3">
+					<div class="col-md-6">
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-4 control-label">Cylinder Size</label>
-							<div class="col-md-7">
+							<div class="col-md-5">
 				        		<form:select path="size" class="form-control " onchange="onChangeReports(id,name);" onfocus="removeBorder(this.id)">
 				        			<form:option value="">-- Select Cylinder Size --</form:option>
 				        			<form:options items="${cylinderTypes}"></form:options>
@@ -402,5 +402,7 @@ function QualityCheck(){
 	// $(".transactions").addClass("open");
 	// $(".transactions").addClass("active");
 	$(".CylinderReport").addClass("active");
+	$(".report").addClass("active");
+
 	var isClick = 'Yes';
 </script>

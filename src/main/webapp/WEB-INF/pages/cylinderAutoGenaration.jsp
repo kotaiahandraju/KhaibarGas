@@ -371,5 +371,5 @@ $('#submit11').click(function(event) {
 
  $("#pageName").text("Cylinder AutoGenaration");
  $(".cylinderAutoGenHome").addClass("active"); 
- 
+ $(".master").addClass("active");
 </script>

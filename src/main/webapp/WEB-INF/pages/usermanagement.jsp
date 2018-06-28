@@ -9,6 +9,7 @@
 width:20px;
 height:25px;
 }
+
 </style>
 
         <div class="clearfix"></div>
@@ -58,7 +59,7 @@ height:25px;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">User Name<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="userName" class="form-control validate" placeholder="User Name"/>
+		                            	<form:input type="text" path="userName" class="form-control validate" placeholder="User Name" />
 								  	</div>
                     			</div>
                     		</div>
@@ -66,7 +67,7 @@ height:25px;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Password<span class="impColor">*</span></label>
                     				<div class="col-md-6">
-								      	<form:input type="text" path="password" class="form-control validate emailOnly" placeholder="Password"/>
+								      	<form:input type="text" path="password" class="form-control validate emailOnly" placeholder="Password" />
 								  	</div>
                     			</div>
                     		</div>
@@ -74,7 +75,7 @@ height:25px;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Edit</label>
                     				<div class="col-md-6">
-		                            	<input type="checkbox"  value="1" name="edit" id="edit" class="editcheck"  />
+		                            	<input type="checkbox"  value="1" name="edit" id="edit" class="editcheck"  style="margin-top:9px; margin-left:9px;"  />
 								  	</div>
                     			</div>
                     		</div>
@@ -83,7 +84,7 @@ height:25px;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Delete</label>
                     				<div class="col-md-6">
-		                            	<input type="checkbox"  value="1"   name="delete1" id="delete1" class="editcheck" />
+		                            	<input type="checkbox"  value="1"   name="delete1" id="delete1" class="editcheck"  style="margin-top:9px; margin-left:9px;" />
 								  	</div>
                     			</div>
                     		</div>
@@ -92,7 +93,7 @@ height:25px;
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Mobile App</label>
                     				<div class="col-md-6">
-								      	<input type="checkbox"  value="1"  name="mobileapp" id="mobileapp" class="editcheck" placeholder="Mobile app"/>
+								      	<input type="checkbox"  value="1"  name="mobileapp" id="mobileapp" class="editcheck" placeholder="Mobile app"  style="margin-top:9px; margin-left:9px;"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -345,5 +346,5 @@ $('#delete1').click(function(){
 
 $("#pageName").text("User Management");
 $(".customer").addClass("active"); 
-
+$(".users").addClass("active");
 </script>

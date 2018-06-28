@@ -12,9 +12,21 @@
 	#target	.caption {
 		display:none;
 		}
+		footer {
+    border-top: 1px solid #d2d3d6;
+    background: #edeef0;
+    /* margin-left: 230px; */
+    height: 30px;
+    margin-top: -20px;
+    overflow: hidden;
+}
+.empkgs th, td {
+    font-size: 14px !important;
+    width: 100px;
+}
 .nchange {
 color:#fff!important;
-font-size:24px;
+font-size:16px;
 cursor:pointer;
 }
 .nch1 {
@@ -23,7 +35,7 @@ display:block;
 text-align:left;
 }
 .lef {
-font-size:19px;
+font-size:15px;
 }
 .info-tiles .tiles-body-alt, .info-tiles .tiles-body {
     padding: 5px 20px;
@@ -253,7 +265,7 @@ tbody tr:nth-child(even) th {
                                 <tbody></tbody>
                             </table>
                          </div>
-
+<div class="clearfix"></div>
 <!-- Body Ends Here -->
 <script type="text/javascript">
 

@@ -247,6 +247,7 @@ $('#tableId').html(tableHead);
 	$("#pageName").text("Expenses Report");
 	// $(".transactions").addClass("open");
 	// $(".transactions").addClass("active");
+	$(".report").addClass("active");
 	$(".expensesReport").addClass("active");
 	var isClick = 'Yes';
 </script>

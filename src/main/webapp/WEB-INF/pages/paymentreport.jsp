@@ -399,6 +399,7 @@ function getinvoicedata(invoiceId){
 	// $(".transactions").addClass("open");
 	// $(".transactions").addClass("active");
 	$(".paymentReport").addClass("active");
+	$(".report").addClass("active");
 	var isClick = 'Yes';
 	
 </script>

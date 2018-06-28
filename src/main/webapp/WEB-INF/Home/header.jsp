@@ -16,7 +16,17 @@
     <link rel="shortcut icon" href="${baseurl }/img/logo.jpeg"/>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    
+	<link rel="stylesheet" href="${baseurl }/newcss/bootstrap.css">
+	<link rel="stylesheet" href="${baseurl }/newcss/bootstrap-extend.css">
+	<link rel="stylesheet" href="${baseurl }/newcss/morris.css">	
+	<link rel="stylesheet" href="${baseurl }/newcss/chartist.css">
+    <link href="${baseurl }/newcss/nv.d3.min.css" rel="stylesheet" type="text/css" media="screen" />
+	<link rel="stylesheet" href="${baseurl }/newcss/master_style.css">
+	<link rel="stylesheet" href="${baseurl }/newcss/horizontal_menu_style.css">
+	<link rel="stylesheet" href="${baseurl }/newcss/_all-skins.css">
+	
+	
     <link rel="stylesheet" href="${baseurl }/assets/css/styles.css">
     <link rel="stylesheet" href="${baseurl }/assets/css/animate.min.css">
     <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600' rel='stylesheet' type='text/css'>
@@ -29,7 +39,7 @@
     <![endif]-->
 
     <!-- The following CSS are included as plugins and can be removed if unused-->
-
+<script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/charts-morrisjs/morris.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/codeprettifier/prettify.css' /> 
 <link rel='stylesheet' type='text/css' href='${baseurl }/assets/plugins/form-toggle/toggles.css' /> 
@@ -42,7 +52,7 @@
 
 <link href="${baseurl }/assets/css/datepicker1.css" rel="stylesheet" type="text/css" />
 
-<script type='text/javascript' src='${baseurl }/assets/js/jquery-1.10.2.min.js'></script>
+
 
 <!-- <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script> -->
 <script type='text/javascript' src="${baseurl }/js/jquery.blockUI.min.js" ></script>
@@ -63,12 +73,19 @@
 	margin-bottom: 0;
     padding-top: 8px;
 }
+.empkgs th, td {
+    font-size: 12px !important;
+    width: 100px;
+}
+#page-content {
+min-height:0px!important;
+padding-bottom:0px !important;}
 .impColor{color:red;}
 
 .view, .edit, .delete, .activate, .deactivate {cursor: pointer;}
-.edit {color: blue;}
-.deactivate {color: blue;}
-.activate {color: red;}
+.edit {color: blue !important;}
+.deactivate {color:#e83c3d !important;}
+.activate {color: green !important;}
 
  .impFiled {color: blue;}
  .panel-success {background-color: #4CAF50 !important;}
@@ -155,8 +172,20 @@ span.has-error,span.hasError
 /* 	max-width: 100% !important; */
 /* 	width: 100% !important; */
 }
+/* .main-sidebar{
+opacity: 0;
+    margin-top: 25px;
+    font-size: 21px;
+    text-align: center;
+    -webkit-transition: opacity 2s ease-in;
+    -moz-transition: opacity 2s ease-in;
+    -o-transition: opacity 2s ease-in;
+    -ms-transition: opacity 2s ease-in;
+    transition: opacity 2s ease-in;
+} */
 </style>
 <script type="text/javascript">
+$(".main-sidebar").css('display','block');
 	var isClick = 'No';
 		window.setTimeout(function() {
 		    $(".msgcss").fadeTo(500, 0).slideUp(500, function(){
@@ -219,7 +248,7 @@ function tooltip(){
 </script>
 </head>
 
-<body class="horizontal-nav ">
+ <body class="hold-transition skin-blue layout-top-nav">
 	<c:if test="${not empty msg}">
 		<div class="msgcss row">
 			<div class="col-sm-4 col-sm-offset-4">
@@ -237,94 +266,142 @@ function tooltip(){
 			</div>
 		</div>
 
-    <header class="navbar navbar-inverse navbar-fixed-top" role="banner">
-        <div class="navbar-header pull-left">
-            <a class="navbar-brand" href="javascript:void(0);"><img src="${baseurl }/assets/img/khaibar_logo.png" class="img-responsive"></a>
-            <div class="clearfix"></div>
-        </div>
-		<div class="masters">
-	        <ul class="nav navbar-nav pull-right toolbar">
-	            <li class="dropdown">
-	                <a href="#" class="dropdown-toggle username" data-toggle="dropdown"><span class="hidden-xs">Master Admin <i class="fa fa-caret-down"></i></span><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt="Dangerfield" /></a>
-	                <ul class="dropdown-menu userinfo arrow">
-	                    <li class="username">
-	                        <a href="#">
-	                            <div class="pull-left"><img src="${baseurl }/assets/demo/avatar/dangerfield.png" alt=""/></div>
-	                            <div class="pull-right"><h5>Master Admin!</h5><small>Logged in as <span>Master</span></small></div> 
-	                        </a>
-	                    </li>
-	                    <li class="userlinks">
-	                        <ul class="dropdown-menu">
-	                            <li><a href="#">Edit Profile <i class="pull-right fa fa-pencil"></i></a></li>
-	                            <li><a href="#">Change Password <i class="pull-right fa fa-cog"></i></a></li>
-	                            <li class="divider"></li>
-	                            <li><a href="../logoutHome" class="text-right">Sign Out</a></li>
-	                        </ul>
-	                    </li>
-	                </ul>
-	            </li>
-	        </ul>
-        </div>
-    </header>
+  
+<div class="wrapper">
 
-   <nav class="navbar navbar-default yamm top20" role="navigation">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <i class="fa fa-bars"></i>
-            </button>
-        </div>
-       <div class="collapse navbar-collapse navbar-ex1-collapse" id="horizontal-navbar" style="padding:0px">
-            <ul class="nav navbar-nav">
-            
-            <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span></a></li>
-             <li class="master">
-            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-user"></i> <span>Master</span> <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						  <li class="items"><a href="${baseurl }/admin/itemsHome"><i class="fa fa-tint"></i> <span>Items</span></a></li>
+  <header class="main-header">
+    <!-- Logo -->
+    <a href="#" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+	  <b class="logo-mini">
+		 <center><img src="${baseurl }/assets/img/khaibar_logo.png" style="padding-top:5px;" class="img-responsive"></center>
+	  </b>
+      <!-- logo for regular state and mobile devices -->
+     
+    </a>
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle d-block d-lg-none" data-toggle="push-menu" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+	  
+	  
+		
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <li class="dropdown user user-menu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Master Admin &nbsp;<i class="fa fa-caret-down"></i>
+              <img src="${baseurl }/assets/demo/avatar/dangerfield.png" class="user-image rounded-circle" alt="User Image">
+            </a>
+            <ul class="dropdown-menu scale-up">
+              <!-- User image -->
+              <li class="user-header">
+                <img src="${baseurl }/assets/demo/avatar/dangerfield.png" class="float-left rounded-circle" alt="User Image">
+
+                <p>
+                  Master Admin!
+                  <small class="mb-5">Logged in as Master</small>
+<!--                   <a href="#" class="btn btn-danger btn-sm btn-rounded">View Profile</a> -->
+                </p>
+              </li>
+              <!-- Menu Body -->
+              <li class="user-body">
+                <div class="row no-gutters">
+                  <div class="col-12 text-left">
+                    <a href="#"><i class="pull-right fa fa-pencil"></i>Edit Profile </a>
+                  </div>
+                  <div class="col-12 text-left">
+                    <a href="#"> <i class="pull-right fa fa-cog"></i>Change Password</a>
+                  </div>
+                  <div class="col-12 text-left">
+                    <a href="../logoutHome" class=""><i class=" pull-right fa fa-power-off"></i>Sign Out</a>
+                  </div>
+                <!-- /.row -->
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+          <li id="non">
+            <a  href="#" data-toggle="control-sidebar"><i class="fa fa-cog fa-spin"></i></a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+  
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar" style="display: none;">
+    <!-- sidebar -->
+    <section class="sidebar" >
+      <!-- sidebar menu -->
+      <ul class="sidebar-menu" data-widget="tree">
+        <li class="dashboard">
+          <a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span>
+          </a>
+        </li>
+		<li class="treeview master" class="">
+          <a href="#">
+            <i class="fa fa-user"></i> <span>Master</span> 
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+			<li class="items"><a href="${baseurl }/admin/itemsHome"><i class="fa fa-tint"></i> <span>Items</span></a></li>
              <li class="lpo"><a href="${baseurl }/admin/lpoHome"><i class="fa fa-bar-chart-o"></i> <span>LPO</span></a></li>
               <li class="company"><a href="${baseurl }/admin/companymaster"><i class="fa fa-building"></i> <span>Company</span></a></li>
               <li class="stores"><a href="${baseurl }/admin/storeHome"><i class="fa fa-th"></i> <span>Stores</span></a></li>
-              
-              <li class="transactions dropdown-submenu">
-            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Cylinders</span> </a>
-					<ul class="dropdown-menu">
-						<li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Cylinder</span></a></li>
-						<li class="cylinderAutoGenHome"><a href="${baseurl }/admin/cylinderAutoGenHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder AutoGeneration</span></a></li>
-					</ul>
-				</li>
-              
-              
-              
-             <li class="truck"><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>Trucks</span></a></li>
+            <li class="treeview">
+              <a href="#"><i class="fa fa-list"></i> <span>Cylinders</span> 
+                <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+                <li class="cylinder"><a href="${baseurl }/admin/CylinderHome"><i class="fa fa-fire-extinguisher" aria-hidden="true"></i> <span>Cylinder</span></a></li>
+						<li class="cylinderAutoGenHome"><a href="${baseurl }/admin/cylinderAutoGenHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder AutoGeneration</span></a></li>			  
+              </ul>
+            </li>    
+            <li class="truck"><a href="${baseurl }/admin/truckHome"><i class="fa fa-truck" aria-hidden="true"></i> <span>Trucks</span></a></li>
              <li class="fillingStation"><a href="${baseurl }/admin/fillingStationHome"><i class="fa fa-archive"></i> <span>Filling Stations</span></a></li>
-             <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>Customers</span></a></li>
-          <li class="transactions dropdown-submenu">
-            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-bar-chart-o"></i> <span>Tariff</span> </a>
-					<ul class="dropdown-menu">
-                <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
-				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Private Tariff Master</span></a></li>
-				</ul>
-	    </li>
-	    <li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>
-                
-					</ul>
-				</li>
+             <li class="customer"><a href="${baseurl }/admin/customerHome"><i class="fa fa-group"></i> <span>Customers</span></a></li>   
+              <li class="treeview">
+              <a href="#"><i class="fa fa-bar-chart-o"></i> <span>Tariff</span>
+                <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+              </a>
+              <ul class="treeview-menu">
+ <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
+				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Private Tariff Master</span></a></li>              </ul>
+            </li> 
+             <li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>       
+          </ul>
           
-           <li class="users">
-            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-users"></i> <span>Users</span> <span class="caret"></span></a>
-					
-					<ul class="dropdown-menu">
-              
-                <li class="staff"><a href="${baseurl }/admin/staffMaster"><i class="fa fa-user"></i> <span>Staff</span></a></li>
+        </li>
+        <li class="treeview users">
+          <a href="#">
+            <i class="fa fa-users"></i> <span>Users</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+			<li class="staff"><a href="${baseurl }/admin/staffMaster"><i class="fa fa-user"></i> <span>Staff</span></a></li>
                 <c:if test="${(cacheUserBean.roleId == 1)}">
                 	<li class="usermanagement"><a href="${baseurl }/admin/usermanagement"><i class="fa fa-bar-chart-o"></i> <span>User Management </span></a></li>
                 </c:if>
-				</ul>
-				</li>
-				<li class="transactions">
-            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Transactions</span> <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
+             </ul></li>
+          <li class="treeview transactions">
+          <a href="#">
+           <i class="fa fa-list"></i> <span>Transactions</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+			<li class="cylinderMovetofillingStation"><a href="${baseurl }/admin/cylinderMovetofillingStation"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to FillingStation</span></a></li>
 						<li class="cylinderFilledStatus"><a href="${baseurl }/admin/cylinderFilledStatus"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Filled Status</span></a></li>
                 		<li class="cylinderQualityCheck"><a href="${baseurl }/admin/cylinderQualityCheck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Quality Check</span></a></li>
 						<li class="cylinderMovetoTruck"><a href="${baseurl }/admin/cylinderMovetoTruck"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Move to Truck</span></a></li>
@@ -332,34 +409,41 @@ function tooltip(){
 						<li class="qualityCheckHome"><a href="${baseurl }/admin/qualityCheckHome"><i class="fa fa-bar-chart-o"></i> <span>Return Cylinder Quality Check And Move To Store</span></a></li>
 						<li class="privateCylinderFilled"><a href="${baseurl }/admin/privateCylinderFilled"><i class="fa fa-bar-chart-o"></i> <span>Private Cylinder Filled </span></a></li>
 						<li class="dueamount"><a href="${baseurl }/admin/dueamount"><i class="fa fa-bar-chart-o"></i> <span>Due Amount Pay </span></a></li>
-						
-					</ul>
-				</li>
-				<li class="transactions">
-            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Truck Tracking</span> <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li class="truckTracking"><a href="${baseurl }/admin/TruckTrakingHome"><i class="fa fa-bar-chart-o"></i> <span>Truck is going out from Factory </span></a></li>
-						<li class="truckTracking1"><a href="${baseurl }/admin/TruckComingintoFactory"><i class="fa fa-bar-chart-o"></i> <span>Truck Coming into Factory</span></a></li>
-					</ul>
-				</li>
-				<li class="expenseTracker"><a href="${baseurl }/admin/expenseTrackerHome"><i class="fa fa-bar-chart-o"></i> <span>Expense Tracker</span></a></li>
-				<li class="reports">
-            		<a class="dropdown-toggle" data-toggle="dropdown" href="#"><i class="fa fa-list"></i> <span>Reports</span> <span class="caret"></span></a>
-					<ul class="dropdown-menu">
-						<li class="CylinderReport"><a href="${baseurl }/admin/reportsHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Report </span></a></li>
+              </ul></li>
+          <li class="treeview trucktracking">
+          <a href="#">
+           <i class="fa fa-list"></i> <span>Truck Tracking</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+			<li class="truckTracking"><a href="${baseurl }/admin/TruckTrakingHome"><i class="fa fa-bar-chart-o"></i> <span>Truck is going out from Factory </span></a></li>
+						<li class="truckTracking1"><a href="${baseurl }/admin/TruckComingintoFactory"><i class="fa fa-bar-chart-o"></i> <span>Truck Coming into Factory</span></a></li>  
+     
+      </ul>
+      <li class="expenseTracker"><a href="${baseurl }/admin/expenseTrackerHome"><i class="fa fa-bar-chart-o"></i> <span>Expense Tracker</span></a></li>
+      <li class="treeview">
+          <a href="#">
+          <i class="fa fa-list"></i> <span>Reports</span>
+            <span class="pull-right-container">
+              <i class="fa fa-angle-right pull-right"></i>
+            </span>
+          </a>
+          <ul class="treeview-menu">
+<li class="CylinderReport"><a href="${baseurl }/admin/reportsHome"><i class="fa fa-bar-chart-o"></i> <span>Cylinder Report </span></a></li>
 						<li class="expensesReport"><a href="${baseurl }/admin/expensesReport"><i class="fa fa-bar-chart-o"></i> <span>Expenses Report</span></a></li>
 						<li class="gasReport"><a href="${baseurl }/admin/gasReport"><i class="fa fa-bar-chart-o"></i> <span>Gas Report</span></a></li>
 						<li class="paymentReport"><a href="${baseurl }/admin/paymentreport"><i class="fa fa-bar-chart-o"></i> <span>Payment Report</span></a></li>
-						 <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-bar-chart-o"></i> <span>Dashboard</span></a></li>
-					</ul>
-				</li>
-				
-			</ul>
-		</div>
-    </nav>
+						 <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-bar-chart-o"></i> <span>Dashboard</span></a></li>              </ul></li>
+    </section>
+  </aside>
 
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
     <div id="page-container">
-    	<div id="page-content" style="min-height: auto;">
+    	<div id="page-content" style="min-height: auto !important;">
     		<div id="wrap">
 	        <div id="page-heading" class="row">
 	        	<div class="col-md-6">
@@ -376,4 +460,17 @@ function tooltip(){
 	            </div>
 	            <div class="clearfix"></div>
 	        </div>
+    <!-- <section class="content-header">
+      <h1>
+        Dashboard
+        <small>Control panel</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+        <li class="breadcrumb-item active">Dashboard</li>
+      </ol>
+    </section> -->
+
+    </div>
+  </div>
 <!-- Header ends Here -->

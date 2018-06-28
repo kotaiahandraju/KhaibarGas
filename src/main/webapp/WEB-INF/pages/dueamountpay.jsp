@@ -1019,4 +1019,6 @@ function ChangeUrl(page, url) {
 
 $("#pageName").text("Due Amount Pay");
 $(".dueamount").addClass("active");
+$(".transactions").addClass("active");
+
 </script>

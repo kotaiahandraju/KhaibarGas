@@ -16,7 +16,8 @@ table #dependent_table{
 /* 	width: 100%; */
 	counter-reset: rowNumber;
 }
-
+table {
+width:100%;}
 table tbody tr.rowInc{
 	counter-increment: rowNumber;
 }
@@ -901,4 +902,5 @@ function ChangeUrl(page, url) {
 
 $("#pageName").text("LPO Master");
 $(".lpo").addClass("active");
+$(".master").addClass("active");
 </script>

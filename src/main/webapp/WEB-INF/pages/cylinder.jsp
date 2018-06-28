@@ -173,7 +173,7 @@
                     		</div> --%>
                     	</div>	 
 	                    <div class="panel-footer">
-					      	<div class="row">
+					      	<div class="row pull-right">
 					      		<div class="col-sm-12">
 					      			<div class="btn-toolbar text-center">
 						      			<input type="submit" id="submit11" value="Submit" class="btn-primary btn"/>
@@ -416,5 +416,5 @@ $('#submit11').click(function(event) {
 
  $("#pageName").text("Cylinder Master");
  $(".cylinder").addClass("active"); 
- 
+ $(".master").addClass("active");
 </script>

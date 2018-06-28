@@ -285,5 +285,5 @@ function inactiveData() {
 }
 $("#pageName").text("Customer Master");
 $(".customer").addClass("active"); 
-
+$(".master").addClass("active");
 </script>

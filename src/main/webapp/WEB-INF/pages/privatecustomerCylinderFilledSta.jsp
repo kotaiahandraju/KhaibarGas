@@ -1345,4 +1345,6 @@ $(function() {
 
 $("#pageName").text("Cylinder Filled Status");
 $(".privateCylinderFilled").addClass("active");
+$(".transactions").addClass("active");
+
 </script>

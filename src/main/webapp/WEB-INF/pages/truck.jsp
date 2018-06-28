@@ -133,7 +133,7 @@
 						</div>
                     </div>
                     <div class="panel-footer">
-						<div class="row">
+						<div class="row pull-right">
 							<div class="col-sm-12">
 				      			<div class="btn-toolbar text-center">
 									<input class="btn-primary btn" type="submit" value="Sumbit" id="submit1">
@@ -275,4 +275,5 @@ function inactiveData() {
 
 $("#pageName").text("Truck Master");
 $(".truck").addClass("active");
+$(".master").addClass("active");
 </script>

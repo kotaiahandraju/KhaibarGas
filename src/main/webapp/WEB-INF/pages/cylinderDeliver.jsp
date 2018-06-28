@@ -1296,4 +1296,6 @@ function ChangeUrl(page, url) {
 
 $("#pageName").text("Cylinder Deliver To Customer");
 $(".cylinderDeliver").addClass("active");
+$(".transactions").addClass("active");
+
 </script>

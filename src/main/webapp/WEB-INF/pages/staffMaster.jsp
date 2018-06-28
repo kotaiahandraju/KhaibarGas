@@ -386,4 +386,5 @@ function inactiveData() {
 }
 $("#pageName").text("Staff Master");
 $(".staff").addClass("active");
+$(".users").addClass("active");
 </script>

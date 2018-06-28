@@ -220,4 +220,5 @@ function inactiveData() {
 }
 $("#pageName").text("Tariff Master");
 $(".tariffMaster").addClass("active");
+$(".master").addClass("active");
 </script>

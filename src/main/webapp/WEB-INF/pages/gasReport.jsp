@@ -244,6 +244,8 @@ $('#tableId').html(tableHead);
 	// $(".transactions").addClass("open");
 	// $(".transactions").addClass("active");
 	$(".gasReport").addClass("active");
+	$(".report").addClass("active");
+
 	var isClick = 'Yes';
 </script>
 

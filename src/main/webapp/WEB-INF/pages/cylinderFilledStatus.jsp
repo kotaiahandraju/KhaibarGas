@@ -7,7 +7,9 @@
 
 
 <style>
-
+.panel-primary {
+width:100%;
+}
 .dataTables_filter {
 display: none; 
 }
@@ -291,4 +293,6 @@ function QualityCheck(){
 	// $(".transactions").addClass("open");
 	// $(".transactions").addClass("active");
 	$(".cylinderFilledStatus").addClass("active");
+	$(".transactions").addClass("active");
+
 </script>
