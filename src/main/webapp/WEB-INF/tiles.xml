@@ -135,6 +135,9 @@
 	<definition name="expenseReport" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/expenseReport.jsp" />
 	</definition>
+	<definition name="changePassword" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/changePassword.jsp" />
+ </definition>
 	
 	
 	

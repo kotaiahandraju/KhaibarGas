@@ -979,6 +979,9 @@ function getTarrifPrice(value,id){
 		var alldata = jsonobj.rate;
 		if(jsonobj.vatallow == "0"){
 			$("#vat").val(0);
+		}else{
+			var vat=${vat};
+			$("#vat").val(vat);
 		}
 		map[number+"discount"] = jsonobj.discount;
 		$("#"+number+"rate").val(jsonobj.rate);
