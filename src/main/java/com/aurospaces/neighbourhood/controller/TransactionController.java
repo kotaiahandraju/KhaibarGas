@@ -722,9 +722,7 @@ public class TransactionController {
 			@RequestParam(value = "previousDueAmount", required=false) String previousDueAmount,
 			@RequestParam(value = "grossamount", required=false) String grossamount,
 			@RequestParam(value = "vatamount", required=false) String vatamount,
-			@RequestParam(value = "totalNetamount", required=false) String totalNetamount,
-			
-			HttpSession session) {
+			@RequestParam(value = "totalNetamount", required=false) String totalNetamount,HttpSession session) {
 		String sJson = null;
 		List<LpomasterBean> lpoList = null;
 		CustomercylindersBean customercylindersBean = null;

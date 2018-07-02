@@ -200,9 +200,9 @@ table tbody tr.rowInc {
         
         
         
-        <div class="row"> 
+        
                     <div class="col-md-12">
-                    
+                    <div class="row"> 
                <div class="panel panel-primary">
                 <div class="panel-heading">
                 <h4>Deliver Cylinders</h4>
@@ -237,7 +237,7 @@ table tbody tr.rowInc {
                 <table class="table table-bordered" id="dependent_table">
                   <thead >
                     <tr class="default" style="background:#EBEBEB">
-                      <th><span>Sno</span></th>
+                      <th style="width:40px;"><span>Sno</span></th>
                       <th><span>Items</span></th>
                       <th><span>Quantity</span></th>
                       <th><span>Price(AED)</span></th>
@@ -250,7 +250,7 @@ table tbody tr.rowInc {
                   </thead>
                   <tbody>
                     <tr id="1" class="rowInc">
-                      <td></td>
+                      <td style="width:40px;"></td>
                       <td><select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)">
                         <option value="" selected="selected" disabled="disabled">-- Select Item --</option>
                         </select> </td>
@@ -1296,4 +1296,6 @@ function ChangeUrl(page, url) {
 
 $("#pageName").text("Cylinder Deliver To Customer");
 $(".cylinderDeliver").addClass("active");
+$(".transactions").addClass("active");
+
 </script>
