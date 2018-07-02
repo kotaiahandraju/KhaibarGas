@@ -272,7 +272,7 @@ table tbody tr.rowInc {
 <div class="clearfix"></div>
 <div class="col-md-6"  style="padding-left:0px;">
  <table class="table table-responsive table-bordered table-striped " >
-    <tr  style="background:#4F8EDC; color:#fff;"><td  colspan="2">Customer Details</td></tr>
+    <tr class="bgs"  style="background:#4F8EDC !important; color:#fff !important; "><td  colspan="2">Customer Details</td></tr>
     <tr><td >Customer Name :</td><td><span class="customerNameId"></span></td></tr>
                           
               <tr><td >Customer Type :</td><td><span class="customerTypeId"></span></td></tr>

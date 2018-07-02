@@ -91,7 +91,7 @@ display: none;
 				
 				
 				<div class="row">
-					<div class="col-md-8 col-md-offset-2">
+					<div class="col-md-8">
 						<div class="row">
 							<div class="col-md-12">
 								<div class="form-group">
@@ -127,7 +127,7 @@ display: none;
 							
 							<div class="panel-footer" style="text-align:right;" >
 							
-							<input type="button" class="btn btn-primary" value="Cylinder Filled Status" onclick="QualityCheck()">
+							
 							
 							</div>
 							
@@ -135,6 +135,16 @@ display: none;
 							
 						</div>
 					</div>
+					<div class="col-md-4" style="padding-top:10px;">
+					<div class="panel panel-primary">
+							<div class="panel-heading">
+								<div class="options">   
+									<a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
+								</div>
+							</div>
+							<div class="panel-body collapse in">
+					<input type="button" class="btn btn-primary" value="Cylinder Filled Status" onclick="QualityCheck()">
+					</div></div></div>
 					<div class="col-md-12">
 					<br><br>
 						<!-- <div class="row">

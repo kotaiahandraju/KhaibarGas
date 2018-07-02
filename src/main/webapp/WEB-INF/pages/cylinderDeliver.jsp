@@ -23,7 +23,10 @@
 
 <style>
 
-
+.empkgs th, td {
+    font-size: 12px !important;
+    width: 195px;
+}
 
 /* #dependent_table table  {
 	
