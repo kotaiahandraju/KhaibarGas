@@ -67,6 +67,19 @@ public class KhaibarUsersDao extends BaseKhaibarUsersDao
 				return retlist.get(0);
 			return null;
 		}
+	
+	public Boolean UpdatePassword(String password, int id)
+	{
+		boolean result = false;
+		jdbcTemplate = custom.getJdbcTemplate();
+		String hql="UPDATE khaibar_users  set password = ? where id = ? ";
+		int results=jdbcTemplate.update(hql, new Object[] {password,id});
+				
+				if (results != 0) {
+					result = true;
+				}
+				return result;
+	}
 
 
 

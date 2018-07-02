@@ -37,20 +37,20 @@ import com.aurospaces.neighbourhood.db.dao.StoresmasterDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
-
-
 @Controller
 @RequestMapping(value = "/admin")
 public class CylinderController {
-	
-	
+
 	private Logger logger = Logger.getLogger(CylinderController.class);
 	@Autowired
 	CylindermasterDao cylindermasterDao;
-	@Autowired StoresmasterDao storesmasterDao;
-	@Autowired CompanymasterDao companymasterDao;
-	@Autowired ItemsDao objItemsDao;
+	@Autowired
+	StoresmasterDao storesmasterDao;
+	@Autowired
+	CompanymasterDao companymasterDao;
+	@Autowired
+	ItemsDao objItemsDao;
+
 	@RequestMapping(value = "/CylinderHome")
 	public String cylinderHome(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
 			ModelMap model, HttpServletRequest request, HttpSession session) {
@@ -78,70 +78,65 @@ public class CylinderController {
 		}
 		return "cylinderHome";
 	}
-	
+
 	@RequestMapping(value = "/addcylinder", method = RequestMethod.POST)
-	public String addCylinder( @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
-			BindingResult bindingresults, Model model,RedirectAttributes redir) {
-		
-		//List<CylindermasterBean> cylinderMaster=null;
-		
+	public String addCylinder(@ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
+			BindingResult bindingresults, Model model, RedirectAttributes redir) {
+
+		// List<CylindermasterBean> cylinderMaster=null;
+
 		int id = 0;
-		String size=null; 
-		
-		try
-		{
-			if(objCylindermasterBean.getSize().equals("1")){
+		String size = null;
+
+		try {
+			if (objCylindermasterBean.getSize().equals("1")) {
 				objCylindermasterBean.setCapacity("11");
 			}
-			if(objCylindermasterBean.getSize().equals("2")){
+			if (objCylindermasterBean.getSize().equals("2")) {
 				objCylindermasterBean.setCapacity("22");
 			}
-			if(objCylindermasterBean.getSize().equals("3")){
+			if (objCylindermasterBean.getSize().equals("3")) {
 				objCylindermasterBean.setCapacity("44");
 			}
-			
-			if(StringUtils.isNotBlank(objCylindermasterBean.getExpirtdate1())){
-				Date date=  KhaibarGasUtil.dateFormate(objCylindermasterBean.getExpirtdate1());
+
+			if (StringUtils.isNotBlank(objCylindermasterBean.getExpirtdate1())) {
+				Date date = KhaibarGasUtil.dateFormate(objCylindermasterBean.getExpirtdate1());
 				objCylindermasterBean.setExpirydate(date);
 			}
 			objCylindermasterBean.setStatus("1");
 			CylindermasterBean cylindermasterBean = cylindermasterDao.getByCylinderId(objCylindermasterBean);
-			int dummyId =0;
-			if(cylindermasterBean != null){
+			int dummyId = 0;
+			if (cylindermasterBean != null) {
 				dummyId = cylindermasterBean.getId();
 			}
-			if(objCylindermasterBean.getId() != 0)
-			{
+			if (objCylindermasterBean.getId() != 0) {
 				id = objCylindermasterBean.getId();
-				if(id == dummyId || cylindermasterBean == null )
-				{
-					
-					
-					/*String capacity = objCylindermasterBean.getCapacity();
-					//changing capcity to Id
-					int capacityId = cylindermasterDao.getCylinderIdByCapacity(capacity);
-					objCylindermasterBean.setCapacity(String.valueOf(capacityId));*/
-					
+				if (id == dummyId || cylindermasterBean == null) {
+
+					/*
+					 * String capacity = objCylindermasterBean.getCapacity();
+					 * //changing capcity to Id int capacityId =
+					 * cylindermasterDao.getCylinderIdByCapacity(capacity);
+					 * objCylindermasterBean.setCapacity(String.valueOf(
+					 * capacityId));
+					 */
+
 					cylindermasterDao.save(objCylindermasterBean);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
-				}
-				else
-				{
+				} else {
 					redir.addFlashAttribute("msg", "Already Record Exist");
 					redir.addFlashAttribute("cssMsg", "danger");
 				}
 			}
-			if(objCylindermasterBean.getId() == 0 && cylindermasterBean == null)
-			{
+			if (objCylindermasterBean.getId() == 0 && cylindermasterBean == null) {
 				objCylindermasterBean.setCylinderstatus("1");
 				cylindermasterDao.save(objCylindermasterBean);
-				
+
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
-			if(objCylindermasterBean.getId() == 0 && cylindermasterBean != null)
-			{
+			if (objCylindermasterBean.getId() == 0 && cylindermasterBean != null) {
 				redir.addFlashAttribute("msg", "Already Record Exist");
 				redir.addFlashAttribute("cssMsg", "danger");
 			}
@@ -152,9 +147,7 @@ public class CylinderController {
 
 		}
 		return "redirect:CylinderHome";
-	}	
-		
-
+	}
 
 	@RequestMapping(value = "/deleteCylinder")
 	public @ResponseBody String deleteEducation(CylindermasterBean objCylindermasterBean, ModelMap model,
@@ -166,8 +159,9 @@ public class CylinderController {
 		String sJson = null;
 		boolean delete = false;
 		try {
-			if (objCylindermasterBean.getId() != 0 && objCylindermasterBean.getStatus() !="") {
-				delete = cylindermasterDao.deleteCylinder(objCylindermasterBean.getId(),objCylindermasterBean.getStatus());
+			if (objCylindermasterBean.getId() != 0 && objCylindermasterBean.getStatus() != "") {
+				delete = cylindermasterDao.deleteCylinder(objCylindermasterBean.getId(),
+						objCylindermasterBean.getStatus());
 				if (delete) {
 					jsonObj.put("message", "deleted");
 				} else {
@@ -200,52 +194,46 @@ public class CylinderController {
 		}
 		return String.valueOf(jsonObj);
 	}
-	
+
 	@RequestMapping("/getCylinderCapacity")
-	public  @ResponseBody  String cylinderTypes(HttpServletRequest request, HttpSession session)
-	{  
-		List<LpoitemsBean> retlist=null;
-		//String retlist=null;
+	public @ResponseBody String cylinderTypes(HttpServletRequest request, HttpSession session) {
+		List<LpoitemsBean> retlist = null;
+		// String retlist=null;
 		JSONObject obj = new JSONObject();
 		try {
-			System.out.println("-----id-------"+request.getParameter("cid"));
-			if(null != request.getParameter("cid")){
-				retlist=cylindermasterDao.getCylinderCapacityByID(request.getParameter("cid"));
-				if(retlist != null){
-//					obj = new JSONObject(retlist);
-				System.out.println("-result------"+retlist);
-				obj.put("list",retlist);
-				}else{
+			System.out.println("-----id-------" + request.getParameter("cid"));
+			if (null != request.getParameter("cid")) {
+				retlist = cylindermasterDao.getCylinderCapacityByID(request.getParameter("cid"));
+				if (retlist != null) {
+					// obj = new JSONObject(retlist);
+					System.out.println("-result------" + retlist);
+					obj.put("list", retlist);
+				} else {
 					obj.put("list", "");
 				}
 			}
-				 
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
 		return String.valueOf(obj);
 	}
-	
+
 	@ModelAttribute("cylinderTypes")
 	public Map<Integer, String> populateUsers() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
 		try {
-			List<CylinderTypesBean> list= cylindermasterDao.getCylinderstypes();
-			for(CylinderTypesBean bean: list){
+			List<CylinderTypesBean> list = cylindermasterDao.getCylinderstypes();
+			for (CylinderTypesBean bean : list) {
 				statesMap.put(bean.getId(), bean.getName());
 			}
-					
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
 		}
 		return statesMap;
 	}
-
-	
-
-	
 
 	@ModelAttribute("LPONumbers")
 	public Map<Integer, String> populateLPONumbers() {
@@ -263,6 +251,7 @@ public class CylinderController {
 		}
 		return statesMap;
 	}
+
 	@ModelAttribute("stores")
 	public Map<Integer, String> populatestores() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
@@ -279,6 +268,7 @@ public class CylinderController {
 		}
 		return statesMap;
 	}
+
 	@ModelAttribute("companys")
 	public Map<Integer, String> populatecompanys() {
 		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
@@ -295,34 +285,35 @@ public class CylinderController {
 		}
 		return statesMap;
 	}
-	
+
 	@RequestMapping("/getMadeByAndExparidate")
-	public  @ResponseBody  String getMadeByAndExparidate(@ModelAttribute LpoitemsBean lpoitemsBean, HttpServletRequest request, HttpSession session)
-	{  
-		List<LpoitemsBean> retlist=null;
-		//String retlist=null;
+	public @ResponseBody String getMadeByAndExparidate(@ModelAttribute LpoitemsBean lpoitemsBean,
+			HttpServletRequest request, HttpSession session) {
+		List<LpoitemsBean> retlist = null;
+		// String retlist=null;
 		JSONObject obj = new JSONObject();
 		try {
-			System.out.println("-----lponumber-------"+lpoitemsBean.getLponumber()+"-------item------"+lpoitemsBean.getItemid());
-			if(null != request.getParameter("cid")){
-				retlist=cylindermasterDao.getMadeByAndExparidate(lpoitemsBean.getItemid(),lpoitemsBean.getLponumber());
-				if(retlist != null){
-//					obj = new JSONObject(retlist);
-				System.out.println("-result------"+retlist.size());
-				obj.put("list",retlist);
-				}else{
+			System.out.println("-----lponumber-------" + lpoitemsBean.getLponumber() + "-------item------"
+					+ lpoitemsBean.getItemid());
+			if (null != request.getParameter("cid")) {
+				retlist = cylindermasterDao.getMadeByAndExparidate(lpoitemsBean.getItemid(),
+						lpoitemsBean.getLponumber());
+				if (retlist != null) {
+					// obj = new JSONObject(retlist);
+					System.out.println("-result------" + retlist.size());
+					obj.put("list", retlist);
+				} else {
 					obj.put("list", "");
 				}
 			}
-				 
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
 			e.printStackTrace();
 		}
 		return String.valueOf(obj);
 	}
-	
+
 	@RequestMapping(value = "/inActiveCylinder")
 	public @ResponseBody String inActiveCylinder(CylindermasterBean objCylindermasterBean, ModelMap model,
 			HttpServletRequest request, HttpSession session, BindingResult objBindingResult) {
@@ -358,35 +349,34 @@ public class CylinderController {
 		}
 		return String.valueOf(jsonObj);
 	}
+
 	@RequestMapping(value = "/getTruckInCylinderCount")
-	public @ResponseBody String getTruckInCylinderCount(  ModelMap model,
-			HttpServletRequest request, HttpSession session) {
+	public @ResponseBody String getTruckInCylinderCount(ModelMap model, HttpServletRequest request,
+			HttpSession session) {
 		JSONObject jsonObj = new JSONObject();
-		 String myarray=request.getParameter("myarray");
-		 String myarray1=request.getParameter("myarray1");
-		 String truckId=request.getParameter("truckId");
-		 String[] items=myarray.split(",");
-		 String[] quantity=myarray1.split(",");
-		
+		String myarray = request.getParameter("myarray");
+		String myarray1 = request.getParameter("myarray1");
+		String truckId = request.getParameter("truckId");
+		String[] items = myarray.split(",");
+		String[] quantity = myarray1.split(",");
+
 		try {
-			
-			
-			
-			for(int i=0;i<items.length;i++){
-				
-			ItemsBean objItemsBean =  objItemsDao.getById(Integer.parseInt(items[i]));
-			if(objItemsBean.getItemType().equals("Cylinder")){
-			int count=	cylindermasterDao.truckincylinderscount(truckId,items[i]);
-			if(count<Integer.parseInt(quantity[i])){
-			 jsonObj.put("msg", objItemsBean.getName()+" available in Truck :" +count);
-			 objItemsBean.getName();
-			}else{
-				 jsonObj.put("msg", "ok");
-			}
-			
-			}else{
-				 jsonObj.put("msg", "ok");
-			}
+
+			for (int i = 0; i < items.length; i++) {
+
+				ItemsBean objItemsBean = objItemsDao.getById(Integer.parseInt(items[i]));
+				if (objItemsBean.getItemType().equals("Cylinder")) {
+					int count = cylindermasterDao.truckincylinderscount(truckId, items[i]);
+					if (count < Integer.parseInt(quantity[i])) {
+						jsonObj.put("msg", objItemsBean.getName() + " available in Truck :" + count);
+						objItemsBean.getName();
+					} else {
+						jsonObj.put("msg", "ok");
+					}
+
+				} else {
+					jsonObj.put("msg", "ok");
+				}
 			}
 
 		} catch (Exception e) {
@@ -427,46 +417,45 @@ public class CylinderController {
 		}
 		return "cylinderAutoGenHome";
 	}
+
 	@RequestMapping(value = "/autoGenaddingcylinder", method = RequestMethod.POST)
-	public String autoGenaddingcylinder( @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
-			BindingResult bindingresults, Model model,RedirectAttributes redir) {
-		
-		//List<CylindermasterBean> cylinderMaster=null;
-		
+	public String autoGenaddingcylinder(@ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
+			BindingResult bindingresults, Model model, RedirectAttributes redir) {
+
+		// List<CylindermasterBean> cylinderMaster=null;
+
 		int id = 0;
-		String size=null; 
-		
-		try
-		{
-			if(objCylindermasterBean.getSize().equals("1")){
+		String size = null;
+
+		try {
+			if (objCylindermasterBean.getSize().equals("1")) {
 				objCylindermasterBean.setCapacity("11");
 			}
-			if(objCylindermasterBean.getSize().equals("2")){
+			if (objCylindermasterBean.getSize().equals("2")) {
 				objCylindermasterBean.setCapacity("22");
 			}
-			if(objCylindermasterBean.getSize().equals("3")){
+			if (objCylindermasterBean.getSize().equals("3")) {
 				objCylindermasterBean.setCapacity("44");
 			}
-			
-			if(StringUtils.isNotBlank(objCylindermasterBean.getExpirtdate1())){
-				Date date=  KhaibarGasUtil.dateFormate(objCylindermasterBean.getExpirtdate1());
+
+			if (StringUtils.isNotBlank(objCylindermasterBean.getExpirtdate1())) {
+				Date date = KhaibarGasUtil.dateFormate(objCylindermasterBean.getExpirtdate1());
 				objCylindermasterBean.setExpirydate(date);
 			}
 			objCylindermasterBean.setStatus("1");
 			CylindermasterBean cylindermasterBean = cylindermasterDao.getByCylinderId(objCylindermasterBean);
-			if(objCylindermasterBean.getId() == 0 && cylindermasterBean == null)
-			{
-				int noOfCylinders=Integer.parseInt(objCylindermasterBean.getNoOfCylinders());
-				for(int i=1;i<=noOfCylinders;i++){
+			if (objCylindermasterBean.getId() == 0 && cylindermasterBean == null) {
+				int noOfCylinders = Integer.parseInt(objCylindermasterBean.getNoOfCylinders());
+				for (int i = 1; i <= noOfCylinders; i++) {
 					objCylindermasterBean.setId(0);
 					objCylindermasterBean.setCylinderstatus("1");
-					System.out.println("....save...."+i);
+					System.out.println("....save...." + i);
 					cylindermasterDao.save(objCylindermasterBean);
 				}
 				redir.addFlashAttribute("msg", "Record Inserted Successfully");
 				redir.addFlashAttribute("cssMsg", "success");
 			}
-			
+
 			cylindermasterDao.updateCylinderIds();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -475,5 +464,5 @@ public class CylinderController {
 		}
 		return "redirect:cylinderAutoGenHome";
 	}
-	
+
 }
