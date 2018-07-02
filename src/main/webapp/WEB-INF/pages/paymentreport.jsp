@@ -6,7 +6,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 <style>
 .modal-dialog {
-    width: 89%;
+    min-width: 60%;
     margin: 30px auto;
 }
 .form-group {
@@ -132,7 +132,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Add Gas</h4>
+				<!-- <h4 class="modal-title">Add Gas</h4> -->
         	</div>
         	<div class="modal-body"  id="modeltable">
 				<table class="table table-bordered table-striped">

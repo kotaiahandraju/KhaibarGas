@@ -11508,7 +11508,7 @@ table.dataTable thead .sorting:after {
 .treeview-menu>li>a {
     padding: 8px 5px 8px 5px;
     display: block;
-    font-size: 13px;
+    font-size: 12px;
 }
 .sidebar-collapse .treeview-menu>li>a {
     padding: 10px 5px 10px 30px;

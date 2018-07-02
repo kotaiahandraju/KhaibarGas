@@ -35,7 +35,29 @@ table#dependent_table tbody tr td:first-child::before {
 #ui-datepicker-div{
 /* 	width: auto !important; */
 }
-
+@media screen and (max-width: 640px) and (min-width: 320px) {
+#dependent_table {
+width:90%;}
+table #dependent_table {
+    width: 35%;
+    counter-reset: rowNumber;
+    min-width: 35%;
+    
+}
+#moveTo  .nc {
+    height: 23px;
+    width: 164px;
+    padding: 5px 9px;
+    -webkit-box-shadow: inset 0 1px 0px rgba(0, 0, 0, 0.015) !important;
+    box-shadow: inset 0 1px 0px rgba(0, 0, 0, 0.015) !important;
+    font-size: 11px;
+    margin-top: 5px;
+    /* display: initial; */
+}
+}
+.panel-primary .panel-body {
+    border-top: none !important;
+}
 </style>
         <div class="clearfix"></div>
              <ol class="breadcrumb">
@@ -96,7 +118,7 @@ table#dependent_table tbody tr td:first-child::before {
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Name <span class="impColor">*</span></label>
                     				<div class="col-md-6">
 		                            	<form:input type="hidden" path="id"/>
-								      	<form:input type="text" path="suppliername" class="form-control validate" placeholder="Supplier Name"/>
+								      	<form:input type="text" path="suppliername" class="form-control nc validate" placeholder="Supplier Name"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -104,7 +126,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Address <span class="impColor">*</span></label>
                     				<div class="col-md-6"> 
-		                            	<form:input type="text" path="supplieraddress" class="form-control validate" placeholder="Supplier Address"/>
+		                            	<form:input type="text" path="supplieraddress" class="form-control nc validate" placeholder="Supplier Address"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -112,7 +134,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Contact No. <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="suppliercontactno" class="form-control numericOnly validate" placeholder="Supplier Contact No."/>
+		                            	<form:input type="text" path="suppliercontactno" class="form-control nc numericOnly validate" placeholder="Supplier Contact No."/>
 								  	</div>
                     			</div>
                     		</div>
@@ -120,7 +142,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Supplier Email <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-								      	<form:input type="text" path="supplieremail" class="form-control validate" placeholder="Supplier Email"/>
+								      	<form:input type="text" path="supplieremail" class="form-control nc validate" placeholder="Supplier Email"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -128,7 +150,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">LPO Amount(AED) <span class="impColor">*</span></label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="amount"  class="form-control validate numericOnly" placeholder="LPO Amount(AED)"/>
+		                            	<form:input type="text" path="amount"  class="form-control nc validate numericOnly" placeholder="LPO Amount(AED)"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -136,7 +158,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Paid Amount(AED)</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="paidamount" onkeyup="PaidCalculation(this.value)" class="form-control numericOnly" placeholder="Paid Amount(AED)"/>
+		                            	<form:input type="text" path="paidamount" onkeyup="PaidCalculation(this.value)" class="form-control nc numericOnly" placeholder="Paid Amount(AED)"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -144,7 +166,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-6 control-label">Due Amount(AED)</label>
                     				<div class="col-md-6">
-		                            	<form:input type="text" path="dueamount" class="form-control numericOnly" placeholder="Due Amount(AED)"/>
+		                            	<form:input type="text" path="dueamount" class="form-control nc numericOnly" placeholder="Due Amount(AED)"/>
 								  	</div>
                     			</div>
                     		</div>
@@ -152,7 +174,7 @@ table#dependent_table tbody tr td:first-child::before {
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-3 control-label">Remarks</label>
                     				<div class="col-md-9">
-		                            	<form:textarea path="remarks" class="form-control" placeholder="Remarks" rows="5"></form:textarea>
+		                            	<form:textarea path="remarks" class="form-control nc" placeholder="Remarks" rows="5"></form:textarea>
 								  	</div>
                     			</div>
                     		</div>
@@ -167,10 +189,10 @@ table#dependent_table tbody tr td:first-child::before {
 									</tr>
 								</table>
                     		</div>
-                    	</div>
+                    	</div><div class="clearfix"></div>
                     	<div class="col-md-12">
                     		<div class="form-group">
-<table class="table table-bordered" id="dependent_table">
+<table class="table table-bordered table-responsive" id="dependent_table">
 	<thead>
 		<tr>
 			<th style="width: 40px;"><span>Sno</span></th>

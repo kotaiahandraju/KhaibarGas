@@ -34,10 +34,10 @@ public class CustomercylindersDao extends BaseCustomercylindersDao
 		List<Map<String, Object>> result=null;
 		jdbcTemplate = custom.getJdbcTemplate();
 		String sql = "SELECT DATE_FORMAT(pd.created_time,'%d-%b-%Y') as created_time,i.`name`,cm.trnNumber,cm.`customername`,cm.`mobile`,cm.`customeraddress`,cm.`landline`,cm.`customertype`,cm.`customerid`, "		
-						+"	pd.`items`,pd.`quantity`,pd.`price`,pd.`totalamount`,pd.`discount`,pd.`netamount`,pd.`totalnetamount`,"
+						+"	pd.`items`,sum(pd.`quantity`) as quantity,pd.`price`,pd.`totalamount`,pd.`discount`,pd.`netamount`,pd.`totalnetamount`,"
 						+" pd.`vatamount`,pd.`paidamount`,pd.`dueamount`,pd.`grossamount`,pd.`previousdueamount`,pd.`invoiceid` "	
-						+" FROM `printdata` pd,`customermaster` cm,`cylindermaster` cm1,`items` i " 
-						+"  WHERE cm.`id`=pd.`customerid` AND pd.`cylinderId`=cm1.`id` AND cm1.size=i.id   AND pd.`invoiceid`=?  GROUP BY NAME,items,quantity,price,invoiceid";
+						+" FROM `printdata` pd,`customermaster` cm,`items` i " 
+						+"  WHERE cm.`id`=pd.`customerid` AND pd.items=i.id   AND pd.`invoiceid`=?  GROUP BY NAME,items,quantity,price,invoiceid";
 		 result =jdbcTemplate.queryForList(sql, new Object[]{invoiceId});
 		 System.out.println(sql);
 		return result;

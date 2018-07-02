@@ -134,7 +134,8 @@
       <!-- /.tab-pane -->
       <!-- Settings tab content -->
       <div class="tab-pane" id="control-sidebar-settings-tab">
-        <div method="post">
+
+        <div  method="post">
           <h3 class="control-sidebar-heading">General Settings</h3>
 
           <div class="form-group">

@@ -209,7 +209,7 @@ tbody tr:nth-child(even) th {
                     </div>
                     
             <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 table-responsive">
             	<div align="center"><div id="target"> </div></div>
 <!--                 <div class="panel panel-primary"> -->
 <!--                     <div class="panel-heading"> -->
