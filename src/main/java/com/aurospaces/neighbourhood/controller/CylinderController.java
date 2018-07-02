@@ -369,17 +369,24 @@ public class CylinderController {
 		 String[] quantity=myarray1.split(",");
 		
 		try {
+			
+			
+			
 			for(int i=0;i<items.length;i++){
 				
+			ItemsBean objItemsBean =  objItemsDao.getById(Integer.parseInt(items[i]));
+			if(objItemsBean.getItemType().equals("Cylinder")){
 			int count=	cylindermasterDao.truckincylinderscount(truckId,items[i]);
 			if(count<Integer.parseInt(quantity[i])){
-			 ItemsBean objItemsBean =  objItemsDao.getById(Integer.parseInt(items[i]));
 			 jsonObj.put("msg", objItemsBean.getName()+" available in Truck :" +count);
 			 objItemsBean.getName();
 			}else{
 				 jsonObj.put("msg", "ok");
 			}
 			
+			}else{
+				 jsonObj.put("msg", "ok");
+			}
 			}
 
 		} catch (Exception e) {

@@ -722,9 +722,7 @@ public class TransactionController {
 			@RequestParam(value = "previousDueAmount", required=false) String previousDueAmount,
 			@RequestParam(value = "grossamount", required=false) String grossamount,
 			@RequestParam(value = "vatamount", required=false) String vatamount,
-			@RequestParam(value = "totalNetamount", required=false) String totalNetamount,
-			
-			HttpSession session) {
+			@RequestParam(value = "totalNetamount", required=false) String totalNetamount,HttpSession session) {
 		String sJson = null;
 		List<LpomasterBean> lpoList = null;
 		CustomercylindersBean customercylindersBean = null;
@@ -760,6 +758,25 @@ public class TransactionController {
 					customercylindersBean.setCustomerId(customerId);
 					customercylindersBean.setCylinderDeliverTruck(cylinderDeliverTruck);
 					customercylindersDao.save(customercylindersBean);
+					
+					printDataBean =new PrintDataBean();
+					printDataBean.setItems(item[i]);
+					printDataBean.setQuantity(unit[i]);
+					printDataBean.setPrice(rate[i]);
+					printDataBean.setTotalamount(totalvalue[i]);
+					printDataBean.setDiscount(discount[i]);
+					printDataBean.setNetamount(taxable[i]);
+					printDataBean.setTotalnetamount(totalNetamount);
+					printDataBean.setGrossamount(grossamount);
+					printDataBean.setPreviousdueamount(previousDueAmount);
+					printDataBean.setInvoiceid(invoiceId);
+					printDataBean.setVatamount(vatamount);
+					printDataBean.setDueamount(dueAmount);
+					printDataBean.setPaidamount(payedAmount);
+					printDataBean.setCustomerId(customerId);
+					printDataBean.setCylinderDeliverTruck(cylinderDeliverTruck);
+				
+					printDataDao.save(printDataBean);
 				}
 					List<CylindermasterBean> listOrderBeans = cylindermasterDao.getInTruckCylinders(cylinderDeliverTruck, item[i],Integer.parseInt(unit[i]));
 					
@@ -814,6 +831,7 @@ public class TransactionController {
 						}
 						// quantity,price,discount,grandTotal,vat,cylinderDeliverTruck,cylinderReturnTruck
 				}
+					
 			}
 			if(cylinderId !=null){
 				for(int i=0;i<cylinderId.length;i++){

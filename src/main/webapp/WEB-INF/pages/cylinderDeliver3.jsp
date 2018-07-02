@@ -25,33 +25,18 @@
 
 
 
-/* #dependent_table table  {
-	
+table #dependent_table {
+	/* 	width: 100%; */
 	counter-reset: rowNumber;
 }
-#dependent_table table tbody tr.rowInc {
+table tbody tr.rowInc {
 	counter-increment: rowNumber;
 }
- #dependent_table table tbody tr td:first-child::before {
+ table#dependent_table tbody tr td:first-child::before {
  content: counter(rowNumber);
-
-} */
-
-.panel-primary .panel-body {
-   border-top:none !important;
+/* 	min-width: 1em; */
+/* 	margin-right: 0.5em; */
 }
-.table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
-    padding: 4px !important;
-    line-height: 1.428571429;
-    vertical-align: top;
-    border-top: 1px solid #e6e7e8;
-}
-.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
-    border: 1px solid #e6e7e8;
-    font-size: 11px !important;
-}
-.col-md-6 {
-float:left;}
 .addItemButton {
 	cursor: pointer;
 	font-size: small;
@@ -61,19 +46,6 @@ float:left;}
 }
 #ui-datepicker-div {
 /* 	width: auto !important; */
-}
-@media screen and (max-width: 640px) and (min-width: 320px) { 
-table.table {
-    clear: both;
-    margin-bottom: 10px !important;
-    max-width: 56% !important;
-}
-.nc {
-    height: calc(2.5rem + 2px);
-    margin-bottom: 5px;
-    font-size: 11px;
-    width: 250px;
-}
 }
 
 </style>
@@ -99,7 +71,7 @@ table.table {
                       <div class="form-group">
                         <label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
                         <div class="col-md-6">
-                          <form:select path="cylinderDeliverTruck" class="form-control nc  validate" onfocus="removeBorder(this.id);" onchange="selectReturnTruck(this.value);" >
+                          <form:select path="cylinderDeliverTruck" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="selectReturnTruck(this.value);" >
                             <form:option value="">--Select Truck--</form:option>
                             <form:options items="${trucks}"></form:options>
                           </form:select>
@@ -108,7 +80,7 @@ table.table {
                       <div class="form-group">
                         <label for="focusedinput" class="col-md-6 control-label">Customer Type <span class="impColor">*</span></label>
                         <div class="col-md-6">
-                          <form:select path="customertype" class="form-control nc   validate"  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
+                          <form:select path="customertype" class="form-control   validate"  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
                             <form:option value="">-- Customer Type --</form:option>
                             <form:option value="COMMERCIAL">COMMERCIAL</form:option>
                             <form:option value="DOMESTIC">DOMESTIC</form:option>
@@ -119,7 +91,7 @@ table.table {
                       <div class="form-group">
                         <label for="focusedinput" class="col-md-6 control-label">Customer Id <span class="impColor">*</span></label>
                         <div class="col-md-6">
-                          <form:select path="customerId" class="form-control nc validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
+                          <form:select path="customerId" class="form-control  validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
                             <form:option value="">-- Select Customer Id --</form:option>
                           </form:select>
                         </div>
@@ -170,7 +142,7 @@ table.table {
                       <div class="form-group">
                         <label for="focusedinput" class="col-md-5 control-label">Cylinder Return Truck</label>
                         <div class="col-md-7">
-                          <form:select path="cylinderReturnTruck" class="form-control nc" onfocus="removeBorder(this.id);" >
+                          <form:select path="cylinderReturnTruck" class="form-control " onfocus="removeBorder(this.id);" >
                             <form:option value="">--Select Truck--</form:option>
                             <form:options items="${trucks}"></form:options>
                           </form:select>
@@ -201,7 +173,7 @@ table.table {
                   
                     
                     <div  style="display:none" >
-                      <form:select path="ownercompany" class="form-control chzn-select nc " onfocus="removeBorder(this.id);" >
+                      <form:select path="ownercompany" class="form-control chzn-select " onfocus="removeBorder(this.id);" >
                         <form:option value="">--Select company--</form:option>
                         <form:options items="${companys}"></form:options>
                       </form:select>
@@ -228,9 +200,9 @@ table.table {
         
         
         
-       
+        
                     <div class="col-md-12">
-                     <div class="row"> 
+                    <div class="row"> 
                <div class="panel panel-primary">
                 <div class="panel-heading">
                 <h4>Deliver Cylinders</h4>
@@ -262,10 +234,10 @@ table.table {
 		<div class="row"> -->
             <div >
               <div class="form-group">
-                <table class="table table-bordered table-responsive" id="dependent_table">
+                <table class="table table-bordered" id="dependent_table">
                   <thead >
                     <tr class="default" style="background:#EBEBEB">
-                      <th><span>Sno</span></th>
+                      <th style="width:40px;"><span>Sno</span></th>
                       <th><span>Items</span></th>
                       <th><span>Quantity</span></th>
                       <th><span>Price(AED)</span></th>
@@ -278,7 +250,7 @@ table.table {
                   </thead>
                   <tbody>
                     <tr id="1" class="rowInc">
-                      <td></td>
+                      <td style="width:40px;"></td>
                       <td><select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)">
                         <option value="" selected="selected" disabled="disabled">-- Select Item --</option>
                         </select> </td>
@@ -355,49 +327,20 @@ table.table {
  <i class="fa fa-2x fa-close"></i></a></div></div>
 <!-- <button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button> -->
 <div class="col-md-6 col-xs-6">
-<img height="60" src="../img/khaibarlogo.png"/></div>
+<img height="70" src="../img/khaibarlogo.png"/></div>
 <div class="col-md-6 col-xs-6" style="float:right; right:50px; text-align:right; ">
 
 <!-- <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
-<p style="font-size:12px; margin-top:10px;">Ajman  - U.A.E, 
+<p style="font-size:15px; margin-top:10px;">Ajman  - U.A.E, 
  Al Jurf Industrial Area 1
  Tel. : (+971) 6 7448668
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;font-size:14px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p style="font-size:12px;" class="printdateId"></p>
+<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="printdateId"></p>
 </div><div class="clearfix"></div>
 <div class="clearfix"></div>
-<div class="col-md-6"  style="padding-left:0px;">
-<table class="table-bordered table table-striped "  style=" padding-left:0px;"><tr style="background:#4F8EDC; color:#fff;"><td colspan="2">Customer Details</td></tr>
-			  <tr><td >Customer Name </td><td><span class="customerNameId"></span></td></tr>
-              <tr><td >Customer Type </td><td><span class="customerTypeId"></span></td></tr>
-              <tr><td >Customer Address </td><td><span class="customerAddress"></span></td></tr>
-              <tr><td >Mobile </td><td><span class="mobile"></span></td></tr>   
-              <tr><td >TRN Number </td><td><span class="trnnumber"></span></td></tr>   
-</table></div>
-<div class="col-md-6" style=" padding-right:0px;">
-<table class="table-bordered table table-striped"  ><tr style="background:#4F8EDC; color:#fff;"><td colspan="2">Return Cylinders</td></tr>
-<tr><td >Cylinders  </td><td><span class="retunCylinders"></span></td></tr>
-              <tr><td >Cylinder Return Truck </td><td><span class="returnTruck"></span></td></tr>
-              <tr><td >Previous Due Amount </td><td><span class="previousdueamount"> </span></td></tr>
-              <tr><td  colspan="2"></td> </tr>  <tr><td  colspan="2"></td> </tr>
-</table></div>
-<div class="col-md-12">
-<table class="table-bordered table table-striped deliverCylinders">
-<thead>
-<tr style="background:#4F8EDC; color:#fff;"><td colspan="7">Deliver Cylinders</td></tr>
-<tr><th>S NO</th><th>ITEMS</th><th>QUANTITY</th><th>PRICE(AED)</th><th>TOTAL AMOUNT (AED)</th><th>DISCOUNT (%)</th><th>NET AMOUNT (AED)</th></tr>
-</thead>
-			<tbody>   
-			 </tbody>  <tfoot>  
-<tr><td colspan="6" align="right">Total Amount (AED)</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>
-<tr><td colspan="6" align="right">Vat Amount( 5%) (AED)</td><td><span class="vat" id="netAmount1">  0</span></td></tr>
-<tr><td colspan="6" align="right">Paid Amount(AED)</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>
-<tr><td colspan="6" align="right">Due Amount(AED)</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>
-<tr><td colspan="6" align="right">Gross Amount (AED)</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr></tfoot>
-</table></div>
- <%-- <table class="table-responsive " >
+ <table class="table-responsive " >
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
     <tr><td ><label for="focusedinput "  >Customer Name :</label></td><td><span class="customerNameId"></span></td></tr>
@@ -435,53 +378,24 @@ table.table {
                   
 </tfoot>
     
-    </table> --%>
+    </table>
     </div>
     <div class="clearfix"></div>
     <br>
     <div class="col-md-12 printTable">
 <div class="col-md-6 col-xs-6">
-<img height="60" src="../img/khaibarlogo.png" /></div>
+<img height="70" src="../img/khaibarlogo.png" /></div>
 <div class="col-md-6 col-xs-6" style="float:right; right:50px; text-align:right; ">
 <!--  <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
-<p style="font-size:12px;">Ajman  - U.A.E, 
+<p style="font-size:15px;">Ajman  - U.A.E, 
  Al Jurf Industrial Area 1
  Tel. : (+971) 6 7448668
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;font-size:14px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p style="font-size:12px;" class="printdateId"></p>
+<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="printdateId"></p>
 </div><div class="clearfix"></div>
-<div class="col-md-6"  style="padding-left:0px;">
-<table class="table-bordered table table-striped "  style=" padding-left:0px;"><tr style="background:#4F8EDC; color:#fff;"><td colspan="2">Customer Details</td></tr>
-			  <tr><td >Customer Name </td><td><span class="customerNameId"></span></td></tr>
-              <tr><td >Customer Type </td><td><span class="customerTypeId"></span></td></tr>
-              <tr><td >Customer Address </td><td><span class="customerAddress"></span></td></tr>
-              <tr><td >Mobile </td><td><span class="mobile"></span></td></tr>   
-              <tr><td >TRN Number </td><td><span class="trnnumber"></span></td></tr>   
-</table></div>
-<div class="col-md-6" style=" padding-right:0px;">
-<table class="table-bordered table table-striped"  ><tr style="background:#4F8EDC; color:#fff;"><td colspan="2">Return Cylinders</td></tr>
-<tr><td >Cylinders  </td><td><span class="retunCylinders"></span></td></tr>
-              <tr><td >Cylinder Return Truck </td><td><span class="returnTruck"></span></td></tr>
-              <tr><td >Previous Due Amount </td><td><span class="previousdueamount"> </span></td></tr>
-              <tr><td  colspan="2"></td> </tr>  <tr><td  colspan="2"></td> </tr>
-</table></div>
-<div class="col-md-12">
-<table class="table-bordered table table-striped deliverCylinders">
-<thead>
-<tr style="background:#4F8EDC; color:#fff;"><td colspan="7">Deliver Cylinders</td></tr>
-<tr><th>S NO</th><th>ITEMS</th><th>QUANTITY</th><th>PRICE(AED)</th><th>TOTAL AMOUNT (AED)</th><th>DISCOUNT (%)</th><th>NET AMOUNT (AED)</th></tr>
-</thead>
-			<tbody>   
-			 </tbody>  <tfoot>  
-<tr><td colspan="6" align="right">Total Amount (AED)</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>
-<tr><td colspan="6" align="right">Vat Amount( 5%) (AED)</td><td><span class="vat" id="netAmount1">  0</span></td></tr>
-<tr><td colspan="6" align="right">Paid Amount(AED)</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>
-<tr><td colspan="6" align="right">Due Amount(AED)</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>
-<tr><td colspan="6" align="right">Gross Amount (AED)</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr></tfoot>
-</table></div>
-<%--  <table class="table-responsive " >
+ <table class="table-responsive " >
     <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
 			border:1px solid lightgray;">
     <tr><td ><label for="focusedinput "  >Customer Name :</label></td><td><span class="customerNameId"></span></td></tr>
@@ -501,7 +415,7 @@ table.table {
               <tr><td ><label for="focusedinput"  >Cylinder Return Truck :</label></td><td><span class="returnTruck"></span></td></tr>
               <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr> <tr><td><label for="focusedinput"  > </label></td> </tr> <tr><td><label for="focusedinput"  > </label></td> </tr>
  </tbody>   </table>
-  <table class="table-responsive deliverCylinders" id="sdsd" style="width:96%" >
+  <table class="table-responsive deliverCylinders" style="width:96%" >
     <thead style="padding:10px;	border:1px solid lightgray;">
     <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr>    
 			<tr class="default" style="background:#EBEBEB">
@@ -519,7 +433,7 @@ table.table {
                   
 </tfoot>
     
-    </table> --%>
+    </table>
     </div>
   <div id="editor"></div>
 </div>
@@ -1383,4 +1297,5 @@ function ChangeUrl(page, url) {
 $("#pageName").text("Cylinder Deliver To Customer");
 $(".cylinderDeliver").addClass("active");
 $(".transactions").addClass("active");
+
 </script>
