@@ -28,7 +28,7 @@
     width: 195px;
 }
 
-/* #dependent_table table  {
+/*  #dependent_table table  {
 	
 	counter-reset: rowNumber;
 }
@@ -38,7 +38,39 @@
  #dependent_table table tbody tr td:first-child::before {
  content: counter(rowNumber);
 
-} */
+}  */
+
+
+
+
+
+
+
+table #dependent_table {
+	/* 	width: 100%; */
+	counter-reset: rowNumber;
+}
+table tbody tr.rowInc {
+	counter-increment: rowNumber;
+}
+ table#dependent_table tbody tr td:first-child::before {
+ content: counter(rowNumber);
+/* 	min-width: 1em; */
+/* 	margin-right: 0.5em; */
+}
+.addItemButton {
+	cursor: pointer;
+	font-size: small;
+	background: green;
+	color: white;
+	padding: 3px 10px 3px 10px;
+}
+#ui-datepicker-div {
+/* 	width: auto !important; */
+}
+
+
+
 
 .panel-primary .panel-body {
    border-top:none !important;
@@ -158,7 +190,7 @@ table.table {
             <div class="col-md-6">
               <div class="panel panel-primary">
                 <div class="panel-heading">
-                  <h4>Returned Cylinders</h4>
+                  <h4>Return Cylinders List</h4>
                 </div>
                 <div class="panel-body">
                   <div class="row">
@@ -1343,7 +1375,7 @@ var j=0;
 				$(".grassAmount").text(orderObj.grossamount);
 				$(".taxinvoice").text(orderObj.invoiceid);
 				$(".printdateId").text(orderObj.created_time);
-				var varcheckBox = "<div>"+orderObj.name+"</div>"; 
+				var varcheckBox =  "<span class='col-md-4'>"+orderObj.name+"</span>"; 
 				$(".retunCylinders").append(varcheckBox);
 				$(".trnnumber").text(orderObj.trnNumber);
 				/* id="'+ dependentRowCount+ 'taxable"
