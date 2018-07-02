@@ -2016,7 +2016,7 @@ pre code {
 select.form-control:not([size]):not([multiple]) {
   height: calc(3rem + 2px);
   margin-bottom:5px;
-  font-size:11px;
+  font-size:12px;
 }
 
 select.form-control:focus::-ms-value {
