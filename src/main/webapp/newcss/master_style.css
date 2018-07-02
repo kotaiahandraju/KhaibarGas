@@ -1787,7 +1787,7 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
     /* left: -9999px; */
     opacity: 1;
     margin-left:-16px;
-        width: 15px;
+        width: 15px !important;
     height: 15px;
     margin-top: 1px;
 }

@@ -229,7 +229,8 @@ table.table {
         
         
        
-                    <div class="col-md-12">
+                    <div class="col-md-12" style="width:100%">
+             
                      <div class="row"> 
                <div class="panel panel-primary">
                 <div class="panel-heading">
@@ -262,7 +263,7 @@ table.table {
 		<div class="row"> -->
             <div >
               <div class="form-group">
-                <table class="table table-bordered table-responsive" id="dependent_table">
+                <table class="table table-bordered table-responsive col-md-12" id="dependent_table">
                   <thead >
                     <tr class="default" style="background:#EBEBEB">
                       <th><span>Sno</span></th>

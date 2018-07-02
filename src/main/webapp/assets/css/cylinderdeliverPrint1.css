@@ -1,9 +1,18 @@
+/* print table---------------------- */
 .col-md-6 {
 	float:left;
+	width:50%;
+}
+td,th {
+	height:20px;
 }
 .table > thead > tr > th, .table > tbody > tr > th, .table > tfoot > tr > th, .table > thead > tr > td, .table > tbody > tr > td, .table > tfoot > tr > td {
     padding: 4px !important;
     line-height: 1.428571429;
     vertical-align: top;
     border-top: 1px solid #e6e7e8;
+}
+.table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
+    border: 1px solid #e6e7e8;
+    font-size: 12px;
 }

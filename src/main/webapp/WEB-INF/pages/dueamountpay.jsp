@@ -22,7 +22,16 @@
 <!-- <script type="text/javascript" src="js/basic.js"></script> -->
 
 <style>
-
+.empkgs th, td {
+    font-size: 12px !important;
+    width: 321px;
+    /* width: 100%; */
+}
+table.table {
+    clear: both;
+    margin-bottom: 10px !important;
+    max-width: none !important;
+}
 
 
 table #dependent_table {
@@ -252,86 +261,87 @@ table tbody tr.rowInc {
 <div class="col-md-6 col-xs-6" style="float:right; right:50px; text-align:right; ">
 
 <!-- <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
-<p style="font-size:15px; margin-top:10px;">Ajman  - U.A.E, 
+<p style="font-size:12px; margin-top:10px;">Ajman  - U.A.E, 
  Al Jurf Industrial Area 1
  Tel. : (+971) 6 7448668
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="printdateId"></p>
+<h3 style="text-align:center;margin-bottom:0px; font-size:14px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="printdateId"></p>
 </div><div class="clearfix"></div>
 <div class="clearfix"></div>
- <table class="table-responsive " >
-    <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
-			border:1px solid lightgray;">
-    <tr><td ><label for="focusedinput "  >Customer Name :</label></td><td><span class="customerNameId"></span></td></tr>
+<div class="col-md-6"  style="padding-left:0px;">
+ <table class="table table-responsive table-bordered table-striped " >
+    <tr  style="background:#4F8EDC; color:#fff;"><td  colspan="2">Customer Details</td></tr>
+    <tr><td >Customer Name :</td><td><span class="customerNameId"></span></td></tr>
                           
-              <tr><td ><label for="focusedinput "  >Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Customer Address :</label></td><td><span class="customerAddress"></span></td></tr>
-              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr> 
-               <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr>
-                <tr><td ><label for="focusedinput "  >Paid Amount :</label></td><td><span class="paidamount"> </span></td></tr>         
-                <tr><td ><label for="focusedinput "  >Due Amount :</label></td><td><span class="Dueamount"> </span></td></tr>                  
+              <tr><td >Customer Type :</td><td><span class="customerTypeId"></span></td></tr>
+              <tr><td >Customer Address :</td><td><span class="customerAddress"></span></td></tr>
+              <tr><td >Mobile :</td><td><span class="mobile"></span></td></tr> 
+               <tr><td >Previous Due Amount :</td><td><span class="previousdueamount"> </span></td></tr>
+                <tr><td >Paid Amount :</td><td><span class="paidamount"> </span></td></tr>         
+                <tr><td >Due Amount :</td><td><span class="Dueamount"> </span></td></tr>                  
                           
-                          </tbody>
+                         
     
-    </table>
-     <table class="table-responsive">
-    <tr><td class="det"><div class="custom">Previous Invoice Data</div></td></tr><tbody style="padding:10px;
-			border:1px solid lightgray;">
-<!--      <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr> -->
-              <tr><td ><label for="focusedinput"  >Items :</label></td><td><span class="previousitems"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Total  Amount :</label></td><td><span class="previouesamount"> </span></td></tr>
-              <tr><td ><label for="focusedinput "  >Due Amount :</label></td><td><span class="previouesdueamount1"> </span></td></tr>    
-              <tr><td ><label for="focusedinput "  >Invoice ID :</label></td><td><span class="previouesInvoiceId"> </span></td></tr>     
-              <tr><td ><label for="focusedinput "  >Paid Amount :</label></td><td><span class="previouespaidamount"> </span></td></tr>
-               <tr height="26px"><td><label for="focusedinput"  > </label></td> </tr>
-                <tr height="26px"><td><label for="focusedinput"  > </label></td> </tr>    
- </tbody>   </table>
+    </table></div>
+    <div  class="col-md-6">
+     <table class="table table-responsive table-bordered table-striped">
+    <tr  style="background:#4F8EDC; color:#fff;"><td  colspan="2">Previous Invoice Data</td></tr>
+<!--      <tr><td ><label for="focusedinput"  >Cylinders :: </td><td><span class="retunCylinders"></span></td></tr> -->
+              <tr><td >Items :</td><td><span class="previousitems"></span></td></tr>
+              <tr><td >Total  Amount :</td><td><span class="previouesamount"> </span></td></tr>
+              <tr><td >Due Amount :</td><td><span class="previouesdueamount1"> </span></td></tr>    
+              <tr><td >Invoice ID :</td><td><span class="previouesInvoiceId"> </span></td></tr>     
+              <tr><td >Paid Amount :</td><td><span class="previouespaidamount"> </span></td></tr>
+               <tr height="26px"><td colspan="2"> </td> </tr>
+                <tr height="26px"><td  colspan="2"> </td> </tr>    
+  </table></div>
     </div>
     <div class="clearfix"></div>
     <br>
     <div class="col-md-12 printTable">
 <div class="col-md-6 col-xs-6">
-<img height="70" src="../img/khaibarlogo.png" /></div>
+<img height="70" src="../img/khaibarlogo.png"/></div>
 <div class="col-md-6 col-xs-6" style="float:right; right:50px; text-align:right; ">
-<!--  <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
-<p style="font-size:15px;">Ajman  - U.A.E, 
+
+<!-- <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
+<p style="font-size:12px; margin-top:10px;">Ajman  - U.A.E, 
  Al Jurf Industrial Area 1
  Tel. : (+971) 6 7448668
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="printdateId"></p>
+<h3 style="text-align:center;margin-bottom:0px; font-size:14px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="printdateId"></p>
 </div><div class="clearfix"></div>
 <div class="clearfix"></div>
- <table class="table-responsive " >
-    <tr><td class="det"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
-			border:1px solid lightgray;">
-    <tr><td ><label for="focusedinput "  >Customer Name :</label></td><td><span class="customerNameId"></span></td></tr>
+<div class="col-md-6"  style="padding-left:0px;">
+ <table class="table table-responsive table-bordered table-striped " >
+    <tr  style="background:#4F8EDC; color:#fff;"><td  colspan="2">Customer Details</td></tr>
+    <tr><td >Customer Name :</td><td><span class="customerNameId"></span></td></tr>
                           
-              <tr><td ><label for="focusedinput "  >Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Customer Address :</label></td><td><span class="customerAddress"></span></td></tr>
-              <tr><td ><label for="focusedinput mobile"  >Mobile :</label></td><td><span class="mobile"></span></td></tr> 
-               <tr><td ><label for="focusedinput "  >Previous Due Amount :</label></td><td><span class="previousdueamount"> </span></td></tr>
-                <tr><td ><label for="focusedinput "  >Paid Amount :</label></td><td><span class="paidamount"> </span></td></tr>         
-                <tr><td ><label for="focusedinput "  >Due Amount :</label></td><td><span class="Dueamount"> </span></td></tr>                  
+              <tr><td >Customer Type :</td><td><span class="customerTypeId"></span></td></tr>
+              <tr><td >Customer Address :</td><td><span class="customerAddress"></span></td></tr>
+              <tr><td >Mobile :</td><td><span class="mobile"></span></td></tr> 
+               <tr><td >Previous Due Amount :</td><td><span class="previousdueamount"> </span></td></tr>
+                <tr><td >Paid Amount :</td><td><span class="paidamount"> </span></td></tr>         
+                <tr><td >Due Amount :</td><td><span class="Dueamount"> </span></td></tr>                  
                           
-                          </tbody>
+                         
     
-    </table>
-     <table class="table-responsive">
-    <tr><td class="det"><div class="custom">Previous Invoice Data</div></td></tr><tbody style="padding:10px;
-			border:1px solid lightgray;">
-<!--      <tr><td ><label for="focusedinput"  >Cylinders :: </label></td><td><span class="retunCylinders"></span></td></tr> -->
-              <tr><td ><label for="focusedinput"  >Items :</label></td><td><span class="previousitems"></span></td></tr>
-              <tr><td ><label for="focusedinput "  >Total  Amount :</label></td><td><span class="previouesamount"> </span></td></tr>
-              <tr><td ><label for="focusedinput "  >Due Amount :</label></td><td><span class="previouesdueamount1"> </span></td></tr>    
-              <tr><td ><label for="focusedinput "  >Invoice ID :</label></td><td><span class="previouesInvoiceId"> </span></td></tr>     
-              <tr><td ><label for="focusedinput "  >Paid Amount :</label></td><td><span class="previouespaidamount"> </span></td></tr>
-               <tr height="26px"><td><label for="focusedinput"  > </label></td> </tr>
-                <tr height="26px"><td><label for="focusedinput"  > </label></td> </tr>    
- </tbody>   </table>
+    </table></div>
+    <div  class="col-md-6">
+     <table class="table table-responsive table-bordered table-striped">
+    <tr  style="background:#4F8EDC; color:#fff;"><td  colspan="2">Previous Invoice Data</td></tr>
+<!--      <tr><td ><label for="focusedinput"  >Cylinders :: </td><td><span class="retunCylinders"></span></td></tr> -->
+              <tr><td >Items :</td><td><span class="previousitems"></span></td></tr>
+              <tr><td >Total  Amount :</td><td><span class="previouesamount"> </span></td></tr>
+              <tr><td >Due Amount :</td><td><span class="previouesdueamount1"> </span></td></tr>    
+              <tr><td >Invoice ID :</td><td><span class="previouesInvoiceId"> </span></td></tr>     
+              <tr><td >Paid Amount :</td><td><span class="previouespaidamount"> </span></td></tr>
+               <tr height="26px"><td colspan="2"> </td> </tr>
+                <tr height="26px"><td  colspan="2"> </td> </tr>    
+  </table>
     </div>
   <div id="editor"></div>
 </div>
