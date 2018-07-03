@@ -156,7 +156,7 @@
 }
 .skin-blue .sidebar-menu>li:hover>a, .skin-blue .sidebar-menu>li.active>a, .skin-blue .sidebar-menu>li.menu-open>a{
   color: #ffffff;
-  background: #242a33;
+  background: #378bf9;
 }
 .skin-blue .sidebar-menu > li.active > a,
 .skin-blue .sidebar-menu > li.menu-open > a {
@@ -181,6 +181,7 @@
 .skin-blue .sidebar-menu .treeview-menu > li.active > a,
 .skin-blue .sidebar-menu .treeview-menu > li > a:hover {
   color: #fff;
+      background: #378bf9;
 }
 .skin-blue .sidebar-form {
   border-radius: 3px;
