@@ -21,10 +21,18 @@
 <!-- <script type="text/javascript" src="js/basic.js"></script> -->
 
 <style>
-
+.dcb {
+	background:#4F8EDC !important; color:#fff !important;
+    -webkit-print-color-adjust: exact; 
+}
 
 .customerdet td{
-width:180px;
+width:500px;
+}
+.deliverCylinders th {
+width:205px;
+}
+
 
 }
 table #dependent_table {
@@ -218,9 +226,9 @@ table tbody tr.rowInc {
         
         
         
-        <div class="row"> 
+       
                     <div class="col-md-12">
-                    
+                     <div class="row"> 
                <div class="panel panel-primary">
                 <div class="panel-heading">
                 <h4>Filled Cylinders</h4>
@@ -268,7 +276,7 @@ table tbody tr.rowInc {
                   </thead>
                   <tbody>
                     <tr id="1" class="rowInc">
-                      <td></td>
+                      <td style="width:60px;"></td>
                       <td><select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id);">
                         <option value="" selected="selected" disabled="disabled">-- Select Item --</option>
                         </select> </td>
@@ -340,34 +348,33 @@ table tbody tr.rowInc {
 <div class="container" id="printCylinder" style="display: none;font-size: 20px !important;">
 <div class="col-md-12 printTable">
  <div class="col-md-12 noPrint" style="padding: 5px;border-bottom: 2px solid;border-top: 2px solid;"  >
- <div class="col-md-4"><button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button></div><div class="col-md-4"></div>
+ <div class="col-md-4"><button class="printbtn btn btn-primary" onclick="PrintElem('#printCylinder');">Print</button></div><div class="col-md-4"></div>
  <div class="col-md-4" style="float:right;text-align: right;"><a style="cursor: pointer;float: right;color: red;" onclick="getBack()">
  <i class="fa fa-2x fa-close"></i></a></div></div>
 <!-- <button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button> -->
-<div class="col-md-6 col-xs-6">
-<img height="70" src="../img/khaibarlogo.png"/></div>
-<div class="col-md-6 col-xs-6" style="float:right; right:50px; text-align:right; ">
+<div class="col-md-4 col-xs-4">
+<img height="50" src="../img/khaibarlogo.png"/></div>
+<div class="col-md-8 col-xs-8" style="float:right; right:50px; text-align:right; ">
 
 <!-- <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
-<p style="font-size:15px; margin-top:10px;">Ajman  - U.A.E, 
+<p style="font-size:12px; margin-top:10px;">Ajman  - U.A.E, 
  Al Jurf Industrial Area 1
  Tel. : (+971) 6 7448668
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="invoiceDate">Date:  </p>
+<h3 style="text-align:left;margin-bottom:0px; font-size:14px;">TAX INVOICE # <span class="taxinvoice"></span> <span style="font-size:12px;" class="invoiceDate pull-right">Date:  </p></h3>
 </div><div class="clearfix"></div>
 
 <div class="col-md-12">
- <table class="table-responsive customerdet"  style="width:96%">
+ <table class="table-responsive customerdet table-bordered table-striped"  style="width:100%">
  
-    <tr><td class="det" style="width:100%;"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
-			border:1px solid lightgray;">
-    <tr><td style="margin-left:150px;" ><label for="focusedinput "  >Customer Id </label></td><td><span class="customerid"></span></td><td style="margin-left:80px;" ><label for="focusedinput "  >Customer Name </label></td><td><span class="customerNameId"></span></td></tr>
+    <tr  style="background:#4F8EDC; color:#fff;"><th colspan="4">Customer Details</th></tr>
+    <tr><td>Customer Id</td><td><span class="customerid"></span></td><td>Customer Name</td><td><span class="customerNameId"></span></td></tr>
                           
-              <tr><td  style="margin-left:150px;"><label for="focusedinput "  >Customer Type </label></td><td><span class="customerTypeId"></span></td><td style="margin-left:80px;"><label for="focusedinput "  >Customer Address </label></td><td><span class="customerNameId"></span></td></tr>
-              <tr><td style="margin-left:150px;"><label for="focusedinput "  >Filling Station </label></td><td><span class="stationname"></span></td><td style="margin-left:80px;"><label for="focusedinput "  >Mobile</label></td><td><span class="mobile"></span></td></tr>
-              <tr><td style="margin-left:150px;"><label for="focusedinput "  >Previous Due Amount </label></td><td><span class="previousdueamount"> </span></td><td style="margin-left:80px;"><label for="focusedinput "  >Land Line </label></td><td><span class="landline"></span></td></tr>       
+              <tr><td>Customer Type </td><td><span class="customerTypeId"></span></td><td  >Customer Address </td><td><span class="customerNameId"></span></td></tr>
+              <tr><td>Filling Station </td><td><span class="stationname"></span></td><td  >Mobile</td><td><span class="mobile"></span></td></tr>
+              <tr><td>Previous Due Amount </td><td><span class="previousdueamount"> </span></td><td  >Land Line </td><td><span class="landline"></span></td></tr>       
                           </tbody>
                           </div>
                           
@@ -376,12 +383,12 @@ table tbody tr.rowInc {
   
              
             
-   </div>
+   </div><div class="clearfix"></div><br>
 
-   
-  <table class="table-responsive deliverCylinders" style="width:96%" >
+   <div class="col-md-12">
+  <table class="table-responsive deliverCylinders table-bordered  table-striped" style="width:100%" >
     <thead style="padding:10px;	border:1px solid lightgray;">
-    <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr>    
+    <tr  class="dcb" style="background:#4F8EDC; color:#fff;"><td colspan="7"><div class="custom">Deliver Cylinders</div></td></tr>    
 			<tr class="default" style="background:#EBEBEB">
             <tr><th scope="col">Sno</th><th width="150px;"  scope="col">Items</th><th scope="col">Quantity</th><th scope="col">Price(AED)</th><th scope="col">Total Amount (AED)</th><th scope="col">Discount (%)</th><th scope="col">Net Amount (AED)
 			</th></tr> </thead>
@@ -389,42 +396,42 @@ table tbody tr.rowInc {
 			 </tbody>       
 						  
                   <tfoot>
- 		<tr><td width="400"></td><td width="200">Total Amount (AED)</td><td> :</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
-         <tr><td width="400"></td><td width="200">Vat Amount( ${vat }%) (AED)</td><td> :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
-         <tr><td width="400"></td><td width="200">Paid Amount(AED)</td><td> :</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
-         <tr><td width="400"></td><td width="200" >Due Amount(AED)</td><td>  :</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
-          <tr><td width="400"></td><td width="200" >Gross Amount (AED)</td><td>  :</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
+ 		<tr><td colspan="6" align="right">Total Amount (AED)</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
+         <tr><td  colspan="6"  align="right">Vat Amount( ${vat }%) (AED)</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
+         <tr><td colspan="6"  align="right">Paid Amount(AED)</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
+         <tr><td colspan="6"  align="right">Due Amount(AED)</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
+          <tr><td  colspan="6"  align="right">Gross Amount (AED)</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
                   
 </tfoot>
     
-    </table>
-    </div>
+    </table></div>
+    </div> <br> <br>
     <div class="clearfix"></div>
-    <br>
+   
     <div class="col-md-12 printTable">
-<div class="col-md-6 col-xs-6">
-<img height="70" src="../img/khaibarlogo.png" /></div>
-<div class="col-md-6 col-xs-6" style="float:right; right:50px; text-align:right; ">
-<!--  <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
-<p style="font-size:15px;">Ajman  - U.A.E, 
+<div class="col-md-4 col-xs-4">
+<img height="50" src="../img/khaibarlogo.png"/></div>
+<div class="col-md-8 col-xs-8" style="float:right; right:50px; text-align:right; ">
+
+<!-- <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
+<p style="font-size:12px; margin-top:10px;">Ajman  - U.A.E, 
  Al Jurf Industrial Area 1
  Tel. : (+971) 6 7448668
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p class="invoiceDate">Date:  </p>
+<h3 style="text-align:left;margin-bottom:0px; font-size:14px;">TAX INVOICE # <span class="taxinvoice"></span> <span style="font-size:12px;" class="invoiceDate pull-right">Date:  </p></h3>
 </div><div class="clearfix"></div>
 
 <div class="col-md-12">
- <table class="table-responsive customerdet"  style="width:96%">
+ <table class="table-responsive customerdet table-bordered table-striped"  style="width:100%">
  
-    <tr><td class="det" style="width:100%;"><div class="custom">Customer Details</div></td></tr><tbody style="padding:10px;
-			border:1px solid lightgray;">
-    <tr><td style="margin-left:150px;" ><label for="focusedinput "  >Customer Id </label></td><td><span class="customerid"></span></td><td style="margin-left:80px;" ><label for="focusedinput "  >Customer Name </label></td><td><span class="customerNameId"></span></td></tr>
+    <tr  style="background:#4F8EDC; color:#fff;"><th colspan="4">Customer Details</th></tr>
+    <tr><td>Customer Id</td><td><span class="customerid"></span></td><td>Customer Name</td><td><span class="customerNameId"></span></td></tr>
                           
-              <tr><td  style="margin-left:150px;"><label for="focusedinput "  >Customer Type </label></td><td><span class="customerTypeId"></span></td><td style="margin-left:80px;"><label for="focusedinput "  >Customer Address </label></td><td><span class="customerNameId"></span></td></tr>
-              <tr><td style="margin-left:150px;"><label for="focusedinput "  >Filling Station </label></td><td><span class="stationname"></span></td><td style="margin-left:80px;"><label for="focusedinput "  >Mobile</label></td><td><span class="mobile"></span></td></tr>
-              <tr><td style="margin-left:150px;"><label for="focusedinput "  >Previous Due Amount </label></td><td><span class="previousdueamount"> </span></td><td style="margin-left:80px;"><label for="focusedinput "  >Land Line </label></td><td><span class="landline"></span></td></tr>       
+              <tr><td>Customer Type </td><td><span class="customerTypeId"></span></td><td  >Customer Address </td><td><span class="customerNameId"></span></td></tr>
+              <tr><td>Filling Station </td><td><span class="stationname"></span></td><td  >Mobile</td><td><span class="mobile"></span></td></tr>
+              <tr><td>Previous Due Amount </td><td><span class="previousdueamount"> </span></td><td  >Land Line </td><td><span class="landline"></span></td></tr>       
                           </tbody>
                           </div>
                           
@@ -433,27 +440,28 @@ table tbody tr.rowInc {
   
              
             
-   </div>
-   
-  <table class="table-responsive deliverCylinders" style="width:96%" >
+   </div><div class="clearfix"></div><br>
+
+   <div class="col-md-12">
+  <table class="table-responsive deliverCylinders table-bordered  table-striped" style="width:100%" >
     <thead style="padding:10px;	border:1px solid lightgray;">
-    <tr><td class="det" width="100%"><div class="custom">Deliver Cylinders</div></td></tr>    
+    <tr  style="background:#4F8EDC; color:#fff;"><td colspan="7"><div class="custom">Deliver Cylinders</div></td></tr>    
 			<tr class="default" style="background:#EBEBEB">
-            <tr><th scope="col">Sno</th><th width="150px" scope="col">Items</th><th  scope="col">Quantity</th><th scope="col">Price(AED)</th><th scope="col">Total Amount (AED)</th><th scope="col">Discount (%)</th><th scope="col">Net Amount (AED)
+            <tr><th scope="col">Sno</th><th width="150px;"  scope="col">Items</th><th scope="col">Quantity</th><th scope="col">Price(AED)</th><th scope="col">Total Amount (AED)</th><th scope="col">Discount (%)</th><th scope="col">Net Amount (AED)
 			</th></tr> </thead>
 			<tbody>   
 			 </tbody>       
 						  
-                  <tfoot >
- 		<tr><td class="tfoot1" width="400"></td><td width="200">Total Amount (AED)</td><td> :</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
-         <tr><td width="400"></td><td width="200">Vat Amount( ${vat }%) (AED)</td><td> :</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
-         <tr><td width="400"></td><td width="200">Paid Amount(AED) </td><td>:</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
-         <tr><td width="400"></td><td width="200" >Due Amount(AED) </td><td> :</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
-          <tr><td width="400"></td><td width="200" >Gross Amount (AED)</td><td>  :</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
+                  <tfoot>
+ 		<tr><td colspan="6" align="right">Total Amount (AED)</td><td><span class="totalAmount" id="netAmount1">0</span></td></tr>       
+         <tr><td  colspan="6"  align="right">Vat Amount( ${vat }%) (AED)</td><td><span class="vat" id="netAmount1">  0</span></td></tr>       
+         <tr><td colspan="6"  align="right">Paid Amount(AED)</td><td><span  class="paidAmount" id="netAmount1"> 0</span></td></tr>       
+         <tr><td colspan="6"  align="right">Due Amount(AED)</td><td><span   class="dueAmount" id="netAmount1"> 0</span></td></tr>      
+          <tr><td  colspan="6"  align="right">Gross Amount (AED)</td><td><span   class="grassAmount" id="netAmount1"> 0</span></td></tr> 
                   
 </tfoot>
     
-    </table>
+    </table></div>
     </div>
   <div id="editor"></div>
 </div>
@@ -657,7 +665,7 @@ function addMoreRowsForDependent() {
 		} 
 	dependentRowCount++;
 	var dependentRow1 = '<tr class="rowInc" role="row" id="'+dependentRowCount+'">'
-			+ '<td class="labelCss"></td>'
+			+ '<td class="labelCss"  style="width:60px;"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
 			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id)"><option>Select</option></select></td>'

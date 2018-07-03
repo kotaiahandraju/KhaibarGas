@@ -396,7 +396,7 @@ width:100%;}
 <div class="container" id="printCylinder" style="display: none;font-size: 20px !important;">
 <div class="col-md-12 printTable">
  <div class="col-md-12 noPrint" style="padding: 5px;border-bottom: 2px solid;border-top: 2px solid;"  >
- <div class="col-md-4"><button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button></div><div class="col-md-4"></div>
+ <div class="col-md-4"><button class="printbtn btn btn-primary" onclick="PrintElem('#printCylinder');">Print</button></div><div class="col-md-4"></div>
  <div class="col-md-4" style="float:right;text-align: right;"><a style="cursor: pointer;float: right;color: red;" onclick="getBack()">
  <i class="fa fa-2x fa-close"></i></a></div></div>
 <!-- <button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button> -->
@@ -429,7 +429,7 @@ width:100%;}
               <tr><td >Previous Due Amount </td><td><span class="previousdueamount"> </span></td></tr>
 <!--               <tr><td  colspan="2"></td> </tr>  <tr><td  colspan="2"></td> </tr> -->
 </table></div>
-<div class="col-md-12">
+<div class="col-md-12"  style="padding-left:0px; padding-right:0px;">
 <table class="table-bordered table table-striped deliverCylinders">
 <thead>
 <tr style="background:#4F8EDC; color:#fff;"><td colspan="7">Deliver Cylinders</td></tr>
@@ -513,7 +513,7 @@ width:100%;}
               <tr><td >Previous Due Amount </td><td><span class="previousdueamount"> </span></td></tr>
 <!--               <tr><td  colspan="2"></td> </tr>  <tr><td  colspan="2"></td> </tr> -->
 </table></div>
-<div class="col-md-12">
+<div class="col-md-12"  style="padding-left:0px; padding-right:0px;">
 <table class="table-bordered table table-striped deliverCylinders">
 <thead>
 <tr style="background:#4F8EDC; color:#fff;"><td colspan="7">Deliver Cylinders</td></tr>
@@ -1247,7 +1247,7 @@ $(function() {
 	  $('.printbtn').click(function() {
 		  $("#printCylinder").css('display', 'block');
 		  console.log($('#printCylinder').html());
-	    doc.fromHTML('<div class="col-md-12 printTable"><button class="printbtn btn-primary" >Print</button><div class="clearfix"></div> <table class="table-responsive "> <tbody><tr><td class="det"><div class="custom">Customer Details</div></td></tr></tbody><tbody style="padding:10px;   border:1px solid lightgray;"> <tr><td><label for="focusedinput ">Customer Name :</label></td><td><span class="customerNameId"></span></td></tr> <tr><td><label for="focusedinput ">Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr> <tr><td><label for="focusedinput ">Customer Address :</label></td><td><span class="customerAddress"></span></td></tr> <tr><td><label for="focusedinput mobile">Mobile :</label></td><td><span class="mobile"></span></td></tr> </tbody> </table>', 15, 15, {
+	    doc.fromHTML('<div class="col-md-12 printTable"><button class="printbtn btn btn-primary" >Print</button><div class="clearfix"></div> <table class="table-responsive "> <tbody><tr><td class="det"><div class="custom">Customer Details</div></td></tr></tbody><tbody style="padding:10px;   border:1px solid lightgray;"> <tr><td><label for="focusedinput ">Customer Name :</label></td><td><span class="customerNameId"></span></td></tr> <tr><td><label for="focusedinput ">Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr> <tr><td><label for="focusedinput ">Customer Address :</label></td><td><span class="customerAddress"></span></td></tr> <tr><td><label for="focusedinput mobile">Mobile :</label></td><td><span class="mobile"></span></td></tr> </tbody> </table>', 15, 15, {
 	      'width': 170,
 	      'elementHandlers': specialElementHandlers
 	    });
