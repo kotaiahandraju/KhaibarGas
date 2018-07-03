@@ -53,6 +53,7 @@ public class ChangepasswordController
 		{
 			/*objuserBean.setPassword(objuserBean.getPassword());*/
 			userDao.UpdatePassword(newpassword, objuserBean.getId());
+			request.setAttribute("msg", "Password Updated Successfully");
 			redirect.addFlashAttribute("msg", "Password Updated Successfully");
 			redirect.addFlashAttribute("cssMsg", "warning");
 			return "redirect:../logoutHome";

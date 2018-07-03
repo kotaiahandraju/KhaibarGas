@@ -132,7 +132,7 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<!-- <h4 class="modal-title">Add Gas</h4> -->
+				<h4 class="modal-title">Invoice Id: <span id="modelInvoiceid"></span></h4>
         	</div>
         	<div class="modal-body"  id="modeltable">
 				<table class="table table-bordered table-striped">
@@ -395,6 +395,7 @@ function getinvoicedata(invoiceId){
 			$("#tdueamount").text(orderObj.dueamount);
 			$("#tgrossamount").text(orderObj.grossamount);
 			$("#tpreviousdueamount").text(orderObj.previousdueamount);
+			$("#modelInvoiceid").text(invoiceId);
 			
 		});
 	});

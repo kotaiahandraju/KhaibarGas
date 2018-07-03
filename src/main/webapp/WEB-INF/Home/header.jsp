@@ -312,7 +312,7 @@ function tooltip(){
                     <a href="#"><i class="pull-right fa fa-pencil"></i>Edit Profile </a>
                   </div> -->
                   <div class="col-12 text-left">
-                    <a href="#"> <i class="pull-right fa fa-cog"></i>Change Password</a>
+                    <a href="changePassword"> <i class="pull-right fa fa-cog"></i>Change Password</a>
                   </div>
                   <div class="col-12 text-left">
                     <a href="../logoutHome" class=""><i class=" pull-right fa fa-power-off"></i>Sign Out</a>
