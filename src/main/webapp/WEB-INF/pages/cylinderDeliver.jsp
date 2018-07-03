@@ -23,9 +23,12 @@
 
 <style>
 
+.empkgs th, td {
+    font-size: 12px !important;
+    width: 205px;
+}
 
-
-/* #dependent_table table  {
+/*  #dependent_table table  {
 	
 	counter-reset: rowNumber;
 }
@@ -35,7 +38,39 @@
  #dependent_table table tbody tr td:first-child::before {
  content: counter(rowNumber);
 
-} */
+}  */
+
+
+
+
+
+
+
+table #dependent_table {
+	/* 	width: 100%; */
+	counter-reset: rowNumber;
+}
+table tbody tr.rowInc {
+	counter-increment: rowNumber;
+}
+ table#dependent_table tbody tr td:first-child::before {
+ content: counter(rowNumber);
+/* 	min-width: 1em; */
+/* 	margin-right: 0.5em; */
+}
+.addItemButton {
+	cursor: pointer;
+	font-size: small;
+	background: green;
+	color: white;
+	padding: 3px 10px 3px 10px;
+}
+#ui-datepicker-div {
+/* 	width: auto !important; */
+}
+
+
+
 
 .panel-primary .panel-body {
    border-top:none !important;
@@ -62,12 +97,20 @@ float:left;}
 #ui-datepicker-div {
 /* 	width: auto !important; */
 }
+ select {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    margin-bottom: 5px;
+}
 @media screen and (max-width: 640px) and (min-width: 320px) { 
 table.table {
     clear: both;
     margin-bottom: 10px !important;
-    max-width: 56% !important;
+    max-width: 66% !important;
 }
+.col-md-6 {
+width:100%;}
 .nc {
     height: calc(2.5rem + 2px);
     margin-bottom: 5px;
@@ -97,8 +140,8 @@ table.table {
                   <div class="row">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Truck <span class="impColor">*</span></label>
-                        <div class="col-md-6">
+                        <label for="focusedinput" class="col-md-5 control-label">Truck <span class="impColor">*</span></label>
+                        <div class="col-md-7">
                           <form:select path="cylinderDeliverTruck" class="form-control nc  validate" onfocus="removeBorder(this.id);" onchange="selectReturnTruck(this.value);" >
                             <form:option value="">--Select Truck--</form:option>
                             <form:options items="${trucks}"></form:options>
@@ -106,8 +149,8 @@ table.table {
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Customer Type <span class="impColor">*</span></label>
-                        <div class="col-md-6">
+                        <label for="focusedinput" class="col-md-5 control-label">Customer Type <span class="impColor">*</span></label>
+                        <div class="col-md-7">
                           <form:select path="customertype" class="form-control nc   validate"  onfocus="removeBorder(this.id);" onchange="getCustomerIds(this.value)">
                             <form:option value="">-- Customer Type --</form:option>
                             <form:option value="COMMERCIAL">COMMERCIAL</form:option>
@@ -117,8 +160,8 @@ table.table {
                         </div>
                       </div>
                       <div class="form-group">
-                        <label for="focusedinput" class="col-md-6 control-label">Customer Id <span class="impColor">*</span></label>
-                        <div class="col-md-6">
+                        <label for="focusedinput" class="col-md-5 control-label">Customer Id <span class="impColor">*</span></label>
+                        <div class="col-md-7">
                           <form:select path="customerId" class="form-control nc validate" onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
                             <form:option value="">-- Select Customer Id --</form:option>
                           </form:select>
@@ -155,7 +198,7 @@ table.table {
             <div class="col-md-6">
               <div class="panel panel-primary">
                 <div class="panel-heading">
-                  <h4>Returned Cylinders</h4>
+                  <h4>Return Cylinders List</h4>
                 </div>
                 <div class="panel-body">
                   <div class="row">
@@ -237,7 +280,7 @@ table.table {
                 <h4>Deliver Cylinders</h4>
                  <table class="options notPrintMe">
                   <tr>
-                    <td class="hideme"><span class="addItemButton btn-danger" onclick="addMoreRowsForDependent(this.form);">Add Item</span></td>
+                    <td class="hideme" align="right"><span class="addItemButton btn-danger" onclick="addMoreRowsForDependent(this.form);">Add Item</span></td>
                   </tr>
                 </table>
                 
@@ -266,7 +309,7 @@ table.table {
                 <table class="table table-bordered table-responsive col-md-12" id="dependent_table">
                   <thead >
                     <tr class="default" style="background:#EBEBEB">
-                      <th><span>Sno</span></th>
+                      <th width="50px"><span>Sno</span></th>
                       <th><span>Items</span></th>
                       <th><span>Quantity</span></th>
                       <th><span>Price(AED)</span></th>
@@ -279,7 +322,7 @@ table.table {
                   </thead>
                   <tbody>
                     <tr id="1" class="rowInc">
-                      <td></td>
+                      <td style="width:60px;"></td>
                       <td><select name="item1" class="form-control " id="1item" style="width: 100%;font-size: small;" title="Select Product" onfocus="removeBorder(this.id)" onchange="getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)">
                         <option value="" selected="selected" disabled="disabled">-- Select Item --</option>
                         </select> </td>
@@ -290,6 +333,8 @@ table.table {
                       <td><input name="taxable" value="0.00" title="Taxable Value" id="1taxable" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td>
                       <!-- 								<td><input name="vat" placeholder="Vat" id="1vat" value="5" type="text" onkeydown="removeBorder(this.id);" class="form-control" /></td> -->
                       <!-- 								<td><input name="netAmount" placeholder="Net Amount"  id="1netAmount" type="text" onkeydown="removeBorder(this.id);" class="form-control" readonly="readonly"/></td> -->
+                   <!--  <td  style="width:60px;color:green;    padding-top: 16px !important;
+    text-align: center; cursor:pointer;"  class="" onclick="addMoreRowsForDependent(this.form);"><i data-toggle="tooltip" title="Add Item" class="fa fa-plus"></i></td> -->
                     </tr>
                   </tbody>
                   <tfoot>
@@ -351,13 +396,13 @@ table.table {
 <div class="container" id="printCylinder" style="display: none;font-size: 20px !important;">
 <div class="col-md-12 printTable">
  <div class="col-md-12 noPrint" style="padding: 5px;border-bottom: 2px solid;border-top: 2px solid;"  >
- <div class="col-md-4"><button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button></div><div class="col-md-4"></div>
+ <div class="col-md-4"><button class="printbtn btn btn-primary" onclick="PrintElem('#printCylinder');">Print</button></div><div class="col-md-4"></div>
  <div class="col-md-4" style="float:right;text-align: right;"><a style="cursor: pointer;float: right;color: red;" onclick="getBack()">
  <i class="fa fa-2x fa-close"></i></a></div></div>
 <!-- <button class="printbtn btn-primary" onclick="PrintElem('#printCylinder');">Print</button> -->
-<div class="col-md-6 col-xs-6">
-<img height="60" src="../img/khaibarlogo.png"/></div>
-<div class="col-md-6 col-xs-6" style="float:right; right:50px; text-align:right; ">
+<div class="col-md-4 col-xs-4">
+<img height="50" src="../img/khaibarlogo.png"/></div>
+<div class="col-md-8 col-xs-8" style="float:right; right:50px; text-align:right; ">
 
 <!-- <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
 <p style="font-size:12px; margin-top:10px;">Ajman  - U.A.E, 
@@ -366,7 +411,7 @@ table.table {
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;font-size:14px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p style="font-size:12px;" class="printdateId"></p>
+<h3 style="text-align:left;margin-bottom:0px;font-size:14px;">TAX INVOICE # <span class="taxinvoice"></span><span  style="font-size:12px;" class="printdateId pull-right"></span></h3><!-- <hr style="margin:2px;"> -->
 </div><div class="clearfix"></div>
 <div class="clearfix"></div>
 <div class="col-md-6"  style="padding-left:0px;">
@@ -382,9 +427,9 @@ table.table {
 <tr><td >Cylinders  </td><td><span class="retunCylinders"></span></td></tr>
               <tr><td >Cylinder Return Truck </td><td><span class="returnTruck"></span></td></tr>
               <tr><td >Previous Due Amount </td><td><span class="previousdueamount"> </span></td></tr>
-              <tr><td  colspan="2"></td> </tr>  <tr><td  colspan="2"></td> </tr>
+<!--               <tr><td  colspan="2"></td> </tr>  <tr><td  colspan="2"></td> </tr> -->
 </table></div>
-<div class="col-md-12">
+<div class="col-md-12"  style="padding-left:0px; padding-right:0px;">
 <table class="table-bordered table table-striped deliverCylinders">
 <thead>
 <tr style="background:#4F8EDC; color:#fff;"><td colspan="7">Deliver Cylinders</td></tr>
@@ -441,9 +486,9 @@ table.table {
     <div class="clearfix"></div>
     <br>
     <div class="col-md-12 printTable">
-<div class="col-md-6 col-xs-6">
-<img height="60" src="../img/khaibarlogo.png" /></div>
-<div class="col-md-6 col-xs-6" style="float:right; right:50px; text-align:right; ">
+<div class="col-md-4 col-xs-4">
+<img height="50" src="../img/khaibarlogo.png" /></div>
+<div class="col-md-8 col-xs-8" style="float:right; right:50px; text-align:right; ">
 <!--  <h3 style="margin-bottom:0px;">Khaibar Gas Bottling & Distribution LLC</h3>  -->
 <p style="font-size:12px;">Ajman  - U.A.E, 
  Al Jurf Industrial Area 1
@@ -451,7 +496,7 @@ table.table {
  TRN : 100027344900003</p>
 </div><div class="clearfix"></div>
 <div class="col-md-12">
-<h3 style="text-align:center;margin-bottom:0px;font-size:14px;">TAX INVOICE # <span class="taxinvoice"></span></h3><hr style="margin:2px;"><p style="font-size:12px;" class="printdateId"></p>
+<h3 style="text-align:left;margin-bottom:0px;font-size:14px;">TAX INVOICE # <span class="taxinvoice"></span> <span  style="font-size:12px;" class="printdateId pull-right"></span></h3>
 </div><div class="clearfix"></div>
 <div class="col-md-6"  style="padding-left:0px;">
 <table class="table-bordered table table-striped "  style=" padding-left:0px;"><tr style="background:#4F8EDC; color:#fff;"><td colspan="2">Customer Details</td></tr>
@@ -466,9 +511,9 @@ table.table {
 <tr><td >Cylinders  </td><td><span class="retunCylinders"></span></td></tr>
               <tr><td >Cylinder Return Truck </td><td><span class="returnTruck"></span></td></tr>
               <tr><td >Previous Due Amount </td><td><span class="previousdueamount"> </span></td></tr>
-              <tr><td  colspan="2"></td> </tr>  <tr><td  colspan="2"></td> </tr>
+<!--               <tr><td  colspan="2"></td> </tr>  <tr><td  colspan="2"></td> </tr> -->
 </table></div>
-<div class="col-md-12">
+<div class="col-md-12"  style="padding-left:0px; padding-right:0px;">
 <table class="table-bordered table table-striped deliverCylinders">
 <thead>
 <tr style="background:#4F8EDC; color:#fff;"><td colspan="7">Deliver Cylinders</td></tr>
@@ -724,7 +769,7 @@ function addMoreRowsForDependent() {
 		} 
 	dependentRowCount++;
 	var dependentRow1 = '<tr class="rowInc" role="row" id="'+dependentRowCount+'">'
-			+ '<td class="labelCss"></td>'
+			+ '<td class="labelCss" style="width:60px;"></td>'
 			+ '<td class="inputCss"><select title="Select Item" name="item1" style="width: 100%;font-size: small;" id="'
 			+ dependentRowCount
 			+ 'item" class="form-control validate" onchange="removeBorder(this.id),getTarrifPrice(this.value,this.id),getTruckInCylinderCount(this.id,this.value)"><option>Select</option></select></td>'
@@ -1202,7 +1247,7 @@ $(function() {
 	  $('.printbtn').click(function() {
 		  $("#printCylinder").css('display', 'block');
 		  console.log($('#printCylinder').html());
-	    doc.fromHTML('<div class="col-md-12 printTable"><button class="printbtn btn-primary" >Print</button><div class="clearfix"></div> <table class="table-responsive "> <tbody><tr><td class="det"><div class="custom">Customer Details</div></td></tr></tbody><tbody style="padding:10px;   border:1px solid lightgray;"> <tr><td><label for="focusedinput ">Customer Name :</label></td><td><span class="customerNameId"></span></td></tr> <tr><td><label for="focusedinput ">Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr> <tr><td><label for="focusedinput ">Customer Address :</label></td><td><span class="customerAddress"></span></td></tr> <tr><td><label for="focusedinput mobile">Mobile :</label></td><td><span class="mobile"></span></td></tr> </tbody> </table>', 15, 15, {
+	    doc.fromHTML('<div class="col-md-12 printTable"><button class="printbtn btn btn-primary" >Print</button><div class="clearfix"></div> <table class="table-responsive "> <tbody><tr><td class="det"><div class="custom">Customer Details</div></td></tr></tbody><tbody style="padding:10px;   border:1px solid lightgray;"> <tr><td><label for="focusedinput ">Customer Name :</label></td><td><span class="customerNameId"></span></td></tr> <tr><td><label for="focusedinput ">Customer Type :</label></td><td><span class="customerTypeId"></span></td></tr> <tr><td><label for="focusedinput ">Customer Address :</label></td><td><span class="customerAddress"></span></td></tr> <tr><td><label for="focusedinput mobile">Mobile :</label></td><td><span class="mobile"></span></td></tr> </tbody> </table>', 15, 15, {
 	      'width': 170,
 	      'elementHandlers': specialElementHandlers
 	    });
@@ -1340,7 +1385,7 @@ var j=0;
 				$(".grassAmount").text(orderObj.grossamount);
 				$(".taxinvoice").text(orderObj.invoiceid);
 				$(".printdateId").text(orderObj.created_time);
-				var varcheckBox = "<div>"+orderObj.name+"</div>"; 
+				var varcheckBox =  "<span class='col-md-4'>"+orderObj.name+"</span>"; 
 				$(".retunCylinders").append(varcheckBox);
 				$(".trnnumber").text(orderObj.trnNumber);
 				/* id="'+ dependentRowCount+ 'taxable"

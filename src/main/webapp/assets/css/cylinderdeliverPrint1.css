@@ -15,4 +15,15 @@ td,th {
 .table-bordered > thead > tr > th, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > tbody > tr > td, .table-bordered > tfoot > tr > td {
     border: 1px solid #e6e7e8;
     font-size: 12px;
+    padding-left:3px;
+    padding-right:3px;
 }
+.bgs {
+	background:#4F8EDC; color:#fff;
+}
+@media print {
+tr.dcb {
+	background:#4F8EDC !important; color:#fff !important;
+    -webkit-print-color-adjust: exact; 
+}}
+
