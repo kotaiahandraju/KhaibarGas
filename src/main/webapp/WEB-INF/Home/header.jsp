@@ -376,7 +376,8 @@ function tooltip(){
  <li class="tariffMaster"><a href="${baseurl }/admin/tariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Tariff Master</span></a></li>
 				<li class="customerTariffMaster"><a href="${baseurl }/admin/customerTariffMaster"><i class="fa fa-bar-chart-o"></i> <span>Private Tariff Master</span></a></li>              </ul>
             </li> 
-             <li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>       
+             <li class="securedeposit"><a href="${baseurl }/admin/securedeposit"><i class="fa fa-bar-chart-o"></i> <span>Security Deposit </span></a></li>  
+             <li>&nbsp;</li>     <li>&nbsp;</li>    <li>&nbsp;</li>      
           </ul>
           
         </li>
