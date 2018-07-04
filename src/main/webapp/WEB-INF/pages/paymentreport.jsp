@@ -192,7 +192,7 @@ function displayTable(listOrders) {
 	var totalpaidamount = 0.00;
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ ' <thead><tr><th>Created Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Invoice Id</th><th>Item Name</th><th>Item Amount</th><th>Discount</th><th>Net Amount</th><th>Vat Amount</th><th>Total Amount</th><th>Previous Due Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody> '
+		+ ' <thead><tr><th>Created Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Invoice Id</th><th>Item Name</th><th>Quantity</th><th>Item Amount</th><th>Discount</th><th>Net Amount</th><th>Vat Amount</th><th>Total Amount</th><th>Previous Due Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody> '
 		+'<tfoot><tr><th colspan="6" style="text-align:center;"  >Total</th><th id="itemamount"></th><th id="discount"></th><th id="netamount">1</th><th id="vatamount">1</th></th><th id="totalamount"></th><th></th><th  id="paidamount"></th><th id="dueamount"></th></tfoot></table>';
 $('#tableId').html(tableHead);
 	serviceUnitArray = {};
@@ -235,6 +235,7 @@ $('#tableId').html(tableHead);
 		+ "<td  title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
 		+ "<td  title='"+orderObj.invoiceId+"'><a  href='#'  onclick=getinvoicedata('"+orderObj.invoiceId+"')>" + orderObj.invoiceId + "</a></td>"
 		+ "<td title='"+orderObj.itemName+"'>" + orderObj.itemName + "</td>"
+		+ "<td title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
 		+ "<td title='"+orderObj.itemamount+"'>" +orderObj.itemamount + "</td>"
 		+ "<td title='"+orderObj.discount+"'>" + orderObj.discount + "</td>"
 		+ "<td title='"+orderObj.netamount+"'>" + orderObj.netamount + "</td>"
@@ -354,7 +355,7 @@ $(function(){
 			var html = "<option value=''>-- Select Customer Id --</option>";
 			$.each(alldata,function(i, catObj) {
 				
-				 html = html + '<option value="'+ catObj.id + '">'+ catObj.customerid +'('+ catObj.customername + ') </option>';
+				 html = html + '<option value="'+ catObj.id + '">'+ catObj.customerid +' ( '+ catObj.customername + ' ) </option>';
 			});
 			$('#customerId').empty().append(html);
 //	 		$("#customerId").trigger("chosen:updated");
