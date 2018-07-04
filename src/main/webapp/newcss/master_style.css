@@ -1786,12 +1786,13 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
     position: absolute;
     /* left: -9999px; */
     opacity: 1;
-    margin-left:-16px;
+    margin-left:12px;
         width: 15px !important;
     height: 15px;
     margin-top: 1px;
 }
 [type=checkbox]+label {
+	margin-left:32px;
    /*  font-weight: 300;
     position: relative;
     padding-left: 35px;
