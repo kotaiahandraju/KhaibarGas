@@ -297,7 +297,7 @@ function movetoTruck(){
 		var stationname = $("#stationname").val();
 		var size = $("#cylinderType").val();
 		var formData = new FormData();
-		formData.append('stationname', stationname);
+		formData.append('fillingstationId', stationname);
 		formData.append('size', size);
 		$.fn.makeMultipartRequest('POST', 'onChangeCylinderMovetoTruck', false,
 				formData, false, 'text', function(data) {

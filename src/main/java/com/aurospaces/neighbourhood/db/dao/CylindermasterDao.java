@@ -329,8 +329,8 @@ public class CylindermasterDao extends BaseCylindermasterDao
 				StringBuffer buffer = new StringBuffer();
 				buffer.append("select count(cylinderstatus) as count1 from cylindermaster where 1=1");
 				
-				if(StringUtils.isNotBlank(cylindermasterBean.getStationname())){
-					buffer.append(" and fillingstationId="+cylindermasterBean.getStationname() );
+				if(StringUtils.isNotBlank(cylindermasterBean.getFillingstationId())){
+					buffer.append(" and fillingstationId="+cylindermasterBean.getFillingstationId() );
 				}
 				if(StringUtils.isNotBlank(cylindermasterBean.getSize())){
 					buffer.append(" and size="+cylindermasterBean.getSize() );			

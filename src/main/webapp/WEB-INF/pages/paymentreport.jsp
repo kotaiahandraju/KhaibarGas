@@ -354,9 +354,7 @@ $(function(){
 			var html = "<option value=''>-- Select Customer Id --</option>";
 			$.each(alldata,function(i, catObj) {
 				
-				 html = html + '<option value="'
-					+ catObj.id + '">'
-					+ catObj.customerid + '</option>';
+				 html = html + '<option value="'+ catObj.id + '">'+ catObj.customerid +'('+ catObj.customername + ') </option>';
 			});
 			$('#customerId').empty().append(html);
 //	 		$("#customerId").trigger("chosen:updated");

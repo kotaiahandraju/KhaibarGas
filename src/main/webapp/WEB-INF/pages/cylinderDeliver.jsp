@@ -1385,7 +1385,7 @@ var j=0;
 				$(".grassAmount").text(orderObj.grossamount);
 				$(".taxinvoice").text(orderObj.invoiceid);
 				$(".printdateId").text(orderObj.created_time);
-				var varcheckBox =  "<span class='col-md-4'>"+orderObj.name+"</span>"; 
+				var varcheckBox =  "<span class='col-md-12'>"+orderObj.name+"</span>"; 
 				$(".retunCylinders").append(varcheckBox);
 				$(".trnnumber").text(orderObj.trnNumber);
 				/* id="'+ dependentRowCount+ 'taxable"
