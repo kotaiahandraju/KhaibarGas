@@ -1534,6 +1534,7 @@
 /*---light sidebar---*/
 .skin-purple-light .main-header .navbar {
   background-color: #745af2;
+  float:right;
 }
 .skin-purple-light .main-header .navbar .nav > li > a {
   color: #ffffff;
