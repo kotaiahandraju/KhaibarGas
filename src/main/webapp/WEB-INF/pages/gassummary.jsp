@@ -5,24 +5,15 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 <style>
-.modal-dialog {
-    min-width: 60%;
-    margin: 30px auto;
-}
 .form-group {
     margin-bottom: 25px;
     margin-top: 10px;
 }
-.modal-header {
-    padding: 7px;
-    border-bottom: 1px solid #e5e5e5;
-    min-height: 16.428571429px;
-}
 </style>
-<div class="clearfix"></div>
+	<div class="clearfix"></div>
 	<ol class="breadcrumb">
 		<li><a href="#">Home</a></li>
-		<li>Payment Report</li>
+		<li>Gas Summary</li>
 	</ol>
 	<div class="clearfix"></div>
 	<div class="container">
@@ -40,7 +31,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">From Date</label>
 							<div class="col-md-7">
-							<form:input path="fromDate" class="form-control " readonly="true"    onkeydown="removeBorder(this.id)"/>
+							<form:input path="fromDate" class="form-control "   onkeydown="removeBorder(this.id)"/>
 							</div>
 						</div>
 					</div>
@@ -48,7 +39,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">To Date</label>
 							<div class="col-md-7">
-				        		<form:input path="toDate" class="form-control " readonly="true"   onkeydown="removeBorder(this.id)"/>
+				        		<form:input path="toDate" class="form-control "   onkeydown="removeBorder(this.id)"/>
 							</div>
 						</div>
 					</div>
@@ -56,7 +47,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">Month</label>
 							<div class="col-md-7">
-				        		<form:input path="month" class="form-control "  readonly="true"  onkeydown="removeBorder(this.id)"/>
+				        		<form:input path="month" class="form-control "  onkeydown="removeBorder(this.id)"/>
 							</div>
 						</div>
 					</div>
@@ -64,24 +55,36 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">Customer Type</label>
 							<div class="col-md-7">
-				        		<form:select path="customertype" class="form-control   "  onfocus="removeBorder(this.id);" onchange="searchData(),getCustomerIds(this.value)">
-                            <form:option value="">-- Customer Type --</form:option>
-                            <form:option value="COMMERCIAL">COMMERCIAL</form:option>
-                            <form:option value="DOMESTIC">DOMESTIC</form:option>
-                            <form:option value="INDUSTIAL">INDUSTIAL</form:option>
-                             <form:option value="PRIVATE">PRIVATE</form:option>
-                          </form:select>
+<%-- 				        		<form:input path="customerType" class="form-control "  onkeydown="removeBorder(this.id)"/> --%>
+				        		<form:select path="customerType"  class="form-control "  onfocus="removeBorder(this.id)">
+				        		<form:option value="">-- Select Customer Type --</form:option>
+				        			<form:option value="public">Khaibar Customer</form:option>
+				        			<form:option value="Private">Private Customer</form:option>
+				        		</form:select>
 							</div>
 						</div>
 						
 					</div>
 					<div class="col-md-3">
 						<div class="form-group">
-							<label for="focusedinput" class="col-md-5 control-label">Customer Id</label>
+							<label for="focusedinput" class="col-md-5 control-label">Filling Station</label>
 							<div class="col-md-7">
-				        		<form:select path="customerId" class="form-control  " onfocus="removeBorder(this.id);" onchange="getCustomerDetails(this.value)">
-                            <form:option value="">-- Select Customer Id --</form:option>
-                          </form:select>
+				        		<form:select path="fillingStationId"  class="form-control "  onfocus="removeBorder(this.id)">
+				        		<form:option value="">-- Select Filling Station --</form:option>
+				        			<form:options items="${fillingstation }"></form:options>
+				        		</form:select>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-5 control-label">Gas Type</label>
+							<div class="col-md-7">
+				        		<form:select path="gasType"  class="form-control "  onfocus="removeBorder(this.id)">
+				        		<form:option value="">-- Select gas type --</form:option>
+				        		<form:option value="Used Gas">Used Gas</form:option>
+				        		<form:option value="Added gas">Added Gas</form:option>
+				        		</form:select>
 							</div>
 						</div>
 					</div>
@@ -97,7 +100,7 @@
 				        		<input type="reset" class="btn btn-danger" value="Reset" >
 							</div>
 						</div>
-					</div><div class="clearfix"></div>
+					</div>
 					</div>
 					</div>
 				</div>
@@ -107,14 +110,17 @@
               <div class="col-md-12">
                     <div class="panel panel-primary">
                         <div class="panel-heading">
-                            <h4>Payment Report List</h4>
+                            <h4>Gas Summary</h4>
                             <div class="options">   
                                 <a href="javascript:;" class="panel-collapse"><i class="fa fa-chevron-down"></i></a>
                             </div>
                         </div>
                         <div class="panel-body collapse in">
                         <div class="table-responsive" id="tableId">
-                            <table id="example" class="table table-striped table-bordered datatables"><thead><tr><th>Payment Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Items</th><th>Invoice</th><th>Item Amount</th><th>Discount Amount</th><th> Net Amount</th><th> Vat Amount</th><th> Previous Due Amount</th><th>Gross Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody></table>
+                            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-bordered datatables" id="example">
+                             <thead><tr><th>Date</th><th>Fillingstation Name</th><th>Gas</th><th>Gas InKgs</th><th>Closed Gas InKgs</th></tr></thead><tbody></tbody></table>
+                                <tbody></tbody>
+                            </table>
                             </div>
                         </div>
                     </div>
@@ -124,41 +130,9 @@
          	</div>
 		</div>
 	</div> <!-- container -->
-	
-	<!-- Modal Starts here-->
-<div class="modal fade" id="myModal" data-backdrop="static" data-keyboard="false" role="dialog">
-	<div class="modal-dialog">
-		<!-- Modal content-->
-		<div class="modal-content">
-			<div class="modal-header">
-				<button type="button" class="close" data-dismiss="modal">&times;</button>
-				<h4 class="modal-title">Invoice Id: <span id="modelInvoiceid"></span></h4>
-        	</div>
-        	<div class="modal-body"  id="modeltable">
-				<table class="table table-bordered table-striped">
-	<thead><tr><th>S.No</th><th>Items</th><th>Quantity</th><th>Price(AED)</th><th>Total Amount (AED)</th><th>Discount (%)</th><th>Net Amount (AED)</th></tr></thead>
-<!-- 	<tr><td></td><td></td><td></td><td></td><td></td><td></td><td></td></tr> -->
-<tbody></tbody>
-	<tfoot><tr><td colspan="6" align="right">Total Net Amount (AED)</td><td id="ttotalnetamount"></td></tr>	
-	<tr><td colspan="6" align="right">Vat Amount ( 5%) (AED)</td><td id="tvatamount"></td></tr>	
-	<tr><td colspan="6" align="right">Paid Amount(AED)</td><td id="tpaidamount"></td></tr>
-	<tr><td colspan="6" align="right">Previous Due Amount(AED)</td><td id="tpreviousdueamount"></td></tr>		
-	<tr><td colspan="6" align="right">Due Amount(AED)</td><td id="tdueamount"></td></tr>	
-	<tr><td colspan="6" align="right">Gross Amount (AED)</td><td id="tgrossamount"></td></tr></tfoot>		
-				</table>
-				
-			</div>
-        	
-      	</div>
-    </div>
-</div>
-<!-- Modal Ends here-->
-	
-	
-	
 <script type='text/javascript' src='${baseurl }/js/jquery-ui.min.js'></script> 
 <script type="text/javascript">
-var documentMessage = "Payment Report";
+var documentMessage = "Gas Report";
 $(document).ready(function() {
     // click on the text field.
     $('#month').MonthPicker({ Button: false });
@@ -181,79 +155,30 @@ $(function() {
 	});
 });
 
-/* <thead><tr><th>Payment Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Items</th><th>Invoice</th><th>Item Amount</th><th>Discount Amount</th><th> Net Amount</th><th> Vat Amount</th><th> Previous Due Amount</th><th>Gross Net Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody><tfoot><tr><th colspan="6" style="text-align:center;"  >Total</th><th id="itemamount"></th><th id="discount">1</th><th id="netamount">1</th><th id="vatamount">1</th><th id="pdueamount">1</th><th id="grossamount"></th><th id="paidamount"></th><th id="dueamount"></th></tfoot></table>'; */
 
 function displayTable(listOrders) {
-	var totalitemAmount = 0.00;
-	var totaldiscount = 0.00;
-	var totalnetamount = 0.00;
-	var totalvatamount = 0.00;
-	var alltotalamount = 0.00;
-	var totalpaidamount = 0.00;
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-		+ ' <thead><tr><th>Created Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Invoice Id</th><th>Item Name</th><th>Quantity</th><th>Item Amount</th><th>Discount</th><th>Net Amount</th><th>Vat Amount</th><th>Total Amount</th><th>Previous Due Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody> '
-		+'<tfoot><tr><th colspan="7" style="text-align:center;"  >Total</th><th id="itemamount"></th><th id="discount"></th><th id="netamount">1</th><th id="vatamount">1</th></th><th id="totalamount"></th><th></th><th  id="paidamount"></th><th id="dueamount"></th></tfoot></table>';
+		+ '<thead><tr><th>Date</th><th>Fillingstation Name</th><th>Gas</th><th>Gas InKgs</th><th>Closed Gas InKgs</th></tr></thead><tbody></tbody></table>';
 $('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
 	var stationName = "";
 	serviceUnitArray[orderObj.id] = orderObj;
-	if(orderObj.grossamount ==undefined){
-		grossamount="";
+	if(orderObj.fillingstationname ==undefined){
+		stationName="";
 	}else{
-		grossamount=orderObj.grossamount;
+		stationName=orderObj.fillingstationname;
 	}
-	if(orderObj.paidAmount ==undefined){
-		paidAmount="";
-	}else{
-		paidAmount=orderObj.paidAmount;
-	}
-	if(orderObj.itemName ==undefined){
-		itemName="";
-	}else{
-		itemName=orderObj.itemName;
-	}
-	totalitemAmount = totalitemAmount+parseInt(orderObj.itemamount);
-	totaldiscount = totaldiscount+parseInt(orderObj.discount);
-	totalnetamount = totalnetamount+parseInt(orderObj.netamount);
-	totalvatamount = totalvatamount+parseInt(orderObj.vatamount);
-	alltotalamount = alltotalamount+parseInt(orderObj.totalAmount);
-	
-	if(orderObj.paidAmount== '' ||orderObj.paidAmount==undefined)
-	{
-		orderObj.paidAmount=0.00;
-	
-	}
-		totalpaidamount = totalpaidamount+parseInt(orderObj.paidAmount);
-	
-	
 	var tblRow = "<tr >"
-		+ "<td  title='"+orderObj.createdOn+"'>" + orderObj.createdOn + "</td>"
-		+ "<td  title='"+orderObj.customername+"'>" + orderObj.customername + "</td>"
-		+ "<td  title='"+orderObj.customerid+"'>" + orderObj.customerid + "</td>"
-		+ "<td  title='"+orderObj.mobile+"'>" + orderObj.mobile + "</td>"
-		+ "<td  ><a  href='#' data-toggle='tooltip' data-original-title='View Data'  onclick=getinvoicedata('"+orderObj.invoiceId+"')>" + orderObj.invoiceId + "</a></td>"
-		+ "<td title='"+orderObj.itemName+"'>" + orderObj.itemName + "</td>"
-		+ "<td title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
-		+ "<td title='"+orderObj.itemamount+"'>" +orderObj.itemamount + "</td>"
-		+ "<td title='"+orderObj.discount+"'>" + orderObj.discount + "</td>"
-		+ "<td title='"+orderObj.netamount+"'>" + orderObj.netamount + "</td>"
-		+ "<td title='"+orderObj.vatamount+"'>" + orderObj.vatamount + "</td>"
-		+ "<td title='"+orderObj.totalAmount+"'>" + orderObj.totalAmount + "</td>"
-		+ "<td title='"+orderObj.previousdueamount+"'>" + orderObj.previousdueamount + "</td>"
-		+ "<td title='"+orderObj.paidAmount+"'>" + orderObj.paidAmount + "</td>"
-		+ "<td title='"+orderObj.dueAmount+"'>" + orderObj.dueAmount + "</td>"
+		+ "<td class='impFiled' title='"+orderObj.expirtdate1+"'>" + orderObj.expirtdate1 + "</td>"
+		+ "<td class='impFiled' title='"+stationName+"'>" + stationName + "</td>"
+		+ "<td class='impFiled' title='"+orderObj.addedGas+"'>" + orderObj.addedGas + "</td>"
+		+ "<td title='"+orderObj.gasInKgs+"'>" + orderObj.gasInKgs + "</td>"
+		+ "<td title='"+orderObj.closedgas+"'>" + orderObj.closedgas + "</td>"
 		+ "</tr >";
 	$(tblRow).appendTo("#tableId table tbody");
 });
-	$("#itemamount").text(totalitemAmount);
-	$("#discount").text(totaldiscount);
-	$("#netamount").text(totalnetamount);
-	$("#vatamount").text(totalvatamount);
-	$("#totalamount").text(alltotalamount);
-	$("#paidamount").text(totalpaidamount);
-	$("#dueamount").text(alltotalamount-totalpaidamount);
 	if(isClick=='Yes'){
 		$('.datatables').dataTable({
 			 dom: 'lBfrtip',
@@ -263,11 +188,8 @@ $('#tableId').html(tableHead);
 			           {
 			                        extend: 'pdfHtml5',
 			                        messageTop : documentMessage,
-			                        footer: true,
-			                        orientation : 'landscape',
-					                pageSize : 'LEGAL',
 // 			                        title : documentMessage,
-									exportOptions: {columns: [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14]},
+									exportOptions: {columns: [0,1,2,3,4]},
 			                        customize: function ( doc ) {
 										doc.content.splice( 1, 0, {
 											margin: [ 0, 0, 0, 12 ],
@@ -279,13 +201,11 @@ $('#tableId').html(tableHead);
 			                    }, {
 		      extend: 'excel',
 		      title: documentMessage,
-		      footer: true,
 		      filename: documentMessage
 		    }, 
 		    {
                 extend: 'print',
                 title: 'Khaibar Gas LLC',
-                footer: true,
                 customize: function(doc) {
                   doc.styles.title = {
                     color: 'red',
@@ -314,26 +234,22 @@ $('#tableId').html(tableHead);
 	}
 }
 
-$(function(){
-	$('.datatables').dataTable({
-// 		  "order": [], 
-	         "aaSorting": []
-	});
-});
 
 	function searchData() {
 		var fromDate = $("#fromDate").val();
 		var toDate = $("#toDate").val();
 		var month=$("#month").val();
-		var customerType=$("#customertype").val();
-		var customerId=$("#customerId").val();
+		var customerType=$("#customerType").val();
+		var fillingStationId=$("#fillingStationId").val();
+		var gasType = $("#gasType").val();
 		var formData = new FormData();
 		formData.append('fromDate', fromDate);
 		formData.append('toDate', toDate);
 		formData.append('month', month);
 		formData.append('customerType', customerType);
-		formData.append("customerId",customerId);
-		$.fn.makeMultipartRequest('POST', 'searchpaymentReport', false,
+		formData.append("fillingStationId",fillingStationId);
+		formData.append("gasType",gasType)
+		$.fn.makeMultipartRequest('POST', 'searchGassummary', false,
 				formData, false, 'text', function(data) {
 					var jsonobj = $.parseJSON(data);
 					var alldata = jsonobj.allOrders1;
@@ -343,69 +259,12 @@ $(function(){
 	}
 	
 
-	function getCustomerIds(value){
-		
-		
-		
-		var formData = new FormData();
-	    formData.append('customertype', value);
-		$.fn.makeMultipartRequest('POST', 'getCustomerIds', false,
-				formData, false, 'text', function(data){
-			var jsonobj = $.parseJSON(data);
-			var alldata = jsonobj.allOrders1;
-			
-			var html = "<option value=''>-- Select Customer Id --</option>";
-			$.each(alldata,function(i, catObj) {
-				
-				 html = html + '<option value="'+ catObj.id + '">'+ catObj.customerid +' ( '+ catObj.customername + ' ) </option>';
-			});
-			$('#customerId').empty().append(html);
-//	 		$("#customerId").trigger("chosen:updated");
-			
-			
-			
-		});
-	}
-	
-function getinvoicedata(invoiceId){
-	var formData = new FormData();
-    formData.append('invoiceid', invoiceId);
-	$.fn.makeMultipartRequest('POST', 'getInvoiceData1', false,	formData, false, 'text', function(data){
-		var jsonobj = $.parseJSON(data);
-		var alldata = jsonobj.allOrders;
-		console.log(alldata);
-		$("#myModal").modal();
-		$("#modeltable table tbody").html("");
-		var j=1;
-		$.each(alldata,function(i, orderObj) {
-			
-			var tblRow = "<tr >"
-			+ "<td  title='"+j+"'>" + j + "</td>"
-			+ "<td  title='"+orderObj.name+"'>" + orderObj.name + "</td>"
-			+ "<td  title='"+orderObj.quantity+"'>" + orderObj.quantity + "</td>"
-			+ "<td  title='"+orderObj.price+"'>" + orderObj.price + "</td>"
-			+ "<td  title='"+orderObj.totalamount+"'>" + orderObj.totalamount + "</td>"
-			+ "<td title='"+orderObj.discount+"'>" + orderObj.discount + "</td>"
-			+ "<td title='"+orderObj.netamount+"'>" +orderObj.netamount + "</td>"
-			+"</tr>";
-			j++;
-			$(tblRow).appendTo("#modeltable table tbody");
-			$("#ttotalnetamount").text(orderObj.totalnetamount);
-			$("#tvatamount").text(orderObj.vatamount);
-			$("#tpaidamount").text(orderObj.paidamount);
-			$("#tdueamount").text(orderObj.dueamount);
-			$("#tgrossamount").text(orderObj.grossamount);
-			$("#tpreviousdueamount").text(orderObj.previousdueamount);
-			$("#modelInvoiceid").text(invoiceId);
-			
-		});
-	});
-}
-	$("#pageName").text("Payment Report");
+	$("#pageName").text("Gas Summary");
 	// $(".transactions").addClass("open");
 	// $(".transactions").addClass("active");
-	$(".paymentReport").addClass("active");
+	$(".gassummary").addClass("active");
 	$(".reports").addClass("active");
+
 	var isClick = 'Yes';
-	
 </script>
+

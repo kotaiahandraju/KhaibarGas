@@ -207,7 +207,7 @@ tbody tr:nth-child(even) th {
                         </div>
                         
                     </div>
-                    
+               <h1>Khaibar Gas Monthly Cylinder Report</h1>     
             <div class="row">
             <div class="col-md-12 table-responsive">
             	<div align="center"><div id="target"> </div></div>

@@ -114,6 +114,8 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			    
 			} 
 	 
+	
+	 
 	 public List<UsedGasBean> getGasReport(UsedGasBean usedGasBean,String month,String year){  
 			jdbcTemplate = custom.getJdbcTemplate();
 			 
@@ -132,6 +134,76 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 				buffer.append(" and fillingStationId='"+usedGasBean.getFillingStationId()+"'  ");
 			}
 			buffer.append(" ORDER BY created_time ");
+			String sql = buffer.toString();
+			System.out.println(sql);
+			List<UsedGasBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
+					ParameterizedBeanPropertyRowMapper.newInstance(UsedGasBean.class));
+			
+			if (retlist.size() > 0)
+				return retlist;
+			return null;
+			    
+			} 
+	 public List<UsedGasBean> getGascustomersummary(UsedGasBean usedGasBean,String month,String year){  
+			jdbcTemplate = custom.getJdbcTemplate();
+			 
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("  SELECT `created_time`,`fillingStationId`,GROUP_CONCAT( DISTINCT `fillingstationname`) AS fillingstationname,sum(`gasInKgs`) as gasInKgs,`closedgas`,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'Used Gas' AS AddedGas FROM usedgas where 1=1 ");
+			if(StringUtils.isNotBlank(month)){
+				 
+				buffer.append("  AND  MONTH(created_time) ='"+month+"' AND YEAR(created_time) ='"+year+"' " );
+			}else if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
+				buffer.append(" and  date(created_time) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
+			}
+			if(StringUtils.isNotBlank(usedGasBean.getCustomerType())){
+				buffer.append(" and customerType='"+usedGasBean.getCustomerType()+"'  ");
+			}
+			if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
+				buffer.append(" and fillingStationId='"+usedGasBean.getFillingStationId()+"'  ");
+			}
+			buffer.append("  GROUP BY DATE(created_time) ORDER BY  created_time ");
+			String sql = buffer.toString();
+			System.out.println(sql);
+			List<UsedGasBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
+					ParameterizedBeanPropertyRowMapper.newInstance(UsedGasBean.class));
+			
+			if (retlist.size() > 0)
+				return retlist;
+			return null;
+			    
+			} 
+	 public List<UsedGasBean> getSearchgassumaryreport(UsedGasBean usedGasBean,String month,String year){  
+			jdbcTemplate = custom.getJdbcTemplate();
+			 
+			StringBuffer buffer = new StringBuffer();
+			buffer.append(" SELECT *FROM (SELECT `created_time`, `fillingStationId`,GROUP_CONCAT(DISTINCT  `fillingstationname`) AS fillingstationname,SUM(`gasInKgs`) as gasInKgs,`closedgas`, DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,CONCAT('Added Gas', '(', IFNULL(addgas.lponumber,'--'), ')') AS AddedGas FROM addgas WHERE 1=1 ");
+			if(StringUtils.isNotBlank(month)){
+				 
+				buffer.append("  AND  MONTH(created_time) ='"+month+"' AND YEAR(created_time) ='"+year+"' " );
+			}else if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
+				buffer.append(" and  date(created_time) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
+			}
+			
+			if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
+				buffer.append(" and fillingStationId='"+usedGasBean.getFillingStationId()+"'  ");
+			}
+			buffer.append(" GROUP BY DATE(created_time) ");
+			buffer.append(" UNION ALL SELECT `created_time`,`fillingStationId`,GROUP_CONCAT( DISTINCT `fillingstationname`) AS fillingstationname,SUM(`gasInKgs`) as gasInKgs,`closedgas`,DATE_FORMAT(created_time,'%d-%b-%Y') AS expirtdate1,'Used Gas' AS UsedGas FROM usedgas WHERE 1=1");
+			if(StringUtils.isNotBlank(month)){
+				 
+				buffer.append("  AND  MONTH(created_time) ='"+month+"' AND YEAR(created_time) ='"+year+"' " );
+			}else if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
+				buffer.append(" and  date(created_time) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
+			}
+			if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
+				buffer.append(" and fillingStationId='"+usedGasBean.getFillingStationId()+"'  ");
+			}
+			buffer.append(" GROUP BY DATE(created_time) ");
+			buffer.append(" ) foo where 1=1 ");
+			if(StringUtils.isNotBlank(usedGasBean.getGasType())){
+				buffer.append(" and  foo.AddedGas LIKE '%"+usedGasBean.getGasType()+"%' ");
+			}
+			buffer.append(" GROUP BY  DATE(created_time),foo.AddedGas ORDER BY created_time ");
 			String sql = buffer.toString();
 			System.out.println(sql);
 			List<UsedGasBean> retlist = jdbcTemplate.query(sql, new Object[] {  },

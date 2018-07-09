@@ -232,6 +232,72 @@ public class ReportsController {
 		return String.valueOf(jsonObject);
 
 	}
+	@RequestMapping(value = "/gassummary")
+	public String gassummary(@ModelAttribute("gasReportsForm") Expensetracker expensetracker, ModelMap model,
+			HttpServletRequest request, HttpSession session) {
+
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<CylindermasterBean> listOrderBeans = null;
+		try {
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "gassummary";
+	}
+	@RequestMapping("searchGassummary")
+	public @ResponseBody String searchGassummary(UsedGasBean usedGasBean ) {
+		ObjectMapper objectMapper = null;
+		JSONObject jsonObject = new JSONObject();
+		List<UsedGasBean> listOrderBeans = null;
+		String monthnumber = null;
+		String year = null;
+		try {
+			if(StringUtils.isNotBlank(usedGasBean.getMonth())){
+				String month1 = usedGasBean.getMonth();
+				 String [] arrOfStr = month1.split("/");
+				  monthnumber = arrOfStr[0];
+				  year = arrOfStr[1];
+			}
+			if(StringUtils.isNotBlank(usedGasBean.getFromDate())){
+				Date date=  KhaibarGasUtil.dateFormate(usedGasBean.getFromDate());
+				java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+				usedGasBean.setFromDate(String.valueOf(sqlDate));
+			}
+			if(StringUtils.isNotBlank(usedGasBean.getToDate())){
+				Date date=  KhaibarGasUtil.dateFormate(usedGasBean.getToDate());
+						java.sql.Date sqlDate = new java.sql.Date(date.getTime());
+						usedGasBean.setToDate(String.valueOf(sqlDate));
+			}
+			if(StringUtils.isNotBlank(usedGasBean.getCustomerType())){
+				listOrderBeans = expensetrackerDao.getGascustomersummary(usedGasBean,monthnumber,year);
+			}else{
+				
+				listOrderBeans = expensetrackerDao.getSearchgassumaryreport(usedGasBean,monthnumber,year);
+			}
+			
+			
+			if (listOrderBeans != null && listOrderBeans.size() > 0) {
+				objectMapper = new ObjectMapper();
+				// System.out.println(sJson);
+				jsonObject.put("allOrders1", listOrderBeans);
+			} else {
+				objectMapper = new ObjectMapper();
+				jsonObject.put("allOrders1", listOrderBeans);
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return String.valueOf(jsonObject);
+
+	}
+	
+//	getSearchgassumaryreport
 	
 	@ModelAttribute("companys")
 	public Map<Integer, String> populatecompanys() {

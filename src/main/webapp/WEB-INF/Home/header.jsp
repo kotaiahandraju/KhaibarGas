@@ -243,6 +243,9 @@ function tooltip(){
 	$('.printlpo').attr('data-original-title','Print');
 	$('.deactivate').attr('data-toggle','tooltip');
 	$('.deactivate').attr('data-original-title','Deactivate');
+	
+	$('.viewdata').attr('data-toggle','tooltip');
+	$('.viewdata').attr('data-original-title','View Data');
 		$('[data-toggle="tooltip"]').tooltip();
 }
 </script>
@@ -436,7 +439,10 @@ function tooltip(){
 						<li class="expensesReport"><a href="${baseurl }/admin/expensesReport"><i class="fa fa-bar-chart-o"></i> <span>Expenses Report</span></a></li>
 						<li class="gasReport"><a href="${baseurl }/admin/gasReport"><i class="fa fa-bar-chart-o"></i> <span>Gas Report</span></a></li>
 						<li class="paymentReport"><a href="${baseurl }/admin/paymentreport"><i class="fa fa-bar-chart-o"></i> <span>Payment Report</span></a></li>
-						 <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-bar-chart-o"></i> <span>Dashboard</span></a></li>              </ul></li>
+						 <li class="gassummary"><a href="${baseurl }/admin/gassummary"><i class="fa fa-bar-chart-o"></i> <span>Gas Summary</span></a></li>
+						 <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-bar-chart-o"></i> <span>Dashboard</span></a></li>
+						  
+	             </ul></li>
     </section>
   </aside>
 

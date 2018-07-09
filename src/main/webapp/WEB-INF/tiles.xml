@@ -138,6 +138,10 @@
 	<definition name="changePassword" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/changePassword.jsp" />
  </definition>
+ 
+ <definition name="gassummary" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/gassummary.jsp" />
+ </definition>
 	
 	
 	
