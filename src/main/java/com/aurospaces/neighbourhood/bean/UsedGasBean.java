@@ -11,9 +11,15 @@ protected int id   = 0;
 protected Date createdTime,date ;
 protected Date updatedTime ;
 protected String fillingStationId,closedgas,fillingstationname ;
-protected String gasInKgs,units ,x,y,fromDate,toDate,month,expirtdate1,AddedGas,customerType,invoiceId,gasType;
+protected String gasInKgs,units ,x,y,fromDate,toDate,month,expirtdate1,AddedGas,customerType,invoiceId,gasType,items;
 
 
+public String getItems() {
+	return items;
+}
+public void setItems(String items) {
+	this.items = items;
+}
 public String getGasType() {
 	return gasType;
 }

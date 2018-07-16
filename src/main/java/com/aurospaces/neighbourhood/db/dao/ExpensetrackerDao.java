@@ -2,6 +2,7 @@
 package com.aurospaces.neighbourhood.db.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -172,7 +173,7 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			return null;
 			    
 			} 
-	 public List<UsedGasBean> getSearchgassumaryreport(UsedGasBean usedGasBean,String month,String year){  
+	/* public List<UsedGasBean> getSearchgassumaryreport(UsedGasBean usedGasBean,String month,String year){  
 			jdbcTemplate = custom.getJdbcTemplate();
 			 
 			StringBuffer buffer = new StringBuffer();
@@ -212,6 +213,65 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			if (retlist.size() > 0)
 				return retlist;
 			return null;
+			    
+			}*/
+	 public List<Map<String,Object>> getSearchgassumaryreport(UsedGasBean usedGasBean,String month,String year){  
+			jdbcTemplate = custom.getJdbcTemplate();
+			 
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("  SELECT foo.gasType,DATE_FORMAT(foo.cdate,'%d-%M-%Y') AS cdate,SUM(foo.sum_of_gas) AS totalgas,foo.stationname,foo.id FROM ( " 
+    
+				   +" SELECT 'Used Gas' AS gasType, 'public' AS customer, DATE(ct.created_time) AS cdate ,(COUNT(*))*(CAST(i.name AS UNSIGNED)) AS sum_of_gas ,GROUP_CONCAT(DISTINCT f.`stationname`) AS stationname,GROUP_CONCAT(DISTINCT f.id) AS id "
+				    +" FROM `cylindertransaction` ct,`cylindermaster` cm ,items i ,`fillingstationmaster` f WHERE ct.`cylinderStatus`='3' "
+				   +" AND cm.id=ct.`cylindetId` AND i.id=cm.size AND f.id=ct.`fillingStation` AND i.`itemType`='Cylinder'   ");
+					if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
+						buffer.append(" and f.id ="+usedGasBean.getFillingStationId() );
+					}
+					if(StringUtils.isNotBlank(usedGasBean.getItems())){
+						buffer.append(" and i.id ="+usedGasBean.getItems() );
+					}
+				   buffer.append(" GROUP BY DATE(ct.created_time),i.name ");
+				   buffer.append("  UNION ALL " 
+				    
+					+" SELECT  'Used Gas' AS gasType,'private' AS customer ,STR_TO_DATE(pc.`cylinderFilledDate`,'%d-%M-%Y') AS cdate,(SUM(pc.`quantity`))*(CAST(i.name AS UNSIGNED)) AS sum_of_gas,GROUP_CONCAT(DISTINCT f.`stationname`) AS stationname,GROUP_CONCAT(DISTINCT f.id) AS id " 
+					+" FROM `privatecylinderfilledprice` pc,items i, fillingstationmaster f WHERE pc.`items` =i.id  "
+				   +" AND f.id=pc.`fillingstationId` AND i.name AND i.`itemType`='Cylinder'   ");
+				   if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
+						buffer.append(" and f.id ="+usedGasBean.getFillingStationId() );
+					}
+				   if(StringUtils.isNotBlank(usedGasBean.getItems())){
+						buffer.append(" and i.id ="+usedGasBean.getItems() );
+					}
+				   buffer.append("  GROUP BY STR_TO_DATE(pc.`cylinderFilledDate`,'%d-%M-%Y'),i.name ");
+				   buffer.append("  UNION ALL  "
+				      
+				    +" SELECT 'Added gas' AS gasType ,'XXX' AS customer,DATE(a.created_time) AS cdate,SUM(a.`gasInKgs`) AS sum_of_gas,GROUP_CONCAT(DISTINCT f.`stationname`) AS stationname,GROUP_CONCAT(DISTINCT f.id) AS id " 
+				    +" FROM addgas a,fillingstationmaster f WHERE 1=1 AND f.id=a.`fillingStationId`  ");
+				   if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
+						buffer.append(" and f.id ="+usedGasBean.getFillingStationId() );
+					}
+				    buffer.append("  GROUP BY DATE(a.created_time) "
+				+" ) foo WHERE 1=1   ");
+			if(StringUtils.isNotBlank(month)){
+				buffer.append("  AND  MONTH(foo.cdate) ='"+month+"' AND YEAR(foo.cdate) ='"+year+"' " );
+			}else if(StringUtils.isNotBlank(usedGasBean.getFromDate()) &&  StringUtils.isNotBlank(usedGasBean.getToDate())){
+				buffer.append(" and  date(foo.cdate) BETWEEN '"+usedGasBean.getFromDate()+"' AND '"+usedGasBean.getToDate()+"' " );
+			}
+			
+			
+			if(StringUtils.isNotBlank(usedGasBean.getGasType())){
+				buffer.append(" and foo.gasType='"+usedGasBean.getGasType()+"'  ");
+			}
+			if(StringUtils.isNotBlank(usedGasBean.getCustomerType())){
+				buffer.append(" and foo.customer='"+usedGasBean.getCustomerType()+"'  ");
+			}
+			
+			buffer.append(" GROUP BY foo.cdate ");
+			String sql = buffer.toString();
+			System.out.println(sql);
+			List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql);
+			
+				return retlist;
 			    
 			} 
 }

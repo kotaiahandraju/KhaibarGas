@@ -129,6 +129,14 @@ public class PrivateCylinderFiledStatusController {
 				printDataBean.setCustomerId(cylindertransactionBean.getCustomerId());
 				printDataBean.setFillingstationId(cylindertransactionBean.getFillingStation());
 				printDataBean.setCylinderFilledDate(cylindertransactionBean.getCylinderFilledDate());
+				
+				String cylinderfilleddate=	cylindertransactionBean.getCylinderFilledDate();
+				Date date = null;
+				if(StringUtils.isNotBlank(cylinderfilleddate)){
+				 date= KhaibarGasUtil.dateFormate(cylinderfilleddate);
+				 printDataBean.setCreatedTime(date);
+				}
+				
 				privateCylinderFilledPriceDao.save(printDataBean);
 				
 				printDataBean =new PrintDataBean();
