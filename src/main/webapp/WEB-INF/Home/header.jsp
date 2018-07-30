@@ -67,12 +67,19 @@
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
 
 <style type="text/css">
+@media only screen and (max-width: 640px) and (min-width: 320px) {
+.dashboard {
+margin-left:0px !important;}
+}
+}
 #page-container, #page-content{min-height: auto;}
 .control-label {
 	text-align: right;
 	margin-bottom: 0;
     padding-top: 8px;
 }
+.sidebar {
+margin-left:15px !important;}
 .empkgs th, td {
     font-size: 12px !important;
     width: 100px;
@@ -339,7 +346,7 @@ function tooltip(){
     <section class="sidebar" >
       <!-- sidebar menu -->
       <ul class="sidebar-menu" data-widget="tree">
-        <li class="dashboard">
+        <li class="dashboard" style="margin-left:15px;">
           <a href="${baseurl }/admin/dashboard"><i class="fa fa-dashboard"></i> <span>Dashboard</span>
           </a>
         </li>
@@ -440,7 +447,7 @@ function tooltip(){
 						<li class="gasReport"><a href="${baseurl }/admin/gasReport"><i class="fa fa-bar-chart-o"></i> <span>Gas Report</span></a></li>
 						<li class="paymentReport"><a href="${baseurl }/admin/paymentreport"><i class="fa fa-bar-chart-o"></i> <span>Payment Report</span></a></li>
 						 <li class="gassummary"><a href="${baseurl }/admin/gassummary"><i class="fa fa-bar-chart-o"></i> <span>Gas Summary</span></a></li>
-						 <li class="dashboard"><a href="${baseurl }/admin/dashboard"><i class="fa fa-bar-chart-o"></i> <span>Dashboard</span></a></li>
+						 <li class="dashboard" style="margin-left:-25px"><a href="${baseurl }/admin/dashboard"><i class="fa fa-bar-chart-o"></i> <span>Dashboard</span></a></li>
 						  
 	             </ul></li>
     </section>

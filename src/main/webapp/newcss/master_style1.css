@@ -102,10 +102,10 @@ img {
     background: url(../../images/boxed-bg.png) fixed;
 }
 .content-wrapper, .main-footer {
-   /*  -webkit-transition: -webkit-transform .3s ease-in-out, margin .3s ease-in-out;
+    -webkit-transition: -webkit-transform .3s ease-in-out, margin .3s ease-in-out;
     -moz-transition: -moz-transform .3s ease-in-out, margin .3s ease-in-out;
     -o-transition: -o-transform .3s ease-in-out, margin .3s ease-in-out;
-    transition: transform .3s ease-in-out, margin .3s ease-in-out; */
+    transition: transform .3s ease-in-out, margin .3s ease-in-out;
     margin-left: 230px;
     z-index: 820;
 }
@@ -193,9 +193,9 @@ a:active, a:focus, a:hover {
     z-index: 1030;
 }
 .main-header .navbar {
-    /* -webkit-transition: margin-left .3s ease-in-out;
+    -webkit-transition: margin-left .3s ease-in-out;
     -o-transition: margin-left .3s ease-in-out;
-    transition: margin-left .3s ease-in-out; */
+    transition: margin-left .3s ease-in-out;
     margin-bottom: 0;
     margin-left: 230px;
     border: none;
@@ -275,9 +275,9 @@ a:active, a:focus, a:hover {
 	display: grid;
 }
 .main-header .logo {
-   /*  -webkit-transition: width .3s ease-in-out;
+    -webkit-transition: width .3s ease-in-out;
     -o-transition: width .3s ease-in-out;
-    transition: width .3s ease-in-out; */
+    transition: width .3s ease-in-out;
     display: block;
     float: left;
     height: 60px;
@@ -420,24 +420,20 @@ a:active, a:focus, a:hover {
 .main-sidebar {
     position: absolute;
     top: 0;
-    left:-20px;
+    left: 0;
     padding-top: 60px;
     min-height: 100%;
-    width: 0px;
+    width: 230px;
     z-index: 9999;
-   /*  -webkit-transition: -webkit-transform .3s ease-in-out, width .3s ease-in-out;
+    -webkit-transition: -webkit-transform .3s ease-in-out, width .3s ease-in-out;
     -moz-transition: -moz-transform .3s ease-in-out, width .3s ease-in-out;
     -o-transition: -o-transform .3s ease-in-out, width .3s ease-in-out;
-    transition: transform .3s ease-in-out, width .3s ease-in-out; */
-}
-.dashboard {
-	padding-left:25px;
+    transition: transform .3s ease-in-out, width .3s ease-in-out;
 }
 @media (min-width: 767px) {
 .main-sidebar {
 	padding-top: 0px;
 }
-
 }
 .main-sidebar .sidebar-footer {
     background: #f2f6f8;
@@ -465,10 +461,10 @@ a:active, a:focus, a:hover {
 @media (max-width:767px) {
     .main-sidebar {
     padding-top: 120px;
-    /* -webkit-transform: translate(-230px, 0);
+    -webkit-transform: translate(-230px, 0);
     -ms-transform: translate(-230px, 0);
     -o-transform: translate(-230px, 0);
-    transform: translate(-230px, 0); */
+    transform: translate(-230px, 0);
 }
 .main-sidebar {
     z-index: 810;
@@ -485,10 +481,10 @@ a:active, a:focus, a:hover {
 }
 }@media (max-width:767px) {
     .sidebar-open .main-sidebar {
-    /* -webkit-transform: translate(0, 0);
+    -webkit-transform: translate(0, 0);
     -ms-transform: translate(0, 0);
     -o-transform: translate(0, 0);
-    transform: translate(0, 0); */
+    transform: translate(0, 0);
 }
 }
 .sidebar {
@@ -592,9 +588,9 @@ a:active, a:focus, a:hover {
     height: auto;
     padding: 0;
     margin-right: 10px;
-   /*  -webkit-transition: transform .5s ease;
+    -webkit-transition: transform .5s ease;
     -o-transition: transform .5s ease;
-    transition: transform .5s ease; */
+    transition: transform .5s ease;
 }
 .sidebar-menu li>a>.fa-angle-right {
     position: absolute;
@@ -1790,12 +1786,13 @@ body .main-header .navbar .nav > li.search-box > a:hover, body .main-header .nav
     position: absolute;
     /* left: -9999px; */
     opacity: 1;
-    margin-left:-16px;
-        width: 15px;
+    margin-left:-19px;
+        width: 15px !important;
     height: 15px;
     margin-top: 1px;
 }
 [type=checkbox]+label {
+	margin-left:32px;
    /*  font-weight: 300;
     position: relative;
     padding-left: 35px;
@@ -14728,26 +14725,13 @@ img.away, img.busy, img.offline, img.online {
 }
 
 
-@media only screen and (max-width: 640px) and (min-width: 320px) {
 
-.main-sidebar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    padding-top: 60px;
-    min-height: 100%;
-    width: 230px;
-    z-index: 9999;
-    -webkit-transition: -webkit-transform .3s ease-in-out, width .3s ease-in-out;
-    -moz-transition: -moz-transform .3s ease-in-out, width .3s ease-in-out;
-    -o-transition: -o-transform .3s ease-in-out, width .3s ease-in-out;
-    transition: transform .3s ease-in-out, width .3s ease-in-out;
-}
-.dashboard {
-	padding-left:0px !important;
-}
 
-}
+
+
+
+
+
 
 
 

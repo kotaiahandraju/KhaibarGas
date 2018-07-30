@@ -40,7 +40,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">From Date</label>
 							<div class="col-md-7">
-							<form:input path="fromDate" class="form-control " readonly="true"    onkeydown="removeBorder(this.id)"/>
+							<form:input path="fromDate"  class="form-control " readonly="true"    onkeydown="removeBorder(this.id)"/>
 							</div>
 						</div>
 					</div>
@@ -85,7 +85,17 @@
 							</div>
 						</div>
 					</div>
-					
+					<div class="col-md-3">
+						<div class="form-group">
+							<label for="focusedinput" class="col-md-5 control-label">Item's</label>
+							<div class="col-md-7">
+				        		<form:select path="itemType" class="form-control  " onfocus="removeBorder(this.id);" >
+                            <form:option value="">-- Select Item --</form:option>
+                            <form:options items="${itemType }"/>
+                          </form:select>
+							</div>
+						</div>
+					</div>
 					</div>
 					<div class="col-md-5"></div>
 					<div class="col-md-7 pull-right">
@@ -190,10 +200,11 @@ function displayTable(listOrders) {
 	var totalvatamount = 0.00;
 	var alltotalamount = 0.00;
 	var totalpaidamount = 0.00;
+	var totalquantity = 0.00;
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
 		+ ' <thead><tr><th>Created Date</th><th>Customer Name</th><th>Customer Id</th><th>Mobile</th><th>Invoice Id</th><th>Item Name</th><th>Quantity</th><th>Item Amount</th><th>Discount</th><th>Net Amount</th><th>Vat Amount</th><th>Total Amount</th><th>Previous Due Amount</th><th>Paid Amount</th><th>Due Amount</th></tr></thead><tbody></tbody> '
-		+'<tfoot><tr><th colspan="7" style="text-align:center;"  >Total</th><th id="itemamount"></th><th id="discount"></th><th id="netamount">1</th><th id="vatamount">1</th></th><th id="totalamount"></th><th></th><th  id="paidamount"></th><th id="dueamount"></th></tfoot></table>';
+		+'<tfoot><tr><th colspan="6" style="text-align:center;"  >Total</th><th id="totalquantity"></th><th id="itemamount"></th><th id="discount"></th><th id="netamount">1</th><th id="vatamount">1</th></th><th id="totalamount"></th><th></th><th  id="paidamount"></th><th id="dueamount"></th></tfoot></table>';
 $('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {
@@ -219,6 +230,7 @@ $('#tableId').html(tableHead);
 	totalnetamount = totalnetamount+parseInt(orderObj.netamount);
 	totalvatamount = totalvatamount+parseInt(orderObj.vatamount);
 	alltotalamount = alltotalamount+parseInt(orderObj.totalAmount);
+	totalquantity =totalquantity+parseInt(orderObj.quantity);
 	
 	if(orderObj.paidAmount== '' ||orderObj.paidAmount==undefined)
 	{
@@ -254,6 +266,7 @@ $('#tableId').html(tableHead);
 	$("#totalamount").text(alltotalamount);
 	$("#paidamount").text(totalpaidamount);
 	$("#dueamount").text(alltotalamount-totalpaidamount);
+	$("#totalquantity").text(totalquantity);
 	if(isClick=='Yes'){
 		$('.datatables').dataTable({
 			 dom: 'lBfrtip',
@@ -327,11 +340,13 @@ $(function(){
 		var month=$("#month").val();
 		var customerType=$("#customertype").val();
 		var customerId=$("#customerId").val();
+		var itemType =$("#itemType").val();
 		var formData = new FormData();
 		formData.append('fromDate', fromDate);
 		formData.append('toDate', toDate);
 		formData.append('month', month);
 		formData.append('customerType', customerType);
+		formData.append('itemType', itemType);
 		formData.append("customerId",customerId);
 		$.fn.makeMultipartRequest('POST', 'searchpaymentReport', false,
 				formData, false, 'text', function(data) {

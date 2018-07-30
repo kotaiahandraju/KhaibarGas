@@ -49,7 +49,7 @@ text-decoration:none !important;
 .ich {
 font-size: 15px !important;
 color: #fff !important;
-width: 100px;
+/* width: 100px; */
     text-align: center;
 }
 .nch1 .kgs {
@@ -59,6 +59,30 @@ text-align:left;
 .empkgs th,td{
 font-size:16px;
 width:100px
+}
+
+#chartdiv {
+/*   width: 40%; */
+  height: 300px;
+}
+#chartdiv1 {
+/*   width: 40%; */
+  height: 300px;
+}
+#chartdiv2 {
+/*   width: 40%; */
+  height: 300px;
+}
+#chartdiv3 {
+  height: 300px;
+}
+#chartdiv4 {
+/*   width: 40%; */
+  height: 300px;
+}
+#chartdiv5 {
+/*   width: 40%; */
+  height: 300px;
 }
 </style>
 	<!-- <style type="text/css">
@@ -106,14 +130,48 @@ tbody tr:nth-child(even) th {
 }
 </style> -->
 
+<script src="${baseurl }/chat/amcharts.js"></script>
+<script src="${baseurl }/chat/pie.js"></script>
+<script src="${baseurl }/chat/export.min.js"></script>
+<link rel="stylesheet" href="${baseurl }/chat/export.css" type="text/css" media="all" />
+<script src="${baseurl }/chat/light.js"></script>
+<script src="https://www.amcharts.com/lib/3/funnel.js"></script>
+<script type="text/javascript" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+
 <script type="text/javascript" src="${baseurl }/js/TableBarChart.js"></script>
 	<link rel="stylesheet" href="${baseurl }/assets/css/TableBarChart.css" />
-	
-        <div class="clearfix"></div>
-             <ol class="breadcrumb">
+	 <ol class="breadcrumb">
               <li><a href="#">Dashboard</a></li>
             </ol>
             <div class="clearfix"></div>
+	<div class="col-md-6">
+	<h3>Cylinders </h3>
+	<div id="chartdiv"></div></div>
+	
+	<div class="col-md-6">
+	<h3>Gas Usage (In Kgs) </h3>
+	<div id="chartdiv1"></div></div>
+	
+	<div class="col-md-6">
+	<h3>Expenses </h3>
+	<div id="chartdiv2"></div></div>
+	
+	<div class="col-md-6">
+	<h3>Total gas usage  </h3>
+	<div id="chartdiv3"></div></div>
+	
+	<div class="col-md-6">
+	<h3>Cylinders </h3>
+	<div id="chartdiv4"></div></div>
+	
+	<div class="col-md-6">
+	<h3>Cylinders </h3>
+	<div id="chartdiv5"></div></div>
+	
+	<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+	
+        <div class="clearfix"></div>
+            
         <div class="container">
             <div class="row">
 	            		<div class="col-md-3 col-xs-12 col-sm-6">
@@ -209,7 +267,7 @@ tbody tr:nth-child(even) th {
                     </div>
                <h1>Khaibar Gas Monthly Cylinder Report</h1>     
             <div class="row">
-            <div class="col-md-12 table-responsive">
+            <div class="col-md-12 table-responsive" style=" padding-top: 20px;"  >
             	<div align="center"><div id="target"> </div></div>
 <!--                 <div class="panel panel-primary"> -->
 <!--                     <div class="panel-heading"> -->
@@ -395,5 +453,142 @@ $("#tableId").html(tableHead); */
 	        window.location.reload();
 	    }
 	});
+	var gassummary =${gassummary};
+	var chart = AmCharts.makeChart( "chartdiv1", {
+		  "type": "pie",
+		  "theme": "light",
+		  "dataProvider":gassummary,
+		  "valueField": "sum_of_gas",
+		  "titleField": "gastype",
+		  "outlineAlpha": 0.4,
+		  "depth3D": 15,
+		  "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+		  "angle": 30,
+		  "export": {
+		    "enabled": true
+		  }
+		} );
+	
+	var cylinderstatuscount =${cylinderstatuscount};
+	var chart = AmCharts.makeChart( "chartdiv", {
+		  "type": "pie",
+		  "theme": "light",
+		  "dataProvider":cylinderstatuscount,
+		  "valueField": "count",
+		  "titleField": "cylinderstatus",
+		  "outlineAlpha": 0.4,
+		  "depth3D": 15,
+		  "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+		  "angle": 30,
+		  "export": {
+		    "enabled": true
+		  }
+		} );
+	
+	var expensessummary =${expensessummary};
+	var chart = AmCharts.makeChart( "chartdiv2", {
+		  "type": "pie",
+		  "theme": "dark",
+		  "dataProvider":expensessummary,
+		  "valueField": "amount",
+		  "titleField": "accountHead",
+		  "outlineAlpha": 0.4,
+		  "depth3D": 15,
+		  "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+		  "angle": 30,
+		  "export": {
+		    "enabled": true
+		  }
+		} );
+	
+	var totalusagegasreport =${totalusagegasreport};
+	var chart1 = AmCharts.makeChart( "chartdiv3", {
+		  "type": "pie",
+		  "theme": "dark",
+		  "dataProvider":totalusagegasreport,
+		  "valueField": "sum_of_gas",
+		  "titleField": "gastype",
+		  "outlineAlpha": 0.4,
+		  "depth3D": 15,
+		  "balloonText": "[[title]]<br><span style='font-size:14px'><b>[[value]]</b> ([[percents]]%)</span>",
+		  "angle": 30,
+		  "export": {
+		    "enabled": true
+		  }
+		} );
+	
+	var chart = AmCharts.makeChart( "chartdiv4", {
+		  "type": "funnel",
+		  "theme": "light",
+		  "dataProvider":cylinderstatuscount,
+		  "balloon": {
+		    "fixedPosition": true
+		  },
+		  "valueField": "count",
+		  "titleField": "cylinderstatus",
+		  "marginRight": 240,
+		  "marginLeft": 50,
+		  "startX": -500,
+		  "rotate": true,
+		  "labelPosition": "right",
+		  "balloonText": "[[title]]: [[value]]n[[description]]",
+		  "export": {
+		    "enabled": true
+		  }
+		} );
+	
+	
+	var chart = AmCharts.makeChart("chartdiv5", {
+	    "type": "pie",
+	    "theme": "light",
+	    "innerRadius": "40%",
+	    "gradientRatio": [-0.4, -0.4, -0.4, -0.4, -0.4, -0.4, 0, 0.1, 0.2, 0.1, 0, -0.2, -0.5],
+	    "dataProvider":cylinderstatuscount,
+	    "balloonText": "[[value]]",
+	    "valueField": "count",
+		  "titleField": "cylinderstatus",
+	    "balloon": {
+	        "drop": true,
+	        "adjustBorderColor": false,
+	        "color": "#FFFFFF",
+	        "fontSize": 16
+	    },
+	    "export": {
+	        "enabled": true
+	    }
+	});
+	
+var totalCylindersCount = ${totalCylindersCount};
+	window.onload = function () {
+
+	var chart = new CanvasJS.Chart("chartContainer", {
+		animationEnabled: true,
+		theme: "light2", // "light1", "light2", "dark1", "dark2"
+		title: {
+			text: "GDP per Capita - 2016"
+		},
+		subtitles: [{
+			text: "In USD",
+			fontSize: 16
+		}],
+		axisY: {
+			prefix: "$",
+			scaleBreaks: {
+				customBreaks: [{
+					startValue: 10000,
+					endValue: 35000
+				}]
+			}
+		},
+		data: [{
+			type: "column",
+			yValueFormatString: "$#,##0.00",
+			dataPoints:totalCylindersCount
+		}]
+	});
+	chart.render();
+
+	}
+	
 	</script>
 	

@@ -142,6 +142,10 @@
  <definition name="gassummary" extends="base.definition">
 		<put-attribute name="body" value="/WEB-INF/pages/gassummary.jsp" />
  </definition>
+ 
+<!--  <definition name="serversidepaginationtest" extends="base.definition">
+		<put-attribute name="body" value="/WEB-INF/pages/serversidepaginationtest.jsp" />
+ </definition> -->
 	
 	
 	

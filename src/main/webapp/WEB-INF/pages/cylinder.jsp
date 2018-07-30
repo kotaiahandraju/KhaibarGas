@@ -104,7 +104,7 @@
 								    </div>
                     			</div>
                     		</div>
-                    		<div class="clearfix"></div>
+                    		
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Color Of Cylinder <span class="impColor">*</span></label>
@@ -133,6 +133,7 @@
 								    </div>
                     			</div>
                     		</div>
+                    		<div class="clearfix"></div>
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Expiry Date <span class="impColor">*</span></label>
@@ -248,8 +249,8 @@ function editCylinder(id) {
 	$("#color").val(serviceUnitArray[id].color);
 	$("#madein").val(serviceUnitArray[id].madein);
 	//alert(serviceUnitArray[id].expirtdate1);
-	$("#expirtdate1").val(serviceUnitArray[id].expirtdate1).trigger("change");
-	$("#ownercompany").val(serviceUnitArray[id].ownercompany).trigger("change");
+
+	$("#ownercompany").val(serviceUnitArray[id].ownercompany);
 	$("#store").val(serviceUnitArray[id].store).trigger("change");
 	$("#cylinderstatus").val(serviceUnitArray[id].cylinderstatus);
 	$("#remarks").val(serviceUnitArray[id].remarks).trigger("change");
@@ -257,6 +258,7 @@ function editCylinder(id) {
 	getLpoNumber();
 	$("#lponumber").val(lpo);
 	$("#lponumber").trigger("chosen:updated");
+	$("#expirtdate1").val(serviceUnitArray[id].expirtdate1);
 	$(window).scrollTop($('#moveTo').offset().top);
 }
 
@@ -317,6 +319,7 @@ $(function() {
 		changeYear : true
 	});
 });
+
 var countList="";
 
 function getLPOdetails(value){

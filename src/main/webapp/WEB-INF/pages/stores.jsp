@@ -55,7 +55,7 @@
 	                    			
 	                    		 <div class="col-md-6">
 	                    			<div class="form-group">
-	                    				<label for="focusedinput" class="col-md-4 control-label">Store Name <span class="impColor">*</span></label>
+	                    				<label for="focusedinput" class="col-md-6 control-label">Store Name <span class="impColor">*</span></label>
 	                    				<div class="col-md-6">
 	                    				<form:input  path="storename" class="form-control validate" placeholder="Store Name"/>
 	                    				<form:hidden path="id"/>
@@ -207,7 +207,13 @@ function inactiveData() {
 					console.log(resJson);
 				});
 }
-
+$(function() {
+$('#example').dataTable({
+	   "bPaginate" : $('#example tbody tr').length>10,
+	   "iDisplayLength": 10
+	   
+	});
+});
 function dataClear(){
 	$("#id").val("");
 	$("#storeName").val("");

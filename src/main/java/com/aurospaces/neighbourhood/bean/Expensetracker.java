@@ -23,10 +23,16 @@ protected Date createdTime ;
 
 protected Date updatedTime ;
 protected String status ;
-protected String trackrstatus,fromDate,toDate,month ,customerType,fillingStationId,customertype,customerId,gasType,items;
+protected String trackrstatus,fromDate,toDate,month ,customerType,fillingStationId,customertype,customerId,gasType,items,itemType;
 
 
 
+public String getItemType() {
+	return itemType;
+}
+public void setItemType(String itemType) {
+	this.itemType = itemType;
+}
 public String getItems() {
 	return items;
 }

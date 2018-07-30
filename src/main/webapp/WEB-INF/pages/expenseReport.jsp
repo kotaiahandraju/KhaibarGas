@@ -32,7 +32,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">From Date</label>
 							<div class="col-md-7">
-							<form:input path="fromDate" class="form-control "   onkeydown="removeBorder(this.id)"/>
+							<form:input path="fromDate" class="form-control "   onkeydown="removeBorder(this.id)" placeholder="From Date" readonly="true"/>
 							</div>
 						</div>
 					</div>
@@ -40,7 +40,7 @@
 						<div class="form-group">
 							<label for="focusedinput" class="col-md-5 control-label">To Date</label>
 							<div class="col-md-7">
-				        		<form:input path="toDate" class="form-control "   onkeydown="removeBorder(this.id)"/>
+				        		<form:input path="toDate" class="form-control "   onkeydown="removeBorder(this.id)" placeholder="To Date" readonly="true"/>
 							</div>
 						</div>
 					</div>

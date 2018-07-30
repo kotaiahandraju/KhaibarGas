@@ -64,9 +64,9 @@ public class CylindermasterDao extends BaseCylindermasterDao
 	
 	public CylindermasterBean getByCylinderId(CylindermasterBean cylindermasterBean) {
 		 jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "SELECT * from cylindermaster where cylinderid = ?";
+			String sql = "SELECT * from cylindermaster where id = ?";
 			List<CylindermasterBean> retlist = jdbcTemplate.query(sql,
-			new Object[]{cylindermasterBean.getCylinderid()},
+			new Object[]{cylindermasterBean.getId()},
 			ParameterizedBeanPropertyRowMapper.newInstance(CylindermasterBean.class));
 			if(retlist.size() > 0)
 				return retlist.get(0);
@@ -507,8 +507,53 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		}
 		
 		
-		
-	 
+		public   List<Map<String, Object>>  getGassummary(){  
+			 jdbcTemplate = custom.getJdbcTemplate();
+			 
+			 String sql="SELECT 'Private Cylinders' AS gastype, SUM((pc.`quantity`)*(CAST(i.name AS UNSIGNED))) AS sum_of_gas    FROM `privatecylinderfilledprice` pc,items i  WHERE pc.`items` =i.id    AND i.`itemType`='Cylinder'     GROUP BY i.`itemType`='Cylinder'      UNION ALL      SELECT 'Khaibar Cylinders' AS gastype,SUM((1)*(CAST(i.name AS UNSIGNED))) AS sum_of_gas  FROM `cylindertransaction` ct,`cylindermaster` cm ,items i  WHERE ct.`cylinderStatus`='3'  AND cm.id=ct.`cylindetId` AND i.id=cm.size AND i.`itemType`='Cylinder'    GROUP BY i.`itemType`='Cylinder '     ";
+			   
+			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
+				return retlist;
+		}
+		public   List<Map<String, Object>>  getExpensessummary(){  
+			 jdbcTemplate = custom.getJdbcTemplate();
+			 
+			 String sql="SELECT `accountHead`,SUM(amount) AS amount FROM   `expensetracker` GROUP BY accountHead ";
+			   
+			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
+				return retlist;
+		}
+		public   List<Map<String, Object>>  totalusagegasreport(){  
+			 jdbcTemplate = custom.getJdbcTemplate();
+			 
+			 String sql="SELECT 'Filling station available gas' AS gastype, SUM(`gasavailability`) AS sum_of_gas FROM `fillingstationmaster` UNION ALL  " 
+
+						+" SELECT 'Private Cylinders filled gas ' AS gastype, SUM((pc.`quantity`)*(CAST(i.name AS UNSIGNED))) AS sum_of_gas "  
+						 +" FROM `privatecylinderfilledprice` pc,items i  WHERE pc.`items` =i.id    AND i.`itemType`='Cylinder' "   
+						  
+						  +"  GROUP BY i.`itemType`='Cylinder'      UNION ALL "      
+						  +"  SELECT 'Khaibar Cylinders delivered gas' AS gastype, " 
+						  +"  SUM((1)*(CAST(i.name AS UNSIGNED))) AS sum_of_gas  FROM `cylindertransaction` ct,`cylindermaster` cm , " 
+						  +"  items i  WHERE ct.`cylinderStatus`='6'  AND cm.id=ct.`cylindetId` AND i.id=cm.size AND i.`itemType`='Cylinder'  " 
+						    +"  GROUP BY i.`itemType`='Cylinder '  " 
+						   +"   UNION ALL      " 
+						      
+						   +" SELECT 'Khaibar Cylinders filled gas ' AS gastype, " 
+						 +"   SUM((1)*(CAST(i.name AS UNSIGNED))) AS sum_of_gas  FROM `cylindermaster` cm , "  
+						 +"   items i  WHERE cm.`cylinderStatus` IN (3,4,5)   AND i.id=cm.size AND i.`itemType`='Cylinder'  " 
+						  +"    GROUP BY i.`itemType`='Cylinder '   ";
+			   
+			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
+				return retlist;
+		}
+		public   List<Map<String, Object>>  getTotalCylindersCount(){  
+			 jdbcTemplate = custom.getJdbcTemplate();
+			 
+			 String sql="SELECT a.name AS label, IFNULL(b.statuscount,0) AS Y	FROM cylinderstatus a	LEFT OUTER JOIN (SELECT cylinderstatus, IFNULL(COUNT(cylinderstatus), 0) AS statuscount FROM cylindermaster,`items` i WHERE i.id=cylindermaster.`size` AND i.`itemType`='Cylinder'  GROUP BY cylinderstatus) b	ON a.id = b.cylinderstatus;  ";
+			   
+			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
+				return retlist;
+		}
 //	 SELECT  i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm	   WHERE cm.cylinderstatus='1' AND cm.size=i.id ) counts	FROM `items` i  WHERE `itemType`='Cylinder'
 }
 

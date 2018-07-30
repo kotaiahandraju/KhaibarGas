@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -26,9 +27,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.aurospaces.neighbourhood.bean.CylinderTypesBean;
 import com.aurospaces.neighbourhood.bean.Expensetracker;
 import com.aurospaces.neighbourhood.bean.LpomasterBean;
 import com.aurospaces.neighbourhood.bean.PrintDataBean;
+import com.aurospaces.neighbourhood.db.dao.LpomasterDao;
 import com.aurospaces.neighbourhood.db.dao.PaymentHistoryDao;
 import com.aurospaces.neighbourhood.util.KhaibarGasUtil;
 import com.aurospaces.neighbourhood.util.SendAttachmentInEmail;
@@ -42,6 +45,7 @@ import com.aurospaces.neighbourhood.util.SendAttachmentInEmail;
 public class PaymentReportController {
 	@Autowired PaymentHistoryDao paymentHistoryDao;
 	@Autowired ServletContext objContext;
+	@Autowired LpomasterDao lpomasterDao;
 	@RequestMapping(value = "/paymentreport")
 	public String paymentreport(@ModelAttribute("gasReportsForm") Expensetracker expensetracker, ModelMap model,
 			HttpServletRequest request, HttpSession session) {
@@ -177,5 +181,21 @@ e.printStackTrace();
 	  return "redirect:dashBoard.htm";
 
 
+	}
+	@ModelAttribute("itemType")
+	public Map<Integer, String> populateitems() {
+		Map<Integer, String> statesMap = new LinkedHashMap<Integer, String>();
+		try {
+			String sSql = " select id,name from items where status='1' and itemType IN( 'Cylinder','Accessories','Equipment') ";
+			List<CylinderTypesBean> list = lpomasterDao.populate(sSql);
+			for (CylinderTypesBean bean : list) {
+				statesMap.put(bean.getId(), bean.getName());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+		}
+		return statesMap;
 	}
 }

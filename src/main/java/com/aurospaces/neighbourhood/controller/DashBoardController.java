@@ -58,6 +58,12 @@ public class DashBoardController {
 		JSONObject jsonObj = new JSONObject();
 		String sJson=null;
 		boolean delete = false;
+		List<Map<String, Object>> cylinderstatuscount = null;
+		List<Map<String, Object>> gassummary = null;
+		List<Map<String, Object>> expensessummary = null;
+		List<Map<String, Object>> totalusagegasreport = null;
+		List<Map<String, Object>> totalCylindersCount = null;
+		
 		try {
 			
 			/*listOrderBeans = 
@@ -203,7 +209,49 @@ public class DashBoardController {
 					} else {
 						request.setAttribute("delivered_qty_list", "''");
 					}*/
+					
+					cylinderstatuscount = 	cylindermasterDao.getCylindersCount();
+					if(cylinderstatuscount != null){
+						
+						request.setAttribute("cylinderstatuscount", objectMapper.writeValueAsString(cylinderstatuscount));
+					}else{
+						request.setAttribute("cylinderstatuscount", "''");
+					}
+					
+					gassummary = 	cylindermasterDao.getGassummary();
+					if(gassummary != null){
+						
+						request.setAttribute("gassummary", objectMapper.writeValueAsString(gassummary));
+					}else{
+						request.setAttribute("gassummary", "''");
+					}
+					
+					expensessummary = 	cylindermasterDao.getExpensessummary();
+					if(expensessummary != null){
+						
+						request.setAttribute("expensessummary", objectMapper.writeValueAsString(expensessummary));
+					}else{
+						request.setAttribute("expensessummary", "''");
+					}
+					
+					totalusagegasreport = 	cylindermasterDao.totalusagegasreport();
+					if(totalusagegasreport != null){
+						
+						request.setAttribute("totalusagegasreport", objectMapper.writeValueAsString(totalusagegasreport));
+					}else{
+						request.setAttribute("totalusagegasreport", "''");
+					}
+					
+					totalCylindersCount = 	cylindermasterDao.getTotalCylindersCount();
+					if(totalCylindersCount != null){
+						
+						request.setAttribute("totalCylindersCount", objectMapper.writeValueAsString(totalCylindersCount));
+					}else{
+						request.setAttribute("totalCylindersCount", "''");
+					}
 
+					
+					
 		} catch (Exception e) {
 			e.printStackTrace();
 			System.out.println(e);

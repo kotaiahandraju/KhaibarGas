@@ -12,7 +12,11 @@ height:25px;
 padding-left:0px;
 
 }
-
+.vatcheckbox {
+margin-top: 10px !important;
+    margin-left: -1px !important;
+    
+}
 </style>
 
 <div class="clearfix"></div>
@@ -122,7 +126,7 @@ padding-left:0px;
 									
 									</label>
 									 <div class="col-sm-2">
-										<form:checkbox path="vatallow" class="form-control vatcheckbox" value="1" placeholder="VAT Allow" ></form:checkbox>
+										<form:checkbox path="vatallow" class="vatcheckbox" value="1" placeholder="VAT Allow" ></form:checkbox>
 									</div>  
 								</div>
 							</div>

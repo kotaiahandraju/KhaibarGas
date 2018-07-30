@@ -120,7 +120,11 @@ public class CylinderController {
 					 * objCylindermasterBean.setCapacity(String.valueOf(
 					 * capacityId));
 					 */
-
+						if(cylindermasterBean.getStore().equals("100")){
+							objCylindermasterBean.setCylinderstatus("1");
+						}else{
+							objCylindermasterBean.setCylinderstatus(cylindermasterBean.getCylinderstatus());
+						}
 					cylindermasterDao.save(objCylindermasterBean);
 					redir.addFlashAttribute("msg", "Record Updated Successfully");
 					redir.addFlashAttribute("cssMsg", "warning");
@@ -465,5 +469,46 @@ public class CylinderController {
 		}
 		return "redirect:cylinderAutoGenHome";
 	}
+	
+	@RequestMapping(value = "/testdatatable")
+	public String testdatatable(@Valid @ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
+			ModelMap model, HttpServletRequest request, HttpSession session) {
 
+		ObjectMapper objectMapper = null;
+		String sJson = null;
+		List<CylindermasterBean> listOrderBeans = null;
+		try {
+			
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return "serversidepaginationtest";
+	}
+	@RequestMapping(value = "/serversidepaginationtest")
+	public @ResponseBody String serversidepaginationtest(@ModelAttribute("cylinderForm") CylindermasterBean objCylindermasterBean,
+			BindingResult bindingresults, Model model, RedirectAttributes redir) {
+
+		// List<CylindermasterBean> cylinderMaster=null;
+		List<CylindermasterBean> listOrderBeans = null;
+		JSONObject jsonObj = new JSONObject();
+
+		try {
+			listOrderBeans = cylindermasterDao.getCylinders("1");
+//			
+//			jsonObj.put("iTotalDisplayRecords", 10);
+//			jsonObj.put("iTotalRecords", listOrderBeans.size());
+			jsonObj.put("draw", 10);
+			
+				jsonObj.put("data", listOrderBeans);
+				// System.out.println(sJson);
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println(e);
+
+		}
+		return String.valueOf(jsonObj);
+		}	
 }

@@ -201,14 +201,14 @@
 </div> <!-- page-container -->
 
  <!-- jQuery 3 -->
-	<script src="../assets/vendor_components/jquery/dist/jquery.js"></script>
+<!-- 	<script src="../assets/vendor_components/jquery/dist/jquery.js"></script> -->
 	
 	<!-- jQuery UI 1.11.4 -->
-	<script src="../assets/vendor_components/jquery-ui/jquery-ui.js"></script>
+<!-- 	<script src="../assets/vendor_components/jquery-ui/jquery-ui.js"></script> -->
 	
 	<!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
 	<script>
-	  $.widget.bridge('uibutton', $.ui.button);
+// 	  $.widget.bridge('uibutton', $.ui.button);
 	</script>
 
 	<script src="${baseurl }/newjs/popper.min.js"></script>
@@ -219,13 +219,13 @@
 	<script src="${baseurl }/newjs/stream_layers.js" type="text/javascript"></script>
     <script src="${baseurl }/newjs/nv.d3.min.js" type="text/javascript"></script>
     <script src="${baseurl }/newjs/utils.js" type="text/javascript"></script>
-	<script src="${baseurl }/newjs/chartist.min.js"></script>
+<%-- 	<script src="${baseurl }/newjs/chartist.min.js"></script> --%>
 	<script src="${baseurl }/newjs/jquery.sparkline.js"></script>
 	<script src="${baseurl }/newjs/jquery.slimscroll.js"></script>
 	<script src="${baseurl }/newjs/fastclick.js"></script>
 	<script src="${baseurl }/newjs/template.js"></script>
 	<script src="${baseurl }/newjs/horizontal-layout.js"></script>
-	<script src="${baseurl }/newjs/dashboard.js"></script>
+<%-- 	<script src="${baseurl }/newjs/dashboard.js"></script> --%>
 	<script src="${baseurl }/newjs/demo.js"></script>
  
  

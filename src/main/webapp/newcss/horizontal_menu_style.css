@@ -340,6 +340,8 @@ Project:	Lion Admin - Responsive Admin Template
 
 .layout-top-nav .sidebar {
     padding-bottom: 0px;
+    width: 102%;
+    background: #000;
 }
 
 .horizontal-menu .main-sidebar {
