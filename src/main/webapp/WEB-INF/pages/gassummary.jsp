@@ -186,6 +186,7 @@ $('#tableId').html(tableHead);
 	$("#totalgas").text(totalgas);
 	if(isClick=='Yes'){
 		$('.datatables').dataTable({
+			pagingType: "full_numbers",
 			 dom: 'lBfrtip',
 			 
 			 

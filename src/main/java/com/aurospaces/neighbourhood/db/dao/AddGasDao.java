@@ -23,7 +23,7 @@ public class AddGasDao extends BaseAddGasDao
 	public List<Map<String, Object>> getdata() {
 		 jdbcTemplate = custom.getJdbcTemplate();
 			String sql = " SELECT foo.name,SUM(foo.counts) AS counts,CONCAT(MONTHNAME(foo.label),'- ', YEAR(foo.label)) AS label FROM( "
-						+" SELECT i.name,COUNT(*) AS counts ,STR_TO_DATE(pc.`cylinderFilledDate`,'%d-%M-%Y') AS label  FROM "
+						+" SELECT i.name,SUM((CAST(pc.`quantity` AS UNSIGNED))) AS counts ,STR_TO_DATE(pc.`cylinderFilledDate`,'%d-%M-%Y') AS label  FROM "
 						+" `privatecylinderfilledprice` pc,items i WHERE i.id =pc.`items` GROUP BY STR_TO_DATE(pc.`cylinderFilledDate`,'%d-%M-%Y'), i.id "
 						+"	UNION ALL "
 						+"	SELECT i.`name`,COUNT(*) AS counts ,DATE(ct.created_time) AS label  "

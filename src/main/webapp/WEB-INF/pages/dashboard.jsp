@@ -168,7 +168,7 @@ tbody tr:nth-child(even) th {
 	<h3>Cylinders </h3>
 	<div id="chartdiv5"></div></div>
 	
-	<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div>
+<!-- 	<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div> -->
 	
         <div class="clearfix"></div>
             
@@ -265,6 +265,7 @@ tbody tr:nth-child(even) th {
                         </div>
                         
                     </div>
+                  <div class="col-md-4"><h3>Opening Balance(in KG\'s) :- </h3></div><div class="col-md-4"><h4>Used Gas(in KG\'s) :- </h4></div><div class="col-md-4"><h4>Remaining Gas (in KG\'s) :-</h4></div> 
                <h1>Khaibar Gas Monthly Cylinder Report</h1>     
             <div class="row">
             <div class="col-md-12 table-responsive" style=" padding-top: 20px;"  >
@@ -559,7 +560,7 @@ $("#tableId").html(tableHead); */
 	});
 	
 var totalCylindersCount = ${totalCylindersCount};
-	window.onload = function () {
+	/* window.onload = function () {
 
 	var chart = new CanvasJS.Chart("chartContainer", {
 		animationEnabled: true,
@@ -589,6 +590,6 @@ var totalCylindersCount = ${totalCylindersCount};
 	chart.render();
 
 	}
-	
+	 */
 	</script>
 	

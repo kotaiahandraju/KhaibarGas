@@ -510,7 +510,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		public   List<Map<String, Object>>  getGassummary(){  
 			 jdbcTemplate = custom.getJdbcTemplate();
 			 
-			 String sql="SELECT 'Private Cylinders' AS gastype, SUM((pc.`quantity`)*(CAST(i.name AS UNSIGNED))) AS sum_of_gas    FROM `privatecylinderfilledprice` pc,items i  WHERE pc.`items` =i.id    AND i.`itemType`='Cylinder'     GROUP BY i.`itemType`='Cylinder'      UNION ALL      SELECT 'Khaibar Cylinders' AS gastype,SUM((1)*(CAST(i.name AS UNSIGNED))) AS sum_of_gas  FROM `cylindertransaction` ct,`cylindermaster` cm ,items i  WHERE ct.`cylinderStatus`='3'  AND cm.id=ct.`cylindetId` AND i.id=cm.size AND i.`itemType`='Cylinder'    GROUP BY i.`itemType`='Cylinder '     ";
+			 String sql="SELECT 'Private Cylinders' AS gastype, SUM((pc.`quantity`)*(CAST(i.name AS UNSIGNED))) AS sum_of_gas    FROM `privatecylinderfilledprice` pc,items i  WHERE pc.`items` =i.id    AND i.`itemType`='Cylinder'     GROUP BY i.`itemType`='Cylinder'      UNION ALL      SELECT 'Khaibar Cylinders' AS gastype,SUM((1)*(CAST(i.name AS UNSIGNED))) AS sum_of_gas  FROM `cylindertransaction` ct,`cylindermaster` cm ,items i  WHERE ct.`cylinderStatus`='3'  AND cm.id=ct.`cylindetId` AND i.id=cm.size AND i.`itemType`='Cylinder'    GROUP BY i.`itemType`='Cylinder '  UNION ALL SELECT 'Remaining Gas' AS gastype, SUM(closingBalanceGas) AS sum_of_gas FROM fillingstationmaster WHERE status=1   ";
 			   
 			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
 				return retlist;
@@ -526,7 +526,7 @@ public class CylindermasterDao extends BaseCylindermasterDao
 		public   List<Map<String, Object>>  totalusagegasreport(){  
 			 jdbcTemplate = custom.getJdbcTemplate();
 			 
-			 String sql="SELECT 'Filling station available gas' AS gastype, SUM(`gasavailability`) AS sum_of_gas FROM `fillingstationmaster` UNION ALL  " 
+			 String sql="SELECT 'Filling station available gas' AS gastype, SUM(`closingBalanceGas`) AS sum_of_gas FROM `fillingstationmaster` UNION ALL  " 
 
 						+" SELECT 'Private Cylinders filled gas ' AS gastype, SUM((pc.`quantity`)*(CAST(i.name AS UNSIGNED))) AS sum_of_gas "  
 						 +" FROM `privatecylinderfilledprice` pc,items i  WHERE pc.`items` =i.id    AND i.`itemType`='Cylinder' "   

@@ -106,6 +106,7 @@
 								    </div>
                     			</div>
                     		</div>
+                    		<div class="clearfix"></div>
                     		<div class="col-md-6">
                     			<div class="form-group">
                     				<label for="focusedinput" class="col-md-4 control-label">Expiry Date <span class="impColor">*</span></label>

@@ -1080,17 +1080,28 @@ function getTarrifPrice(value,id){
 	});
 }
 function payedAmountCal(value){
+	if(value != ""){
+		if(parseFloat(value)<parseFloat(finalAmount+1)){
+			
 	var dueAmount =  finalAmount-value;
 	$("#dueAmount").val(dueAmount.toFixed(3));
+		}else{
+			$("#payedAmount").val("");
+			$("#dueAmount").val("");
+			alert("The Maximum Paid Amount only : "+finalAmount);
+		}
+	}
 }
 function discountCheck(id,value){
 // 	alert(map[id]);
-	if(parseInt(value)>parseInt(map[id])){
+if(value !=""){
+	if(parseFloat(value)>parseFloat(map[id])){
 		alert("Please Enter Discount Maximum : "+map[id] );
 		$("#"+id).val("0");
 		allcalculate(id);
 		return false;
 	}
+}
 	allcalculate(id);
 }
 var cylinderAvailable=true;

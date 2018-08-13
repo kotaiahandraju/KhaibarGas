@@ -42,7 +42,7 @@ table tbody tr.rowInc {
 						</div>
 					</div>
 					<div class="panel-body collapse in">
-					 <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label>
+<!-- 					 <input type="checkbox" class="form-check-input" onclick="inactiveData();" id="inActive"> <label class="form-check-label">Show Inactive List</label> -->
 						<div class="table-responsive" id="tableId">
 							<table class="table table-striped table-bordered datatables" id="example">
 								<thead><tr><th>Customer Name</th><th>Security Deposit</th><th>Item Name</th><th>Quantity</th><th>Company Name</th><th>Amount</th></tr></thead>
@@ -74,7 +74,7 @@ table tbody tr.rowInc {
 		                            <form:option value="">-- Customer Type --</form:option>
 		                            <form:option value="COMMERCIAL">COMMERCIAL</form:option>
 		                            <form:option value="DOMESTIC">DOMESTIC</form:option>
-		                            <form:option value="INDUSTIAL">INDUSTIAL</form:option>
+		                            <form:option value="INDUSTRIAL">INDUSTRIAL</form:option>
 		                          </form:select>
 									</div>
 								</div>

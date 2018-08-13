@@ -95,7 +95,7 @@ ps.setString(9, securedepositBean.getSecurityDeposit());
 		public Boolean delete(int id,String status) {
 			boolean result=false;
 			jdbcTemplate = custom.getJdbcTemplate();
-			String sql = "update lpomaster set status='"+status+"' where id = ?";
+			String sql = "Update  cylindermaster set status='"+status+"' WHERE id=?";
 			jdbcTemplate.update(sql, new Object[]{id});
 			 int results=jdbcTemplate.update(sql, new Object[]{id});
 				if(results!=0){

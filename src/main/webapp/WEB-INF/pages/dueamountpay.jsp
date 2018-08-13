@@ -639,7 +639,16 @@ dependentRowCount = 1;
 function PaidCalculation(value){
 	var amount = $("#pDueAmount").text();
 	if(amount !="" && value !=""){
-		$("#dueAmount").val(parseFloat(amount).toFixed(3)-parseFloat(value).toFixed(3));
+		if(parseFloat(value)<parseFloat(amount+1)){
+			var ii = parseFloat(amount).toFixed(3)-parseFloat(value).toFixed(3);
+		$("#dueAmount").val((parseFloat(amount).toFixed(3)-parseFloat(value).toFixed(3)).toFixed(3));
+		}else{
+			alert("The Maximum Paid Amount only : "+amount);
+			$("#dueAmount").val(amount);
+			$("#paidAmount").val("");
+		}
+	}else{
+		$("#dueAmount").val(amount);
 	}
 }
 function getCustomerIds(value){

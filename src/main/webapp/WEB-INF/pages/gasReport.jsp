@@ -181,6 +181,7 @@ $('#tableId').html(tableHead);
 });
 	if(isClick=='Yes'){
 		$('.datatables').dataTable({
+			pagingType: "full_numbers",
 			 dom: 'lBfrtip',
 			 
 			 

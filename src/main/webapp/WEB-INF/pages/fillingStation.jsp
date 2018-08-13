@@ -206,7 +206,7 @@ if (listOrders1 != "") {
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
-			+ '<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance(in KG\'s)</th><th>UsedGas(in KG\'s)</th><th>Closing Balance(in KG\'s)</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG\'s)</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
+			+ '<thead><tr><th>Station Number</th><th>Station Name</th><th>Opening Balance(in KG\'s)</th><th>Used Gas(in KG\'s)</th><th>Remaining Gas (in KG\'s)</th><th>Filling Machines</th><th>Quantity</th><th>Total Capacity(in KG\'s)</th><th>Status</th><th style="text-align: center;"></th></tr></thead><tbody></tbody></table>';
 	$('#tableId').html(tableHead);
 	serviceUnitArray = {};
 	$.each(listOrders,function(i, orderObj) {

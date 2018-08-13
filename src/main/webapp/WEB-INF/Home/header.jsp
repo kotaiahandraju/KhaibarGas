@@ -468,7 +468,7 @@ function tooltip(){
 		                <div class="btn-toolbar">
 		                    <a href="#" class="btn btn-danger "><span id="cylinderCount1"></span><br />Cylinders</a>
 		                    <a href="#" class="btn btn-warning"><span id="customerCount1"></span><br />Customers</a>
-		                    <a href="#" class="btn btn-info"><span id="totalGas1"></span><br />Gas in Kgs</a>
+		                    <a href="#" class="btn btn-info"><span id="totalGas1"></span><br />Remaining Gas (Kgs)</a>
 		                </div>
 	            	</div>
 	            </div>
