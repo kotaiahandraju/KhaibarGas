@@ -265,6 +265,7 @@ $('#tableId').html(tableHead);
 	$("#vatamount").text(totalvatamount);
 	$("#totalamount").text(alltotalamount);
 	$("#paidamount").text(totalpaidamount);
+// 	alert(alltotalamount)
 	$("#dueamount").text(alltotalamount-totalpaidamount);
 	$("#totalquantity").text(totalquantity);
 	if(isClick=='Yes'){

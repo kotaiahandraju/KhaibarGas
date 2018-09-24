@@ -28,7 +28,7 @@ public class PaymentHistoryDao extends BasePaymentHistoryDao
 		 List<Map<String,Object>> retlist =null;
 		 jdbcTemplate = custom.getJdbcTemplate();
 		 StringBuffer buffer = new StringBuffer();
-		 buffer.append( "SELECT p.`quantity`,DATE_FORMAT(p.created_time,'%d-%b-%Y') AS createdOn,p.invoiceid,cm.customerid, GROUP_CONCAT( DISTINCT ifnull(i.name,'---'),' ') AS itemName,ifnull(p.`totalamount`,0) AS itemamount,TRUNCATE(IFNULL((IFNULL(p.totalamount,0)*(IFNULL(p.`discount`,0)/100)),0),2) AS discount," 
+		 buffer.append( "SELECT ifnull(p.`quantity`,0) as quantity ,DATE_FORMAT(p.created_time,'%d-%b-%Y') AS createdOn,p.invoiceid,cm.customerid, GROUP_CONCAT( DISTINCT ifnull(i.name,'---'),' ') AS itemName,ifnull(p.`totalamount`,0) AS itemamount,TRUNCATE(IFNULL((IFNULL(p.totalamount,0)*(IFNULL(p.`discount`,0)/100)),0),2) AS discount," 
 						+" IFNULL(p.`netamount`,0) as netamount,IFNULL(p.`vatamount`,0) as vatamount,TRUNCATE((IFNULL(p.netamount,0)+IFNULL(p.vatamount,0)),2) AS totalAmount,IFNULL(p.`previousdueamount`,0) as previousdueamount ,  IFNULL(p.grossamount,0) as grossamount,IFNULL(p.paidAmount,0) as paidAmount ,IFNULL(p.`dueAmount`,0) as dueAmount , "
 						 +" p.invoiceId,cm.customertype,cm.`customername`, 	 cm.`customeraddress`,cm.`mobile`,cm.`landline` FROM `printdata` p LEFT JOIN "   
 						 +"  `customermaster` cm ON p.`customerid`=cm.id  LEFT JOIN  items i ON p.`items` =i.id WHERE 1=1   " );

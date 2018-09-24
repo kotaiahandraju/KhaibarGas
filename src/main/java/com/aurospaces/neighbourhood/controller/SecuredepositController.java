@@ -83,6 +83,7 @@ public class SecuredepositController {
 					securedepositBean.setItemId(item[i]);
 					securedepositBean.setCompanyId(company[i]);
 					securedepositBean.setAmount("");
+					securedepositBean.setId(0);
 					securedepositDao.save(securedepositBean);
 					for(int j=0;j<Integer.parseInt(unit[i]);j++){
 						CylindermasterBean cylindermasterBean = new CylindermasterBean();

@@ -313,7 +313,7 @@ function inactiveData() {
 		
 		var formData = new FormData();
 		formData.append('status', status);
-		 formData.append('truckStatus', "Coming into Factory");
+		 formData.append('truckStatus', "In");
 		$.fn.makeMultipartRequest('POST', 'inActiveTruckTracking', false,
 				formData, false, 'text', function(data) {
 			var jsonobj = $.parseJSON(data);

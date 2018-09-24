@@ -47,7 +47,7 @@ height:25px;
             <div class="col-md-12 col-sm-12">
                 <div class="panel panel-primary">
                     <div class="panel-heading">
-                        <h4>Add Customers</h4>
+                        <h4>Add User</h4>
                         <div class="options">
                         </div>
                     </div>

@@ -89,18 +89,23 @@ public class ReportsController {
 	}
 	@RequestMapping("onChangeReports")
 	public @ResponseBody String onChangeReports(CylindermasterBean cylinderBean ) {
-		ObjectMapper objectMapper = null;
 		JSONObject jsonObject = new JSONObject();
 		List<CylindermasterBean> listOrderBeans = null;
+		List<Map<String,Object>> listOrderBeans1 = null;
 		try {
 			listOrderBeans = cylindermasterDao.getCylindersReport(cylinderBean);
+			listOrderBeans1 = cylindermasterDao.getCylindersStatuscount(cylinderBean);
 			if (listOrderBeans != null && listOrderBeans.size() > 0) {
-				objectMapper = new ObjectMapper();
 				// System.out.println(sJson);
 				jsonObject.put("allOrders1", listOrderBeans);
 			} else {
-				objectMapper = new ObjectMapper();
 				jsonObject.put("allOrders1", listOrderBeans);
+			}
+			if (listOrderBeans1 != null && listOrderBeans1.size() > 0) {
+				// System.out.println(sJson);
+				jsonObject.put("allOrders2", listOrderBeans1);
+			} else {
+				jsonObject.put("allOrders2", listOrderBeans1);
 			}
 
 		} catch (Exception e) {

@@ -63,6 +63,7 @@ public class DashBoardController {
 		List<Map<String, Object>> expensessummary = null;
 		List<Map<String, Object>> totalusagegasreport = null;
 		List<Map<String, Object>> totalCylindersCount = null;
+		List<Map<String, Object>> fillingStationcount = null;
 		
 		try {
 			
@@ -249,8 +250,15 @@ public class DashBoardController {
 					}else{
 						request.setAttribute("totalCylindersCount", "''");
 					}
-
 					
+					fillingStationcount = 	cylindermasterDao.getFillingStationcount();
+					if(fillingStationcount != null){
+						
+						request.setAttribute("fillingStationcount", objectMapper.writeValueAsString(fillingStationcount));
+					}else{
+						request.setAttribute("fillingStationcount", "''");
+					}
+
 					
 		} catch (Exception e) {
 			e.printStackTrace();

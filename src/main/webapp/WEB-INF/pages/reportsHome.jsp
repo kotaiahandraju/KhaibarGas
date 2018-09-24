@@ -85,8 +85,10 @@
 				        		</form:select>
 							</div>
 						</div>
-					</div>
-					
+					</div><div class="col-md-2"></div><div class="col-md-3" style="padding-top:5px;">
+					<table class="table table-bordered table-striped" id="statuscount"><thead><tr><th>Cylinder Status</th><th>Count</th></tr></thead><tbody id="tablebody"></tbody></table>
+					</div><div class="clearfix"></div>
+					<div class="col-md-1"></div>
 					</div>
 					</div>
 				</div>
@@ -192,6 +194,15 @@ $(document).ready(function() {
 if (listOrders1 != "") {
 	displayTable(listOrders1);
 } */
+function displayTable1(listOrders) {
+		$('#statuscount tbody').html(" ");
+	$.each(listOrders,function(i, orderObj) {
+		var tblRow = "<tr >"
+		+ "<td >"+ orderObj.name + "</td>"
+		+ "<td >"+ orderObj.COUNT + "</td></tr>"
+		$(tblRow).appendTo("#statuscount  tbody");
+	});
+}
 function displayTable(listOrders) {
 	$('#tableId').html('');
 	var tableHead = '<table id="example" class="table table-striped table-bordered datatables">'
@@ -314,8 +325,10 @@ function QualityCheck(){
 				formData, false, 'text', function(data) {
 					var jsonobj = $.parseJSON(data);
 					var alldata = jsonobj.allOrders1;
+					var alldata1 = jsonobj.allOrders2;
 					console.log(jsonobj.allOrders1);
 					displayTable(alldata);
+					displayTable1(alldata1);
 				});
 	}
 	function onChangeReports(id,name) {
@@ -381,7 +394,10 @@ function QualityCheck(){
 			console.log(data);
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
+			var alldata1 = jsonobj.allOrders2;
+			console.log(jsonobj.allOrders1);
 			displayTable(alldata);
+			displayTable1(alldata1);
 			
 		});
 	}
@@ -399,7 +415,10 @@ function QualityCheck(){
 			console.log(data);
 			var jsonobj = $.parseJSON(data);
 			var alldata = jsonobj.allOrders1;
+			var alldata1 = jsonobj.allOrders2;
+			console.log(jsonobj.allOrders1);
 			displayTable(alldata);
+			displayTable1(alldata1);
 			
 		});
 	}

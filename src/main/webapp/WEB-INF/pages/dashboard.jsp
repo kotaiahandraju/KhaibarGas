@@ -5,6 +5,15 @@
 <%@ taglib uri="http://www.springframework.org/tags" prefix="spring"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/sql" prefix="sql"%>  
 <style>
+.opening .table thead tr td {
+padding:1px;
+}
+.table-responsive > .table-bordered {
+       border: 1px solid #e6e7e8;
+}
+.table-bordered > thead > tr > th, .table-bordered > thead > tr > td {
+    border-bottom-width: 1px;
+}
 #target {
 			width: 600px;
 			height: 400px;
@@ -144,7 +153,7 @@ tbody tr:nth-child(even) th {
               <li><a href="#">Dashboard</a></li>
             </ol>
             <div class="clearfix"></div>
-	<div class="col-md-6">
+	<!-- <div class="col-md-6">
 	<h3>Cylinders </h3>
 	<div id="chartdiv"></div></div>
 	
@@ -166,7 +175,7 @@ tbody tr:nth-child(even) th {
 	
 	<div class="col-md-6">
 	<h3>Cylinders </h3>
-	<div id="chartdiv5"></div></div>
+	<div id="chartdiv5"></div></div> -->
 	
 <!-- 	<div id="chartContainer" style="height: 370px; max-width: 920px; margin: 0px auto;"></div> -->
 	
@@ -265,8 +274,8 @@ tbody tr:nth-child(even) th {
                         </div>
                         
                     </div>
-                  <div class="col-md-4"><h3>Opening Balance(in KG\'s) :- </h3></div><div class="col-md-4"><h4>Used Gas(in KG\'s) :- </h4></div><div class="col-md-4"><h4>Remaining Gas (in KG\'s) :-</h4></div> 
-               <h1>Khaibar Gas Monthly Cylinder Report</h1>     
+                  <div class="table-responsive" style="padding-top:8px;"><table class="table table-bordered table-striped opening"><thead  style="background:#006699; color:#fff;padding:1px;"><tr><td class="btn-info"><p  style="font-size:14px;text-align:center; margin: 0 0 0px;">Opening Balance(in KG's) :- <span id="gasavailability">0</span></p></td><td class="btn-success"><p style="text-align:center; margin: 0 0 0px;font-size:14px;">Used Gas(in KG's) :- <span id="usedGas">0</span> </p></td><td class="btn-danger"><p  style="text-align:center;font-size:14px; margin: 0 0 0px;">Remaining Gas (in KG's) :- <span id="closingBalanceGas">0</span></p></td></tr></thead></table></div>  
+               <h3>Khaibar Gas Monthly Cylinder Report</h3>     
             <div class="row">
             <div class="col-md-12 table-responsive" style=" padding-top: 20px;"  >
             	<div align="center"><div id="target"> </div></div>
@@ -421,7 +430,15 @@ $("#tableId").html(tableHead); */
 	//if(isClick=='Yes') $('.datatables').dataTable();
 }
 
-
+var fillingstationcount =${fillingStationcount};
+fillingstationcount1(fillingstationcount);
+function fillingstationcount1(list){
+	$.each(list,function(i, orderObj) {
+		$("#gasavailability").text(orderObj.gasavailability);
+		$("#usedGas").text(orderObj.usedGas);
+		$("#closingBalanceGas").text(orderObj.closingBalanceGas);
+	});
+}
 </script>
 	<script type="text/javascript">
 	/* var listOrders1 = ${allOrders1};

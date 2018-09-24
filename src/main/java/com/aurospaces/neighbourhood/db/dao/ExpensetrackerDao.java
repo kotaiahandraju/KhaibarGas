@@ -103,7 +103,7 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			if(StringUtils.isNotBlank(usedGasBean.getGasType())){
 				buffer.append(" and  foo.AddedGas LIKE '%"+usedGasBean.getGasType()+"%' ");
 			}
-			buffer.append(" ORDER BY created_time ");
+			buffer.append(" ORDER BY created_time desc ");
 			String sql = buffer.toString();
 			System.out.println(sql);
 			List<UsedGasBean> retlist = jdbcTemplate.query(sql, new Object[] {  },
@@ -134,7 +134,7 @@ public class ExpensetrackerDao extends BaseExpensetrackerDao
 			if(StringUtils.isNotBlank(usedGasBean.getFillingStationId())){
 				buffer.append(" and fillingStationId='"+usedGasBean.getFillingStationId()+"'  ");
 			}
-			buffer.append(" ORDER BY created_time ");
+			buffer.append(" ORDER BY Date(created_time) desc");
 			String sql = buffer.toString();
 			System.out.println(sql);
 			List<UsedGasBean> retlist = jdbcTemplate.query(sql, new Object[] {  },

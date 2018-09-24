@@ -56,7 +56,7 @@
 					<div class="col-md-12 col-sm-12">
 						<div class="panel panel-primary">
 							<div class="panel-heading">
-								<h4>Staff Master Details</h4>
+								<h4> Add Staff Master</h4>
 								<div class="options"></div>
 							</div>
 							<form:form modelAttribute="staffMaster" class="form-horizontal"
@@ -106,7 +106,7 @@
 									<div class="row">
 										<div class="col-md-6">
 											<div class="form-group">
-												<label class="col-sm-4 control-label required">Designation</label><span class="impColor">*</span>
+												<label class="col-sm-4 control-label required">Designation<span class="impColor">*</span></label>
 												<div class="col-sm-6">
 													<form:input path="designation"
 														class="form-control onlyCharacters validate"

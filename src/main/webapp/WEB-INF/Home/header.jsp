@@ -70,7 +70,24 @@
 @media only screen and (max-width: 640px) and (min-width: 320px) {
 .dashboard {
 margin-left:0px !important;}
+.opening  {
+overflow-x:auto !important;
 }
+.layout-top-nav .sidebar {
+    padding-bottom: 0px;
+    width: 100%;
+    background: #000;
+}
+.btn-toolbar > .btn, .btn-toolbar > .btn-group, .btn-toolbar > .input-group {
+  margin-left: 0px; 
+}
+.sidebar {
+    margin-left: 0px !important;
+}
+}
+@media only screen and (max-width: 1900px) and (min-width: 720px) {
+.sidebar {
+margin-left:15px !important;}
 }
 #page-container, #page-content{min-height: auto;}
 .control-label {
@@ -79,7 +96,7 @@ margin-left:0px !important;}
     padding-top: 8px;
 }
 .sidebar {
-margin-left:15px !important;}
+margin-left:15px;}
 .empkgs th, td {
     font-size: 12px !important;
     width: 100px;

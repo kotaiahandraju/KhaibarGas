@@ -554,6 +554,47 @@ public class CylindermasterDao extends BaseCylindermasterDao
 			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
 				return retlist;
 		}
+		public   List<Map<String, Object>>  getFillingStationcount(){  
+			 jdbcTemplate = custom.getJdbcTemplate();
+			 
+			 String sql="SELECT SUM(`gasavailability`) AS gasavailability,SUM(`usedGas`) AS usedGas,SUM(`closingBalanceGas`) AS closingBalanceGas FROM `fillingstationmaster` ";
+			   
+			 List<Map<String, Object>> retlist = jdbcTemplate.queryForList(sql);
+				return retlist;
+		}
+		public List<Map<String,Object>> getCylindersStatuscount(CylindermasterBean cylindermasterBean){  
+			jdbcTemplate = custom.getJdbcTemplate();
+			 
+			StringBuffer buffer = new StringBuffer();
+			buffer.append("SELECT cs.`name`,COUNT(*) AS COUNT FROM `cylindermaster` c,`cylinderstatus` cs WHERE cs.id=c.`cylinderstatus` ");
+			if(StringUtils.isNotBlank(cylindermasterBean.getOwnercompany())){
+				buffer.append(" and c.ownercompany = "+cylindermasterBean.getOwnercompany());
+			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getStorename())){
+				buffer.append(" and c.store = "+cylindermasterBean.getStorename() +"  and c.cylinderstatus = '1' "  );
+			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getCylinderstatus())){
+				buffer.append(" and c.cylinderstatus = "+cylindermasterBean.getCylinderstatus());
+			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getLponumber())){
+				buffer.append(" and c.lponumber = '"+cylindermasterBean.getLponumber()+"' ");
+			}
+			if(StringUtils.isNotBlank(cylindermasterBean.getSize())){
+				buffer.append(" and c.size = '"+cylindermasterBean.getSize()+"' ");
+			}
+			buffer.append("  GROUP BY `cylinderstatus` ");
+			
+			String sql = buffer.toString();
+			System.out.println(sql);
+//			 String sql =  "SELECT co.companyname , c. *,cs.name as cylinderstatus,i.name As sizeName,DATE_FORMAT(c.expirydate,'%d-%b-%Y') AS expirtdate1 , CASE WHEN c.status IN ('0') THEN 'Deactive' WHEN c.status in ('1') THEN 'Active'  ELSE '-----' END as cylendersstatus   FROM companymaster co,cylindermaster c,items i,cylinderstatus cs where c.size=i.id and cs.id=c.cylinderstatus and co.id=c.ownercompany  order by c.id desc";
+			List<Map<String,Object>> retlist = jdbcTemplate.queryForList(sql, new Object[] {  });
+			
+			if (retlist.size() > 0)
+				return retlist;
+			return null;
+			    
+			}
+		
 //	 SELECT  i.`name`,  (SELECT  COUNT(*)   FROM cylindermaster cm	   WHERE cm.cylinderstatus='1' AND cm.size=i.id ) counts	FROM `items` i  WHERE `itemType`='Cylinder'
 }
 
